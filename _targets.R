@@ -3,7 +3,7 @@ library(tarchetypes)
 library(crew)
 
 # cores available
-#coress <- floor(.9 * parallelly::freeCores()[1])
+# coress <- floor(.9 * parallelly::freeCores()[1])
 coress <- 1  # limitado temporariamente para evitar rate-limit do FTP IBGE
 
 
@@ -85,33 +85,38 @@ targets::tar_source('./R')
 
 list(
   
-  # 01. microdata 1960 ---------------------------------------------------------------
-
-  # input: amostra compilada pelo Rogerio em censoBR_aux_Dados (fora do FTP IBGE).
-  tar_target(name = aux_microdata_1960_paths,
-             command = c(
-               "../censoBR_aux_Dados/1960/microdados da amostra/Censo.1960.brasil.domicilios.amostraCompilada.censobr.fst",
-               "../censoBR_aux_Dados/1960/microdados da amostra/Censo.1960.brasil.pessoas.amostraCompilada.censobr.parquet"
+  tar_target(name = data_version,
+             command = "v0.6.0"
              ),
-             format = "file"
-             ),
-
-  tar_target(name = dataset_names_microdata_1960,
-             command = c("households", "population")
-             ),
-
-  # branch per dataset: read fst/parquet, rename v* -> V*, attach dataset sentinel
-  tar_target(name = clean_microdata_table_1960,
-             command = clean_microdata_1960(aux_microdata_1960_paths, dataset_names_microdata_1960),
-             pattern = map(dataset_names_microdata_1960)
-             ),
-
-  # branch per dataset: cast code_* to numeric (v0.6.0 convention) + save parquet
-  tar_target(name = output_microdata_1960,
-             command = save_microdata_1960(clean_microdata_table_1960),
-             pattern = map(clean_microdata_table_1960),
-             format = "file"
-             ),
+  
+  
+  # # 01. microdata 1960 ---------------------------------------------------------------
+  # 
+  # # input: amostra compilada pelo Rogerio em censoBR_aux_Dados (fora do FTP IBGE).
+  # tar_target(name = aux_microdata_1960_paths,
+  #            command = c(
+  #              "../censoBR_aux_Dados/1960/microdados da amostra/Censo.1960.brasil.domicilios.amostraCompilada.censobr.fst",
+  #              "../censoBR_aux_Dados/1960/microdados da amostra/Censo.1960.brasil.pessoas.amostraCompilada.censobr.parquet"
+  #            ),
+  #            format = "file"
+  #            ),
+  # 
+  # tar_target(name = dataset_names_microdata_1960,
+  #            command = c("households", "population")
+  #            ),
+  # 
+  # # branch per dataset: read fst/parquet, rename v* -> V*, attach dataset sentinel
+  # tar_target(name = clean_microdata_table_1960,
+  #            command = clean_microdata_1960(aux_microdata_1960_paths, dataset_names_microdata_1960),
+  #            pattern = map(dataset_names_microdata_1960)
+  #            ),
+  # 
+  # # branch per dataset: cast code_* to numeric (v0.6.0 convention) + save parquet
+  # tar_target(name = output_microdata_1960,
+  #            command = save_microdata_1960(clean_microdata_table_1960),
+  #            pattern = map(clean_microdata_table_1960),
+  #            format = "file"
+  #            ),
 
   # 02. microdata 1970 ---------------------------------------------------------------
   
@@ -149,7 +154,7 @@ list(
 
   # branch per theme: cast code_* to numeric (v0.6.0 convention) + save parquet
   tar_target(name = output_tracts_paths_2000,
-             command = save_tracts_2000(clean_tract_table_2000),
+             command = save_tracts_2000(clean_tract_table_2000, data_version),
              pattern = map(clean_tract_table_2000),
              format = 'file'
              ),
@@ -188,7 +193,7 @@ list(
   # create national files: 1 parquet file for each table
   # add geography columns and save parquet
   tar_target(name = output_tracts_paths_2010,
-             command = save_tracts_2010(clean_tract_table_2010),
+             command = save_tracts_2010(clean_tract_table_2010, data_version),
              pattern = map(clean_tract_table_2010),
              format = 'file'
              ),
@@ -220,7 +225,7 @@ list(
 
   # branch per theme: cast code_* to numeric (v0.6.0 convention) + save parquet
   tar_target(name = output_tracts_paths_2022,
-             command = save_tracts_2022(clean_tract_table_2022),
+             command = save_tracts_2022(clean_tract_table_2022, data_version),
              pattern = map(clean_tract_table_2022),
              format = 'file'
              )

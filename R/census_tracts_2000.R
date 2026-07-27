@@ -252,7 +252,7 @@ clean_tracts_2000 <- function(raw_xls_paths, tbl_name){
 }
 
 
-save_tracts_2000 <- function(cleaned_dt){
+save_tracts_2000 <- function(cleaned_dt, data_version){
 
   tbl <- cleaned_dt$table_name[1]
   message("Saving tracts 2000: ", tbl)
@@ -265,8 +265,13 @@ save_tracts_2000 <- function(cleaned_dt){
   # convencao v0.6.0: code_* numeric.
   out <- code_cols_to_numeric(out)
 
-  dest_file <- paste0("./data/tracts/2000/2000_tracts_", tbl, ".parquet")
+  
+  
+  # save data
+  message("saving")
+  dir.create("./data/tracts/2000/", recursive = TRUE, showWarnings = FALSE)
+  dest_file <- paste0("./data/tracts/2000/2000_tracts_", tolower(tbl), "_", data_version,".parquet")
   write_censobr_parquet(out, dest_file)
-
+  
   dest_file
 }

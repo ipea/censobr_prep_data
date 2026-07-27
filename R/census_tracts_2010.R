@@ -247,8 +247,9 @@ clean_tracts_2010 <- function(raw_file_paths, tbl_name){
 
 
 # generate a national df with all states for a given table
-# clean_tract_table_2010 <- tar_read(clean_tract_table_2010)
-save_tracts_2010 <- function(br_df){
+# br_df <- tar_read(clean_tract_table_2010, 1)
+# data_version <- tar_read(data_version)
+save_tracts_2010 <- function(br_df, data_version){
 
   tbl <- br_df$table_name[1]
   message(tbl)
@@ -256,7 +257,7 @@ save_tracts_2010 <- function(br_df){
   # code_weighting (área de ponderação): crosswalk IBGE em Documentacao_microdados_2010.zip.
   # geobr (>=1.10) deixou de expor essa coluna; lemos da fonte canônica.
   ap <- get_areas_ponderacao_2010()
-  setDT(br_df)
+  data.table::setDT(br_df)
   br_df <- merge(br_df, ap, by = "code_tract", all.x = TRUE, sort = FALSE)
 
   br_df <- add_geography_cols_tracts(br_df, year = 2010)
@@ -318,7 +319,7 @@ save_tracts_2010 <- function(br_df){
   # V cols vêm como character (fread colClasses) com vírgula decimal IBGE.
   # Loop set é preferível a mutate(across) — evita cópia da tabela inteira.
   message("to numeric")
-  setDT(AT)
+  data.table::setDT(AT)
   for(v in grep("V", names(AT), value = TRUE))
     set(AT, j = v, value = as.numeric(gsub(",", ".", AT[[v]], fixed = TRUE)))
 
@@ -332,9 +333,10 @@ save_tracts_2010 <- function(br_df){
   # table_name é metadata interna do pipeline — não vai pro output.
   AT$table_name <- NULL
 
+  # save data
   message("saving")
   dir.create("./data/tracts/2010/", recursive = TRUE, showWarnings = FALSE)
-  dest_file <- paste0("./data/tracts/2010/2010_tracts_", tbl, ".parquet")
+  dest_file <- paste0("./data/tracts/2010/2010_tracts_", tolower(tbl), "_", data_version,".parquet")
   write_censobr_parquet(AT, dest_file)
 
   dest_file
