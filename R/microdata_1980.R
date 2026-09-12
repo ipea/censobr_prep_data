@@ -46,26 +46,22 @@ clean_microdata_1980 <- function(raw_paths, dataset_name){
   arrw <- arrw |>
     dplyr::mutate(code_muni_1980 = as.numeric(V2) * 10000 + as.numeric(V5))
 
-  # municipios que mudaram de UF entre 1980 e 2010: Fernando de Noronha (PE) e
-  # os 52 que foram de Goias para o Tocantins. A coluna Observation do
-  # crosswalk e nota de trabalho e nao entra no produto.
-  cross <- readxl::read_xlsx(raw_paths[grepl("crosswalk", basename(raw_paths))])
-  cross <- data.frame(code_muni_1980    = as.numeric(cross$municCod1980),
-                      municCod2010_6dig = as.numeric(cross$municCod2010_6dig))
+  # code_muni de 7 digitos pela malha de 1980, casando pelos 6 primeiros. O
+  # produto tem de casar com geobr::read_municipality(year = 1980), entao a
+  # geografia fica na geografia de 1980: Fernando de Noronha e 2000107, no
+  # territorio 20, e os 52 municipios que viriam a ser o Tocantins continuam em
+  # Goias (52xxxxx), que e onde estavam. Os 3.991 codigos do dado resolvem
+  # todos nessa malha.
+  #
+  # O crosswalk_tocantins_ferNoronha_1980_2010.xlsx NAO entra aqui: ele reescreve
+  # esses 53 municipios para o codigo de 2010 (prefixo 17 e 26), que nao existe
+  # na malha de 1980 -- era o que deixava 35.567 domicilios sem code_muni.
+  m80 <- sf::st_drop_geometry(geobr::read_municipality(year = 1980, showProgress = FALSE))
+  muni <- data.frame(code_muni_1980 = as.numeric(substr(as.character(m80$code_muni), 1, 6)),
+                     code_muni      = as.numeric(m80$code_muni))
 
   arrw <- arrw |>
-    dplyr::left_join(cross, by = "code_muni_1980") |>
-    dplyr::mutate(municCod2010_6dig = dplyr::coalesce(municCod2010_6dig, code_muni_1980))
-
-  # code_muni de 7 digitos pela malha de 1980, casando pelos 6 primeiros
-  muni <- geobr::read_municipality(year = 1980, showProgress = FALSE)
-  muni <- sf::st_drop_geometry(muni)
-  muni <- data.frame(municCod2010_6dig = as.numeric(substr(as.character(muni$code_muni), 1, 6)),
-                     code_muni         = as.numeric(muni$code_muni))
-
-  arrw <- arrw |>
-    dplyr::left_join(muni, by = "municCod2010_6dig") |>
-    dplyr::mutate(municCod2010_6dig = NULL)
+    dplyr::left_join(muni, by = "code_muni_1980")
 
   # geografia inline, e nao via add_geography_cols(): o ramo 1980 daquela
   # funcao atribui V3 tanto a code_meso quanto a code_micro, e V4 (a
@@ -78,6 +74,16 @@ clean_microdata_1980 <- function(raw_paths, dataset_name){
 
   states <- states_censobr()[, c("code_state", "abbrev_state", "name_state",
                                  "code_region", "name_region")]
+
+  # o Territorio de Fernando de Noronha (codigo 20) existia em 1980 e nao esta
+  # em states_censobr(), que so traz as 27 UFs de hoje. Sem esta linha os 69
+  # domicilios de la ficam sem sigla, sem nome de UF e sem regiao.
+  states <- rbind(states,
+                  data.frame(code_state   = 20,
+                             abbrev_state = "FN",
+                             name_state   = "Fernando de Noronha",
+                             code_region  = 2,
+                             name_region  = "Nordeste"))
 
   arrw <- arrw |>
     dplyr::left_join(states, by = "code_state")
@@ -94,29 +100,14 @@ clean_microdata_1980 <- function(raw_paths, dataset_name){
   arrw <- arrw |>
     dplyr::mutate(dplyr::across(dplyr::all_of(num_vars), as.numeric))
 
-  # V604 (PESOP) vem zerada em 42 das 29,4M pessoas. O peso do domicilio em que
-  # a pessoa mora e o substituto natural -- ele esta na propria linha, porque as
-  # variaveis de domicilio vem repetidas em cada morador.
-  # Nao se mexe na V603 (PESOD): ela e zero em 233.399 domicilios por desenho do
-  # IBGE, que so calculou fator de expansao para particular permanente. Ver
-  # references/microdata_1980_ftp_vs_aux.md.
-  if(dataset_name == "population"){
-    arrw <- arrw |>
-      dplyr::mutate(V604 = dplyr::if_else(V604 == 0 & V603 > 0, V603, V604))
-
-    # sobram 24 pessoas em domicilio coletivo, onde nem o peso da pessoa nem o
-    # do domicilio existem; herdam a mediana do municipio
-    med <- arrw |>
-      dplyr::filter(V604 > 0) |>
-      dplyr::group_by(code_muni) |>
-      dplyr::summarise(V604_muni = stats::median(V604)) |>
-      dplyr::collect()
-
-    arrw <- arrw |>
-      dplyr::left_join(med, by = "code_muni") |>
-      dplyr::mutate(V604 = dplyr::if_else(V604 == 0, V604_muni, V604),
-                    V604_muni = NULL)
-  }
+  # Nenhum dos dois pesos e tocado. Como o IBGE entrega, V603 soma 25.210.639
+  # (= SIDRA t206, domicilios particulares permanentes, exato em 40 celulas:
+  # Brasil, 26 UFs, 2 situacoes e 11 classes de comodos) e V604 soma
+  # 119.011.052 (= SIDRA t200/t202, populacao, exato em 20 celulas). Os zeros
+  # -- 233.399 em V603 e 42 em V604 -- nao sao lacunas: sao a marca de
+  # fora-do-universo com que o IBGE produziu essas tabelas, e imputar qualquer
+  # um deles faz o censobr deixar de reproduzir o publicado.
+  # Ver references/microdata_1980_pesos_v603_v604.md.
 
   arrw <- arrw |>
     dplyr::relocate(code_muni, code_muni_1980, code_state, abbrev_state, name_state,
