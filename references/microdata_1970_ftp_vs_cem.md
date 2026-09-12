@@ -71,10 +71,71 @@ concentração: PE +301 e AL −26.
   original fazia. Com `fifelse` o `NA` se propaga e zera o peso do domicílio
   inteiro. Foi o que fez `weight_household` sair `NaN` na primeira tentativa.
 
-## Decisão pendente
+## Decisão tomada (2026-09-12): 1970 migra para o `release_legacy`
 
-Se a paridade exata com o publicado importar mais que a reprodutibilidade,
-1970 pode migrar para o `release_legacy`, como 1960, 1980 e 1991 — hospedando
-o CSV da versão CEM. O custo é mais ~4 GB no release e a perda da fonte
-pública. Pela rota atual, o dado é do IBGE, reprodutível por qualquer um, e
-diverge em 2 pessoas e 275 domicílios.
+A rota do FTP foi abandonada. O motivo não foi a divergência de 2 pessoas e
+275 domicílios, e sim a **corrupção de origem em `DAMO70AL.txt` e
+`Damo70PE.txt`**: 1.785 registros deslocados, dos quais 1.573 só têm o peso
+recuperável e seguem com o miolo fora de lugar
+(ver [microdata_1970_corrupcao_al_pe.md](microdata_1970_corrupcao_al_pe.md)).
+A versão CEM não tem esse defeito.
+
+O custo estimado de ~4 GB **não se confirmou**: em parquet zstd os três
+insumos somam **436 MB**.
+
+| insumo no `release_legacy` | CSV de origem | parquet |
+|---|---:|---:|
+| `Censo.1970.brasil.domicilios.amostra.25porcento.parquet` | 425 MB | 41 MB |
+| `Censo.1970.brasil.pessoas.amostra.25porcento.parquet` | 3,9 GB | 337 MB |
+| `crosswalk_personid_hhid_1970.parquet` | 499 MB | 58 MB |
+
+### O crosswalk é indispensável
+
+Chegou-se a supor que ele fosse dispensável, porque o arquivo de pessoas traz
+`iddomicilio` e `idpessoa`. **Não é.** O `iddomicilio` das pessoas é outro
+espaço de numeração — 4.803.419 valores densos de 1 a 4.803.419 — e não casa
+com o `household_id` dos domicílios (4.737.407): 99,9% não resolvem. Nem por
+fórmula: `(iddomicilio * 100 + V003) * 10 + V004` acerta os primeiros
+registros e erra em 72% do total.
+
+### Os identificadores do CEM também vêm de `na.locf`, e têm falha
+
+Medido nas primeiras 6 milhões de linhas do CSV de pessoas: **8.038 blocos**
+em que a fronteira nunca foi encontrada, o maior com **1.281 pessoas** num só
+`iddomicilio`. O perfil é sempre o mesmo — `V006 == 0` (unipessoal), `V007`
+inteiramente NA, nenhum chefe, `V005 == 1`. Entre eles, 65% têm mais de um
+morador.
+
+Duas verificações delimitam o problema:
+
+- **o bloco de domicílio é coerente**: zero domicílios com mais de um valor
+  real em V007, V008, V009 ou V010 (medir isso exige ignorar NA — essas
+  variáveis só vêm preenchidas na primeira pessoa, o que é justamente o motivo
+  de existir o `na.locf`);
+- **os identificadores não-blob estão certos**: em domicílios de família única
+  com chefe presente, o tamanho bate com `V005` (total de pessoas da família)
+  em **99,93%** dos casos (1.074.813 de 1.075.550); 736 maiores, 1 menor.
+
+O defeito **não chega ao produto**, porque o vínculo só vale quando resolve na
+tabela de domicílios. É a regra que o pipeline aplica: 468.164 pessoas (1,888%)
+ficam com `id_household = NA` e **zero** ids órfãos — idêntico ao publicado.
+
+### Paridade verificada
+
+| | nosso | publicado v0.5.0 |
+|---|---:|---:|
+| pessoas | 24.793.358 | 24.793.358 |
+| domicílios | 4.737.407 | 4.737.407 |
+| colunas (nomes e ordem) | 65 / 35 | idênticos |
+| `id_household` NA | 468.164 | 468.164 |
+| ids órfãos | 0 | 0 |
+| máximo de moradores | 37 | 37 |
+| `sum(V054)` | 94.461.969 | 94.461.969 |
+| `sum(weight_household)` | 17.682.112 | 17.682.112 |
+| NA nas 9 colunas de geografia | 0 | — |
+
+### Risco residual
+
+Os **736 domicílios** (0,07%) em que o tamanho excede o `V005` do chefe. Podem
+ser famílias secundárias legítimas ou fronteiras perdidas menores; os dois
+casos não foram separados.

@@ -118,7 +118,8 @@ list(
 
   # 02. microdata 1970 ---------------------------------------------------------------
 
-  # download do FTP + o crosswalk de municipio, que so existe no release_legacy
+  # a fonte e a versao CEM, no release_legacy: o FWF do FTP traz 1.785
+  # registros deslocados em AL e PE -- ver R/microdata_1970.R
   tar_target(name = raw_microdata_paths_1970,
              command = download_microdata_1970(),
              format = "file"
@@ -128,8 +129,8 @@ list(
              command = c("households", "population")
              ),
 
-  # branch per dataset: o registro de domicilio e derivado das pessoas, por
-  # na.locf sobre a ordem original -- ver R/microdata_1970.R
+  # branch per dataset: o vinculo pessoa -> domicilio vem do crosswalk, e so
+  # vale quando resolve na tabela de domicilios -- ver R/microdata_1970.R
   tar_target(name = output_microdata_1970,
              command = save_microdata_1970(
                clean_microdata_1970(raw_microdata_paths_1970,
