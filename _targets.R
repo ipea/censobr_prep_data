@@ -369,9 +369,27 @@ list(
              command = save_tracts_2022(clean_tract_table_2022, data_version),
              pattern = map(clean_tract_table_2022),
              format = 'file'
+             ),
+
+  # 11. tracts 2022 preliminares ------------------------------------------------------
+
+  # divulgacao previa do Censo 2022, um CSV nacional unico -- ver
+  # R/census_tracts_2022_prelim.R
+  tar_target(name = raw_tracts_path_2022_prelim,
+             command = download_tract_2022_prelim(),
+             format = 'file'
+             ),
+
+  tar_target(name = clean_tract_2022_prelim,
+             command = clean_tracts_2022_prelim(raw_tracts_path_2022_prelim)
+             ),
+
+  tar_target(name = output_tracts_path_2022_prelim,
+             command = save_tracts_2022_prelim(clean_tract_2022_prelim, data_version),
+             format = 'file'
              )
-  
-  
+
+
   #END. Upload files -----------------------------------------------------------
   
   # # all files input
