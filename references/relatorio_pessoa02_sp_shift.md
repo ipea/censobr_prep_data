@@ -11,7 +11,11 @@ Os arquivos `Pessoa02_SP1.xls` e `Pessoa02_SP2.xls` distribuídos pelo IBGE têm
 
 Resultado prático: quando o pipeline empilha (`rbindlist`) as 28 publicações IBGE (26 UFs comuns + SP1 + SP2), variáveis com o mesmo significado caem em colunas diferentes do parquet final. As variáveis ficam tecnicamente todas presentes, mas **bagunçadas** — e ninguém percebe sem inspecionar arquivo por arquivo.
 
-A versão antiga do pipeline, baseada em `dplyr::left_join`, também não percebia: ela seguia tranquila gerando um parquet com o universo dos 256 nomes (`V001`–`V255`), com SP escrevendo nas colunas erradas e o usuário final consumindo o resultado como se fosse o esperado.
+A versão antiga do pipeline, baseada em `dplyr::left_join`, também não percebia: ela seguia tranquila, com SP escrevendo nas colunas erradas e o usuário final consumindo o resultado como se fosse o esperado.
+
+> **Correção de 2026-09-12.** Este parágrafo afirmava que o pipeline antigo gerava um parquet com os 256 nomes (`V001`–`V255`). Isso foi verificado e **não procede** para nenhum artefato entregue: o `v0.5.0` publicado, o baseline `v0.6.0` guardado em `data_raw/baseline_compare/` e a saída atual têm todos **171** colunas `pessoa02_V*` e **zero** na faixa `V171`–`V255`. Os 256 nomes devem ter sido um estado transitório de build local durante a investigação de maio.
+>
+> O estrago real no publicado é **pior** do que colunas bagunçadas, e tem três camadas: (a) `V001`–`V085` de SP ficam vazias; (b) `V086`–`V170` de SP contêm o dado **masculino** deslocado — `pub_V086 == V001` correto em 64.717 de 64.717 setores; (c) os dados **femininos de SP se perderam**, porque viriam nomeados `V171`–`V255`, que o schema de 170 colunas não acomoda. Só a camada (a) é visível. Detalhamento em [relatorio_defeitos_2010_tracts_v050.md](relatorio_defeitos_2010_tracts_v050.md).
 
 ## 2. Por que esse tipo de erro escapa do controle
 
@@ -249,4 +253,6 @@ Como IBGE corrigiu o caso análogo de GO sem aviso prévio em 15/09/2025, vale c
 
 ## 7. Síntese
 
-Em termos práticos: o schema `Pessoa02_SP` é o schema canônico, escondido atrás de um shift trivial de +85 nos nomes das colunas. A "presença" das variáveis V171-V255 no parquet atual de v0.6.0 não é informação extra que SP teria — é a mesma informação canônica que todas as outras UFs publicam, só que duplicada sob nomes errados. A correção shifta os nomes de volta, fazendo o parquet final ter exatamente as 170 variáveis canônicas para todas as 28 publicações, em paridade com o dicionário oficial do IBGE.
+Em termos práticos: o schema `Pessoa02_SP` é o schema canônico, escondido atrás de um shift trivial de +85 nos nomes das colunas. Nos **arquivos do IBGE**, as variáveis `V171`–`V255` de SP não são informação extra — são a mesma informação canônica que todas as outras UFs publicam, só que sob nomes errados. A correção shifta os nomes de volta, fazendo o parquet final ter exatamente as 170 variáveis canônicas para todas as 28 publicações, em paridade com o dicionário oficial do IBGE.
+
+> **Correção de 2026-09-12.** A redação original dizia "no parquet atual de v0.6.0", sugerindo que o parquet carregava as colunas `V171`–`V255`. Nenhum parquet entregue as tem: são 171 colunas `pessoa02_V*` em todos os artefatos verificados. As colunas `V171`–`V255` existem apenas nos **XLS do IBGE**; no parquet publicado elas foram descartadas no empilhamento, e com elas os dados femininos de São Paulo. Ver a nota da seção 1.

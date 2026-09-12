@@ -56,6 +56,10 @@ clean_microdata_1980 <- function(raw_paths, dataset_name){
   # O crosswalk_tocantins_ferNoronha_1980_2010.xlsx NAO entra aqui: ele reescreve
   # esses 53 municipios para o codigo de 2010 (prefixo 17 e 26), que nao existe
   # na malha de 1980 -- era o que deixava 35.567 domicilios sem code_muni.
+  # Decisao de 2026-09-12: o arquivo continua sendo baixado e nao e usado. Optou-se
+  # por nao expor o codigo de 2010 em coluna propria nem tirar do download, para
+  # nao mexer no schema publicado. Fica disponivel se um dia se quiser a ligacao
+  # 1980 <-> 2010.
   m80 <- sf::st_drop_geometry(geobr::read_municipality(year = 1980, showProgress = FALSE))
   muni <- data.frame(code_muni_1980 = as.numeric(substr(as.character(m80$code_muni), 1, 6)),
                      code_muni      = as.numeric(m80$code_muni))
@@ -100,17 +104,18 @@ clean_microdata_1980 <- function(raw_paths, dataset_name){
   arrw <- arrw |>
     dplyr::mutate(dplyr::across(dplyr::all_of(num_vars), as.numeric))
 
-  # V212 (total de comodos) e V213 (comodos servindo de dormitorio) vem zeradas
-  # nos 233.344 domicilios de especie != 1, onde o questionario de domicilio
-  # nunca foi aplicado. Zero comodo nao existe -- no particular permanente a
-  # contagem comeca em 1 --, e as outras 17 variaveis do bloco ja marcam essas
-  # mesmas linhas com NA. O zero ali nao e um valor, e "nao perguntamos", e
-  # somado ou mediado por engano puxa qualquer media de comodos para baixo.
-  # A V602 fica de fora: dos seus 4.926.294 zeros so 233.344 sao nao-aplicavel,
-  # o resto e domicilio proprio, que nao paga aluguel de verdade.
+  # Nos 233.344 domicilios de especie != 1 o questionario de domicilio nunca foi
+  # aplicado, e as 17 variaveis categoricas do bloco ja marcam essas linhas com
+  # NA. V212 (total de comodos), V213 (comodos servindo de dormitorio) e V602
+  # (aluguel) vinham com zero no lugar, que nao e valor: e "nao perguntamos", e
+  # somado ou mediado por engano puxa qualquer media para baixo.
+  # O corte e por universo (V201), nao por valor: em V602 os outros 4.692.950
+  # zeros sao de especie 1 e sao substantivos -- domicilio proprio, que de fato
+  # nao paga aluguel -- e continuam zero.
   arrw <- arrw |>
     dplyr::mutate(V212 = dplyr::if_else(V201 == "1", V212, NA_real_),
-                  V213 = dplyr::if_else(V201 == "1", V213, NA_real_))
+                  V213 = dplyr::if_else(V201 == "1", V213, NA_real_),
+                  V602 = dplyr::if_else(V201 == "1", V602, NA_real_))
 
   # Nenhum dos dois pesos e tocado. Como o IBGE entrega, V603 soma 25.210.639
   # (= SIDRA t206, domicilios particulares permanentes, exato em 40 celulas:
