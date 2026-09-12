@@ -259,7 +259,7 @@ add_geography_cols <- function(arrw, year){
                    code_region == 2 ~'Nordeste',
                    code_region == 3 ~'Sudeste',
                    code_region == 4 ~'Sul',
-                   code_region == 5 ~'Centro-oeste')
+                   code_region == 5 ~'Centro-Oeste')
                  )
 
   # other regions
@@ -398,7 +398,7 @@ add_geography_cols_tracts <- function(arrw, year){
                    code_region == '2' ~'Nordeste',
                    code_region == '3' ~'Sudeste',
                    code_region == '4' ~'Sul',
-                   code_region == '5' ~'Centro-oeste'))
+                   code_region == '5' ~'Centro-Oeste'))
 
 
 

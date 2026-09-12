@@ -100,6 +100,18 @@ clean_microdata_1980 <- function(raw_paths, dataset_name){
   arrw <- arrw |>
     dplyr::mutate(dplyr::across(dplyr::all_of(num_vars), as.numeric))
 
+  # V212 (total de comodos) e V213 (comodos servindo de dormitorio) vem zeradas
+  # nos 233.344 domicilios de especie != 1, onde o questionario de domicilio
+  # nunca foi aplicado. Zero comodo nao existe -- no particular permanente a
+  # contagem comeca em 1 --, e as outras 17 variaveis do bloco ja marcam essas
+  # mesmas linhas com NA. O zero ali nao e um valor, e "nao perguntamos", e
+  # somado ou mediado por engano puxa qualquer media de comodos para baixo.
+  # A V602 fica de fora: dos seus 4.926.294 zeros so 233.344 sao nao-aplicavel,
+  # o resto e domicilio proprio, que nao paga aluguel de verdade.
+  arrw <- arrw |>
+    dplyr::mutate(V212 = dplyr::if_else(V201 == "1", V212, NA_real_),
+                  V213 = dplyr::if_else(V201 == "1", V213, NA_real_))
+
   # Nenhum dos dois pesos e tocado. Como o IBGE entrega, V603 soma 25.210.639
   # (= SIDRA t206, domicilios particulares permanentes, exato em 40 celulas:
   # Brasil, 26 UFs, 2 situacoes e 11 classes de comodos) e V604 soma
