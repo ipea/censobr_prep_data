@@ -206,6 +206,30 @@ download_tract_2022 <- function(){
 
   zip_files <- list.files(dest_dir, pattern = "\\.zip$", full.names = TRUE)
   if(length(zip_files) == 0) stop("No ZIP files in ", dest_dir, " after download")
+
+  # O IBGE republica o mesmo agregado com sufixo de data novo, e o zip antigo
+  # fica em disco ao lado do novo. Sem isto o tema casa com dois CSVs e o clean
+  # para: foi o que aconteceu com o basico, republicado em 20260520 sobre o
+  # 20250417. Fica so o mais recente de cada base. Note que o nome interno do
+  # CSV nao acompanha o do zip -- o zip novo extrai sem sufixo e o antigo com --
+  # entao a ordenacao tem de ser pela data do ZIP, nao pelo nome do CSV.
+  nm   <- sub("_csv$", "", sub("\\.zip$", "", basename(zip_files)))
+  date <- suppressWarnings(as.integer(sub("^.*_(\\d{8})$", "\\1", nm)))
+  date[is.na(date)] <- 0L
+  zips <- data.table::data.table(file = zip_files,
+                                 base = sub("_\\d{8}$", "", nm),
+                                 date = date)
+  data.table::setorder(zips, base, -date)
+  superados <- setdiff(zip_files, zips[, .SD[1L], by = base]$file)
+  if(length(superados)){
+    message("  descartando ", length(superados), " zip(s) superados pelo IBGE")
+    file.remove(superados)
+  }
+
+  # o csv/ e refeito do zero: extracao de uma rodada anterior sobrevive ao
+  # descarte do zip e continuaria casando com o padrao do tema
+  unlink(csv_dir, recursive = TRUE)
+  dir.create(csv_dir, recursive = TRUE, showWarnings = FALSE)
   unzip_censobr(zip_dir = dest_dir, out_zip = csv_dir)
 
   csv_paths <- list.files(csv_dir,
