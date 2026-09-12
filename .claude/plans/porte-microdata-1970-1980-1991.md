@@ -15,7 +15,7 @@ diferindo no tamanho da amostra (1970: 25%, 1980: 25%, 1991: 10%).
 
 ### v0.5.0 baseline publicado
 
-6 parquets em `ipeaGIT/censobr` v0.5.0:
+6 parquets em `ipea/censobr` v0.5.0:
 - `1970_households_v0.5.0.parquet` + `1970_population_v0.5.0.parquet`
 - `1980_households_v0.5.0.parquet` + `1980_population_v0.5.0.parquet`
 - `1991_households_v0.5.0.parquet` + `1991_population_v0.5.0.parquet`

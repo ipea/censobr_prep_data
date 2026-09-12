@@ -17,7 +17,7 @@ Para qualquer tarefa não-trivial, **planejar antes de escrever código**. Plano
 ## O Protocolo
 
 1. **Entrar em modo plano** — usar `EnterPlanMode`.
-2. **Consultar fontes** — ler `CLAUDE.md`, regras em `.claude/rules/`, estado do `_targets/meta/`, último release do `ipeaGIT/censobr`.
+2. **Consultar fontes** — ler `CLAUDE.md`, regras em `.claude/rules/`, estado do `_targets/meta/`, último release do `ipea/censobr`.
 3. **Investigar** — ler o código afetado (`R/`, `_targets.R`, scripts em `R_ainda_sem_targets/` se for migração), mapear dependências.
 4. **Redigir o plano** — quais mudanças, em quais arquivos, em que ordem; quais targets serão adicionados/alterados; impacto no schema dos parquets.
 5. **Salvar em disco** — em `~/.claude/plans/` (padrão Claude Code) ou em `.claude/plans/` no projeto.

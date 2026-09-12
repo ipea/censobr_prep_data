@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project autonomy
 
-This project (`censobr_prep_data`) is **always opened as a standalone workspace** — never with the parent `censobr_e_prepData/` folder. The consumer package `censobr` lives at `..\censobr\` on disk, but is treated as a separate project handled in a separate VS Code window / Claude Code session. Changes to the consumer go through PRs on `https://github.com/ipeaGIT/censobr`, not from this session.
+This project (`censobr_prep_data`) is **always opened as a standalone workspace** — never with the parent `censobr_e_prepData/` folder. The consumer package `censobr` lives at `..\censobr\` on disk, but is treated as a separate project handled in a separate VS Code window / Claude Code session. Changes to the consumer go through PRs on `https://github.com/ipea/censobr`, not from this session.
 
 Defense-in-depth: PreToolUse hooks in `.claude/settings.json` block any `Edit`/`Write`/`NotebookEdit` or destructive Bash command that targets `..\censobr\` (in case a path slips through by mistake). Read-only access to `..\censobr\` is allowed.
 
@@ -60,9 +60,9 @@ Duas regras complementares: [`memory-discipline.md`](.claude/rules/memory-discip
 
 ## What this repo is
 
-Data-preparation companion to the [`censobr`](https://github.com/ipeaGIT/censobr) R package. It downloads raw Brazilian Census files from the IBGE FTP, parses/cleans them, and writes compressed parquet files that are uploaded as assets to GitHub Releases on `ipeaGIT/censobr`. End users never run this repo — they consume the published parquet files via the `censobr` package. The README is intentionally empty.
+Data-preparation companion to the [`censobr`](https://github.com/ipea/censobr) R package. It downloads raw Brazilian Census files from the IBGE FTP, parses/cleans them, and writes compressed parquet files that are uploaded as assets to GitHub Releases on `ipea/censobr`. End users never run this repo — they consume the published parquet files via the `censobr` package. The README is intentionally empty.
 
-**Project objective:** the deliverable is the **`targets` pipeline itself, 100% reproducible**. Producing any specific `censobr` release (v0.5.0, v0.6.0, etc.) is a downstream concern handled in a separate session against the `ipeaGIT/censobr` repo.
+**Project objective:** the deliverable is the **`targets` pipeline itself, 100% reproducible**. Producing any specific `censobr` release (v0.5.0, v0.6.0, etc.) is a downstream concern handled in a separate session against the `ipea/censobr` repo.
 
 ## Data domain — two types, two axes
 
@@ -147,7 +147,7 @@ Centralized helpers used throughout the pipeline. Reuse before reinventing:
 
 ## Open data bugs (must fix in this pipeline)
 
-5 issues open in `ipeaGIT/censobr/issues`, all in **2010 tracts** (the only block currently wired). Catalog and remediation plan in memory entry [`project_open_data_bugs.md`](C:/Users/antro/.claude/projects/d--Dropbox-Software-R-Packages-censobr-e-prepData-censobr-prep-data/memory/project_open_data_bugs.md). Phase 0.3 of the plan tackles these before any other porting.
+5 issues open in `ipea/censobr/issues`, all in **2010 tracts** (the only block currently wired). Catalog and remediation plan in memory entry [`project_open_data_bugs.md`](C:/Users/antro/.claude/projects/d--Dropbox-Software-R-Packages-censobr-e-prepData-censobr-prep-data/memory/project_open_data_bugs.md). Phase 0.3 of the plan tackles these before any other porting.
 
 Highlights: #73 (X→0 instead of NA, BLOCKER); #68 (GO Pessoa02 all NA, BLOCKER, fix is commented out); #70 (Pessoa02 truncated at V170, BLOCKER); #71 (V009 income variable in Basico full of NAs in many states — user-reported workaround was switching from XLS to direct-FTP-CSV read, BLOCKER); #75 (UF/region name inconsistencies in Basico, MAJOR).
 
@@ -161,7 +161,7 @@ This is an intentional break from v0.5.0 (which had `code_tract` as string and t
 
 ## Validation reference
 
-There is **no `dev` branch** on `ipeaGIT/censobr` (verified 2026-05-02 — only `main` and `gh-pages`; local Dropbox-synced clones may show stale `origin/dev` ref). The published reference is **v0.5.0** (Jun/2025, 38 parquets). v0.5.0 carries the bugs above — treat it as historical baseline to measure intentional divergence after fixes, not as gold standard.
+There is **no `dev` branch** on `ipea/censobr` (verified 2026-05-02 — only `main` and `gh-pages`; local Dropbox-synced clones may show stale `origin/dev` ref). The published reference is **v0.5.0** (Jun/2025, 38 parquets). v0.5.0 carries the bugs above — treat it as historical baseline to measure intentional divergence after fixes, not as gold standard.
 
 The pre-release **v0.6.0** (Sep/2025, 8 parquets) is the output of an earlier version of `R/census_tracts_2010.R` (not the current `main` HEAD). Useful as a checkpoint reference but should not be conflated with v0.5.0.
 
@@ -171,4 +171,4 @@ Phase-0 baseline evidence for 2010 tracts bugs is in [`.claude/plans/baseline-20
 
 ## Publishing artifacts
 
-Final parquet files are uploaded to GitHub Releases on `ipeaGIT/censobr` via `piggyback::pb_upload()` (template in `R_ainda_sem_targets/z_upload_assets.R`; placeholder commented at the bottom of `_targets.R`). Requires `GITHUB_TOKEN` in `~/.Renviron`. The release tag is the data version (e.g. `v0.3.0`, `v2.0.0`), not a code version.
+Final parquet files are uploaded to GitHub Releases on `ipea/censobr` via `piggyback::pb_upload()` (template in `R_ainda_sem_targets/z_upload_assets.R`; placeholder commented at the bottom of `_targets.R`). Requires `GITHUB_TOKEN` in `~/.Renviron`. The release tag is the data version (e.g. `v0.3.0`, `v2.0.0`), not a code version.

@@ -19,7 +19,7 @@ O consumidor `censobr` já trata o nível 2 com
 recebeu do IBGE e a função grava parquets no cache local, sem redistribuição.
 
 Este plano trata do **nível 1**: o único que pode virar asset de release do
-`ipeaGIT/censobr`. Fecha o item deferred "Microdata 2022 (issue #65)".
+`ipea/censobr`. Fecha o item deferred "Microdata 2022 (issue #65)".
 
 ## Diferença entre os dois layouts (verificada, não presumida)
 
@@ -148,7 +148,7 @@ Pessoas para `_targets/objects/`. O ganho de granularidade não paga o custo.
    grava `2022_population_<release>.parquet` no cache — exatamente o nome que
    um asset público do release teria. Um sobrescreve o outro, e os dois têm
    colunas diferentes (`P0111` + geografia fina vs `P0110`). É decisão do lado
-   do consumidor (PR em `ipeaGIT/censobr`), mas precisa ser resolvida antes de
+   do consumidor (PR em `ipea/censobr`), mas precisa ser resolvida antes de
    publicar o release.
 2. **Volume.** ~9 GB de CSV extraído; Pessoas nacional ~27M linhas. zstd-22
    sobre isso é demorado. Medir no smoke test antes de rodar as 27 UFs.

@@ -19,7 +19,7 @@
   Sheets: `Pessoa` (60 vars) + `Domicílio` (25 vars). Na coluna *Rótulo* o IBGE 2025 inclui o V-code histórico no formato `NNN-Descrição` para a maioria das variáveis.
 - **B** — `domicilios1980_via_PedroSouza.xlsx` (29 vars) + `pessoas1980_via_PedroSouza.xlsx` (67 vars), em `censoBR_aux_Dados/1980/microdados da amostra/dicionario/`.
 - **C** — `layout_1980.xlsx`, mesma pasta. Sheets `Households` (43 var-rows com posições FWF) + `Population` (52 var-rows).
-- **v0.5.0** — schemas dos parquets `1980_households_v0.5.0.parquet` (29 V-cols) + `1980_population_v0.5.0.parquet` (89 V-cols), baixados do release `ipeaGIT/censobr` v0.5.0.
+- **v0.5.0** — schemas dos parquets `1980_households_v0.5.0.parquet` (29 V-cols) + `1980_population_v0.5.0.parquet` (89 V-cols), baixados do release `ipea/censobr` v0.5.0.
 
 **Auxiliar D** (consultar quando 3 fontes divergirem):
 - `Variaveis_Auxiliares/V*.txt` — V211, V512, V525, V530, V542, V550-V554

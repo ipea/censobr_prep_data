@@ -27,9 +27,9 @@ if ([string]::IsNullOrWhiteSpace($cmd)) { exit 0 }
 # refs, not local paths, so even if they contain "censobr" they cannot be
 # a write target. Removing them prevents false positives like:
 #
-#   mkdir foo && gh release download --repo ipeaGIT/censobr --dir foo
-#   gh api repos/ipeaGIT/censobr/contents/...
-#   curl https://github.com/ipeaGIT/censobr/...
+#   mkdir foo && gh release download --repo ipea/censobr --dir foo
+#   gh api repos/ipea/censobr/contents/...
+#   curl https://github.com/ipea/censobr/...
 #
 # Note: this does NOT weaken the write check below — `-X POST/PUT/PATCH/DELETE`
 # against `gh ... censobr` is still flagged via the write-pattern list, and
@@ -124,7 +124,7 @@ if ($null -eq $matched) {
 [Console]::Error.WriteLine("")
 [Console]::Error.WriteLine("O diretorio ../censobr e somente leitura nesta sessao.")
 [Console]::Error.WriteLine("Mudancas no consumidor 'censobr' devem ser feitas via PR")
-[Console]::Error.WriteLine("no GitHub: https://github.com/ipeaGIT/censobr")
+[Console]::Error.WriteLine("no GitHub: https://github.com/ipea/censobr")
 [Console]::Error.WriteLine("")
 [Console]::Error.WriteLine("Operacoes read-only (cat, ls, grep, git log, gh release view, etc.)")
 [Console]::Error.WriteLine("sao permitidas. Veja .claude/rules/scope.md.")

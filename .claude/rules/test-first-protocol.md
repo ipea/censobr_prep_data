@@ -118,7 +118,7 @@ Para parquets que **reproduzem** datasets já em v0.5.0:
 
 ```r
 ref <- arrow::read_parquet(
-  "https://github.com/ipeaGIT/censobr/releases/download/v0.5.0/2010_tracts_Basico_v0.5.0.parquet"
+  "https://github.com/ipea/censobr/releases/download/v0.5.0/2010_tracts_Basico_v0.5.0.parquet"
 )
 new <- arrow::read_parquet("./data/tracts/2010/2010_tracts_Basico.parquet")
 

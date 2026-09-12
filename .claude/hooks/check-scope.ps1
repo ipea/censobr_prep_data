@@ -58,7 +58,7 @@ if ($blocked) {
     [Console]::Error.WriteLine("")
     [Console]::Error.WriteLine("O diretorio ../censobr e somente leitura nesta sessao.")
     [Console]::Error.WriteLine("Mudancas no consumidor 'censobr' devem ser feitas via PR")
-    [Console]::Error.WriteLine("no GitHub: https://github.com/ipeaGIT/censobr")
+    [Console]::Error.WriteLine("no GitHub: https://github.com/ipea/censobr")
     [Console]::Error.WriteLine("")
     [Console]::Error.WriteLine("Veja .claude/rules/scope.md para a regra completa.")
     exit 2

@@ -7,7 +7,7 @@
 
 ## Método
 
-Em vez de rodar `tar_make()` do zero (~horas de FTP IBGE com `coress=1`), baixamos os parquets já publicados em duas tags do `ipeaGIT/censobr` e inspecionamos diretamente:
+Em vez de rodar `tar_make()` do zero (~horas de FTP IBGE com `coress=1`), baixamos os parquets já publicados em duas tags do `ipea/censobr` e inspecionamos diretamente:
 
 - `v0.5.0` (2025-06-30, latest release) — output do **legacy** `R_ainda_sem_targets/census_tracts_aggreg_2010.R`.
 - `v0.6.0` (2025-09-12, pre-release) — output de uma **versão anterior** do wired `R/census_tracts_2010.R`. (O `R/census_tracts_2010.R` no `main` HEAD atual foi criado hoje, commit `3a94684`; presumivelmente similar à versão que produziu v0.6.0 mas pode divergir em detalhes.)

@@ -16,7 +16,7 @@
 - **A — layout_1970.xlsx** em `censoBR_aux_Dados/1970/microdados da amostra/dicionario/`. Sheet `Population` traz 54 V-vars com posições FWF (DESDE/TAM) cobrindo chars 1-76 do registro. Sheet `Households` traz 20 vars (subset da Population) sem posições.
 - **B — pessoas1970_via_PedroSouza.xlsx**. Mesmas vars com Label, Descrição, Categorias detalhadas.
 - **B' — domicilios_fixed1970_via_PedroSouza.xlsx**. 30 rows, apenas 3 cols (Ano, Variável, Label) — versão menos detalhada para o subset domicílio. **Households é derivado da Population via agregação** — não há schema independente.
-- **v0.5.0 schemas** baixados do release `ipeaGIT/censobr` v0.5.0:
+- **v0.5.0 schemas** baixados do release `ipea/censobr` v0.5.0:
   - `1970_population_v0.5.0.parquet`: 65 colunas (54 V-cols + 9 geo + 2 IDs)
   - `1970_households_v0.5.0.parquet`: 35 colunas (20 V-cols + 9 geo + 1 ID + 5 derivadas)
 

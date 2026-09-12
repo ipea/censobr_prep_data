@@ -34,10 +34,10 @@ paths:
    ```
    Identificar: quais targets estão `built`, `pending`, ou com `error`. Se houver erro, qual.
 
-5. **Verificar releases do consumidor `ipeaGIT/censobr`:**
+5. **Verificar releases do consumidor `ipea/censobr`:**
    ```bash
-   gh release list --repo ipeaGIT/censobr --limit 5
-   gh release view v0.6.0 --repo ipeaGIT/censobr --json assets --jq '.assets[].name' 2>/dev/null
+   gh release list --repo ipea/censobr --limit 5
+   gh release view v0.6.0 --repo ipea/censobr --json assets --jq '.assets[].name' 2>/dev/null
    ```
    Comparar com o conjunto de targets no `_targets.R` — o que já foi publicado em v0.6.0 vs o que ainda falta.
 
@@ -55,7 +55,7 @@ paths:
 ## Prioridade de fontes (em caso de divergência)
 
 1. **Estado do `_targets/meta/`** — específico, datado, é o que o pipeline efetivamente computou.
-2. **Releases no `ipeaGIT/censobr` (GitHub)** — fonte de verdade do que está publicado.
+2. **Releases no `ipea/censobr` (GitHub)** — fonte de verdade do que está publicado.
 3. **Plano mais recente em `~/.claude/plans/`** — visão de longo prazo, pode estar à frente do que foi executado.
 4. **`CLAUDE.md`** — convenções e estrutura do projeto.
 5. **`.claude/rules/`** — regras inviolaveis (escopo, mudanças mínimas, etc.).
