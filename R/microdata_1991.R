@@ -78,7 +78,11 @@ clean_microdata_1991 <- function(raw_paths, dataset_name){
     dplyr::left_join(states, by = "code_state")
 
   # as V numericas de cada tabela, e o peso, que o IBGE grava como inteiro
-  # com 8 casas decimais implicitas
+  # com 8 casas decimais implicitas. Na tabela de pessoas ha dois: V7301 (da
+  # pessoa) e V7300 (do domicilio, repetido em cada morador). O script legado
+  # so dividia o da pessoa, e a V7300 saia como string com o inteiro cru --
+  # 10% dela em notacao cientifica, inutilizavel. Aqui os dois recebem o
+  # mesmo tratamento.
   if(dataset_name == "households"){
     num_vars <- c("V0102", "V0098", "V0109", "V0111", "V0112", "V2012",
                   "V0209", "V0211", "V2111", "V0212", "V2121", "V7300")
@@ -88,10 +92,11 @@ clean_microdata_1991 <- function(raw_paths, dataset_name){
                   "V3152", "V0317", "V0318", "V3311", "V3312", "V3341", "V0354",
                   "V0355", "V3561", "V0357", "V0360", "V0361", "V3351", "V3352",
                   "V3353", "V3354", "V3355", "V3356", "V3360", "V3361", "V3362",
-                  "V0335", "V0336", "V0340", "V3357", "V3443", "V7301")
-    peso <- "V7301"
+                  "V0335", "V0336", "V0340", "V3357", "V3443", "V7300", "V7301")
+    peso <- c("V7300", "V7301")
   }
   num_vars <- intersect(num_vars, names(arrw))
+  peso     <- intersect(peso, names(arrw))
 
   arrw <- arrw |>
     dplyr::mutate(dplyr::across(dplyr::all_of(num_vars), as.numeric)) |>

@@ -75,9 +75,44 @@ clean_microdata_1970 <- function(raw_paths, dataset_name){
       sigla <- toupper(substr(basename(f), 7, 8))
       uf <- uf_cod$uf_1970[match(sigla, uf_cod$uf_sigla)]
 
-      df <- readr::read_fwf(f, readr::fwf_positions(dic$int_pos, dic$fin_pos, dic$var_name),
-                            col_types = paste(rep("i", nrow(dic)), collapse = ""))
+      # Dois dos 27 arquivos -- DAMO70AL.txt e Damo70PE.txt -- trazem 1.785
+      # registros deslocados: um bloco de 18 ou 60 caracteres muda de lugar e a
+      # linha sai com 16 a 154 caracteres em vez de 76. A cabeca do registro
+      # continua no lugar (o prefixo bate com as linhas vizinhas) e a cauda
+      # tambem, mas o peso, que sao os dois ultimos caracteres, deixa de cair
+      # nas posicoes 75-76: numa leitura por posicao fixa 899 ficam sem peso e
+      # outros 650 saem com um numero errado mas plausivel.
+      # Ver references/microdata_1970_corrupcao_al_pe.md.
+      # Lemos linha a linha e so entao passamos o vetor ao parser -- sobre o
+      # arquivo cru o read_fwf ainda inventa uma linha em PE, o que
+      # desalinharia o id_household, que e posicional.
+      linhas <- readr::read_lines(f, locale = readr::locale(encoding = "ISO-8859-1"),
+                                  progress = FALSE)
+      linhas <- linhas[nchar(linhas) > 1]   # 0x1A de fim de arquivo do DOS
+      n <- nchar(linhas)
+
+      # linhas curtas demais sao fragmentos, com 3 a 10 das 54 variaveis
+      # preenchidas: nao tem sexo, idade nem parentesco. Nao sao pessoas.
+      fragmento <- n < 54
+      if(any(fragmento)){
+        message("    descartando ", sum(fragmento), " fragmento(s) de registro")
+        linhas <- linhas[!fragmento]
+        n <- n[!fragmento]
+      }
+
+      df <- readr::read_fwf(I(linhas),
+                            readr::fwf_positions(dic$int_pos, dic$fin_pos, dic$var_name),
+                            col_types = paste(rep("i", nrow(dic)), collapse = ""),
+                            progress = FALSE)
       data.table::setDT(df)
+
+      quebrado <- which(n != 76)
+      if(length(quebrado)){
+        message("    recuperando o peso de ", length(quebrado), " registro(s) deslocado(s)")
+        data.table::set(df, quebrado, "V054",
+                        as.integer(substring(linhas[quebrado], n[quebrado] - 1L, n[quebrado])))
+      }
+      rm(linhas); gc(verbose = FALSE)
 
       # o municipio de 1970 e UF + microrregiao + municipio. Guanabara e
       # Distrito Federal vem agregados no crosswalk (2531000 e 3600000), entao
@@ -90,17 +125,25 @@ clean_microdata_1970 <- function(raw_paths, dataset_name){
       df[, c("k1", "k2", "k3") := NULL]
       df[cw, on = "code_muni_1970", code_muni := i.code_muni]
 
-      # o byte de fim de arquivo do DOS no fim de cada .txt vira um registro
-      # todo vazio -- um por UF, 27 no pais
-      vazias <- df[, rowSums(is.na(.SD)) == length(dic$var_name), .SDcols = dic$var_name]
-      if(any(vazias)){
-        message("    descartando ", sum(vazias), " registro(s) vazio(s) (byte de EOF)")
-        df <- df[!vazias]
-      }
-
       # a UF vem do arquivo, entao vale mesmo quando V001/V002 estao
       # corrompidos e o municipio nao resolve (156 registros no pais)
       df[, uf_1970 := uf]
+
+      # ninguem pode ficar sem peso. Depois do remendo sobram uns poucos
+      # registros com V054 ilegivel ou zerado na fonte; herdam a mediana do
+      # setor e, na falta dela, a do municipio. Fica aqui, e nao na derivacao
+      # do domicilio, porque a tabela de pessoas sai deste staging.
+      df[V054 %in% 0, V054 := NA_integer_]
+      if(anyNA(df$V054)){
+        message("    imputando o peso de ", sum(is.na(df$V054)), " registro(s)")
+        df[, wt_set := as.numeric(stats::median(V054, na.rm = TRUE)),
+           by = .(code_muni_1970, V003, V004)]
+        df[, wt_mun := as.numeric(stats::median(V054, na.rm = TRUE)), by = code_muni_1970]
+        df[, wt_uf  := as.numeric(stats::median(V054, na.rm = TRUE))]
+        df[is.na(V054),
+           V054 := as.integer(round(data.table::fcoalesce(wt_set, wt_mun, wt_uf)))]
+        df[, c("wt_set", "wt_mun", "wt_uf") := NULL]
+      }
 
       arrow::write_parquet(df, file.path(stage_dir, paste0(sigla, ".parquet")))
       rm(df); gc(verbose = FALSE)
@@ -169,10 +212,13 @@ clean_microdata_1970 <- function(raw_paths, dataset_name){
   p[, hhIncomePerCap := hhIncome / numberRelatives]
   p[nonrelative == 1, c("hhIncome", "hhIncomePerCap") := NA_real_]
 
-  # o peso do domicilio e o do chefe
-  p[, wgthh := 0]
+  # o peso do domicilio e o do chefe; onde o arquivo nao traz chefe, vale a
+  # mediana dos moradores -- senao o domicilio inteiro ficaria sem peso
+  p[, wgthh := NA_real_]
   p[V025 == 1, wgthh := as.numeric(V054)]
-  p[, wgthh := max(wgthh), by = household_id]
+  p[, wgthh := suppressWarnings(max(wgthh, na.rm = TRUE)), by = household_id]
+  p[is.infinite(wgthh), wgthh := NA_real_]
+  p[is.na(wgthh), wgthh := stats::median(as.numeric(V054), na.rm = TRUE), by = household_id]
   p[is.na(household_id), wgthh := NA_real_]
 
   # V005 e V022+ sao de pessoa; o registro de domicilio fica com V001-V021
@@ -191,9 +237,8 @@ clean_microdata_1970 <- function(raw_paths, dataset_name){
            by = household_id, .SDcols = medias]
   data.table::setnames(out, "household_id", "id_household")
 
-  # onde o chefe nao tem peso no arquivo, a media do grupo sai NaN; NA e o
-  # valor honesto. Sao 131 domicilios em 4,7 milhoes -- registros incompletos
-  # do proprio FWF do IBGE (V054 falta em 1.114 das 24,8M pessoas).
+  # onde o grupo nao tem valor algum, a media sai NaN; NA e o valor honesto.
+  # Sao 131 domicilios em 4,7 milhoes.
   for(v in c("weight_household", "hh_income", "hh_income_per_cap"))
     data.table::set(out, which(is.nan(out[[v]])), v, NA_real_)
 

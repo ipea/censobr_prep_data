@@ -92,7 +92,33 @@ clean_microdata_1980 <- function(raw_paths, dataset_name){
   num_vars <- intersect(num_vars, names(arrw))
 
   arrw <- arrw |>
-    dplyr::mutate(dplyr::across(dplyr::all_of(num_vars), as.numeric)) |>
+    dplyr::mutate(dplyr::across(dplyr::all_of(num_vars), as.numeric))
+
+  # V604 (PESOP) vem zerada em 42 das 29,4M pessoas. O peso do domicilio em que
+  # a pessoa mora e o substituto natural -- ele esta na propria linha, porque as
+  # variaveis de domicilio vem repetidas em cada morador.
+  # Nao se mexe na V603 (PESOD): ela e zero em 233.399 domicilios por desenho do
+  # IBGE, que so calculou fator de expansao para particular permanente. Ver
+  # references/microdata_1980_ftp_vs_aux.md.
+  if(dataset_name == "population"){
+    arrw <- arrw |>
+      dplyr::mutate(V604 = dplyr::if_else(V604 == 0 & V603 > 0, V603, V604))
+
+    # sobram 24 pessoas em domicilio coletivo, onde nem o peso da pessoa nem o
+    # do domicilio existem; herdam a mediana do municipio
+    med <- arrw |>
+      dplyr::filter(V604 > 0) |>
+      dplyr::group_by(code_muni) |>
+      dplyr::summarise(V604_muni = stats::median(V604)) |>
+      dplyr::collect()
+
+    arrw <- arrw |>
+      dplyr::left_join(med, by = "code_muni") |>
+      dplyr::mutate(V604 = dplyr::if_else(V604 == 0, V604_muni, V604),
+                    V604_muni = NULL)
+  }
+
+  arrw <- arrw |>
     dplyr::relocate(code_muni, code_muni_1980, code_state, abbrev_state, name_state,
                     code_region, name_region, code_meso, code_micro)
 
