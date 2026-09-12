@@ -90,46 +90,183 @@ list(
              ),
   
   
-  # # 01. microdata 1960 ---------------------------------------------------------------
-  # 
-  # # input: amostra compilada pelo Rogerio em censoBR_aux_Dados (fora do FTP IBGE).
-  # tar_target(name = aux_microdata_1960_paths,
-  #            command = c(
-  #              "../censoBR_aux_Dados/1960/microdados da amostra/Censo.1960.brasil.domicilios.amostraCompilada.censobr.fst",
-  #              "../censoBR_aux_Dados/1960/microdados da amostra/Censo.1960.brasil.pessoas.amostraCompilada.censobr.parquet"
-  #            ),
-  #            format = "file"
-  #            ),
-  # 
-  # tar_target(name = dataset_names_microdata_1960,
-  #            command = c("households", "population")
-  #            ),
-  # 
-  # # branch per dataset: read fst/parquet, rename v* -> V*, attach dataset sentinel
-  # tar_target(name = clean_microdata_table_1960,
-  #            command = clean_microdata_1960(aux_microdata_1960_paths, dataset_names_microdata_1960),
-  #            pattern = map(dataset_names_microdata_1960)
-  #            ),
-  # 
-  # # branch per dataset: cast code_* to numeric (v0.6.0 convention) + save parquet
-  # tar_target(name = output_microdata_1960,
-  #            command = save_microdata_1960(clean_microdata_table_1960),
-  #            pattern = map(clean_microdata_table_1960),
-  #            format = "file"
-  #            ),
+  # 01. microdata 1960 ---------------------------------------------------------------
+
+  # input: amostra compilada pelo Rogerio (nao existe no FTP IBGE), hospedada
+  # no release_legacy deste repo.
+  tar_target(name = raw_microdata_paths_1960,
+             command = download_microdata_1960(),
+             format = "file"
+             ),
+
+  tar_target(name = dataset_names_microdata_1960,
+             command = c("households", "population")
+             ),
+
+  # branch per dataset: read parquet, rename v* -> V*, attach dataset sentinel
+  tar_target(name = clean_microdata_table_1960,
+             command = clean_microdata_1960(raw_microdata_paths_1960, dataset_names_microdata_1960),
+             pattern = map(dataset_names_microdata_1960)
+             ),
+
+  # branch per dataset: cast code_* to numeric (v0.6.0 convention) + save parquet
+  tar_target(name = output_microdata_1960,
+             command = save_microdata_1960(clean_microdata_table_1960, data_version),
+             pattern = map(clean_microdata_table_1960),
+             format = "file"
+             ),
 
   # 02. microdata 1970 ---------------------------------------------------------------
-  
-  
+
+  # download do FTP + o crosswalk de municipio, que so existe no release_legacy
+  tar_target(name = raw_microdata_paths_1970,
+             command = download_microdata_1970(),
+             format = "file"
+             ),
+
+  tar_target(name = dataset_names_microdata_1970,
+             command = c("households", "population")
+             ),
+
+  # branch per dataset: o registro de domicilio e derivado das pessoas, por
+  # na.locf sobre a ordem original -- ver R/microdata_1970.R
+  tar_target(name = output_microdata_1970,
+             command = save_microdata_1970(
+               clean_microdata_1970(raw_microdata_paths_1970,
+                                    dataset_names_microdata_1970),
+               dataset_names_microdata_1970,
+               data_version),
+             pattern = map(dataset_names_microdata_1970),
+             format = "file"
+             ),
+
+
   # 03. microdata 1980 ---------------------------------------------------------------
-  
+
+  # input: amostra preparada pelo Rogerio, no release_legacy. O DBF do FTP
+  # IBGE 2025 perde V518, V3, V4 e V6 -- ver R/microdata_1980.R.
+  tar_target(name = raw_microdata_paths_1980,
+             command = download_microdata_1980(),
+             format = "file"
+             ),
+
+  tar_target(name = dataset_names_microdata_1980,
+             command = c("households", "population")
+             ),
+
+  # branch per dataset: clean e save no mesmo target (pessoas tem 29,4M linhas)
+  tar_target(name = output_microdata_1980,
+             command = save_microdata_1980(
+               clean_microdata_1980(raw_microdata_paths_1980,
+                                    dataset_names_microdata_1980),
+               dataset_names_microdata_1980,
+               data_version),
+             pattern = map(dataset_names_microdata_1980),
+             format = "file"
+             ),
+
+
   # 04. microdata 1991 ---------------------------------------------------------------
-  
-  # 05. microdata 2010 ---------------------------------------------------------------
-  
-  # 06. microdata 2022 ---------------------------------------------------------------
-  
-  # 07. census tracts 2000 ---------------------------------------------------------------
+
+  # input: amostra preparada pelo Rogerio, no release_legacy. O DBF do FTP
+  # IBGE nao traz a V0102 -- ver R/microdata_1991.R.
+  tar_target(name = raw_microdata_paths_1991,
+             command = download_microdata_1991(),
+             format = "file"
+             ),
+
+  tar_target(name = dataset_names_microdata_1991,
+             command = c("households", "population")
+             ),
+
+  # branch per dataset: clean e save no mesmo target (pessoas tem 17M linhas)
+  tar_target(name = output_microdata_1991,
+             command = save_microdata_1991(
+               clean_microdata_1991(raw_microdata_paths_1991,
+                                    dataset_names_microdata_1991),
+               dataset_names_microdata_1991,
+               data_version),
+             pattern = map(dataset_names_microdata_1991),
+             format = "file"
+             ),
+
+
+  # 05. microdata 2000 ---------------------------------------------------------------
+
+  # download (also unzips, inclusive os zips aninhados da Bahia).
+  tar_target(name = raw_microdata_paths_2000,
+             command = download_microdata_2000(),
+             format = "file"
+             ),
+
+  tar_target(name = dataset_names_microdata_2000,
+             command = c("households", "population", "families")
+             ),
+
+  # branch per table: parse FWF por UF com staging, empilha e grava
+  tar_target(name = output_microdata_2000,
+             command = save_microdata_2000(
+               clean_microdata_2000(raw_microdata_paths_2000,
+                                    dataset_names_microdata_2000),
+               dataset_names_microdata_2000,
+               data_version),
+             pattern = map(dataset_names_microdata_2000),
+             format = "file"
+             ),
+
+  # 06. microdata 2010 ---------------------------------------------------------------
+
+  # download (also unzips). Returns paths to all extracted TXTs.
+  tar_target(name = raw_microdata_paths_2010,
+             command = download_microdata_2010(),
+             format = "file"
+             ),
+
+  tar_target(name = dataset_names_microdata_2010,
+             command = c("households", "population", "mortality", "emigration")
+             ),
+
+  # branch per table: parse FWF por UF com staging, empilha e grava
+  tar_target(name = output_microdata_2010,
+             command = save_microdata_2010(
+               clean_microdata_2010(raw_microdata_paths_2010,
+                                    dataset_names_microdata_2010),
+               dataset_names_microdata_2010,
+               data_version),
+             pattern = map(dataset_names_microdata_2010),
+             format = "file"
+             ),
+
+
+  # 07. microdata 2022 ---------------------------------------------------------------
+
+  # amostra de ACESSO PUBLICO (nivel 1) -- a unica redistribuivel. O acesso
+  # controlado (nivel 2) e importado pelo proprio pesquisador no consumidor.
+
+  # download (also unzips). Returns paths to all extracted CSVs.
+  tar_target(name = raw_microdata_paths_2022,
+             command = download_microdata_2022(),
+             format = 'file'
+             ),
+
+  tar_target(name = dataset_names_microdata_2022,
+             command = c("households", "population", "families", "mortality")
+             ),
+
+  # branch per table: clean e save no mesmo target -- Pessoas tem 21,5M linhas,
+  # e um target intermediario obrigaria o targets a serializar isso em
+  # _targets/objects/. A query arrow atravessa os dois passos preguicosa.
+  tar_target(name = output_microdata_2022,
+             command = save_microdata_2022(
+               clean_microdata_2022(raw_microdata_paths_2022,
+                                    dataset_names_microdata_2022),
+               dataset_names_microdata_2022,
+               data_version),
+             pattern = map(dataset_names_microdata_2022),
+             format = 'file'
+             ),
+
+  # 08. census tracts 2000 ---------------------------------------------------------------
 
   # download (also unzips). Returns paths to all extracted XLSs.
   tar_target(name = raw_tracts_paths_2000,
@@ -159,7 +296,7 @@ list(
              format = 'file'
              ),
 
-  # 08. census tracts 2010 ---------------------------------------------------------------
+  # 09. census tracts 2010 ---------------------------------------------------------------
   
   # # year input
   # tar_target(name = years_tracts,
@@ -198,7 +335,7 @@ list(
              format = 'file'
              ),
 
-  # 09. census tracts 2022 ---------------------------------------------------------------
+  # 10. census tracts 2022 ---------------------------------------------------------------
 
   # download (also unzips). Returns paths to all extracted CSVs.
   tar_target(name = raw_tracts_paths_2022,

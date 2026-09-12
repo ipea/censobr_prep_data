@@ -302,6 +302,84 @@ get_schema <- function(year, dataset){
       V1005 = int8()
     )
   }
+
+  # 2022 microdata, amostra de ACESSO PUBLICO. Tipos derivados do "Layout
+  # Microdados CD2022 - acesso Publico.xlsx": DEC > 0 vira double(); senao o
+  # inteiro e dimensionado por INT (<=2 int8, 3-4 int16, 5-9 int32). O layout
+  # publico nao tem INT >= 10, entao nao ha int64() -- ao contrario do
+  # controlado, onde a area de ponderacao estoura 32 bits. F0101 e M0101 sao
+  # string() porque carregam letra no valor ("F001", "M001"); P0101 parece com
+  # elas mas e contagem, fica inteiro. Os tipos conferem com os que o consumidor
+  # verificou contra os dados no acesso controlado, para as 256 variaveis que
+  # as duas modalidades compartilham.
+  # Declarar o schema tambem evita que o arrow tipe como null as colunas em
+  # branco no primeiro bloco que le.
+
+  if (year==2022 & dataset=="households") {   # Domicilios -- 55 variaveis
+    sss <- schema(
+      D0010 = int8(), D0020 = int8(), D0100 = int32(), D0110 = double(), D0120 = int8(), D0130 = int8(),
+      D0140 = int8(), D0150 = int16(), D0160 = int8(), D0170 = int8(), D0180 = int8(), D0190 = int8(),
+      D0200 = int8(), D0210 = int8(), D0220 = int8(), D0230 = int8(), D0240 = double(), D0250 = int8(),
+      D0260 = int8(), D0270 = int8(), D0280 = int8(), D0290 = int8(), D0300 = int8(), D0310 = int8(),
+      D0320 = int8(), D0330 = int8(), D0340 = int8(), D0350 = int32(), D0360 = double(), D0370 = int8(),
+      D0380 = int8(), D0390 = int8(), D0400 = int8(), D0410 = int8(), MD0130 = int8(), MD0150 = int8(),
+      MD0160 = int8(), MD0170 = int8(), MD0180 = int8(), MD0190 = int8(), MD0200 = int8(), MD0210 = int8(),
+      MD0220 = int8(), MD0230 = int8(), MD0240 = int8(), MD0250 = int8(), MD0260 = int8(), MD0270 = int8(),
+      MD0280 = int8(), MD0290 = int8(), MD0300 = int8(), MD0310 = int8(), MD0320 = int8(), MD0330 = int8(),
+      MD0340 = int8()
+    )
+  }
+
+  if (year==2022 & dataset=="population") {   # Pessoas -- 168 variaveis
+    sss <- schema(
+      P0010 = int8(), P0020 = int8(), P0100 = int32(), P0101 = int8(), P0110 = double(), P0120 = int8(),
+      P0130 = int8(), P0140 = int8(), P0150 = int8(), P0170 = int8(), P0180 = int8(), P0200 = int8(),
+      P0210 = int8(), P0220 = int8(), P0230 = int8(), P0240 = int8(), P0250 = int8(), P0260 = int8(),
+      P0270 = int8(), P0280 = int8(), P0290 = int8(), P0300 = int8(), P0310 = int8(), P0320 = int8(),
+      P0330 = int8(), P0340 = int8(), P0350 = int8(), P0360 = int8(), P0370 = int8(), P0380 = int8(),
+      P0390 = int8(), P0400 = int8(), P0410 = int8(), P0420 = int8(), P0430 = int8(), P0440 = int8(),
+      P0450 = int8(), P0460 = int8(), P0470 = int8(), P0480 = int8(), P0490 = int8(), P0520 = int8(),
+      P0530 = int8(), P0540 = int16(), P0550 = int8(), P0560 = int8(), P0570 = int8(), P0600 = int8(),
+      P0610 = int8(), P0640 = int8(), P0650 = int8(), P0660 = int8(), P0670 = int8(), P0680 = int8(),
+      P0690 = int8(), P0700 = int8(), P0710 = int8(), P0720 = int8(), P0730 = int8(), P0740 = int8(),
+      P0760 = int16(), P0770 = int8(), P0780 = int8(), P0790 = int16(), P0800 = int8(), P0810 = int8(),
+      P0840 = int8(), P0850 = int8(), P0860 = int8(), P0870 = int8(), P0880 = int8(), P0890 = int8(),
+      P0900 = int8(), P0910 = int8(), P0920 = int8(), P0930 = int8(), P0940 = int8(), P0950 = int8(),
+      P0960 = int8(), P0990 = int8(), P1000 = int8(), P1010 = int8(), P1020 = int8(), P1050 = int8(),
+      P1060 = int8(), P1070 = int8(), P1080 = int32(), P1090 = int8(), P1100 = int32(), P1110 = int32(),
+      P1120 = int8(), P1130 = int8(), P1160 = int8(), P1170 = int8(), P1180 = int8(), P1190 = int16(),
+      P1200 = int8(), P1210 = int8(), P1220 = int16(), MP0150 = int8(), MP0170 = int8(), MP0180 = int8(),
+      MP0210 = int8(), MP0230 = int8(), MP0260 = int8(), MP0270 = int8(), MP0280 = int8(), MP0290 = int8(),
+      MP0300 = int8(), MP0310 = int8(), MP0320 = int8(), MP0330 = int8(), MP0350 = int8(), MP0360 = int8(),
+      MP0410 = int8(), MP0411 = int8(), MP0420 = int8(), MP0430 = int8(), MP0440 = int8(), MP0450 = int8(),
+      MP0460 = int8(), MP0480 = int8(), MP0490 = int8(), MP0520 = int8(), MP0530 = int8(), MP0540 = int8(),
+      MP0550 = int8(), MP0560 = int8(), MP0570 = int8(), MP0600 = int8(), MP0610 = int8(), MP0640 = int8(),
+      MP0650 = int8(), MP0660 = int8(), MP0670 = int8(), MP0680 = int8(), MP0690 = int8(), MP0700 = int8(),
+      MP0710 = int8(), MP0720 = int8(), MP0730 = int8(), MP0740 = int8(), MP0800 = int8(), MP0810 = int8(),
+      MP0840 = int8(), MP0850 = int8(), MP0860 = int8(), MP0870 = int8(), MP0880 = int8(), MP0890 = int8(),
+      MP0900 = int8(), MP0990 = int8(), MP1000 = int8(), MP1010 = int8(), MP1050 = int8(), MP1060 = int8(),
+      MP1070 = int8(), MP1080 = int8(), MP1090 = int8(), MP1100 = int8(), MP1120 = int8(), MP1130 = int8(),
+      MP1160 = int8(), MP1170 = int8(), MP1180 = int8(), MP1200 = int8(), MP1210 = int8(), MP1220 = int8()
+    )
+  }
+
+  if (year==2022 & dataset=="families") {   # Familia -- 23 variaveis
+    sss <- schema(
+      F0010 = int8(), F0020 = int8(), F0100 = int32(), F0101 = string(), F0110 = double(), F0120 = int8(),
+      F0130 = int8(), F0140 = int8(), F0150 = int8(), F0160 = int8(), F0170 = int8(), F0180 = int8(),
+      F0190 = int8(), F0200 = int8(), F0210 = int8(), F0220 = int8(), F0230 = int8(), F0240 = int8(),
+      F0250 = int8(), F0260 = double(), F0270 = int8(), MF0190 = int8(), MF0200 = int8()
+    )
+  }
+
+  if (year==2022 & dataset=="mortality") {   # Mortalidade -- 14 variaveis
+    sss <- schema(
+      M0010 = int8(), M0020 = int8(), M0100 = int32(), M0101 = string(), M0110 = double(), M0120 = int8(),
+      M0130 = int8(), M0140 = int8(), M0150 = int8(), M0160 = int8(), M0170 = int8(), MM0150 = int8(),
+      MM0160 = int8(), MM0170 = int8()
+    )
+  }
+
 return(sss)
 }
 
