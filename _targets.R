@@ -85,8 +85,11 @@ targets::tar_source('./R')
 
 list(
   
+  # v0.7.0 e nao v0.6.1: o conteudo mudou de verdade nesta rodada -- 1970 trocou
+  # de fonte (FTP -> versao CEM no release_legacy), o shift de SP em pessoa02 de
+  # 2010 foi corrigido, e 1980 mudou code_muni, V602, V212 e V213.
   tar_target(name = data_version,
-             command = "v0.6.0"
+             command = "v0.7.0"
              ),
   
   
