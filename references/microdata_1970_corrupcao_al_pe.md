@@ -21,11 +21,14 @@ A consequência prática é séria e silenciosa. O peso amostral é o último ca
 registro (posições 75-76), e o deslocamento o tira do lugar. Numa leitura por
 posição fixa — que é como esses arquivos são lidos — dos 1.785 registros:
 
-- **899** perdem o peso (as posições 75-76 caem fora do campo);
+- **900** perdem o peso — em 685 as posições 75-76 caem fora do campo e em 215
+  o que há nelas não é número;
 - **650** recebem **um peso falso, mas plausível** — sem nenhum sinal de erro;
 - 24 acertam por acaso;
-- e outras **212 linhas fragmentárias**, que não são registros de pessoa,
+- e outras **211 linhas fragmentárias**, que não são registros de pessoa,
   entram na tabela como se fossem.
+
+A soma fecha: 900 + 650 + 24 + 211 = 1.785.
 
 ## Identificação dos arquivos
 
@@ -44,19 +47,25 @@ Os outros 25 arquivos têm **100% das linhas com exatamente 76 caracteres**.
 
 O registro da amostra de 1970 tem 76 caracteres (layout de 54 variáveis,
 posições 1 a 76, sem lacunas). Nos dois arquivos afetados aparecem linhas de
-16, 20, 54, 58, 66, 68, 94, 98, 132, 136 e 154 caracteres.
+16, 54, 58, 66, 68, 94, 98, 132, 136 e 154 caracteres.
 
 Os desvios se concentram em **±18 e ±60**, e os ganhos compensam as perdas:
 
 | Arquivo | −60 | −18 | +18 | +60 | outros | saldo em bytes |
 |---|---:|---:|---:|---:|---:|---:|
 | Alagoas | 6 | 22 | 17 | 1 | 0 | −390 |
-| Pernambuco | 205 | 657 | 658 | 204 | 15 | +274 |
+| Pernambuco | 205 | 658 | 658 | 204 | 14 | +312 |
 
-Em Pernambuco o pareamento é quase exato (657 contra 658, e 205 contra 204);
-os 15 restantes se distribuem por desvios menores (−56, −22, −10, −8, +22, +56
-e +78). O tamanho total do arquivo praticamente se conserva. **Caracteres foram
-movidos, não criados nem destruídos.**
+Em Pernambuco o pareamento é exato em −18 contra +18 (658 de cada) e quase
+exato em −60 contra +60 (205 contra 204); os 14 restantes se distribuem por
+desvios menores (−22, −10, −8, +22, +56 e +78). O tamanho total do arquivo
+praticamente se conserva. **Caracteres foram movidos, não criados nem
+destruídos.**
+
+A aritmética fecha com o tamanho físico dos arquivos:
+`412.171 × 78 + 1 − 390 = 32.148.949` e
+`1.381.977 × 78 + 1 + 312 = 107.794.519`, onde 78 é o registro de 76
+caracteres mais CR e LF, e o `+1` é o byte `0x1A` de fim de arquivo.
 
 ### Exemplo — registro alongado (Alagoas, linha 273.198, byte 21.309.366)
 
@@ -90,15 +99,18 @@ O defeito **não é ruído aleatório**. Três regularidades:
    primeiros dois terços — a distribuição por decil é `0 0 0 0 0 0 6 6 34 0`.
    Em Pernambuco, 1.731 das 1.739 estão nos primeiros 60%.
 
-2. **Pareamento regular em Alagoas.** Cada linha alongada é seguida de uma
-   encurtada 27 a 28 registros adiante — `273198:94 → 273226:58`,
-   `282441:16 → 282469:58`, `285803:16 → 285831:58`, `308489:94 → 308516:58`.
-   Os registros entre as duas continuam com 76 caracteres e conteúdo plausível.
+2. **Pareamento em Alagoas.** As 46 anomalias formam 23 pares: uma linha
+   alongada (94, 136 ou 16) e, adiante, uma encurtada (58) que restaura o
+   saldo. Os quatro primeiros pares estão a 27 ou 28 registros de distância —
+   `273198:94 → 273226:58`, `282441:16 → 282469:58`, `285803:16 → 285831:58`,
+   `308489:94 → 308516:58` —, mas o intervalo **não é constante**: varia de 1 a
+   440 registros ao longo do arquivo. Os registros entre os dois membros do par
+   continuam com 76 caracteres e conteúdo plausível.
 
-3. **Alinhamento com fronteiras de 4 KB.** Das linhas anômalas, 37,0% em
-   Alagoas (17 de 46) e 12,8% em Pernambuco (223 de 1.739) começam a até 76
-   bytes de um múltiplo de 4.096 — contra 3,7% esperados por acaso.
-   Enriquecimento de 10× e 3,5×.
+3. **Alinhamento com fronteiras de 4 KB.** Das linhas anômalas, **37,0% em
+   Alagoas (17 de 46)** e **23,4% em Pernambuco (407 de 1.739)** começam a até
+   76 bytes de um múltiplo de 4.096 — contra **3,71%** medidos sobre todas as
+   linhas dos próprios arquivos. Enriquecimento de **10×** e **6,3×**.
 
 Praticamente não há lixo binário: Alagoas não tem nenhum byte de controle fora
 de CR/LF; Pernambuco tem 9 em 107 MB (1 NUL e 4 TAB).
@@ -139,7 +151,22 @@ table(nchar(linhas))
 
 Num arquivo íntegro, como `DAMO70AC.txt`, a tabela tem uma única entrada: `76`.
 
+## Nota metodológica sobre as contagens
+
+Todos os números deste relatório vêm de leitura **byte a byte** dos arquivos
+(`readBin`, contando `LF` e descontando `CR`), e não de um leitor de texto. A
+distinção importa: lendo os mesmos arquivos com `readr::read_lines`, o
+Pernambuco ganha uma linha que não existe no arquivo e uma linha de 58
+caracteres aparece partida. Sobre o arquivo cru, o `readr::read_fwf` também
+inventa um registro em PE. Quem for reproduzir esta apuração deve contar bytes.
+
 ## O que fizemos no `censobr_prep_data`
+
+> **Nota de 2026-09-12.** Esta seção descreve a rota pelo FTP, que foi
+> **abandonada**. Por causa desta corrupção, 1970 passou a vir da versão
+> harmonizada pelo CEM, hospedada no `release_legacy` do repo. O texto fica
+> como registro do que a rota do FTP exigia — e como medida do custo do
+> defeito. Ver [microdata_1970_ftp_vs_cem.md](microdata_1970_ftp_vs_cem.md).
 
 Como o início e o fim do registro sobrevivem ao deslocamento, o peso amostral é
 recuperável dos dois últimos caracteres da linha. No pipeline:
@@ -148,10 +175,10 @@ recuperável dos dois últimos caracteres da linha. No pipeline:
    fixa — ler direto do arquivo faz o `readr::read_fwf` **inserir uma linha
    inexistente** em Pernambuco (posição 108.813), o que desalinharia os
    identificadores de domicílio e de pessoa, que são posicionais em 1970;
-2. **212 linhas fragmentárias** são descartadas — têm de 16 a 20 caracteres e
-   de 3 a 10 das 54 variáveis preenchidas, sem sexo, idade nem parentesco;
-3. nos **1.573 registros** deslocados restantes, o peso é lido da cauda da
-   linha (40 em AL, 1.533 em PE);
+2. **211 linhas fragmentárias** são descartadas — todas de 16 caracteres, com
+   3 a 10 das 54 variáveis preenchidas, sem sexo, idade nem parentesco;
+3. nos **1.574 registros** deslocados restantes, o peso é lido da cauda da
+   linha (40 em AL, 1.534 em PE);
 4. em **6 deles** a cauda também é ilegível; entram na imputação geral, que dá
    a mediana do setor e, na falta, a do município.
 

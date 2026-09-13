@@ -6,6 +6,38 @@ publicadas no release `v0.5.0` do `censobr`, comparadas registro a registro com 
 saída atual deste pipeline
 **Status:** diagnóstico concluído; nenhum dos defeitos existe na saída atual
 
+> ## Correção de 2026-09-12 — leia antes do resto
+>
+> Uma verificação independente contra a fonte do IBGE mudou a **atribuição de
+> causa** de três itens deste relatório. Os defeitos no parquet publicado são
+> reais e estão corretamente medidos; o que estava errado era dizer, ou
+> sugerir, que vinham do dado do IBGE.
+>
+> **1. A perda de decimais no Basico NÃO é defeito do IBGE.** Comparação
+> célula a célula entre o XLS (intocado desde 2012) e o CSV do IBGE, nas 26
+> tabelas do Acre: **mais de 3,4 milhões de células, zero divergências, zero
+> NA assimétrico**, decimais intactos nos dois formatos (`3,39` no XLS,
+> `"3,39"` no CSV). Os 1.800.306 valores que viraram NA no v0.5.0 se perderam
+> **na leitura, do lado do consumidor** — não na origem.
+>
+> **2 e 3. O `Domicilio01` do RS trocado por `Pessoa11`, e o `Responsavel01`
+> do ES inteiramente NA, são consequências e não erros de conteúdo do IBGE.**
+> A origem em ambos é irregularidade de *formato* dentro do mesmo lote: o
+> `Domicilio01_RS` só existe em `.xlsx` e o `RESPONSAVEL01_ES` só existe em
+> `.xls`. Um discovery restrito a um dos formatos não os encontra, e o pipeline
+> antigo preencheu os lugares com o que estava à mão. O dano no produto é o que
+> está descrito abaixo; a causa é de empacotamento, não de dado.
+>
+> **O IBGE republicou todo o lote em 15/06/2026** (`AC_20260615.zip` etc.) e
+> corrigiu, na origem, o `Cod_setor` destruído por notação científica em 79
+> CSVs, a ausência do `RESPONSAVEL01_ES.csv`, o nome `Pessoa02_ES..csv` com
+> ponto duplo e o separador dos CSVs. **O shift de São Paulo em `Pessoa02`
+> sobreviveu à republicação** e continua sendo o único defeito de conteúdo
+> desta lista.
+>
+> Levantamento completo em
+> [carta_ibge_levantamento.md](carta_ibge_levantamento.md).
+
 ---
 
 ## 1. Resumo
