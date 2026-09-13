@@ -73,16 +73,17 @@ The pipeline produces parquets of two distinct kinds, organized along two indepe
 | Edition | Raw source | Download stage |
 |---|---|---|
 | 1960 | Personal compilation by the maintainer (Rogério), assembled outside this project from two complementary sources | **No download stage, ever** — `censobr` consumes the semi-prepared input as given |
-| 1970, 1980, 1991, 2000, 2010 | IBGE FTP — `https://ftp.ibge.gov.br/Censos/` | Short-term: scripts assume local files (download skipped). Long-term: add `download_microdata_<year>()` targets reading from FTP |
-| 2022 | IBGE FTP (expected) — IBGE may release ~Jul/2026 | Awaiting publication |
+| 1970, 1980, 1991 | Amostra preparada pelo CEM, hospedada no release `release_legacy` deste repo. O FTP do IBGE republicou as três edições em 01/2025 em versões que perdem variáveis (1980, 1991: sem identificador de domicílio) ou trazem registros corrompidos (1970) — ver `references/microdata_<ano>_ftp_vs_*.md` | `download_microdata_<year>()` via `get_release_legacy()`; o FTP serve só como referência de validação |
+| 2000, 2010 | IBGE FTP — `https://ftp.ibge.gov.br/Censos/` | `download_microdata_<year>()` |
+| 2022 | IBGE FTP — amostra de acesso público, publicada em 31/08/2026 (a versão de acesso controlado não é redistribuível) | `download_microdata_2022()` |
 
 **Type 2 — Aggregates by census tract** (registros em nível de setor censitário; somas, proporções e médias do **universo** do censo, agregadas espacialmente — não da amostra):
 
 | Edition | Status |
 |---|---|
-| 2000 | Legacy script in `R_ainda_sem_targets/census_tracts_aggreg_2000.R` — pending port |
-| 2010 | **Wired** in `R/census_tracts_2010.R` + `# 08.` block in `_targets.R`. Canonical template for porting other years |
-| 2022 | Legacy scripts `census_tracts_aggreg_2022*.R` — pending port |
+| 2000 | `R/census_tracts_2000.R` + block `# 08.` in `_targets.R` |
+| 2010 | `R/census_tracts_2010.R` + block `# 09.` |
+| 2022 | `R/census_tracts_2022.R` + block `# 10.` (definitivos) and `R/census_tracts_2022_prelim.R` + block `# 11.` (preliminares) |
 
 No tract aggregates exist for editions before 2000.
 
@@ -90,7 +91,7 @@ No tract aggregates exist for editions before 2000.
 
 The canonical sequence for processing an (edition × type) flow has **four stages**. Use these names consistently in code, plans, and discussion:
 
-1. **download** — fetch raw files from the IBGE FTP. Skipped for 1960 (no FTP source) and for short-term microdata work (assumes local input).
+1. **download** — fetch raw files from the IBGE FTP; for 1960/1970/1980/1991 it fetches the prepared sample from the `release_legacy` release instead.
 2. **abrir** (open/read) — parse raw files (fixed-width `.txt` for microdata; `.xls`/`.zip` for tracts) into R/Arrow structures.
 3. **recodificar** (recode) — transform **values within columns**: e.g., `1/2` → `"Masculino"/"Feminino"`, regroup race/color categories, harmonize education codes across editions.
 4. **padronizar** (standardize) — bring the **structure and metadata** into the `censobr` standard: rename columns to `censobr` convention, apply `arrow::schema()` types, attach geography columns (`code_muni`, `code_state`, `name_state`, `code_region`), write parquet via `write_censobr_parquet()` (zstd-22).
@@ -110,12 +111,13 @@ The pipeline uses [`targets`](https://books.ropensci.org/targets/) + `tarchetype
 
 Outputs land in `./data/` (gitignored); raw downloads in `./data_raw/` (gitignored); `crew` worker logs in `./logs/crew_workers/`.
 
-## Code layout: two R folders
+## Code layout
 
-- **`R/`** — functions sourced by the targets pipeline. Currently only the **2010 census tracts** flow is wired up (`download_tract_2010` → `clean_tracts_2010` → `save_tracts_2010`). Use this folder as the template when porting more years/datasets into the pipeline.
-- **`R_ainda_sem_targets/`** — legacy standalone scripts not yet refactored into targets, covering microdata (1960/1970/1980/1991/2000/2010) and aggregated census tracts (2000/2010/2022). Run them manually with `source()`. The `_targets.R` skeleton already has section headers (`# 01. microdata 1960`, etc.) reserved for migrating these in.
+All code lives in `R/`, sourced by `targets::tar_source('./R')`. One file per (edition × type) — `microdata_<year>.R`, `census_tracts_<year>.R` — each exposing a `download_*` → `clean_*` → `save_*` trio wired as a numbered block (`# 01.` to `# 11.`) in `_targets.R`. Shared code is in `support_fun.R`, `add_geography_cols.R`, `convert_raw_to_parquet.R`, `schema_col_classes.R`, `release_legacy.R` and `type_convention.R`.
 
-When adding new years/datasets, prefer porting them into `R/` + `_targets.R` rather than expanding `R_ainda_sem_targets/`.
+The legacy standalone scripts that preceded the pipeline (folder `R_ainda_sem_targets/`) were removed after every edition was ported; they remain in git history up to commit `18d2ac7`.
+
+When adding a new year or table, add the trio in `R/` and a numbered block in `_targets.R`; do not add standalone scripts.
 
 ## Shared utilities (`R/support_fun.R`)
 
@@ -145,11 +147,9 @@ Centralized helpers used throughout the pipeline. Reuse before reinventing:
 - **Goiás 2010 `Pessoa02`** (and SP) has malformed `V01`–`V09` column names (vs. `V001`–`V009` elsewhere); fix is wired in `read_single_file_tract_2010` (issue #68 — covers GO, SP1, SP2).
 - `code_weighting` for 2010 tracts is read from the IBGE source file `Composição das Áreas de Ponderação.txt` inside `Documentacao_microdados_2010.zip` via `get_areas_ponderacao_2010()` in `R/support_fun.R`. (Was previously joined from `geobr::read_census_tract(year = 2010)`, but `geobr ≥1.10` no longer exposes that column.)
 
-## Open data bugs (must fix in this pipeline)
+## Data bugs
 
-5 issues open in `ipea/censobr/issues`, all in **2010 tracts** (the only block currently wired). Catalog and remediation plan in memory entry [`project_open_data_bugs.md`](C:/Users/antro/.claude/projects/d--Dropbox-Software-R-Packages-censobr-e-prepData-censobr-prep-data/memory/project_open_data_bugs.md). Phase 0.3 of the plan tackles these before any other porting.
-
-Highlights: #73 (X→0 instead of NA, BLOCKER); #68 (GO Pessoa02 all NA, BLOCKER, fix is commented out); #70 (Pessoa02 truncated at V170, BLOCKER); #71 (V009 income variable in Basico full of NAs in many states — user-reported workaround was switching from XLS to direct-FTP-CSV read, BLOCKER); #75 (UF/region name inconsistencies in Basico, MAJOR).
+The five `ipea/censobr` issues on 2010 tracts (#68, #70, #71, #73, #75) were fixed in this pipeline in 2026-05-03/04 (commits `57c571a`, `c51f55c`); no data issue is open. Defects found in the IBGE source files — as opposed to in our processing — are catalogued in `references/carta_ibge_levantamento.md`, which is the basis of the letter to IBGE.
 
 ## Type convention v0.6.0 — `code_*` as numeric
 
@@ -161,14 +161,12 @@ This is an intentional break from v0.5.0 (which had `code_tract` as string and t
 
 ## Validation reference
 
-There is **no `dev` branch** on `ipea/censobr` (verified 2026-05-02 — only `main` and `gh-pages`; local Dropbox-synced clones may show stale `origin/dev` ref). The published reference is **v0.5.0** (Jun/2025, 38 parquets). v0.5.0 carries the bugs above — treat it as historical baseline to measure intentional divergence after fixes, not as gold standard.
+There is **no `dev` branch** on `ipea/censobr` (verified 2026-05-02 — only `main` and `gh-pages`; local Dropbox-synced clones may show stale `origin/dev` ref). The published reference is **v0.5.0** (Jun/2025, 38 parquets). v0.5.0 carries the 2010-tracts bugs fixed in May 2026 — treat it as historical baseline to measure intentional divergence after fixes, not as gold standard.
 
 The pre-release **v0.6.0** (Sep/2025, 8 parquets) is the output of an earlier version of `R/census_tracts_2010.R` (not the current `main` HEAD). Useful as a checkpoint reference but should not be conflated with v0.5.0.
 
 The **canonical column-by-column specification** for 2010/2022 tract parquets is the dictionary CSV from Pedro H. G. F. Souza's private repo, frozen at [`references/phgfsouza_census_tracts/`](references/phgfsouza_census_tracts/) (commit `f895871`, 2026-04-30). Read this in any port that touches setores 2010/2022 to validate output column-by-column. Coverage: 8 parquets for 2010, 9 parquets for 2022. Does NOT cover microdata or pre-2010.
 
-Phase-0 baseline evidence for 2010 tracts bugs is in [`.claude/plans/baseline-2010-tracts.md`](.claude/plans/baseline-2010-tracts.md) — read this before working Phase 0.3.
-
 ## Publishing artifacts
 
-Final parquet files are uploaded to GitHub Releases on `ipea/censobr` via `piggyback::pb_upload()` (template in `R_ainda_sem_targets/z_upload_assets.R`; placeholder commented at the bottom of `_targets.R`). Requires `GITHUB_TOKEN` in `~/.Renviron`. The release tag is the data version (e.g. `v0.3.0`, `v2.0.0`), not a code version.
+Final parquet files are uploaded to GitHub Releases on `ipea/censobr` via `piggyback::pb_upload()` (placeholder commented at the bottom of `_targets.R`). Requires `GITHUB_TOKEN` in `~/.Renviron`. The release tag is the data version (e.g. `v0.3.0`, `v2.0.0`), not a code version.

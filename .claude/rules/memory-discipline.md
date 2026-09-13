@@ -9,7 +9,7 @@ paths:
 # Disciplina de memória e performance
 
 **Status:** OBRIGATÓRIA
-**Escopo:** todo código R em `censobr_prep_data` (atual e futuro). Aplica-se ao porte de cada script de `R_ainda_sem_targets/` para `R/`.
+**Escopo:** todo código R em `censobr_prep_data` (atual e futuro). Aplica-se a todo código novo e a todo bloco tocado em `R/`.
 **Complementar a:** [`code-style.md`](code-style.md) (regra-irmã, foco em estilo de escrita + nomeação censobr + adaptação targets).
 
 ## Por que existe

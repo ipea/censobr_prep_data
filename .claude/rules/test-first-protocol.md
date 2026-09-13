@@ -21,8 +21,8 @@ Diferente de pipelines com `testthat`, aqui a validação é empírica: o output
 ```
 ┌─────────────────────────────────────────────────┐
 │  1. INVESTIGAR                                  │
-│     - Ler o script legado em R_ainda_sem_targets│
-│       (se for migração) ou o R/ existente       │
+│     - Ler o codigo existente em R/ e o bloco    │
+│       correspondente do _targets.R              │
 │     - Mapear dependências: qual download? qual  │
 │       schema? qual harmonização?                │
 │     - Identificar funções compartilhadas        │

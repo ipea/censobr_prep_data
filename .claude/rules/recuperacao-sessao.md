@@ -68,4 +68,3 @@ Se houver divergência, **trustar o que está mais próximo da execução** (`_t
 - ✗ Disparar `tar_destroy()` ou `tar_invalidate()` sem confirmar com o usuário.
 - ✗ Republicar/sobrescrever um release no GitHub sem aprovação explícita.
 - ✗ Editar arquivos em `..\censobr\` (proibido por hook — ver `.claude/rules/scope.md`).
-- ✗ Reescrever um script de `R_ainda_sem_targets/` sem antes confirmar para qual ano/dataset/tabela ele está sendo migrado.

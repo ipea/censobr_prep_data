@@ -18,7 +18,7 @@ Para qualquer tarefa não-trivial, **planejar antes de escrever código**. Plano
 
 1. **Entrar em modo plano** — usar `EnterPlanMode`.
 2. **Consultar fontes** — ler `CLAUDE.md`, regras em `.claude/rules/`, estado do `_targets/meta/`, último release do `ipea/censobr`.
-3. **Investigar** — ler o código afetado (`R/`, `_targets.R`, scripts em `R_ainda_sem_targets/` se for migração), mapear dependências.
+3. **Investigar** — ler o código afetado (`R/`, `_targets.R`), mapear dependências.
 4. **Redigir o plano** — quais mudanças, em quais arquivos, em que ordem; quais targets serão adicionados/alterados; impacto no schema dos parquets.
 5. **Salvar em disco** — em `~/.claude/plans/` (padrão Claude Code) ou em `.claude/plans/` no projeto.
 6. **Apresentar ao usuário** — aguardar aprovação via `ExitPlanMode`.
@@ -26,7 +26,7 @@ Para qualquer tarefa não-trivial, **planejar antes de escrever código**. Plano
 
 ## O que é não-trivial (REQUER plano)
 
-- Portar um script de `R_ainda_sem_targets/` para `R/` (mudança de paradigma para targets).
+- Acrescentar uma edição ou tabela nova ao pipeline (trio `download_*`/`clean_*`/`save_*` em `R/` + bloco em `_targets.R`).
 - Adicionar / remover / renomear `tar_target` em `_targets.R`.
 - Modificar funções compartilhadas em `R/support_fun.R`, `R/add_geography_cols.R`, `R/convert_raw_to_parquet.R`, `R/schema_col_classes.R` (ver lista de funções protegidas em `minimal-changes.md`).
 - Alterar `read_guides/*.csv` (afeta parsing fwf).
@@ -43,7 +43,6 @@ Para qualquer tarefa não-trivial, **planejar antes de escrever código**. Plano
 - Atualizar `.gitignore`, `.Rbuildignore`.
 - Editar `CLAUDE.md`, `MEMORY.md` (se existir), regras em `.claude/rules/`.
 - Adicionar `# TODO:` pontual em código já existente.
-- Renomear um arquivo dentro de `R_ainda_sem_targets/` (legado, não afeta pipeline).
 
 ## Formato do plano em disco
 

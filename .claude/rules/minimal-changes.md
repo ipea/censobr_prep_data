@@ -69,7 +69,7 @@ As seguintes funções afetam **múltiplos targets ou múltiplos anos** — não
 - Re-rodar `tar_destroy()` sem entender o que vai recomputar (gargalo de FTP IBGE).
 - Fazer "fix" iterativo cego: editar → tar_make → falha → editar → tar_make sem entender a causa raiz.
 - Adicionar pacote em `tar_option_set(packages = ...)` sem necessidade comprovada (afeta reprodutibilidade).
-- **Introduzir paths absolutos** (`R:/`, `C:/Users/`) em qualquer arquivo `R/` ou `_targets.R`. Em `R_ainda_sem_targets/` é tolerado *temporariamente* até o porte para targets.
+- **Introduzir paths absolutos** (`R:/`, `C:/Users/`) em qualquer arquivo `R/` ou `_targets.R`.
 - Mexer em código de `..\censobr\` (proibido por hook — ver `scope.md`).
 
 ## Escopo por subdiretório
@@ -77,7 +77,6 @@ As seguintes funções afetam **múltiplos targets ou múltiplos anos** — não
 | Subdiretório | O que pode mudar | Cuidado |
 |---|---|---|
 | `R/` | Funções no pipeline `targets` ativo | Reprodutibilidade. Tudo aqui é executado por `tar_source()`. |
-| `R_ainda_sem_targets/` | Código legado, ainda não migrado | Pode ter paths absolutos temporários. Ao migrar para `R/`, eliminar. |
 | `read_guides/` | Adicionar dicionários novos | NÃO alterar dicionários existentes sem plano (afeta parsing). |
 | `_targets.R` | Adicionar/remover targets | Mudanças aqui invalidam dependências em cascata. |
 | `.claude/` | Rules, hooks, settings | Versionado para o time. |

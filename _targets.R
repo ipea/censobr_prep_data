@@ -411,10 +411,12 @@ list(
   #            command = "v2.0.0"
   # ),
   
-  # Upload to GitHub Releases (requires GITHUB_TOKEN in ~/.Renviron)
-  # Sys.setenv(GITHUB_TOKEN = "ghp_...") or add to ~/.Renviron
+  # Upload to GitHub Releases (requires GITHUB_TOKEN in ~/.Renviron).
+  # O upload e feito fora do tar_make, so no fim, e nunca por um agente:
   # tar_target(name = upload,
-  #            command = upload_arquivos(files = all_files, versao_dados)
+  #            command = piggyback::pb_upload(file = c(output_microdata_1970, ...),
+  #                                           repo = "ipea/censobr",
+  #                                           tag  = data_version)
   # )
 )
 
