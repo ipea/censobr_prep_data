@@ -1,0 +1,18104 @@
+# Auditoria dos relatorios de references/
+
+**O que e isto.** Uma auditoria adversarial dos relatorios que *nos* escrevemos --
+nao dos dados do IBGE. Dez agentes reconferiram cada afirmacao numerica de dez
+relatorios contra os dados. Nao confundir com
+[carta_ibge_levantamento.md](carta_ibge_levantamento.md), que cataloga os 75
+defeitos encontrados **nos dados do IBGE**.
+
+**748 afirmacoes conferidas, 113 erros, 28 graves.**
+
+| relatorio | afirmacoes | erros | graves |
+|---|---:|---:|---:|
+| tracts_2022_v0006_escala | 45 | 8 | 1 |
+| microdata_1970_corrupcao_al_ | 112 | 8 | 2 |
+| relatorio_pessoa02_sp_shift | 52 | 10 | 3 |
+| microdata_2022_acesso_public | 67 | 5 | 0 |
+| microdata_1980_ftp_vs_aux | 46 | 14 | 7 |
+| relatorio_defeitos_2010_trac | 80 | 14 | 0 |
+| microdata_1991_ftp_vs_aux | 72 | 8 | 2 |
+| microdata_1980_pesos_v603_v6 | 112 | 19 | 2 |
+| divergencias_v050_v060_2010_ | 79 | 14 | 9 |
+| microdata_1970_ftp_vs_cem | 83 | 13 | 2 |
+| **TOTAL** | **748** | **113** | **28** |
+
+
+---
+
+## tracts_2022_v0006_escala
+
+**Veredito.** erros_graves
+
+Reconferi 45 afirmações do relatório, refazendo toda medição do zero sobre os parquets v0.7.0, os CSVs crus do IBGE e seis dicionários. O núcleo do documento resiste: a identidade `V0006 = k/V0007` fecha em 457.500 de 457.500 setores, o fator 100 entre as duas divulgações é real (mediana da razão = 100 exata), as três leituras da âncora externa batem até a última casa, e o rótulo do IBGE é byte a byte idêntico nas seis fontes. Encontrei 8 defeitos, um deles grave: a "pendência" dos 2.136 setores em que V0005 não fecharia é um artefato do `round()` do R — os 2.136 são empates exatos de 0,05 e, com arredondamento meio-para-cima, fecha 408.445 de 408.445. O relatório atribui ao IBGE um defeito que é do nosso método de medição. Os outros sete são menores ou cosméticos, mas três são generalizações categóricas falsificáveis em minutos por quem receber a carta: "nenhuma outra coluna reproduz k" (dois contraexemplos), "só V0005 e V0006 não são contagem em 3.400+ variáveis" (a varredura deixou de fora 111 variáveis, quatro delas não-contagem) e "k = V0006 × V0007 é inteiro exato" (só em 2 dos 11). Achei também uma evidência forte que o relatório descarta por engano: nos 8 dos 11 setores anômalos que existem no preliminar, o preliminar dá valor sadio, o que localiza o defeito na republicação definitiva.
+
+
+### Erros GRAVES (1)
+
+**1. [GRAVE] Seção 'Pendências', 1º bullet: "nos 408.445 setores com V0004 == 0 e V0007 > 0, onde V0001/V0007 deveria reproduzir V0005, sobram 2.136 setores (0,52%) sem explicação"**
+
+- *O relatorio diz:* 2.136 setores (0,52%) em que V0005 não é reproduzida por V0001/V0007, sem explicação
+- *O correto e:* Zero setores sem explicação. Os 408.445 fecham 100,0000%. Os 2.136 são empates exatos (|V0005 − V0001/V0007| = 0,05000000, verificado a 17 dígitos) em que o IBGE arredondou para cima em 2.136/2.136 casos e o round() do R arredonda meio-para-par. O 408.445 do enunciado confere.
+- *Medido por:* arrow::read_parquet do basico v0.7.0; sel <- V0004==0 & V0007>0 (408.445). Teste A: abs(V0005 - round(r,1)) >= 1e-9 reproduz as 2.136 falhas. Teste B: abs(V0005 - r) <= 0.05 -> 408.445/408.445. Teste C: V0005 == floor(r*10 + 0.5)/10 -> 408.445/408.445 = 100,0000%. Exemplo: setor 110001525000028, V0001=13, V0007=4, r=3,25 exato, V0005 publicado 3,3, round(3.25,1) no R = 3,2. Scripts s13_v0005.R e s14_ties.R.
+
+
+### Demais erros (7)
+
+**1. [MENOR] Seção 'O que decide: a aritmética', última linha: "No preliminar a mesma identidade só fecha depois de dividir por 100."**
+
+- *O relatorio diz:* A identidade V0006 = k/V0007 com k inteiro só fecha no preliminar depois de dividir V0006 por 100
+- *O correto e:* A identidade de inteiro fecha 100,0000% nas DUAS leituras (441.101/441.101 setores com V0007>0) — ela não discrimina nada, porque se V0006 = 100·k/V0007 então tanto V0006×V0007 quanto V0006/100×V0007 são inteiros. O que discrimina é a restrição k <= V0007: 169.559/441.101 = 38,44% lendo como proporção, contra 441.101/441.101 = 100,00% lendo como percentual. A conclusão está certa; o teste declarado não é o que a sustenta.
+- *Medido por:* Leitura A: kA = round(V0006*V0007), ok se abs(V0006 - kA/V0007) <= 0,5e-6 (coerente com as 6 casas gravadas no CSV preliminar) -> 441.101/441.101; desses, kA <= V0007 em 169.559. Leitura B: kB = round(V0006/100*V0007), ok se abs(V0006/100 - kB/V0007) <= 0,5e-8 -> 441.101/441.101; desses, kB <= V0007 em 441.101. Script s15_prelim_id.R.
+
+**2. [MENOR] Seção 'A exceção', 2º parágrafo: "Nenhuma outra coluna da mesma linha reproduz k — nem V0001, V0002, V0003, V0004, V0008 ou V0009, nem soma óbvia delas."**
+
+- *O relatorio diz:* Em nenhum dos 11 setores k é reproduzido por outra coluna ou soma delas
+- *O correto e:* Falso em 2 dos 11. Setor 354340210000122: k = 22 = V0002 (=22), = V0003+V0004 (21+1) e = V0001−V0002 (44−22). Setor 430660105100006: k = 62 = V0001−V0003 (157−95).
+- *Medido por:* Varredura exaustiva sobre as 11 linhas: todas as colunas isoladas (V0001–V0005, V0007–V0009), todas as combn(8,2) somas de pares, todas as combn(8,3) somas de trincas e todas as diferenças ordenadas de pares, com tolerância 1e-9. Script s06_prelim_and_11.R.
+
+**3. [MENOR] Seção 'O que NÃO está afetado', 1º bullet: "Varridos os dois dicionários inteiros, só V0005 e V0006 não são contagem, em 3.400+ variáveis."**
+
+- *O relatorio diz:* A varredura de 3.400+ variáveis nos dois dicionários encontrou só V0005 e V0006 como não-contagem
+- *O correto e:* Verdadeiro para os dois dicionários varridos, falso para o produto. O dicionário do definitivo 20260520 tem exatamente 3.400 códigos V (V00001–V03950) e nele só V0005/V0006 não são contagem — mas ele não contém nenhum V06* (0 ocorrências) nem os V05* de Entorno. A documentação está partida em 5 arquivos: setores (3.400) + entorno domicílios/faces/pessoas (105) + renda responsável 20260508 (6) = 3.511. Das 111 não varridas, quatro não são contagem: V06003 (variância do nº de moradores), V06004 (valor do rendimento nominal médio mensal), V06005 (variância do rendimento), V06006 (valor do rendimento nominal mediano). A Nota metodológica n. 06 declara 3.501 variáveis temáticas incluindo 'Arquivo Renda Responsável | 5 | V06001–V06005'.
+- *Medido por:* readxl sobre as 5 planilhas do dic_20260520.xlsx: 3.400 códigos V únicos; grep '^V06[0-9]+$' = 0. Varredura de rótulos por padrão percentual|média|médio|propor|taxa|razão|variância|valor devolve só V0005 e V0006. Mesma varredura nos 3 dicionários de Entorno: 105 vars, 0 não-contagem. Leitura integral do dicionario_de_dados_renda_responsavel_20260508.xlsx: 6 vars, 4 não-contagem. Header do CSV cru de renda: V06001–V06006. Scripts s09_dicts2.R, s10_renda.R, s11_entorno.R.
+
+**4. [MENOR] Seção 'A exceção', 1º parágrafo: "Nos 11, k = V0006 × V0007 é inteiro exato (251, 151, 618, ...)"**
+
+- *O relatorio diz:* O produto V0006 × V0007 é inteiro exato nos 11 setores
+- *O correto e:* O produto é inteiro exato só em 2 dos 11 (354340210000122: 2,0000×11 = 22; 410490705000149: 1,4000×5 = 7). Nos outros 9 não: 4,2542×59 = 250,9978; 1,3825×183 = 253,0 (252,9975); 3,6140×171 = 617,994. O que vale em 11/11 é a formulação correta usada dois parágrafos antes: V0006 é k/V0007 arredondado a 4 casas, com k inteiro. O conjunto dos 11 valores de k confere.
+- *Medido por:* k <- round(V0006*V0007); k_exato <- abs(k - V0006*V0007) < 1e-9 -> TRUE em 2 linhas; k_recons <- abs(round(k/V0007,4) - V0006) < 1e-12 -> TRUE em 11 linhas. Script s02_core.R.
+
+**5. [MENOR] Seção 'A exceção', fim: "Três deles nem existem no preliminar, o que elimina a contraprova externa."**
+
+- *O relatorio diz:* A ausência de 3 setores no preliminar elimina a contraprova externa
+- *O correto e:* Os 3 ausentes conferem (150276405000050, 354340210000122, 410490705000149), mas nos 8 presentes a contraprova existe, tem o mesmo V0007, e é favorável à tese: em 8/8 o preliminar dá k <= V0007 (p.ex. 510420305000020, V0007=39: definitivo k=151, preliminar k=17) enquanto o definitivo dá k > V0007. Isso localiza o defeito na republicação definitiva, evidência mais forte que 'defeito de fonte sem mecanismo identificado'.
+- *Medido por:* merge dos 11 com o parquet preliminar por code_tract; k_pre = round(V0006/100*V0007). 3 NA, 8 com match; p6 > 100 em 0 dos 8; k_pre <= p7 em 8 dos 8; V0007 idêntico nos 8. Script s07_eight.R.
+
+**6. [COSMETICO] Seção 'O que decide: a aritmética': "V0002, V0003 e V0001 reproduzem V0006 em ~32%, que é nível de acaso."**
+
+- *O relatorio diz:* Os três denominadores alternativos reproduzem V0006 em ~32%
+- *O correto e:* 32,56% (V0002), 32,37% (V0003) e 34,47% (V0001). V0001 não é '~32%'. O argumento fica mais forte se excluir os 149.423 setores com V0006 == 0, que passam trivialmente em qualquer denominador: as taxas caem para 2,59% / 2,60% / 5,67%, com V0007 seguindo em 100,00%.
+- *Medido por:* Mesmo critério do teste principal (existe inteiro k com |V0006 − k/den| <= 5e-5), aplicado a cada denominador, e repetido no subconjunto V0006 > 0 (318.676 setores). Script s04_denoms.R.
+
+**7. [COSMETICO] Seção 'O que NÃO está afetado', 4º bullet: "Os valores do parquet são byte a byte os do CSV do IBGE em 468.099 de 468.099 setores."**
+
+- *O relatorio diz:* Igualdade byte a byte entre parquet e CSV
+- *O correto e:* A igualdade é de valor, não de bytes: o CSV grava texto com vírgula decimal ('0,0923') e o parquet grava double. O número 468.099 de 468.099 confere para V0001–V0009 e para code_tract, com 0 NA dos dois lados e nenhum valor censurado 'X' no arquivo.
+- *Medido por:* fread do CSV com colClasses='character', conversão gsub(',','.') + as.numeric, ordenação por code_tract e comparação elemento a elemento contra o parquet: 468.099/468.099 em cada uma das 9 colunas V; code_tract identical() = TRUE. Contagem de linhas do CSV por bytes (readBin/count): 468.100 LF e 468.100 CR em 140.970.380 bytes = cabeçalho + 468.099 linhas. Script s05_csv_vs_parquet.R.
+
+### Incertezas (1143)
+
+- A
+- s
+-  
+- s
+- a
+- f
+- r
+- a
+- s
+-  
+- 2
+- 0
+- 2
+- 4
+- 1
+- 1
+- 1
+- 5
+-  
+- e
+-  
+- 2
+- 0
+- 2
+- 5
+- 0
+- 4
+- 1
+- 7
+-  
+- d
+- o
+-  
+- d
+- i
+- c
+- i
+- o
+- n
+- á
+- r
+- i
+- o
+-  
+- d
+- o
+-  
+- d
+- e
+- f
+- i
+- n
+- i
+- t
+- i
+- v
+- o
+-  
+- n
+- ã
+- o
+-  
+- e
+- s
+- t
+- ã
+- o
+-  
+- m
+- a
+- i
+- s
+-  
+- n
+- o
+-  
+- F
+- T
+- P
+-  
+- d
+- o
+-  
+- I
+- B
+- G
+- E
+-  
+- —
+-  
+- H
+- T
+- T
+- P
+-  
+- 4
+- 0
+- 4
+-  
+- e
+- m
+-  
+- a
+- m
+- b
+- a
+- s
+-  
+- h
+- o
+- j
+- e
+- ,
+-  
+- s
+- ó
+-  
+- a
+-  
+- 2
+- 0
+- 2
+- 6
+- 0
+- 5
+- 2
+- 0
+-  
+- r
+- e
+- s
+- p
+- o
+- n
+- d
+- e
+-  
+- 2
+- 0
+- 0
+- .
+-  
+- C
+- o
+- n
+- f
+- e
+- r
+- i
+-  
+- o
+-  
+- c
+- o
+- n
+- t
+- e
+- ú
+- d
+- o
+-  
+- a
+-  
+- p
+- a
+- r
+- t
+- i
+- r
+-  
+- d
+- e
+-  
+- c
+- ó
+- p
+- i
+- a
+- s
+-  
+- l
+- o
+- c
+- a
+- i
+- s
+-  
+- (
+- s
+- c
+- r
+- a
+- t
+- c
+- h
+- p
+- a
+- d
+- /
+- v
+- 0
+- 0
+- 0
+- 6
+- /
+- d
+- i
+- c
+- _
+- 2
+- 0
+- 2
+- 4
+- 1
+- 1
+- 1
+- 5
+- .
+- x
+- l
+- s
+- x
+- ,
+-  
+- m
+- d
+- 5
+-  
+- 0
+- a
+- 3
+- b
+- 9
+- 6
+- 8
+- 1
+- …
+- ;
+-  
+- D
+- o
+- w
+- n
+- l
+- o
+- a
+- d
+- s
+- /
+- …
+- 2
+- 0
+- 2
+- 5
+- 0
+- 4
+- 1
+- 7
+- .
+- x
+- l
+- s
+- x
+- ,
+-  
+- m
+- d
+- 5
+-  
+- b
+- b
+- e
+- 3
+- d
+- d
+- 1
+- 9
+- …
+- ,
+-  
+- m
+- t
+- i
+- m
+- e
+-  
+- 2
+- 0
+- 2
+- 5
+- -
+- 1
+- 2
+- -
+- 2
+- 3
+- )
+- .
+-  
+- S
+- ã
+- o
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+- s
+-  
+- d
+- i
+- s
+- t
+- i
+- n
+- t
+- o
+- s
+-  
+- e
+- n
+- t
+- r
+- e
+-  
+- s
+- i
+-  
+- e
+-  
+- d
+- o
+-  
+- 2
+- 0
+- 2
+- 6
+- 0
+- 5
+- 2
+- 0
+- ,
+-  
+- c
+- o
+- m
+-  
+- e
+- s
+- t
+- r
+- u
+- t
+- u
+- r
+- a
+-  
+- c
+- o
+- n
+- s
+- i
+- s
+- t
+- e
+- n
+- t
+- e
+-  
+- e
+-  
+- o
+-  
+- r
+- ó
+- t
+- u
+- l
+- o
+-  
+- i
+- d
+- ê
+- n
+- t
+- i
+- c
+- o
+- ,
+-  
+- m
+- a
+- s
+-  
+- a
+-  
+- e
+- x
+- i
+- s
+- t
+- ê
+- n
+- c
+- i
+- a
+-  
+- h
+- i
+- s
+- t
+- ó
+- r
+- i
+- c
+- a
+-  
+- d
+- e
+- l
+- a
+- s
+-  
+- n
+- o
+-  
+- F
+- T
+- P
+-  
+- n
+- ã
+- o
+-  
+- é
+-  
+- r
+- e
+- a
+- u
+- d
+- i
+- t
+- á
+- v
+- e
+- l
+-  
+- d
+- e
+-  
+- f
+- o
+- r
+- m
+- a
+-  
+- i
+- n
+- d
+- e
+- p
+- e
+- n
+- d
+- e
+- n
+- t
+- e
+- .
+-  
+- I
+- s
+- s
+- o
+-  
+- é
+-  
+- r
+- i
+- s
+- c
+- o
+-  
+- s
+- e
+-  
+- a
+-  
+- c
+- a
+- r
+- t
+- a
+-  
+- c
+- i
+- t
+- a
+- r
+-  
+- a
+- s
+-  
+- t
+- r
+- ê
+- s
+-  
+- s
+- a
+- f
+- r
+- a
+- s
+-  
+- c
+- o
+- m
+- o
+-  
+- v
+- e
+- r
+- i
+- f
+- i
+- c
+- á
+- v
+- e
+- i
+- s
+-  
+- p
+- e
+- l
+- o
+-  
+- d
+- e
+- s
+- t
+- i
+- n
+- a
+- t
+- á
+- r
+- i
+- o
+- .
+-  
+- T
+- a
+- m
+- b
+- é
+- m
+-  
+- n
+- ã
+- o
+-  
+- r
+- e
+- c
+- o
+- n
+- f
+- e
+- r
+- i
+-  
+- o
+-  
+- P
+- D
+- F
+-  
+- o
+- r
+- i
+- g
+- i
+- n
+- a
+- l
+-  
+- d
+- a
+-  
+- N
+- o
+- t
+- a
+-  
+- m
+- e
+- t
+- o
+- d
+- o
+- l
+- ó
+- g
+- i
+- c
+- a
+-  
+- n
+- .
+-  
+- 0
+- 6
+-  
+- —
+-  
+- u
+- s
+- e
+- i
+-  
+- a
+-  
+- t
+- r
+- a
+- n
+- s
+- c
+- r
+- i
+- ç
+- ã
+- o
+-  
+- e
+- m
+-  
+- r
+- e
+- f
+- e
+- r
+- e
+- n
+- c
+- e
+- s
+- /
+- p
+- h
+- g
+- f
+- s
+- o
+- u
+- z
+- a
+- _
+- c
+- e
+- n
+- s
+- u
+- s
+- _
+- t
+- r
+- a
+- c
+- t
+- s
+- /
+- t
+- r
+- a
+- n
+- s
+- c
+- r
+- i
+- p
+- t
+- s
+- /
+- 2
+- 0
+- 2
+- 2
+- _
+- m
+- e
+- t
+- h
+- o
+- d
+- o
+- l
+- o
+- g
+- i
+- c
+- a
+- l
+- _
+- n
+- o
+- t
+- e
+- s
+- .
+- m
+- d
+- ,
+-  
+- q
+- u
+- e
+-  
+- d
+- e
+- c
+- l
+- a
+- r
+- a
+-  
+- o
+-  
+- P
+- D
+- F
+-  
+- c
+- o
+- m
+- o
+-  
+- g
+- r
+- o
+- u
+- n
+- d
+-  
+- t
+- r
+- u
+- t
+- h
+- ;
+-  
+- a
+-  
+- f
+- r
+- a
+- s
+- e
+-  
+- c
+- i
+- t
+- a
+- d
+- a
+-  
+- a
+- p
+- a
+- r
+- e
+- c
+- e
+-  
+- a
+- l
+- i
+-  
+- l
+- i
+- t
+- e
+- r
+- a
+- l
+- m
+- e
+- n
+- t
+- e
+- .
+-  
+- P
+- o
+- r
+-  
+- f
+- i
+- m
+- ,
+-  
+- a
+-  
+- r
+- a
+- z
+- ã
+- o
+-  
+- e
+- n
+- t
+- r
+- e
+-  
+- a
+- s
+-  
+- c
+- o
+- n
+- t
+- a
+- g
+- e
+- n
+- s
+-  
+- n
+- a
+- s
+-  
+- d
+- u
+- a
+- s
+-  
+- d
+- i
+- v
+- u
+- l
+- g
+- a
+- ç
+- õ
+- e
+- s
+-  
+- é
+-  
+- 1
+- ,
+- 0
+- 0
+- 0
+- 0
+-  
+- q
+- u
+- a
+- n
+- d
+- o
+-  
+- m
+- e
+- d
+- i
+- d
+- a
+-  
+- s
+- o
+- b
+- r
+- e
+-  
+- o
+- s
+-  
+- t
+- o
+- t
+- a
+- i
+- s
+-  
+- n
+- a
+- c
+- i
+- o
+- n
+- a
+- i
+- s
+-  
+- (
+- é
+-  
+- o
+-  
+- q
+- u
+- e
+-  
+- o
+-  
+- p
+- r
+- ó
+- p
+- r
+- i
+- o
+-  
+- r
+- e
+- l
+- a
+- t
+- ó
+- r
+- i
+- o
+-  
+- p
+- r
+- o
+- v
+- a
+-  
+- c
+- o
+- m
+-  
+- s
+- u
+- m
+- (
+- V
+- 0
+- 0
+- 0
+- 7
+- )
+- )
+- ;
+-  
+- m
+- e
+- d
+- i
+- d
+- a
+-  
+- s
+- e
+- t
+- o
+- r
+-  
+- a
+-  
+- s
+- e
+- t
+- o
+- r
+-  
+- n
+- o
+- s
+-  
+- 4
+- 1
+- 4
+- .
+- 7
+- 9
+- 0
+-  
+- c
+- o
+- m
+- u
+- n
+- s
+- ,
+-  
+- a
+- s
+-  
+- s
+- o
+- m
+- a
+- s
+-  
+- d
+- i
+- v
+- e
+- r
+- g
+- e
+- m
+-  
+- e
+- m
+-  
+- 0
+- ,
+- 0
+- 1
+- %
+-  
+- a
+-  
+- 0
+- ,
+- 0
+- 7
+- %
+-  
+- —
+-  
+- a
+-  
+- f
+- o
+- r
+- m
+- u
+- l
+- a
+- ç
+- ã
+- o
+-  
+- '
+- r
+- a
+- z
+- ã
+- o
+-  
+- 1
+- ,
+- 0
+- 0
+- 0
+- 0
+- '
+-  
+- s
+- ó
+-  
+- é
+-  
+- e
+- x
+- a
+- t
+- a
+-  
+- n
+- a
+-  
+- l
+- e
+- i
+- t
+- u
+- r
+- a
+-  
+- d
+- e
+-  
+- t
+- o
+- t
+- a
+- i
+- s
+-  
+- n
+- a
+- c
+- i
+- o
+- n
+- a
+- i
+- s
+- ,
+-  
+- q
+- u
+- e
+-  
+- é
+-  
+- a
+-  
+- l
+- e
+- i
+- t
+- u
+- r
+- a
+-  
+- q
+- u
+- e
+-  
+- o
+-  
+- t
+- e
+- x
+- t
+- o
+-  
+- e
+- x
+- p
+- l
+- i
+- c
+- i
+- t
+- a
+- .
+
+
+
+---
+
+## microdata_1970_corrupcao_al_
+
+**Veredito.** erros_graves
+
+Remedi 112 afirmações do relatório do zero, byte a byte, sobre os 27 arquivos do FTP. A espinha dorsal está sólida: MD5s, tamanhos, datas no zip, CRC, 412.171 e 1.381.977 registros, os 46 e 1.739 anômalos, o total de 24.793.359, a decomposição 900+650+24+211=1.785, as tabelas de desvio com saldos −390 e +312, as duas aritméticas de tamanho físico, os dois exemplos transcritos caractere a caractere com os offsets de byte certos, os decis de Alagoas e o 1.731/1.739 de Pernambuco — tudo confere. Oito afirmações estão erradas, duas delas na parte que vai à carta: o intervalo entre os pares vai de 1 a 400, não a 440; e a descrição do pareamento chama a linha de 16 caracteres de "alongada" (ela é a mais curta) e diz que a segunda linha "restaura o saldo", o que só vale para 18 dos 23 pares — os 5 restantes deixam −78 cada, que somam exatamente o −390 publicado duas seções acima. Além disso: Pernambuco tem 13 bytes de controle e não 9; os 3,71% de linha de base de 4 KB são valor teórico (2×76/4096), não medida — o medido é 3,76%; e o readr::read_lines não ganha linha em Pernambuco (quem inventa registro é só o read_fwf, na posição 108.813, que o relatório acerta). Três números do pipeline também saíram trocados: moda 881 em vez de 882, 1.573 em vez de 1.574, e "650 pesos falsos mas plausíveis" quando 465 deles assumem valores raros ou inexistentes no país. O -1.853 da soma de pesos não é reproduzível porque o código foi descartado; a remedição dá entre -1.919 e -1.721.
+
+
+### Erros GRAVES (2)
+
+**1. [GRAVE] § Padrão da ocorrência, item 2 (Pareamento em Alagoas): "mas o intervalo **não é constante**: varia de 1 a 440 registros ao longo do arquivo"**
+
+- *O relatorio diz:* O intervalo entre os dois membros de cada par varia de 1 a 440 registros.
+- *O correto e:* Varia de 1 a 400 registros. Os 23 gaps: 1 6 7 27 27 27 28 28 28 28 32 50 53 150 237 290 290 290 290 290 290 290 400. O máximo é o par linha 348.820 -> 349.220 = 400.
+- *Medido por:* Varredura byte a byte de DAMO70AL.txt (readBin, posições de LF, comprimento = LF - início - CR); extraídas as 46 linhas com comprimento != 76 em ordem; pareadas consecutivamente (1-2, 3-4, ...) e calculado o diff de número de linha. Também testado pareamento alternativo (cada linha longa casada com a próxima curta de desvio oposto): máximo 15.674, também nunca 440. Script 05_pares.R.
+
+**2. [GRAVE] § Padrão da ocorrência, item 2: "As 46 anomalias formam 23 pares: uma linha alongada (94, 136 ou 16) e, adiante, uma encurtada (58) que restaura o saldo."**
+
+- *O relatorio diz:* Cada par é formado por uma linha alongada (94, 136 ou 16 caracteres) seguida de uma encurtada (58) que restaura o saldo de bytes.
+- *O correto e:* A linha de 16 caracteres é a MAIS CURTA (-60), não alongada; em 6 dos 23 pares o primeiro membro é curto. E o saldo só é restaurado em 18 dos 23 pares: os 5 pares 16->58 são curta+curta e deixam -78 cada, somando exatamente os -390 do arquivo. Há ainda 1 par (343.779 -> 344.069) que é 16 -> 136, isto é, curta e depois longa. Composição: 17x(94->58, saldo 0), 1x(16->136, saldo 0), 5x(16->58, saldo -78).
+- *Medido por:* Mesmo pareamento consecutivo do item anterior; calculado (comp1-76)+(comp2-76) por par. Soma dos saldos = -390, idêntica ao saldo do arquivo medido independentemente em 01_scan.R. Script 05_pares.R.
+
+
+### Demais erros (6)
+
+**1. [MENOR] § Padrão da ocorrência, fecho: "Pernambuco tem 9 em 107 MB (1 NUL e 4 TAB)"**
+
+- *O relatorio diz:* Damo70PE.txt tem 9 bytes de controle fora de CR/LF, sendo 1 NUL e 4 TAB.
+- *O correto e:* Tem 13 (excluindo o 0x1A de fim de arquivo): 1 NUL (0x00), 2 BS (0x08), 4 TAB (0x09), 4 VT (0x0B), 1 CAN (0x18), 1 ESC (0x1B). O parêntese do relatório já não fechava: 1+4=5, não 9.
+- *Medido por:* which(b < 32 & b != 0x0A & b != 0x0D & b != 0x1A) sobre o vetor inteiro de bytes do arquivo, com table() por valor e localização de cada posição. Scripts 01_scan.R e 03_pe.R.
+
+**2. [MENOR] § Padrão da ocorrência, item 3: "contra 3,71% medidos sobre todas as linhas dos próprios arquivos. Enriquecimento de 10x e 6,3x."**
+
+- *O relatorio diz:* A linha de base de 3,71% foi medida sobre todas as linhas dos próprios arquivos; enriquecimento de 10x (AL) e 6,3x (PE).
+- *O correto e:* 3,71% é a expectativa teórica (2 x 76 / 4096 = 3,7109%), não uma medida. O medido é 3,7591% em AL, 3,7585% em PE e 3,7597% nos 27 arquivos. Os enriquecimentos reais são 9,8x e 6,2x. Os numeradores 17/46 (37,0%) e 407/1.739 (23,4%) conferem.
+- *Medido por:* Para cada linha, offset inicial 0-indexado mod 4096; contadas as que têm min(res, 4096-res) <= 76 (a definição que reproduz exatamente os 17 e os 407 do relatório). Calculado por arquivo e agregado nos 27. Scripts 02_al_pe.R e 10_frag_4kb_pesos.R.
+
+**3. [MENOR] § Nota metodológica: "lendo os mesmos arquivos com readr::read_lines, o Pernambuco ganha uma linha que não existe no arquivo e uma linha de 58 caracteres aparece partida"**
+
+- *O relatorio diz:* read_lines faz Pernambuco ganhar uma linha inexistente e parte uma linha de 58 caracteres.
+- *O correto e:* read_lines(PE) devolve 1.381.978 elementos, dos quais 1.381.977 após o filtro nchar>1 do próprio relatório — idêntico à contagem por bytes. AL devolve 412.172/412.171 pelo mesmo motivo (o elemento extra é o 0x1A). Não há linha ganha em PE. A linha de 58 caracteres aparece TRUNCADA em 20 (corte no NUL), não partida: os 37 caracteres restantes somem e o total não sobe. Quem inventa registro é só o read_fwf (1.381.979 = LF + 0x1A + 1 inventado), partindo a byte-linha 108.812 em 20 + 37 caracteres — a posição 108.813 que o relatório cita CONFERE.
+- *Medido por:* readr sobre R 4.5.0: read_lines nos dois arquivos com table(nchar()); read_fwf com fwf_widths(200) e trim_ws=FALSE, comparado linha a linha contra a reconstrução por bytes; localizado o primeiro ponto de divergência de comprimento. Scripts 06_repro.R, 08_fwf2.R, 09_split.R.
+
+**4. [MENOR] § O que fizemos: "a distribuição dos pesos recuperados reproduz a real (moda 4, com 881 casos, depois 3 com 535 e 5 com 99)"**
+
+- *O relatorio diz:* O peso 4 aparece 881 vezes entre os pesos recuperados.
+- *O correto e:* 882 (35 em AL + 847 em PE). Os outros dois números conferem: 3 -> 535, 5 -> 99. Com trim à direita da cauda o resultado é o mesmo, 882.
+- *Medido por:* Extraídos os dois últimos caracteres de cada uma das 1.574 linhas anômalas não-fragmentárias (comprimento != 16) dos dois arquivos, e table(). Soma da tabela = 1.574, confere. Script 04_pe2.R.
+
+**5. [MENOR] § O que fizemos, Ressalva importante: "nesses 1.573 registros apenas o peso é confiável"**
+
+- *O relatorio diz:* 1.573 registros com só o peso confiável.
+- *O correto e:* 1.574 (= 1.785 - 211 fragmentárias = 40 AL + 1.534 PE, ambos conferidos), ou 1.568 se a intenção era excluir os 6 de cauda ilegível. 1.573 não é nenhum dos dois, e contradiz o 1.574 publicado dois parágrafos acima no mesmo documento.
+- *Medido por:* Contagem direta das linhas anômalas com comprimento != 16 por arquivo: AL 46-6=40, PE 1739-205=1534, total 1574; dessas, 6 com cauda não-numérica. Script 04_pe2.R.
+
+**6. [MENOR] § Resumo: "**650** recebem **um peso falso, mas plausível** — sem nenhum sinal de erro"**
+
+- *O relatorio diz:* Os 650 pesos falsos são plausíveis e não deixam nenhum sinal de erro.
+- *O correto e:* A contagem 650 confere, a caracterização não. Só 185 dos 650 (28,5%) caem na faixa de pesos comuns (1-13, os únicos com >=1.000 casos nacionais). Os outros 465 (71,5%) assumem valores raros ou inexistentes: 27 aparece 192 vezes contra 32 ocorrências reais no país inteiro (fator 7), 19 aparece 116 contra 143 reais, 59 aparece 26 contra 2 reais, 49 aparece 5 e 99 aparece 2 vezes sendo que nenhum dos dois existe na amostra. Há sinal distribucional forte — como o próprio relatório reconhece três parágrafos adiante ao citar 27, 10, 19 e 21 como prova de que a leitura está errada.
+- *Medido por:* Tabulada a distribuição nacional de V054 nas 24,79 milhões de linhas íntegras (76 caracteres) dos 27 arquivos, lendo os bytes 75-76 diretamente; cruzada com os 650 valores lidos em 75-76 nas linhas anômalas com comprimento >= 76 cujo valor difere da cauda. Script 11_plaus_cem.R.
+
+### Incertezas (1799)
+
+- 1
+- )
+-  
+- O
+-  
+- "
+- -
+- 1
+- .
+- 8
+- 5
+- 3
+-  
+- a
+- b
+- a
+- i
+- x
+- o
+-  
+- d
+- a
+-  
+- v
+- e
+- r
+- s
+- ã
+- o
+-  
+- d
+- e
+-  
+- r
+- e
+- f
+- e
+- r
+- ê
+- n
+- c
+- i
+- a
+- "
+-  
+- n
+- ã
+- o
+-  
+- é
+-  
+- r
+- e
+- p
+- r
+- o
+- d
+- u
+- z
+- í
+- v
+- e
+- l
+- :
+-  
+- o
+-  
+- c
+- ó
+- d
+- i
+- g
+- o
+-  
+- d
+- a
+-  
+- r
+- o
+- t
+- a
+-  
+- F
+- T
+- P
+-  
+- q
+- u
+- e
+-  
+- f
+- a
+- z
+- i
+- a
+-  
+- a
+-  
+- r
+- e
+- c
+- u
+- p
+- e
+- r
+- a
+- ç
+- ã
+- o
+-  
+- f
+- o
+- i
+-  
+- d
+- e
+- s
+- c
+- a
+- r
+- t
+- a
+- d
+- o
+-  
+- (
+- R
+- /
+- m
+- i
+- c
+- r
+- o
+- d
+- a
+- t
+- a
+- _
+- 1
+- 9
+- 7
+- 0
+- .
+- R
+-  
+- h
+- o
+- j
+- e
+-  
+- l
+- ê
+-  
+- d
+- o
+-  
+- r
+- e
+- l
+- e
+- a
+- s
+- e
+- _
+- l
+- e
+- g
+- a
+- c
+- y
+- /
+- C
+- E
+- M
+- )
+- .
+-  
+- R
+- e
+- f
+- a
+- z
+- e
+- n
+- d
+- o
+-  
+- a
+-  
+- r
+- e
+- c
+- u
+- p
+- e
+- r
+- a
+- ç
+- ã
+- o
+-  
+- d
+- o
+-  
+- z
+- e
+- r
+- o
+-  
+- s
+- o
+- b
+- r
+- e
+-  
+- o
+- s
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+- s
+-  
+- c
+- r
+- u
+- s
+-  
+- d
+- á
+-  
+- 9
+- 4
+- .
+- 4
+- 6
+- 0
+- .
+- 0
+- 5
+- 0
+-  
+- (
+- -
+- 1
+- .
+- 9
+- 1
+- 9
+- )
+-  
+- l
+- e
+- n
+- d
+- o
+-  
+- o
+- s
+-  
+- d
+- o
+- i
+- s
+-  
+- ú
+- l
+- t
+- i
+- m
+- o
+- s
+-  
+- c
+- a
+- r
+- a
+- c
+- t
+- e
+- r
+- e
+- s
+-  
+- d
+- a
+-  
+- l
+- i
+- n
+- h
+- a
+- ,
+-  
+- o
+- u
+-  
+- 9
+- 4
+- .
+- 4
+- 6
+- 0
+- .
+- 2
+- 4
+- 8
+-  
+- (
+- -
+- 1
+- .
+- 7
+- 2
+- 1
+- )
+-  
+- c
+- o
+- m
+-  
+- t
+- r
+- i
+- m
+-  
+- à
+-  
+- d
+- i
+- r
+- e
+- i
+- t
+- a
+- .
+-  
+- O
+-  
+- -
+- 1
+- .
+- 8
+- 5
+- 3
+-  
+- f
+- i
+- c
+- a
+-  
+- e
+- n
+- t
+- r
+- e
+-  
+- o
+- s
+-  
+- d
+- o
+- i
+- s
+-  
+- e
+-  
+- é
+-  
+- c
+- o
+- m
+- p
+- a
+- t
+- í
+- v
+- e
+- l
+-  
+- c
+- o
+- m
+-  
+- a
+-  
+- i
+- m
+- p
+- u
+- t
+- a
+- ç
+- ã
+- o
+-  
+- d
+- e
+-  
+- m
+- e
+- d
+- i
+- a
+- n
+- a
+-  
+- q
+- u
+- e
+-  
+- o
+-  
+- p
+- i
+- p
+- e
+- l
+- i
+- n
+- e
+-  
+- a
+- p
+- l
+- i
+- c
+- a
+- v
+- a
+-  
+- a
+- o
+- s
+-  
+- 8
+-  
+- r
+- e
+- g
+- i
+- s
+- t
+- r
+- o
+- s
+-  
+- r
+- e
+- s
+- t
+- a
+- n
+- t
+- e
+- s
+-  
+- s
+- e
+- m
+-  
+- p
+- e
+- s
+- o
+- ,
+-  
+- m
+- a
+- s
+-  
+- n
+- ã
+- o
+-  
+- p
+- u
+- d
+- e
+-  
+- f
+- e
+- c
+- h
+- a
+- r
+-  
+- o
+-  
+- n
+- ú
+- m
+- e
+- r
+- o
+- .
+-  
+- A
+-  
+- d
+- i
+- r
+- e
+- ç
+- ã
+- o
+- ,
+-  
+- a
+-  
+- o
+- r
+- d
+- e
+- m
+-  
+- d
+- e
+-  
+- g
+- r
+- a
+- n
+- d
+- e
+- z
+- a
+-  
+- e
+-  
+- o
+-  
+- "
+- c
+- a
+- i
+- u
+-  
+- a
+-  
+- u
+- m
+-  
+- t
+- e
+- r
+- ç
+- o
+- "
+-  
+- c
+- o
+- n
+- f
+- e
+- r
+- e
+- m
+-  
+- (
+- 5
+- .
+- 9
+- 4
+- 8
+-  
+- d
+- i
+- v
+- i
+- d
+- i
+- d
+- o
+-  
+- p
+- o
+- r
+-  
+- 1
+- .
+- 9
+- 1
+- 9
+-  
+- =
+-  
+- 3
+- ,
+- 1
+- x
+- ;
+-  
+- p
+- o
+- r
+-  
+- 1
+- .
+- 8
+- 5
+- 3
+-  
+- =
+-  
+- 3
+- ,
+- 2
+- x
+- )
+- .
+-  
+- 2
+- )
+-  
+- A
+-  
+- h
+- i
+- p
+- ó
+- t
+- e
+- s
+- e
+-  
+- d
+- e
+-  
+- c
+- a
+- u
+- s
+- a
+-  
+- (
+- c
+- ó
+- p
+- i
+- a
+- /
+- c
+- o
+- n
+- v
+- e
+- r
+- s
+- ã
+- o
+-  
+- c
+- o
+- m
+-  
+- b
+- u
+- f
+- f
+- e
+- r
+- ,
+-  
+- 4
+-  
+- K
+- B
+-  
+- c
+- o
+- m
+- o
+-  
+- a
+- s
+- s
+- i
+- n
+- a
+- t
+- u
+- r
+- a
+-  
+- d
+- e
+-  
+- I
+- /
+- O
+- )
+-  
+- é
+-  
+- i
+- n
+- f
+- e
+- r
+- ê
+- n
+- c
+- i
+- a
+-  
+- e
+-  
+- o
+-  
+- r
+- e
+- l
+- a
+- t
+- ó
+- r
+- i
+- o
+-  
+- a
+-  
+- r
+- o
+- t
+- u
+- l
+- a
+-  
+- c
+- o
+- r
+- r
+- e
+- t
+- a
+- m
+- e
+- n
+- t
+- e
+-  
+- c
+- o
+- m
+- o
+-  
+- t
+- a
+- l
+-  
+- —
+-  
+- n
+- ã
+- o
+-  
+- a
+- u
+- d
+- i
+- t
+- e
+- i
+-  
+- c
+- o
+- m
+- o
+-  
+- m
+- e
+- d
+- i
+- d
+- a
+- .
+-  
+- 3
+- )
+-  
+- "
+- O
+- s
+-  
+- 1
+- 6
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+- s
+-  
+- d
+- e
+-  
+- j
+- a
+- n
+- e
+- i
+- r
+- o
+-  
+- d
+- e
+-  
+- 1
+- 9
+- 9
+- 8
+-  
+- e
+- s
+- t
+- ã
+- o
+-  
+- t
+- o
+- d
+- o
+- s
+-  
+- l
+- i
+- m
+- p
+- o
+- s
+- "
+-  
+- f
+- o
+- i
+-  
+- v
+- e
+- r
+- i
+- f
+- i
+- c
+- a
+- d
+- o
+-  
+- c
+- o
+- m
+- o
+-  
+- a
+- u
+- s
+- ê
+- n
+- c
+- i
+- a
+-  
+- d
+- e
+-  
+- l
+- i
+- n
+- h
+- a
+- s
+-  
+- f
+- o
+- r
+- a
+-  
+- d
+- e
+-  
+- 7
+- 6
+-  
+- c
+- a
+- r
+- a
+- c
+- t
+- e
+- r
+- e
+- s
+-  
+- e
+-  
+- d
+- e
+-  
+- b
+- y
+- t
+- e
+- s
+-  
+- d
+- e
+-  
+- c
+- o
+- n
+- t
+- r
+- o
+- l
+- e
+- ,
+-  
+- n
+- ã
+- o
+-  
+- c
+- o
+- m
+- o
+-  
+- a
+- u
+- s
+- ê
+- n
+- c
+- i
+- a
+-  
+- d
+- e
+-  
+- q
+- u
+- a
+- l
+- q
+- u
+- e
+- r
+-  
+- d
+- e
+- f
+- e
+- i
+- t
+- o
+-  
+- d
+- e
+-  
+- c
+- o
+- n
+- t
+- e
+- ú
+- d
+- o
+- .
+-  
+- 4
+- )
+-  
+- A
+-  
+- f
+- a
+- i
+- x
+- a
+-  
+- "
+- 3
+-  
+- a
+-  
+- 1
+- 0
+-  
+- v
+- a
+- r
+- i
+- á
+- v
+- e
+- i
+- s
+-  
+- p
+- r
+- e
+- e
+- n
+- c
+- h
+- i
+- d
+- a
+- s
+- "
+-  
+- n
+- a
+- s
+-  
+- f
+- r
+- a
+- g
+- m
+- e
+- n
+- t
+- á
+- r
+- i
+- a
+- s
+-  
+- d
+- e
+- p
+- e
+- n
+- d
+- e
+-  
+- d
+- e
+-  
+- c
+- o
+- n
+- t
+- a
+- r
+-  
+- o
+- u
+-  
+- n
+- ã
+- o
+-  
+- u
+- m
+-  
+- c
+- a
+- m
+- p
+- o
+-  
+- s
+- ó
+-  
+- c
+- o
+- m
+-  
+- t
+- r
+- a
+- ç
+- o
+- :
+-  
+- c
+- o
+- n
+- t
+- a
+- n
+- d
+- o
+-  
+- o
+-  
+- t
+- r
+- a
+- ç
+- o
+-  
+- d
+- á
+-  
+- 3
+-  
+- a
+-  
+- 1
+- 0
+-  
+- (
+- c
+- o
+- n
+- f
+- e
+- r
+- e
+- )
+- ,
+-  
+- c
+- o
+- n
+- t
+- a
+- n
+- d
+- o
+-  
+- s
+- ó
+-  
+- c
+- a
+- m
+- p
+- o
+- s
+-  
+- c
+- o
+- m
+-  
+- d
+- í
+- g
+- i
+- t
+- o
+-  
+- d
+- á
+-  
+- 2
+-  
+- a
+-  
+- 1
+- 0
+-  
+- (
+- 1
+- 1
+-  
+- l
+- i
+- n
+- h
+- a
+- s
+-  
+- d
+- o
+-  
+- t
+- i
+- p
+- o
+-  
+- "
+-  
+-  
+-  
+-  
+-  
+-  
+-  
+-  
+- -
+-  
+-  
+-  
+-  
+-  
+- 0
+- 4
+- "
+- )
+- .
+-  
+- D
+- e
+- i
+- x
+- e
+- i
+-  
+- c
+- o
+- m
+- o
+-  
+- r
+- e
+- s
+- s
+- a
+- l
+- v
+- a
+-  
+- c
+- o
+- s
+- m
+- é
+- t
+- i
+- c
+- a
+- ,
+-  
+- n
+- ã
+- o
+-  
+- c
+- o
+- m
+- o
+-  
+- e
+- r
+- r
+- o
+- .
+-  
+- 5
+- )
+-  
+- D
+- e
+- t
+- a
+- l
+- h
+- e
+-  
+- a
+- d
+- j
+- a
+- c
+- e
+- n
+- t
+- e
+-  
+- f
+- o
+- r
+- a
+-  
+- d
+- o
+-  
+- r
+- e
+- l
+- a
+- t
+- ó
+- r
+- i
+- o
+-  
+- a
+- u
+- d
+- i
+- t
+- a
+- d
+- o
+- :
+-  
+- R
+- /
+- m
+- i
+- c
+- r
+- o
+- d
+- a
+- t
+- a
+- _
+- 1
+- 9
+- 7
+- 0
+- .
+- R
+-  
+- l
+- i
+- n
+- h
+- a
+-  
+- 9
+-  
+- d
+- i
+- z
+-  
+- "
+- 8
+- 9
+- 9
+-  
+- f
+- i
+- c
+- a
+- m
+-  
+- s
+- e
+- m
+-  
+- p
+- e
+- s
+- o
+- "
+- ;
+-  
+- o
+-  
+- c
+- e
+- r
+- t
+- o
+-  
+- é
+-  
+- 9
+- 0
+- 0
+- ,
+-  
+- c
+- o
+- m
+- o
+-  
+- o
+-  
+- r
+- e
+- l
+- a
+- t
+- ó
+- r
+- i
+- o
+-  
+- a
+- f
+- i
+- r
+- m
+- a
+-  
+- —
+-  
+- a
+- q
+- u
+- i
+-  
+- q
+- u
+- e
+- m
+-  
+- e
+- s
+- t
+- á
+-  
+- e
+- r
+- r
+- a
+- d
+- o
+-  
+- é
+-  
+- o
+-  
+- c
+- o
+- m
+- e
+- n
+- t
+- á
+- r
+- i
+- o
+-  
+- d
+- o
+-  
+- c
+- ó
+- d
+- i
+- g
+- o
+- .
+-  
+- 6
+- )
+-  
+- D
+- e
+- t
+- e
+- c
+- t
+- e
+- i
+-  
+- t
+- a
+- m
+- b
+- é
+- m
+-  
+- d
+- u
+- a
+- s
+-  
+- g
+- e
+- n
+- e
+- r
+- a
+- l
+- i
+- z
+- a
+- ç
+- õ
+- e
+- s
+-  
+- d
+- e
+-  
+- r
+- e
+- s
+- u
+- m
+- o
+-  
+- q
+- u
+- e
+-  
+- n
+- ã
+- o
+-  
+- s
+- ã
+- o
+-  
+- n
+- ú
+- m
+- e
+- r
+- o
+- s
+-  
+- m
+- a
+- s
+-  
+- s
+- ã
+- o
+-  
+- c
+- h
+- e
+- c
+- á
+- v
+- e
+- i
+- s
+-  
+- e
+-  
+- f
+- a
+- l
+- h
+- a
+- m
+- :
+-  
+- "
+- m
+- a
+- i
+- s
+-  
+- l
+- o
+- n
+- g
+- o
+- s
+-  
+- e
+-  
+- m
+- a
+- i
+- s
+-  
+- c
+- u
+- r
+- t
+- o
+- s
+-  
+- n
+- a
+-  
+- m
+- e
+- s
+- m
+- a
+-  
+- p
+- r
+- o
+- p
+- o
+- r
+- ç
+- ã
+- o
+- "
+-  
+- (
+- v
+- a
+- l
+- e
+-  
+- p
+- a
+- r
+- a
+-  
+- P
+- E
+- ,
+-  
+- n
+- ã
+- o
+-  
+- p
+- a
+- r
+- a
+-  
+- A
+- L
+- ,
+-  
+- q
+- u
+- e
+-  
+- g
+- a
+- n
+- h
+- a
+-  
+- 3
+- 6
+- 6
+-  
+- e
+-  
+- p
+- e
+- r
+- d
+- e
+-  
+- 7
+- 5
+- 6
+-  
+- b
+- y
+- t
+- e
+- s
+- )
+-  
+- e
+-  
+- "
+- c
+- a
+- r
+- a
+- c
+- t
+- e
+- r
+- e
+- s
+-  
+- f
+- o
+- r
+- a
+- m
+-  
+- m
+- o
+- v
+- i
+- d
+- o
+- s
+- ,
+-  
+- n
+- ã
+- o
+-  
+- c
+- r
+- i
+- a
+- d
+- o
+- s
+-  
+- n
+- e
+- m
+-  
+- d
+- e
+- s
+- t
+- r
+- u
+- í
+- d
+- o
+- s
+- "
+-  
+- (
+- s
+- a
+- l
+- d
+- o
+-  
+- a
+- g
+- r
+- e
+- g
+- a
+- d
+- o
+-  
+- d
+- o
+- s
+-  
+- d
+- o
+- i
+- s
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+- s
+- :
+-  
+- -
+- 7
+- 8
+-  
+- b
+- y
+- t
+- e
+- s
+- )
+- .
+-  
+- A
+- m
+- b
+- a
+- s
+-  
+- e
+- s
+- t
+- ã
+- o
+-  
+- l
+- i
+- s
+- t
+- a
+- d
+- a
+- s
+-  
+- c
+- o
+- m
+- o
+-  
+- c
+- o
+- s
+- m
+- é
+- t
+- i
+- c
+- a
+- s
+-  
+- n
+- o
+-  
+- r
+- e
+- l
+- a
+- t
+- ó
+- r
+- i
+- o
+- .
+
+
+
+---
+
+## relatorio_pessoa02_sp_shift
+
+**Veredito.** erros_menores
+
+Refiz do zero as 52 afirmações verificáveis do relatório. O núcleo técnico está íntegro: os 15 números das tabelas 4.1/4.2/4.3 reproduziram exatamente, as 85 identidades aritméticas fecham 84/85 nas três UFs, o crosswalk V<n>→V<n−85> e todos os rótulos semânticos conferem contra a seção 6.7 do dicionário oficial, e o fix no pipeline está onde o relatório diz que está. Encontrei 10 problemas, 2 deles graves: a explicação da seção 4.6 é falsa em dois pontos (a taxa de censura não cresce com o tamanho da UF — AC 2,29%, SP1 0,85%, SP2 2,56% — e os "84 cortes que não sofrem censura" sofrem exatamente a mesma censura); e a citação do log `1_Atualizacoes_20250915.txt` retorna 404. Achado novo e decisivo: o IBGE republicou as 27 UFs em 15/06/2026 e o shift +85 CONTINUA presente em `pessoa02_sp1.csv` dessa safra — o defeito está vivo, o fix do pipeline segue necessário e a carta fica mais forte se citar a publicação nova. Erros menores: SP1 está rotulado como "Região Metropolitana" quando é só o município da capital (18.363 setores, 1 município) e SP2 como "interior" quando inclui Guarulhos e Osasco (644 municípios); e a seção 6.4 ainda carrega a premissa das "256 colunas" que a própria nota de 2026-09-12 retratou. Nenhum erro derruba a conclusão central do relatório.
+
+
+### Erros GRAVES (3)
+
+**1. [GRAVE] §4.6 — "Como a média ponderada de censura cresce com o tamanho da UF, SP2 mostra 0,33% e AC mostra 0,046%."**
+
+- *O relatorio diz:* A taxa de censura do IBGE cresce com o tamanho da UF, e é isso que explica por que SP2 mostra 0,33% de diferença em V001 e AC apenas 0,046%.
+- *O correto e:* A taxa de censura não cresce com o tamanho da UF: AC 20/874 = 2,29%; SP1 157/18.363 = 0,85%; SP2 1.222/47.733 = 2,56%. SP1 é 21x maior que AC e tem diferença MENOR (0,041% < 0,046%) — o contrário do previsto. O Quadro 1 do próprio dicionário IBGE confirma a não-monotonicidade (PB 5.574 setores -> 0,6%; SC 12.227 -> 4,5%; AC 900 -> 2,3%; SP 68.296 -> 2,1%; Brasil 316.574 -> 2,0%). O que explica a diferença, com igualdade exata, é a soma de Pessoa01_V001 nos setores censurados: 247 (AC), 4.070 (SP1), 87.098 (SP2) — idênticos às diferenças observadas. A média de alfabetizados 5+ por setor censurado é 12,3 / 25,9 / 71,3.
+- *Medido por:* Script 09_mecanismo_v001.R: li PESSOA01_{AC,SP1,SP2}.xls e PESSOA02_{AC,SP1,SP2}.xls com readxl col_types='text', marquei setor censurado como is.na(as.numeric(coluna de homens 5+)), e comparei sum(Pessoa01_V001[censurado]) com a diferença agregada. Taxas: sum(censurado)/nrow. Quadro 1 lido do texto extraído do PDF oficial via pdftools (linhas 1320-1365 de dicionario_universo.txt).
+
+**2. [GRAVE] §4.6 — "A relação testável que importa é o batimento dos 84 cortes que não sofrem essa censura agregada — todos esses fecham com diferença absoluta zero."**
+
+- *O relatorio diz:* Os 84 cortes que fecham com zero não sofrem a censura 'X' do IBGE.
+- *O correto e:* Os 84 cortes sofrem a censura na mesma medida exata: cada uma das 170 colunas de Pessoa02 tem 20 (AC), 157 (SP1) e 1.222 (SP2) células 'X', e Pessoa01_V002..V085 também. Eles fecham porque a censura é simétrica nos dois arquivos, não porque estejam isentos. A única assimetria está em Pessoa01_V001, que tem ZERO células 'X' — o IBGE o preserva como variável estrutural ('Foram mantidas apenas as variáveis estruturais... a população por sexo'), enquanto os totais por sexo de Pessoa02 são suprimidos. Pelo mesmo motivo, a frase vizinha 'o IBGE aplica censura ... com critério um pouco diferente do que aplica nos cortes etários individuais' descreve mal o mecanismo.
+- *Medido por:* Script 03_identities.R: para cada coluna V de Pessoa01 e Pessoa02 das 3 UFs contei sum(toupper(trimws(x))=='X'). Resultado: Pessoa01 V001 nX=0 nas 3 UFs; Pessoa01 V002..V085 e todas as 170 colunas de Pessoa02 com nX = 20/157/1222. Regra de supressão lida no PDF oficial (linha 1299 do texto extraído).
+
+**3. [GRAVE] §2, item 2 — "Log de atualizações IBGE (https://ftp.ibge.gov.br/.../1_Atualizacoes_20250915.txt)"**
+
+- *O relatorio diz:* O log de atualizações vigente do IBGE é o 1_Atualizacoes_20250915.txt, e a safra corrente dos arquivos é a de 2025.
+- *O correto e:* Esse arquivo retorna HTTP 404. Foi substituído por 1_Atualizacoes_20260615.txt (Last-Modified: 15/06/2026), junto com a republicação de TODAS as 27 UFs como *_20260615.zip. O log novo registra para 15/06/2026 apenas a correção do Cod_setor nos CSVs e continua sem qualquer entrada sobre Pessoa02 de SP. Verifiquei que o shift +85 SOBREVIVE na safra de 15/06/2026: pessoa02_sp1.csv dessa publicação tem 172 colunas, 170 V, V086..V255 contíguas. O fix do pipeline continua necessário, e a carta deve citar a publicação de 15/06/2026.
+- *Medido por:* curl -I no arquivo antigo (404) e no novo (200); curl da listagem HTML do diretório; download do log novo (2.598 bytes). Para o conteúdo do zip remoto sem baixar 175 MB: range-request dos últimos 64 KB -> parse do End of Central Directory e do central directory (script 07_zip_cd.R), depois range-request só dos 2.471.378 bytes comprimidos do membro CSV/pessoa02_sp1.csv, inflado via gzcon com cabeçalho gzip mínimo, e leitura de 1 linha de header (script 08_fetch_member.R). Controles: pessoa01_sp1.csv (V001-V085) e pessoa02_ac.csv (V001-V170) da mesma safra.
+
+
+### Demais erros (7)
+
+**1. [MENOR] §4.2 título "SP1 (Região Metropolitana de São Paulo)"; §4.3 título "SP2 (interior de São Paulo)" e "proporcional à escala maior do interior paulista"**
+
+- *O relatorio diz:* SP1 cobre a Região Metropolitana de São Paulo e SP2 cobre o interior do estado.
+- *O correto e:* SP1 = 1 único município, 3550308 (São Paulo capital), 18.363 setores — Guarulhos e Osasco ausentes. SP2 = 644 municípios, incluindo Guarulhos (1.705 setores) e Osasco, ou seja, o resto da RMSP + interior + litoral. 1 + 644 = 645 municípios de SP. As pastas do zip se chamam SP_Capital e SP_Exceto_Capital. O erro é herdado do dicionário do IBGE, que se contradiz: em dois trechos diz 'UF=SP1 para os arquivos com dados do município de São Paulo' e na nota de rodapé 3 diz 'SP1 para ... os setores dos municípios da Região Metropolitana de São Paulo'. A transcrição do Pedro Souza (transcripts/2010_dictionary_tracts.md:545) reproduz a variante errada. Isso é material extra para a carta ao IBGE.
+- *Medido por:* Script 06_sp_published.R: substr(Cod_setor, 1, 7) sobre PESSOA01_SP1.xls e PESSOA01_SP2.xls, contagem de municípios distintos e teste de pertencimento para 3550308 (capital), 3518800 (Guarulhos), 3534401 (Osasco), 3549904 (S. J. do Rio Preto). Contradição do dicionário: grep por 'SP1|SP2|São Paulo' no texto extraído do PDF (linhas 1216-1218, 1260-1262, 1309-1310).
+
+**2. [MENOR] §6.4 — "registrar que v0.6.0 corrige o shift de SP, indo de 256 colunas pessoa02_V* (com cols vazias por UF) para 171 colunas alinhadas"**
+
+- *O relatorio diz:* Algum artefato teve 256 colunas pessoa02_V*, e o documento de divergências deve registrar essa transição 256 -> 171.
+- *O correto e:* Resíduo de uma afirmação que a própria nota de 2026-09-12 retratou nas §1 e §7. Nenhum artefato teve 256 colunas: abri os cinco parquets (v0.5.0 publicado, baseline v0.6.0 em data_raw/baseline_compare/, 2010_tracts_PESSOA.parquet atual, v0.6.0 e v0.7.0 em data/tracts/2010/) e todos têm 2.008 colunas, 310.114 linhas, exatamente 171 pessoa02_V* (V001-V170 + V1005) e ZERO na faixa V171-V255. Além disso o documento alvo, references/divergencias_v050_v060_2010_tracts.md, nunca disse 256 — já diz 171 (linha 58). A §6.4 precisa cair junto com o resto da retratação.
+- *Medido por:* Script 05_parquets.R: arrow::open_dataset em cada parquet, grep '^pessoa02_V' nos names, faixa numérica, contagem em 1..170 e em 171..255, e setdiff para faltantes. grep '256' em references/divergencias_v050_v060_2010_tracts.md.
+
+**3. [MENOR] §2, último parágrafo — "o data.table é estrito quanto a chaves duplicadas: ele recusou silenciosamente fazer um Cartesian. O pipeline antigo escondia o problema; o novo expôs."**
+
+- *O relatorio diz:* A troca de dplyr::left_join por data.table::merge revelou o shift porque o data.table recusou silenciosamente um join Cartesian por chaves duplicadas.
+- *O correto e:* O comentário do próprio repositório diz o oposto. Em git show 6a1e66f:R/census_tracts_2010.R, linha 165: 'IBGE às vezes inclui linhas-resumo sem código de setor. Filtrar antes do merge — data.table casa NA==NA no join (gera Cartesian); dplyr::left_join antigo silenciosamente dropava NAs.' Ou seja: era o data.table que GERAVA o Cartesian, e o problema eram linhas-resumo com code_tract NA — nada a ver com o shift de Pessoa02, cujas colunas nem colidem por nome. data.table nunca recusa silenciosamente um Cartesian: ou o gera, ou erra com mensagem explícita sobre allow.cartesian. Inferência apresentada como medição.
+- *Medido por:* git show 6a1e66f:R/census_tracts_2010.R (versão imediatamente anterior ao commit 29fee76 que aplicou o fix do shift), leitura das linhas 158-200; git log --oneline -- R/census_tracts_2010.R para ordenar os commits.
+
+**4. [MENOR] §4, cabeçalho dos resultados — "Isso é mais robusto que comparação setor-a-setor porque contorna os artefatos de censura 'X' do IBGE"; e §6.3 Nível 2 "Diferença esperada: zero ou na ordem de 0,04%"**
+
+- *O relatorio diz:* Agregar por UF contorna os artefatos de censura; setor a setor espera-se diferença de zero ou da ordem de 0,04%.
+- *O correto e:* É o contrário: setor a setor a identidade fecha com diferença EXATAMENTE zero em 100% dos setores não censurados — 854/854 em AC, 18.206/18.206 em SP1, 46.511/46.511 em SP2, com max|H+M − total| = 0. Os 0,04%–0,33% são produzidos pela agregação sobre um universo assimétrico (Pessoa01_V001 nunca suprimido, Pessoa02 suprimido em 20/157/1.222 setores). A agregação não contorna a censura: é ela que a torna visível. O critério do Nível 2 deveria ser 'zero, sempre que o setor não for censurado'.
+- *Medido por:* Script 09_mecanismo_v001.R: merge por Cod_setor, filtro !censurado & !is.na(total), contagem de sum(h+f == t01) e max(abs(h+f-t01)). Confirmado também no parquet final (script 10_output_atual.R): 64.717/64.717 setores de SP e 303.819/303.819 no Brasil com pessoa02_V001 + pessoa02_V086 == pessoa01_V001.
+
+**5. [MENOR] §3, propriedade 3 — "É falsificável. Se um único corte não fechasse a conta, a hipótese cairia." vs. §4.6**
+
+- *O relatorio diz:* Um único corte que não fechasse derrubaria a hipótese.
+- *O correto e:* Exatamente um corte não fecha (V001, nas três UFs) e a hipótese é mantida com uma explicação ad hoc na §4.6. O critério de falsificação é declarado e depois abandonado — numa carta oficial isso é munição para o leitor. A formulação que a evidência de fato sustenta é: 84 cortes fecham com igualdade exata E a diferença do 85º é explicada quantitativamente, também com igualdade exata, pela soma de Pessoa01_V001 nos setores suprimidos (247 / 4.070 / 87.098).
+- *Medido por:* Leitura conjunta de §3 e §4.6 do relatório, confrontada com a medição do script 03 (84/85 zeros) e do script 09 (a diferença do 85º corte igual, sem resíduo, à soma sobre os setores suprimidos).
+
+**6. [MENOR] §4.5 — "O shift é único do arquivo Pessoa02 nos arquivos de SP. Não afeta nem outros temas em SP nem outras UFs. Verificação direta dos 13 arquivos da família Pessoa em AC e SP1"**
+
+- *O relatorio diz:* Conclusão de que o shift não afeta outros temas em SP nem outras UFs, apoiada em 13 arquivos da família Pessoa em AC e SP1.
+- *O correto e:* A conclusão está CORRETA, mas a evidência citada não a comprova — 13 arquivos Pessoa de duas UFs não cobrem nenhum outro tema (Basico, Domicilio, DomicilioRenda, Responsavel01/02, ResponsavelRenda, Entorno01-05) nem nenhuma das outras 26 publicações. É generalização além do medido. Refiz a verificação em escala e ela se sustenta: só PESSOA02_SP1 e PESSOA02_SP2 desviam. O padrão vmin != 1 de ENTORNO02-ENTORNO05 (202-421, 422-622, 623-842, 843-1062) é desenho do IBGE e aparece idêntico em TODAS as 28 publicações. Achado lateral não relacionado: DOMICILIO02_RO tem 241 colunas V contra 132 nas outras 26 UFs (vmin=1, não é shift).
+- *Medido por:* Script 02_scan_all_csv_headers.R: li a PRIMEIRA LINHA de cada um dos 727 CSVs contando bytes (readBin, primeiro 0x0A, sem read_lines), detectei o separador, extraí vmin/vmax/contiguidade — 727/727 cobertos. Script 11_xls_specificity.R: readxl n_max=0 em 52 XLS (todos os PESSOA02_* das 28 publicações + todos os temas não-Pessoa de SP1 e SP2). Script 01: os 42 XLS da família Pessoa de AC, SP1 e SP2.
+
+**7. [COSMETICO] §1, nota de correção de 2026-09-12 — "pub_V086 == V001 correto em 64.717 de 64.717 setores"**
+
+- *O relatorio diz:* 64.717 de 64.717 setores.
+- *O correto e:* O número está certo, mas sem denominador engana. O universo de SP é 66.096 setores (18.363 em SP1 + 47.733 em SP2, e o Quadro 1 do IBGE publica exatamente 66.096 para SP). Desses, 1.379 estão suprimidos ('x' -> NA dos dois lados) — também exatamente o número que o Quadro 1 do IBGE publica para SP, 2,1%. Os 64.717 restantes batem, todos, sem uma divergência. Escrito como está, sugere que 64.717 é o universo de SP.
+- *Medido por:* Script 06_sp_published.R: merge do parquet v0.5.0 (filtrado por substr(code_tract,1,2)=='35', 66.096 linhas) com V086 cru de PESSOA02_SP1.xls + PESSOA02_SP2.xls (66.096 linhas); 1.379 pares ambos-NA, 64.717 pares iguais, 0 divergentes. Quadro 1 lido do PDF oficial (linha 1360 do texto extraído: 'São Paulo SP 68296 2200 66096 1379 2,1').
+
+### Incertezas (2174)
+
+- 1
+- )
+-  
+- N
+- Ã
+- O
+-  
+- V
+- E
+- R
+- I
+- F
+- I
+- Q
+- U
+- E
+- I
+-  
+- a
+-  
+- s
+- a
+- f
+- r
+- a
+-  
+- d
+- e
+-  
+- 1
+- 5
+- /
+- 0
+- 6
+- /
+- 2
+- 0
+- 2
+- 6
+-  
+- n
+- o
+- s
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+- s
+-  
+- X
+- L
+- S
+- ,
+-  
+- s
+- ó
+-  
+- n
+- o
+-  
+- C
+- S
+- V
+-  
+- (
+- p
+- e
+- s
+- s
+- o
+- a
+- 0
+- 2
+- _
+- s
+- p
+- 1
+- .
+- c
+- s
+- v
+- )
+- .
+-  
+- B
+- a
+- i
+- x
+- e
+- i
+-  
+- a
+- p
+- e
+- n
+- a
+- s
+-  
+- o
+-  
+- m
+- e
+- m
+- b
+- r
+- o
+-  
+- c
+- o
+- m
+- p
+- r
+- i
+- m
+- i
+- d
+- o
+-  
+- d
+- o
+-  
+- C
+- S
+- V
+-  
+- p
+- o
+- r
+-  
+- r
+- a
+- n
+- g
+- e
+- -
+- r
+- e
+- q
+- u
+- e
+- s
+- t
+-  
+- p
+- a
+- r
+- a
+-  
+- n
+- ã
+- o
+-  
+- p
+- u
+- x
+- a
+- r
+-  
+- 1
+- 7
+- 5
+-  
+- M
+- B
+-  
+- d
+- o
+-  
+- F
+- T
+- P
+- .
+-  
+- S
+- e
+-  
+- o
+-  
+- I
+- B
+- G
+- E
+-  
+- t
+- i
+- v
+- e
+- r
+-  
+- c
+- o
+- r
+- r
+- i
+- g
+- i
+- d
+- o
+-  
+- o
+-  
+- X
+- L
+- S
+-  
+- e
+-  
+- n
+- ã
+- o
+-  
+- o
+-  
+- C
+- S
+- V
+-  
+- (
+- o
+- u
+-  
+- v
+- i
+- c
+- e
+- -
+- v
+- e
+- r
+- s
+- a
+- )
+-  
+- —
+-  
+- o
+-  
+- q
+- u
+- e
+-  
+- j
+- á
+-  
+- a
+- c
+- o
+- n
+- t
+- e
+- c
+- e
+- u
+-  
+- n
+- o
+-  
+- h
+- i
+- s
+- t
+- ó
+- r
+- i
+- c
+- o
+-  
+- d
+- e
+- l
+- e
+- s
+- ,
+-  
+- v
+- e
+- r
+-  
+- a
+-  
+- e
+- n
+- t
+- r
+- a
+- d
+- a
+-  
+- d
+- e
+-  
+- 1
+- 1
+- /
+- 1
+- 2
+- /
+- 2
+- 0
+- 2
+- 4
+-  
+- s
+- o
+- b
+- r
+- e
+-  
+- D
+- o
+- m
+- i
+- c
+- i
+- l
+- i
+- o
+- 0
+- 1
+- _
+- R
+- S
+-  
+- —
+-  
+- i
+- s
+- s
+- o
+-  
+- e
+- s
+- c
+- a
+- p
+- a
+- r
+- i
+- a
+- .
+-  
+- O
+-  
+- p
+- i
+- p
+- e
+- l
+- i
+- n
+- e
+-  
+- l
+- ê
+-  
+- X
+- L
+- S
+-  
+- p
+- o
+- r
+-  
+- d
+- e
+- f
+- a
+- u
+- l
+- t
+- ,
+-  
+- e
+- n
+- t
+- ã
+- o
+-  
+- e
+- s
+- s
+- a
+-  
+- c
+- h
+- e
+- c
+- a
+- g
+- e
+- m
+-  
+- v
+- a
+- l
+- e
+-  
+- a
+-  
+- p
+- e
+- n
+- a
+-  
+- a
+- n
+- t
+- e
+- s
+-  
+- d
+- e
+-  
+- a
+-  
+- c
+- a
+- r
+- t
+- a
+-  
+- s
+- a
+- i
+- r
+- .
+-  
+- C
+- u
+- s
+- t
+- o
+- :
+-  
+- b
+- a
+- i
+- x
+- a
+- r
+-  
+- S
+- P
+- _
+- C
+- a
+- p
+- i
+- t
+- a
+- l
+- _
+- 2
+- 0
+- 2
+- 6
+- 0
+- 6
+- 1
+- 5
+- .
+- z
+- i
+- p
+-  
+- (
+- 1
+- 7
+- 5
+-  
+- M
+- B
+- )
+-  
+- u
+- m
+- a
+-  
+- v
+- e
+- z
+- .
+- 
+
+- 
+
+- 2
+- )
+-  
+- N
+- Ã
+- O
+-  
+- V
+- E
+- R
+- I
+- F
+- I
+- Q
+- U
+- E
+- I
+-  
+- S
+- P
+- _
+- E
+- x
+- c
+- e
+- t
+- o
+- _
+- C
+- a
+- p
+- i
+- t
+- a
+- l
+- _
+- 2
+- 0
+- 2
+- 6
+- 0
+- 6
+- 1
+- 5
+- .
+- z
+- i
+- p
+- .
+-  
+- P
+- r
+- e
+- s
+- u
+- m
+- i
+- ,
+-  
+- p
+- e
+- l
+- o
+-  
+- p
+- a
+- r
+- a
+- l
+- e
+- l
+- i
+- s
+- m
+- o
+-  
+- c
+- o
+- m
+-  
+- a
+-  
+- s
+- a
+- f
+- r
+- a
+-  
+- l
+- o
+- c
+- a
+- l
+-  
+- (
+- o
+- n
+- d
+- e
+-  
+- S
+- P
+- 1
+-  
+- e
+-  
+- S
+- P
+- 2
+-  
+- t
+- ê
+- m
+-  
+- e
+- x
+- a
+- t
+- a
+- m
+- e
+- n
+- t
+- e
+-  
+- o
+-  
+- m
+- e
+- s
+- m
+- o
+-  
+- d
+- e
+- s
+- v
+- i
+- o
+- )
+- ,
+-  
+- q
+- u
+- e
+-  
+- S
+- P
+- 2
+-  
+- t
+- a
+- m
+- b
+- é
+- m
+-  
+- m
+- a
+- n
+- t
+- é
+- m
+-  
+- o
+-  
+- s
+- h
+- i
+- f
+- t
+- .
+-  
+- C
+- o
+- n
+- f
+- i
+- r
+- m
+- a
+- r
+-  
+- a
+- n
+- t
+- e
+- s
+-  
+- d
+- e
+-  
+- a
+- f
+- i
+- r
+- m
+- a
+- r
+-  
+- i
+- s
+- s
+- o
+-  
+- n
+- u
+- m
+- a
+-  
+- c
+- a
+- r
+- t
+- a
+- .
+- 
+
+- 
+
+- 3
+- )
+-  
+- A
+-  
+- v
+- a
+- r
+- r
+- e
+- d
+- u
+- r
+- a
+-  
+- a
+- m
+- p
+- l
+- a
+-  
+- d
+- e
+-  
+- e
+- s
+- p
+- e
+- c
+- i
+- f
+- i
+- c
+- i
+- d
+- a
+- d
+- e
+-  
+- (
+- 7
+- 2
+- 7
+-  
+- C
+- S
+- V
+- s
+- )
+-  
+- e
+-  
+- a
+-  
+- d
+- e
+-  
+- X
+- L
+- S
+-  
+- (
+- 5
+- 2
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+- s
+- )
+-  
+- u
+- s
+- a
+- r
+- a
+- m
+-  
+- o
+-  
+- m
+- a
+- t
+- e
+- r
+- i
+- a
+- l
+-  
+- L
+- O
+- C
+- A
+- L
+- ,
+-  
+- d
+- a
+-  
+- s
+- a
+- f
+- r
+- a
+-  
+- 2
+- 0
+- 2
+- 3
+- 1
+- 0
+- 3
+- 0
+- /
+- 2
+- 0
+- 2
+- 4
+- 1
+- 2
+- 1
+- 1
+- /
+- 2
+- 0
+- 2
+- 5
+- 0
+- 9
+- 1
+- 5
+- .
+-  
+- V
+- a
+- l
+- e
+-  
+- p
+- a
+- r
+- a
+-  
+- o
+-  
+- q
+- u
+- e
+-  
+- o
+-  
+- r
+- e
+- l
+- a
+- t
+- ó
+- r
+- i
+- o
+-  
+- a
+- f
+- i
+- r
+- m
+- a
+- ,
+-  
+- m
+- a
+- s
+-  
+- n
+- ã
+- o
+-  
+- p
+- r
+- o
+- v
+- a
+-  
+- q
+- u
+- e
+-  
+- a
+-  
+- s
+- a
+- f
+- r
+- a
+-  
+- d
+- e
+-  
+- 1
+- 5
+- /
+- 0
+- 6
+- /
+- 2
+- 0
+- 2
+- 6
+-  
+- m
+- a
+- n
+- t
+- é
+- m
+-  
+- o
+-  
+- m
+- e
+- s
+- m
+- o
+-  
+- p
+- e
+- r
+- f
+- i
+- l
+-  
+- e
+- m
+-  
+- t
+- o
+- d
+- o
+- s
+-  
+- o
+- s
+-  
+- t
+- e
+- m
+- a
+- s
+-  
+- —
+-  
+- e
+-  
+- a
+-  
+- n
+- o
+- t
+- a
+-  
+- d
+- o
+-  
+- l
+- o
+- g
+-  
+- d
+- e
+-  
+- 1
+- 5
+- /
+- 0
+- 6
+- /
+- 2
+- 0
+- 2
+- 6
+-  
+- d
+- i
+- z
+-  
+- q
+- u
+- e
+-  
+- o
+-  
+- C
+- o
+- d
+- _
+- s
+- e
+- t
+- o
+- r
+-  
+- d
+- o
+- s
+-  
+- C
+- S
+- V
+- s
+-  
+- f
+- o
+- i
+-  
+- r
+- e
+- g
+- r
+- a
+- v
+- a
+- d
+- o
+-  
+- (
+- o
+-  
+- p
+- e
+- s
+- s
+- o
+- a
+- 0
+- 2
+- _
+- s
+- p
+- 1
+- .
+- c
+- s
+- v
+-  
+- p
+- a
+- s
+- s
+- o
+- u
+-  
+- d
+- e
+-  
+- 7
+- .
+- 0
+- 0
+- 5
+- .
+- 8
+- 2
+- 2
+-  
+- p
+- a
+- r
+- a
+-  
+- 1
+- 3
+- .
+- 2
+- 4
+- 9
+- .
+- 5
+- 8
+- 6
+-  
+- b
+- y
+- t
+- e
+- s
+-  
+- d
+- e
+- s
+- c
+- o
+- m
+- p
+- r
+- i
+- m
+- i
+- d
+- o
+- s
+- )
+- ,
+-  
+- e
+- n
+- t
+- ã
+- o
+-  
+- o
+- s
+-  
+- C
+- S
+- V
+- s
+-  
+- m
+- u
+- d
+- a
+- r
+- a
+- m
+-  
+- d
+- e
+-  
+- f
+- a
+- t
+- o
+- .
+- 
+
+- 
+
+- 4
+- )
+-  
+- A
+-  
+- f
+- r
+- a
+- s
+- e
+-  
+- "
+- a
+-  
+- v
+- e
+- r
+- s
+- ã
+- o
+-  
+- a
+- n
+- t
+- i
+- g
+- a
+-  
+- d
+- o
+-  
+- p
+- i
+- p
+- e
+- l
+- i
+- n
+- e
+- ,
+-  
+- b
+- a
+- s
+- e
+- a
+- d
+- a
+-  
+- e
+- m
+-  
+- d
+- p
+- l
+- y
+- r
+- :
+- :
+- l
+- e
+- f
+- t
+- _
+- j
+- o
+- i
+- n
+- ,
+-  
+- t
+- a
+- m
+- b
+- é
+- m
+-  
+- n
+- ã
+- o
+-  
+- p
+- e
+- r
+- c
+- e
+- b
+- i
+- a
+- "
+-  
+- (
+- §
+- 1
+- )
+-  
+- e
+- u
+-  
+- c
+- o
+- n
+- f
+- i
+- r
+- m
+- e
+- i
+-  
+- p
+- e
+- l
+- o
+-  
+- e
+- f
+- e
+- i
+- t
+- o
+-  
+- (
+- o
+-  
+- v
+- 0
+- .
+- 5
+- .
+- 0
+-  
+- p
+- u
+- b
+- l
+- i
+- c
+- a
+- d
+- o
+-  
+- c
+- a
+- r
+- r
+- e
+- g
+- a
+-  
+- o
+-  
+- e
+- s
+- t
+- r
+- a
+- g
+- o
+- )
+-  
+- e
+-  
+- p
+- e
+- l
+- o
+-  
+- c
+- o
+- m
+- e
+- n
+- t
+- á
+- r
+- i
+- o
+-  
+- d
+- o
+-  
+- c
+- ó
+- d
+- i
+- g
+- o
+-  
+- e
+- m
+-  
+- 6
+- a
+- 1
+- e
+- 6
+- 6
+- f
+- ,
+-  
+- m
+- a
+- s
+-  
+- n
+- ã
+- o
+-  
+- r
+- e
+- c
+- u
+- p
+- e
+- r
+- e
+- i
+-  
+- a
+-  
+- v
+- e
+- r
+- s
+- ã
+- o
+-  
+- d
+- p
+- l
+- y
+- r
+- :
+- :
+- l
+- e
+- f
+- t
+- _
+- j
+- o
+- i
+- n
+-  
+- p
+- r
+- o
+- p
+- r
+- i
+- a
+- m
+- e
+- n
+- t
+- e
+-  
+- d
+- i
+- t
+- a
+-  
+- n
+- o
+-  
+- h
+- i
+- s
+- t
+- ó
+- r
+- i
+- c
+- o
+-  
+- g
+- i
+- t
+-  
+- d
+- e
+- s
+- t
+- e
+-  
+- r
+- e
+- p
+- o
+- s
+- i
+- t
+- ó
+- r
+- i
+- o
+-  
+- —
+-  
+- o
+-  
+- c
+- o
+- m
+- m
+- i
+- t
+-  
+- m
+- a
+- i
+- s
+-  
+- a
+- n
+- t
+- i
+- g
+- o
+-  
+- q
+- u
+- e
+-  
+- e
+- n
+- c
+- o
+- n
+- t
+- r
+- e
+- i
+-  
+- j
+- á
+-  
+- u
+- s
+- a
+-  
+- m
+- e
+- r
+- g
+- e
+- .
+-  
+- M
+- a
+- r
+- c
+- o
+-  
+- c
+- o
+- m
+- o
+-  
+- N
+- Ã
+- O
+-  
+- V
+- E
+- R
+- I
+- F
+- I
+- C
+- Á
+- V
+- E
+- L
+- ,
+-  
+- n
+- ã
+- o
+-  
+- c
+- o
+- m
+- o
+-  
+- e
+- r
+- r
+- o
+- .
+- 
+
+- 
+
+- 5
+- )
+-  
+- A
+-  
+- a
+- f
+- i
+- r
+- m
+- a
+- ç
+- ã
+- o
+-  
+- d
+- e
+-  
+- §
+- 3
+-  
+- d
+- e
+-  
+- q
+- u
+- e
+-  
+- a
+- s
+-  
+- 2
+- 5
+- 5
+-  
+- v
+- e
+- r
+- i
+- f
+- i
+- c
+- a
+- ç
+- õ
+- e
+- s
+-  
+- s
+- ã
+- o
+-  
+- "
+- i
+- n
+- d
+- e
+- p
+- e
+- n
+- d
+- e
+- n
+- t
+- e
+- s
+- "
+-  
+- é
+-  
+- d
+- i
+- s
+- c
+- u
+- t
+- í
+- v
+- e
+- l
+-  
+- (
+- a
+- s
+-  
+- 8
+- 5
+-  
+- i
+- d
+- e
+- n
+- t
+- i
+- d
+- a
+- d
+- e
+- s
+-  
+- d
+- e
+-  
+- u
+- m
+- a
+-  
+- m
+- e
+- s
+- m
+- a
+-  
+- U
+- F
+-  
+- c
+- o
+- m
+- p
+- a
+- r
+- t
+- i
+- l
+- h
+- a
+- m
+-  
+- o
+- s
+-  
+- m
+- e
+- s
+- m
+- o
+- s
+-  
+- s
+- e
+- t
+- o
+- r
+- e
+- s
+-  
+- e
+-  
+- a
+-  
+- m
+- e
+- s
+- m
+- a
+-  
+- p
+- o
+- p
+- u
+- l
+- a
+- ç
+- ã
+- o
+- )
+- ,
+-  
+- m
+- a
+- s
+-  
+- i
+- s
+- s
+- o
+-  
+- é
+-  
+- q
+- u
+- e
+- s
+- t
+- ã
+- o
+-  
+- d
+- e
+-  
+- r
+- e
+- d
+- a
+- ç
+- ã
+- o
+-  
+- e
+- s
+- t
+- a
+- t
+- í
+- s
+- t
+- i
+- c
+- a
+- ,
+-  
+- n
+- ã
+- o
+-  
+- e
+- r
+- r
+- o
+-  
+- d
+- e
+-  
+- m
+- e
+- d
+- i
+- ç
+- ã
+- o
+-  
+- —
+-  
+- n
+- ã
+- o
+-  
+- c
+- o
+- n
+- t
+- a
+- b
+- i
+- l
+- i
+- z
+- e
+- i
+-  
+- c
+- o
+- m
+- o
+-  
+- a
+- c
+- h
+- a
+- d
+- o
+- .
+- 
+
+- 
+
+- 6
+- )
+-  
+- O
+-  
+- r
+- e
+- l
+- a
+- t
+- ó
+- r
+- i
+- o
+-  
+- n
+- ã
+- o
+-  
+- a
+- t
+- r
+- i
+- b
+- u
+- i
+-  
+- e
+- m
+-  
+- n
+- e
+- n
+- h
+- u
+- m
+-  
+- p
+- o
+- n
+- t
+- o
+-  
+- a
+- o
+-  
+- n
+- o
+- s
+- s
+- o
+-  
+- p
+- i
+- p
+- e
+- l
+- i
+- n
+- e
+-  
+- u
+- m
+-  
+- d
+- e
+- f
+- e
+- i
+- t
+- o
+-  
+- q
+- u
+- e
+-  
+- s
+- e
+- j
+- a
+-  
+- d
+- o
+-  
+- I
+- B
+- G
+- E
+- ,
+-  
+- n
+- e
+- m
+-  
+- o
+-  
+- c
+- o
+- n
+- t
+- r
+- á
+- r
+- i
+- o
+- :
+-  
+- v
+- e
+- r
+- i
+- f
+- i
+- q
+- u
+- e
+- i
+-  
+- q
+- u
+- e
+-  
+- o
+-  
+- s
+- h
+- i
+- f
+- t
+-  
+- e
+- s
+- t
+- á
+-  
+- n
+- o
+-  
+- X
+- L
+- S
+- /
+- C
+- S
+- V
+-  
+- c
+- r
+- u
+-  
+- d
+- o
+-  
+- I
+- B
+- G
+- E
+-  
+- (
+- o
+- r
+- i
+- g
+- e
+- m
+-  
+- I
+- B
+- G
+- E
+- )
+-  
+- e
+-  
+- q
+- u
+- e
+-  
+- a
+-  
+- p
+- e
+- r
+- d
+- a
+-  
+- d
+- o
+- s
+-  
+- d
+- a
+- d
+- o
+- s
+-  
+- f
+- e
+- m
+- i
+- n
+- i
+- n
+- o
+- s
+-  
+- d
+- e
+-  
+- S
+- P
+-  
+- n
+- o
+-  
+- v
+- 0
+- .
+- 5
+- .
+- 0
+-  
+- p
+- u
+- b
+- l
+- i
+- c
+- a
+- d
+- o
+-  
+- é
+-  
+- d
+- o
+-  
+- n
+- o
+- s
+- s
+- o
+-  
+- e
+- m
+- p
+- i
+- l
+- h
+- a
+- m
+- e
+- n
+- t
+- o
+-  
+- (
+- o
+- r
+- i
+- g
+- e
+- m
+-  
+- n
+- o
+- s
+- s
+- a
+- )
+-  
+- —
+-  
+- e
+-  
+- é
+-  
+- e
+- x
+- a
+- t
+- a
+- m
+- e
+- n
+- t
+- e
+-  
+- a
+- s
+- s
+- i
+- m
+-  
+- q
+- u
+- e
+-  
+- o
+-  
+- r
+- e
+- l
+- a
+- t
+- ó
+- r
+- i
+- o
+- ,
+-  
+- d
+- e
+- p
+- o
+- i
+- s
+-  
+- d
+- a
+-  
+- n
+- o
+- t
+- a
+-  
+- d
+- e
+-  
+- 2
+- 0
+- 2
+- 6
+- -
+- 0
+- 9
+- -
+- 1
+- 2
+- ,
+-  
+- d
+- i
+- s
+- t
+- r
+- i
+- b
+- u
+- i
+-  
+- a
+- s
+-  
+- r
+- e
+- s
+- p
+- o
+- n
+- s
+- a
+- b
+- i
+- l
+- i
+- d
+- a
+- d
+- e
+- s
+- .
+
+
+
+---
+
+## microdata_2022_acesso_public
+
+**Veredito.** erros_menores
+
+Reconferi 67 afirmações numéricas do relatório de 2022, refazendo cada medição do zero (layouts rebaixados do FTP, Notas 03/2026 e 05/2026 lidas na íntegra, 108 CSVs contados por bytes LF, 8 parquets abertos, SIDRA 4709 consultada, censobr conferido no GitHub). O núcleo do documento está sólido: as 256 variáveis comuns, as 248 posições FWF divergentes, as contagens 55/168/23/14 e 64/210/31/25, os pesos *0110 vs *0111, as linhas dos 4 parquets, a soma 203.080.756, os 636.707 de Roraima, os 19.216 com P0150=9, os 1.048 (1,2%) em RR e os 7.689.914 Controles distintos — tudo confere exatamente. Achei 5 erros, todos menores ou cosméticos, e todos em seções sobre o nosso pipeline, não sobre o que o IBGE publicou: "265 colunas" onde são 280; D0240 descrita como "9 inteiros" quando tem 2; a generalização de que a ausência de code_weighting quebra "todas as edições de 1960 a 2010" quando só 2000 e 2010 têm essa coluna; o nome ".controlado" apresentado como algo que o pipeline grava, quando nada grava; e dois tamanhos de arquivo (137,3 e 609,8 MB) que não batem com nenhum arquivo em disco. Mais 4 imprecisões cosméticas. Nenhuma afirmação ficou sem verificação e nenhum erro compromete uma decisão do pipeline.
+
+
+### Demais erros (5)
+
+**1. [MENOR] §7 Validação, último bullet: "Nenhuma coluna 100% NA em nenhuma tabela — a tipagem do schema está correta nas 265 colunas."**
+
+- *O relatorio diz:* 265 colunas no total das quatro tabelas
+- *O correto e:* 280 colunas (60+173+28+19), ou 260 contando só as variáveis do IBGE. 265 = 260 + 5, isto é, as 5 colunas de geografia contadas uma vez só em vez de uma por tabela
+- *Medido por:* ParquetFileReader$create(f)$GetSchema()$num_fields nos 4 parquets v0.7.0 (e v0.6.0, idênticos): 60, 173, 28, 19. A própria tabela do relatório, logo acima, lista esses mesmos 4 números — a soma não fecha com o total declarado
+
+**2. [MENOR] §5 Tipagem: "`DEC > 0` → `double()` — são 7 variáveis: os 4 pesos (13 decimais) e `D0240`, `D0360`, `F0260` (2 decimais sobre 9 inteiros)."**
+
+- *O relatorio diz:* D0240, D0360 e F0260 têm 2 decimais sobre 9 inteiros
+- *O correto e:* D0240 tem INT=2 e DEC=2 ("Número de moradores por cômodo utilizado como dormitório"). Só D0360 e F0260 (rendimento domiciliar e familiar per capita) têm 9 inteiros + 2 decimais. O conjunto das 7 variáveis com DEC>0 está certo; a largura atribuída a uma delas, não
+- *Medido por:* Achatamento do Layout Microdados CD2022 - acesso Público.xlsx baixado do FTP (37.045 B), colunas INT e DEC lidas como texto: D0240 INT=2 DEC=2; D0360 INT=9 DEC=2; F0260 INT=9 DEC=2. Confirmado por fim-ini+1 == INT+DEC em todas as 260 variáveis
+
+**3. [MENOR] §6 Geografia no parquet público: "**Não há `code_muni` nem `code_weighting`** — uma quebra de expectativa em relação a todas as edições de 1960 a 2010."**
+
+- *O relatorio diz:* todas as edições de 1960 a 2010 trazem code_muni e code_weighting
+- *O correto e:* code_weighting só existe em 2000 e 2010. 1970, 1980 e 1991 não têm; 1960 não tem nem code_muni nem code_state/code_region (tem apenas code_muni_1960). A quebra é contra 2000/2010, não contra todas as edições
+- *Medido por:* Abri o schema dos 20 parquets v0.7.0 em data/microdata_sample e listei as colunas que começam com code_/name_/abbrev_: 1960 → só code_muni_1960; 1970/1980/1991 → code_muni + UF/região, sem code_weighting; 2000/2010 → com code_weighting
+
+**4. [MENOR] §9 Padrão de nome: "Decidido em 2026-09-11, e é o que o pipeline grava:" seguido do bloco com as duas linhas, incluindo `2022_<tabela>.controlado_<data_version>.parquet`**
+
+- *O relatorio diz:* o pipeline grava os dois padrões de nome, público e controlado
+- *O correto e:* o pipeline grava só o `.publico`. Nenhum arquivo `.controlado` é produzido aqui, e o consumidor no HEAD do GitHub ainda grava o nome sem sufixo
+- *Medido por:* grep -rn "controlado" R/ _targets.R: só comentários, nenhum nome de arquivo. save_microdata_2022() monta paste0("2022_", dataset_name, ".publico_", data_version, ".parquet"). Em ipeaGIT/censobr (gh api), import_microdata22_controlado.R linha 136 grava paste0("2022_", tbl_name, "_", censobr_env$data_release, ".parquet") e seu último commit é de 2026-09-02, anterior à decisão de 2026-09-11
+
+**5. [COSMETICO] §7 Validação, tabela: coluna "Arquivo" com 137,3 MB (households) e 609,8 MB (population)**
+
+- *O relatorio diz:* households 137,3 MB e population 609,8 MB
+- *O correto e:* households 144.395.231 B = 137,71 MiB (v0.6.0) ou 144.295.923 B = 137,61 MiB (v0.7.0); population 639.079.449 B = 609,47 MiB (v0.6.0) ou 639.194.018 B = 609,58 MiB (v0.7.0). families (95,1) e mortality (5,5) conferem
+- *Medido por:* file.info()$size nos 8 parquets de data/microdata_sample/2022, convertido para MiB (÷1048576) e para MB decimal (÷1e6). Nenhuma das duas convenções produz 137,3 nem 609,8, e só existem esses 8 arquivos de 2022 no disco
+
+### Incertezas (1156)
+
+- 1
+- )
+-  
+- A
+-  
+- a
+- f
+- i
+- r
+- m
+- a
+- ç
+- ã
+- o
+-  
+- d
+- e
+-  
+- q
+- u
+- e
+-  
+- "
+- o
+-  
+- c
+- o
+- n
+- s
+- u
+- m
+- i
+- d
+- o
+- r
+-  
+- v
+- e
+- r
+- i
+- f
+- i
+- c
+- o
+- u
+-  
+- e
+- m
+- p
+- i
+- r
+- i
+- c
+- a
+- m
+- e
+- n
+- t
+- e
+-  
+- c
+- o
+- n
+- t
+- r
+- a
+-  
+- o
+- s
+-  
+- d
+- a
+- d
+- o
+- s
+-  
+- d
+- o
+-  
+- c
+- o
+- n
+- t
+- r
+- o
+- l
+- a
+- d
+- o
+- "
+-  
+- s
+- ó
+-  
+- p
+- ô
+- d
+- e
+-  
+- s
+- e
+- r
+-  
+- v
+- e
+- r
+- i
+- f
+- i
+- c
+- a
+- d
+- a
+-  
+- q
+- u
+- a
+- n
+- t
+- o
+-  
+- a
+- o
+-  
+- r
+- e
+- s
+- u
+- l
+- t
+- a
+- d
+- o
+-  
+- (
+- o
+- s
+-  
+- 2
+- 5
+- 6
+-  
+- t
+- i
+- p
+- o
+- s
+-  
+- s
+- ã
+- o
+-  
+- i
+- d
+- ê
+- n
+- t
+- i
+- c
+- o
+- s
+- )
+-  
+- —
+-  
+- a
+-  
+- v
+- a
+- r
+- r
+- e
+- d
+- u
+- r
+- a
+-  
+- e
+- m
+- p
+- í
+- r
+- i
+- c
+- a
+-  
+- e
+- m
+-  
+- s
+- i
+-  
+- e
+- s
+- t
+- á
+-  
+- d
+- o
+- c
+- u
+- m
+- e
+- n
+- t
+- a
+- d
+- a
+-  
+- n
+- o
+-  
+- r
+- o
+- x
+- y
+- g
+- e
+- n
+-  
+- d
+- e
+-  
+- i
+- m
+- p
+- o
+- r
+- t
+- _
+- m
+- i
+- c
+- r
+- o
+- d
+- a
+- t
+- a
+- 2
+- 2
+- _
+- c
+- o
+- n
+- t
+- r
+- o
+- l
+- a
+- d
+- o
+- .
+- R
+-  
+- e
+-  
+- e
+- x
+- i
+- g
+- i
+- r
+- i
+- a
+-  
+- o
+- s
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+- s
+-  
+- d
+- e
+-  
+- a
+- c
+- e
+- s
+- s
+- o
+-  
+- c
+- o
+- n
+- t
+- r
+- o
+- l
+- a
+- d
+- o
+- ,
+-  
+- q
+- u
+- e
+-  
+- n
+- ã
+- o
+-  
+- p
+- o
+- d
+- e
+- m
+-  
+- s
+- e
+- r
+-  
+- a
+- u
+- d
+- i
+- t
+- a
+- d
+- o
+- s
+-  
+- a
+- q
+- u
+- i
+- .
+-  
+- 2
+- )
+-  
+- O
+-  
+- p
+- a
+- r
+- á
+- g
+- r
+- a
+- f
+- o
+-  
+- d
+- o
+-  
+- §
+- 3
+-  
+- s
+- o
+- b
+- r
+- e
+-  
+- o
+-  
+- a
+- r
+- r
+- a
+- s
+- t
+- o
+-  
+- d
+- a
+-  
+- f
+- e
+- c
+- u
+- n
+- d
+- i
+- d
+- a
+- d
+- e
+-  
+- é
+-  
+- p
+- a
+- r
+- á
+- f
+- r
+- a
+- s
+- e
+-  
+- f
+- i
+- e
+- l
+-  
+- d
+- a
+-  
+- N
+- o
+- t
+- a
+-  
+- 0
+- 3
+-  
+- e
+-  
+- n
+- ã
+- o
+-  
+- q
+- u
+- a
+- n
+- t
+- i
+- f
+- i
+- c
+- a
+-  
+- n
+- a
+- d
+- a
+- ,
+-  
+- e
+- n
+- t
+- ã
+- o
+-  
+- n
+- ã
+- o
+-  
+- é
+-  
+- e
+- r
+- r
+- o
+- ;
+-  
+- r
+- e
+- g
+- i
+- s
+- t
+- r
+- o
+-  
+- d
+- e
+-  
+- t
+- o
+- d
+- o
+-  
+- m
+- o
+- d
+- o
+-  
+- q
+- u
+- e
+- ,
+-  
+- e
+- n
+- t
+- r
+- e
+-  
+- o
+- s
+-  
+- 1
+- 9
+- .
+- 2
+- 1
+- 6
+-  
+- r
+- e
+- g
+- i
+- s
+- t
+- r
+- o
+- s
+-  
+- c
+- o
+- m
+-  
+- s
+- e
+- x
+- o
+-  
+- s
+- u
+- p
+- r
+- i
+- m
+- i
+- d
+- o
+- ,
+-  
+- a
+-  
+- f
+- e
+- c
+- u
+- n
+- d
+- i
+- d
+- a
+- d
+- e
+-  
+- n
+- ã
+- o
+-  
+- é
+-  
+- a
+- p
+- a
+- g
+- a
+- d
+- a
+-  
+- e
+- m
+-  
+- t
+- o
+- d
+- o
+- s
+-  
+- (
+- 6
+- 6
+- ,
+- 6
+- %
+-  
+- d
+- e
+-  
+- N
+- A
+-  
+- e
+- m
+-  
+- P
+- 0
+- 3
+- 2
+- 0
+- -
+- P
+- 0
+- 3
+- 4
+- 0
+-  
+- e
+-  
+- 7
+- 9
+- ,
+- 9
+- %
+-  
+- e
+- m
+-  
+- P
+- 0
+- 3
+- 5
+- 0
+- -
+- P
+- 0
+- 3
+- 8
+- 0
+- ,
+-  
+- c
+- o
+- n
+- t
+- r
+- a
+-  
+- 5
+- 7
+- ,
+- 1
+- %
+-  
+- e
+-  
+- 7
+- 1
+- ,
+- 3
+- %
+-  
+- n
+- o
+- s
+-  
+- d
+- e
+- m
+- a
+- i
+- s
+-  
+- r
+- e
+- g
+- i
+- s
+- t
+- r
+- o
+- s
+- )
+-  
+- —
+-  
+- s
+- e
+-  
+- a
+- l
+- g
+- u
+- m
+- a
+-  
+- v
+- e
+- r
+- s
+- ã
+- o
+-  
+- f
+- u
+- t
+- u
+- r
+- a
+-  
+- d
+- o
+-  
+- t
+- e
+- x
+- t
+- o
+-  
+- q
+- u
+- i
+- s
+- e
+- r
+-  
+- a
+- f
+- i
+- r
+- m
+- a
+- r
+-  
+- s
+- u
+- p
+- r
+- e
+- s
+- s
+- ã
+- o
+-  
+- t
+- o
+- t
+- a
+- l
+- ,
+-  
+- s
+- e
+- r
+- i
+- a
+-  
+- f
+- a
+- l
+- s
+- o
+- .
+-  
+- 3
+- )
+-  
+- O
+- s
+-  
+- t
+- a
+- m
+- a
+- n
+- h
+- o
+- s
+-  
+- d
+- e
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+-  
+- r
+- e
+- l
+- a
+- t
+- a
+- d
+- o
+- s
+-  
+- n
+- ã
+- o
+-  
+- c
+- o
+- r
+- r
+- e
+- s
+- p
+- o
+- n
+- d
+- e
+- m
+-  
+- a
+-  
+- n
+- e
+- n
+- h
+- u
+- m
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+-  
+- e
+- x
+- i
+- s
+- t
+- e
+- n
+- t
+- e
+-  
+- e
+- m
+-  
+- d
+- i
+- s
+- c
+- o
+-  
+- e
+- m
+-  
+- n
+- e
+- n
+- h
+- u
+- m
+- a
+-  
+- c
+- o
+- n
+- v
+- e
+- n
+- ç
+- ã
+- o
+-  
+- d
+- e
+-  
+- M
+- B
+- ;
+-  
+- n
+- ã
+- o
+-  
+- c
+- o
+- n
+- s
+- e
+- g
+- u
+- i
+-  
+- r
+- e
+- c
+- o
+- n
+- s
+- t
+- r
+- u
+- i
+- r
+-  
+- d
+- e
+-  
+- o
+- n
+- d
+- e
+-  
+- v
+- i
+- e
+- r
+- a
+- m
+-  
+- 1
+- 3
+- 7
+- ,
+- 3
+-  
+- e
+-  
+- 6
+- 0
+- 9
+- ,
+- 8
+- ,
+-  
+- e
+-  
+- p
+- o
+- r
+-  
+- i
+- s
+- s
+- o
+-  
+- o
+- s
+-  
+- c
+- l
+- a
+- s
+- s
+- i
+- f
+- i
+- q
+- u
+- e
+- i
+-  
+- c
+- o
+- m
+- o
+-  
+- t
+- r
+- a
+- n
+- s
+- c
+- r
+- i
+- ç
+- ã
+- o
+-  
+- e
+- r
+- r
+- a
+- d
+- a
+-  
+- e
+-  
+- n
+- ã
+- o
+-  
+- c
+- o
+- m
+- o
+-  
+- d
+- a
+- d
+- o
+-  
+- d
+- e
+-  
+- o
+- u
+- t
+- r
+- a
+-  
+- v
+- e
+- r
+- s
+- ã
+- o
+- .
+-  
+- 4
+- )
+-  
+- A
+-  
+- c
+- ó
+- p
+- i
+- a
+-  
+- l
+- o
+- c
+- a
+- l
+-  
+- d
+- e
+-  
+- .
+- .
+- \
+- c
+- e
+- n
+- s
+- o
+- b
+- r
+- \
+-  
+- e
+- s
+- t
+- á
+-  
+- a
+- t
+- r
+- á
+- s
+-  
+- d
+- o
+-  
+- G
+- i
+- t
+- H
+- u
+- b
+-  
+- (
+- n
+- ã
+- o
+-  
+- t
+- e
+- m
+-  
+- o
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+-  
+- d
+- o
+-  
+- a
+- c
+- e
+- s
+- s
+- o
+-  
+- c
+- o
+- n
+- t
+- r
+- o
+- l
+- a
+- d
+- o
+- )
+-  
+- —
+-  
+- u
+- s
+- e
+- i
+-  
+- o
+-  
+- G
+- i
+- t
+- H
+- u
+- b
+-  
+- c
+- o
+- m
+- o
+-  
+- f
+- o
+- n
+- t
+- e
+- ,
+-  
+- c
+- o
+- n
+- f
+- o
+- r
+- m
+- e
+-  
+- a
+-  
+- r
+- e
+- g
+- r
+- a
+-  
+- d
+- e
+-  
+- e
+- s
+- c
+- o
+- p
+- o
+-  
+- d
+- o
+-  
+- p
+- r
+- o
+- j
+- e
+- t
+- o
+- .
+
+
+
+---
+
+## microdata_1980_ftp_vs_aux
+
+**Veredito.** erros_graves
+
+Auditei as 46 afirmacoes numericas e factuais de references/microdata_1980_ftp_vs_aux.md, refazendo cada medicao do zero: header byte a byte dos 52 DBFs do zip do FTP, os dois parquets do release_legacy via arrow lazy, o 1980_households_v0.5.0.parquet baixado do release, as saidas v0.6.0/v0.7.0 do pipeline e a Documentacao.xls do IBGE. A tese central se sustenta e sai reforcada: o DBF de 2025 realmente nao tem MIUFANT/V518 (verifiquei nas 26 UFs, nao so em Rondonia), nem V3/V4/V6, nem idpessoa — e, alem disso, perde o Territorio de Fernando de Noronha inteiro (298 pessoas, 69 domicilios; nao existe CD80PES20 no zip), perda que o relatorio nao menciona. Mas sete numeros de apoio estao errados. Os mais serios: a V518 tem 4.020 codigos distintos e nao 3.991, e 29 deles (468.308 registros, 7,4%) nao sao codigos de municipio; a particao por V517 nao e exata, porque 55.959 registros com V517 = 9 caem fora das tres faixas declaradas; e o "35,9% nasceram em outra UF" e 34,5% quando calculado sobre o grupo inteiro — 35,9% so aparece com um denominador restrito que o texto nao declara. O paragrafo final ficou obsoleto: afirma 35.567 NAs e 3.938 codigos de municipio "nos dois" quando a saida atual tem 0 NAs e 3.991, porque o crosswalk foi abandonado em 2026-09-12, e as "tres diferencas deliberadas" ja sao cinco. Ha ainda a confusao entre 53 municipios e 35.567 linhas icadas pelo left_join, e a frase de que V518 seria a unica origem geografica do bloco, que MIUFNASC/V512 desmente em uma linha.
+
+
+### Erros GRAVES (7)
+
+**1. [GRAVE] Secao "Por que a V518 e a perda que pesa" — "os 3.991 codigos distintos da V518 sao **exatamente** o mesmo conjunto dos 3.991 valores de code_muni_1980" e "no mesmo espaco de codigos do municipio atual"**
+
+- *O relatorio diz:* V518 tem 3.991 codigos distintos, identicos ao conjunto de code_muni_1980 (3.991)
+- *O correto e:* V518 tem 4.020 codigos distintos. 3.991 coincidem com code_muni_1980 (o setdiff nesse sentido e 0, essa metade esta certa), mas ha 29 codigos a mais, cobrindo 468.308 registros = 7,42% dos 6.312.593 com codigo: 26 codigos UF+0000 (todas as UFs menos o DF; 530000 nao ocorre; 421.888 registros), mais 540000 (2.922), 800000 (42.965, com V511=6 estrangeiro em 31.223 deles) e 990000 (533)
+- *Medido por:* arrow::open_dataset no release_legacy de pessoas; count(V518) com filter(!is.na(V518), V518 != '0') -> 4.020 linhas, todas com nchar 6; count de as.numeric(V2)*10000+as.numeric(V5) -> 3.991; setdiff nos dois sentidos (scratchpad/audit1980/03_v518.R e 08_detalhes.R)
+
+**2. [GRAVE] Secao "A armadilha do '0'" — "V517 e o filtro, e a particao e exata"; linhas da tabela "V517 = 7 (10 anos ou mais)" e "V517 de 0 a 6: migrantes recentes"**
+
+- *O relatorio diz:* A particao e exata: NA <-> V517=8; "0" <-> V517=7; codigo <-> V517 de 0 a 6
+- *O correto e:* So a primeira linha e biunivoca. O grupo "0" tem 5.907.024 com V517=7 e 48.000 com V517=9; o grupo com codigo tem 6.304.634 com V517 de 0 a 6 e 7.959 com V517=9. Sao 55.959 registros (V517=9, sem declaracao) que a receita classifica errado
+- *Medido por:* count(st, V517) onde st = ifelse(is.na(V518),'NA',ifelse(V518=='0','zero','codigo')), no parquet de pessoas do release_legacy (scratchpad/audit1980/03_v518.R, saida out03.txt)
+
+**3. [GRAVE] Secao "A armadilha do '0'", celula "Quem e" da linha `"0"` — "35,9% nasceram em outra UF"**
+
+- *O relatorio diz:* 35,9% do grupo "0" (5.955.024 registros) nasceram em outra UF
+- *O correto e:* 34,5% (2.053.342 / 5.955.024). Decompondo o grupo: 3.662.425 na mesma UF (61,50%), 2.053.342 em outra UF brasileira (34,48%), 239.257 estrangeiro/ignorado (4,02%). O 35,9% do relatorio e 2.053.342 / 5.715.767 = 35,92%, ou seja, sobre um denominador que exclui estrangeiro/ignorado sem declarar. Se o criterio for "nao nasceu na UF onde mora", o numero e 38,5%
+- *Medido por:* count(st, V2, V512) no parquet de pessoas; V512 traduzido do sequencial 1980 (1=RO ... 14=FN ... 27=DF) para o codespace moderno; V512 >= 29 tratado como estrangeiro/ignorado (scratchpad/audit1980/10_nascimento.R). A traducao foi validada pelo proprio grupo NA, que deu 100,000000% mesma UF, zero excecao
+
+**4. [GRAVE] Ultimo paragrafo — "households bate exatamente: ... code_muni com 35.567 NAs e 3.938 valores distintos nos dois"**
+
+- *O relatorio diz:* code_muni tem 35.567 NAs e 3.938 valores distintos tanto no publicado quanto na saida do pipeline
+- *O correto e:* So no publicado v0.5.0 (35.567 NAs, 3.938 distintos). A saida atual — tanto 1980_households_v0.6.0.parquet quanto v0.7.0 — tem 0 NAs e 3.991 valores distintos. O proprio R/microdata_1980.R documenta a "Decisao de 2026-09-12" de abandonar o crosswalk justamente porque ele "deixava 35.567 domicilios sem code_muni". O numero mudou depois que o relatorio foi escrito e virou uma quarta divergencia, nao paridade
+- *Medido por:* arrow::read_parquet do 1980_households_v0.5.0.parquet baixado do release ipeaGIT/censobr; open_dataset + summarise(sum(is.na(code_muni))) e count(code_muni) nos dois parquets locais (scratchpad/audit1980/04_publicado.R)
+
+**5. [GRAVE] Secao "Divergencias intencionais vs o publicado" — "O porte para o targets introduz tres diferencas deliberadas" e item 3 "Conteudo identico — verificado por distribuicao por UF, somas de colunas numericas e comparacao apos ordenacao"**
+
+- *O relatorio diz:* Sao tres divergencias, e fora a ordem das linhas o conteudo e identico
+- *O correto e:* Sao cinco. Alem de code_micro, Observation e ordem das linhas: (4) V212, V213 e V602 diferem em 233.344 linhas cada — o NA-fora-do-universo (V201 != '1') introduzido em R/microdata_1980.R depois do relatorio; (5) code_muni sem NA. As outras 26 V-cols sao de fato identicas apos ordenacao
+- *Medido por:* read_parquet dos dois arquivos, ordenacao por chave (V2, V5, V601) — unica, 0 duplicatas, mesmas chaves nos dois apos sort — e identical() coluna a coluna nas 29 V-cols (scratchpad/audit1980/11_crosswalk_ordem.R)
+
+**6. [GRAVE] Divergencias intencionais, item 3 — "o left_join do crosswalk, no script legado, icou as 53 linhas casadas para o topo"**
+
+- *O relatorio diz:* O left_join icou 53 linhas para o topo
+- *O correto e:* Icou 35.567 linhas (69 de Fernando de Noronha + 35.498 de Goias), que sao as linhas casadas de 53 municipios. O rle sobre !is.na(Observation) no publicado da um unico run TRUE de 35.567 seguido de 6.681.318 FALSE; a linha 35.568 e a primeira de Rondonia (code_muni 1100023). O 53 e a contagem de municipios do crosswalk, nao de linhas
+- *Medido por:* rle(!is.na(pub$Observation)) no 1980_households_v0.5.0.parquet; table(pub$V2[obs]); length(unique(pub$code_muni_1980[obs])); readxl no crosswalk (53 linhas: 52 Goias->Tocantins + 1 FN) (scratchpad/audit1980/11_crosswalk_ordem.R)
+
+**7. [GRAVE] Conclusao — "A republicacao em DBF que o IBGE colocou no FTP em 2025 perde quatro variaveis e nao ganha nenhuma" e toda a secao "O que o DBF do FTP perde"**
+
+- *O relatorio diz:* O inventario de perdas do DBF e: V518, V3, V4, V6 (mais idpessoa)
+- *O correto e:* O DBF tambem perde o Territorio de Fernando de Noronha inteiro. O zip traz 26 UFs de pessoas e 26 de domicilios (11-16, 21-29, 31-33, 35, 41-43, 50-53); nao existe CD80PES20 nem CD80DOM20. Soma dos registros do FTP: 29.378.455 pessoas contra 29.378.753 da amostra preparada — diferenca de exatamente 298, que e o V2=='20' da amostra; os 69 domicilios de FN idem. As 26 UFs restantes batem registro a registro, entao FN nao foi realocado para dentro de PE. Para uma carta ao IBGE essa e a perda mais reportavel do conjunto
+- *Medido por:* header dos 52 DBFs lido do zip via System.IO.Compression.ZipFile (06_extract_headers.ps1) e parseado byte a byte (07_all_headers.R); n_records do header somado por tipo; comparado com count(V2) nos parquets do release_legacy (08_detalhes.R)
+
+
+### Demais erros (7)
+
+**1. [MENOR] Secao "Por que a V518 e a perda que pesa" — "V518 e o unico item do bloco de migracao que identifica geograficamente a origem" e "Nao e reconstruivel a partir do DBF: nada mais la carrega a origem geografica"**
+
+- *O relatorio diz:* Nenhuma outra variavel do bloco de migracao, nem do DBF, carrega origem geografica
+- *O correto e:* O proprio bloco listado no relatorio abre com MIUFNASC = V512, UF de nascimento, que esta no DBF e e origem geografica em resolucao de UF (ha ainda TMUNTRAB/V527, largura 7, codigo geografico de destino de trabalho/estudo). A formulacao defensavel, que sustenta a mesma conclusao, e: V518 e a unica variavel que da o municipio de residencia anterior; a origem em resolucao municipal e irrecuperavel a partir do DBF. Como esta, um tecnico do IBGE rebate em uma linha
+- *Medido por:* lista completa dos 61 campos do header de CD80PES11.DBF (01_dbf_header.R) cruzada com references/microdata_1980_col_mapping.csv (MIUFNASC->V512 'UF de Nascimento'; TMUNTRAB->V527 'UF do Municipio trabalha/estuda')
+
+**2. [MENOR] Secao "A armadilha do '0'", ultimo paragrafo — "o prefixo de UF da V518 usa o codespace moderno 11-53"**
+
+- *O relatorio diz:* Os prefixos de UF da V518 estao em 11-53
+- *O correto e:* Os prefixos observados sao 11 12 13 14 15 16 20 21 22 23 24 25 26 27 28 29 31 32 33 35 41 42 43 50 51 52 53 mais 54, 80 e 99. Sao 46.420 registros (540000: 2.922; 800000: 42.965; 990000: 533) fora da faixa declarada. Uma guarda escrita so para 11-53 quebra neles
+- *Medido por:* substr(V518, 1, 2) sobre os 4.020 codigos distintos; sort(unique(...)) e setdiff contra o conjunto de V2 da propria base (scratchpad/audit1980/08_detalhes.R)
+
+**3. [MENOR] Secao "A armadilha do '0'" — "Quem quiser o estoque de migrantes usa V517 != 8, nao V518 != NA"**
+
+- *O relatorio diz:* Os dois filtros dao resultados diferentes
+- *O correto e:* Sao o mesmo filtro. V517 = 8 ocorre em 17.111.136 linhas e todas tem V518 NA; V518 NA ocorre em 17.111.136 linhas e todas tem V517 = 8 — a biunivocidade e exata, entao V517 != 8 e !is.na(V518) selecionam exatamente as mesmas linhas. (Alem disso `V518 != NA` em R avalia sempre para NA.) O alerta substantivo — nao tratar o "0" como nao-migrante — esta certo; o contraste escolhido para expressa-lo e que nao funciona
+- *Medido por:* cruzamento count(st, V517) (03_v518.R): a celula NA/V517=8 tem 17.111.136 e nenhuma outra celula aparece em nenhuma das duas margens
+
+**4. [MENOR] Conclusao — "perde quatro variaveis e nao ganha nenhuma" (vertente domicilios)**
+
+- *O relatorio diz:* O DBF nao ganha nada em relacao a amostra preparada
+- *O correto e:* Em variaveis, confere. Em registros, o DBF de domicilios tem 6.886.803 contra 6.716.885 da amostra preparada — 169.987 registros a mais, distribuidos por todas as 26 UFs (~2,6% cada). Comparando RO linha a linha, a diferenca esta inteiramente em ESPECIE 5 (+550) e 7 (+165); especies 1 e 3 batem exato (24.492 e 844). A amostra preparada descartou parte dos domicilios nao ocupados/coletivos
+- *Medido por:* n_records dos 26 headers CD80DOM*.DBF somados (07_all_headers.R) vs count(V2) no parquet de domicilios do release_legacy; leitura completa de CD80DOM11.DBF por parsing de bytes e table(ESPECIE) vs table(V201) (09_uf11_dom.R)
+
+**5. [COSMETICO] Secao "Nota sobre as referencias internas" — "a documentacao XLS do IBGE 2025 omite a linha de tres variaveis (V517, V518, V521)"**
+
+- *O relatorio diz:* Uma linha com tres variaveis foi omitida da Documentacao.xls
+- *O correto e:* O fato confere — nao ha entrada para 517, 518 nem 521 — mas nao e uma linha unica: sao duas lacunas separadas. A sheet Pessoa salta de MITEMPUF (516, linha 190) direto para EDSABELE (519, linha 202), e o lugar do 521 e ocupado por uma repeticao de EDULGRAU/524 (aparece nas linhas 220 e 256). A sheet documenta 60 entradas e 59 nomes distintos, para 61 campos no DBF
+- *Medido por:* awk sobre data_raw/microdata/1980/layout/sheetA_pessoa.csv listando toda linha com nome de variavel na coluna 0; comparacao com a lista de 61 campos do header do DBF
+
+**6. [COSMETICO] Tabela "O que o DBF do FTP perde", coluna "Na amostra preparada", linha V518 — "preenchida"**
+
+- *O relatorio diz:* V518 esta preenchida na amostra preparada
+- *O correto e:* V518 e NA em 17.111.136 de 29.378.753 linhas (58,2%). A propria secao seguinte do relatorio explica essa estrutura, mas a celula, lida isolada ao lado dos "0% NA" de V3/V4/V6, sugere preenchimento integral. "presente" seria a palavra certa
+- *Medido por:* summarise(sum(is.na(V518))) no parquet de pessoas do release_legacy (03_v518.R)
+
+**7. [COSMETICO] Secao "O que o DBF do FTP perde" — "Verificado abrindo CD80PES11.DBF (Rondonia) direto: 61 colunas"**
+
+- *O relatorio diz:* Conclusao sobre o conteudo do DBF baseada na leitura de um unico arquivo
+- *O correto e:* A conclusao e correta, mas o relatorio nao declara a cobertura. Verifiquei os 52 DBFs do zip: as 26 UFs de pessoas tem assinatura de coluna identica (61 campos, 165 bytes/registro) e as 26 de domicilios idem (26 campos, 53 bytes); MIUFANT nao aparece em nenhum. Vale registrar a cobertura no texto antes de ir ao IBGE, para nao ficar exposto a critica de generalizacao de um caso
+- *Medido por:* extracao dos primeiros 4096 bytes de cada entrada .DBF do zip (06_extract_headers.ps1) e parsing dos headers (07_all_headers.R): assinaturas distintas = 1 para pessoas e 1 para domicilios
+
+### Incertezas (1338)
+
+- N
+- a
+- d
+- a
+-  
+- f
+- i
+- c
+- o
+- u
+-  
+- N
+- A
+- O
+-  
+- V
+- E
+- R
+- I
+- F
+- I
+- C
+- A
+- V
+- E
+- L
+- ,
+-  
+- m
+- a
+- s
+-  
+- r
+- e
+- g
+- i
+- s
+- t
+- r
+- o
+-  
+- c
+- i
+- n
+- c
+- o
+-  
+- r
+- e
+- s
+- s
+- a
+- l
+- v
+- a
+- s
+- .
+-  
+- (
+- a
+- )
+-  
+- A
+-  
+- s
+- e
+- m
+- a
+- n
+- t
+- i
+- c
+- a
+-  
+- d
+- o
+- s
+-  
+- c
+- o
+- d
+- i
+- g
+- o
+- s
+-  
+- 5
+- 4
+- 0
+- 0
+- 0
+- 0
+- ,
+-  
+- 8
+- 0
+- 0
+- 0
+- 0
+- 0
+-  
+- e
+-  
+- 9
+- 9
+- 0
+- 0
+- 0
+- 0
+-  
+- d
+- a
+-  
+- V
+- 5
+- 1
+- 8
+-  
+- e
+- u
+-  
+- d
+- e
+- s
+- c
+- r
+- e
+- v
+- i
+- ,
+-  
+- n
+- a
+- o
+-  
+- a
+- f
+- i
+- r
+- m
+- e
+- i
+- :
+-  
+- 8
+- 0
+- 0
+- 0
+- 0
+- 0
+-  
+- t
+- e
+- m
+-  
+- V
+- 5
+- 1
+- 1
+- =
+- 6
+-  
+- (
+- e
+- s
+- t
+- r
+- a
+- n
+- g
+- e
+- i
+- r
+- o
+- )
+-  
+- e
+- m
+-  
+- 3
+- 1
+- .
+- 2
+- 2
+- 3
+-  
+- d
+- o
+- s
+-  
+- 4
+- 2
+- .
+- 9
+- 6
+- 5
+-  
+- e
+-  
+- V
+- 5
+- 1
+- 2
+-  
+- n
+- a
+-  
+- f
+- a
+- i
+- x
+- a
+-  
+- e
+- s
+- t
+- r
+- a
+- n
+- g
+- e
+- i
+- r
+- a
+- ,
+-  
+- o
+-  
+- q
+- u
+- e
+-  
+- s
+- u
+- g
+- e
+- r
+- e
+-  
+- "
+- p
+- a
+- i
+- s
+-  
+- e
+- s
+- t
+- r
+- a
+- n
+- g
+- e
+- i
+- r
+- o
+- "
+- ,
+-  
+- e
+-  
+- 9
+- 9
+- 0
+- 0
+- 0
+- 0
+-  
+- p
+- a
+- r
+- e
+- c
+- e
+-  
+- "
+- s
+- e
+- m
+-  
+- d
+- e
+- c
+- l
+- a
+- r
+- a
+- c
+- a
+- o
+- "
+-  
+- —
+-  
+- m
+- a
+- s
+-  
+- n
+- a
+- o
+-  
+- a
+- c
+- h
+- e
+- i
+-  
+- a
+-  
+- d
+- o
+- c
+- u
+- m
+- e
+- n
+- t
+- a
+- c
+- a
+- o
+-  
+- d
+- e
+-  
+- c
+- a
+- t
+- e
+- g
+- o
+- r
+- i
+- a
+- s
+-  
+- d
+- a
+-  
+- V
+- 5
+- 1
+- 8
+-  
+- (
+- a
+-  
+- D
+- o
+- c
+- u
+- m
+- e
+- n
+- t
+- a
+- c
+- a
+- o
+- .
+- x
+- l
+- s
+-  
+- d
+- o
+-  
+- I
+- B
+- G
+- E
+-  
+- 2
+- 0
+- 2
+- 5
+-  
+- j
+- u
+- s
+- t
+- a
+- m
+- e
+- n
+- t
+- e
+-  
+- a
+-  
+- o
+- m
+- i
+- t
+- e
+- )
+- ,
+-  
+- e
+- n
+- t
+- a
+- o
+-  
+- a
+-  
+- l
+- e
+- i
+- t
+- u
+- r
+- a
+-  
+- e
+-  
+- i
+- n
+- f
+- e
+- r
+- e
+- n
+- c
+- i
+- a
+-  
+- m
+- i
+- n
+- h
+- a
+- .
+-  
+- (
+- b
+- )
+-  
+- A
+-  
+- c
+- a
+- t
+- e
+- g
+- o
+- r
+- i
+- a
+-  
+- "
+- V
+- 5
+- 1
+- 7
+-  
+- =
+-  
+- 7
+-  
+- =
+-  
+- 1
+- 0
+-  
+- a
+- n
+- o
+- s
+-  
+- o
+- u
+-  
+- m
+- a
+- i
+- s
+- "
+-  
+- e
+- u
+-  
+- c
+- o
+- n
+- f
+- i
+- r
+- m
+- e
+- i
+-  
+- p
+- e
+- l
+- o
+-  
+- r
+- o
+- t
+- u
+- l
+- o
+-  
+- d
+- e
+-  
+- M
+- I
+- T
+- E
+- M
+- P
+- U
+- F
+-  
+- (
+- 5
+- 1
+- 6
+- )
+-  
+- n
+- a
+-  
+- D
+- o
+- c
+- u
+- m
+- e
+- n
+- t
+- a
+- c
+- a
+- o
+- .
+- x
+- l
+- s
+- ,
+-  
+- j
+- a
+-  
+- q
+- u
+- e
+-  
+- a
+-  
+- l
+- i
+- n
+- h
+- a
+-  
+- d
+- e
+-  
+- M
+- I
+- T
+- E
+- M
+- P
+- M
+- U
+-  
+- (
+- 5
+- 1
+- 7
+- )
+-  
+- n
+- a
+- o
+-  
+- e
+- x
+- i
+- s
+- t
+- e
+-  
+- l
+- a
+- ;
+-  
+- a
+- s
+-  
+- c
+- a
+- t
+- e
+- g
+- o
+- r
+- i
+- a
+- s
+-  
+- o
+- b
+- s
+- e
+- r
+- v
+- a
+- d
+- a
+- s
+-  
+- (
+- 0
+- -
+- 9
+- )
+-  
+- s
+- a
+- o
+-  
+- c
+- o
+- n
+- s
+- i
+- s
+- t
+- e
+- n
+- t
+- e
+- s
+- .
+-  
+- (
+- c
+- )
+-  
+- A
+-  
+- c
+- a
+- u
+- s
+- a
+-  
+- d
+- o
+- s
+-  
+- 1
+- 6
+- 9
+- .
+- 9
+- 8
+- 7
+-  
+- d
+- o
+- m
+- i
+- c
+- i
+- l
+- i
+- o
+- s
+-  
+- a
+-  
+- m
+- a
+- i
+- s
+-  
+- n
+- o
+-  
+- D
+- B
+- F
+-  
+- e
+- u
+-  
+- i
+- s
+- o
+- l
+- e
+- i
+-  
+- s
+- o
+-  
+- e
+- m
+-  
+- R
+- O
+-  
+- (
+- e
+- s
+- p
+- e
+- c
+- i
+- e
+- s
+-  
+- 5
+-  
+- e
+-  
+- 7
+- )
+- ;
+-  
+- n
+- a
+- o
+-  
+- e
+- x
+- t
+- r
+- a
+- i
+-  
+- a
+- s
+-  
+- o
+- u
+- t
+- r
+- a
+- s
+-  
+- 2
+- 5
+-  
+- U
+- F
+- s
+-  
+- p
+- a
+- r
+- a
+-  
+- c
+- o
+- n
+- f
+- i
+- r
+- m
+- a
+- r
+-  
+- q
+- u
+- e
+-  
+- o
+-  
+- p
+- a
+- d
+- r
+- a
+- o
+-  
+- e
+-  
+- o
+-  
+- m
+- e
+- s
+- m
+- o
+-  
+- e
+- m
+-  
+- t
+- o
+- d
+- a
+- s
+- ,
+-  
+- e
+- m
+- b
+- o
+- r
+- a
+-  
+- a
+-  
+- d
+- i
+- f
+- e
+- r
+- e
+- n
+- c
+- a
+-  
+- p
+- r
+- o
+- p
+- o
+- r
+- c
+- i
+- o
+- n
+- a
+- l
+-  
+- (
+- ~
+- 2
+- ,
+- 6
+- %
+- )
+-  
+- s
+- e
+- j
+- a
+-  
+- u
+- n
+- i
+- f
+- o
+- r
+- m
+- e
+- .
+-  
+- (
+- d
+- )
+-  
+- "
+- i
+- d
+- p
+- e
+- s
+- s
+- o
+- a
+-  
+- .
+- .
+- .
+-  
+- s
+- e
+-  
+- r
+- e
+- c
+- o
+- n
+- s
+- t
+- r
+- o
+- i
+- ,
+-  
+- m
+- a
+- s
+-  
+- c
+- o
+- m
+-  
+- v
+- a
+- l
+- o
+- r
+- e
+- s
+-  
+- d
+- i
+- f
+- e
+- r
+- e
+- n
+- t
+- e
+- s
+-  
+- d
+- o
+- s
+-  
+- p
+- u
+- b
+- l
+- i
+- c
+- a
+- d
+- o
+- s
+- "
+-  
+- e
+-  
+- u
+- m
+- a
+-  
+- a
+- f
+- i
+- r
+- m
+- a
+- c
+- a
+- o
+-  
+- c
+- o
+- n
+- d
+- i
+- c
+- i
+- o
+- n
+- a
+- l
+-  
+- s
+- o
+- b
+- r
+- e
+-  
+- u
+- m
+-  
+- c
+- e
+- n
+- a
+- r
+- i
+- o
+-  
+- q
+- u
+- e
+-  
+- n
+- i
+- n
+- g
+- u
+- e
+- m
+-  
+- e
+- x
+- e
+- c
+- u
+- t
+- o
+- u
+- ;
+-  
+- c
+- o
+- n
+- f
+- i
+- r
+- m
+- e
+- i
+-  
+- o
+-  
+- u
+- n
+- i
+- c
+- o
+-  
+- f
+- a
+- t
+- o
+-  
+- t
+- e
+- s
+- t
+- a
+- v
+- e
+- l
+- ,
+-  
+- q
+- u
+- e
+-  
+- i
+- d
+- p
+- e
+- s
+- s
+- o
+- a
+-  
+- e
+-  
+- 1
+- :
+- n
+-  
+- n
+- a
+-  
+- o
+- r
+- d
+- e
+- m
+-  
+- d
+- o
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+- .
+-  
+- (
+- e
+- )
+-  
+- N
+- a
+- o
+-  
+- c
+- o
+- n
+- s
+- e
+- g
+- u
+- i
+-  
+- d
+- e
+- t
+- e
+- r
+- m
+- i
+- n
+- a
+- r
+-  
+- s
+- e
+-  
+- o
+-  
+- p
+- a
+- r
+- a
+- g
+- r
+- a
+- f
+- o
+-  
+- f
+- i
+- n
+- a
+- l
+-  
+- e
+- s
+- t
+- a
+- v
+- a
+-  
+- c
+- o
+- r
+- r
+- e
+- t
+- o
+-  
+- n
+- a
+-  
+- d
+- a
+- t
+- a
+-  
+- e
+- m
+-  
+- q
+- u
+- e
+-  
+- f
+- o
+- i
+-  
+- e
+- s
+- c
+- r
+- i
+- t
+- o
+-  
+- (
+- 2
+- 0
+- 2
+- 6
+- -
+- 0
+- 9
+- -
+- 1
+- 1
+- )
+- :
+-  
+- o
+-  
+- 1
+- 9
+- 8
+- 0
+- _
+- h
+- o
+- u
+- s
+- e
+- h
+- o
+- l
+- d
+- s
+- _
+- v
+- 0
+- .
+- 6
+- .
+- 0
+- .
+- p
+- a
+- r
+- q
+- u
+- e
+- t
+-  
+- n
+- o
+-  
+- d
+- i
+- s
+- c
+- o
+-  
+- e
+-  
+- d
+- e
+-  
+- 2
+- 0
+- 2
+- 6
+- -
+- 0
+- 9
+- -
+- 1
+- 2
+-  
+- 1
+- 3
+- :
+- 1
+- 2
+-  
+- e
+-  
+- j
+- a
+-  
+- t
+- e
+- m
+-  
+- 0
+-  
+- N
+- A
+- s
+- ,
+-  
+- e
+- n
+- t
+- a
+- o
+-  
+- o
+-  
+- b
+- u
+- i
+- l
+- d
+-  
+- q
+- u
+- e
+-  
+- t
+- i
+- n
+- h
+- a
+-  
+- 3
+- 5
+- .
+- 5
+- 6
+- 7
+-  
+- N
+- A
+- s
+-  
+- n
+- a
+- o
+-  
+- e
+- x
+- i
+- s
+- t
+- e
+-  
+- m
+- a
+- i
+- s
+-  
+- l
+- o
+- c
+- a
+- l
+- m
+- e
+- n
+- t
+- e
+-  
+- p
+- a
+- r
+- a
+-  
+- c
+- o
+- n
+- f
+- e
+- r
+- e
+- n
+- c
+- i
+- a
+- .
+
+
+
+---
+
+## relatorio_defeitos_2010_trac
+
+**Veredito.** erros_menores
+
+Refiz do zero as 80 afirmações numéricas do relatório contra os parquets v0.5.0 e v0.7.0, o bruto local do IBGE e o FTP. O núcleo empírico está correto e reprodutível: os quatro defeitos (RS/Domicilio, ES/Responsavel, Basico/decimais, SP+GO/Pessoa) existem, e praticamente todas as magnitudes-chave batem no dígito — 1.800.306 valores perdidos no Basico, 684.613 no ES, 22.332×241 no RS, 53.731/54.000 no Pessoa, 84.900 setores no Entorno, 79 CSVs com Cod_setor científico. Confirmei também no FTP que o IBGE republicou o lote em 15/06/2026 e que o shift de SP sobreviveu à republicação. Achei 14 defeitos no texto: 8 erros reais e 6 imprecisões cosméticas. Os mais sérios são um denominador errado ("9.884 das 10.125 nas outras 26 UFs" é a conta das 27; fora do RS a paridade é 9.750/9.750), um intervalo generalizado a partir de parte dos casos ("entre 0,7% e 3%" quando vai de 0,72% a 9,22%), uma contagem de colunas inexistente ("13 colunas" num Basico que tem 12) e o rótulo errado da variável V001, que pelo dicionário do IBGE é "domicílios particulares e coletivos" e não "particulares permanentes". Nenhum achado invalida uma conclusão do relatório, mas cinco deles são conferíveis por qualquer leitor do IBGE em minutos.
+
+
+### Demais erros (14)
+
+**1. [MENOR] §2 Domicilio — 'Fora do RS não há dano: nas outras 26 UFs, publicado e nosso coincidem em 9.884 das 10.125 células (UF × coluna)'**
+
+- *O relatorio diz:* Nas outras 26 UFs há 9.884 coincidências em 10.125 células (UF × coluna), ou seja, 241 divergências fora do RS.
+- *O correto e:* 9.884/10.125 é a conta sobre as 27 UFs (27 × 375 colunas V = 10.125), e as 241 divergências estão TODAS no RS. Nas outras 26 UFs a paridade é perfeita: 9.750 de 9.750.
+- *Medido por:* read_parquet das colunas V de Domicilio (375, incluindo os dois V1005) nas duas versões; soma por UF × coluna com data.table; matriz de igualdade. Total 27×375=10125 combos, 9884 iguais e 241 diferentes; excluindo a linha do RS: 9750 combos, 0 diferentes. Script 08_domicilio_ufcol.R
+
+**2. [MENOR] §4 Basico — 'o preenchimento no publicado cai para algo entre 0,7% e 3%'**
+
+- *O relatorio diz:* O preenchimento das colunas V003–V012 no publicado fica entre 0,7% e 3%.
+- *O correto e:* Vai de 0,723% (RN V003) a 9,223% (RR V007). Mediana 2,00%. 48 das 240 combinações (arquivo-fonte × coluna) estão acima de 3%; RR e RO chegam a 6–9%.
+- *Medido por:* Preenchimento por grupo-arquivo (27 UFs com SP dividido em Capital/Exceto) × coluna V001–V012, publicado vs atual; filtrei as 24 publicações quebradas × 10 colunas = 240 combinações e tirei min/max/mediana/quantis. Scripts 02_basico.R e 04_basico_range.R
+
+**3. [MENOR] §4 Basico — 'Não há shift: onde o publicado tem valor, ele é idêntico ao nosso em 100,00% dos casos nas 13 colunas'**
+
+- *O relatorio diz:* O Basico tem 13 colunas em que a concordância é de 100,00%.
+- *O correto e:* O Basico tem 12 colunas V (V001–V012), não 13. A concordância de 100,00% confere para as 12 (de 128.369 a 309.347 células por coluna, todas iguais).
+- *Medido por:* names() do parquet Basico v0.5.0: 35 colunas, das quais V001..V012 (12) e 22 geográficas + Cod_municipio. Comparação linha a linha por code_tract em cada uma das 12. Script 03_basico_decimais.R
+
+**4. [MENOR] §4 Basico — 'Escapam apenas MG, RJ, PR e SP_Exceto_Capital (47.733 setores, 99,47% preenchido)'**
+
+- *O relatorio diz:* Os quatro arquivos que escapam somam 47.733 setores com 99,47% de preenchimento.
+- *O correto e:* 47.733 setores / 99,47% é só o SP_Exceto_Capital. Os quatro somam 125.531 setores: MG 32.564 (99,76%), RJ 27.769 (99,79%), PR 17.465 (99,89%), SP_Exceto_Capital 47.733 (99,63%). Os 24 quebrados somam 184.589.
+- *Medido por:* Contagem de setores e fill_pub por grupo-arquivo em V003..V012; soma dos quatro não-afetados e dos 24 afetados (184.589 + 125.531 = 310.120). Scripts 02_basico.R e 04_basico_range.R
+
+**5. [MENOR] §2 Domicilio, tabela do exemplo — '| valor correto (domicílios particulares permanentes no RS) | 3.653.000 |'**
+
+- *O relatorio diz:* 3.653.000 é o número de domicílios particulares permanentes no RS, e é o valor correto de domicilio01_V001.
+- *O correto e:* O número 3.653.000 está certo como valor de V001, mas o rótulo não. Pelo dicionário oficial do IBGE (2011, §6.2), V001 = 'Domicílios particulares E domicílios coletivos'. 'Domicílios particulares permanentes' é a V002, que no RS soma 3.599.604.
+- *Medido por:* Somei domicilio01_V001, V002 e V003 do RS no parquet v0.7.0: 3.653.000 / 3.599.604 / 3.016.947; Brasil V001 = 58.051.449, que coincide com o valor citado em references/relatorio_domicilio01_V001_vs_sidra1310.md, onde o dicionário do IBGE é reproduzido. Script 19_v001_e_entorno.R
+
+**6. [MENOR] §6 Entorno — 'o XLS do IBGE desses cinco estados tem 203 colunas (Cod_setor + Situacao_setor + 201 V) contra 222 em AC/SC (21 não-V + 201 V)'**
+
+- *O relatorio diz:* Os XLS de Entorno dos cinco estados têm 203 colunas contra 222 em AC/SC.
+- *O correto e:* Vale só para Entorno01 e Entorno03 (201 V): 203 contra 222. Em Entorno02, Entorno04 e Entorno05 (220 V) é 222 contra 241 — de modo que '222' aparece dos dois lados da comparação conforme o tema. O invariante correto é: faltam 19 colunas não-V nos cinco estados, em todos os cinco temas (2 não-V contra 21).
+- *Medido por:* readxl::read_excel(n_max = 0) nos 35 arquivos ENTORNO01–05 de CE, DF, MG, PE, RS, AC e SC; contei colunas totais, colunas ^V[0-9]+$ e não-V. Script 13_entorno_xls.R
+
+**7. [MENOR] §4 Basico — 'Inferência. A perda de decimais não foi confirmada abrindo os XLS/CSV brutos; vem de evidência indireta'**
+
+- *O relatorio diz:* A perda de decimais não foi confirmada nos arquivos brutos do IBGE.
+- *O correto e:* Texto vencido pela caixa de correção no topo do próprio relatório, que descreve a confirmação célula a célula no Acre. Reproduzi: Basico_AC.xls traz '3,39' em V003 e BASICO_AC.csv traz '3,39' na mesma célula, com 856 de 874 linhas decimais nos dois formatos. A ressalva precisa cair ou ser reescrita.
+- *Medido por:* readxl::read_excel(col_types='text') em Basico_AC.xls e fread(colClasses='character') em BASICO_AC.csv; comparação de V003 e contagem de células com vírgula decimal. Script 18_ac_xls_vs_csv.R
+
+**8. [MENOR] §1 Resumo — 'O padrão que une três dos quatro: o IBGE distribui, dentro do mesmo lote, arquivos fora do formato dominante — um .xlsx onde todos são .xls, um .xls onde deveria haver .csv, decimais que um leitor não digeriu'**
+
+- *O relatorio diz:* Os decimais do Basico são um caso de o IBGE distribuir arquivo fora do formato dominante.
+- *O correto e:* Contradiz a caixa de correção do próprio documento, que reatribui a perda de decimais ao lado do consumidor: os decimais estão intactos no XLS e no CSV do IBGE. O terceiro item da enumeração não pertence à lista de anomalias de empacotamento do IBGE.
+- *Medido por:* Leitura do próprio relatório (correção de 2026-09-12, item 1) mais a verificação XLS×CSV no Acre que a confirma. Script 18_ac_xls_vs_csv.R
+
+**9. [COSMETICO] §4 Basico — 'os únicos valores observados são 1, 2, 3, …, 54'**
+
+- *O relatorio diz:* Os valores sobreviventes em V003 formam a sequência 1, 2, 3, …, 54.
+- *O correto e:* São 19 valores distintos e não contíguos: 1–13, 15, 16, 20, 23, 36, 54. (A afirmação de fundo confere: 3.905 de 3.905 sobreviventes são inteiros exatos.)
+- *Medido por:* sort(unique()) dos valores não-NA de V003 no publicado, restrito aos 24 grupos-arquivo quebrados (3.905 valores). Script 03_basico_decimais.R
+
+**10. [COSMETICO] §4 Basico — 'o preenchimento no publicado cai … contra ~98% no nosso'**
+
+- *O relatorio diz:* O preenchimento no parquet atual é de cerca de 98%.
+- *O correto e:* 99,85% (média ponderada nas 240 combinações afetadas); mínimo 97,94%, máximo 100%.
+- *Medido por:* fill_cur por grupo-arquivo × coluna V003..V012 nas 24 publicações quebradas, ponderado por número de setores. Script 04_basico_range.R
+
+**11. [COSMETICO] §4 Basico — 'PUB_V003 só casa com OUR_V003 — com as vizinhas, 0,28% ou 0,00%'**
+
+- *O relatorio diz:* As colunas vizinhas casam com PUB_V003 em 0,28% ou 0,00% dos casos.
+- *O correto e:* Confere para OUR_V004 (0,2838%) e OUR_V005 (0,0000%), mas OUR_V001 dá 0,3816% e OUR_V002 dá 1,0741%. A conclusão ('PUB_V003 só casa com OUR_V003', 100,00%) permanece.
+- *Medido por:* Comparação de PUB_V003 contra OUR_V001..OUR_V005 em 128.946 pares não-NA, base completa de 310.120 setores. Script 03_basico_decimais.R
+
+**12. [COSMETICO] §7 As três tabelas limpas, tabela 'Tabela | Colunas | Células comparadas'**
+
+- *O relatorio diz:* DomicilioRenda: 23 colunas, 4.651.800 células. PessoaRenda: 141 colunas, 41.245.960 células. ResponsavelRenda: 141 colunas, células '—'.
+- *O correto e:* As células conferem, mas sobre outra base: 4.651.800 = 15 colunas V × 310.120 e 41.245.960 = 133 colunas V × 310.120. Os 23 e 141 são o total de colunas do parquet (23×310.120 = 7.132.760; 141×310.120 = 43.726.920). ResponsavelRenda são as mesmas 41.245.960 células, 0 diferenças.
+- *Medido por:* names() e comparação célula a célula por code_tract nas colunas ^V[0-9]+$ das três tabelas, publicado vs v0.7.0. Script 14_renda.R
+
+**13. [COSMETICO] §3 Responsavel — 'têm NA em todas as 109 colunas de responsavel01 … São 684.613 valores ausentes'**
+
+- *O relatorio diz:* São 684.613 valores ausentes no ES.
+- *O correto e:* 684.613 é quantos valores o parquet atual tem e o publicado não. As células NA no publicado são 695.420 (6.380 × 109). A frase mistura os dois conceitos.
+- *Medido por:* Contagem de !is.na() nas 109 colunas responsavel01 dos 6.380 setores do ES no v0.7.0 (684.613) e produto 6.380×109 = 695.420. Script 09_responsavel_es.R
+
+**14. [COSMETICO] §4 Basico — 'name_region vem com o prefixo "Regiao " ("Regiao Norte" em vez de "Norte")'**
+
+- *O relatorio diz:* A string no parquet publicado é 'Regiao Norte'.
+- *O correto e:* É 'Região Norte', com til. As cinco categorias são 'Região Centro-Oeste', 'Região Nordeste', 'Região Norte', 'Região Sudeste', 'Região Sul'. Se a carta citar literalmente, citar com acento.
+- *Medido por:* sort(unique(pub$name_region)) no parquet 2010_tracts_Basico_v0.5.0.parquet. Script 02_basico.R
+
+### Incertezas (1567)
+
+- T
+- r
+- ê
+- s
+-  
+- p
+- o
+- n
+- t
+- o
+- s
+-  
+- n
+- ã
+- o
+-  
+- f
+- e
+- c
+- h
+- e
+- i
+- .
+-  
+- (
+- 1
+- )
+-  
+- O
+-  
+- t
+- e
+- s
+- t
+- e
+-  
+- d
+- e
+-  
+- d
+- e
+- s
+- l
+- o
+- c
+- a
+- m
+- e
+- n
+- t
+- o
+-  
+- d
+- o
+-  
+- E
+- n
+- t
+- o
+- r
+- n
+- o
+-  
+- p
+- o
+- r
+-  
+- c
+- o
+- r
+- r
+- e
+- l
+- a
+- ç
+- ã
+- o
+-  
+- d
+- e
+-  
+- p
+- e
+- r
+- f
+- i
+- s
+-  
+- c
+- o
+- m
+-  
+- l
+- a
+- g
+- s
+-  
+- −
+- 1
+- 0
+- 0
+-  
+- a
+-  
+- +
+- 1
+- 0
+- 0
+-  
+- (
+- '
+- l
+- a
+- g
+-  
+- ó
+- t
+- i
+- m
+- o
+-  
+- 0
+-  
+- e
+- m
+-  
+- 1
+- 3
+- 5
+-  
+- d
+- e
+-  
+- 1
+- 3
+- 5
+- '
+- )
+-  
+- n
+- ã
+- o
+-  
+- f
+- o
+- i
+-  
+- r
+- e
+- p
+- r
+- o
+- d
+- u
+- z
+- i
+- d
+- o
+-  
+- —
+-  
+- n
+- ã
+- o
+-  
+- t
+- e
+- n
+- h
+- o
+-  
+- o
+-  
+- s
+- c
+- r
+- i
+- p
+- t
+-  
+- o
+- r
+- i
+- g
+- i
+- n
+- a
+- l
+- .
+-  
+- M
+- e
+- d
+- i
+-  
+- o
+-  
+- e
+- q
+- u
+- i
+- v
+- a
+- l
+- e
+- n
+- t
+- e
+-  
+- f
+- o
+- r
+- t
+- e
+- :
+-  
+- z
+- e
+- r
+- o
+-  
+- d
+- i
+- v
+- e
+- r
+- g
+- ê
+- n
+- c
+- i
+- a
+- s
+-  
+- e
+- m
+-  
+- 2
+- 8
+- .
+- 7
+- 8
+- 2
+-  
+- c
+- o
+- m
+- b
+- i
+- n
+- a
+- ç
+- õ
+- e
+- s
+-  
+- U
+- F
+-  
+- ×
+-  
+- c
+- o
+- l
+- u
+- n
+- a
+-  
+- V
+-  
+- d
+- o
+-  
+- E
+- n
+- t
+- o
+- r
+- n
+- o
+-  
+- e
+- n
+- t
+- r
+- e
+-  
+- p
+- u
+- b
+- l
+- i
+- c
+- a
+- d
+- o
+-  
+- e
+-  
+- a
+- t
+- u
+- a
+- l
+- ,
+-  
+- c
+- o
+- n
+- s
+- i
+- s
+- t
+- e
+- n
+- t
+- e
+-  
+- c
+- o
+- m
+-  
+- a
+- u
+- s
+- ê
+- n
+- c
+- i
+- a
+-  
+- d
+- e
+-  
+- d
+- e
+- s
+- l
+- o
+- c
+- a
+- m
+- e
+- n
+- t
+- o
+- .
+-  
+- (
+- 2
+- )
+-  
+- A
+-  
+- c
+- o
+- m
+- p
+- a
+- r
+- a
+- ç
+- ã
+- o
+-  
+- X
+- L
+- S
+-  
+- ×
+-  
+- C
+- S
+- V
+-  
+- d
+- o
+-  
+- A
+- c
+- r
+- e
+- :
+-  
+- r
+- e
+- p
+- r
+- o
+- d
+- u
+- z
+- i
+-  
+- 1
+- 9
+-  
+- d
+- a
+- s
+-  
+- 2
+- 6
+-  
+- t
+- a
+- b
+- e
+- l
+- a
+- s
+-  
+- (
+- 2
+- .
+- 4
+- 4
+- 0
+- .
+- 2
+- 0
+- 8
+-  
+- c
+- é
+- l
+- u
+- l
+- a
+- s
+-  
+- V
+- ,
+-  
+- z
+- e
+- r
+- o
+-  
+- d
+- i
+- v
+- e
+- r
+- g
+- ê
+- n
+- c
+- i
+- a
+- s
+- ,
+-  
+- z
+- e
+- r
+- o
+-  
+- N
+- A
+-  
+- a
+- s
+- s
+- i
+- m
+- é
+- t
+- r
+- i
+- c
+- o
+- )
+- .
+-  
+- A
+- s
+-  
+- 7
+-  
+- r
+- e
+- s
+- t
+- a
+- n
+- t
+- e
+- s
+-  
+- —
+-  
+- B
+- A
+- S
+- I
+- C
+- O
+- ,
+-  
+- E
+- N
+- T
+- O
+- R
+- N
+- O
+- 0
+- 1
+-  
+- a
+-  
+- E
+- N
+- T
+- O
+- R
+- N
+- O
+- 0
+- 5
+-  
+- e
+-  
+- P
+- E
+- S
+- S
+- O
+- A
+- 0
+- 2
+-  
+- —
+-  
+- s
+- ã
+- o
+-  
+- e
+- x
+- a
+- t
+- a
+- m
+- e
+- n
+- t
+- e
+-  
+- o
+- s
+-  
+- C
+- S
+- V
+- s
+-  
+- c
+- o
+- m
+-  
+- a
+- s
+- p
+- a
+- s
+-  
+- d
+- u
+- p
+- l
+- i
+- c
+- a
+- d
+- a
+- s
+-  
+- m
+- a
+- l
+- f
+- o
+- r
+- m
+- a
+- d
+- a
+- s
+-  
+- e
+- /
+- o
+- u
+-  
+- s
+- e
+- p
+- a
+- r
+- a
+- d
+- o
+- r
+-  
+- '
+- ,
+- '
+- ,
+-  
+- q
+- u
+- e
+-  
+- u
+- m
+-  
+- l
+- e
+- i
+- t
+- o
+- r
+-  
+- i
+- n
+- g
+- ê
+- n
+- u
+- o
+-  
+- n
+- ã
+- o
+-  
+- a
+- b
+- r
+- e
+- ;
+-  
+- n
+- e
+- s
+- s
+- a
+- s
+- ,
+-  
+- o
+-  
+- C
+- o
+- d
+- _
+- s
+- e
+- t
+- o
+- r
+-  
+- d
+- o
+-  
+- C
+- S
+- V
+-  
+- É
+-  
+- d
+- i
+- v
+- e
+- r
+- g
+- e
+- n
+- t
+- e
+-  
+- d
+- o
+-  
+- X
+- L
+- S
+-  
+- (
+- '
+- 1
+- ,
+- 2
+- 0
+- E
+- +
+- 1
+- 4
+- '
+-  
+- c
+- o
+- n
+- t
+- r
+- a
+-  
+- '
+- 1
+- 2
+- 0
+- 0
+- 0
+- 1
+- 3
+- 0
+- 5
+- 0
+- 0
+- 0
+- 0
+- 0
+- 1
+- '
+- )
+- ,
+-  
+- d
+- e
+-  
+- m
+- o
+- d
+- o
+-  
+- q
+- u
+- e
+-  
+- '
+- z
+- e
+- r
+- o
+-  
+- d
+- i
+- v
+- e
+- r
+- g
+- ê
+- n
+- c
+- i
+- a
+- s
+- '
+-  
+- s
+- ó
+-  
+- s
+- e
+-  
+- s
+- u
+- s
+- t
+- e
+- n
+- t
+- a
+-  
+- e
+- s
+- c
+- o
+- p
+- a
+- d
+- o
+-  
+- à
+- s
+-  
+- c
+- o
+- l
+- u
+- n
+- a
+- s
+-  
+- V
+- .
+-  
+- A
+-  
+- o
+- r
+- d
+- e
+- m
+-  
+- d
+- e
+-  
+- g
+- r
+- a
+- n
+- d
+- e
+- z
+- a
+-  
+- d
+- o
+- s
+-  
+- '
+- 3
+- ,
+- 4
+-  
+- m
+- i
+- l
+- h
+- õ
+- e
+- s
+-  
+- d
+- e
+-  
+- c
+- é
+- l
+- u
+- l
+- a
+- s
+- '
+-  
+- c
+- o
+- n
+- f
+- e
+- r
+- e
+-  
+- (
+- 4
+- .
+- 0
+- 3
+- 6
+-  
+- c
+- o
+- l
+- u
+- n
+- a
+- s
+-  
+- V
+-  
+- ×
+-  
+- 8
+- 7
+- 4
+-  
+- s
+- e
+- t
+- o
+- r
+- e
+- s
+-  
+- ≈
+-  
+- 3
+- ,
+- 5
+- 3
+-  
+- m
+- i
+- l
+- h
+- õ
+- e
+- s
+- ;
+-  
+- 4
+- .
+- 2
+- 0
+- 1
+-  
+- c
+- o
+- l
+- u
+- n
+- a
+- s
+-  
+- t
+- o
+- t
+- a
+- i
+- s
+-  
+- ≈
+-  
+- 3
+- ,
+- 6
+- 7
+-  
+- m
+- i
+- l
+- h
+- õ
+- e
+- s
+- )
+- .
+-  
+- (
+- 3
+- )
+-  
+- C
+- o
+- n
+- f
+- i
+- r
+- m
+- e
+- i
+-  
+- o
+-  
+- c
+- o
+- n
+- s
+- e
+- r
+- t
+- o
+-  
+- d
+- o
+-  
+- C
+- o
+- d
+- _
+- s
+- e
+- t
+- o
+- r
+-  
+- n
+- a
+-  
+- r
+- e
+- p
+- u
+- b
+- l
+- i
+- c
+- a
+- ç
+- ã
+- o
+-  
+- d
+- e
+-  
+- 1
+- 5
+- /
+- 0
+- 6
+- /
+- 2
+- 0
+- 2
+- 6
+-  
+- s
+- ó
+-  
+- p
+- o
+- r
+-  
+- a
+- m
+- o
+- s
+- t
+- r
+- a
+-  
+- (
+- E
+- S
+- ,
+-  
+- 2
+- 6
+-  
+- C
+- S
+- V
+- s
+- ,
+-  
+- e
+-  
+- S
+- P
+- _
+- C
+- a
+- p
+- i
+- t
+- a
+- l
+- /
+- p
+- e
+- s
+- s
+- o
+- a
+- 0
+- 2
+- _
+- s
+- p
+- 1
+- )
+-  
+- —
+-  
+- n
+- ã
+- o
+-  
+- b
+- a
+- i
+- x
+- e
+- i
+-  
+- o
+- s
+-  
+- 2
+- 8
+-  
+- z
+- i
+- p
+- s
+-  
+- p
+- a
+- r
+- a
+-  
+- c
+- h
+- e
+- c
+- a
+- r
+-  
+- o
+- s
+-  
+- 7
+- 9
+-  
+- C
+- S
+- V
+- s
+-  
+- u
+- m
+-  
+- a
+-  
+- u
+- m
+- ;
+-  
+- a
+-  
+- n
+- o
+- t
+- a
+-  
+- o
+- f
+- i
+- c
+- i
+- a
+- l
+-  
+- d
+- o
+-  
+- I
+- B
+- G
+- E
+-  
+- c
+- o
+- b
+- r
+- e
+-  
+- o
+-  
+- l
+- o
+- t
+- e
+-  
+- i
+- n
+- t
+- e
+- i
+- r
+- o
+- .
+-  
+- A
+- c
+- h
+- a
+- d
+- o
+-  
+- c
+- o
+- l
+- a
+- t
+- e
+- r
+- a
+- l
+- ,
+-  
+- f
+- o
+- r
+- a
+-  
+- d
+- o
+-  
+- e
+- s
+- c
+- o
+- p
+- o
+-  
+- d
+- o
+-  
+- r
+- e
+- l
+- a
+- t
+- ó
+- r
+- i
+- o
+- :
+-  
+- n
+- o
+-  
+- E
+- n
+- t
+- o
+- r
+- n
+- o
+-  
+- o
+-  
+- n
+- a
+- m
+- e
+- _
+- r
+- e
+- g
+- i
+- o
+- n
+-  
+- d
+- o
+-  
+- p
+- u
+- b
+- l
+- i
+- c
+- a
+- d
+- o
+-  
+- t
+- r
+- a
+- z
+-  
+- '
+- C
+- e
+- n
+- t
+- r
+- o
+- -
+- o
+- e
+- s
+- t
+- e
+- '
+-  
+- e
+-  
+- o
+-  
+- a
+- t
+- u
+- a
+- l
+-  
+- '
+- C
+- e
+- n
+- t
+- r
+- o
+- -
+- O
+- e
+- s
+- t
+- e
+- '
+-  
+- e
+- m
+-  
+- 2
+- 3
+- .
+- 9
+- 1
+- 9
+-  
+- l
+- i
+- n
+- h
+- a
+- s
+- ,
+-  
+- e
+-  
+- h
+- á
+-  
+- u
+- m
+- a
+-  
+- c
+- é
+- l
+- u
+- l
+- a
+-  
+- d
+- e
+-  
+- e
+- n
+- t
+- o
+- r
+- n
+- o
+- 0
+- 3
+- _
+- S
+- e
+- t
+- o
+- r
+- _
+- P
+- r
+- e
+- c
+- o
+- l
+- e
+- t
+- a
+-  
+- q
+- u
+- e
+-  
+- d
+- i
+- f
+- e
+- r
+- e
+-  
+- s
+- ó
+-  
+- n
+- a
+-  
+- f
+- o
+- r
+- m
+- a
+- t
+- a
+- ç
+- ã
+- o
+-  
+- d
+- e
+-  
+- u
+- m
+-  
+- f
+- l
+- o
+- a
+- t
+-  
+- (
+- 5
+- ,
+- 4
+- 2
+- e
+- −
+- 2
+- 0
+- )
+-  
+- —
+-  
+- é
+-  
+- a
+-  
+- ú
+- n
+- i
+- c
+- a
+-  
+- '
+- d
+- i
+- v
+- e
+- r
+- g
+- ê
+- n
+- c
+- i
+- a
+- '
+-  
+- d
+- o
+-  
+- E
+- n
+- t
+- o
+- r
+- n
+- o
+-  
+- e
+- n
+- t
+- r
+- e
+-  
+- a
+- s
+-  
+- d
+- u
+- a
+- s
+-  
+- v
+- e
+- r
+- s
+- õ
+- e
+- s
+- ,
+-  
+- o
+-  
+- q
+- u
+- e
+-  
+- t
+- o
+- r
+- n
+- a
+-  
+- o
+-  
+- '
+- c
+- i
+- n
+- c
+- o
+-  
+- t
+- ê
+- m
+-  
+- d
+- i
+- v
+- e
+- r
+- g
+- ê
+- n
+- c
+- i
+- a
+- '
+-  
+- d
+- o
+-  
+- §
+- 1
+-  
+- t
+- e
+- c
+- n
+- i
+- c
+- a
+- m
+- e
+- n
+- t
+- e
+-  
+- v
+- e
+- r
+- d
+- a
+- d
+- e
+- i
+- r
+- o
+-  
+- m
+- a
+- s
+-  
+- c
+- o
+- s
+- m
+- é
+- t
+- i
+- c
+- o
+-  
+- n
+- o
+-  
+- q
+- u
+- i
+- n
+- t
+- o
+-  
+- c
+- a
+- s
+- o
+- .
+
+
+
+---
+
+## microdata_1991_ftp_vs_aux
+
+**Veredito.** erros_graves
+
+Checei as 72 afirmações verificáveis do relatório de 1991 refazendo cada medição do zero, e 62 conferem — inclusive as mais duras: V0102 como chave primária perfeita (4.024.543 valores distintos), os 27.819 blocos com média 144,7, os 6 blocos que cruzam município, as 1.285.449 combinações de (UF, município, V0109) com 632.153 repetidas e a pior delas com 5.871 casos, os 141 campos do DBF, os 1.525 domicílios de Itapipoca e a soma de pesos 35.435.725. Dois achados são graves. O primeiro: a seção "Divergência intencional vs o publicado — Nenhuma, em households" é falsa — comparando coluna a coluna contra o v0.5.0 publicado, name_region muda de "Centro-oeste" para "Centro-Oeste" em 276.692 linhas e seis colunas code_* mudam de int32 para double. O segundo: o "Dá (100%)" do agrupamento pessoa→domicílio é generalização de dois casos (RR e AC) e falha em Rondônia, onde o DBF dá 26.860 grupos para 26.850 domicílios — nacionalmente o DBF tem 17.045.712 registros-pessoa contra 17.045.653 da amostra preparada, com a diferença concentrada em RO (+58) e BA (+1). Há ainda quatro erros menores, o mais visível sendo a descrição "UF(2) + bloco(4) + domicílio(3)" de V0102: os dois primeiros dígitos não são a UF em 534.696 domicílios (13,3%), porque São Paulo aparece sob os prefixos 35 e 36. Dois números certos dependem de definição não declarada e precisam de uma frase a mais antes de ir para a carta: os "320 blocos" (só com reinício definido como CD107 não crescente) e os "98,7%" (só com o peso arredondado a 5 casas, porque os pesos brutos das duas fontes não batem).
+
+
+### Erros GRAVES (2)
+
+**1. [GRAVE] Seção 'Divergência intencional vs o publicado' — "Nenhuma, em households. As duas diferenças de processo são internas"**
+
+- *O relatorio diz:* Não há nenhuma divergência do produto de 1991 (households) em relação ao publicado; as duas diferenças são apenas de processo interno.
+- *O correto e:* Há divergência visível no produto. Contra o 1991_households_v0.5.0.parquet publicado: (a) name_region muda de 'Centro-oeste' para 'Centro-Oeste' em 276.692 linhas (todas as do Centro-Oeste; as outras quatro regiões não mudam); (b) seis colunas mudam de tipo int32 -> double (code_muni, code_state, code_region, code_meso, code_micro, code_metro). As outras 51 colunas são idênticas em valor. A mudança de name_region vem de states_censobr() (R/support_fun.R:524), que grava 'Centro-Oeste', e não está registrada em lugar nenhum do relatório.
+- *Medido por:* Baixei 1991_households_v0.5.0.parquet do release v0.5.0 (gh release download, 77.176.630 bytes). Aliei as 4.024.543 linhas das duas versões por V0102 (identical(sort(V0102_v050), sort(V0102_v070)) == TRUE) e comparei as 58 colunas uma a uma, lendo uma coluna por vez de cada arquivo com arrow::read_parquet(col_select=) para não estourar RAM; numéricas comparadas por |a-b| < 1e-9, demais como character. Tipos lidos de open_dataset()$schema. Script 13_full_diff.R e 14_name_region.R.
+
+**2. [GRAVE] Seção 'O que dá e o que não dá para reconstruir' — "**Dá (100%):** o *agrupamento* pessoa→domicílio... Testado: RR dá 5.486 grupos para 5.486 domicílios reais, AC dá 9.824 para 9.824"**
+
+- *O relatorio diz:* A reconstrução do agrupamento pessoa→domicílio a partir do DBF funciona em 100% dos casos.
+- *O correto e:* Generalização de dois casos que falha no terceiro. RR e AC batem (confirmado), mas em Rondônia cumsum(PESSOAN==1) dá 26.860 grupos para 26.850 domicílios na amostra preparada. O DBF do FTP tem 17.045.712 registros-pessoa contra 17.045.653 da amostra preparada — diferença de 59, concentrada em RO (+58) e BA (+1); as outras 25 UFs batem exatamente, SP inclusive. O mecanismo continua internamente consistente em RO (nenhum dos 46 campos de domicílio varia dentro de grupo), mas a métrica usada para provar o 100% (N grupos == N domicílios reais) não vale nacionalmente.
+- *Medido por:* Extraí os 27 cabeçalhos DBF do zip com 7-Zip (-so | head -c 6000, termina cedo) e li o nº de registros nos bytes 5-8 de cada um, byte a byte com readBin. Comparei com a contagem de pessoas por V1101 no parquet Censo.1991.brasil.pessoas. Depois extraí o DBF inteiro de RO (CD91AMOUP11.DBF, 59.387.382 bytes), li os 120.452 registros por offset de byte (record length 493, header 4.545) e apliquei cumsum(as.integer(PESSOAN)==1). Scripts 22_todos_headers.R, 23_diff_por_uf.R, 24_ro.R, 25_ro_diag.R.
+
+
+### Demais erros (6)
+
+**1. [MENOR] Seção 'O que é a V0102' — "Tem 9 dígitos com estrutura interna `UF(2) + bloco(4) + domicílio(3)`"**
+
+- *O relatorio diz:* Os dois primeiros dígitos da V0102 são o código da UF.
+- *O correto e:* Não são, em 534.696 domicílios (13,3% do total). São Paulo (V1101 == '35') aparece sob dois prefixos: 35 (344.675 domicílios, 8 municípios, incluindo a capital 5030) e 36 (534.696 domicílios, 564 municípios), sem município em comum. Há 28 prefixos distintos para 27 UFs. Os 9 dígitos e o corte 2+4+3 conferem; o rótulo 'UF' é que está errado. Nenhum número do relatório muda, porque a contagem foi feita sobre os 6 primeiros dígitos — mas quem ler ao pé da letra e agrupar por (V1101, bloco) obtém 25.815 blocos, média 155,9 e 2.010 blocos multi-município em vez de 6.
+- *Medido por:* Sobre as 4.024.543 linhas do parquet de domicílios: table(nchar(V0102)) == {9: 4024543}; sort(unique(substr(V0102,1,2))) devolve 28 valores; sum(substr(V0102,1,2) != V1101) == 534.696, todos com V1101 == '35'. Contagens alternativas de bloco: uniqueN(substr(V0102,1,6)) == 27.819 vs uniqueN(paste(V1101, substr(V0102,3,6))) == 25.815. Scripts 05_hh_v0102.R e 07_sp_prefix.R.
+
+**2. [MENOR] Seção 'Itapipoca' — "households bate exatamente com o publicado: 4.024.543 linhas, 58 colunas, 0 NAs em `code_muni`, 4.491 municípios distintos, mesma soma de pesos (35.435.725)"**
+
+- *O relatorio diz:* O produto bate exatamente com o v0.5.0 publicado.
+- *O correto e:* Os cinco fatos listados conferem um a um (4.024.543 linhas; 58 colunas com a mesma lista e a mesma ordem; 0 NAs em code_muni; 4.491 municípios; soma de pesos 35.435.724,656 -> 35.435.725, idêntica nas duas versões até a 4ª casa). Mas 'exatamente' é falso: seis code_* trocaram int32 por double e name_region mudou em 276.692 linhas (ver achado 1).
+- *Medido por:* Mesma comparação coluna a coluna do achado 1, mais leitura direta do v0.7.0 (nrow 4.024.543, ncol 58, sum(is.na(code_muni))==0, uniqueN(code_muni)==4491, sum(V7300)==35435724.6560). Scripts 11_output_v070.R, 12_v050.R, 13_full_diff.R.
+
+**3. [MENOR] Seção 'O que é a V0102' — "Rótulo idêntico em quatro fontes independentes (layout_1991.xlsx, dicionários do Pedro Souza para domicílios e pessoas, e o `1991_dictionary_microdata_*.html` do release `censo_docs`)"**
+
+- *O relatorio diz:* Quatro fontes independentes trazem o mesmo rótulo 'Identificação do Questionário' para V0102.
+- *O correto e:* São dois documentos, não quatro fontes independentes. O 1991_dictionary_microdata_households.html / _population.html do censo_docs e o 'layout_1991' (source_C_layout_households.csv / _population.csv) são o mesmo documento: mesma ordem de variáveis (V0099, V1101, V7004, V0102, V0098, ...), mesmo texto, mesma estrutura de três colunas — o HTML é a exportação da planilha. E os dois arquivos do Pedro Souza são um único dicionário partido por tipo de registro. O rótulo em si confere nos quatro arquivos.
+- *Medido por:* Baixei os dois HTML do release censo_docs (gh release download) e extraí o rótulo removendo tags: 'Identificação do Questionário' nos dois. Comparei a sequência de V-codes do HTML com a de source_C_layout_*.csv — idênticas nas 12 primeiras posições e no vizinho imediato de V0102 (V0098 'Ordem da Pessoa', com a mesma observação '00 para os registros de domicílio'). Grep de V0102 nos quatro CSVs de _inputs/.
+
+**4. [MENOR] Seção 'Itapipoca' — "é o que as camadas de 2000, 2010 e 2022 do próprio `geobr` usam, e o que v0.5.0/v0.6.0 publicam"**
+
+- *O relatorio diz:* Os releases v0.5.0 e v0.6.0 publicam Itapipoca com o código 2306405.
+- *O correto e:* v0.5.0 publica, sim (1.525 linhas com code_muni == 2306405, 0 com 2306045). O release v0.6.0 de ipeaGIT/censobr tem um único asset — censobr_0.6.0.tar.gz — e nenhum parquet; não existe arquivo de 1991 publicado em v0.6.0. O 1991_households_v0.6.0.parquet em data/ é saída deste pipeline, não release.
+- *Medido por:* gh release view v0.6.0 --repo ipeaGIT/censobr --json assets (1 asset, 162.106 bytes); gh release view v0.5.0 (contém 1991_households_v0.5.0.parquet, 77.176.630 bytes), baixado e conferido: sum(code_muni==2306405)==1525. As camadas geobr 2000/2010/2022 (da biblioteca renv, geobr 2.0.1) devolvem 2306405 — isso confere.
+
+**5. [COSMETICO] Seção 'Uma advertência...' — "porque o CSV está ordenado pela `V0102`"**
+
+- *O relatorio diz:* O arquivo preparado está ordenado pela V0102.
+- *O correto e:* Vale dentro de cada UF — 26 das 27 têm V0102 estritamente crescente — e vale para RR, que é o caso citado. Mas o arquivo não está ordenado por V0102: a primeira UF é SP (35), só depois vem 11, 12, ... 53; e dentro de SP o bloco de prefixo 36 (534.696 linhas) não é crescente. is.unsorted(as.numeric(V0102)) == TRUE para o arquivo inteiro.
+- *Medido por:* No parquet de domicílios: !is.unsorted(as.numeric(V0102)) global == FALSE; por V1101, 26 de 27 TRUE (a exceção é 35); V1101[!duplicated(V1101)] devolve 35,11,12,...,53. Dentro de SP, rleid do prefixo dá 2 blocos contíguos (35 depois 36), o primeiro crescente e o segundo não. Scripts 18_ceiling_ordem.R e 19_ordem_sp.R.
+
+**6. [COSMETICO] Seção 'Por que o FTP perde' — "27 DBFs, um por UF (`Dados/Regiao X/CD91AMOUP<UF>.DBF`)"**
+
+- *O relatorio diz:* O padrão de nome dos DBFs é CD91AMOUP<UF>.DBF.
+- *O correto e:* Os 27 DBFs e as 5 pastas de região conferem, mas o sufixo é o CÓDIGO numérico da UF, não a sigla: CD91AMOUP14.DBF é Roraima, CD91AMOUP12.DBF é o Acre, CD91AMOUP35.DBF é São Paulo. Numa carta ao IBGE o '<UF>' ambíguo deve ser trocado por '<código da UF, 2 dígitos>'.
+- *Medido por:* Listagem das 35 entradas do zip por 7z l -slt e por zipfile.infolist(), com os nomes escapados para ASCII: Dados/Região {Norte,Nordeste,Sudeste,Sul,Centro Oeste}/CD91AMOUP{11..53}.DBF. Conferido contra o conteúdo: o DBF 14 tem UFNUM == '14' em todos os 23.102 registros.
+
+### Incertezas (1808)
+
+- (
+- 1
+- )
+-  
+- '
+- C
+- S
+- V
+- s
+-  
+- d
+- e
+-  
+- 2
+- 0
+- 1
+- 8
+- '
+-  
+- —
+-  
+- n
+- a
+- d
+- a
+-  
+- n
+- o
+-  
+- r
+- e
+- p
+- o
+- s
+- i
+- t
+- ó
+- r
+- i
+- o
+-  
+- d
+- a
+- t
+- a
+-  
+- o
+- u
+-  
+- v
+- e
+- r
+- s
+- i
+- o
+- n
+- a
+-  
+- a
+-  
+- o
+- r
+- i
+- g
+- e
+- m
+-  
+- d
+- a
+-  
+- a
+- m
+- o
+- s
+- t
+- r
+- a
+-  
+- p
+- r
+- e
+- p
+- a
+- r
+- a
+- d
+- a
+- ;
+-  
+- N
+- Ã
+- O
+-  
+- V
+- E
+- R
+- I
+- F
+- I
+- C
+- Á
+- V
+- E
+- L
+- .
+-  
+- (
+- 2
+- )
+-  
+- '
+- C
+- D
+- 9
+- 1
+- A
+- M
+- O
+- U
+- P
+-  
+- (
+- A
+- M
+- O
+- s
+- t
+- r
+- a
+-  
+- /
+-  
+- U
+- n
+- i
+- d
+- a
+- d
+- e
+-  
+- d
+- e
+-  
+- P
+- o
+- n
+- d
+- e
+- r
+- a
+- ç
+- ã
+- o
+- )
+- '
+-  
+- —
+-  
+- é
+-  
+- l
+- e
+- i
+- t
+- u
+- r
+- a
+-  
+- d
+- e
+-  
+- a
+- c
+- r
+- ô
+- n
+- i
+- m
+- o
+-  
+- d
+- e
+-  
+- n
+- o
+- m
+- e
+-  
+- d
+- e
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+- ;
+-  
+- n
+- ã
+- o
+-  
+- h
+- á
+-  
+- n
+- a
+- d
+- a
+-  
+- n
+- o
+-  
+- z
+- i
+- p
+-  
+- (
+- L
+- E
+- I
+- A
+- _
+- M
+- E
+- .
+- D
+- O
+- C
+- ,
+-  
+- d
+- i
+- c
+- i
+- o
+- n
+- á
+- r
+- i
+- o
+- ,
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+- s
+-  
+- a
+- u
+- x
+- i
+- l
+- i
+- a
+- r
+- e
+- s
+- )
+-  
+- q
+- u
+- e
+-  
+- c
+- o
+- n
+- f
+- i
+- r
+- m
+- e
+-  
+- a
+-  
+- e
+- x
+- p
+- a
+- n
+- s
+- ã
+- o
+- ;
+-  
+- N
+- Ã
+- O
+-  
+- V
+- E
+- R
+- I
+- F
+- I
+- C
+- Á
+- V
+- E
+- L
+- ,
+-  
+- e
+-  
+- n
+- o
+-  
+- t
+- e
+- x
+- t
+- o
+-  
+- a
+- p
+- a
+- r
+- e
+- c
+- e
+-  
+- c
+- o
+- m
+- o
+-  
+- s
+- e
+-  
+- f
+- o
+- s
+- s
+- e
+-  
+- a
+- c
+- h
+- a
+- d
+- o
+- .
+-  
+- (
+- 3
+- )
+-  
+- '
+- t
+- e
+- n
+- d
+- e
+-  
+- a
+-  
+- p
+- i
+- o
+- r
+- a
+- r
+-  
+- e
+- m
+-  
+- S
+- ã
+- o
+-  
+- P
+- a
+- u
+- l
+- o
+- '
+-  
+- é
+-  
+- p
+- r
+- e
+- d
+- i
+- ç
+- ã
+- o
+- ,
+-  
+- n
+- ã
+- o
+-  
+- m
+- e
+- d
+- i
+- ç
+- ã
+- o
+- ,
+-  
+- e
+-  
+- o
+-  
+- t
+- e
+- x
+- t
+- o
+-  
+- n
+- ã
+- o
+-  
+- a
+- v
+- i
+- s
+- a
+- ;
+-  
+- c
+- o
+- r
+- r
+- o
+- b
+- o
+- r
+- e
+- i
+-  
+- a
+-  
+- d
+- i
+- r
+- e
+- ç
+- ã
+- o
+-  
+- p
+- e
+- l
+- o
+-  
+- t
+- e
+- t
+- o
+-  
+- d
+- e
+-  
+- u
+- n
+- i
+- c
+- i
+- d
+- a
+- d
+- e
+-  
+- d
+- a
+-  
+- i
+- m
+- p
+- r
+- e
+- s
+- s
+- ã
+- o
+-  
+- d
+- i
+- g
+- i
+- t
+- a
+- l
+-  
+- p
+- o
+- r
+-  
+- U
+- F
+-  
+- (
+- S
+- P
+-  
+- é
+-  
+- a
+-  
+- p
+- i
+- o
+- r
+-  
+- d
+- a
+- s
+-  
+- 2
+- 7
+- ,
+-  
+- 9
+- 8
+- ,
+- 8
+- 2
+- %
+- ,
+-  
+- c
+- o
+- n
+- t
+- r
+- a
+-  
+- 9
+- 9
+- ,
+- 6
+- 7
+- %
+-  
+- e
+- m
+-  
+- R
+- R
+- )
+- ,
+-  
+- m
+- a
+- s
+-  
+- n
+- ã
+- o
+-  
+- r
+- o
+- d
+- e
+- i
+-  
+- o
+-  
+- c
+- a
+- s
+- a
+- m
+- e
+- n
+- t
+- o
+-  
+- e
+- f
+- e
+- t
+- i
+- v
+- o
+-  
+- c
+- o
+- n
+- t
+- r
+- a
+-  
+- o
+-  
+- D
+- B
+- F
+-  
+- d
+- e
+-  
+- S
+- P
+-  
+- (
+- 1
+- ,
+- 6
+- 7
+-  
+- G
+- B
+- )
+- .
+-  
+- (
+- 4
+- )
+-  
+- O
+- s
+-  
+- d
+- o
+- i
+- s
+-  
+- n
+- ú
+- m
+- e
+- r
+- o
+- s
+-  
+- q
+- u
+- e
+-  
+- d
+- e
+- p
+- e
+- n
+- d
+- e
+- m
+-  
+- d
+- e
+-  
+- d
+- e
+- f
+- i
+- n
+- i
+- ç
+- ã
+- o
+-  
+- n
+- ã
+- o
+-  
+- d
+- e
+- c
+- l
+- a
+- r
+- a
+- d
+- a
+- :
+-  
+- '
+- 3
+- 2
+- 0
+-  
+- b
+- l
+- o
+- c
+- o
+- s
+- '
+-  
+- s
+- ó
+-  
+- s
+- a
+- i
+-  
+- c
+- o
+- m
+-  
+- r
+- e
+- i
+- n
+- í
+- c
+- i
+- o
+-  
+- =
+-  
+- C
+- D
+- 1
+- 0
+- 7
+-  
+- n
+- ã
+- o
+-  
+- c
+- r
+- e
+- s
+- c
+- e
+- n
+- t
+- e
+-  
+- (
+- c
+- o
+- m
+-  
+- d
+- e
+- c
+- r
+- é
+- s
+- c
+- i
+- m
+- o
+-  
+- e
+- s
+- t
+- r
+- i
+- t
+- o
+-  
+- s
+- ã
+- o
+-  
+- 2
+- 6
+- 2
+- )
+- ,
+-  
+- e
+-  
+- '
+- 9
+- 8
+- ,
+- 7
+- %
+- '
+-  
+- s
+- ó
+-  
+- s
+- a
+- i
+-  
+- c
+- o
+- m
+-  
+- o
+-  
+- p
+- e
+- s
+- o
+-  
+- a
+- r
+- r
+- e
+- d
+- o
+- n
+- d
+- a
+- d
+- o
+-  
+- a
+-  
+- 5
+-  
+- c
+- a
+- s
+- a
+- s
+-  
+- (
+- a
+-  
+- 7
+-  
+- c
+- a
+- s
+- a
+- s
+-  
+- c
+- a
+- i
+-  
+- p
+- a
+- r
+- a
+-  
+- 2
+- 7
+- ,
+- 9
+- %
+- ,
+-  
+- a
+-  
+- 4
+-  
+- s
+- o
+- b
+- e
+-  
+- p
+- a
+- r
+- a
+-  
+- 9
+- 9
+- ,
+- 5
+- %
+- ,
+-  
+- s
+- e
+- m
+-  
+- p
+- e
+- s
+- o
+-  
+- 9
+- 5
+- ,
+- 0
+- %
+- )
+-  
+- —
+-  
+- p
+- o
+- r
+- q
+- u
+- e
+-  
+- o
+- s
+-  
+- p
+- e
+- s
+- o
+- s
+-  
+- b
+- r
+- u
+- t
+- o
+- s
+-  
+- n
+- ã
+- o
+-  
+- b
+- a
+- t
+- e
+- m
+-  
+- e
+- n
+- t
+- r
+- e
+-  
+- a
+- s
+-  
+- f
+- o
+- n
+- t
+- e
+- s
+- :
+-  
+- o
+-  
+- D
+- B
+- F
+-  
+- g
+- r
+- a
+- v
+- a
+-  
+- 7
+-  
+- d
+- e
+- c
+- i
+- m
+- a
+- i
+- s
+-  
+- e
+-  
+- a
+-  
+- a
+- m
+- o
+- s
+- t
+- r
+- a
+-  
+- p
+- r
+- e
+- p
+- a
+- r
+- a
+- d
+- a
+-  
+- 8
+- ,
+-  
+- e
+-  
+- s
+- ó
+-  
+- 1
+- .
+- 3
+- 8
+- 7
+-  
+- d
+- o
+- s
+-  
+- 4
+- .
+- 8
+- 9
+- 2
+-  
+- v
+- a
+- l
+- o
+- r
+- e
+- s
+-  
+- d
+- i
+- s
+- t
+- i
+- n
+- t
+- o
+- s
+-  
+- d
+- e
+-  
+- R
+- R
+-  
+- c
+- o
+- i
+- n
+- c
+- i
+- d
+- e
+- m
+-  
+- n
+- a
+-  
+- 7
+- ª
+-  
+- c
+- a
+- s
+- a
+- .
+-  
+- A
+- m
+- b
+- o
+- s
+-  
+- p
+- r
+- e
+- c
+- i
+- s
+- a
+- m
+-  
+- d
+- a
+-  
+- r
+- e
+- g
+- r
+- a
+-  
+- e
+- s
+- c
+- r
+- i
+- t
+- a
+-  
+- a
+- n
+- t
+- e
+- s
+-  
+- d
+- e
+-  
+- i
+- r
+-  
+- p
+- a
+- r
+- a
+-  
+- a
+-  
+- c
+- a
+- r
+- t
+- a
+- .
+-  
+- (
+- 5
+- )
+-  
+- N
+- ã
+- o
+-  
+- r
+- a
+- s
+- t
+- r
+- e
+- e
+- i
+-  
+- a
+-  
+- c
+- a
+- u
+- s
+- a
+-  
+- d
+- o
+- s
+-  
+- 5
+- 9
+-  
+- r
+- e
+- g
+- i
+- s
+- t
+- r
+- o
+- s
+- -
+- p
+- e
+- s
+- s
+- o
+- a
+-  
+- a
+-  
+- m
+- a
+- i
+- s
+-  
+- d
+- o
+-  
+- D
+- B
+- F
+-  
+- (
+- R
+- O
+-  
+- +
+- 5
+- 8
+- ,
+-  
+- B
+- A
+-  
+- +
+- 1
+- )
+- ;
+-  
+- e
+- m
+-  
+- R
+- O
+-  
+- a
+-  
+- d
+- i
+- f
+- e
+- r
+- e
+- n
+- ç
+- a
+-  
+- é
+-  
+- d
+- i
+- f
+- u
+- s
+- a
+-  
+- —
+-  
+- 2
+- 7
+- 4
+-  
+- g
+- r
+- u
+- p
+- o
+- s
+-  
+- d
+- o
+-  
+- D
+- B
+- F
+-  
+- s
+- e
+- m
+-  
+- p
+- a
+- r
+-  
+- d
+- e
+-  
+- i
+- m
+- p
+- r
+- e
+- s
+- s
+- ã
+- o
+-  
+- d
+- i
+- g
+- i
+- t
+- a
+- l
+-  
+- c
+- o
+- n
+- t
+- r
+- a
+-  
+- 2
+- 6
+- 4
+-  
+- d
+- o
+- m
+- i
+- c
+- í
+- l
+- i
+- o
+- s
+-  
+- p
+- r
+- e
+- p
+- a
+- r
+- a
+- d
+- o
+- s
+-  
+- s
+- e
+- m
+-  
+- p
+- a
+- r
+- ,
+-  
+- e
+- s
+- p
+- a
+- l
+- h
+- a
+- d
+- o
+- s
+-  
+- p
+- o
+- r
+-  
+- 2
+- 3
+-  
+- m
+- u
+- n
+- i
+- c
+- í
+- p
+- i
+- o
+- s
+-  
+- e
+-  
+- p
+- o
+- r
+-  
+- t
+- o
+- d
+- o
+- s
+-  
+- o
+- s
+-  
+- t
+- a
+- m
+- a
+- n
+- h
+- o
+- s
+-  
+- d
+- e
+-  
+- d
+- o
+- m
+- i
+- c
+- í
+- l
+- i
+- o
+-  
+- —
+-  
+- e
+-  
+- n
+- ã
+- o
+-  
+- c
+- h
+- e
+- g
+- u
+- e
+- i
+-  
+- a
+-  
+- a
+- b
+- r
+- i
+- r
+-  
+- o
+-  
+- D
+- B
+- F
+-  
+- d
+- a
+-  
+- B
+- a
+- h
+- i
+- a
+-  
+- (
+- 7
+- 4
+- 0
+-  
+- M
+- B
+- )
+- .
+-  
+- (
+- 6
+- )
+-  
+- A
+-  
+- a
+- m
+- o
+- s
+- t
+- r
+- a
+-  
+- p
+- r
+- e
+- p
+- a
+- r
+- a
+- d
+- a
+-  
+- t
+- e
+- m
+-  
+- 1
+-  
+- d
+- o
+- m
+- i
+- c
+- í
+- l
+- i
+- o
+-  
+- s
+- e
+- m
+-  
+- n
+- e
+- n
+- h
+- u
+- m
+-  
+- r
+- e
+- g
+- i
+- s
+- t
+- r
+- o
+-  
+- d
+- e
+-  
+- p
+- e
+- s
+- s
+- o
+- a
+-  
+- (
+- 4
+- .
+- 0
+- 2
+- 4
+- .
+- 5
+- 4
+- 3
+-  
+- d
+- o
+- m
+- i
+- c
+- í
+- l
+- i
+- o
+- s
+-  
+- c
+- o
+- n
+- t
+- r
+- a
+-  
+- 4
+- .
+- 0
+- 2
+- 4
+- .
+- 5
+- 4
+- 2
+-  
+- V
+- 0
+- 1
+- 0
+- 2
+-  
+- d
+- i
+- s
+- t
+- i
+- n
+- t
+- o
+- s
+-  
+- e
+- m
+-  
+- p
+- e
+- s
+- s
+- o
+- a
+- s
+- )
+- ;
+-  
+- n
+- ã
+- o
+-  
+- i
+- n
+- v
+- e
+- s
+- t
+- i
+- g
+- u
+- e
+- i
+- .
+-  
+- (
+- 7
+- )
+-  
+- A
+- t
+- e
+- n
+- ç
+- ã
+- o
+-  
+- p
+- a
+- r
+- a
+-  
+- q
+- u
+- e
+- m
+-  
+- f
+- o
+- r
+-  
+- r
+- e
+- c
+- o
+- n
+- f
+- e
+- r
+- i
+- r
+- :
+-  
+- a
+-  
+- g
+- e
+- o
+- b
+- r
+-  
+- i
+- n
+- s
+- t
+- a
+- l
+- a
+- d
+- a
+-  
+- n
+- a
+-  
+- b
+- i
+- b
+- l
+- i
+- o
+- t
+- e
+- c
+- a
+-  
+- g
+- l
+- o
+- b
+- a
+- l
+-  
+- d
+- o
+-  
+- u
+- s
+- u
+- á
+- r
+- i
+- o
+-  
+- é
+-  
+- a
+-  
+- 1
+- .
+- 9
+- .
+- 1
+- .
+- 9
+- 0
+- 0
+- 0
+-  
+- e
+-  
+- N
+- Ã
+- O
+-  
+- t
+- e
+- m
+-  
+- o
+-  
+- b
+- u
+- g
+-  
+- d
+- e
+-  
+- I
+- t
+- a
+- p
+- i
+- p
+- o
+- c
+- a
+-  
+- (
+- d
+- e
+- v
+- o
+- l
+- v
+- e
+-  
+- 2
+- 3
+- 0
+- 6
+- 4
+- 0
+- 5
+- )
+- ;
+-  
+- o
+-  
+- b
+- u
+- g
+-  
+- s
+- ó
+-  
+- a
+- p
+- a
+- r
+- e
+- c
+- e
+-  
+- n
+- a
+-  
+- 2
+- .
+- 0
+- .
+- 1
+-  
+- d
+- a
+-  
+- b
+- i
+- b
+- l
+- i
+- o
+- t
+- e
+- c
+- a
+-  
+- r
+- e
+- n
+- v
+-  
+- d
+- o
+-  
+- p
+- r
+- o
+- j
+- e
+- t
+- o
+- ,
+-  
+- q
+- u
+- e
+-  
+- é
+-  
+- a
+-  
+- q
+- u
+- e
+-  
+- o
+-  
+- p
+- i
+- p
+- e
+- l
+- i
+- n
+- e
+-  
+- u
+- s
+- a
+- .
+
+
+
+---
+
+## microdata_1980_pesos_v603_v6
+
+**Veredito.** erros_graves
+
+Reconferi 112 afirmações numéricas do relatório refazendo cada medição do zero (parquets v0.7.0, fonte release_legacy, 26 DBF do zip do IBGE, dicionários oficiais, releases v0.2.0/v0.3.0/v0.5.0 e API do SIDRA). A tese central resiste inteira e é mais forte do que o texto diz: sum(V603)=25.210.639 bate o SIDRA t206 em 40/40 células com resíduo zero, e sum(V604)=119.011.052 bate o t200/t202 em 23 marginais exatas — não 20. Achei 19 defeitos, 2 graves: "raramente proprietários (5,5% contra 75,3%)", em que o 75,3% não existe sob nenhum recorte (o par correto é 55,5% ou 61,2%), e "V603 e V604 são as duas únicas variáveis do layout sem nenhuma categoria declarada", quando são 26 das 89 — incluindo V602, V212 e V213, que o próprio relatório discute. Dois erros já migraram para a carta ao IBGE: "13 variáveis solidárias" (são 14, falta ALUGUEL) e "14 com aluguel declarado" (são 17, com 3 sentinelas e não 2). Há ainda uma contradição interna (os 160 moradores "todos com V604 > 0" — um tem zero, como a tabela seguinte admite), um líquido atribuído a um subconjunto (169.918 em vez de 169.976), uma incoerência entre "+~152" e "0,00085%" (=214), um peso injetado não reprodutível (+151,324 e 4,068571, não +151,334 e 4,078571) e uma atribuição errada ao pipeline (V211). Três afirmações e a recomendação 4 ficaram obsoletas porque o parquet foi refeito duas horas depois do relatório.
+
+
+### Erros GRAVES (2)
+
+**1. [GRAVE] Seção "Os 55 de espécie 1": "raramente proprietários (5,5% contra 75,3%)"**
+
+- *O relatorio diz:* Os 55 domicílios de espécie 1 com peso zero são proprietários em 5,5% dos casos, contra 75,3% na base de comparação.
+- *O correto e:* O 75,3% não existe sob nenhum recorte. Com próprio = V209 ∈ {1,3}: 7,3% nos 55 (4/55) contra 61,2% na espécie 1 (61,7% ponderado). Com próprio = V209 == 1 ("já acabou de pagar"), que é a leitura que produz o 5,5%: 5,5% nos 55 (3/55) contra 55,5% na espécie 1 (55,7% ponderado).
+- *Medido por:* open_dataset sobre 1980_households_v0.7.0.parquet; count(V209) em filter(V201=='1') e em filter(V201=='1', V603==0); versão ponderada com sum(V603) por V209. Conferido contra o dicionário oficial (V209 Condição de Ocupação: 1 próprio já pagou, 3 próprio não pago, 5 alugado, 6 cedido empregador, 7 cedido particular, 0 outro, 9 ignorado). Script 07_os55.R e 08_imput.R.
+
+**2. [GRAVE] Seção "Conformidade com o dicionário": "V603 e V604 são as duas únicas variáveis do layout sem nenhuma categoria declarada — nem ignorado, nem não aplicável."**
+
+- *O relatorio diz:* Só V603 e V604 não declaram categoria alguma no layout.
+- *O correto e:* São 26 das 89 variáveis: V3, V4, V5, V6, V601, V602, V212, V213, V603, V604, V518, V527, V530, V532, V536, V537, V538, V539, V542, V544, V546, V547, V548, V549, V557, V570. Entre elas, três substantivas do bloco de domicílio que o próprio relatório discute — V602 (Aluguel), V212 (Total de Cômodos) e V213 (Cômodos servindo de dormitório).
+- *Medido por:* Baixei os dois dicionários oficiais do release censo_docs (1980_dictionary_microdata_households.html e 1980_dictionary_microdata_population.html), parseei as linhas <tr>/<td> e identifiquei as variáveis com o campo CATEG vazio e zero linhas de categoria. União dos dois dicionários = 89 variáveis (confirma o 89 do relatório). Scripts 13_dic2.R e 14_dic3.R.
+
+
+### Demais erros (17)
+
+**1. [MENOR] Seção "Os 55 de espécie 1": "seus 160 moradores têm todos V604 > 0"**
+
+- *O relatorio diz:* Todos os 160 moradores dos 55 domicílios têm peso de pessoa positivo.
+- *O correto e:* 159 dos 160. Um morador tem V604 == 0 — exatamente o caso que a tabela de V604 duas seções adiante lista como "espécie 1, domicílio sem peso | 1 | morador de um dos 55". O relatório se contradiz.
+- *Medido por:* inner_join da tabela de pessoas com as 55 chaves (V2, V5, V6, V601) dos domicílios com V201=='1' & V603==0; contagem de V604==0 e V604>0. Cross-check: filter(V604==0) na tabela de pessoas dá 42 registros, repartidos em 18 (esp.1, V603>0), 1 (esp.1, V603==0), 1 (esp.3) e 22 (esp.5). Scripts 02_v604_geo.R e 07_os55.R.
+
+**2. [MENOR] Opção (b): "faltam 169.918 registros de espécie 5 e 7 em relação ao DBF"**
+
+- *O relatorio diz:* O déficit da amostra preparada contra o DBF, em espécies 5 e 7, é de 169.918 registros.
+- *O correto e:* 169.976 (espécie 5: 144.390; espécie 7: 25.586). O 169.918 é a diferença líquida total de registros (6.886.803 − 6.716.885), que abate os 58 domicílios de espécie 1 de Fernando de Noronha que a amostra tem e o DBF não. Comparando só as 26 UFs (excluindo FN dos dois lados) o déficit é 169.987.
+- *Medido por:* Extraí os 26 CD80DOM*.DBF com 7-Zip, parseei o header dBASE (nrec, hlen, rlen=53, 26 campos) e li ESPECIE e PESOD por matriz de bytes: DBF = 6.886.803 registros, espécie 1/3/5/7 = 6.483.483 / 27.487 / 328.887 / 46.946. Amostra v0.7.0 = 6.483.541 / 27.487 / 184.497 / 21.360, com FN (code_state 20) contribuindo 58 de espécie 1 e 11 de espécie 5. Scripts 06_dbf_dom2.R e 07_os55.R.
+
+**3. [MENOR] Seção "O zero é a sentinela de 'não se aplica' do IBGE": "o PESOD == 0 é solidário a outras 13 variáveis do mesmo registro"**
+
+- *O relatorio diz:* 13 variáveis recebem sentinela de NSA na mesma linha: TIPO, SANUSO, TPRESID, COMODOS, COMODOR, FOGAO, COMBCOZI, TELEFONE, ILUMINA, RADIO, GELADEIR, TV, AUTOMOVE.
+- *O correto e:* São 14 — falta ALUGUEL, que é 0 em 100% desses registros e cujo NSA declarado no layout também é 0. 14 (valor 0) + 6 (dígito não-zero: PAREDES=1, PISO=2, COBERTUR=8, AGUA=8, SANESCOA=1, CONDOCUP=8) = as 20 variáveis substantivas do DBF; com 13 sobra ALUGUEL sem explicação. Este erro já está na carta ao IBGE (references/carta_ibge_levantamento.md, linha 351).
+- *Medido por:* Nos 26 DBF, para os registros com PESOD==0 & ESPECIE!=1 (403.320), coletei os valores distintos de cada uma das 20 variáveis substantivas. Resultado agregado: ALUGUEL='0', AUTOMOVE='0', COMBCOZI='0', COMODOR='0', COMODOS='0', FOGAO='0', GELADEIR='0', ILUMINA='0', RADIO='0', SANUSO='0', TELEFONE='0', TIPO='0', TPRESID='0', TV='0'; AGUA='8', COBERTUR='8', CONDOCUP='8', PAREDES='1', PISO='2', SANESCOA='1'. Script 06_dbf_dom2.R.
+
+**4. [MENOR] Seção "Os 55 de espécie 1": "14 com aluguel declarado"**
+
+- *O relatorio diz:* 14 dos 55 domicílios têm aluguel declarado.
+- *O correto e:* 17 com valor real (120 a 2.000 Cr$) e 3 com a sentinela 999999 — 20 com V602 diferente de zero. Nenhuma leitura alternativa dá 14 (V209==5 dá 18; V209==5 sem sentinela dá 16). A carta ao IBGE (linha 351) repete o 14 e ainda erra a contagem das sentinelas: diz "dois com a sentinela 999999", são três.
+- *Medido por:* table(V602) nos 55 do parquet v0.7.0: 0→35, 120→1, 200→4, 400→3, 500→1, 600→3, 800→1, 1000→3, 2000→1, 999999→3. Contagem independente sobre o CSV dos 54 registros extraídos dos DBF (campo ALUGUEL): 20 não-zero, 3 sentinelas, 17 valores reais de 120 a 2000. Scripts 08_imput.R e contagem direta em dbf_esp1_pesod0.csv.
+
+**5. [MENOR] Seção "V604 — a imputação do pipeline quebrou a paridade": "+151,334", "119.011.203,334", "(151,333987802074802)" e o valor fracionário "4,078571"**
+
+- *O relatorio diz:* A imputação injetava 151,333987802074802 de peso, levando a soma a 119.011.203,334, com seis valores fracionários distintos entre eles 4,078571.
+- *O correto e:* Reexecutando o código revertido (commit 1a98de5) sobre o dado atual, o peso injetado é 151,3239878020747824 (soma 119.011.203,324, +151,324) e o sexto valor fracionário é 4,068571428571428, não 4,078571. A diferença é exatamente 0,01 nos dois números, o que aponta para uma troca de dígito propagada ao total. Os outros cinco valores (3,133333; 3,968721; 4,138022; 4,950980; 5,931026), o "7 pesos fracionários", o "6 valores distintos" e a repartição 18/1/23 conferem.
+- *Medido por:* Reproduzi o passo 1 (V604 = if_else(V604==0 & V603>0, V603, V604) → 18 casos, soma 58) e o passo 2 (mediana de V604>0 por code_muni via arrow, aplicada aos 24 restantes → soma 93,3239878020748). Rodei duas vezes: o t-digest do Arrow 23.0.1.1 é determinístico e devolve 4,068571428571428 para o município 5102702 nas duas. Mediana exata em R nesse município = 4. Scripts 08_imput.R e 20_median.R.
+
+**6. [MENOR] Tabela "As opções", linha (d): "+~152"; e no corpo "Imputá-los levaria a soma a ~25.210.79x ... por um ganho de 0,00085%"**
+
+- *O relatorio diz:* Imputar só os 55 acrescentaria ~152 à soma de V603, um ganho de 0,00085%.
+- *O correto e:* Incoerente consigo mesmo: 0,00085% de 25.210.639 = 214, não 152. Imputando os 55 com a média nacional de V603 (3,888439): +213,86 = 0,000848% → soma ~25.210.853, não ~25.210.79x. Com a mediana do próprio município: +188,11 = 0,000746%. O percentual está certo; o "+152" está errado e parece contaminação do +151,3 injetado em V604, que é outra tabela.
+- *Medido por:* média de V603 em filter(V201=='1', V603>0) = 25.210.639/6.483.486 = 3,888438873778705; 55 × média = 213,8641. Mediana municipal de V603 (espécie 1, peso>0) casada com os 55 → soma 188,1139. Script 08_imput.R.
+
+**7. [COSMETICO] Seção "Os 55 de espécie 1": "quebraria de uma vez as 40 células exatas" (repetido na tabela das opções, linha (d): "quebrada em 40 células")**
+
+- *O relatorio diz:* Imputar os 55 quebraria todas as 40 células exatas.
+- *O correto e:* Quebraria 23 das 40. Os 55 estão em 10 das 26 UFs do SIDRA (FN não é célula do SIDRA), nas 2 situações e em 10 das 11 classes de cômodos — a classe "sem declaração" não é tocada. 1 (Brasil) + 10 + 2 + 10 = 23.
+- *Medido por:* Nos 55 do parquet v0.7.0: unique(code_state) menos o 20 = 10 UFs; V198 dividido em urbano (13) e rural (42), as duas situações; classes de cômodos atingidas = 1,2,3,4,5,6,7,8,9,10+ = 10 (V212==99 ausente). Script 21_celulas55.R.
+
+**8. [MENOR] Seção "(c) merece discussão honesta": "O pipeline já converteu a sentinela 0 do IBGE em NA em V211 (Tempo de Residência)"**
+
+- *O relatorio diz:* Foi o pipeline que converteu o 0 de V211 em NA.
+- *O correto e:* O pipeline não toca V211 — não há nenhuma linha sobre ela em clean_microdata_1980(). A fonte release_legacy já entrega V211 com 233.344 NA e zero valores "0"; no DBF do IBGE, TPRESID é 0 nesses registros. A conversão aconteceu na amostra preparada, a montante deste repo. A distinção importa porque o relatório é rigoroso em separar "a fonte" de "o pipeline" na seção "O zero não foi criado pelo pipeline", e porque esta frase sustenta o argumento de que (c) não inauguraria política nenhuma.
+- *Medido por:* grep em R/microdata_1980.R (V211 aparece só na lista num_vars, que faz as.numeric); count(V211) sobre data/release_legacy/Censo.1980.brasil.domicilios.amostra.25porcento.parquet: 113 categorias, 233.344 NA, 0 valores "0", 0 strings vazias; leitura do campo TPRESID nos DBF para PESOD==0 & ESPECIE!=1 dá '0'. Scripts 11_v211_geobr.R e 06_dbf_dom2.R.
+
+**9. [MENOR] Seção "Conformidade com o dicionário": "`9`/`99` 'ignorado/sem declaração' (25 variáveis)"**
+
+- *O relatorio diz:* 25 variáveis declaram a convenção 9/99 para ignorado/sem declaração.
+- *O correto e:* Pelo menos 35: V203, V204, V205, V206, V207, V208, V214, V215, V216, V217, V220, V221, V508, V509, V510, V514, V515, V516, V519, V520, V521, V522, V526, V533, V534, V535, V540, V550, V551, V552, V553, V554, V555, V556, V681. É piso, porque 13 variáveis têm a lista de categorias em formato que o parser não leu. Os outros dois eixos do mesmo parágrafo conferem exatos: branco/não aplicável = 21 e 98 "a ser imputado" = 7 (V550–V556).
+- *Medido por:* Parse dos dois dicionários oficiais; para cada variável, procurei categoria cujo código é 9/99/999 e cujo rótulo casa com Ignorado|Sem declaração|Não declarado, listando o texto literal de cada acerto para inspeção visual. Scripts 16_categ2.R e 17_detalhe.R.
+
+**10. [MENOR] Seção "Geografia": "com os mesmos rótulos que o `geobr` 1980 usa: `FN`, `Fernando de Noronha`, região 2, `Nordeste`"**
+
+- *O relatorio diz:* Os rótulos da linha acrescentada para o código 20 são os que o geobr 1980 usa.
+- *O correto e:* O geobr 1980 não fornece nenhum desses rótulos. geobr::read_municipality(year=1980) devolve 4 colunas (code_muni, name_muni, code_state, abbrev_state) — não há name_state nem região — e para o código 20 o abbrev_state é NA. "Fernando de Noronha" aparece só como name_muni do município 2000107. Os quatro rótulos foram criados localmente em microdata_1980.R (decisão defensável, mas não herdada do geobr).
+- *Medido por:* sf::st_drop_geometry(geobr::read_municipality(year=1980)): 3.994 linhas, names() = code_muni/name_muni/code_state/abbrev_state; a linha do code_state 20 é code_muni 2000107, name_muni 'Fernando de Noronha', abbrev_state NA. Script 11_v211_geobr.R.
+
+**11. [MENOR] Seção "(c) merece discussão honesta": "17 das 21 variáveis substantivas do bloco de domicílio já usam NA para 'não aplicável', e só 4 usam 0 (V212, V213, V602, V603)"**
+
+- *O relatorio diz:* No parquet, 17 de 21 variáveis substantivas usam NA e 4 usam 0.
+- *O correto e:* Desatualizado: no parquet v0.7.0 são 20 de 21 com NA e só V603 usa 0. Os commits d6ff527 (12/09 11h02, V212 e V213 → NA) e 30d26ec (12/09 12h21, V602 → NA) vieram depois do commit do relatório (dab2b17, 12/09 09h56). A conclusão do relatório fica mais forte do que o texto: V603 é hoje a única exceção.
+- *Medido por:* summarise(across(everything(), ~sum(is.na(.x)))) em filter(V201 != '1') no parquet v0.7.0: V202–V209, V211, V212, V213, V214–V221 e V602 todas com 233.344 NA (100%); contagem de zeros fora do universo: V211=0, V212=0, V213=0, V602=0, V603=233.344. git log e git show dos três commits. Script 10_dic_geo.R.
+
+**12. [MENOR] Seção "O zero é a sentinela...": "têm **100% de NA nas 17 variáveis substantivas do bloco**"**
+
+- *O relatorio diz:* Os 233.344 têm 100% de NA em 17 variáveis do bloco de domicílio.
+- *O correto e:* Hoje são 20 variáveis com 100% de NA (as 17 de então mais V212, V213 e V602). Mesmo motivo do item anterior: o parquet foi refeito depois do relatório.
+- *Medido por:* Mesma medição do item anterior, sobre 1980_households_v0.7.0.parquet. Script 10_dic_geo.R.
+
+**13. [MENOR] Recomendação 4: "V212 e V213 (cômodos): considerar 0 → NA. ... É decisão separada e menor"**
+
+- *O relatorio diz:* A conversão de V212 e V213 de 0 para NA ainda está por decidir.
+- *O correto e:* Já foi feita. O commit d6ff527 (12/09 11h02) implementou V212 e V213 → NA fora da espécie 1, e o 30d26ec (12/09 12h21) estendeu a V602. A recomendação está cumprida e o texto a apresenta como pendente.
+- *Medido por:* git log --format='%h %ad %s' -- R/microdata_1980.R e git show d6ff527/30d26ec; leitura das linhas 107-119 do arquivo atual, que contêm o bloco mutate(V212/V213/V602 = if_else(V201=='1', ..., NA_real_)).
+
+**14. [COSMETICO] Seção V604: link "[R/microdata_1980.R:103-119](../R/microdata_1980.R#L103-L119)"**
+
+- *O relatorio diz:* A correção que zerou os 42 está nas linhas 103-119 de R/microdata_1980.R.
+- *O correto e:* O intervalo estava certo para a versão anterior do arquivo (commit 1a98de5, onde a linha 103 é o `if(dataset_name == "population")` e a 119 o `}` de fechamento), mas o próprio commit que introduziu o relatório removeu esse bloco. Hoje as linhas 103-119 contêm o bloco V212/V213/V602 → NA, código não relacionado.
+- *Medido por:* git show 1a98de5:R/microdata_1980.R | sed -n '92,125p' com numeração; sed -n '100,125p' no arquivo atual. Confirmação via git log do arquivo.
+
+**15. [COSMETICO] Seção "O achado que organiza tudo": "A de V604, em **20 células** (2 sexos × 2 situações × 17 grupos etários + idade ignorada)"**
+
+- *O relatorio diz:* A paridade de V604 foi verificada em 20 células, descritas como 2 sexos × 2 situações × 17 grupos etários + idade ignorada.
+- *O correto e:* O parêntese é aritmeticamente incoerente: 2×2×17+1 = 69 células, não 20. As marginais efetivamente verificáveis são 23 (Brasil + 2 sexos + 2 situações + 17 grupos etários + idade ignorada) e todas conferem exatas contra o SIDRA. O "20" só fecha se se contar 2 sexos + 18 classes etárias e se ignorarem Brasil e situações.
+- *Medido por:* SIDRA t202 (Brasil 119.011.052; Homens 59.142.833; Mulheres 59.868.219; Urbana 80.437.327; Rural 38.573.725) e t200 (17 grupos quinquenais 0-4…80+ e Idade ignorada 113.440) contra sum(V604) por V501, por V198 agrupado em urbano/rural e por faixa de V606 (999 = idade ignorada, 28.697 registros, 113.440 ponderados). Resíduo zero nas 23. Script 18_v604_sidra.R.
+
+**16. [COSMETICO] Recomendação 5: "O `censobr` não diz nada sobre esse peso em lugar nenhum — nem NEWS, nem vinheta, nem `add_labels` (que não cobre 1980)"**
+
+- *O relatorio diz:* Não há nenhuma menção ao peso V603 no pacote consumidor.
+- *O correto e:* As três fontes citadas conferem (NEWS.md sem menção; nenhuma das 4 vinhetas cita V603; add_labels_households só tem ramos para 2010 e 2000). Mas existe tests/testthat/test_read_households.R:111, que afirma expect_equal(sum(V603), 25210639) — logo o "em lugar nenhum" é forte demais. O detalhe favorece a decisão: imputar quebraria o teste do próprio consumidor.
+- *Medido por:* grep -rn 'V603|V604' em ../censobr (somente leitura); grep em NEWS.md e vignettes/; grep 'year ==' em R/add_labels_households.R (só 2010 e 2000).
+
+**17. [COSMETICO] Seção "Fernando de Noronha fecha a conta": "A nossa fonte é mais completa que a republicação de 2025 do próprio IBGE"**
+
+- *O relatorio diz:* A amostra preparada é mais completa que o DBF de 2025.
+- *O correto e:* Verdade só num sentido. A amostra tem os 69 domicílios de FN que o DBF não tem; o DBF tem 169.976 registros de coletivos (espécies 5 e 7) que a amostra não tem. O próprio relatório registra o truncamento na seção das opções, mas a frase isolada é a que seria citada contra nós. Achado de reforço não registrado: a tabela do SIDRA t206 por UF também soma 25.210.413 — FN só aparece no total Brasil, o que corrobora o argumento dos 226 por caminho independente.
+- *Medido por:* Contagem por espécie nos 26 DBF contra o parquet v0.7.0 (ver item do 169.976); consulta à API SIDRA t206 n3/all/1980, soma das 26 UFs = 25.210.413 contra n1 = 25.210.639.
+
+### Incertezas (2023)
+
+- 1
+- )
+-  
+- "
+- e
+- m
+-  
+- 4
+- 6
+-  
+- c
+- a
+- t
+- e
+- g
+- ó
+- r
+- i
+- c
+- a
+- s
+-  
+- c
+- o
+- m
+- p
+- a
+- r
+- a
+- d
+- a
+- s
+-  
+- v
+- a
+- l
+- o
+- r
+-  
+- a
+-  
+- v
+- a
+- l
+- o
+- r
+- "
+-  
+- —
+-  
+- N
+- Ã
+- O
+-  
+- V
+- E
+- R
+- I
+- F
+- I
+- C
+- Á
+- V
+- E
+- L
+-  
+- c
+- o
+- m
+-  
+- p
+- r
+- e
+- c
+- i
+- s
+- ã
+- o
+- .
+-  
+- C
+- o
+- n
+- s
+- e
+- g
+- u
+- i
+-  
+- e
+- x
+- t
+- r
+- a
+- i
+- r
+-  
+- c
+- ó
+- d
+- i
+- g
+- o
+- s
+-  
+- d
+- e
+-  
+- c
+- a
+- t
+- e
+- g
+- o
+- r
+- i
+- a
+-  
+- d
+- e
+-  
+- 5
+- 0
+-  
+- v
+- a
+- r
+- i
+- á
+- v
+- e
+- i
+- s
+-  
+- d
+- o
+- s
+-  
+- d
+- i
+- c
+- i
+- o
+- n
+- á
+- r
+- i
+- o
+- s
+-  
+- (
+- 1
+- 7
+-  
+- p
+- r
+- e
+- s
+- e
+- n
+- t
+- e
+- s
+-  
+- n
+- a
+-  
+- t
+- a
+- b
+- e
+- l
+- a
+-  
+- d
+- e
+-  
+- d
+- o
+- m
+- i
+- c
+- í
+- l
+- i
+- o
+- s
+- ,
+-  
+- 5
+- 0
+-  
+- n
+- a
+-  
+- d
+- e
+-  
+- p
+- e
+- s
+- s
+- o
+- a
+- s
+- )
+- ;
+-  
+- e
+- m
+-  
+- 1
+- 3
+-  
+- v
+- a
+- r
+- i
+- á
+- v
+- e
+- i
+- s
+-  
+- (
+- V
+- 2
+- 0
+- 9
+- ,
+-  
+- V
+- 2
+- 1
+- 1
+- ,
+-  
+- V
+- 2
+- 1
+- 8
+- ,
+-  
+- V
+- 2
+- 1
+- 9
+- ,
+-  
+- V
+- 5
+- 0
+- 4
+- ,
+-  
+- V
+- 5
+- 1
+- 2
+- ,
+-  
+- V
+- 5
+- 1
+- 7
+- ,
+-  
+- V
+- 5
+- 2
+- 3
+- ,
+-  
+- V
+- 5
+- 2
+- 4
+- ,
+-  
+- V
+- 5
+- 2
+- 5
+- ,
+-  
+- V
+- 5
+- 3
+- 0
+- ,
+-  
+- V
+- 5
+- 3
+- 2
+- ,
+-  
+- V
+- 5
+- 3
+- 6
+- ,
+-  
+- V
+- 6
+- 0
+- 6
+- ,
+-  
+- V
+- 6
+- 8
+- 0
+- ,
+-  
+- V
+- 6
+- 8
+- 2
+- )
+-  
+- o
+-  
+- H
+- T
+- M
+- L
+-  
+- d
+- o
+-  
+- d
+- i
+- c
+- i
+- o
+- n
+- á
+- r
+- i
+- o
+-  
+- q
+- u
+- e
+- b
+- r
+- a
+-  
+- a
+-  
+- l
+- i
+- s
+- t
+- a
+-  
+- d
+- e
+-  
+- f
+- o
+- r
+- m
+- a
+-  
+- q
+- u
+- e
+-  
+- m
+- e
+- u
+-  
+- p
+- a
+- r
+- s
+- e
+- r
+-  
+- n
+- ã
+- o
+-  
+- l
+- e
+- u
+- .
+-  
+- O
+-  
+- 4
+- 6
+-  
+- é
+-  
+- p
+- l
+- a
+- u
+- s
+- í
+- v
+- e
+- l
+-  
+- c
+- o
+- m
+- o
+-  
+- s
+- u
+- b
+- c
+- o
+- n
+- j
+- u
+- n
+- t
+- o
+-  
+- d
+- o
+-  
+- q
+- u
+- e
+-  
+- c
+- h
+- e
+- c
+- a
+- r
+- a
+- m
+- ,
+-  
+- m
+- a
+- s
+-  
+- n
+- ã
+- o
+-  
+- p
+- u
+- d
+- e
+-  
+- r
+- e
+- p
+- r
+- o
+- d
+- u
+- z
+- i
+- r
+-  
+- o
+-  
+- n
+- ú
+- m
+- e
+- r
+- o
+-  
+- e
+- x
+- a
+- t
+- o
+- .
+-  
+- C
+- o
+- n
+- s
+- e
+- q
+- u
+- ê
+- n
+- c
+- i
+- a
+- :
+-  
+- a
+-  
+- a
+- f
+- i
+- r
+- m
+- a
+- ç
+- ã
+- o
+-  
+- "
+- u
+- m
+-  
+- ú
+- n
+- i
+- c
+- o
+-  
+- v
+- a
+- l
+- o
+- r
+-  
+- o
+- b
+- s
+- e
+- r
+- v
+- a
+- d
+- o
+-  
+- n
+- ã
+- o
+-  
+- d
+- e
+- c
+- l
+- a
+- r
+- a
+- d
+- o
+-  
+- e
+- m
+-  
+- t
+- o
+- d
+- o
+-  
+- o
+-  
+- b
+- a
+- n
+- c
+- o
+- "
+-  
+- f
+- o
+- i
+-  
+- v
+- e
+- r
+- i
+- f
+- i
+- c
+- a
+- d
+- a
+-  
+- n
+- a
+- s
+-  
+- 5
+- 0
+-  
+- v
+- a
+- r
+- i
+- á
+- v
+- e
+- i
+- s
+-  
+- q
+- u
+- e
+-  
+- c
+- o
+- n
+- s
+- e
+- g
+- u
+- i
+-  
+- l
+- e
+- r
+-  
+- (
+- d
+- o
+- i
+- s
+-  
+- f
+- a
+- l
+- s
+- o
+- s
+-  
+- p
+- o
+- s
+- i
+- t
+- i
+- v
+- o
+- s
+-  
+- d
+- o
+-  
+- m
+- e
+- u
+-  
+- p
+- a
+- r
+- s
+- e
+- r
+-  
+- f
+- o
+- r
+- a
+- m
+-  
+- d
+- e
+- s
+- c
+- a
+- r
+- t
+- a
+- d
+- o
+- s
+- :
+-  
+- V
+- 2
+- 0
+- 9
+- ,
+-  
+- c
+- u
+- j
+- a
+- s
+-  
+- 8
+-  
+- c
+- a
+- t
+- e
+- g
+- o
+- r
+- i
+- a
+- s
+-  
+- o
+-  
+- p
+- a
+- r
+- s
+- e
+- r
+-  
+- l
+- e
+- u
+-  
+- c
+- o
+- m
+- o
+-  
+- 2
+- ,
+-  
+- e
+-  
+- V
+- 5
+- 2
+- 2
+- ,
+-  
+- c
+- u
+- j
+- o
+-  
+- c
+- ó
+- d
+- i
+- g
+- o
+-  
+- 8
+-  
+- u
+- s
+- a
+-  
+- t
+- r
+- a
+- v
+- e
+- s
+- s
+- ã
+- o
+-  
+- e
+- n
+- -
+- d
+- a
+- s
+- h
+-  
+- e
+- m
+-  
+- v
+- e
+- z
+-  
+- d
+- e
+-  
+- h
+- í
+- f
+- e
+- n
+- )
+- ,
+-  
+- e
+-  
+- n
+- e
+- l
+- a
+- s
+-  
+- s
+- ó
+-  
+- V
+- 6
+- 0
+- 5
+- =
+- =
+- 9
+- 9
+-  
+- s
+- o
+- b
+- r
+- e
+- v
+- i
+- v
+- e
+-  
+- —
+-  
+- m
+- a
+- s
+-  
+- n
+- ã
+- o
+-  
+- é
+-  
+- c
+- o
+- b
+- e
+- r
+- t
+- u
+- r
+- a
+-  
+- t
+- o
+- t
+- a
+- l
+-  
+- d
+- a
+- s
+-  
+- 8
+- 9
+- .
+- 
+
+- 
+
+- 2
+- )
+-  
+- O
+-  
+- p
+- e
+- s
+- o
+-  
+- i
+- n
+- j
+- e
+- t
+- a
+- d
+- o
+-  
+- p
+- o
+- r
+-  
+- V
+- 6
+- 0
+- 4
+- :
+-  
+- o
+-  
+- A
+- r
+- r
+- o
+- w
+-  
+- u
+- s
+- a
+-  
+- a
+- p
+- p
+- r
+- o
+- x
+- i
+- m
+- a
+- t
+- e
+- _
+- m
+- e
+- d
+- i
+- a
+- n
+-  
+- (
+- t
+- -
+- d
+- i
+- g
+- e
+- s
+- t
+- )
+- ,
+-  
+- q
+- u
+- e
+-  
+- e
+- m
+-  
+- p
+- r
+- i
+- n
+- c
+- í
+- p
+- i
+- o
+-  
+- p
+- o
+- d
+- e
+-  
+- v
+- a
+- r
+- i
+- a
+- r
+-  
+- c
+- o
+- m
+-  
+- v
+- e
+- r
+- s
+- ã
+- o
+-  
+- e
+-  
+- l
+- a
+- y
+- o
+- u
+- t
+-  
+- d
+- e
+-  
+- r
+- o
+- w
+-  
+- g
+- r
+- o
+- u
+- p
+- .
+-  
+- R
+- o
+- d
+- e
+- i
+-  
+- d
+- u
+- a
+- s
+-  
+- v
+- e
+- z
+- e
+- s
+-  
+- n
+- o
+-  
+- A
+- r
+- r
+- o
+- w
+-  
+- 2
+- 3
+- .
+- 0
+- .
+- 1
+- .
+- 1
+-  
+- c
+- o
+- m
+-  
+- r
+- e
+- s
+- u
+- l
+- t
+- a
+- d
+- o
+-  
+- i
+- d
+- ê
+- n
+- t
+- i
+- c
+- o
+-  
+- (
+- 4
+- ,
+- 0
+- 6
+- 8
+- 5
+- 7
+- 1
+- 4
+- 2
+- 8
+- 5
+- 7
+- 1
+- 4
+- 2
+- 8
+-  
+- n
+- o
+-  
+- m
+- u
+- n
+- i
+- c
+- í
+- p
+- i
+- o
+-  
+- 5
+- 1
+- 0
+- 2
+- 7
+- 0
+- 2
+- ,
+-  
+- t
+- o
+- t
+- a
+- l
+-  
+- 1
+- 5
+- 1
+- ,
+- 3
+- 2
+- 3
+- 9
+- 8
+- 7
+- 8
+- 0
+- 2
+- 0
+- 7
+- 4
+- 7
+- 8
+- 2
+- 4
+- )
+- ,
+-  
+- e
+-  
+- o
+-  
+- d
+- e
+- s
+- v
+- i
+- o
+-  
+- c
+- o
+- n
+- t
+- r
+- a
+-  
+- o
+-  
+- r
+- e
+- l
+- a
+- t
+- ó
+- r
+- i
+- o
+-  
+- é
+-  
+- e
+- x
+- a
+- t
+- a
+- m
+- e
+- n
+- t
+- e
+-  
+- 0
+- ,
+- 0
+- 1
+-  
+- e
+- m
+-  
+- d
+- o
+- i
+- s
+-  
+- l
+- u
+- g
+- a
+- r
+- e
+- s
+-  
+- i
+- n
+- d
+- e
+- p
+- e
+- n
+- d
+- e
+- n
+- t
+- e
+- s
+-  
+- —
+-  
+- o
+-  
+- q
+- u
+- e
+-  
+- a
+- p
+- o
+- n
+- t
+- a
+-  
+- p
+- a
+- r
+- a
+-  
+- t
+- r
+- o
+- c
+- a
+-  
+- d
+- e
+-  
+- d
+- í
+- g
+- i
+- t
+- o
+- ,
+-  
+- n
+- ã
+- o
+-  
+- p
+- a
+- r
+- a
+-  
+- i
+- n
+- s
+- t
+- a
+- b
+- i
+- l
+- i
+- d
+- a
+- d
+- e
+-  
+- n
+- u
+- m
+- é
+- r
+- i
+- c
+- a
+- .
+-  
+- A
+- i
+- n
+- d
+- a
+-  
+- a
+- s
+- s
+- i
+- m
+- ,
+-  
+- n
+- ã
+- o
+-  
+- p
+- o
+- s
+- s
+- o
+-  
+- e
+- x
+- c
+- l
+- u
+- i
+- r
+-  
+- q
+- u
+- e
+-  
+- a
+-  
+- e
+- x
+- e
+- c
+- u
+- ç
+- ã
+- o
+-  
+- o
+- r
+- i
+- g
+- i
+- n
+- a
+- l
+- ,
+-  
+- s
+- o
+- b
+- r
+- e
+-  
+- u
+- m
+- a
+-  
+- e
+- s
+- c
+- r
+- i
+- t
+- a
+-  
+- a
+- n
+- t
+- e
+- r
+- i
+- o
+- r
+-  
+- d
+- o
+-  
+- p
+- a
+- r
+- q
+- u
+- e
+- t
+- ,
+-  
+- t
+- e
+- n
+- h
+- a
+-  
+- p
+- r
+- o
+- d
+- u
+- z
+- i
+- d
+- o
+-  
+- 4
+- ,
+- 0
+- 7
+- 8
+- 5
+- 7
+- 1
+- .
+- 
+
+- 
+
+- 3
+- )
+-  
+- O
+-  
+- "
+- +
+- ~
+- 1
+- 5
+- 2
+- "
+-  
+- d
+- a
+-  
+- o
+- p
+- ç
+- ã
+- o
+-  
+- (
+- d
+- )
+- :
+-  
+- i
+- d
+- e
+- n
+- t
+- i
+- f
+- i
+- q
+- u
+- e
+- i
+-  
+- q
+- u
+- e
+-  
+- 0
+- ,
+- 0
+- 0
+- 0
+- 8
+- 5
+- %
+-  
+- c
+- o
+- r
+- r
+- e
+- s
+- p
+- o
+- n
+- d
+- e
+-  
+- a
+-  
+- +
+- 2
+- 1
+- 4
+-  
+- (
+- i
+- m
+- p
+- u
+- t
+- a
+- ç
+- ã
+- o
+-  
+- p
+- e
+- l
+- a
+-  
+- m
+- é
+- d
+- i
+- a
+-  
+- n
+- a
+- c
+- i
+- o
+- n
+- a
+- l
+- )
+-  
+- e
+-  
+- q
+- u
+- e
+-  
+- a
+-  
+- m
+- e
+- d
+- i
+- a
+- n
+- a
+-  
+- m
+- u
+- n
+- i
+- c
+- i
+- p
+- a
+- l
+-  
+- d
+- á
+-  
+- +
+- 1
+- 8
+- 8
+- ,
+-  
+- m
+- a
+- s
+-  
+- n
+- ã
+- o
+-  
+- c
+- o
+- n
+- s
+- e
+- g
+- u
+- i
+-  
+- r
+- e
+- c
+- o
+- n
+- s
+- t
+- r
+- u
+- i
+- r
+-  
+- n
+- e
+- n
+- h
+- u
+- m
+-  
+- c
+- r
+- i
+- t
+- é
+- r
+- i
+- o
+-  
+- d
+- e
+-  
+- i
+- m
+- p
+- u
+- t
+- a
+- ç
+- ã
+- o
+-  
+- q
+- u
+- e
+-  
+- p
+- r
+- o
+- d
+- u
+- z
+- a
+-  
+- 1
+- 5
+- 2
+- .
+-  
+- A
+-  
+- h
+- i
+- p
+- ó
+- t
+- e
+- s
+- e
+-  
+- d
+- e
+-  
+- c
+- o
+- n
+- t
+- a
+- m
+- i
+- n
+- a
+- ç
+- ã
+- o
+-  
+- p
+- e
+- l
+- o
+-  
+- +
+- 1
+- 5
+- 1
+- ,
+- 3
+-  
+- d
+- e
+-  
+- V
+- 6
+- 0
+- 4
+-  
+- é
+-  
+- i
+- n
+- t
+- e
+- r
+- p
+- r
+- e
+- t
+- a
+- ç
+- ã
+- o
+-  
+- m
+- i
+- n
+- h
+- a
+- ,
+-  
+- n
+- ã
+- o
+-  
+- m
+- e
+- d
+- i
+- ç
+- ã
+- o
+- .
+- 
+
+- 
+
+- 4
+- )
+-  
+- C
+- o
+- n
+- t
+- a
+- g
+- e
+- m
+-  
+- d
+- e
+-  
+- "
+- 2
+- 5
+-  
+- v
+- a
+- r
+- i
+- á
+- v
+- e
+- i
+- s
+- "
+-  
+- c
+- o
+- m
+-  
+- c
+- o
+- n
+- v
+- e
+- n
+- ç
+- ã
+- o
+-  
+- 9
+- /
+- 9
+- 9
+- :
+-  
+- m
+- e
+- u
+-  
+- 3
+- 5
+-  
+- é
+-  
+- p
+- i
+- s
+- o
+- ,
+-  
+- p
+- e
+- l
+- o
+-  
+- m
+- o
+- t
+- i
+- v
+- o
+-  
+- d
+- o
+-  
+- i
+- t
+- e
+- m
+-  
+- 1
+- .
+-  
+- A
+-  
+- d
+- i
+- r
+- e
+- ç
+- ã
+- o
+-  
+- d
+- o
+-  
+- e
+- r
+- r
+- o
+-  
+- é
+-  
+- c
+- e
+- r
+- t
+- a
+-  
+- (
+- 3
+- 5
+-  
+- >
+-  
+- 2
+- 5
+- )
+- ,
+-  
+- a
+-  
+- m
+- a
+- g
+- n
+- i
+- t
+- u
+- d
+- e
+-  
+- e
+- x
+- a
+- t
+- a
+-  
+- n
+- ã
+- o
+- .
+- 
+
+- 
+
+- 5
+- )
+-  
+- N
+- ã
+- o
+-  
+- r
+- e
+- p
+- r
+- o
+- c
+- e
+- s
+- s
+- e
+- i
+-  
+- o
+-  
+- p
+- i
+- p
+- e
+- l
+- i
+- n
+- e
+-  
+- (
+- n
+- e
+- n
+- h
+- u
+- m
+-  
+- t
+- a
+- r
+- _
+- m
+- a
+- k
+- e
+- )
+- .
+-  
+- T
+- o
+- d
+- a
+- s
+-  
+- a
+- s
+-  
+- m
+- e
+- d
+- i
+- ç
+- õ
+- e
+- s
+-  
+- s
+- ã
+- o
+-  
+- s
+- o
+- b
+- r
+- e
+-  
+- o
+- s
+-  
+- a
+- r
+- t
+- e
+- f
+- a
+- t
+- o
+- s
+-  
+- v
+- 0
+- .
+- 7
+- .
+- 0
+-  
+- j
+- á
+-  
+- g
+- r
+- a
+- v
+- a
+- d
+- o
+- s
+-  
+- e
+- m
+-  
+- d
+- a
+- t
+- a
+- /
+- ,
+-  
+- o
+- s
+-  
+- p
+- a
+- r
+- q
+- u
+- e
+- t
+- s
+-  
+- p
+- u
+- b
+- l
+- i
+- c
+- a
+- d
+- o
+- s
+-  
+- e
+-  
+- o
+- s
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+- s
+-  
+- c
+- r
+- u
+- s
+- .
+-  
+- N
+- ã
+- o
+-  
+- e
+- d
+- i
+- t
+- e
+- i
+-  
+- n
+- e
+- n
+- h
+- u
+- m
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+-  
+- d
+- o
+-  
+- p
+- r
+- o
+- j
+- e
+- t
+- o
+- .
+
+
+
+---
+
+## divergencias_v050_v060_2010_
+
+**Veredito.** erros_graves
+
+Checei 79 afirmações do relatório refazendo cada medição a partir dos parquets v0.5.0 baixados do release, da saída atual do pipeline, dos 772 XLS crus do IBGE, do dicionário oficial e do git. O núcleo empírico sobre o shift de SP e sobre code_weighting está sólido — linhas (310120/310114), os 6 setores ausentes (3 CE, 2 PR, 1 AM, confirmados como ausência no arquivo cru do IBGE), 2,09 % de NA em pessoa02_V001 em SP, faixa 0,59–4,45 % nas demais UFs, 10.184 áreas de ponderação, 0 % NA, arquivo UTF-16LE com 310.120 linhas, e as 15 colunas espúrias de ENTORNO05_RO com 1 valor não-NA cada. Mas há nove erros, cinco deles graves: a seção inteira de "renames IBGE→canonical" é falsa (a v0.5.0 já publicava os 19 nomes canonical; só sobra Cod_municipio), os tipos da v0.5.0 não são int32/int64 e sim string em todas as code_*, "86 cols espúrias" são 85, "84/85 identidades" são 85/85 (medido nos três conjuntos crus e no parquet), e o sintoma atribuído ao issue #73 ("X virando 0") não existe no dado publicado — as 17.631 células "X" que testei são NA na v0.5.0. O #68 também está descrito errado (V01–V99, não V01–V09; 99 de 171 colunas, não "todo NA"; SP1/SP2 têm outra causa) e o #71 troca um padrão de 23 UFs, incluindo o DF, por "UFs rurais", além de restringir a V009 um defeito que atinge V003–V012. A seção "bugs a corrigir antes de shippar" está desatualizada: os dois bugs foram corrigidos no mesmo commit que criou o relatório.
+
+
+### Erros GRAVES (9)
+
+**1. [GRAVE] Seção 'Basico — renames IBGE→canonical', linhas 26-27: "v0.5.0 publicava nomes IBGE crus: Nome_do_municipio, Cod_meso, Nome_da_meso, ... Cod_Grandes Regiões, Nome_Grande_Regiao"**
+
+- *O relatorio diz:* A v0.5.0 publicava 19 colunas com nomes IBGE crus no Basico, substituídas por nomes canonical em v0.6.0.
+- *O correto e:* A v0.5.0 já publicava os 19 nomes canonical (code_muni, name_muni, code_state, name_state, code_region, name_region, code_meso, name_meso, code_micro, name_micro, code_metro, name_metro, name_neighborhood, code_neighborhood, code_district, name_district, code_subdistrict, name_subdistrict, Basico_V1005). Nenhum dos 19 nomes IBGE crus existe na v0.5.0. A única coluna com nomenclatura IBGE é Cod_municipio, que convive com code_muni; a mudança real em v0.6.0 é a REMOÇÃO dessa coluna (35 -> 34 colunas).
+- *Medido por:* arrow::open_dataset() no 2010_tracts_Basico_v0.5.0.parquet (tamanho conferido contra o asset do release via gh) e nas 8 tabelas: setdiff(names(v0.5.0), names(pipeline)) = 'Cod_municipio' e setdiff inverso = character(0) em todas as 8. A spec phgfsouza (derivada da v0.5.0) lista Cod_municipio na posição 19 e os demais nomes canonical.
+
+**2. [GRAVE] Seção 'Basico — renames', linha 32: "Causa: o bloco de rename canonical ... era dead code em v0.5.0 (if(tbl == 'Basico_') nunca matched tbl=\"BASICO\")"**
+
+- *O relatorio diz:* O dead code explica os nomes crus publicados na v0.5.0.
+- *O correto e:* O dead code existiu (corrigido no commit 3555121, 2026-05-03, em duas condições: 'Basico_'->'BASICO' e 'Entorno_'->'ENTORNO'), mas afetou apenas builds internos do pipeline em maio/2026. A v0.5.0 foi produzida pelo script legado R_ainda_sem_targets/census_tracts_aggreg_2010.R, que renomeava corretamente — por isso a v0.5.0 tem os nomes canonical. A causa é inferência, não medição.
+- *Medido por:* git show 3555121 -- R/census_tracts_2010.R (linhas -if(tbl == 'Basico_') / +if(tbl == 'BASICO')); git log --date=short; leitura do script legado; e o schema medido da v0.5.0 (ver erro anterior), que contradiz a consequência prevista.
+
+**3. [GRAVE] Seção 'Tipos de code_*', linha 38: "v0.5.0: code_tract é string; demais code_* (code_muni, code_state, etc.) são int32/int64"**
+
+- *O relatorio diz:* Na v0.5.0, só code_tract era string; as demais code_* eram inteiras.
+- *O correto e:* Na v0.5.0, TODAS as code_* são string, nas 8 tabelas: code_tract, code_weighting, code_muni, code_state, code_region, code_meso, code_micro, code_metro, code_neighborhood, code_district, code_subdistrict. Nenhuma é int32/int64. (A v0.6.0 pré-release do GitHub também é toda string.)
+- *Medido por:* open_dataset(path)$schema em cada um dos 8 parquets v0.5.0, dos 8 v0.6.0 do GitHub e dos 8 da saída atual; impressão do tipo Arrow de cada coluna cujo nome começa com code_/Cod_.
+
+**4. [GRAVE] Título da seção Pessoa, linha 48: "shift SP corrigido — 86 cols espúrias eliminadas"**
+
+- *O relatorio diz:* 86 colunas espúrias foram eliminadas.
+- *O correto e:* 85. Sem a correção, a união dos nomes de Pessoa02 é V001..V255 + V1005 = 256 colunas; com a correção são 171 (V001..V170 + V1005). 256 - 171 = 85. Confere também com o build intermediário de 2093 colunas citado no commit 6a1e66f: 2093 - 2008 = 85. O próprio corpo do relatório (linha 64) diz 'As 85 vars'.
+- *Medido por:* Leitura dos cabeçalhos dos 28 arquivos PESSOA02_*.xls (readxl): 26 UFs com V001..V170, SP1 e SP2 com V086..V255; união = 255 números V distintos, sem buracos. Contagem de pessoa02_V* no parquet = 171 (v0.5.0 e atual).
+
+**5. [GRAVE] Seção Pessoa, linha 55: "84/85 batem com diferença absoluta zero em SP1 e SP2 quando se usa V_(i+85) + V_(i+170)"**
+
+- *O relatorio diz:* 84 das 85 identidades aritméticas batem exatamente em SP1 e SP2.
+- *O correto e:* 85 de 85 batem, com diferença absoluta zero, em todas as linhas comparáveis: AC 874 setores, SP1 18.363 setores, SP2 47.733 setores. No parquet final, a identidade pessoa02_V_i + pessoa02_V_(i+85) = pessoa01_V_i vale para as 85 categorias em todos os 66.096 setores de SP.
+- *Medido por:* Leitura dos XLS crus PESSOA01_/PESSOA02_ de AC, SP1 e SP2 com readxl (col_types='text'), merge por Cod_setor com prefixos explícitos (o merge com sufixos default falha silenciosamente porque os conjuntos de nomes não se sobrepõem), conversão com gsub(',','.') + as.numeric, e teste |a-(h+mu)| < 1e-9 exigindo neq == ncomp. Teste equivalente no parquet v0.7.0 filtrando code_state == 35.
+
+**6. [GRAVE] Seção Pessoa, linha 62: "v0.5.0 publicou Pessoa02 SP com os mesmos nomes shiftados, e as variáveis V086-V255 ficaram com NA em todas as UFs ≠ SP"**
+
+- *O relatorio diz:* Na v0.5.0, V086-V255 são NA em todas as UFs que não SP.
+- *O correto e:* A primeira metade confere (SP na v0.5.0 tem V001-V085 100% NA e V086-V170 com os valores que deveriam ser V001-V085). A segunda é falsa: na v0.5.0 não existem colunas pessoa02_V171..V255, e pessoa02_V086..V170 estão preenchidas em todas as UFs (NA entre 0,59% e 4,45%). A descrição corresponde ao build intermediário do pipeline (2093 colunas), não à v0.5.0 publicada.
+- *Medido por:* Lista de nomes do 2010_tracts_Pessoa_v0.5.0.parquet: 171 colunas pessoa02_V*, de V001 a V170 mais V1005. %NA por UF de pessoa02_V170 na v0.5.0: 0,59% (PB) a 4,45% (SC); SP = 2,09%. Perfil de colunas 100% NA por UF: SP = 85 colunas contíguas (V001-V085); AC = 0.
+
+**7. [GRAVE] Tabela de bug fixes, linha 83: "#73 | 'X' (marcador censura IBGE) virando 0 em vez de NA" (coluna 'Sintoma em v0.5.0')**
+
+- *O relatorio diz:* Na v0.5.0 o marcador de censura X aparecia como 0 em vez de NA.
+- *O correto e:* Não se reproduz: as células 'X' do IBGE já eram NA na v0.5.0 publicada. Em 17.631 células 'X' testadas (6 UFs/arquivos, 6 tabelas diferentes), a v0.5.0 traz NA em 100% e 0 em nenhuma — idêntico à saída atual. O script legado que gerou a v0.5.0 tem inclusive o comentário 'whenever there is X the value gets convert to NA' e faz a coerção com as.numeric.
+- *Medido por:* Para DOMICILIO01_AC (4.780 X), ENTORNO01_AC (3.980), PESSOA01_AC (1.680), PESSOA05_AC (180), DOMICILIORENDA_AC (280), DOMICILIORENDA_RR (392), PESSOARENDA_RR (3.696) e RESPONSAVEL01_TO (3.103): localizei cada célula 'X' no XLS cru (linha=Cod_setor, coluna=V*), e li o mesmo par (setor, coluna) nos parquets v0.5.0 e v0.7.0, contando NA / zero / outro.
+
+**8. [GRAVE] Tabela de bug fixes, linha 84: "#68 | GO (e SP1/SP2) Pessoa02 todo NA por nomes V01-V09 malformados"**
+
+- *O relatorio diz:* Pessoa02 de GO (e de SP1/SP2) ficava todo NA por causa de nomes V01-V09 malformados.
+- *O correto e:* Três correções: (a) o nome malformado é V01-V99 (o changelog do IBGE diz 'as variáveis de V001 a V099 foram nomeadas omitindo um 0'); (b) não é 'todo NA' — na v0.5.0 GO tem 99 de 171 colunas pessoa02_V* 100% NA (V001-V099 contíguas) e 72 colunas com dado; (c) SP1/SP2 não pertencem ao #68 — o NA de SP vem do shift +85 (V001-V085, 85 colunas), como a própria linha 53 do relatório e o comentário do código dizem. A linha 53 escreve 'GO V01-V99', contradizendo a linha 84.
+- *Medido por:* Perfil de colunas 100% NA por UF no 2010_tracts_Pessoa_v0.5.0.parquet (GO: 99 colunas, V001-V099, contíguas; SP: 85 colunas, V001-V085; AC: 0). Cabeçalhos dos 28 PESSOA02_*.xls atuais (todos V com 4 caracteres, GO já corrigido). Changelog 1_Atualizacoes_20260615.txt baixado do FTP do IBGE, entrada de 15/09/2025.
+
+**9. [GRAVE] Tabela de bug fixes, linha 82: "#71 | V009 (renda) com 96-99% NA em UFs rurais por destruição da coluna no read"**
+
+- *O relatorio diz:* V009 tinha 96-99% de NA nas UFs rurais.
+- *O correto e:* A faixa está certa para V009 (96,21% no AM a 98,81% no TO), mas o recorte é errado: atinge 23 das 27 UFs, incluindo o Distrito Federal (98,60%), a unidade mais urbanizada do país; as exceções são MG, RJ e PR (0,00%) e SP (27,35%). Além disso não é só V009: V003 a V012 (10 colunas) têm o mesmo perfil na v0.5.0, com 23 UFs acima de 90% de NA em cada uma — e o próprio issue #71 fala em 'v003 at v006'.
+- *Medido por:* group_by(abbrev_state) no 2010_tracts_Basico_v0.5.0.parquet com sum(is.na(V009))/n, e o mesmo para V001..V012; comparação com a saída atual (V009 com 0,001% de NA). Verificação no XLS cru: V009 é 100% numérico, sem 'X' e sem NA, em TO, DF, MG, RJ, PR, SP1, SP2 e AC.
+
+
+### Demais erros (5)
+
+**1. [MENOR] Seção 'Tipos de code_*', linha 41: "comparações tipo code_state == '11' (string) ou code_state == 11L (integer) mudam para code_state == 11 (numeric)"**
+
+- *O relatorio diz:* Havia usuários comparando code_state com inteiro (11L) na v0.5.0.
+- *O correto e:* Na v0.5.0 nenhuma code_* era inteira — todas string. A orientação de migração deveria ser apenas "11" (string) -> 11 (double), e vale para todas as code_*, não só code_tract.
+- *Medido por:* Mesmo levantamento de schema Arrow das 8 tabelas v0.5.0 (todas as code_* = string).
+
+**2. [MENOR] Seção 'Bugs conhecidos a corrigir antes de shippar v0.6.0' (linhas 66-76): "table_name vazando em todos os 8 parquets" e "Adicionar out$table_name <- NULL"**
+
+- *O relatorio diz:* Os dois bugs (table_name e colunas espúrias do Entorno) estão pendentes de correção em sessão dedicada.
+- *O correto e:* Ambos já estavam corrigidos quando o relatório foi escrito — no mesmo commit 6a1e66f que criou o documento. table_name não existe em nenhum dos 8 parquets atuais nem nos arquivos sem versão de 04-05/05; a correção está em R/census_tracts_2010.R:334 e o filtro das colunas '...' em R/census_tracts_2010.R:128-129.
+- *Medido por:* Checagem de 'table_name' %in% names() e de nomes que casam ^\\.{3}\\d+$ nos 8 parquets v0.7.0, nos 8 v0.6.0 locais e nos 8 arquivos sem sufixo de versão; git show 6a1e66f --stat e leitura das linhas do arquivo atual.
+
+**3. [MENOR] Seção 'Basico — renames', linha 30: "code_muni (substitui Cod_municipio), code_state (substitui Cod_UF), name_state (substitui Nome_da_UF), code_region (substitui Cod_Grandes Regiões), name_region (substitui Nome_Grande_Regiao)"**
+
+- *O relatorio diz:* As colunas canonical substituíram colunas IBGE homônimas na passagem v0.5.0 -> v0.6.0.
+- *O correto e:* code_muni, code_state, name_state, code_region e name_region já existiam na v0.5.0 lado a lado. O que muda de fato é: Cod_municipio deixa de ser publicada (única coluna removida em todas as 8 tabelas) e os valores de name_state/name_region/abbrev_state do Basico são padronizados.
+- *Medido por:* setdiff de nomes entre v0.5.0 e saída atual nas 8 tabelas; contagem de colunas 35 -> 34 apenas no Basico.
+
+**4. [COSMETICO] Seção Entorno, linha 76: "viram cols com 99.9999% NA (1 valor não-NA em 310k rows)"**
+
+- *O relatorio diz:* 99,9999% de NA.
+- *O correto e:* 99,99968% (1 valor não-NA em 310.120 linhas). O fato está certo — exatamente 1 não-NA por coluna —, a porcentagem tem nove a mais do que os dados suportam.
+- *Medido por:* Leitura completa (não n_max=0) de ENTORNO05_RO.xls no range além da coluna 241: 15 colunas auto-nomeadas, cada uma com exatamente 1 valor não-NA; denominador 310.120 linhas da tabela nacional.
+
+**5. [COSMETICO] Seção 'Basico — renames', linha 32: "Fix de 1 linha em 2026-05-03 ativou o rename"**
+
+- *O relatorio diz:* Correção de 1 linha.
+- *O correto e:* Duas condições foram trocadas no mesmo commit ('Basico_'->'BASICO' e 'Entorno_'->'ENTORNO'). A data 2026-05-03 confere (commit 3555121).
+- *Medido por:* git show 3555121 -- R/census_tracts_2010.R e git log --date=short.
+
+### Incertezas (2048)
+
+- 1
+- )
+-  
+- M
+- e
+- c
+- a
+- n
+- i
+- s
+- m
+- o
+-  
+- d
+- o
+-  
+- #
+- 7
+- 1
+- :
+-  
+- o
+-  
+- r
+- e
+- l
+- a
+- t
+- ó
+- r
+- i
+- o
+-  
+- d
+- i
+- z
+-  
+- '
+- d
+- e
+- s
+- t
+- r
+- u
+- i
+- ç
+- ã
+- o
+-  
+- d
+- a
+-  
+- c
+- o
+- l
+- u
+- n
+- a
+-  
+- n
+- o
+-  
+- r
+- e
+- a
+- d
+- '
+-  
+- e
+-  
+- a
+-  
+- d
+- i
+- r
+- e
+- ç
+- ã
+- o
+-  
+- d
+- a
+-  
+- c
+- u
+- l
+- p
+- a
+-  
+- (
+- n
+- o
+- s
+- s
+- o
+-  
+- p
+- i
+- p
+- e
+- l
+- i
+- n
+- e
+- ,
+-  
+- n
+- ã
+- o
+-  
+- o
+-  
+- I
+- B
+- G
+- E
+- )
+-  
+- é
+-  
+- c
+- o
+- e
+- r
+- e
+- n
+- t
+- e
+-  
+- c
+- o
+- m
+-  
+- o
+-  
+- q
+- u
+- e
+-  
+- v
+- i
+-  
+- —
+-  
+- n
+- o
+-  
+- X
+- L
+- S
+-  
+- c
+- r
+- u
+-  
+- V
+- 0
+- 0
+- 9
+-  
+- é
+-  
+- 1
+- 0
+- 0
+- %
+-  
+- n
+- u
+- m
+- é
+- r
+- i
+- c
+- o
+-  
+- —
+- ,
+-  
+- m
+- a
+- s
+-  
+- n
+- ã
+- o
+-  
+- c
+- o
+- n
+- s
+- e
+- g
+- u
+- i
+-  
+- r
+- e
+- p
+- r
+- o
+- d
+- u
+- z
+- i
+- r
+-  
+- o
+-  
+- m
+- e
+- c
+- a
+- n
+- i
+- s
+- m
+- o
+-  
+- e
+- x
+- a
+- t
+- o
+-  
+- q
+- u
+- e
+-  
+- s
+- e
+- p
+- a
+- r
+- a
+-  
+- a
+- s
+-  
+- 2
+- 3
+-  
+- U
+- F
+- s
+-  
+- a
+- f
+- e
+- t
+- a
+- d
+- a
+- s
+-  
+- d
+- e
+-  
+- M
+- G
+- /
+- R
+- J
+- /
+- P
+- R
+-  
+- (
+- 0
+- %
+-  
+- d
+- e
+-  
+- N
+- A
+- )
+- ,
+-  
+- p
+- o
+- r
+- q
+- u
+- e
+-  
+- a
+-  
+- v
+- 0
+- .
+- 5
+- .
+- 0
+-  
+- f
+- o
+- i
+-  
+- g
+- e
+- r
+- a
+- d
+- a
+-  
+- p
+- o
+- r
+-  
+- u
+- m
+-  
+- e
+- s
+- t
+- a
+- d
+- o
+-  
+- d
+- o
+-  
+- s
+- c
+- r
+- i
+- p
+- t
+-  
+- l
+- e
+- g
+- a
+- d
+- o
+-  
+- q
+- u
+- e
+-  
+- n
+- ã
+- o
+-  
+- e
+- s
+- t
+- á
+-  
+- m
+- a
+- i
+- s
+-  
+- e
+- m
+-  
+- d
+- i
+- s
+- c
+- o
+- .
+-  
+- A
+- c
+- h
+- e
+- i
+-  
+- d
+- o
+- i
+- s
+-  
+- c
+- a
+- n
+- d
+- i
+- d
+- a
+- t
+- o
+- s
+- :
+-  
+- d
+- e
+- c
+- i
+- m
+- a
+- l
+-  
+- c
+- o
+- m
+-  
+- v
+- í
+- r
+- g
+- u
+- l
+- a
+-  
+- (
+- '
+- 3
+- ,
+- 3
+- 9
+- '
+- )
+-  
+- c
+- o
+- a
+- g
+- i
+- d
+- o
+-  
+- p
+- o
+- r
+-  
+- a
+- s
+- .
+- n
+- u
+- m
+- e
+- r
+- i
+- c
+- ,
+-  
+- e
+-  
+- c
+- a
+- b
+- e
+- ç
+- a
+- l
+- h
+- o
+-  
+- C
+- S
+- V
+-  
+- d
+- o
+-  
+- I
+- B
+- G
+- E
+-  
+- c
+- o
+- m
+-  
+- u
+- m
+-  
+- s
+- e
+- p
+- a
+- r
+- a
+- d
+- o
+- r
+-  
+- a
+-  
+- m
+- a
+- i
+- s
+-  
+- q
+- u
+- e
+-  
+- a
+- s
+-  
+- l
+- i
+- n
+- h
+- a
+- s
+-  
+- d
+- e
+-  
+- d
+- a
+- d
+- o
+- s
+-  
+- (
+- 3
+- 3
+-  
+- c
+- a
+- m
+- p
+- o
+- s
+-  
+- n
+- o
+-  
+- h
+- e
+- a
+- d
+- e
+- r
+-  
+- c
+- o
+- n
+- t
+- r
+- a
+-  
+- 3
+- 2
+-  
+- n
+- o
+- s
+-  
+- d
+- a
+- d
+- o
+- s
+-  
+- e
+- m
+-  
+- T
+- O
+- ,
+-  
+- M
+- G
+- ,
+-  
+- D
+- F
+-  
+- e
+-  
+- P
+- R
+- ;
+-  
+- A
+- C
+-  
+- n
+- ã
+- o
+-  
+- t
+- e
+- m
+-  
+- e
+- s
+- s
+- a
+-  
+- a
+- s
+- s
+- i
+- m
+- e
+- t
+- r
+- i
+- a
+-  
+- e
+-  
+- m
+- e
+- s
+- m
+- o
+-  
+- a
+- s
+- s
+- i
+- m
+-  
+- t
+- e
+- m
+-  
+- 9
+- 7
+- ,
+- 9
+- 4
+- %
+-  
+- d
+- e
+-  
+- N
+- A
+- )
+- .
+-  
+- A
+-  
+- f
+- r
+- a
+- s
+- e
+-  
+- d
+- o
+-  
+- r
+- e
+- l
+- a
+- t
+- ó
+- r
+- i
+- o
+- ,
+-  
+- p
+- o
+- r
+- t
+- a
+- n
+- t
+- o
+- ,
+-  
+- é
+-  
+- i
+- n
+- f
+- e
+- r
+- ê
+- n
+- c
+- i
+- a
+-  
+- n
+- ã
+- o
+-  
+- m
+- e
+- d
+- i
+- d
+- a
+- .
+-  
+- 2
+- )
+-  
+- A
+-  
+- '
+- v
+- 0
+- .
+- 6
+- .
+- 0
+- '
+-  
+- d
+- o
+-  
+- r
+- e
+- l
+- a
+- t
+- ó
+- r
+- i
+- o
+-  
+- é
+-  
+- a
+-  
+- s
+- a
+- í
+- d
+- a
+-  
+- d
+- o
+-  
+- p
+- i
+- p
+- e
+- l
+- i
+- n
+- e
+-  
+- d
+- e
+-  
+- m
+- a
+- i
+- o
+- /
+- 2
+- 0
+- 2
+- 6
+- ,
+-  
+- n
+- ã
+- o
+-  
+- o
+-  
+- p
+- r
+- é
+- -
+- r
+- e
+- l
+- e
+- a
+- s
+- e
+-  
+- v
+- 0
+- .
+- 6
+- .
+- 0
+-  
+- p
+- u
+- b
+- l
+- i
+- c
+- a
+- d
+- o
+-  
+- n
+- o
+-  
+- G
+- i
+- t
+- H
+- u
+- b
+-  
+- e
+- m
+-  
+- s
+- e
+- t
+- /
+- 2
+- 0
+- 2
+- 5
+-  
+- —
+-  
+- e
+- s
+- t
+- e
+-  
+- ú
+- l
+- t
+- i
+- m
+- o
+-  
+- a
+- i
+- n
+- d
+- a
+-  
+- t
+- e
+- m
+-  
+- t
+- o
+- d
+- a
+- s
+-  
+- a
+- s
+-  
+- c
+- o
+- d
+- e
+- _
+- *
+-  
+- c
+- o
+- m
+- o
+-  
+- s
+- t
+- r
+- i
+- n
+- g
+- .
+-  
+- Q
+- u
+- e
+- m
+-  
+- l
+- e
+- r
+-  
+- a
+-  
+- s
+- e
+- ç
+- ã
+- o
+-  
+- d
+- e
+-  
+- t
+- i
+- p
+- o
+- s
+-  
+- p
+- e
+- n
+- s
+- a
+- n
+- d
+- o
+-  
+- n
+- o
+-  
+- r
+- e
+- l
+- e
+- a
+- s
+- e
+-  
+- p
+- u
+- b
+- l
+- i
+- c
+- a
+- d
+- o
+-  
+- s
+- e
+-  
+- c
+- o
+- n
+- f
+- u
+- n
+- d
+- e
+- .
+-  
+- 3
+- )
+-  
+- O
+- s
+-  
+- p
+- a
+- r
+- q
+- u
+- e
+- t
+- s
+-  
+- 2
+- 0
+- 1
+- 0
+-  
+- d
+- e
+-  
+- s
+- e
+- t
+- o
+- r
+- e
+- s
+-  
+- e
+- m
+-  
+- d
+- a
+- t
+- a
+- /
+-  
+- c
+- o
+- m
+-  
+- s
+- u
+- f
+- i
+- x
+- o
+-  
+- v
+- 0
+- .
+- 7
+- .
+- 0
+-  
+- t
+- ê
+- m
+-  
+- m
+- d
+- 5
+-  
+- i
+- d
+- ê
+- n
+- t
+- i
+- c
+- o
+-  
+- a
+- o
+- s
+-  
+- v
+- 0
+- .
+- 6
+- .
+- 0
+-  
+- l
+- o
+- c
+- a
+- i
+- s
+- :
+-  
+- e
+- s
+- t
+- e
+-  
+- e
+- i
+- x
+- o
+-  
+- n
+- ã
+- o
+-  
+- f
+- o
+- i
+-  
+- r
+- e
+- f
+- e
+- i
+- t
+- o
+-  
+- e
+- m
+-  
+- v
+- 0
+- .
+- 7
+- .
+- 0
+- ,
+-  
+- e
+- n
+- t
+- ã
+- o
+-  
+- n
+- e
+- n
+- h
+- u
+- m
+-  
+- n
+- ú
+- m
+- e
+- r
+- o
+-  
+- d
+- e
+- s
+- t
+- a
+-  
+- a
+- u
+- d
+- i
+- t
+- o
+- r
+- i
+- a
+-  
+- m
+- u
+- d
+- a
+-  
+- p
+- o
+- r
+-  
+- c
+- a
+- u
+- s
+- a
+-  
+- d
+- a
+-  
+- r
+- e
+- c
+- o
+- n
+- s
+- t
+- r
+- u
+- ç
+- ã
+- o
+-  
+- d
+- e
+-  
+- o
+- u
+- t
+- r
+- o
+- s
+-  
+- p
+- a
+- r
+- q
+- u
+- e
+- t
+- s
+- .
+-  
+- 4
+- )
+-  
+- O
+-  
+- I
+- B
+- G
+- E
+-  
+- r
+- e
+- p
+- u
+- b
+- l
+- i
+- c
+- o
+- u
+-  
+- a
+- s
+-  
+- 2
+- 7
+-  
+- U
+- F
+- s
+-  
+- e
+- m
+-  
+- 1
+- 5
+- /
+- 0
+- 6
+- /
+- 2
+- 0
+- 2
+- 6
+-  
+- (
+- 1
+- _
+- A
+- t
+- u
+- a
+- l
+- i
+- z
+- a
+- c
+- o
+- e
+- s
+- _
+- 2
+- 0
+- 2
+- 6
+- 0
+- 6
+- 1
+- 5
+- .
+- t
+- x
+- t
+- :
+-  
+- '
+- C
+- o
+- d
+- _
+- s
+- e
+- t
+- o
+- r
+-  
+- d
+- o
+- s
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+- s
+-  
+- C
+- S
+- V
+-  
+- e
+- s
+- t
+- a
+- v
+- a
+- m
+-  
+- c
+- o
+- r
+- r
+- o
+- m
+- p
+- i
+- d
+- a
+- s
+- '
+- )
+- ;
+-  
+- o
+- s
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+- s
+-  
+- c
+- r
+- u
+- s
+-  
+- e
+- m
+-  
+- d
+- i
+- s
+- c
+- o
+-  
+- (
+- 2
+- 0
+- 2
+- 3
+- 1
+- 0
+- 3
+- 0
+- /
+- 2
+- 0
+- 2
+- 4
+- 1
+- 2
+- 1
+- 1
+- /
+- 2
+- 0
+- 2
+- 5
+- 0
+- 9
+- 1
+- 5
+- )
+-  
+- e
+- s
+- t
+- ã
+- o
+-  
+- s
+- u
+- p
+- e
+- r
+- a
+- d
+- o
+- s
+- .
+-  
+- O
+-  
+- c
+- h
+- a
+- n
+- g
+- e
+- l
+- o
+- g
+-  
+- n
+- ã
+- o
+-  
+- m
+- e
+- n
+- c
+- i
+- o
+- n
+- a
+-  
+- P
+- e
+- s
+- s
+- o
+- a
+- 0
+- 2
+-  
+- d
+- e
+-  
+- S
+- P
+- ,
+-  
+- e
+- n
+- t
+- ã
+- o
+-  
+- o
+-  
+- s
+- h
+- i
+- f
+- t
+-  
+- p
+- r
+- o
+- v
+- a
+- v
+- e
+- l
+- m
+- e
+- n
+- t
+- e
+-  
+- p
+- e
+- r
+- s
+- i
+- s
+- t
+- e
+- ,
+-  
+- m
+- a
+- s
+-  
+- a
+- n
+- t
+- e
+- s
+-  
+- d
+- e
+-  
+- m
+- a
+- n
+- d
+- a
+- r
+-  
+- a
+-  
+- c
+- a
+- r
+- t
+- a
+-  
+- c
+- o
+- n
+- v
+- é
+- m
+-  
+- r
+- e
+- b
+- a
+- i
+- x
+- a
+- r
+-  
+- o
+- s
+-  
+- z
+- i
+- p
+- s
+-  
+- d
+- e
+-  
+- 2
+- 0
+- 2
+- 6
+- 0
+- 6
+- 1
+- 5
+-  
+- e
+-  
+- r
+- e
+- c
+- o
+- n
+- f
+- e
+- r
+- i
+- r
+-  
+- o
+-  
+- c
+- a
+- b
+- e
+- ç
+- a
+- l
+- h
+- o
+-  
+- d
+- e
+-  
+- P
+- E
+- S
+- S
+- O
+- A
+- 0
+- 2
+- _
+- S
+- P
+- 1
+- /
+- S
+- P
+- 2
+- .
+-  
+- 5
+- )
+-  
+- A
+-  
+- c
+- h
+- e
+- c
+- a
+- g
+- e
+- m
+-  
+- d
+- o
+-  
+- m
+- a
+- r
+- c
+- a
+- d
+- o
+- r
+-  
+- '
+- X
+- '
+-  
+- c
+- o
+- b
+- r
+- i
+- u
+-  
+- 1
+- 7
+- .
+- 6
+- 3
+- 1
+-  
+- c
+- é
+- l
+- u
+- l
+- a
+- s
+-  
+- e
+- m
+-  
+- 8
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+- s
+-  
+- (
+- A
+- C
+- ,
+-  
+- R
+- R
+- ,
+-  
+- T
+- O
+- )
+-  
+- e
+-  
+- 6
+-  
+- t
+- a
+- b
+- e
+- l
+- a
+- s
+- ;
+-  
+- n
+- ã
+- o
+-  
+- v
+- a
+- r
+- r
+- i
+-  
+- a
+- s
+-  
+- 2
+- 7
+-  
+- U
+- F
+- s
+- ,
+-  
+- e
+- m
+- b
+- o
+- r
+- a
+-  
+- a
+-  
+- c
+- o
+- e
+- r
+- ç
+- ã
+- o
+-  
+- v
+- i
+- a
+-  
+- a
+- s
+- .
+- n
+- u
+- m
+- e
+- r
+- i
+- c
+-  
+- n
+- o
+-  
+- s
+- c
+- r
+- i
+- p
+- t
+-  
+- l
+- e
+- g
+- a
+- d
+- o
+-  
+- t
+- o
+- r
+- n
+- e
+-  
+- i
+- m
+- p
+- r
+- o
+- v
+- á
+- v
+- e
+- l
+-  
+- u
+- m
+-  
+- c
+- o
+- m
+- p
+- o
+- r
+- t
+- a
+- m
+- e
+- n
+- t
+- o
+-  
+- d
+- i
+- f
+- e
+- r
+- e
+- n
+- t
+- e
+-  
+- e
+- m
+-  
+- o
+- u
+- t
+- r
+- a
+-  
+- U
+- F
+- .
+-  
+- 6
+- )
+-  
+- A
+- v
+- i
+- s
+- o
+-  
+- m
+- e
+- t
+- o
+- d
+- o
+- l
+- ó
+- g
+- i
+- c
+- o
+-  
+- p
+- a
+- r
+- a
+-  
+- q
+- u
+- e
+- m
+-  
+- f
+- o
+- r
+-  
+- r
+- e
+- f
+- a
+- z
+- e
+- r
+- :
+-  
+- r
+- e
+- a
+- d
+- x
+- l
+-  
+- c
+- o
+- m
+-  
+- n
+- _
+- m
+- a
+- x
+- =
+- 0
+-  
+- e
+- s
+- c
+- o
+- n
+- d
+- e
+-  
+- c
+- o
+- l
+- u
+- n
+- a
+- s
+-  
+- a
+- l
+- é
+- m
+-  
+- d
+- o
+-  
+- c
+- a
+- b
+- e
+- ç
+- a
+- l
+- h
+- o
+-  
+- —
+-  
+- E
+- N
+- T
+- O
+- R
+- N
+- O
+- 0
+- 5
+- _
+- R
+- O
+- .
+- x
+- l
+- s
+-  
+- m
+- o
+- s
+- t
+- r
+- a
+-  
+- 2
+- 4
+- 1
+-  
+- c
+- o
+- l
+- u
+- n
+- a
+- s
+-  
+- c
+- o
+- m
+-  
+- n
+- _
+- m
+- a
+- x
+- =
+- 0
+-  
+- e
+-  
+- 2
+- 5
+- 6
+-  
+- n
+- a
+-  
+- l
+- e
+- i
+- t
+- u
+- r
+- a
+-  
+- c
+- o
+- m
+- p
+- l
+- e
+- t
+- a
+- ;
+-  
+- a
+-  
+- p
+- r
+- i
+- m
+- e
+- i
+- r
+- a
+-  
+- v
+- a
+- r
+- r
+- e
+- d
+- u
+- r
+- a
+-  
+- q
+- u
+- e
+-  
+- f
+- i
+- z
+-  
+- p
+- o
+- r
+-  
+- c
+- a
+- b
+- e
+- ç
+- a
+- l
+- h
+- o
+-  
+- m
+- e
+-  
+- l
+- e
+- v
+- o
+- u
+-  
+- a
+-  
+- c
+- o
+- n
+- c
+- l
+- u
+- i
+- r
+- ,
+-  
+- e
+- r
+- r
+- a
+- d
+- a
+- m
+- e
+- n
+- t
+- e
+- ,
+-  
+- q
+- u
+- e
+-  
+- a
+- s
+-  
+- 1
+- 5
+-  
+- c
+- o
+- l
+- u
+- n
+- a
+- s
+-  
+- e
+- s
+- p
+- ú
+- r
+- i
+- a
+- s
+-  
+- n
+- ã
+- o
+-  
+- e
+- x
+- i
+- s
+- t
+- i
+- a
+- m
+- .
+
+
+
+---
+
+## microdata_1970_ftp_vs_cem
+
+**Veredito.** erros_graves
+
+Reconferi 83 afirmações do relatório e achei 13 erros, dois deles graves. O pior é a frase "cada um dos 27 .txt termina com um 0x1A / descontados os 27, o total da rota FTP dá 24.793.358 — exatamente o publicado": são 25 arquivos, não 27 (PI e SP terminam em CRLF, verificado com od), o total byte a byte é 24.793.359, e a afirmação de paridade exata contradiz a própria tabela do relatório, que diz +2. Seis outros números da coluna "Porte (FTP)" estão inflados pelo registro fantasma que o read_fwf inventa em Pernambuco — o mesmo artefato que o relatório irmão manda evitar: 24.793.360→24.793.359, 4.737.682→4.737.679, PE 1.382.320→1.382.319, domicílios PE +301→+298, peso 17.685.053→17.685.043, 1.114→1.113. Há ainda duas contagens erradas independentes disso (1.573 deslocados → 1.574, dos quais 1.568 com peso recuperado; e 156 municípios não resolvidos → 158, com 117 deles causados por lacuna do nosso crosswalk, não por ilegibilidade do arquivo do IBGE), uma generalização "sempre" que falha em 1 de 8.038 blocos, e um "risco residual" que deixa em aberto uma hipótese que os dados já fecham (697 dos 736 casos têm mais de um chefe: são fronteiras perdidas, não famílias secundárias). O resto do relatório é sólido: toda a seção "Paridade verificada" bate contra o parquet v0.5.0 baixado agora, e números difíceis como 8.038 blocos, 1.281 pessoas no maior, 4.803.419 iddomicilio densos, 72% de erro da fórmula e 1.074.813 de 1.075.550 reproduziram exatamente.
+
+
+### Erros GRAVES (2)
+
+**1. [GRAVE] Seção "O que o porte trata", item 1: "Cada um dos 27 `.txt` termina com um `0x1A` que o `read_fwf` transforma num registro todo vazio."**
+
+- *O relatorio diz:* Todos os 27 arquivos .txt terminam com o byte 0x1A de fim de arquivo do DOS.
+- *O correto e:* 25 dos 27. `Damo70PI.TXT` e `Damo70SP.txt` não têm o byte e terminam em CRLF.
+- *Medido por:* Leitura byte a byte dos 27 arquivos com readBin, contando ocorrências de 0x1A (s02_bytes.R): zero em Damo70PI.TXT e Damo70SP.txt, uma em cada um dos outros 25. Confirmado por caminho independente com `od -An -tx1` nos últimos 6 bytes: PI = `20 20 30 33 0d 0a`, SP = `30 30 30 35 0d 0a`, contra AC = `20 30 34 0d 0a 1a` e PE = `20 30 33 0d 0a 1a`.
+
+**2. [GRAVE] Seção "O que o porte trata", item 1: "Descontados os 27, o total da rota FTP dá **24.793.358 — exatamente o publicado**."**
+
+- *O relatorio diz:* Descontando os 27 registros de EOF, a rota do FTP chega a 24.793.358 registros, exatamente o número do produto publicado.
+- *O correto e:* São 25 pseudo-registros de EOF, e descontados eles sobram 24.793.359 — um a mais que o publicado (24.793.358). Não há paridade exata. Além disso a afirmação contradiz a tabela "Números" do próprio relatório, que dá 24.793.360 (+2).
+- *Medido por:* Soma dos LF dos 27 arquivos (s02_bytes.R) = 24.793.359, confirmada pela aritmética de tamanho físico (76 chars + CR + LF por registro, mais o 0x1A onde existe): ex. DAMO70AC.txt 59.870×78+1 = 4.669.861 bytes, o tamanho real. Publicado medido em 1970_population_v0.5.0.parquet baixado do release: 24.793.358 linhas.
+
+
+### Demais erros (11)
+
+**1. [MENOR] Tabela "Números", linha `population, linhas`, coluna Porte (FTP): 24.793.360; e Conclusão: "chega a **+2 pessoas**" (0,000008%)**
+
+- *O relatorio diz:* A rota do FTP produz 24.793.360 pessoas, +2 em relação ao publicado, ou 0,000008%.
+- *O correto e:* 24.793.359 registros byte a byte, +1 (0,000004%). O registro extra do relatório é a linha que `readr::read_fwf` inventa em `Damo70PE.txt` — artefato de leitor que o relatório irmão manda evitar.
+- *Medido por:* Contagem de LF byte a byte nos 27 arquivos (s02_bytes.R e s04_raw.R, dois scripts independentes): 24.793.359. Publicado: nrow do parquet v0.5.0 = 24.793.358.
+
+**2. [MENOR] Tabela "Números", linha `households, linhas`, coluna Porte (FTP): 4.737.682; e Conclusão: "**+275 domicílios**"**
+
+- *O relatorio diz:* A rota do FTP deriva 4.737.682 domicílios, +275 em relação ao publicado.
+- *O correto e:* 4.737.679 domicílios, +272.
+- *Medido por:* Reprodução completa da derivação por na.locf do commit 1a98de5 sobre os campos V003/V004/V006/V007/V008/V025 extraídos byte a byte por posição fixa dos 27 arquivos, na ordem alfabética de nome em maiúsculas (s06_hh.R, confirmado em s10/s11/s12/s13): uniqueN(household_id não-NA) = 4.737.679. A mesma emulação reproduziu exatamente 131 domicílios sem peso, 2 hh_income NA e 268 hh_income_per_cap NA, o que atesta sua fidelidade.
+
+**3. [MENOR] Tabela por UF: "PE (26) | 1.382.320 | 1.382.323 | −3"**
+
+- *O relatorio diz:* Pernambuco tem 1.382.320 pessoas na rota FTP, 3 a menos que o publicado.
+- *O correto e:* 1.382.319 (1.381.977 de Damo70PE.txt + 342 de Damo70FN.txt), ou seja −4 em relação ao publicado.
+- *Medido por:* Contagem byte a byte por arquivo (s02_bytes.R): PE = 1.381.977, FN = 342. Ambos recebem code_state 26 na rota FTP (o add_geo_1970 daquela versão mapeava uf_1970 14 e 16 para 26). Publicado por code_state, do parquet v0.5.0: 1.382.323 (s09_uf.R).
+
+**4. [MENOR] Seção "Números": "Em households a mesma concentração: PE +301 e AL −26."**
+
+- *O relatorio diz:* Pernambuco tem +301 domicílios na rota FTP em relação ao publicado.
+- *O correto e:* +298. (AL −26 confere.)
+- *Medido por:* Derivação de domicílio reproduzida byte a byte com a UF de origem anexada por arquivo (s10_hh_uf.R): PE 259.680 contra 259.382 no publicado v0.5.0 = +298; AL 80.506 contra 80.532 = −26. Soma +272, coerente com o total medido.
+
+**5. [MENOR] Tabela "Números", linha `sum(weight_household)`, coluna Porte (FTP): 17.685.053**
+
+- *O relatorio diz:* A soma dos pesos domiciliares da rota FTP é 17.685.053, +2.941 (0,017%) sobre o publicado.
+- *O correto e:* 17.685.043, +2.931. O percentual (0,017%) não muda.
+- *Medido por:* Regra pré-correção do commit 7b6fecf (wgthh = 0; chefe traz V054 lido nas posições 75-76; max por domicílio; NA se o chefe não tem peso) aplicada sobre a derivação byte a byte (s13_wsum.R): soma = 17.685.043 com 131 domicílios NA. Publicado: 17.682.112, conferido no parquet v0.5.0.
+
+**6. [MENOR] Seção "O que o porte trata", item 3: "`V054` falta em 1.114 das 24,8 milhões de pessoas."**
+
+- *O relatorio diz:* 1.114 pessoas ficam sem peso amostral na leitura por posição fixa.
+- *O correto e:* 1.113.
+- *Medido por:* Leitura dos bytes nas posições 75-76 de cada registro, emulando o parser de inteiro (dígitos e espaços válidos, qualquer outro caractere ou campo fora da linha = NA), byte a byte nos 27 arquivos (s04_raw.R, reconfirmado em s11_peso.R): 1.113 NA, sendo 35 em AL e 1.078 em PE, dos quais 896 caem fora do campo por linha curta. Decomposição coerente: 211 fragmentos + 900 deslocados + 2 linhas bem formadas.
+
+**7. [MENOR] Seção "Decisão tomada (2026-09-12)": "1.785 registros deslocados, dos quais **1.573** só têm o peso recuperável e seguem com o miolo fora de lugar"**
+
+- *O relatorio diz:* Dos 1.785 registros deslocados, 1.573 têm só o peso recuperável.
+- *O correto e:* São 1.574 os registros deslocados não-fragmentários (comprimento ≥ 54: 40 em AL e 1.534 em PE). Destes, 1.568 tiveram o peso recuperado dos dois últimos caracteres; em 6 a cauda também é ilegível. 1.573 não corresponde a nenhuma das duas contagens. (O relatório irmão diz 1.574 no passo 3 e 1.573 na ressalva — a inconsistência foi herdada.)
+- *Medido por:* Tabulação byte a byte dos comprimentos de linha dos 27 arquivos (s02_bytes.R): AL = 6×16, 22×58, 17×94, 1×136; PE = 205×16, 3×54, 658×58, 1×66, 1×68, 658×94, 4×98, 1×132, 204×136, 4×154. Total anômalo 1.785, fragmentos (len<54) 211, não-fragmentos 1.574. Leitura dos dois últimos bytes de cada um dos 1.574 (s04_raw.R): 1.568 numéricos, 6 não.
+
+**8. [MENOR] Seção "O que o porte trata", item 2: "**Registros com `V001`/`V002` corrompidos.** 156 pessoas (0,0006%) têm microrregião/município ilegíveis e a chave não resolve no crosswalk."**
+
+- *O relatorio diz:* 156 pessoas têm microrregião/município ilegíveis, o que impede a resolução no crosswalk.
+- *O correto e:* São 158 byte a byte (0,00064%) — e no staging que está hoje no repo, 84. Além do número, a causa está trocada: 117 das 158 têm V001 e V002 perfeitamente legíveis (chaves como 1421122, 1426222, 1427722); o que falta é a entrada no `crosswalk_munic_1970_to_2010.rda`, que é insumo nosso, não do IBGE. Só 41 têm os campos realmente ilegíveis.
+- *Medido por:* V001 (posições 1-3) e V002 (4-6) extraídos byte a byte dos 27 arquivos, UF vinda do nome do arquivo, cascata k1/k2/k3 aplicada contra o crosswalk carregado do .rda (s06_hh.R): k1 resolve 23.552.678, k2 1.104.952, k3 135.571, nenhuma resolve 158 — 41 com V001 ou V002 NA e 117 com ambos legíveis. Contagem paralela sobre os parquets de staging em data_raw (s05/s09): 84 com code_muni NA, 83 em PE e 1 em AL.
+
+**9. [COSMETICO] Seção "Os identificadores do CEM também vêm de `na.locf`, e têm falha": "O perfil é **sempre** o mesmo — `V006 == 0` (unipessoal), `V007` inteiramente NA, nenhum chefe, `V005 == 1`."**
+
+- *O relatorio diz:* Todos os 8.038 blocos sem fronteira têm o mesmo perfil.
+- *O correto e:* 8.037 dos 8.038. Um bloco (`iddomicilio` 102432, 9 pessoas) quebra os três critérios de uma vez: tem chefe (V025 == 1), V006 == 3 e V005 == 2 nas duas últimas linhas.
+- *Medido por:* Agregação por iddomicilio das primeiras 6 milhões de linhas do parquet CEM de pessoas (s07_cem.R e s08_variantes.R): dos 8.038 blocos com V007 inteiramente NA, 8.037 têm V006 == 0 em todas as linhas, 8.037 têm V005 == 1 em todas, 8.037 não têm nenhum chefe — e é o mesmo bloco que falha nos três.
+
+**10. [MENOR] Seção "Risco residual": "Os **736 domicílios** (0,07%) em que o tamanho excede o `V005` do chefe. Podem ser famílias secundárias legítimas ou fronteiras perdidas menores; os dois casos não foram separados."**
+
+- *O relatorio diz:* Os 736 podem ser famílias secundárias legítimas ou fronteiras perdidas, e os dois casos não foram separados.
+- *O correto e:* A primeira hipótese está excluída por construção — o conjunto dos 1.075.550 foi definido sem blocos com V006 ∈ {3,4}, isto é, sem família secundária. E os casos são separáveis com uma linha: 697 dos 736 (94,7%) têm mais de um chefe no mesmo bloco (340 com dois, 195 com quatro, um com 32), e os 736 têm V006 == 1 em todas as linhas. Isso é fronteira perdida, não família secundária. Só 39 têm um único chefe.
+- *Medido por:* Reprodução exata do conjunto do relatório (blocos com ≥1 chefe e nenhum V006 ∈ {3,4}) nas primeiras 6 milhões de linhas — n = 1.075.550, batem 1.074.813, maiores 736, menor 1 — seguida da decomposição dos 736 por número de chefes e por composição de V006 (s14_736.R). Excesso mediano de 6 pessoas sobre o V005 do chefe, máximo 162.
+
+**11. [COSMETICO] Conclusão: "o CSV auxiliar traz cinco colunas `cem001`–`cem005`"**
+
+- *O relatorio diz:* As cinco colunas do CEM se chamam cem001 a cem005.
+- *O correto e:* São cinco, mas a quinta é `CEM005`, em maiúsculas: cem001, cem002, cem003, cem004, CEM005.
+- *Medido por:* names() do parquet data/release_legacy/Censo.1970.brasil.pessoas.amostra.25porcento.parquet (s01_meta.R): 63 colunas, as cinco primeiras sendo cem001, cem002, cem003, cem004, CEM005.
+
+### Incertezas (2135)
+
+- 1
+- )
+-  
+- A
+-  
+- c
+- o
+- l
+- u
+- n
+- a
+-  
+- "
+- P
+- o
+- r
+- t
+- e
+-  
+- (
+- F
+- T
+- P
+- )
+- "
+-  
+- d
+- e
+- s
+- c
+- r
+- e
+- v
+- e
+-  
+- u
+- m
+-  
+- a
+- r
+- t
+- e
+- f
+- a
+- t
+- o
+-  
+- q
+- u
+- e
+-  
+- n
+- ã
+- o
+-  
+- e
+- x
+- i
+- s
+- t
+- e
+-  
+- m
+- a
+- i
+- s
+- :
+-  
+- a
+-  
+- r
+- o
+- t
+- a
+-  
+- d
+- o
+-  
+- F
+- W
+- F
+-  
+- f
+- o
+- i
+-  
+- r
+- e
+- m
+- o
+- v
+- i
+- d
+- a
+-  
+- d
+- o
+-  
+- r
+- e
+- p
+- o
+-  
+- n
+- o
+-  
+- c
+- o
+- m
+- m
+- i
+- t
+-  
+- f
+- 1
+- 0
+- 8
+- 9
+- c
+- a
+- .
+-  
+- R
+- e
+- c
+- o
+- n
+- s
+- t
+- r
+- u
+- í
+- -
+- a
+-  
+- e
+- x
+- t
+- r
+- a
+- i
+- n
+- d
+- o
+-  
+- o
+- s
+-  
+- c
+- a
+- m
+- p
+- o
+- s
+-  
+- b
+- y
+- t
+- e
+-  
+- a
+-  
+- b
+- y
+- t
+- e
+-  
+- p
+- o
+- r
+-  
+- p
+- o
+- s
+- i
+- ç
+- ã
+- o
+-  
+- f
+- i
+- x
+- a
+-  
+- e
+-  
+- r
+- e
+- e
+- x
+- e
+- c
+- u
+- t
+- a
+- n
+- d
+- o
+-  
+- a
+-  
+- d
+- e
+- r
+- i
+- v
+- a
+- ç
+- ã
+- o
+-  
+- d
+- e
+-  
+- d
+- o
+- m
+- i
+- c
+- í
+- l
+- i
+- o
+-  
+- d
+- o
+-  
+- c
+- o
+- m
+- m
+- i
+- t
+-  
+- 1
+- a
+- 9
+- 8
+- d
+- e
+- 5
+- .
+-  
+- A
+-  
+- e
+- m
+- u
+- l
+- a
+- ç
+- ã
+- o
+-  
+- r
+- e
+- p
+- r
+- o
+- d
+- u
+- z
+- i
+- u
+-  
+- E
+- X
+- A
+- T
+- A
+- M
+- E
+- N
+- T
+- E
+-  
+- s
+- e
+- i
+- s
+-  
+- n
+- ú
+- m
+- e
+- r
+- o
+- s
+-  
+- d
+- o
+-  
+- r
+- e
+- l
+- a
+- t
+- ó
+- r
+- i
+- o
+-  
+- (
+- 9
+- 4
+- .
+- 4
+- 6
+- 7
+- .
+- 9
+- 1
+- 7
+- ,
+-  
+- 1
+- 3
+- 1
+- ,
+-  
+- 2
+- ,
+-  
+- 2
+- 6
+- 8
+- ,
+-  
+- 4
+- 1
+- 2
+- .
+- 1
+- 7
+- 1
+- ,
+-  
+- −
+- 2
+- 6
+- )
+- ,
+-  
+- o
+-  
+- q
+- u
+- e
+-  
+- é
+-  
+- f
+- o
+- r
+- t
+- e
+-  
+- e
+- v
+- i
+- d
+- ê
+- n
+- c
+- i
+- a
+-  
+- d
+- e
+-  
+- f
+- i
+- d
+- e
+- l
+- i
+- d
+- a
+- d
+- e
+-  
+- —
+-  
+- m
+- a
+- s
+-  
+- n
+- ã
+- o
+-  
+- é
+-  
+- a
+-  
+- m
+- e
+- s
+- m
+- a
+-  
+- e
+- x
+- e
+- c
+- u
+- ç
+- ã
+- o
+- .
+-  
+- O
+- s
+-  
+- d
+- e
+- s
+- v
+- i
+- o
+- s
+-  
+- q
+- u
+- e
+-  
+- r
+- e
+- s
+- t
+- a
+- m
+-  
+- (
+- 1
+-  
+- p
+- e
+- s
+- s
+- o
+- a
+- ,
+-  
+- 3
+-  
+- d
+- o
+- m
+- i
+- c
+- í
+- l
+- i
+- o
+- s
+- ,
+-  
+- 1
+- 0
+-  
+- u
+- n
+- i
+- d
+- a
+- d
+- e
+- s
+-  
+- d
+- e
+-  
+- p
+- e
+- s
+- o
+- ,
+-  
+- 1
+-  
+- r
+- e
+- g
+- i
+- s
+- t
+- r
+- o
+-  
+- e
+- m
+-  
+- P
+- E
+- )
+-  
+- e
+- s
+- t
+- ã
+- o
+-  
+- t
+- o
+- d
+- o
+- s
+-  
+- e
+- m
+-  
+- P
+- e
+- r
+- n
+- a
+- m
+- b
+- u
+- c
+- o
+-  
+- e
+-  
+- s
+- ã
+- o
+-  
+- d
+- o
+-  
+- t
+- a
+- m
+- a
+- n
+- h
+- o
+-  
+- e
+-  
+- d
+- o
+-  
+- l
+- u
+- g
+- a
+- r
+-  
+- c
+- e
+- r
+- t
+- o
+- s
+-  
+- p
+- a
+- r
+- a
+-  
+- o
+-  
+- r
+- e
+- g
+- i
+- s
+- t
+- r
+- o
+-  
+- f
+- a
+- n
+- t
+- a
+- s
+- m
+- a
+-  
+- q
+- u
+- e
+-  
+- o
+-  
+- `
+- r
+- e
+- a
+- d
+- _
+- f
+- w
+- f
+- `
+-  
+- i
+- n
+- v
+- e
+- n
+- t
+- a
+-  
+- l
+- á
+- ,
+-  
+- d
+- o
+- c
+- u
+- m
+- e
+- n
+- t
+- a
+- d
+- o
+-  
+- n
+- o
+-  
+- r
+- e
+- l
+- a
+- t
+- ó
+- r
+- i
+- o
+-  
+- i
+- r
+- m
+- ã
+- o
+- .
+-  
+- N
+- ã
+- o
+-  
+- c
+- o
+- n
+- s
+- i
+- g
+- o
+-  
+- p
+- r
+- o
+- v
+- a
+- r
+-  
+- q
+- u
+- e
+-  
+- o
+-  
+- f
+- a
+- n
+- t
+- a
+- s
+- m
+- a
+-  
+- e
+- x
+- p
+- l
+- i
+- c
+- a
+-  
+- 1
+- 0
+- 0
+- %
+-  
+- d
+- o
+-  
+- d
+- e
+- s
+- v
+- i
+- o
+-  
+- s
+- e
+- m
+-  
+- r
+- e
+- -
+- r
+- o
+- d
+- a
+- r
+-  
+- o
+-  
+- c
+- ó
+- d
+- i
+- g
+- o
+-  
+- a
+- p
+- a
+- g
+- a
+- d
+- o
+- .
+- 
+
+- 
+
+- 2
+- )
+-  
+- "
+- A
+-  
+- v
+- e
+- r
+- s
+- ã
+- o
+-  
+- C
+- E
+- M
+-  
+- n
+- ã
+- o
+-  
+- t
+- e
+- m
+-  
+- e
+- s
+- s
+- e
+-  
+- d
+- e
+- f
+- e
+- i
+- t
+- o
+-  
+- [
+- a
+-  
+- c
+- o
+- r
+- r
+- u
+- p
+- ç
+- ã
+- o
+-  
+- d
+- e
+-  
+- A
+- L
+- /
+- P
+- E
+- ]
+- "
+-  
+- n
+- ã
+- o
+-  
+- f
+- o
+- i
+-  
+- m
+- e
+- d
+- i
+- d
+- a
+-  
+- d
+- i
+- r
+- e
+- t
+- a
+- m
+- e
+- n
+- t
+- e
+- .
+-  
+- O
+-  
+- q
+- u
+- e
+-  
+- m
+- e
+- d
+- i
+-  
+- é
+-  
+- p
+- a
+- r
+- i
+- d
+- a
+- d
+- e
+-  
+- e
+- x
+- a
+- t
+- a
+-  
+- d
+- o
+-  
+- p
+- r
+- o
+- d
+- u
+- t
+- o
+-  
+- c
+- o
+- m
+-  
+- o
+-  
+- p
+- u
+- b
+- l
+- i
+- c
+- a
+- d
+- o
+-  
+- e
+- m
+-  
+- n
+- o
+- v
+- e
+-  
+- m
+- é
+- t
+- r
+- i
+- c
+- a
+- s
+-  
+- —
+-  
+- e
+- v
+- i
+- d
+- ê
+- n
+- c
+- i
+- a
+-  
+- i
+- n
+- d
+- i
+- r
+- e
+- t
+- a
+- .
+- 
+
+- 
+
+- 3
+- )
+-  
+- A
+-  
+- a
+- f
+- i
+- r
+- m
+- a
+- ç
+- ã
+- o
+-  
+- "
+- C
+- o
+- m
+-  
+- `
+- f
+- i
+- f
+- e
+- l
+- s
+- e
+- `
+-  
+- o
+-  
+- `
+- N
+- A
+- `
+-  
+- s
+- e
+-  
+- p
+- r
+- o
+- p
+- a
+- g
+- a
+-  
+- e
+-  
+- z
+- e
+- r
+- a
+-  
+- o
+-  
+- p
+- e
+- s
+- o
+-  
+- d
+- o
+-  
+- d
+- o
+- m
+- i
+- c
+- í
+- l
+- i
+- o
+-  
+- i
+- n
+- t
+- e
+- i
+- r
+- o
+- .
+-  
+- F
+- o
+- i
+-  
+- o
+-  
+- q
+- u
+- e
+-  
+- f
+- e
+- z
+-  
+- `
+- w
+- e
+- i
+- g
+- h
+- t
+- _
+- h
+- o
+- u
+- s
+- e
+- h
+- o
+- l
+- d
+- `
+-  
+- s
+- a
+- i
+- r
+-  
+- `
+- N
+- a
+- N
+- `
+-  
+- n
+- a
+-  
+- p
+- r
+- i
+- m
+- e
+- i
+- r
+- a
+-  
+- t
+- e
+- n
+- t
+- a
+- t
+- i
+- v
+- a
+- "
+-  
+- é
+-  
+- n
+- a
+- r
+- r
+- a
+- t
+- i
+- v
+- a
+-  
+- d
+- e
+-  
+- c
+- ó
+- d
+- i
+- g
+- o
+-  
+- e
+-  
+- n
+- ã
+- o
+-  
+- f
+- o
+- i
+-  
+- t
+- e
+- s
+- t
+- a
+- d
+- a
+-  
+- e
+- m
+- p
+- i
+- r
+- i
+- c
+- a
+- m
+- e
+- n
+- t
+- e
+-  
+- (
+- e
+-  
+- t
+- e
+- m
+-  
+- u
+- m
+- a
+-  
+- t
+- e
+- n
+- s
+- ã
+- o
+-  
+- i
+- n
+- t
+- e
+- r
+- n
+- a
+-  
+- p
+- r
+- ó
+- p
+- r
+- i
+- a
+- :
+-  
+- "
+- z
+- e
+- r
+- a
+- "
+-  
+- e
+-  
+- "
+- s
+- a
+- i
+- r
+-  
+- N
+- a
+- N
+- "
+-  
+- n
+- ã
+- o
+-  
+- s
+- ã
+- o
+-  
+- a
+-  
+- m
+- e
+- s
+- m
+- a
+-  
+- c
+- o
+- i
+- s
+- a
+- )
+- .
+- 
+
+- 
+
+- 4
+- )
+-  
+- O
+-  
+- r
+- e
+- l
+- a
+- t
+- ó
+- r
+- i
+- o
+-  
+- d
+- i
+- z
+-  
+- "
+- M
+- e
+- d
+- i
+- d
+- o
+-  
+- n
+- a
+- s
+-  
+- p
+- r
+- i
+- m
+- e
+- i
+- r
+- a
+- s
+-  
+- 6
+-  
+- m
+- i
+- l
+- h
+- õ
+- e
+- s
+-  
+- d
+- e
+-  
+- l
+- i
+- n
+- h
+- a
+- s
+- "
+-  
+- a
+- n
+- t
+- e
+- s
+-  
+- d
+- o
+- s
+-  
+- 8
+- .
+- 0
+- 3
+- 8
+-  
+- b
+- l
+- o
+- c
+- o
+- s
+- ,
+-  
+- m
+- a
+- s
+-  
+- a
+- s
+-  
+- d
+- u
+- a
+- s
+-  
+- v
+- e
+- r
+- i
+- f
+- i
+- c
+- a
+- ç
+- õ
+- e
+- s
+-  
+- s
+- e
+- g
+- u
+- i
+- n
+- t
+- e
+- s
+-  
+- (
+- V
+- 0
+- 0
+- 7
+- –
+- V
+- 0
+- 1
+- 0
+-  
+- e
+-  
+- o
+- s
+-  
+- 9
+- 9
+- ,
+- 9
+- 3
+- %
+- )
+-  
+- n
+- ã
+- o
+-  
+- r
+- e
+- p
+- e
+- t
+- e
+- m
+-  
+- o
+-  
+- e
+- s
+- c
+- o
+- p
+- o
+- .
+-  
+- R
+- e
+- p
+- r
+- o
+- d
+- u
+- z
+- i
+-  
+- a
+- s
+-  
+- d
+- u
+- a
+- s
+-  
+- s
+- o
+- b
+- r
+- e
+-  
+- a
+- s
+-  
+- m
+- e
+- s
+- m
+- a
+- s
+-  
+- 6
+-  
+- m
+- i
+- l
+- h
+- õ
+- e
+- s
+-  
+- e
+-  
+- b
+- a
+- t
+- e
+- r
+- a
+- m
+-  
+- e
+- x
+- a
+- t
+- a
+- m
+- e
+- n
+- t
+- e
+- ,
+-  
+- o
+-  
+- q
+- u
+- e
+-  
+- c
+- o
+- n
+- f
+- i
+- r
+- m
+- a
+-  
+- o
+-  
+- e
+- s
+- c
+- o
+- p
+- o
+-  
+- —
+-  
+- m
+- a
+- s
+-  
+- o
+-  
+- t
+- e
+- x
+- t
+- o
+-  
+- d
+- e
+- i
+- x
+- a
+-  
+- o
+-  
+- l
+- e
+- i
+- t
+- o
+- r
+-  
+- s
+- u
+- p
+- o
+- r
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+-  
+- i
+- n
+- t
+- e
+- i
+- r
+- o
+- .
+-  
+- V
+- a
+- l
+- e
+-  
+- e
+- x
+- p
+- l
+- i
+- c
+- i
+- t
+- a
+- r
+- .
+- 
+
+- 
+
+- 5
+- )
+-  
+- O
+- s
+-  
+- d
+- e
+- l
+- t
+- a
+- s
+-  
+- d
+- e
+-  
+- M
+- S
+- /
+- M
+- T
+-  
+- e
+-  
+- G
+- O
+- /
+- T
+- O
+-  
+- n
+- a
+-  
+- m
+- i
+- n
+- h
+- a
+-  
+- t
+- a
+- b
+- e
+- l
+- a
+-  
+- p
+- o
+- r
+-  
+- U
+- F
+-  
+- d
+- e
+-  
+- d
+- o
+- m
+- i
+- c
+- í
+- l
+- i
+- o
+- s
+-  
+- s
+- ã
+- o
+-  
+- a
+- r
+- t
+- e
+- f
+- a
+- t
+- o
+-  
+- d
+- a
+-  
+- m
+- i
+- n
+- h
+- a
+-  
+- s
+- i
+- m
+- p
+- l
+- i
+- f
+- i
+- c
+- a
+- ç
+- ã
+- o
+-  
+- (
+- a
+- t
+- r
+- i
+- b
+- u
+- í
+-  
+- o
+-  
+- c
+- o
+- d
+- e
+- _
+- s
+- t
+- a
+- t
+- e
+-  
+- p
+- e
+- l
+- o
+-  
+- n
+- o
+- m
+- e
+-  
+- d
+- o
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+- ,
+-  
+- e
+-  
+- o
+- s
+-  
+- a
+- r
+- q
+- u
+- i
+- v
+- o
+- s
+-  
+- d
+- e
+-  
+- M
+- T
+-  
+- e
+-  
+- G
+- O
+-  
+- c
+- o
+- n
+- t
+- ê
+- m
+-  
+- m
+- u
+- n
+- i
+- c
+- í
+- p
+- i
+- o
+- s
+-  
+- q
+- u
+- e
+-  
+- h
+- o
+- j
+- e
+-  
+- s
+- ã
+- o
+-  
+- M
+- S
+-  
+- e
+-  
+- T
+- O
+- )
+- .
+-  
+- N
+- ã
+- o
+-  
+- s
+- ã
+- o
+-  
+- d
+- i
+- v
+- e
+- r
+- g
+- ê
+- n
+- c
+- i
+- a
+-  
+- r
+- e
+- a
+- l
+-  
+- e
+-  
+- n
+- ã
+- o
+-  
+- a
+- f
+- e
+- t
+- a
+- m
+-  
+- P
+- E
+-  
+- n
+- e
+- m
+-  
+- A
+- L
+- .
+- 
+
+- 
+
+- 6
+- )
+-  
+- O
+-  
+- C
+- S
+- V
+-  
+- d
+- e
+-  
+- d
+- o
+- m
+- i
+- c
+- í
+- l
+- i
+- o
+- s
+-  
+- e
+- x
+- i
+- s
+- t
+- e
+-  
+- e
+- m
+-  
+- d
+- u
+- a
+- s
+-  
+- c
+- ó
+- p
+- i
+- a
+- s
+-  
+- n
+- o
+-  
+- d
+- i
+- s
+- c
+- o
+-  
+- c
+- o
+- m
+-  
+- t
+- a
+- m
+- a
+- n
+- h
+- o
+- s
+-  
+- d
+- i
+- f
+- e
+- r
+- e
+- n
+- t
+- e
+- s
+-  
+- (
+- 4
+- 1
+- 4
+- .
+- 3
+- 1
+- 3
+- .
+- 6
+- 7
+- 9
+-  
+- b
+- y
+- t
+- e
+- s
+-  
+- e
+- m
+-  
+- B
+- a
+- n
+- c
+- o
+- s
+- _
+- D
+- a
+- d
+- o
+- s
+- /
+- C
+- e
+- n
+- s
+- o
+- s
+- ,
+-  
+- d
+- e
+-  
+- 2
+- 0
+- 1
+- 8
+- ;
+-  
+- 4
+- 2
+- 5
+- .
+- 4
+- 2
+- 7
+- .
+- 2
+- 0
+- 7
+-  
+- e
+- m
+-  
+- c
+- e
+- n
+- s
+- o
+- B
+- R
+- _
+- a
+- u
+- x
+- _
+- D
+- a
+- d
+- o
+- s
+- ,
+-  
+- d
+- e
+-  
+- s
+- e
+- t
+- /
+- 2
+- 0
+- 2
+- 4
+- )
+- .
+-  
+- O
+-  
+- r
+- e
+- l
+- a
+- t
+- ó
+- r
+- i
+- o
+-  
+- u
+- s
+- a
+-  
+- o
+-  
+- d
+- e
+-  
+- 2
+- 0
+- 2
+- 4
+- ,
+-  
+- q
+- u
+- e
+-  
+- é
+-  
+- o
+-  
+- q
+- u
+- e
+-  
+- g
+- e
+- r
+- o
+- u
+-  
+- o
+-  
+- p
+- a
+- r
+- q
+- u
+- e
+- t
+-  
+- d
+- o
+-  
+- r
+- e
+- l
+- e
+- a
+- s
+- e
+- _
+- l
+- e
+- g
+- a
+- c
+- y
+-  
+- —
+-  
+- p
+- o
+- r
+-  
+- i
+- s
+- s
+- o
+-  
+- "
+- 4
+- 2
+- 5
+-  
+- M
+- B
+- "
+-  
+- c
+- o
+- n
+- f
+- e
+- r
+- e
+- .
+-  
+- R
+- e
+- g
+- i
+- s
+- t
+- r
+- o
+-  
+- a
+- q
+- u
+- i
+-  
+- p
+- o
+- r
+- q
+- u
+- e
+-  
+- é
+-  
+- u
+- m
+- a
+-  
+- a
+- r
+- m
+- a
+- d
+- i
+- l
+- h
+- a
+-  
+- p
+- a
+- r
+- a
+-  
+- q
+- u
+- e
+- m
+-  
+- f
+- o
+- r
+-  
+- r
+- e
+- c
+- o
+- n
+- f
+- e
+- r
+- i
+- r
+- .
+
