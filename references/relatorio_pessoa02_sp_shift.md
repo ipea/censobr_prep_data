@@ -243,7 +243,6 @@ Validação em três níveis, em ordem crescente de custo:
 
 ### 6.4 Documentação a atualizar
 
-- `references/divergencias_v050_v060_2010_tracts.md`: registrar que v0.6.0 corrige o shift de SP, indo de 256 colunas `pessoa02_V*` (com cols vazias por UF) para 171 colunas alinhadas, idênticas em todas as 28 publicações.
 - `memory/project_open_data_bugs.md`: adicionar este caso como "bug IBGE não corrigido pela fonte; corrigido por nós no pipeline", citando o crosswalk.
 - Comentário no `commit message`: linkar para este relatório.
 

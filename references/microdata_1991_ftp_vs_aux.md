@@ -36,7 +36,7 @@ domicílio se repetem em cada morador, e não há arquivo de domicílio separado
 
 Os 141 campos do DBF (verificados em RR e AC) não incluem nenhuma identificação
 de questionário. O mapping gold construído por consenso de 12 agentes
-(`references/microdata_1991_rounds/FINAL_microdata_1991_col_mapping_gold.csv`)
+(`references/microdata_1991_col_mapping.csv`)
 não encontra origem para `V0102` em nenhum deles.
 
 O candidato óbvio, `CD107` (= `V0109`, "Número do Domicílio no CD 1.07"), **não

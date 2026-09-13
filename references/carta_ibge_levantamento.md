@@ -62,7 +62,7 @@ Download integral do AC_20260615.zip e comparação em R (readxl col_types='text
 
 **Domicilio01 do RS substituído pelo conteúdo de Pessoa11, e Responsavel01 do ES inteiramente NA — NÃO são defeitos do IBGE**
 
-Cruzamento do relatório interno references/relatorio_defeitos_2010_tracts_v050.md com a verificação feita agora na fonte atual, 12/09/2026. Registrado para separar, na carta, causa de origem de consequência no consumidor.
+Cruzamento dos defeitos que o `censobr` v0.5.0 apresentava (diagnóstico interno de 12/09/2026) com a verificação feita agora na fonte atual. Registrado para separar, na carta, causa de origem de consequência no consumidor.
 
 ### Não é defeito do IBGE (4)
 

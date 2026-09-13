@@ -70,8 +70,7 @@ enquanto a `V512` (naturalidade) usa a codificação sequencial de 1980 (1=RO �
 
 ## Nota sobre as referências internas
 
-Os arquivos de maio (`references/microdata_1980_col_mapping.csv`,
-`microdata_1980_col_inventory.md`) marcam `MIUFANT → V518` com evidência
+Os arquivos de maio (`references/microdata_1980_col_mapping.csv`) marca `MIUFANT → V518` com evidência
 "A+B+C+v050", sugerindo que a coluna existiria no DBF. **Está errado** — a
 verificação direta no DBF mostra que não existe. O que ocorreu é que a
 documentação XLS do IBGE 2025 omite a linha de três variáveis (`V517`, `V518`,

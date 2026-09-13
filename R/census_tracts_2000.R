@@ -1,5 +1,5 @@
 # 2000 census tracts (agregados por setor).
-# Adaptado de R_ainda_sem_targets/census_tracts_aggreg_2000.R para arquitetura
+# Portado do script legado census_tracts_aggreg_2000.R (git, ate 18d2ac7) para arquitetura
 # targets: 3 funcoes publicas (download_tract_2000, clean_tracts_2000,
 # save_tracts_2000) + 3 helpers top-level (recode_datasets_2000,
 # recode_basico_2000, make_theme_dataset_2000).

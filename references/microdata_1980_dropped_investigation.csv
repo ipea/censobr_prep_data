@@ -1,9 +1,0 @@
-dataset,v050_col,B_desc,A_matches
-households,V602,Aluguel ou Prestação Mensal,ALUGUEL(score0.75):Aluguel ou Prestação Mes
-population,V517,Tempo residência Município atual,MITEMPUF(score0.75):Tempo Residencia UF Atual
-population,V518,UF do Município anterior,MUNIC(score0.50):Código do Município; MIANTEZN(score0.50):Município Anterior Morava; TMUNTRAB(score0.50):UF/Município Trabalha/Estuda
-population,V521,Grau que freqüenta,EDSERIE(score0.67):Série que Frequenta
-population,V604,Peso,PESOP(score0.50):Peso Pessoa
-population,V605,Idade em meses,IDADEMES(score1.00):Idade em meses; IDADEANO(score0.67):Idade em Anos
-population,V606,Idade em anos,IDADEANO(score1.00):Idade em Anos; IDADEMES(score0.67):Idade em meses
-population,V609,Renda  dinh bruto outras ocupação,RPRINDIN(score0.40):Renda Dinheiro Ocupação Principal; RPRINPRM(score0.40):Renda Produtos Mercadorias Ocupação Principal; ROUTROCU(score0.40):Renda Outras Ocupações

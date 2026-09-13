@@ -1,5 +1,5 @@
 # 2022 census tracts (agregados por setor).
-# Adaptado de R_ainda_sem_targets/census_tracts_aggreg_2022.R para arquitetura
+# Portado do script legado census_tracts_aggreg_2022.R (git, ate 18d2ac7) para arquitetura
 # targets: 3 funcoes publicas (download_tract_2022, clean_tracts_2022,
 # save_tracts_2022) + 3 helpers top-level (recode_datasets_2022,
 # recode_basico_2022, make_theme_dataset_2022).
