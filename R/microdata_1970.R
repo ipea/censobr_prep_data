@@ -11,22 +11,50 @@
 # defeito. Ver references/microdata_1970_corrupcao_al_pe.md e
 # references/microdata_1970_ftp_vs_cem.md.
 #
-# Tres entradas, e as tres sao necessarias:
-#  - pessoas: 24.793.358 registros, com iddomicilio e idpessoa proprios;
-#  - domicilios: 4.737.407 registros, ja com os campos derivados (peso, renda,
-#    numero de moradores) -- nao ha derivacao por na.locf a refazer aqui;
-#  - crosswalk idpessoa -> household_id. Ele e indispensavel: o `iddomicilio`
-#    do arquivo de pessoas e outro espaco de numeracao (4.803.419 valores) e
-#    NAO casa com o `household_id` dos domicilios (4.737.407) -- nem por
-#    formula: testado, erra em 72% das pessoas.
+# So o arquivo de pessoas entra no produto: 24.793.358 registros. A tabela de
+# domicilios do CEM e o crosswalk dele continuam no release_legacy, e continuam
+# a ser baixados, mas servem de referencia de validacao -- os domicilios sao
+# derivados aqui, em derive_households_1970().
 #
-# O identificador do arquivo de pessoas tambem foi construido por na.locf e
-# tem falhas em coletivos e unipessoais: ha blocos onde a fronteira nunca foi
-# encontrada e centenas de pessoas caem num mesmo id (o maior tem 1.281). Por
-# isso id_household so vale quando resolve na tabela de domicilios; nos demais
-# casos e NA. Sao 468.164 pessoas (1,888%), numero identico ao do publicado.
+# Ficam sem id_household 453.643 pessoas (1,830%): 339.316 individuos em
+# domicilio coletivo (V006 == 0) e 114.325 de familias que moram em coletivo
+# (V007 == 1).
 #
-# Public API: download_microdata_1970, clean_microdata_1970, save_microdata_1970.
+# O dicionario do IBGE rotula V006 == 0 como "PESSOA SO" e V025 == 9 como
+# "MEMBRO GRUPO-CONVIDADO", e os dois rotulos enganam. O questionario CD 1.01
+# mostra o certo: no quesito 4 a opcao 9 aparece so na coluna da 1a pessoa, e e
+# "Individual (Em domicilio coletivo)"; no quesito 1 das caracteristicas do
+# domicilio a opcao e "0E Individual", ao lado de "1 Unica" e do grupo
+# Convivente (2 Principal, 3E Parente, 4E Nao parente). "Convivente" nomeia as
+# familias 2/3/4, nao o codigo 9. As duas colunas dizem a mesma coisa: V006 == 0
+# e V025 == 9 coincidem em 339.316 de 339.316, nos dois sentidos.
+#
+# Nao sao moradores solitarios. Medido so na ordem crua do arquivo, sem usar
+# nenhum identificador derivado: as 339.316 formam 40.310 blocos contiguos, de
+# comprimento medio 8,4 e ate 3.337 pessoas, 392 deles com 100 ou mais, e
+# nenhum atravessa municipio. Se estivessem espalhados ao acaso o comprimento
+# medio seria 1,014 e blocos de 100+ teriam probabilidade da ordem de 1e-187.
+# Quem mora sozinho de fato (V006 == 1 e V005 == 1) forma 217.013 blocos de
+# comprimento medio 1,12, nenhum acima de 74 -- que e o comportamento esperado.
+# O perfil fecha: os V006 == 0 tem idade mediana 25 e 11,7% de menores de 15,
+# contra 49 e 1,2% de quem mora sozinho.
+#
+# Os 243.070 domicilios unipessoais particulares estao no produto, e a forma de
+# identifica-los no banco de pessoas e V006 == 1 & V005 == 1: familia unica no
+# domicilio, e de uma pessoa so. Sao 5,13% dos domicilios.
+#
+# Sao 4.741.386 domicilios, contra os 4.737.407 da tabela do CEM: entram os
+# 3.979 improvisados que ela descartava.
+#
+# O banco de pessoas tambem e corrigido em dois pontos, ambos herdados do
+# formulario e nao do CEM: V021 vinha 0 onde o quesito era pulado, e o bloco de
+# caracteristicas da habitacao (V007-V021) so vinha preenchido nos registros da
+# familia unica ou principal, deixando 822.746 pessoas de familia secundaria sem
+# condicao de ocupacao, agua, sanitario, comodos nem dormitorios. Ver
+# clean_microdata_1970().
+#
+# Public API: download_microdata_1970, derive_households_1970,
+# clean_microdata_1970, save_microdata_1970.
 
 
 # Baixa os inputs do release_legacy (smart-skip via download_file_censobr).
@@ -44,24 +72,159 @@ download_microdata_1970 <- function(){
 }
 
 
+# Deriva a tabela de domicilios a partir do arquivo de pessoas.
+#
+# O produto ate a v0.6.0 usava a tabela pronta do CEM. Ela continua no
+# release_legacy como referencia de validacao, mas nao entra mais no produto:
+# a derivacao abaixo reproduz os 4.737.407 domicilios dela em 100,000000% das
+# 24.793.358 pessoas, e corrigir os defeitos exige refazer os agregados.
+#
+# O que muda em relacao ao CEM:
+#  - entram os 3.979 domicilios improvisados, que a regra "(5.2) Assigning NA to
+#    improvised households" descartava. Sao particulares: V007 == 0 em
+#    14.212/14.212, um unico chefe em cada, e o tamanho do grupo bate com o V005
+#    do chefe em 3.900 de 3.900 familias unicas;
+#  - weight_household passa a ser o peso do chefe do DOMICILIO. O CEM fazia
+#    max(V054) entre os chefes de familia, e em domicilio multifamiliar ha dois
+#    ou tres V025 == 1: em 46.136 domicilios o max adotava o peso de um chefe
+#    secundario, sempre maior, inflando sum(weight_household) em 0,303%;
+#  - V006 passa a ser a condicao da familia do chefe do domicilio (1 ou 2). O CEM
+#    tirava a media do V006 das pessoas, e V006 e variavel de FAMILIA: 230.394
+#    linhas (4,86%) saiam com valores como 2,5 e 2,33, que nao existem no
+#    dicionario;
+#  - o bloco estrutural (V001-V004, V006-V021) vem da linha do chefe, e nao de
+#    mean(). Da no mesmo -- zero domicilios tem mais de um valor de V007 a V020
+#    -- e nao inventa codigo de distrito ou de situacao nos 36 domicilios em que
+#    o na.locf colou familias de distritos diferentes;
+#  - numb_families e numb_residents sao colunas novas. numb_dwellers conta linhas
+#    do domicilio, inclusive as 154.719 pessoas que o IBGE marca como NAO MORADOR
+#    (V024 == 2, todas pensionista ou hospede); numb_residents exclui essas;
+#  - V025 == 0 e IGNORADO, nao nao-parente, e volta a contar no denominador da
+#    renda per capita. Sao 341 pessoas em 322 domicilios.
+#
+# Coletivos ficam de fora: renda domiciliar per capita nao significa nada em
+# hotel, quartel, convento ou presidio, cujos moradores nao partilham orcamento.
+# Sao 453.641 pessoas -- 339.316 individuais (V006 == 0, o "0E Individual" do
+# formulario) e 114.325 de familias que moram em coletivo (V007 == 1).
+derive_households_1970 <- function(raw_paths){
+
+  message("Deriving 1970 households")
+
+  pessoas <- raw_paths[grepl("pessoas", basename(raw_paths))]
+
+  # passo 1: a fronteira de domicilio, sobre as 24,8M linhas. Regras do CEM
+  # linha a linha, menos a (5.2) que descartava improvisados.
+  p <- arrow::open_dataset(pessoas) |>
+    dplyr::select(idpessoa, V003, V004, V006, V007, V008, V024, V025, V041, V054) |>
+    dplyr::collect() |>
+    data.table::as.data.table()
+  data.table::setorder(p, idpessoa)
+
+  p[, ind_collective := data.table::fifelse(is.na(V007), 0, V007)]
+  p[, flag := NA_real_]
+  p[ind_collective == 0 & V025 == 1 & V006 %in% c(1, 2), flag := 1]
+  p[c(0, diff(ind_collective)) == 1, flag := 1]
+  p[V006 == 0, flag := 1]
+  p[V025 == 1 & V006 %in% c(3, 4), flag := NA]
+
+  p[flag == 1, seq_hh := 1:nrow(p[flag == 1])]
+  p[, household_id := data.table::nafill((seq_hh * 100 + V003) * 10 + V004,
+                                         type = "locf")]
+
+  p[, mean_v007 := mean(V007, na.rm = TRUE), by = household_id]
+  p[, mean_v008 := mean(V008, na.rm = TRUE), by = household_id]
+  p[mean_v007  %in% 1, household_id := NA_real_]
+  p[is.nan(mean_v007), household_id := NA_real_]
+  p[is.nan(mean_v008), household_id := NA_real_]
+  p[V006 %in% 0,       household_id := NA_real_]
+
+  # passo 2: os agregados. Nao-parente nao entra na renda nem no denominador do
+  # per capita: pensionista e hospede paga aluguel ao chefe e empregado domestico
+  # recebe salario dele, entao somar as duas pontas contaria a mesma renda duas
+  # vezes. O IGNORADO (V025 == 0) nao e nao-parente e conta normalmente.
+  p[, nonrelative := as.numeric(V025 >= 7)]
+  p[, totalIncome := 0]
+  p[V041 <= 9998, totalIncome := V041]
+  p[nonrelative == 1, totalIncome := 0]
+
+  agg <- p[!is.na(household_id),
+           list(numb_dwellers          = .N,
+                numb_residents         = sum(V024 != 2),
+                numb_families          = sum(V025 == 1),
+                numb_dwellers_hhincome = sum(1 - nonrelative),
+                hhIncome               = sum(totalIncome)),
+           by = household_id]
+
+  cw     <- p[, list(idpessoa, household_id)]
+  chefes <- p[!is.na(household_id) & V025 == 1 & V006 %in% c(1, 2), idpessoa]
+  n_pes  <- nrow(p)
+  rm(p); gc(verbose = FALSE)
+
+  message("  ", nrow(agg), " households, ", sum(!is.na(cw$household_id)), " people")
+
+  # passo 3: o bloco estrutural e a linha do chefe do domicilio. Lido em faixas
+  # de idpessoa porque as 22 colunas em double sobre 24,8M linhas nao cabem na
+  # RAM de uma vez.
+  vs <- paste0("V", sprintf("%03d", c(1:4, 6:21)))
+  faixas <- seq(1, n_pes, by = 5e6)
+  blocos <- vector("list", length(faixas))
+  for (i in seq_along(faixas)) {
+    lo <- faixas[i]
+    hi <- min(lo + 5e6 - 1, n_pes)
+    b <- arrow::open_dataset(pessoas) |>
+      dplyr::filter(idpessoa >= lo, idpessoa <= hi) |>
+      dplyr::select(all_of(c("idpessoa", vs, "V054",
+                             "MunicCode1970", "MunicCode2010"))) |>
+      dplyr::collect() |>
+      data.table::as.data.table()
+    blocos[[i]] <- b[idpessoa %in% chefes]
+    rm(b); gc(verbose = FALSE)
+  }
+  dom <- data.table::rbindlist(blocos)
+  rm(blocos); gc(verbose = FALSE)
+
+  dom <- merge(dom, cw[idpessoa %in% chefes], by = "idpessoa")
+  dom <- merge(dom, agg, by = "household_id")
+
+  data.table::setnames(dom, c("V054", "MunicCode1970", "MunicCode2010", "hhIncome"),
+                       c("wgthh", "municcode1970", "municcode2010", "hhIncome"))
+  dom[, hhIncomePerCap := hhIncome / numb_dwellers_hhincome]
+  dom[, idpessoa := NULL]
+  data.table::setnames(dom, vs, tolower(vs))
+  data.table::setcolorder(dom, c("household_id", tolower(vs), "wgthh",
+                                 "numb_dwellers", "numb_residents", "numb_families",
+                                 "numb_dwellers_hhincome", "hhIncome",
+                                 "hhIncomePerCap", "municcode1970", "municcode2010"))
+
+  out_dir <- "./data_raw/microdata/1970"
+  dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+  paths <- c(file.path(out_dir, "households_1970.parquet"),
+             file.path(out_dir, "crosswalk_1970.parquet"))
+  write_censobr_parquet(dom, paths[1])
+  write_censobr_parquet(cw, paths[2])
+
+  rm(dom, cw, agg); gc(verbose = FALSE)
+
+  paths
+}
+
+
 # Abre o parquet da tabela, anexa geografia e devolve query arrow preguicosa.
-clean_microdata_1970 <- function(raw_paths, dataset_name){
+clean_microdata_1970 <- function(raw_paths, derived_paths, dataset_name){
 
   message("Cleaning microdata 1970: ", dataset_name)
 
+  dom_path <- derived_paths[grepl("households_1970", basename(derived_paths))]
+
   if(dataset_name == "households"){
 
-    arrw <- arrow::open_dataset(raw_paths[grepl("domicilios", basename(raw_paths))])
-
-    arrw <- arrw |>
-      dplyr::rename(id_household           = household_id,
-                    code_muni              = municcode2010,
-                    code_muni_1970         = municcode1970,
-                    weight_household       = wgthh,
-                    numb_dwellers          = numberDwellers,
-                    numb_dwellers_hhincome = numberDwellers_hhIncome,
-                    hh_income              = hhIncome,
-                    hh_income_per_cap      = hhIncomePerCap) |>
+    arrw <- arrow::open_dataset(dom_path) |>
+      dplyr::rename(id_household      = household_id,
+                    code_muni         = municcode2010,
+                    code_muni_1970    = municcode1970,
+                    weight_household  = wgthh,
+                    hh_income         = hhIncome,
+                    hh_income_per_cap = hhIncomePerCap) |>
       dplyr::rename_with(toupper, dplyr::starts_with("v"))
 
     arrw <- add_geo_1970(arrw)
@@ -73,6 +236,7 @@ clean_microdata_1970 <- function(raw_paths, dataset_name){
     arrw <- arrw |>
       dplyr::relocate(all_of(c(GEO_COLS_1970, "id_household", vs,
                                "weight_household", "numb_dwellers",
+                               "numb_residents", "numb_families",
                                "numb_dwellers_hhincome", "hh_income",
                                "hh_income_per_cap")))
     return(arrw)
@@ -83,26 +247,53 @@ clean_microdata_1970 <- function(raw_paths, dataset_name){
   # as cinco colunas cem* sao da harmonizacao do CEM e nao entram no produto
   arrw <- arrw |>
     dplyr::select(-dplyr::matches("^cem", ignore.case = TRUE)) |>
+    dplyr::select(-iddomicilio) |>
     dplyr::rename(code_muni      = MunicCode2010,
                   code_muni_1970 = MunicCode1970,
                   id_person      = idpessoa)
 
-  # o vinculo pessoa -> domicilio vem do crosswalk, nao do iddomicilio
-  cw <- arrow::read_parquet(raw_paths[grepl("crosswalk_personid", basename(raw_paths))])
-  hh <- arrow::read_parquet(raw_paths[grepl("domicilios", basename(raw_paths))],
-                            col_select = "household_id")
+  cw <- arrow::read_parquet(derived_paths[grepl("crosswalk_1970", basename(derived_paths))])
+  names(cw) <- c("id_person", "id_household")
+  arrw <- arrw |> dplyr::left_join(cw, by = "id_person")
 
-  # so vale o id que existe na tabela de domicilios: coletivos, improvisados e
-  # pessoas isoladas nao formam domicilio, e os blocos que o na.locf do CEM
-  # deixou colados apontariam para um domicilio inexistente
-  cw <- data.frame(id_person    = cw$idpessoa,
-                   id_household = ifelse(cw$household_id %in% hh$household_id,
-                                         cw$household_id, NA_real_))
-  rm(hh); gc(verbose = FALSE)
+  # V021 vem 0 onde o formulario mandava pular -- familia secundaria e individual
+  # em domicilio coletivo. Zero ali nao e numero de dormitorios, e o branco do
+  # impresso: sao 61.390 registros, todos exatamente 0. Vira NA antes de o bloco
+  # ser completado.
+  arrw <- arrw |>
+    dplyr::mutate(V021 = ifelse(V006 %in% c(0, 3, 4) & V021 == 0, NA_real_, V021))
+
+  # o bloco do domicilio so vem preenchido nos registros da familia unica ou
+  # principal: V007 nao-NA <=> V006 em (1,2), sem excecao, porque os codigos
+  # marcados com E no formulario mandavam pular o quesito. As 822.746 pessoas de
+  # familia secundaria ficavam sem condicao de ocupacao, agua, sanitario, comodos
+  # e dormitorios, embora morem no mesmo domicilio. Como o bloco e do domicilio
+  # -- zero domicilios tem mais de um valor em V007 a V020 --, completa-se a
+  # partir da linha do domicilio. Quem esta em coletivo nao tem id_household e
+  # segue sem bloco, que e o certo.
+  bl <- arrow::read_parquet(dom_path,
+                            col_select = c("household_id",
+                                           paste0("v", sprintf("%03d", 7:21))))
+  names(bl) <- c("id_household", paste0("d", sprintf("%03d", 7:21)))
 
   arrw <- arrw |>
-    dplyr::select(-iddomicilio) |>
-    dplyr::left_join(cw, by = "id_person")
+    dplyr::left_join(bl, by = "id_household") |>
+    dplyr::mutate(V007 = dplyr::coalesce(V007, d007),
+                  V008 = dplyr::coalesce(V008, d008),
+                  V009 = dplyr::coalesce(V009, d009),
+                  V010 = dplyr::coalesce(V010, d010),
+                  V011 = dplyr::coalesce(V011, d011),
+                  V012 = dplyr::coalesce(V012, d012),
+                  V013 = dplyr::coalesce(V013, d013),
+                  V014 = dplyr::coalesce(V014, d014),
+                  V015 = dplyr::coalesce(V015, d015),
+                  V016 = dplyr::coalesce(V016, d016),
+                  V017 = dplyr::coalesce(V017, d017),
+                  V018 = dplyr::coalesce(V018, d018),
+                  V019 = dplyr::coalesce(V019, d019),
+                  V020 = dplyr::coalesce(V020, d020),
+                  V021 = dplyr::coalesce(V021, d021)) |>
+    dplyr::select(-dplyr::starts_with("d0"))
 
   arrw <- add_geo_1970(arrw)
 

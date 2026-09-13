@@ -132,11 +132,19 @@ list(
              command = c("households", "population")
              ),
 
+  # a tabela de domicilios e derivada do arquivo de pessoas, e nao lida pronta
+  # do CEM -- ver R/microdata_1970.R
+  tar_target(name = derived_paths_1970,
+             command = derive_households_1970(raw_microdata_paths_1970),
+             format = "file"
+             ),
+
   # branch per dataset: o vinculo pessoa -> domicilio vem do crosswalk, e so
   # vale quando resolve na tabela de domicilios -- ver R/microdata_1970.R
   tar_target(name = output_microdata_1970,
              command = save_microdata_1970(
                clean_microdata_1970(raw_microdata_paths_1970,
+                                    derived_paths_1970,
                                     dataset_names_microdata_1970),
                dataset_names_microdata_1970,
                data_version),

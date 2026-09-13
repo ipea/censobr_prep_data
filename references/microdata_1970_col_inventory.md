@@ -137,9 +137,15 @@ Calculadas durante a agregação pessoa→domicílio:
    - if dataset='population': resultado é direto (1 row = 1 pessoa)
    - if dataset='households': aplicar lógica de chefia do legacy 1970a:
      - flag inicial: V025=1 & V006 em c(1,2) → 1 (novo household)
-     - V006=0 → pessoa só (novo household)
+     - V006=0 → NA (excluir): não é quem mora sozinho, e sim "Individual em
+       domicílio coletivo". O dicionário do IBGE rotula "pessoa só", mas no
+       vocabulário do censo "só" quer dizer sem laços de parentesco no
+       domicílio, não morando sozinho — a definição do IBGE é "para a pessoa
+       só que residia em domicílio coletivo, ainda que compartilhando a
+       unidade de habitação com outra(s) pessoa(s) com a(s) qual(is) não tinha
+       laços de parentesco". V006=0 ⟺ V025=9 em 339.316/339.316
      - V007=1 (collective) → NA (excluir)
-     - V008=2 (improvisado) → NA
+     - V008=2 (improvisado) → **entra** (a regra 5.2 do legacy o excluía)
      - household_id via na.locf(idhh_locality)
      - Agregar por household_id: numb_dwellers, hh_income, weight_household, etc.
    - Aplicar add_geography_cols(year=1970)
