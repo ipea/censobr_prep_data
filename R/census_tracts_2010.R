@@ -290,11 +290,8 @@ save_tracts_2010 <- function(br_df, data_version){
                         name_subdistrict  = Nome_do_subdistrito,
                         Basico_V1005      = Situacao_setor)
     
-    # cols IBGE de UF/região foram substituídas por add_state_info/add_region_info.
-    AT <- AT |>
-      select(-any_of(c("Cod_Grandes Regiões", "Nome_Grande_Regiao",
-                       "Cod_UF", "Nome_da_UF", "Cod_municipio")))
-    
+    # as cols IBGE de regiao/UF/municipio (Cod_Grandes Regiões, Nome_Grande_Regiao,
+    # Cod_UF, Nome_da_UF, Cod_municipio) ficam no produto ao lado das censobr.
     AT <- relocate(AT, code_tract, code_weighting, code_muni, name_muni,
                        code_state, abbrev_state, name_state,
                        code_region, name_region,
