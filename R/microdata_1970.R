@@ -46,12 +46,11 @@
 # Sao 4.741.386 domicilios, contra os 4.737.407 da tabela do CEM: entram os
 # 3.979 improvisados que ela descartava.
 #
-# O banco de pessoas tambem e corrigido em dois pontos, ambos herdados do
-# formulario e nao do CEM: V021 vinha 0 onde o quesito era pulado, e o bloco de
-# caracteristicas da habitacao (V007-V021) so vinha preenchido nos registros da
-# familia unica ou principal, deixando 822.746 pessoas de familia secundaria sem
-# condicao de ocupacao, agua, sanitario, comodos nem dormitorios. Ver
-# clean_microdata_1970().
+# No banco de pessoas a unica alteracao de valor e V021, que vinha 0 onde o
+# quesito era pulado e passa a NA. O bloco de caracteristicas da habitacao
+# (V007-V021) fica como o IBGE gravou -- preenchido so nos registros da familia
+# unica ou principal; nao se propaga para as familias secundarias, porque isso
+# seria inventar dado. Ver clean_microdata_1970().
 #
 # Public API: download_microdata_1970, derive_households_1970,
 # clean_microdata_1970, save_microdata_1970.
@@ -258,42 +257,10 @@ clean_microdata_1970 <- function(raw_paths, derived_paths, dataset_name){
 
   # V021 vem 0 onde o formulario mandava pular -- familia secundaria e individual
   # em domicilio coletivo. Zero ali nao e numero de dormitorios, e o branco do
-  # impresso: sao 61.390 registros, todos exatamente 0. Vira NA antes de o bloco
-  # ser completado.
+  # impresso: sao 61.390 registros, todos exatamente 0. Vira NA. O resto do bloco
+  # V007-V020 fica como o IBGE gravou: NA fora da familia unica ou principal.
   arrw <- arrw |>
     dplyr::mutate(V021 = ifelse(V006 %in% c(0, 3, 4) & V021 == 0, NA_real_, V021))
-
-  # o bloco do domicilio so vem preenchido nos registros da familia unica ou
-  # principal: V007 nao-NA <=> V006 em (1,2), sem excecao, porque os codigos
-  # marcados com E no formulario mandavam pular o quesito. As 822.746 pessoas de
-  # familia secundaria ficavam sem condicao de ocupacao, agua, sanitario, comodos
-  # e dormitorios, embora morem no mesmo domicilio. Como o bloco e do domicilio
-  # -- zero domicilios tem mais de um valor em V007 a V020 --, completa-se a
-  # partir da linha do domicilio. Quem esta em coletivo nao tem id_household e
-  # segue sem bloco, que e o certo.
-  bl <- arrow::read_parquet(dom_path,
-                            col_select = c("household_id",
-                                           paste0("v", sprintf("%03d", 7:21))))
-  names(bl) <- c("id_household", paste0("d", sprintf("%03d", 7:21)))
-
-  arrw <- arrw |>
-    dplyr::left_join(bl, by = "id_household") |>
-    dplyr::mutate(V007 = dplyr::coalesce(V007, d007),
-                  V008 = dplyr::coalesce(V008, d008),
-                  V009 = dplyr::coalesce(V009, d009),
-                  V010 = dplyr::coalesce(V010, d010),
-                  V011 = dplyr::coalesce(V011, d011),
-                  V012 = dplyr::coalesce(V012, d012),
-                  V013 = dplyr::coalesce(V013, d013),
-                  V014 = dplyr::coalesce(V014, d014),
-                  V015 = dplyr::coalesce(V015, d015),
-                  V016 = dplyr::coalesce(V016, d016),
-                  V017 = dplyr::coalesce(V017, d017),
-                  V018 = dplyr::coalesce(V018, d018),
-                  V019 = dplyr::coalesce(V019, d019),
-                  V020 = dplyr::coalesce(V020, d020),
-                  V021 = dplyr::coalesce(V021, d021)) |>
-    dplyr::select(-dplyr::starts_with("d0"))
 
   arrw <- add_geo_1970(arrw)
 

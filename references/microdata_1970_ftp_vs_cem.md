@@ -134,18 +134,17 @@ fecha registro a registro: `V007` é NA em 1.162.064 registros (`V006 ∈ {0, 3,
 4}`); `V008`, nesses mais os 114.325 de `V007 = 1` (1.276.389); `V009` a
 `V020`, nesses mais os 14.212 de domicílio improvisado (1.290.601).
 
-O produto completa o bloco por domicílio: as 822.746 pessoas de famílias
-secundárias, em 233.855 domicílios (4,93%), recebem condição de ocupação,
-água, sanitário, cômodos e dormitórios do domicílio em que moram. É seguro
-porque nenhum domicílio tem mais de um valor em `V007`–`V020`. A taxa de
-preenchimento de `V009` em família secundária passa de 0,00% para 99,96%
-(822.437 de 822.746; os 309 restantes moram em domicílio improvisado, cujo
-bloco é NA por construção).
-`V021` (dormitórios) vem com `0` em 61.390 registros em que o quesito foi
-pulado — família secundária e individual em coletivo —; ali zero é o branco do
-impresso, vira NA e depois recebe o valor do domicílio. Os 3.979 domicílios
-improvisados ficam com `V009`–`V020` NA, porque o IBGE não lhes aplica o
-bloco.
+No banco de pessoas o bloco fica como o IBGE o gravou: as 822.746 pessoas de
+famílias secundárias, em 233.855 domicílios (4,93%), têm `V007`–`V020` NA,
+e não recebem o valor do domicílio em que moram — preencher a partir de outro
+registro seria inventar dado. Quem precisa da condição de ocupação, água,
+sanitário ou cômodos de uma pessoa de família secundária junta a tabela de
+domicílios por `id_household`, onde o bloco vem da linha do chefe e vale para
+o domicílio inteiro. A única alteração de valor é em `V021` (dormitórios):
+vem com `0` em 61.390 registros em que o quesito foi pulado — família
+secundária e individual em coletivo —; ali zero é o branco do impresso e
+vira NA. Os 3.979 domicílios improvisados ficam com `V009`–`V020` NA também na
+tabela de domicílios, porque o IBGE não lhes aplica o bloco.
 
 ### Os domicílios improvisados
 
@@ -178,8 +177,8 @@ Os agregados somam todas as famílias do domicílio, nas duas versões:
 a principal, faltariam 60.002.161).
 
 No banco de pessoas, 14.521 pessoas ganharam `id_household`, nenhuma perdeu e
-nenhuma mudou de domicílio; e o bloco `V007`–`V021` está preenchido para todos
-os moradores de 4.737.407 domicílios (era 4.503.631).
+nenhuma mudou de domicílio; `V021` passa de `0` a NA nos 61.390 registros em
+que o quesito foi pulado; nenhum outro valor muda.
 
 | verificação do produto | |
 |---|---:|
