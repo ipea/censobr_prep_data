@@ -131,6 +131,7 @@ Centralized helpers used throughout the pipeline. Reuse before reinventing:
 - `add_state_info()` / `add_region_info()` — robust state/region code+name imputation; tolerates historical spellings (e.g. `Goyaz`, `Districto Federal`, `Guanabara`) — important for pre-1960 data.
 - `dicionario_municipality` / `dicionario_state` + `rename_cols_censobr()` — fuzzy column-name standardization across heterogeneous IBGE exports.
 - `write_censobr_parquet()` — the canonical writer (zstd level 22). Always use this instead of `arrow::write_parquet` directly.
+- `GEO_COLS_CENSOBR` / `relocate_geo_cols_censobr()` — the fixed order of the censobr geography columns, moved to the front of every table in every `save_*` (works on data.frame, data.table and arrow lazy queries).
 - `UF_SIGLAS` — 27-state vector. Note that 2010 SP comes in two pieces: `SP_Capital` and `SP_Exceto_Capital`.
 - `pick_latest_per_uf()` — when IBGE re-publishes a UF zip with new date suffix (e.g., `RS_20231030.zip` → `RS_20241211.zip`, `GO_20231030.zip` → `GO_20250915.zip`), keeps only the most recent. Used in `download_tract_2010` for FTP listing + local cleanup.
 - `get_areas_ponderacao_2010()` — crosswalk `code_tract → code_weighting` (2010 weighting areas) from IBGE's `Documentacao_microdados_2010.zip`. Replaces the old `geobr` source.

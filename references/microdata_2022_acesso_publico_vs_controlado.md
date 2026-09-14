@@ -123,8 +123,8 @@ produzido aqui.
 `code_region`, `name_region`, `code_state`, `abbrev_state`, `name_state`,
 derivadas de `*0020`, com `code_*` em `numeric`. Não há `code_muni` nem
 `code_weighting`, porque o público para na UF. `code_weighting` existe nos
-produtos de 2000 e 2010; 1970, 1980 e 1991 não a têm, e 1960 tem só
-`code_muni_1960`. A geografia entra inline em `save_microdata_2022()`, não
+produtos de 2000 e 2010; 1970, 1980 e 1991 não a têm, e 1960 não tem
+`code_muni` (só `code_muni_1960` e `name_muni`, pela malha de 1960). A geografia entra inline em `save_microdata_2022()`, não
 por `add_geography_cols()` — a coluna de origem muda de nome por tabela
 (`D0020`/`P0020`/`F0020`/`M0020`) e o ramo `year == 2022` daquela função
 pertence aos setores (`CD_MUN`).

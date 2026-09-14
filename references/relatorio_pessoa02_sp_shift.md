@@ -126,11 +126,13 @@ do dicionário:
 Em `R/census_tracts_2010.R`, `read_single_file_tract_2010()` renomeia
 `V<n>` para `V<n − 85>` (`n ≥ 86`) quando o arquivo é Pessoa02 de SP1 ou
 SP2, antes do prefixo de tema. Sem a renomeação, a união dos nomes de Pessoa02
-nas 28 publicações daria 256 colunas (`V001`–`V255` + `V1005`), 85 delas
-espúrias; com ela, 171.
+nas 28 publicações daria 255 colunas `V*` (`V001`–`V255`), 85 delas
+espúrias; com ela, 170.
 
-No parquet `2010_tracts_PESSOA.parquet`: 2.008 colunas, 310.114 setores,
-exatamente 171 colunas `pessoa02_V*` (`V001`–`V170` + `V1005`). A identidade
+No parquet `2010_tracts_pessoa`: 310.114 setores e 2.010 colunas — 9 de
+geografia censobr, o `Cod_setor` do IBGE e, para cada um dos 13 subarquivos,
+a `Situacao_setor` e as `V*` com o prefixo do subarquivo; Pessoa02 tem
+exatamente 170 colunas `pessoa02_V*` (`V001`–`V170`). A identidade
 `pessoa02_V_i + pessoa02_V_(i+85) = pessoa01_V_i` vale nas 85 categorias em
 todos os 66.096 setores de São Paulo (18.363 + 47.733, o mesmo total do
 Quadro 1 do IBGE): 1.379 (2,1%, também igual ao Quadro 1) estão suprimidos
