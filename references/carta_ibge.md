@@ -49,8 +49,10 @@ alta afetam diretamente o conteúdo que o usuário obtém:
    anterior); o dicionário rotula o código 16 de MIUFPAIS como Sergipe quando
    é a Bahia; e os pesos não reproduzem a população publicada em 91
    municípios.
-4. **2000.** `RN.zip` contém uma cópia integral da Paraíba e `BA.zip` traz um
-   zip dentro do zip, sem aviso no log.
+4. **2000.** `RN.zip` traz, além dos três arquivos do Rio Grande do Norte,
+   uma cópia integral dos três arquivos da Paraíba, idêntica à de `PB.zip` —
+   quem lê a pasta inteira conta os paraibanos duas vezes —, e `BA.zip` traz
+   um zip dentro do zip; nada disso consta do log.
 5. **Agregados por setor de 2010.** Os arquivos `Pessoa02` de São Paulo
    (capital e demais municípios) têm os nomes das 170 variáveis deslocados
    em 85 posições em relação ao dicionário — o que está sob `V086` é a `V001`
