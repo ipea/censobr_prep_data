@@ -126,11 +126,7 @@ clean_microdata_1980 <- function(raw_paths, dataset_name){
   # um deles faz o censobr deixar de reproduzir o publicado.
   # Ver references/microdata_1980_pesos_v603_v604.md.
 
-  arrw <- arrw |>
-    dplyr::relocate(code_muni, code_muni_1980, code_state, abbrev_state, name_state,
-                    code_region, name_region, code_meso, code_micro)
-
-  arrw
+  relocate_geo_cols_censobr(arrw)
 }
 
 

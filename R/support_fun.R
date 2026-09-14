@@ -237,6 +237,43 @@ code_cols_to_numeric <- function(df){
 }
 
 
+# As colunas de geografia do censobr sao adicionais: as do IBGE ficam com o nome
+# original, e estas vem sempre no inicio da tabela, nesta ordem -- do maior para
+# o menor recorte, codigo antes do nome; depois os atributos do setor e as
+# variantes historicas.
+GEO_COLS_CENSOBR <- c(
+  "code_region", "name_region",
+  "code_state", "abbrev_state", "name_state",
+  "code_meso", "name_meso",
+  "code_micro", "name_micro",
+  "code_intermediate", "name_intermediate",
+  "code_immediate", "name_immediate",
+  "code_metro", "name_metro",
+  "code_urban_concentration", "name_urban_concentration",
+  "code_muni", "name_muni",
+  "code_district", "name_district",
+  "code_subdistrict", "name_subdistrict",
+  "code_neighborhood", "name_neighborhood",
+  "code_nucleo_urbano", "name_nucleo_urbano",
+  "code_favela", "name_favela",
+  "code_aglomerado", "name_aglomerado",
+  "code_weighting", "code_tract",
+  "code_situacao", "situacao", "code_type", "area_km2",
+  "code_muni_1960", "code_muni_1970", "code_muni_1980",
+  "abbrev_state_1960", "name_state_1960",
+  "abbrev_state_1970", "name_state_1970")
+
+relocate_geo_cols_censobr <- function(df){
+  first <- intersect(GEO_COLS_CENSOBR, names(df))
+  if(data.table::is.data.table(df)){
+    data.table::setcolorder(df, first)
+    return(df)
+  }
+  # all_of sem prefixo de pacote: o arrow so traduz o seletor assim
+  dplyr::relocate(df, all_of(first))
+}
+
+
 
 # detect encoding of a csv file
 detect_csv_encoding <- function(file_path){

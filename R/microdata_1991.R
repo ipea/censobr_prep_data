@@ -170,9 +170,7 @@ clean_microdata_1991 <- function(raw_paths, dataset_name){
                              V3045 / numb_family_members))
   }
 
-  arrw |>
-    dplyr::relocate(code_muni, code_state, abbrev_state, name_state,
-                    code_region, name_region, code_meso, code_micro, code_metro)
+  relocate_geo_cols_censobr(arrw)
 }
 
 

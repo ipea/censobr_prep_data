@@ -5,9 +5,15 @@
 # do compilado em censoBR_aux_Dados/1960/.../Criando a amostra compilada/.
 #
 # Pipeline minimo: baixa os 2 parquets, renomeia cols v* -> V* (consumer
-# censobr espera maiusculo), aplica convencao v0.6.0 em code_* (numeric) e
-# salva. Nao adiciona geo cols (paridade rigida com v0.5.0 -- que tambem so
-# traz `uf` e `code_muni_1960` do compilado).
+# censobr espera maiusculo), acrescenta a geografia censobr, aplica convencao
+# v0.6.0 em code_* (numeric) e salva.
+#
+# A geografia do compilado sao `uf` (codigo de UF do Censo de 1960, cujo
+# dicionario esta no release censo_docs) e `code_muni_1960` (so nos registros
+# da amostra de 25%). As colunas censobr saem dai: a UF do `uf`, o nome do
+# municipio da malha de 1960 do geobr. Guanabara (34), Fernando de Noronha (20)
+# e Serra dos Aimores (99, litigio MG/ES) sao UFs de 1960, com o codigo que o
+# geobr lhes da; nao ha code_muni moderno porque nao existe crosswalk 1960->2010.
 #
 # Public API: download_microdata_1960, clean_microdata_1960, save_microdata_1960.
 
@@ -41,6 +47,25 @@ clean_microdata_1960 <- function(raw_paths, dataset_name){
   # consumer censobr espera prefixo V maiusculo nos codigos do questionario
   names(df) <- ifelse(startsWith(names(df), "v"), sub("^v", "V", names(df)), names(df))
 
+  # UF: codigo do Censo de 1960 -> codigo IBGE atual (dicionario do compilado)
+  uf_1960 <- data.frame(
+    uf         = c(0, 1, 2, 3, 4, 6, 10, 12, 14, 17, 19, 21, 24, 25, 30, 31, 40,
+                   50, 51, 52, 54, 60, 71, 74, 81, 91, 94, 97),
+    code_state = c(11, 12, 13, 14, 15, 16, 21, 22, 23, 24, 25, 26, 20, 27, 28, 29, 31,
+                   99, 32, 33, 34, 35, 41, 42, 43, 51, 52, 53))
+
+  df <- dplyr::left_join(df, uf_1960, by = "uf")
+  df <- add_state_info(df, column = "code_state")
+  df <- add_region_info(df, column = "code_state")
+  df$name_state[df$code_state %in% 99]  <- "Serra dos Aimorés"
+  df$code_region[df$code_state %in% 99] <- NA_real_
+
+  # nome do municipio pela malha de 1960 (geobr); 3 codigos do compilado nao
+  # existem nela e ficam sem nome
+  munis <- sf::st_drop_geometry(geobr::read_municipality(year = 1960, showProgress = FALSE))
+  munis <- munis[, c("code_muni", "name_muni")]
+  df <- dplyr::left_join(df, munis, by = c("code_muni_1960" = "code_muni"))
+
   df$dataset_name <- dataset_name
   df
 }
@@ -56,6 +81,7 @@ save_microdata_1960 <- function(cleaned_df, data_version){
 
   # convencao v0.6.0: code_* numeric (afeta code_muni_1960; quebra intencional
   # vs v0.5.0 onde era int32).
+  out <- relocate_geo_cols_censobr(out)
   out <- code_cols_to_numeric(out)
 
   dir.create("./data/microdata_sample/1960/", recursive = TRUE, showWarnings = FALSE)

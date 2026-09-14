@@ -123,6 +123,7 @@ save_microdata_2010 <- function(arrw, dataset_name, data_version){
   temp_dir <- file.path(out_dir, paste0("tmp_", dataset_name))
   unlink(temp_dir, recursive = TRUE)
 
+  arrw <- relocate_geo_cols_censobr(arrw)
   arrow::write_dataset(arrw,
                        path               = temp_dir,
                        format             = "parquet",

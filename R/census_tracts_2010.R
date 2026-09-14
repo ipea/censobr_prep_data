@@ -176,11 +176,10 @@ clean_tracts_2010 <- function(raw_file_paths, tbl_name){
     root_name <- sub("_.*$", "", root_name)
     root_name <- tolower(root_name)
     
-    # rename columns
-    data.table::setnames(temp_df, 'Cod_setor', 'code_tract')
-    temp_df[, code_tract := as.character(code_tract)]
+    # Cod_setor fica como o IBGE escreve; code_tract e code_muni sao as chaves censobr
+    temp_df[, code_tract := as.character(Cod_setor)]
     temp_df[, code_muni := substr(code_tract, 1, 7)]
-    data.table::setcolorder(temp_df, c('code_muni', 'code_tract'))
+    data.table::setcolorder(temp_df, c('code_muni', 'code_tract', 'Cod_setor'))
 
     # IBGE às vezes inclui linhas-resumo sem código de setor. Filtrar antes do
     # merge — data.table casa NA==NA no join (gera Cartesian); dplyr::left_join
@@ -190,8 +189,8 @@ clean_tracts_2010 <- function(raw_file_paths, tbl_name){
     # prefixa V cols com nome do sub-arquivo (pessoa01_, domicilio02_, etc.)
     tabl <- detect_2010_table_name(f)
     if(tabl %in% c("PESSOA", "DOMICILIO", "RESPONSAVEL", "ENTORNO")){
-      cols_to_rename <- names(temp_df)[3:ncol(temp_df)]
-      names(temp_df)[3:ncol(temp_df)] <- paste0(root_name, "_", cols_to_rename)
+      cols_to_rename <- names(temp_df)[4:ncol(temp_df)]
+      names(temp_df)[4:ncol(temp_df)] <- paste0(root_name, "_", cols_to_rename)
     }
 
     # table_name é re-adicionado em clean_tracts_2010 após rbindlist; mantê-lo
@@ -211,7 +210,7 @@ clean_tracts_2010 <- function(raw_file_paths, tbl_name){
     df_list[[1]] <- NULL
     while(length(df_list) > 0){
       temp_uf <- merge(temp_uf, df_list[[1]],
-                       by = c("code_muni", "code_tract"),
+                       by = c("code_muni", "code_tract", "Cod_setor"),
                        all.x = TRUE, sort = FALSE)
       df_list[[1]] <- NULL
       gc(verbose = FALSE)
@@ -274,7 +273,8 @@ save_tracts_2010 <- function(br_df, data_version){
     
     options(scipen = 999)
 
-    AT <- dplyr::rename(AT,
+    # colunas censobr copiadas das do IBGE, que ficam com o nome original
+    AT <- dplyr::mutate(AT,
                         name_muni         = Nome_do_municipio,
                         code_meso         = Cod_meso,
                         name_meso         = Nome_da_meso,
@@ -288,43 +288,28 @@ save_tracts_2010 <- function(br_df, data_version){
                         name_district     = Nome_do_distrito,
                         code_subdistrict  = Cod_subdistrito,
                         name_subdistrict  = Nome_do_subdistrito,
-                        Basico_V1005      = Situacao_setor)
-    
-    # as cols IBGE de regiao/UF/municipio (Cod_Grandes Regiões, Nome_Grande_Regiao,
-    # Cod_UF, Nome_da_UF, Cod_municipio) ficam no produto ao lado das censobr.
-    AT <- relocate(AT, code_tract, code_weighting, code_muni, name_muni,
-                       code_state, abbrev_state, name_state,
-                       code_region, name_region,
-                       code_meso, name_meso, code_micro, name_micro,
-                       code_metro, name_metro,
-                       name_neighborhood, code_neighborhood,
-                       Basico_V1005)
+                        code_situacao     = as.numeric(Situacao_setor))
+  } else {
+    # nos outros temas a Situacao_setor vem repetida por sub-tabela, identica
+    sit <- grep("Situacao_setor$", names(AT), value = TRUE)[1]
+    AT$code_situacao <- as.numeric(AT[[sit]])
   }
-  
-  
-  # rename column Situacao_setor
-  all_cols <- names(AT)
-  old_names <- all_cols[str_detect(all_cols, 'Situacao_setor')]
-  
-  if(tbl == 'ENTORNO'){ AT <- select(AT, -c(entorno05_V1005)) }
-  
-  AT <- rename_with(AT, ~gsub("Situacao_setor", "V1005", .x), .cols = all_of(old_names))
-  
-  
+
   AT <- collect(AT)
 
   # V cols vêm como character (fread colClasses) com vírgula decimal IBGE.
   # Loop set é preferível a mutate(across) — evita cópia da tabela inteira.
   message("to numeric")
   data.table::setDT(AT)
-  for(v in grep("V", names(AT), value = TRUE))
+  for(v in grep("(^|_)V\\d", names(AT), value = TRUE))
     set(AT, j = v, value = as.numeric(gsub(",", ".", AT[[v]], fixed = TRUE)))
 
   AT <- AT[order(code_muni, code_tract)]
   setindex(AT, NULL)
   setDF(AT)
 
-  # convenção v0.6.0: todas code_* viram numeric (R double / Arrow float64).
+  # colunas censobr de geografia no inicio; convenção v0.6.0: code_* numeric.
+  AT <- relocate_geo_cols_censobr(AT)
   AT <- code_cols_to_numeric(AT)
 
   # table_name é metadata interna do pipeline — não vai pro output.

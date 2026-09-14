@@ -11,18 +11,20 @@
 # Pessoa<1-7>_<UF>.XLS, Responsavel<1-5>_<UF>.XLS, Instrucao<1-6>_<UF>.XLS.
 
 
-# recodifica X/,/. para NA, converte cols numericas, normaliza CD_setor.
+# recodifica X/,/. para NA, converte cols numericas, normaliza a chave do setor.
+# O IBGE chama o setor de Cod_setor; as variantes so diferem de caixa ou de
+# prefixo e casam sem mexer nas outras colunas, que ficam com o nome original.
 recode_datasets_2000 <- function(df){
 
-  variants <- c("CD_setor", "COD_SETOR", "CD_SETOR", "SETOR")
-  present  <- intersect(names(df), variants)
+  variants <- c("cod_setor", "cd_setor", "setor")
+  present  <- names(df)[tolower(names(df)) %in% variants]
 
-  if(present != "CD_setor"){
-    df <- df |> rename("CD_setor" = !!sym(present))
+  if(present != "Cod_setor"){
+    df <- df |> rename("Cod_setor" = !!sym(present))
   }
 
   df_recoded <- df |>
-    mutate(CD_setor = as.numeric(CD_setor)) |>
+    mutate(Cod_setor = as.numeric(Cod_setor)) |>
 
     ### replace "X" "," "." with NA
     mutate_if(is.character, .funs = \(var){
@@ -54,46 +56,61 @@ recode_datasets_2000 <- function(df){
     stop("Missing values criados onde nao deveriam")
   }
 
-  df_recoded |> select(CD_setor, everything())
+  df_recoded |> select(Cod_setor, everything())
 }
 
 
-# le todos os Basico_<UF>.XLS, empilha, recodifica, aplica rename canonico.
-# IBGE entrega cols Var01-Var14 ja como cols separadas; str_to_upper -> VAR01-VAR14
-# que casa com o baseline v0.5.0.
+# os nomes de coluna ficam como o IBGE os escreve. Entre UFs a unica diferenca
+# e de caixa; casa-se com a grafia do primeiro arquivo da pilha.
+match_names_2000 <- function(lst){
+  ref <- names(lst[[1]])
+  lapply(lst, \(x){
+    i <- match(tolower(names(x)), tolower(ref))
+    setNames(x, ifelse(is.na(i), names(x), ref[i]))
+  })
+}
+
+
+# le todos os Basico_<UF>.XLS, empilha, recodifica e acrescenta as colunas
+# censobr de geografia. As do IBGE (Cod_UF, Nome_da_UF, ..., Var01-Var14)
+# ficam com o nome original.
 recode_basico_2000 <- function(raw_xls_paths, dataset_info_2000){
 
   basico_files <- dataset_info_2000$file[dataset_info_2000$theme == "Basico"]
   if(length(basico_files) == 0) stop("Nenhum arquivo Basico encontrado")
 
   basico_list <- lapply(basico_files, \(f) readxl::read_excel(path = f))
-  basico_list <- lapply(basico_list, \(x) setNames(x, str_to_upper(names(x))))
+  basico_list <- match_names_2000(basico_list)
 
   datasets_basico <- data.table::rbindlist(basico_list, use.names = TRUE, fill = TRUE)
   rm(basico_list); gc(verbose = FALSE)
 
   datasets_basico <- recode_datasets_2000(datasets_basico)
 
-  datasets_basico |>
-    rename(code_tract        = CD_setor,
-           code_state        = COD_UF,
-           name_state        = NOME_DA_UF,
-           code_meso         = COD_MESO,
-           name_meso         = NOME_DA_MESO,
-           code_micro        = COD_MICRO,
-           name_micro        = NOME_DA_MICRO,
-           code_metro        = COD_RM,
-           name_metro        = NOME_DA_RM,
-           code_muni         = COD_MUNICIPIO,
-           name_muni         = NOME_DO_MUNICIPIO,
-           code_district     = COD_DISTRITO,
-           name_district     = NOME_DO_DISTRITO,
-           code_subdistrict  = COD_SUBDISTRITO,
-           name_subdistrict  = NOME_DO_SUBDISTRITO,
-           code_neighborhood = COD_BAIRRO,
-           name_neighborhood = NOME_DO_BAIRRO,
-           situacao          = SITUACAO,
-           code_type         = TIPO_DO_SETOR)
+  datasets_basico <- datasets_basico |>
+    mutate(code_tract        = Cod_setor,
+           code_state        = Cod_UF,
+           code_meso         = Cod_meso,
+           name_meso         = Nome_da_meso,
+           code_micro        = Cod_micro,
+           name_micro        = Nome_da_micro,
+           code_metro        = Cod_RM,
+           name_metro        = Nome_da_RM,
+           code_muni         = Cod_municipio,
+           name_muni         = Nome_do_municipio,
+           code_district     = Cod_distrito,
+           name_district     = Nome_do_distrito,
+           code_subdistrict  = Cod_subdistrito,
+           name_subdistrict  = Nome_do_subdistrito,
+           code_neighborhood = Cod_bairro,
+           name_neighborhood = Nome_do_bairro,
+           code_situacao     = Situacao,
+           code_type         = Tipo_do_setor)
+
+  # name_state canonico, abbrev_state e regiao
+  datasets_basico <- add_state_info(datasets_basico, column = "code_muni")
+  datasets_basico <- add_region_info(datasets_basico, column = "code_state")
+  datasets_basico
 }
 
 
@@ -117,7 +134,7 @@ make_theme_dataset_2000 <- function(theme_i, raw_xls_paths, dataset_basico, data
     prefix_j_files <- dataset_info_i$file[dataset_info_i$prefix == prefix_j]
 
     prefix_j_list  <- lapply(prefix_j_files, \(f) readxl::read_excel(path = f))
-    prefix_j_list  <- lapply(prefix_j_list, \(x) setNames(x, str_to_upper(names(x))))
+    prefix_j_list  <- match_names_2000(prefix_j_list)
     prefix_j_stack <- data.table::rbindlist(prefix_j_list, use.names = TRUE, fill = TRUE)
     rm(prefix_j_list); gc(verbose = FALSE)
 
@@ -126,27 +143,28 @@ make_theme_dataset_2000 <- function(theme_i, raw_xls_paths, dataset_basico, data
 
   gc(verbose = FALSE)
 
-  # adiciona prefixo de tema as V cols (somente quando ha mais de 1 sub-tabela)
+  # adiciona prefixo de tema as V cols (somente quando ha mais de 1 sub-tabela).
+  # Situacao e Tipo_do_setor repetem os do Basico, que ja entram pelo join.
   if(length(prefixes) > 1){
     for(j in seq_along(prefixes)){
       prefix_j <- prefixes[j]
 
-      datasets_i[[j]]$SITUACAO      <- NULL
-      datasets_i[[j]]$TIPO_DO_SETOR <- NULL
+      datasets_i[[j]]$Situacao      <- NULL
+      datasets_i[[j]]$Tipo_do_setor <- NULL
 
-      names_to_change <- setdiff(names(datasets_i[[j]]), "CD_setor")
+      names_to_change <- setdiff(names(datasets_i[[j]]), "Cod_setor")
       if(any(grepl(x = names_to_change, pattern = prefix_j))) next
 
-      data.table::setnames(datasets_i[[j]], old = "CD_setor", new = "code_tract")
+      data.table::setnames(datasets_i[[j]], old = "Cod_setor", new = "code_tract")
       datasets_i[[j]] <- datasets_i[[j]] |> select(code_tract, everything())
 
       newnames <- paste(prefix_j, names_to_change, sep = "_")
       data.table::setnames(datasets_i[[j]], old = names_to_change, new = newnames)
     }
   } else {
-    datasets_i[[1]]$SITUACAO      <- NULL
-    datasets_i[[1]]$TIPO_DO_SETOR <- NULL
-    data.table::setnames(datasets_i[[1]], old = "CD_setor", new = "code_tract")
+    datasets_i[[1]]$Situacao      <- NULL
+    datasets_i[[1]]$Tipo_do_setor <- NULL
+    data.table::setnames(datasets_i[[1]], old = "Cod_setor", new = "code_tract")
     datasets_i[[1]] <- datasets_i[[1]] |> select(code_tract, everything())
   }
 
@@ -262,11 +280,10 @@ save_tracts_2000 <- function(cleaned_dt, data_version){
   out <- cleaned_dt
   out$table_name <- NULL
 
-  # convencao v0.6.0: code_* numeric.
+  # colunas censobr de geografia no inicio; convencao v0.6.0: code_* numeric.
+  out <- relocate_geo_cols_censobr(out)
   out <- code_cols_to_numeric(out)
 
-  
-  
   # save data
   message("saving")
   dir.create("./data/tracts/2000/", recursive = TRUE, showWarnings = FALSE)

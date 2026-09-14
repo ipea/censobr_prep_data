@@ -82,7 +82,7 @@ Foram visíveis no diff antigo de `R/census_tracts_2010.R` e na versão AI-style
 
 ## 2. Nomeação `censobr` (canônica)
 
-Esquema visível em `R/census_tracts_2022.R` (bloco de rename do Basico). Aplicar literalmente, sem invenção.
+**As colunas do IBGE ficam com o nome original, em todas as edições e tabelas — nunca renomeadas para o padrão censobr.** As colunas de geografia censobr (`code_*`, `name_*`, `abbrev_state`) são **adicionais**: copiadas ou derivadas das do IBGE via `mutate()`, nunca via `rename()`, e vêm sempre no início da tabela, na ordem de `GEO_COLS_CENSOBR` (`R/support_fun.R`), aplicada por `relocate_geo_cols_censobr()` em todo `save_*`. Decisão do usuário em 2026-09-13. Esquema de nomes visível em `R/census_tracts_2022.R` (bloco de `mutate` do Basico). Aplicar literalmente, sem invenção.
 
 ### Identificadores hierárquicos (`code_*`)
 
@@ -100,9 +100,8 @@ Esquema visível em `R/census_tracts_2022.R` (bloco de rename do Basico). Aplica
 
 ### Variáveis V do IBGE
 
-- **Preservadas** com prefixo de tema: `pessoa01_V002`, `domicilio02_V135`, `entorno05_V242`, `Basico_V1005`.
-- O prefixo é o sub-arquivo IBGE (Pessoa01, Domicilio02, etc.) em lowercase.
-- Para tabelas single-file (Basico), prefixo é o tema com `_` final: `Basico_V1005`.
+- **Preservadas** com prefixo de tema quando a tabela une vários arquivos IBGE: `pessoa01_V002`, `domicilio02_V135`, `entorno05_V242`. O prefixo é o sub-arquivo IBGE (Pessoa01, Domicilio02, etc.) em lowercase; as colunas não-V desses arquivos (`Situacao_setor`, `Cod_UF`…) recebem o mesmo prefixo.
+- Tabelas de arquivo único (Basico, PessoaRenda…) não têm prefixo: `V001`, `Situacao_setor`.
 - Não renomear V cols por hipótese de "ficar mais legível" — quebra os dicionários do IBGE que os usuários do `censobr` consultam.
 
 ### Convenção v0.6.0
@@ -112,9 +111,7 @@ Esquema visível em `R/census_tracts_2022.R` (bloco de rename do Basico). Aplica
 
 ### Zero invenção
 
-Se uma coluna IBGE não tiver mapping óbvio:
-1. Manter o nome IBGE original (uppercase, como vem do `fread`).
-2. Pedir decisão explícita do usuário antes de renomear.
+Se uma coluna IBGE não tiver mapping óbvio para uma coluna censobr, ela fica só com o nome original — não se inventa `code_*`/`name_*` novo sem decisão explícita do usuário. A caixa do nome também é a do IBGE (`Cod_UF`, `Nome_da_UF`, `Var01` em 2000); diferenças de caixa entre UFs casam com a grafia do primeiro arquivo (`match_names_2000`).
 
 ## 3. Adaptação a `targets`
 

@@ -46,9 +46,11 @@ Duas regras complementares: [`memory-discipline.md`](.claude/rules/memory-discip
 - `=` alinhado em listas de pares. Pipe `|>` em código novo. `library()` em bloco no topo.
 
 **Nomeação `censobr` (canônica — zero invenção):**
-- IDs: `code_tract|muni|state|region|district|subdistrict|neighborhood|weighting|meso|micro|metro`. Sigla: `abbrev_state`. Nomes humanos: `name_*` análogos.
-- V cols IBGE preservadas com prefixo de tema: `pessoa01_V002`, `domicilio02_V135`, `entorno05_V242`, `Basico_V1005`.
+- **Colunas do IBGE ficam com o nome original, sempre** (`Cod_setor`, `Nome_da_UF`, `CD_MUN`, `V0102`…); nunca renomeadas. As colunas de geografia censobr são **adicionais** (`mutate`, não `rename`) e vêm no início da tabela, na ordem de `GEO_COLS_CENSOBR` via `relocate_geo_cols_censobr()` (`R/support_fun.R`). Decisão de 2026-09-13.
+- IDs censobr: `code_tract|muni|state|region|district|subdistrict|neighborhood|weighting|meso|micro|metro`. Sigla: `abbrev_state`. Nomes humanos: `name_*` análogos.
+- V cols IBGE preservadas com prefixo de tema quando a tabela une vários arquivos: `pessoa01_V002`, `domicilio02_V135`, `entorno05_V242`.
 - Convenção v0.6.0: `code_*` viram `numeric` (Arrow `float64`) via `code_cols_to_numeric()`.
+- Nunca preencher valor de um registro a partir de outro (ex.: bloco do chefe nas famílias secundárias de 1970); zero → NA em "não se aplica" e correção de sentinela para o valor do dicionário são aceitáveis.
 
 **Anti-padrões (NÃO repetir — visíveis no diff antigo de `R/census_tracts_2010.R` e na versão AI-style anterior de `R/census_tracts_2022.R` — ambos refatorados em 2026-05-04):**
 - `mutate_all(funs(...))`, `purrr::reduce(.x, dplyr::left_join)`, `purrr::map(~str_detect)` em colunas character.

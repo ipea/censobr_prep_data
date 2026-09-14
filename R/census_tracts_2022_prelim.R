@@ -14,14 +14,14 @@
 #    divulgou. A diferenca sao 37.550 setores (8,3%) que existem na malha
 #    preliminar e nao na definitiva -- a versao antiga fazia inner join com o
 #    Basico definitivo e os descartava em silencio;
-#  - o publicado tem 57 colunas porque trazia os nomes censobr E os nomes
-#    crus do IBGE, alem de seis colunas que so existem na malha definitiva
-#    (situacao, code_type, code_neighborhood, code_nucleo_urbano, code_favela
-#    e code_aglomerado). Aqui ficam as 29 da fonte, com a nomeacao censobr,
-#    como faz o Basico definitivo.
+#  - o publicado tem 57 colunas porque trazia, alem dos nomes crus do IBGE e
+#    dos censobr, seis colunas que so existem na malha definitiva (situacao,
+#    code_type, code_neighborhood, code_nucleo_urbano, code_favela e
+#    code_aglomerado). Aqui ficam as 29 da fonte com o nome original, mais as
+#    22 colunas censobr de geografia derivadas delas.
 #
-# Em compensacao, esta tabela guarda code_meso e code_micro, que o IBGE nao
-# publica no Basico definitivo de 2022.
+# Esta tabela guarda code_meso e code_micro, que o IBGE nao publica no Basico
+# definitivo de 2022.
 #
 # Public API: download_tract_2022_prelim, clean_tracts_2022_prelim,
 #             save_tracts_2022_prelim.
@@ -50,7 +50,8 @@ download_tract_2022_prelim <- function(){
 }
 
 
-# Le o CSV, renomeia para a convencao censobr e devolve a tabela.
+# Le o CSV, acrescenta as colunas censobr de geografia e devolve a tabela. As
+# 29 colunas do IBGE ficam com o nome original.
 clean_tracts_2022_prelim <- function(raw_csv_path){
 
   message("Cleaning 2022 tracts: preliminares")
@@ -58,11 +59,10 @@ clean_tracts_2022_prelim <- function(raw_csv_path){
   df <- data.table::fread(raw_csv_path, sep = ";", dec = ",", showProgress = FALSE)
   data.table::setnames(df, toupper(names(df)))
 
-  # o "P" marca o setor como preliminar e nao faz parte do codigo
-  df[, CD_SETOR := gsub("P", "", CD_SETOR)]
-
-  df <- dplyr::select(df,
-                      code_tract               = CD_SETOR   ,
+  # o "P" marca o setor como preliminar e nao faz parte do codigo; o code_tract
+  # censobr e numerico, o CD_SETOR do IBGE segue como texto
+  df <- dplyr::mutate(df,
+                      code_tract               = as.numeric(gsub("P", "", CD_SETOR)),
                       area_km2                 = AREA_KM2   ,
                       code_region              = CD_REGIAO  ,
                       name_region              = NM_REGIAO  ,
@@ -83,8 +83,7 @@ clean_tracts_2022_prelim <- function(raw_csv_path){
                       code_immediate           = CD_RGI     ,
                       name_immediate           = NM_RGI     ,
                       code_urban_concentration = CD_CONCURB ,
-                      name_urban_concentration = NM_CONCURB ,
-                      V0001, V0002, V0003, V0004, V0005, V0006, V0007)
+                      name_urban_concentration = NM_CONCURB)
 
   # convencao v0.6.0: todo code_* e numeric. As V tambem, que o IBGE censura
   # com "X" em setor pequeno e o fread deixa como texto.
@@ -92,7 +91,7 @@ clean_tracts_2022_prelim <- function(raw_csv_path){
                 paste0("V000", 1:7))
   df <- dplyr::mutate(df, dplyr::across(dplyr::all_of(num_cols), as.numeric))
 
-  df
+  relocate_geo_cols_censobr(df)
 }
 
 

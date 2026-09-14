@@ -52,7 +52,8 @@ recode_datasets_2022 <- function(df){
 }
 
 
-# le o Basico, recodifica, e aplica o bloco canonico de rename censobr.
+# le o Basico, recodifica, e acrescenta as colunas censobr de geografia. As
+# colunas do IBGE ficam com o nome original.
 recode_basico_2022 <- function(raw_csv_paths, dataset_info_2022){
 
   pattern     <- dataset_info_2022$pattern[dataset_info_2022$theme == "Basico"]
@@ -65,7 +66,7 @@ recode_basico_2022 <- function(raw_csv_paths, dataset_info_2022){
   datasets_basico <- recode_datasets_2022(datasets_basico)
 
   datasets_basico |>
-    rename(code_tract               = CD_setor   ,
+    mutate(code_tract               = CD_setor   ,
            situacao                 = SITUACAO   ,
            code_situacao            = CD_SIT     ,
            code_type                = CD_TIPO    ,
@@ -307,6 +308,10 @@ save_tracts_2022 <- function(cleaned_dt, data_version){
 
   out <- cleaned_dt
   out$table_name <- NULL
+
+  # a chave do IBGE volta ao nome que tem no CSV; as colunas censobr vao para o inicio
+  data.table::setnames(out, "CD_setor", "CD_SETOR")
+  out <- relocate_geo_cols_censobr(out)
 
   # convencao v0.6.0: code_* numeric.
   out <- code_cols_to_numeric(out)

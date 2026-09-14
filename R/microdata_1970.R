@@ -238,6 +238,7 @@ clean_microdata_1970 <- function(raw_paths, derived_paths, dataset_name){
                                "numb_residents", "numb_families",
                                "numb_dwellers_hhincome", "hh_income",
                                "hh_income_per_cap")))
+    arrw <- relocate_geo_cols_censobr(arrw)
     return(arrw)
   }
 
@@ -265,8 +266,9 @@ clean_microdata_1970 <- function(raw_paths, derived_paths, dataset_name){
   arrw <- add_geo_1970(arrw)
 
   vs <- paste0("V", sprintf("%03d", 1:54))
-  arrw |>
+  arrw <- arrw |>
     dplyr::relocate(all_of(c(GEO_COLS_1970, vs, "id_person", "id_household")))
+  relocate_geo_cols_censobr(arrw)
 }
 
 

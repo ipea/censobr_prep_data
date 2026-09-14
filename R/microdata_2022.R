@@ -106,10 +106,9 @@ clean_microdata_2022 <- function(raw_paths, dataset_name){
                                  "code_region", "name_region")]
 
   arrw <- arrw |>
-    dplyr::left_join(states, by = "code_state") |>
-    dplyr::relocate(code_region, name_region, code_state, abbrev_state, name_state)
+    dplyr::left_join(states, by = "code_state")
 
-  arrw
+  relocate_geo_cols_censobr(arrw)
 }
 
 
