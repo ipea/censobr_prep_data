@@ -1,6 +1,14 @@
 # Censo 1960, amostra de 1,27%: o que o repositório `ConsistenciaCenso1960Br` faz, o que reproduz e o que precisa mudar
 
 **Data:** 2026-09-14 (segundo exame; substitui a versão do mesmo dia)
+**Status:** este documento é o **diagnóstico**. A implementação está em
+`microdata_1960_amostra_127_preparacao.md` e em `R/microdata_1960_amostra_127.R`,
+e em alguns pontos ela foi além do que este exame propunha, porque em seguida
+entraram duas fontes novas: o Volume II dos *Resultados Preliminares* de 1965,
+que é uma tabulação destes mesmos cartões feita antes do dano, e o Boletim de
+Amostra CD 2 com as *Instruções ao Recenseador*. Onde os dois documentos
+divergirem, vale o de preparação; as divergências estão assinaladas abaixo
+como **[revisto]**.
 **Escopo:** exame do repositório `antrologos/ConsistenciaCenso1960Br` (2018), que produz a versão consistida da amostra de 1,27% do Censo de 1960 usada como insumo do `censobr` para as 11 UFs sem amostra de 25% (RO, AC, AM, RR, PA, AP, MA, PI, ES, GB, SC). Dois exames no mesmo dia: o primeiro, feito à mão; o segundo, com cinco lentes independentes (layout, diagnósticos manuais, banco de pessoas, estrutura de domicílios, ponte com o censobr), cada uma remedida por um verificador com a instrução de refutá-la. Onde o segundo exame corrigiu o primeiro, vale o segundo. Todos os números vêm de medições sobre `Original Files/HHOLDA.txt`, sobre os arquivos auxiliares, sobre a reprodução integral do `README.Rmd` e sobre os parquets `amostraCompilada` do `release_legacy`. Scripts em `D:/tmp/c1960/_review/`.
 
 ---
@@ -48,6 +56,15 @@ que se descreve abaixo, portanto, está no produto publicado.
 ## Defeitos do dado que o procedimento não trata
 
 ### D1. Pernambuco tem 2.815 linhas de pessoa duplicadas (5,08% da UF) — e os 856 IDs pulados são o rastro delas
+
+**[revisto]** A preparação remove 2.850 linhas, não 2.815, e por um critério
+que segue a forma do defeito em vez de contar linhas iguais: sai a repetida
+que é chefe ou cônjuge, a que está em família com duas ou mais repetidas (o
+bloco copiado) e a avulsa na cauda da família nos três municípios
+danificados. Ficam 846 repetidas marcadas. A prova de que são cópias ganhou
+um argumento externo: a tabulação de 1965, feita antes do dano, só reproduz o
+Nordeste sem elas — fator de expansão 79,5 como nas outras regiões, contra
+78,4 com elas. Ver o passo 6 do documento de preparação.
 
 Linha idêntica (posições 1–54) a outra linha da mesma família, nunca
 adjacente, em ordem embaralhada (família 29839: A, B, C, D, E e depois C, B,
@@ -195,7 +212,14 @@ domicílios, nunca o inverso; somas 875.853 e 899.861.
   dezena do código.
 - `V216` (ano de casamento): SPSS e `.doc` omitem o 59 e rotulam 58 como 1959;
   o xlsx corrige (13.040 registros salvos) mas mantém "62 = antes de 1964"
-  (é antes de 1864, como o dicionário final diz).
+  (é antes de 1864, como o dicionário final diz). **[revisto]** O Boletim de
+  Amostra (quesito Q) e as *Instruções ao Recenseador* (p. 31) resolvem a
+  variável: é o ano do casamento ou do início da união com o cônjuge com quem
+  a pessoa vive na data do censo, e 00 é "não vive com cônjuge". Os códigos
+  acima de 60 não são anos do século 19: o 63, com 5.690 pessoas de todas as
+  idades, casadas e viúvas, é ignorado. Daí também a marca de casamento
+  impossível ser, quase sempre, erro na idade e não no ano: 1.315 dos 1.367
+  cônjuges marcados têm o mesmo ano do chefe, porque é o ano do casal.
 - `V214` (curso): 71/72 seguem o SAS (71 Estatística, 72 Artes domésticas)
   contra SPSS e `.doc`; o 89 vem de um documento citado na observação e não
   disponível no repositório — 23 registros.
@@ -282,6 +306,21 @@ compilada/`. Medido contra `release_legacy`, `censobr_source == 1`
    0–30 + 99 e 99 documentado como ignorado, `v204b` = 99, rótulo de
    `V216` = 62 (P3); listar as variáveis em branco fora de salto (P4); flags
    de coerência intrafamiliar (P5); rótulo dos coletivos (P6).
+   **[revisto]** `V217`/`V218` acima de 30 continuam anulados, mas não por
+   serem códigos inválidos: o questionário pede o número de filhos por
+   extenso, então qualquer número é resposta possível — o que os desqualifica
+   é a implausibilidade (um homem de 62 anos com 97 filhos), e por isso eles
+   viram NA com marca própria, no passo 8, em vez de entrarem na lista de
+   correções.
+2b. **[revisto] Pesos e erro amostral.** O exame tratava o peso como
+   pós-estratificação a ser feita na compilação. Com o Volume II de 1965 em
+   mãos, a preparação já calibra o peso de cada domicílio às 176 células do
+   quadro 1 e às 8 do quadro 2, e publica os erros-padrão pelo desenho real
+   da amostra — pastas sorteadas uma em vinte, dentro de estratos de região e
+   situação. Isso também corrige o desenho declarado na compilação antiga
+   (estrato = UF, unidade primária = município), que não corresponde ao
+   sorteio e subestima a variância.
+
 3. **Compilação**: decidir RO — recalibrar ao total (70.783 sobre 675
    pessoas) ou manter 30.842 e avisar que RO cobre só Porto Velho urbano;
    IDs por rank numérico; carregar `cem_iddomicilio`, `cem_idindividuo` e as

@@ -105,6 +105,16 @@
 
 
 # ------------------------------------------------------------------------------
+# As quatro regiões em que o IBGE publicou os Resultados Preliminares de 1965,
+# nos códigos de UF de 1960. Norte e Centro-Oeste só aparecem somados, e o
+# volume não os separa; aqui vão juntos pelo mesmo motivo.
+REGIAO_1960 <- c("0" = "Norte e Centro-Oeste", "1" = "Norte e Centro-Oeste", "2" = "Norte e Centro-Oeste", "3" = "Norte e Centro-Oeste",
+                 "4" = "Norte e Centro-Oeste", "6" = "Norte e Centro-Oeste", "91" = "Norte e Centro-Oeste", "94" = "Norte e Centro-Oeste", "97" = "Norte e Centro-Oeste",
+                 "10" = "Nordeste", "12" = "Nordeste", "14" = "Nordeste", "17" = "Nordeste", "19" = "Nordeste", "21" = "Nordeste", "24" = "Nordeste", "25" = "Nordeste",
+                 "30" = "Leste", "31" = "Leste", "40" = "Leste", "50" = "Leste", "51" = "Leste", "52" = "Leste", "54" = "Leste",
+                 "60" = "Sul", "71" = "Sul", "74" = "Sul", "81" = "Sul")
+
+
 # Passo 1 — baixar o arquivo bruto
 #
 # O arquivo tem 68.756.992 bytes e vem do repositório de 2018, num commit fixo,
@@ -643,6 +653,18 @@ build_families_1960_amostra_127 <- function(tabelas){
 # velho que o chefe; casamento antes dos 10 anos de idade (inclusive antes
 # do nascimento).
 #
+# Desenho da amostra. Duas colunas dizem como a amostra foi sorteada, sem as
+# quais qualquer erro-padrão sai subestimado: censobr_upa é a pasta, que é a
+# unidade que o IBGE sorteou (uma em vinte), e censobr_estrato é a região
+# cruzada com o tipo de situação da pasta — urbana, rural ou mista. São 817
+# pastas em 12 estratos, o menor com 18 pastas. O quarto grupo do desenho
+# original, cidades de 100 mil habitantes e mais, não entra: a população
+# municipal não pode ser deduzida da própria amostra (o cálculo acusaria 216
+# municípios acima de 100 mil, quando o Brasil de 1960 tinha cerca de trinta).
+# Estratos mais grossos que os do IBGE superestimam levemente a variância, que
+# é o lado seguro do erro; a fração de 1/20 da segunda etapa também não entra
+# como correção de população finita, pelo mesmo motivo.
+#
 # Tipos. Todas as variáveis do IBGE viram inteiros; a chave do questionário e
 # as marcas ficam como estão.
 # ------------------------------------------------------------------------------
@@ -714,8 +736,19 @@ finalize_1960_amostra_127 <- function(tabelas){
   para_inteiro(pessoas); para_inteiro(domicilios)
   data.table::setnames(pessoas, "tipo", "censobr_tipo_registro")
 
-  data.table::setcolorder(pessoas, c("UF", "V116", "V118", "censobr_idhousehold", "censobr_idfamily", "linha", "censobr_weight"))
-  data.table::setcolorder(domicilios, c("UF", "V116", "V118", "censobr_idhousehold", "linha", "censobr_weight"))
+  # o desenho da amostra: a pasta e a unidade sorteada, o estrato e regiao x situacao das pastas
+  domicilios[, censobr_upa := paste0(UF, "-", pasta)]
+  pastas <- domicilios[, .(urbanos = sum(V118 %in% c(1, 3)), rurais = sum(V118 %in% 5)), by = censobr_upa]
+  pastas[, tipo := data.table::fifelse(urbanos > 0 & rurais > 0, "mista", data.table::fifelse(rurais == 0, "urbana", "rural"))]
+  domicilios[pastas, censobr_estrato := paste(REGIAO_1960[as.character(UF)], i.tipo, sep = " - "), on = "censobr_upa"]
+  pessoas[domicilios, `:=`(censobr_upa = i.censobr_upa, censobr_estrato = i.censobr_estrato), on = "censobr_idhousehold"]
+  message("  desenho: ", data.table::uniqueN(domicilios$censobr_upa), " pastas (",
+          paste(names(table(pastas$tipo)), table(pastas$tipo), collapse = ", "), ") em ",
+          data.table::uniqueN(domicilios$censobr_estrato), " estratos; menor estrato com ",
+          min(unique(domicilios[, .(censobr_estrato, censobr_upa)])[, .N, by = censobr_estrato]$N), " pastas")
+
+  data.table::setcolorder(pessoas, c("UF", "V116", "V118", "censobr_idhousehold", "censobr_idfamily", "linha", "censobr_weight", "censobr_upa", "censobr_estrato"))
+  data.table::setcolorder(domicilios, c("UF", "V116", "V118", "censobr_idhousehold", "linha", "censobr_weight", "censobr_upa", "censobr_estrato"))
 
   message("  pessoas: ", nrow(pessoas), " x ", ncol(pessoas), " | domicilios: ", nrow(domicilios), " x ", ncol(domicilios))
   list(pessoas = pessoas, domicilios = domicilios)
@@ -749,6 +782,8 @@ finalize_1960_amostra_127 <- function(tabelas){
 # arquivo está íntegro e afasta-se onde faltam ou sobram cartões — por isso
 # ele também é um diagnóstico, gravado em censobr_weight_fator.
 #
+# A reprodução dos sete quadros, inclusive o 6, é o passo 10.
+#
 # O que não entra. O estado conjugal por sexo (quadro 5) foi testado e
 # rejeitado: leva o fator de alguns domicílios a 18 vezes o de desenho,
 # porque força os que perderam o cartão do chefe a compensar com peso o que
@@ -768,11 +803,7 @@ calibrate_1960_amostra_127 <- function(tabelas, gabarito_path){
   gab <- data.table::fread(gabarito_path, encoding = "UTF-8")
 
   # as celulas do quadro 1: regiao x situacao x sexo x faixa de idade
-  regiao_uf <- c("0" = "Norte e Centro-Oeste", "1" = "Norte e Centro-Oeste", "2" = "Norte e Centro-Oeste", "3" = "Norte e Centro-Oeste",
-                 "4" = "Norte e Centro-Oeste", "6" = "Norte e Centro-Oeste", "91" = "Norte e Centro-Oeste", "94" = "Norte e Centro-Oeste", "97" = "Norte e Centro-Oeste",
-                 "10" = "Nordeste", "12" = "Nordeste", "14" = "Nordeste", "17" = "Nordeste", "19" = "Nordeste", "21" = "Nordeste", "24" = "Nordeste", "25" = "Nordeste",
-                 "30" = "Leste", "31" = "Leste", "40" = "Leste", "50" = "Leste", "51" = "Leste", "52" = "Leste", "54" = "Leste",
-                 "60" = "Sul", "71" = "Sul", "74" = "Sul", "81" = "Sul")
+  regiao_uf <- REGIAO_1960
   faixas <- c("0 a 4", "5 a 9", "10 a 14", "15 a 19", "20 a 24", "25 a 29", "30 a 39", "40 a 49", "50 a 59", "60 a 69", "70 e mais e ignorada")
   pessoas[, regiao   := regiao_uf[as.character(UF)]]
   pessoas[, situacao := data.table::fifelse(V118 %in% c(1, 3), "urbana", data.table::fifelse(V118 %in% 5, "rural", NA_character_))]
@@ -823,24 +854,7 @@ calibrate_1960_amostra_127 <- function(tabelas, gabarito_path){
   domicilios[, censobr_weight_desenho := 1 / 0.0127]
   pessoas[,    censobr_weight_desenho := 1 / 0.0127]
 
-  # reproducao do quadro 6 (validacao, nao restricao): domicilios particulares ocupados e residentes
-  domicilios[, regiao := regiao_uf[as.character(UF)]]
-  domicilios[, situacao := data.table::fifelse(V118 %in% c(1, 3), "urbana", data.table::fifelse(V118 %in% 5, "rural", NA_character_))]
-  res <- pessoas[!(V202 %in% c(5, 6)), .(residentes = sum(censobr_weight)), by = .(regiao, situacao, censobr_idhousehold)]
-  res <- res[domicilios[!(V101 %in% 3), .(censobr_idhousehold)], on = "censobr_idhousehold"][, .(residentes = sum(residentes, na.rm = TRUE)), by = .(regiao, situacao)]
-  dom <- domicilios[!(V101 %in% 3), .(domicilios = sum(censobr_weight)), by = .(regiao, situacao)]
-  q6 <- gab[quadro == 6 & regiao != "Brasil" & linha == "TOTAIS" & coluna %in% c("dom_urbana", "dom_rural", "pes_urbana", "pes_rural")]
-  q6[, `:=`(situacao = sub(".*_", "", coluna), medida = data.table::fifelse(grepl("^dom", coluna), "domicilios", "residentes"))]
-  comp <- merge(q6[, .(regiao, situacao, medida, publicado = valor)],
-                rbind(dom[, .(regiao, situacao, medida = "domicilios", calibrado = domicilios)], res[, .(regiao, situacao, medida = "residentes", calibrado = residentes)]),
-                by = c("regiao", "situacao", "medida"))
-  comp[, dif_pct := round(100 * (calibrado / publicado - 1), 2)]
-  data.table::fwrite(comp[order(medida, regiao, situacao)], "./data_raw/microdata/1960/amostra_127/calibracao_1965_quadro6.csv", bom = TRUE)
-  message("  quadro 6 (validacao): diferenca relativa dos domicilios ", paste(range(comp[medida == "domicilios", dif_pct]), collapse = " a "),
-          "%; dos residentes ", paste(range(comp[medida == "residentes", dif_pct]), collapse = " a "), "%")
-
   pessoas[, c("regiao", "situacao", "sexo", "idade", "faixa", "presente", "celula", "alfabetizacao", "celula_q2") := NULL]
-  domicilios[, c("regiao", "situacao") := NULL]
   list(pessoas = pessoas, domicilios = domicilios)
 }
 
@@ -864,9 +878,14 @@ calibrate_1960_amostra_127 <- function(tabelas, gabarito_path){
 # por estado conjugal comparam; nos quadros 6 e 7 os domicílios e residentes
 # publicados são 1,6% a 3,9% menores que os do arquivo, uniformemente por
 # item, o que aponta um universo menor na tabulação de 1965 e não erro de
-# leitura; no quadro 3 a construção civil e as "outras atividades" saem
-# 5% e 6% abaixo do publicado, uma diferença de classificação dos ramos
-# que o Boletim não resolve.
+# leitura; no quadro 3 a construção civil sai 4,3% abaixo do publicado e as
+# "outras atividades" 5,2%, enquanto os outros sete ramos saem de 0,4% a 1,6%
+# acima. Duas explicações foram testadas e caíram: a fronteira entre ativos e
+# inativos, que no arquivo é limpa (ramo de atividade e atividade não
+# econômica nunca aparecem juntos na mesma pessoa), e a produção de energia e
+# o abastecimento de água, que ao migrarem para a construção afundam ainda
+# mais as "outras atividades". Como as listas de códigos do Boletim são só das
+# respostas mais frequentes, não há como decidir de fora do dado.
 # ------------------------------------------------------------------------------
 validate_1965_1960_amostra_127 <- function(tabelas, gabarito_path){
 
@@ -874,11 +893,7 @@ validate_1965_1960_amostra_127 <- function(tabelas, gabarito_path){
 
   p <- data.table::copy(tabelas$pessoas); d <- data.table::copy(tabelas$domicilios)
   gab <- data.table::fread(gabarito_path, encoding = "UTF-8")[regiao != "Brasil"]
-  regiao_uf <- c("0" = "Norte e Centro-Oeste", "1" = "Norte e Centro-Oeste", "2" = "Norte e Centro-Oeste", "3" = "Norte e Centro-Oeste",
-                 "4" = "Norte e Centro-Oeste", "6" = "Norte e Centro-Oeste", "91" = "Norte e Centro-Oeste", "94" = "Norte e Centro-Oeste", "97" = "Norte e Centro-Oeste",
-                 "10" = "Nordeste", "12" = "Nordeste", "14" = "Nordeste", "17" = "Nordeste", "19" = "Nordeste", "21" = "Nordeste", "24" = "Nordeste", "25" = "Nordeste",
-                 "30" = "Leste", "31" = "Leste", "40" = "Leste", "50" = "Leste", "51" = "Leste", "52" = "Leste", "54" = "Leste",
-                 "60" = "Sul", "71" = "Sul", "74" = "Sul", "81" = "Sul")
+  regiao_uf <- REGIAO_1960
   p[, regiao := regiao_uf[as.character(UF)]]
   p[, presente := !(V202 %in% 3:4)]; p[, residente := !(V202 %in% 5:6)]; p[, sexo := data.table::fifelse(V202 %in% c(1, 3, 5), "homens", "mulheres")]
   p[, idade := data.table::fifelse(V204 %in% 1, V204B, data.table::fifelse(V204 %in% 0, 0L, 999L))]; p[is.na(idade), idade := 999L]
@@ -946,6 +961,84 @@ validate_1965_1960_amostra_127 <- function(tabelas, gabarito_path){
   resumo <- comp[, .(celulas = .N, dif_mediana_abs = round(median(abs(dif_pct)), 2), dif_max_abs = round(max(abs(dif_pct)), 1)), by = quadro]
   message(paste(capture.output(print(resumo)), collapse = "\n"))
   comp
+}
+
+
+# ------------------------------------------------------------------------------
+# Passo 11 — erros amostrais
+#
+# O que faltava. O Volume II de 1965 promete "uma publicação especial em que
+# se fará descrição detalhada do desenho da amostra e das técnicas
+# utilizadas", com os erros de amostragem; ela não está na biblioteca do
+# IBGE, nem no Internet Archive, nem é citada no volume definitivo. Este
+# passo calcula o que ela teria dado.
+#
+# Como se calcula. A amostra é de conglomerados: sorteou-se uma pasta em
+# vinte, e a pasta traz ~220 domicílios inteiros, todos parecidos entre si
+# porque são vizinhos. Tratar a amostra como se fosse aleatória simples
+# subestima a variância, às vezes muito. O estimador correto soma, dentro de
+# cada estrato, a dispersão dos totais entre as pastas daquele estrato:
+#
+#   V = soma_h  n_h/(n_h-1) * soma_i (t_hi - média dos t_h)^2
+#
+# onde t_hi é o total estimado dentro da pasta i do estrato h. É o estimador
+# de conglomerado último, com reposição — o mesmo de survey::svydesign(ids =
+# ~censobr_upa, strata = ~censobr_estrato, weights = ~censobr_weight), aqui
+# escrito à mão para não acrescentar dependência ao pipeline.
+#
+# O efeito de desenho (deff) é essa variância dividida pela de uma amostra
+# aleatória simples de pessoas do mesmo tamanho, N²(1-f)P(1-P)/(n-1); diz
+# quantas vezes a amostra é menos precisa do que seria se cada pessoa tivesse
+# sido sorteada isoladamente. Para o total do país ele não existe, porque uma
+# amostra de tamanho fixo estima esse total sem erro por construção.
+# ------------------------------------------------------------------------------
+sampling_errors_1960_amostra_127 <- function(tabelas){
+
+  message("Estimating sampling errors for the 1960 amostra de 1,27%")
+
+  p <- data.table::copy(tabelas$pessoas)
+  p[, regiao := REGIAO_1960[as.character(UF)]]
+  p[, situacao := data.table::fifelse(V118 %in% c(1, 3), "urbana", data.table::fifelse(V118 %in% 5, "rural", NA_character_))]
+  p[, sexo := data.table::fifelse(V202 %in% c(1, 3, 5), "homens", "mulheres")]
+  p[, idade := data.table::fifelse(V204 %in% 1, V204B, data.table::fifelse(V204 %in% 0, 0L, 999L))]; p[is.na(idade), idade := 999L]
+  p[, faixa := c("0 a 4", "5 a 9", "10 a 14", "15 a 19", "20 a 24", "25 a 29", "30 a 39", "40 a 49", "50 a 59", "60 a 69", "70 e mais e ignorada")[findInterval(idade, c(0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70))]]
+  p <- p[!(V202 %in% c(3, 4)) & !is.na(V202) & !is.na(regiao) & !is.na(situacao)]
+
+  # a pasta que nao tem ninguem do dominio entra na conta com total zero: e por isso
+  # que o numero de pastas do estrato vem da amostra toda, e nao do dominio
+  pastas_estrato <- unique(p[, .(censobr_estrato, censobr_upa)])[, .(n = .N), by = censobr_estrato]
+  n_amostra <- nrow(p); n_populacao <- sum(p$censobr_weight)
+
+  erro_padrao <- function(por){
+    pasta <- p[, .(t = sum(censobr_weight)), by = c(por, "censobr_estrato", "censobr_upa")]
+    estr  <- pasta[, .(soma = sum(t), soma2 = sum(t^2)), by = c(por, "censobr_estrato")]
+    estr[pastas_estrato, n := i.n, on = "censobr_estrato"]
+    estr[, v := n / (n - 1) * (soma2 - soma^2 / n)]
+    out <- estr[, .(estimativa = sum(soma), variancia = sum(v)), by = por]
+    out[p[, .(pessoas = .N), by = por], pessoas := i.pessoas, on = por]
+
+    # referencia: amostra aleatoria simples de pessoas do mesmo tamanho, N^2 (1-f) P(1-P)/(n-1)
+    out[, parte := estimativa / n_populacao]
+    out[, v_srs := n_populacao^2 * (1 - n_amostra / n_populacao) * parte * (1 - parte) / (n_amostra - 1)]
+    out[, `:=`(erro_padrao = sqrt(variancia), cv_pct = round(100 * sqrt(variancia) / estimativa, 2),
+               deff = data.table::fifelse(parte < 1, round(variancia / v_srs, 1), NA_real_))]
+    out[, .SD, .SDcols = c(por, "estimativa", "erro_padrao", "cv_pct", "deff", "pessoas")]
+  }
+
+  celulas <- erro_padrao(c("regiao", "situacao", "sexo", "faixa"))
+  totais  <- rbind(erro_padrao(c("regiao", "situacao"))[, `:=`(sexo = "ambos", faixa = "todas")],
+                   erro_padrao("regiao")[, `:=`(situacao = "ambas", sexo = "ambos", faixa = "todas")],
+                   erro_padrao("situacao")[, `:=`(regiao = "Brasil", sexo = "ambos", faixa = "todas")],
+                   fill = TRUE)
+  brasil <- p[, .(regiao = "Brasil", situacao = "ambas", sexo = "ambos", faixa = "todas", estimativa = sum(censobr_weight))]
+  res <- rbind(brasil, totais, celulas, fill = TRUE)[, .(regiao, situacao, sexo, faixa, estimativa = round(estimativa),
+                                                         erro_padrao = round(erro_padrao), cv_pct, deff, pessoas)]
+  data.table::fwrite(res, "./data_raw/microdata/1960/amostra_127/erros_amostrais.csv", bom = TRUE)
+
+  message("  ", nrow(res), " dominios; nas 176 celulas do quadro 1 o coeficiente de variacao tem mediana ",
+          round(median(celulas$cv_pct), 2), "% e maximo ", round(max(celulas$cv_pct), 1),
+          "%; efeito de desenho mediano ", round(median(celulas$deff, na.rm = TRUE), 1))
+  res
 }
 
 

@@ -168,7 +168,7 @@ ITEM A (documentação/procedimento — manter, reescrito):
 
 ## Itens confirmados, por edição
 
-### 1960 e itens transversais — 13 itens (6 de gravidade alta)
+### 1960 e itens transversais — 14 itens (6 de gravidade alta, 1 pergunta de arquivo)
 
 #### [ALTA] O IBGE não distribui nenhum microdado do Censo de 1960 (nem 1940, nem 1950)
 
@@ -177,6 +177,14 @@ ITEM A (documentação/procedimento — manter, reescrito):
 **Evidência.** https://ftp.ibge.gov.br/Censos/Censo_Demografico_1960/ responde HTTP/1.1 404 Not Found (Apache/2.4.37, 12/09/2026 19:42 GMT); idem 1950/ e 1940/. Varredura recursiva de toda a árvore /Censos/ (47.748 entradas, ~1.000 índices) não devolve nenhum arquivo de 1960. Pastas adjacentes checadas e descartadas: /seculoxx/ (leia_me.txt: 'tabelas encontradas no CD-ROM Estatísticas do Século XX... conjunto de tabelas em Excel' — agregados, não microdados), /Informacoes_Gerais_e_Referencia/, /Documentos/, /Estoque/. O que o IBGE de fato publica de 1960 são os volumes impressos digitalizados na Biblioteca (ex.: https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t9_mg.pdf → HTTP 200, application/pdf): tabulações, não registros. Consequência medida no produto do censobr: o insumo de 1960 é uma costura de duas amostras de terceiros — em 1960_population_v0.7.0.parquet, 15.145.824 pessoas, das quais censobr_source==1 (amostra de 1,27%) = 162.055 registros cobrindo 11 códigos de UF e censobr_source==2 (5% IPUMS, extraída da 25% parcialmente processada) = 14.983.769 cobrindo 17 códigos; os dois conjuntos são disjuntos por UF, soma de pesos 70.924.748.
 
 **Estado hoje: persiste.** curl -sI nas URLs acima em 12/09/2026; crawler recursivo do índice HTML do FTP; Wayback CDX de ftp.ibge.gov.br/Censos/ — snapshot 20241109103646 lista 1991/2000/2010/2022 e o snapshot 20250122183253 já lista 1970/1980: 1960 nunca apareceu em nenhum deles
+
+#### [PERGUNTA DE ARQUIVO] A publicação especial sobre o desenho da amostra de 1,27% de 1960, prometida em 1965, não é localizável
+
+**Arquivos.** *Censo Demográfico: resultados preliminares*, Série Especial, vol. II (Biblioteca do IBGE, liv84480, março de 1965), p. 6.
+
+**Evidência.** O volume promete "uma publicação especial em que se fará descrição detalhada do desenho da amostra e das técnicas utilizadas", com os erros de amostragem que ele deixou de incluir. Procurada em 14/09/2026: o catálogo da Biblioteca do IBGE tem, da Série Especial de 1960, só o vol. II e o vol. IV (favelas da Guanabara); o Internet Archive (coleção Memória Estatística do Brasil) tem os mesmos dois; e o volume nacional definitivo, que descreve o desenho da amostra de 25% e o estimador de razão com pesos inteiros, não a cita.
+
+**Estado hoje: não localizada.** Sem ela, os estratos do sorteio têm de ser reconstruídos por aproximação a partir do próprio arquivo — região cruzada com a situação das pastas, 12 estratos e 817 unidades primárias —, o que dá erros-padrão conservadores; o quarto grupo do desenho, cidades de 100.000 habitantes e mais, não é reconstruível, porque a população municipal não se deduz da amostra.
 
 #### [ALTA] Toda a árvore /Censos/ tem apenas TRÊS arquivos de log de atualização; 1970, 1980, 1991, os agregados de setor de 2000 e o Censo 2022 inteiro não têm nenhum
 

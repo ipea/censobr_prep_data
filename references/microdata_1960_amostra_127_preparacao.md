@@ -14,6 +14,8 @@ O estágio cobre a amostra de 1,27%. A amostra de 25% e a compilação das duas 
 
 **A documentação do censo.** O boletim da amostra (`Questionário 1960 - amostra.pdf`) e as *Instruções ao Recenseador* (`doc0090.pdf`) estão em `D:\Dropbox\Workshop Censo\Censos\`; são a fonte para o significado dos códigos, transcritos em `read_guides/1960_amostra_127_codigos.csv` (o boletim traz o número de cada quadrícula; o arquivo grava o último dígito desse número, e é assim que 56 a 59 viram V215 = 6 a 9, 60 a 64 viram 0 a 4, e assim por diante).
 
+Há um limite nessa fonte, escrito no alto da própria coluna de códigos do boletim: "As declarações e os códigos abaixo relacionados referem-se às respostas mais frequentes. Declarações diferentes das especificadas não deverão ser codificadas pelo Recenseador". Ou seja, as quatro listas impressas — unidades da federação e países, cursos, ocupação, classe de atividade — são um resumo das respostas comuns; quando a resposta não estava na lista, o recenseador escrevia por extenso e a codificação era feita depois, no órgão central, com uma tabela completa que não está no formulário nem nos manuais que temos. A lista de cursos do boletim, por exemplo, tem 23 códigos, e o dicionário de 2018 tem 55. Por isso o boletim confirma o **significado** de cada código, e é assim que ele é usado aqui, mas não pode dizer quais códigos são válidos: essa parte continua vindo das sintaxes que acompanham o arquivo.
+
 ## 2. Como o arquivo é
 
 Cada linha é um cartão. As posições têm significado fixo:
@@ -311,6 +313,10 @@ Ver a seção 7. Cada domicílio recebe um peso único, o mesmo para todas as su
 
 Com os pesos calibrados, cada célula dos quadros 2 a 7 é recomposta a partir das variáveis do arquivo e comparada com o valor publicado (`calibracao_1965_validacao.csv`). Ver a seção 7.
 
+### Passo 11 — erros amostrais
+
+O que a publicação especial de 1965 daria e nunca deu: o erro-padrão de cada estimativa, calculado pelo desenho de pastas (`erros_amostrais.csv`). Ver a seção 8.
+
 ## 6. O que sai
 
 Duas tabelas em `data_raw/microdata/1960/amostra_127/`, intermediárias — a compilação com a amostra de 25% é que produzirá os parquets do `censobr`:
@@ -334,6 +340,7 @@ As colunas do IBGE (UF, V116, V118, V101–V113, V202–V224) ficam com os nomes
 | `censobr_n_*` | contagens por domicílio |
 | `censobr_v208_imputada`, `censobr_v217_fora_da_faixa`, `censobr_v218_fora_da_faixa`, `censobr_flag_*` | imputação, códigos anulados e marcas de coerência do passo 8 |
 | `censobr_weight`, `censobr_weight_fator`, `censobr_weight_desenho` | peso calibrado, fator de calibração e peso de desenho (passo 9) |
+| `censobr_upa`, `censobr_estrato` | a pasta sorteada e o estrato a que ela pertence, para calcular erro amostral (passo 8) |
 
 ## 7. O desenho da amostra e o gabarito de 1965
 
@@ -363,7 +370,41 @@ As máximas são células pequenas (mulheres com rendimento alto em Norte e Cent
 
 **Cobertura parcial.** Rondônia só tem Porto Velho (138 domicílios urbanos e 2 rurais); o Amapá tem um município, o Acre dois, Fernando de Noronha só urbano, o Distrito Federal só duas situações. Nenhum peso cria o que não foi amostrado: a calibração reproduz os totais regionais, e a estimativa para essas UFs isoladas descreve só o que foi sorteado.
 
-## 8. Números por UF
+## 8. Quanto se pode confiar numa estimativa
+
+A amostra é de conglomerados: sorteou-se uma pasta em vinte, e a pasta traz todos os ~220 domicílios de um lote de trabalho, que são vizinhos e parecidos entre si. Uma amostra assim é menos precisa que uma amostra do mesmo tamanho sorteada pessoa a pessoa, e quem tratar as 897 mil linhas como se fossem 897 mil sorteios independentes vai publicar intervalos de confiança pequenos demais.
+
+Duas colunas dizem como o sorteio foi feito: `censobr_upa` é a pasta, e `censobr_estrato` é a região cruzada com o tipo de situação da pasta. São 817 pastas em 12 estratos:
+
+| estrato | pastas | | estrato | pastas |
+|---|---|---|---|---|
+| Norte e Centro-Oeste, urbana | 18 | | Nordeste, rural | 70 |
+| Norte e Centro-Oeste, rural | 20 | | Sul, rural | 70 |
+| Norte e Centro-Oeste, mista | 29 | | Sul, mista | 92 |
+| Nordeste, urbana | 42 | | Leste, mista | 108 |
+| Leste, rural | 63 | | Leste, urbana | 114 |
+| Nordeste, mista | 64 | | Sul, urbana | 127 |
+
+O quarto grupo do desenho de 1965, cidades de 100 mil habitantes e mais, não entra: a população dos municípios não pode ser deduzida da própria amostra, porque um município que recebeu uma pasta inteira já parece ter 90 mil habitantes — o cálculo acusaria 216 municípios acima de 100 mil, quando o Brasil de 1960 tinha cerca de trinta cidades desse porte. Estratos mais grossos que os do IBGE dão erros-padrão um pouco maiores que os verdadeiros, que é o lado seguro do erro. A fração de uma pasta em vinte também não entra como correção de população finita, pelo mesmo motivo.
+
+Com isso, o passo 11 calcula o erro-padrão de cada estimativa somando, dentro de cada estrato, a dispersão dos totais entre as pastas. É o mesmo que `survey::svydesign(ids = ~censobr_upa, strata = ~censobr_estrato, weights = ~censobr_weight)` faria, escrito à mão para não acrescentar dependência ao pipeline. O resultado, para a população presente:
+
+| domínio | estimativa | erro-padrão | coeficiente de variação |
+|---|---|---|---|
+| Brasil, urbana | 32.471.377 | 526.209 | 1,6% |
+| Brasil, rural | 37.647.694 | 576.427 | 1,5% |
+| Leste | 24.659.232 | 308.755 | 1,3% |
+| Sul | 24.445.902 | 332.030 | 1,4% |
+| Nordeste | 15.524.609 | 265.597 | 1,7% |
+| Norte e Centro-Oeste | 5.489.328 | 235.304 | 4,3% |
+
+Nas 176 células do quadro 1 (região × situação × sexo × faixa de idade), o coeficiente de variação tem mediana de 3,6% e máximo de 13,7%, este nas células pequenas do Norte e Centro-Oeste. O efeito de desenho — quantas vezes a amostra é menos precisa que um sorteio pessoa a pessoa do mesmo tamanho — tem mediana 7 nessas células, e chega a 300 quando o domínio é definido por região e situação, porque a pasta é quase toda urbana ou quase toda rural e as pastas são justamente o que se sorteia. Dito de outro modo: para estimar quanta gente morava na zona urbana do Nordeste, esta amostra vale 817 sorteios, não 885 mil.
+
+Não há total do país na tabela com erro-padrão, e não é esquecimento: a soma dos pesos foi calibrada aos totais de 1965, então o país é reproduzido por construção, sem erro. O mesmo vale para as 184 células que entraram como restrição da calibração; os erros-padrão delas são os de antes da calibração, e portanto conservadores.
+
+Tudo em `data_raw/microdata/1960/amostra_127/erros_amostrais.csv`, uma linha por domínio, com estimativa, erro-padrão, coeficiente de variação, efeito de desenho e número de pessoas.
+
+## 9. Números por UF
 
 | UF | sigla | domicilios | familias | pessoas | pessoas_por_domicilio | fator_de_calibracao | populacao_presente_calibrada |
 |---|---|---|---|---|---|---|---|
@@ -399,7 +440,7 @@ As máximas são células pequenas (mulheres com rendimento alto em Norte e Cent
 Total: 174.245 domicílios, 174.616 famílias, 897.009 pessoas.
 
 
-## 9. Decisões tomadas
+## 10. Decisões tomadas
 
 Todas apresentadas ao usuário com a evidência e decididas em 2026-09-14:
 
@@ -408,16 +449,18 @@ Todas apresentadas ao usuário com a evidência e decididas em 2026-09-14:
 - **Famílias sem registro:** famílias e domicílios próprios, marcadas; a hipótese de anexar cônjuges sozinhos foi testada e descartada; a amostra de 25% pode confirmar pelas mesmas chaves de questionário.
 - **Imputações determinísticas:** nacionalidade e localização das linhas corrompidas, marcadas.
 - **Pesos:** calibrados aos quadros 1 e 2 de 1965, e não apenas o peso de desenho; as margens de estado conjugal e de domicílios foram testadas e rejeitadas (seção 7).
+- **Geografia e tipos do `censobr`:** não entram aqui. Estas duas tabelas guardam a unidade da federação e o município nos códigos de 1960, como o arquivo os traz, e são intermediárias: quem produz os parquets do `censobr`, com `code_state`, `name_muni` e a convenção de tipos, é a compilação com a amostra de 25%, que já tem o mapeamento em `R/microdata_1960.R`.
 
-## 10. Em aberto
+## 11. Em aberto
 
 - **O universo dos quadros 6 e 7 de 1965**, 1,6% a 3,9% menor que o das pessoas presentes (seção 7).
-- **A classificação dos ramos de atividade** (construção civil e "outras atividades" 4% a 5% abaixo do publicado).
+- **A classificação dos ramos de atividade.** No quadro 3, a construção civil sai 4,3% abaixo do publicado e as "outras atividades" 5,2% abaixo, enquanto os outros sete ramos saem de 0,4% a 1,6% acima: cerca de 195 mil pessoas estão numa linha diferente da que o IBGE usou. Duas explicações foram testadas e caíram. A primeira era a fronteira entre ativos e inativos: medido, ela é limpa, porque o ramo de atividade e a atividade não econômica são complementares no arquivo, sem uma única pessoa com os dois preenchidos. A segunda era a produção de energia e o abastecimento de água, que a introdução de 1965 lista dentro das atividades industriais; movê-los para a construção aproxima essa linha mas afunda ainda mais as "outras atividades", de onde saem. Como as listas de códigos do boletim não são exaustivas (seção 1), não há como decidir de fora do dado. Fica documentado.
 - **As 49 repetições avulsas dos três municípios** e as 150 famílias sem registro: confirmação pela amostra de 25%.
-- **A publicação especial** que o volume de 1965 promete, com o desenho detalhado da amostra e os erros de amostragem: não está na biblioteca digital do IBGE (a Série Especial de 1960 tem catalogados só o volume II e o volume IV, favelas da Guanabara), nem no Internet Archive (mesmos dois volumes, coleção Memória Estatística do Brasil), nem é citada no volume nacional definitivo, que descreve o desenho da amostra de 25% e o estimador de razão com pesos inteiros. Tudo indica que nunca saiu.
+- **As tabelas completas de codificação**, que o órgão central usou e que não estão no boletim nem nos manuais (seção 1). Sem elas, a lista de valores válidos de cada variável continua vindo das sintaxes de 2018, que em alguns pontos acrescentaram códigos por conta própria — os filhos tidos acima de 30, por exemplo, que o questionário permite escrever mas o dicionário do IBGE não lista.
+- **A publicação especial** que o volume de 1965 promete, com o desenho detalhado da amostra e os erros de amostragem: não está na biblioteca digital do IBGE (a Série Especial de 1960 tem catalogados só o volume II e o volume IV, favelas da Guanabara), nem no Internet Archive (mesmos dois volumes, coleção Memória Estatística do Brasil), nem é citada no volume nacional definitivo, que descreve o desenho da amostra de 25% e o estimador de razão com pesos inteiros. Tudo indica que nunca saiu. Os erros amostrais que ela traria estão calculados na seção 8.
 
-## 11. Como auditar
+## 12. Como auditar
 
-- `linhas_problematicas.csv`, `duplicatas_removidas.csv`, `calibracao_1965_quadro6.csv` e `calibracao_1965_validacao.csv`, em `data_raw/microdata/1960/amostra_127/`, listam tudo que foi apontado, removido e comparado.
+- `linhas_problematicas.csv`, `duplicatas_removidas.csv`, `calibracao_1965_validacao.csv` e `erros_amostrais.csv`, em `data_raw/microdata/1960/amostra_127/`, listam tudo que foi apontado, removido, comparado e estimado.
 - `read_guides/1960_amostra_127_correcoes.csv` tem cada correção com o texto antes e depois; `read_guides/1960_amostra_127_codigos.csv` tem os códigos lidos no boletim; `references/censo_1960_resultados_preliminares_1965.csv` tem o gabarito.
-- Cada passo é um alvo do `targets`: `targets::tar_read(linhas_1960_amostra_127)`, `problemas_...`, `linhas_corrigidas_...`, `tabelas_brutas_...`, `tabelas_dedup_...`, `familias_...`, `tabelas_...`, `tabelas_calibradas_...`, `validacao_1965_...` e `output_...`. Qualquer passo pode ser aberto e conferido sem rodar os outros.
+- Cada passo é um alvo do `targets`: `targets::tar_read(linhas_1960_amostra_127)`, `problemas_...`, `linhas_corrigidas_...`, `tabelas_brutas_...`, `tabelas_dedup_...`, `familias_...`, `tabelas_...`, `tabelas_calibradas_...`, `validacao_1965_...`, `erros_...` e `output_...`. Qualquer passo pode ser aberto e conferido sem rodar os outros.

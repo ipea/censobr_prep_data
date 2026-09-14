@@ -86,6 +86,15 @@ log de atualização por edição, como o IBGE já faz para os microdados de 200
 scripts de verificação e podemos fornecê-los, assim como as versões
 corrigidas que produzimos, se forem úteis ao Instituto.
 
+Fazemos ainda uma pergunta de arquivo, que não é pedido de correção. O Volume
+II dos Resultados Preliminares de 1960, de março de 1965, promete uma
+publicação especial com a descrição detalhada do desenho da amostra de 1,27% e
+os erros de amostragem que ele deixou de incluir. Não a localizamos: da Série
+Especial de 1960, a Biblioteca tem apenas os volumes II e IV. Gostaríamos de
+saber se ela chegou a existir, se há no arquivo do Instituto a descrição dos
+estratos e das frações de sorteio dessa subamostra, e se os cartões perfurados
+ou as fitas originais dela foram preservados.
+
 Colocamo-nos à disposição para qualquer esclarecimento.
 
 Atenciosamente,
