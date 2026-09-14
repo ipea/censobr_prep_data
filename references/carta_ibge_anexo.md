@@ -21,7 +21,17 @@ Cada item traz o arquivo afetado, a evidência medida e a confirmação de que o
 
 **Persiste.** crawler próprio do índice HTML do FTP (1970, 1980, 1991, 2000, 2010, 2022), 12/09/2026; grep -i 'atualiza|leia.?me|errata|retific|corrig|changelog|historico' sobre o índice consolidado
 
-### 3. [MÉDIA] Divisão Territorial do Brasil incompleta nos pacotes de microdados de 1970 e 1980
+### 3. [ALTA] As republicações em DBF de 1980 e 1991 nomeiam as variáveis com mnemônicos que não existem em nenhuma documentação do Censo, e não há tabela de correspondência
+
+**Arquivos.** Dados/*/*/CD80{DOM,PES}<UF>.DBF e Layout/Documentação.xls (Censo 1980); Dados/Regiao */CD91AMOUP<UF>.DBF e Documentação/Dicionário 1991.xls (Censo 1991).
+
+**Evidência.** Os campos dos DBF têm nomes mnemônicos de até 8 caracteres, limite do formato dBASE, muitos truncados: em 1980, SITUACAO, ESPECIE, COBERTUR, SANESCOA, CONDOCUP, COMBCOZI, GELADEIR, AUTOMOVE, COMODOS, PESOD, MIUFANT; em 1991, UFNOM, MESONOM, MICRONUM, ALUGUEFX, DEMOCOMO, DEMODORM, RFAPCAPV, MIUFPAIS. A documentação que acompanha cada pacote repete esses mesmos mnemônicos na coluna "Variável": em 1980 o rótulo traz o número do quesito ("501-Sexo", "198-Situação do Domicílio"); em 1991 há uma numeração hierárquica própria ("9.12", "11.2"). Varrendo célula a célula as duas planilhas — 3.010 células na Documentação.xls de 1980 e 3.286 no Dicionário 1991.xls —, **o código no formato V#### não aparece nenhuma vez**, embora seja como as mesmas variáveis são identificadas nas distribuições anteriores desses microdados, nos dicionários de referência em uso e na literatura que os utiliza há décadas. Também não se distribui nenhuma tabela ligando um sistema ao outro.
+
+Consequência: para usar a republicação junto com qualquer trabalho anterior é preciso reconstruir a correspondência variável a variável. Nós a reconstruímos — 89 entradas em 1980 e 141 em 1991 — cruzando o rótulo, o quesito, o tipo e a distribuição dos valores em várias fontes independentes, e o exercício não é mecânico: ALUGUEL é numerada como quesito 210 na documentação de 2025 e corresponde à V602 da distribuição anterior; SANUSO e PESOD, em 1980, não têm número de quesito nenhum na planilha; e RFAPCAPV, em 1991, não tem contrapartida na distribuição anterior. Cada usuário que precisar ligar as duas distribuições refará esse trabalho por conta própria, com resultados possivelmente diferentes.
+
+**Persiste.** Leitura dos cabeçalhos dos DBF (26 e 61 campos em 1980, 141 em 1991, layout idêntico em todas as UFs) e das planilhas extraídas dos zips do FTP, com readxl, em 13/09/2026.
+
+### 4. [MÉDIA] Divisão Territorial do Brasil incompleta nos pacotes de microdados de 1970 e 1980
 
 **Arquivos.** Microdados_Censo_Demografico_1970_Amostra.zip (263.170.655 bytes, 09/01/2025): a pasta 'Divisão Territorial do Brasil/' contém UM único arquivo, 'Região Sul.xls' (226.304 bytes, data interna 2013-03-26). Microdados_Censo_Demografico_1980_Amostra.zip (544.850.882 bytes, 09/01/2025): a mesma pasta contém DOIS arquivos, 'DTB - Região Centro-Oeste.xls' (168.960 bytes) e 'DTB - Região Sul.xls' (430.592 bytes)
 
@@ -32,7 +42,7 @@ Cada item traz o arquivo afetado, a evidência medida e a confirmação de que o
 
 ## 1970
 
-### 4. [ALTA] 1.785 registros deslocados em DAMO70AL.txt e Damo70PE.txt (violam o LRECL de 76 bytes da própria documentação do IBGE)
+### 5. [ALTA] 1.785 registros deslocados em DAMO70AL.txt e Damo70PE.txt (violam o LRECL de 76 bytes da própria documentação do IBGE)
 
 **Arquivos.** Dentro de Microdados_Censo_Demografico_1970_Amostra.zip (263.170.655 bytes, MD5 d390dff085f7ad92775b665f91d053e3, Last-Modified 09/01/2025 22:08:30 GMT): Dados/DAMO70AL.txt (32.148.949 bytes, data no zip 14/11/2005 17:10, MD5 37094fe0b11b2a7ac5d2bb182e95e9f3, CRC-32 53b4d46a) e Dados/Damo70PE.txt (107.794.519 bytes, data no zip 16/11/2005 10:25, MD5 e1d1fa7110fe9ab0b2478742f04befac, CRC-32 bc971b5f). Referência íntegra: Dados/DAMO70AC.txt (MD5 a681e6bfce52a96e3892016e0744d913).
 
@@ -42,7 +52,7 @@ CONSEQUÊNCIA NO PESO AMOSTRAL (V054, posições 75-76, último campo do registr
 
 **Persiste.** Três provas independentes de que o arquivo servido HOJE é exatamente o que analisamos. (1) HEAD em https://ftp.ibge.gov.br/Censos/Censo_Demografico_1970/Microdados/Microdados_Censo_Demografico_1970_Amostra.zip em 12/09/2026: Content-Length 263.170.655, idêntico ao esperado; ETag "fafaa5f-62b4d37e15c97" cuja parte de tamanho (0xfafaa5f) é 263.170.655. (2) md5sum da cópia local (baixada em 05/05/2026) = d390dff085f7ad92775b665f91d053e3, exatamente o valor esperado. (3) Três requisições HTTP Range contra o FTP hoje (bytes 0-262143, 131072000-131334143 e 262908511-263170654, este último contendo o diretório central do ZIP com o CRC-32 de cada membro) -- os três trechos têm MD5 idêntico aos mesmo
 
-### 5. [ALTA] 79 bytes de lixo binário em Damo70PE.txt, dois deles em registros de comprimento VÁLIDO (invisíveis a qualquer teste de comprimento)
+### 6. [ALTA] 79 bytes de lixo binário em Damo70PE.txt, dois deles em registros de comprimento VÁLIDO (invisíveis a qualquer teste de comprimento)
 
 **Arquivos.** Dados/Damo70PE.txt (107.794.519 bytes, MD5 e1d1fa7110fe9ab0b2478742f04befac), dentro de Microdados_Censo_Demografico_1970_Amostra.zip
 
@@ -56,7 +66,7 @@ O achado crítico: esses 79 bytes se espalham por 42 linhas, das quais 40 JÁ co
 
 **Persiste.** Mesma cadeia de prova do defeito anterior: o zip servido hoje pelo FTP é byte a byte idêntico à cópia analisada (Content-Length, MD5 e três HTTP Range conferidos em 12/09/2026, incluindo o diretório central do ZIP). A varredura de bytes foi refeita hoje sobre os 27 arquivos extraídos desse zip. Bytes exibidos em hexadecimal via od -c sobre as linhas 34.635 e 306.296.
 
-### 6. [MÉDIA] o pacote nacional de 1970 é distribuído com a documentação e o anexo territorial de apenas UMA região (Sul)
+### 7. [MÉDIA] o pacote nacional de 1970 é distribuído com a documentação e o anexo territorial de apenas UMA região (Sul)
 
 **Arquivos.** Dentro de Microdados_Censo_Demografico_1970_Amostra.zip: 'Documentação/Documentação.doc' (163.328 bytes, data no zip 14/02/2017 09:45) e 'Divisão Territorial do Brasil/Região Sul.xls' (226.304 bytes, data no zip 26/03/2013 14:48)
 
@@ -70,7 +80,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Extração de 'Documentação/Documentação.doc' do zip baixado do FTP (byte a byte idêntico ao servido hoje, conforme verificação por Content-Length, MD5 e HTTP Range em 12/09/2026) e leitura do fluxo de texto do .doc em CP-1252, com busca por 'REGIÃO', 'DAMO70', 'LRECL' e 'NÚMERO DE REGISTROS'. Listagem do zip por 'unzip -l' confirma que 'Divisão Territorial do Brasil/' contém somente 'Região Sul.xls'. A listagem HTTP de https://ftp.ibge.gov.br/Censos/Censo_Demografico_1970/Microdados/ confirma que não há documentação avulsa fora do zip.
 
-### 7. [BAIXA] Pacote de 1970 — pasta com erro de grafia e 27 arquivos de dado com três convenções de maiúsculas
+### 8. [BAIXA] Pacote de 1970 — pasta com erro de grafia e 27 arquivos de dado com três convenções de maiúsculas
 
 **Arquivos.** Microdados_Censo_Demografico_1970_Amostra.zip — 263.170.655 bytes, Last-Modified Thu, 09 Jan 2025 22:08:30 GMT, 37 entradas
 
@@ -81,7 +91,7 @@ Dois subprodutos úteis para a carta:
 
 ## 1980
 
-### 8. [ALTA] A republicação em DBF perde quatro variáveis que existem na distribuição anterior: V518 (MIUFANT, município/UF anterior), V3 (mesorregião), V4 (microrregião) e V6 (distrito)
+### 9. [ALTA] A republicação em DBF perde quatro variáveis que existem na distribuição anterior: V518 (MIUFANT, município/UF anterior), V3 (mesorregião), V4 (microrregião) e V6 (distrito)
 
 **Arquivos.** Microdados_Censo_Demografico_1980_Amostra.zip (544.850.882 bytes, MD5 1129ac8abe4dbb2d0dbaccff689f8b37, Last-Modified 2025-01-09 22:08:20 GMT) -> Dados/*/Pessoas/CD80PES{11..53}.DBF, todos os 26
 
@@ -89,7 +99,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** HEAD em https://ftp.ibge.gov.br/Censos/Censo_Demografico_1980/Microdados/Microdados_Censo_Demografico_1980_Amostra.zip em 12/09/2026: Last-Modified Thu, 09 Jan 2025 22:08:20 GMT, Content-Length 544.850.882, ETag "2079c3c2-62b4d375174bf" -- idênticos ao arquivo local baixado em 05/05/2026. Índice do diretório mostra 2025-01-09 19:08, 520M. Nenhum arquivo de log de atualização existe na pasta de 1980. Parse direto do cabeçalho dos 26 DBF extraídos do zip.
 
-### 9. [ALTA] COMODOS (quesito 12, total de cômodos) corrompida em 47 dos 223 municípios de Goiás: médias de 43 cômodos por domicílio, 1.064 casos de dormitórios > cômodos totais, e 5.093 campos numéricos em branco
+### 10. [ALTA] COMODOS (quesito 12, total de cômodos) corrompida em 47 dos 223 municípios de Goiás: médias de 43 cômodos por domicílio, 1.064 casos de dormitórios > cômodos totais, e 5.093 campos numéricos em branco
 
 **Arquivos.** Dados/Região Centro-Oeste/Domicílios/CD80DOM52.DBF (11.440.120 bytes)
 
@@ -97,7 +107,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Arquivo do FTP inalterado desde 09/01/2025 (HEAD em 12/09/2026). O cabeçalho interno de todos os DBF traz a data 28/11/2011 (bytes 03 11 11 28), isto é, os arquivos foram gerados em 2011 e só empacotados em 2025 -- a corrupção vem da conversão, não do empacotamento. Comparação contra a amostra que o projeto usa (release_legacy, CSVs de 2018 convertidos em parquet), que fora dos municípios afetados bate 100% registro a registro, inclusive nas sentinelas 999999 e 99.
 
-### 10. [ALTA] TPRESID (quesito 11, tempo de residência) corrompida em Curitiba: 7.451 valores fora do esquema de codificação do próprio IBGE, e mais ~1.100 valores plausíveis porém trocados
+### 11. [ALTA] TPRESID (quesito 11, tempo de residência) corrompida em Curitiba: 7.451 valores fora do esquema de codificação do próprio IBGE, e mais ~1.100 valores plausíveis porém trocados
 
 **Arquivos.** Dados/Região Sul/Domicílios/CD80DOM41.DBF (23.334.274 bytes), município 0690 (Curitiba)
 
@@ -105,7 +115,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Arquivo do FTP inalterado desde 09/01/2025 (HEAD em 12/09/2026, Content-Length 544.850.882). Cabeçalho interno do DBF datado de 28/11/2011. Verificação contra o questionário CD 1.01 extraído do próprio zip (Instrumentos de Coleta/Boletim da Amostra.pdf), que é de fato o de 1980 (IX Recenseamento Geral do Brasil).
 
-### 11. [ALTA] O Território de Fernando de Noronha (UF 20) está inteiramente ausente do DBF, e por isso os totais nacionais calculados a partir dele não fecham com o que o próprio IBGE publicou
+### 12. [ALTA] O Território de Fernando de Noronha (UF 20) está inteiramente ausente do DBF, e por isso os totais nacionais calculados a partir dele não fecham com o que o próprio IBGE publicou
 
 **Arquivos.** Dados/ -- o pacote traz 26 pares CD80DOM/CD80PES (UF 11-16, 21-29, 31-35, 41-43, 50-53). Não há CD80DOM20.DBF nem CD80PES20.DBF
 
@@ -113,7 +123,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Listagem completa do zip (79 arquivos) obtida com unzip -Z1 e conferida contra o FTP em 12/09/2026; só existem 26 UFs. A paridade com o SIDRA foi estabelecida em apuração anterior deste projeto (references/microdata_1980_pesos_v603_v604.md, 40 células para domicílios e 20 para pessoas) e reconferida aqui somando os 26 DBF.
 
-### 12. [MÉDIA] 54 domicílios particulares permanentes (ESPECIE=1) com peso zero (PESOD=0), dentro do universo ponderado
+### 13. [MÉDIA] 54 domicílios particulares permanentes (ESPECIE=1) com peso zero (PESOD=0), dentro do universo ponderado
 
 **Arquivos.** Dados/*/Domicilios/CD80DOM{13,21,22,24,25,27,29,31,35,42}.DBF
 
@@ -121,7 +131,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Mesmo arquivo verificado no FTP em 12/09/2026 (inalterado desde 09/01/2025). Contagem direta nos 26 DBF de domicílio. Na amostra preparada anterior os mesmos registros aparecem com peso zero (55 lá, porque inclui um de Fernando de Noronha que o DBF não traz), e o mesmo valor está em v0.2.0, v0.3.0 e v0.5.0 do censobr -- três distribuições sem tratamento.
 
-### 13. [MÉDIA] 169.987 registros de domicílio coletivo (45,2% de todos os coletivos) não têm nenhum morador no arquivo de pessoas, nenhum peso e nenhum dado substantivo
+### 14. [MÉDIA] 169.987 registros de domicílio coletivo (45,2% de todos os coletivos) não têm nenhum morador no arquivo de pessoas, nenhum peso e nenhum dado substantivo
 
 **Arquivos.** Dados/*/Domicilios/CD80DOM*.DBF x Dados/*/Pessoas/CD80PES*.DBF, todas as 26 UFs
 
@@ -129,7 +139,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Cruzamento feito nas 26 UFs a partir dos DBF extraídos do zip do FTP (inalterado desde 09/01/2025). Contador V601 lido do parquet release_legacy. O Leiame.txt do pacote diz apenas que os dois arquivos se ligam por UF, MUNIC, CONTADOM, sem uma palavra sobre coletivos sem morador.
 
-### 14. [MÉDIA] A pasta Arquivos Auxiliares do pacote de 1980 contém documentação dos Censos de 1991 e 2000, não de 1980
+### 15. [MÉDIA] A pasta Arquivos Auxiliares do pacote de 1980 contém documentação dos Censos de 1991 e 2000, não de 1980
 
 **Arquivos.** Arquivos Auxiliares/ (20 arquivos, ~18 MB) dentro de Microdados_Censo_Demografico_1980_Amostra.zip
 
@@ -137,7 +147,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Arquivos extraídos do zip baixado do FTP (inalterado desde 09/01/2025, conferido por HEAD em 12/09/2026) e abertos um a um com readxl/readLines.
 
-### 15. [MÉDIA] Na Documentação.xls a coluna Faixa foi destruída por conversão automática do Excel em 44 das 83 variáveis: os intervalos viraram datas
+### 16. [MÉDIA] Na Documentação.xls a coluna Faixa foi destruída por conversão automática do Excel em 44 das 83 variáveis: os intervalos viraram datas
 
 **Arquivos.** Layout/Documentação.xls (203.776 bytes), folhas Domicílio e Pessoa
 
@@ -145,7 +155,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Leitura direta de Layout/Documentação.xls extraído do zip do FTP (203.776 bytes, 09/01/2025), sem nenhuma conversão intermediária: a corrupção está no XLS distribuído.
 
-### 16. [MÉDIA] A Documentação.xls omite 4 variáveis que estão no dado, duplica 2 linhas e nomeia errado a chave de ligação do arquivo de pessoas
+### 17. [MÉDIA] A Documentação.xls omite 4 variáveis que estão no dado, duplica 2 linhas e nomeia errado a chave de ligação do arquivo de pessoas
 
 **Arquivos.** Layout/Documentação.xls (folhas Início, Domicílio, Pessoa) e Leiame.txt
 
@@ -153,7 +163,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Comparação campo a campo entre os nomes do cabeçalho dos DBF (26 no de domicílio, 61 no de pessoa, layout idêntico nas 26 UFs) e as linhas de variável das duas folhas do XLS, lido com readxl. Leiame.txt extraído do zip do FTP.
 
-### 17. [BAIXA] Sentinelas não declaradas e faixas declaradas que não correspondem ao dado
+### 18. [BAIXA] Sentinelas não declaradas e faixas declaradas que não correspondem ao dado
 
 **Arquivos.** Layout/Documentação.xls x Dados/*/*/CD80{DOM,PES}*.DBF
 
@@ -164,7 +174,7 @@ Dois subprodutos úteis para a carta:
 
 ## 1991
 
-### 18. [ALTA] Dicionário rotula o código 16 de MIUFPAIS como "SE" (Sergipe); o código é a Bahia — 492.708 registros mal decodificados
+### 19. [ALTA] Dicionário rotula o código 16 de MIUFPAIS como "SE" (Sergipe); o código é a Bahia — 492.708 registros mal decodificados
 
 **Arquivos.** Documentação/Dicionário 1991.xls (180.736 bytes, 2025-01-09, aba "Layout"), dentro de Microdados_Censo_Demografico_1991_Amostra.zip; afeta a variável MIUFPAIS (bytes 404-405 de todos os 27 CD91AMOUP<UF>.DBF)
 
@@ -172,7 +182,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Dicionário extraído do zip atual do FTP (HEAD em 2026-09-12: Last-Modified Thu, 09 Jan 2025 22:07:17 GMT, Content-Length 673.659.331, ETag "282739c3-62b4d338d8eef" — idênticos à cópia local analisada, MD5 f41a9bf306b84a538c8dfc18b4ffcab2). Lista de categorias parseada da aba Layout com readxl; contagens dos códigos obtidas por varredura completa dos 17.045.712 registros.
 
-### 19. [ALTA] Em 59 das 73 variáveis com código de "não aplicável" declarado, esse código nunca aparece no dado — o DBF deixa o campo em branco, estado não documentado (342.836.420 células)
+### 20. [ALTA] Em 59 das 73 variáveis com código de "não aplicável" declarado, esse código nunca aparece no dado — o DBF deixa o campo em branco, estado não documentado (342.836.420 células)
 
 **Arquivos.** Documentação/Dicionário 1991.xls (coluna "NSA") x os 27 CD91AMOUP<UF>.DBF
 
@@ -180,7 +190,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Varredura byte a byte dos 133 campos numéricos nos 27 DBFs (contagem de registros com o campo integralmente preenchido por espaços e tabulação completa dos valores), cruzada com as colunas NSA/Ignorado do Dicionário 1991.xls do mesmo zip. Arquivo verificado no FTP em 2026-09-12 (sem alteração desde 2025-01-09).
 
-### 20. [ALTA] Pesos de expansão não reproduzem a população publicada em 91 municípios — desvio acima de 5% em 9 deles, pior caso -10,43% (Cavalcante/GO)
+### 21. [ALTA] Pesos de expansão não reproduzem a população publicada em 91 municípios — desvio acima de 5% em 9 deles, pior caso -10,43% (Cavalcante/GO)
 
 **Arquivos.** Campo PESO (bytes 224-235) dos 27 CD91AMOUP<UF>.DBF, confrontado com Arquivos Auxiliares/FRACAMO.TXT (219.199 bytes) do mesmo zip e com Censo_Demografico_1991/Populacao_Residente_Urbana_Rural/{Goias,Parana}.zip (POPS91GO.XLS, POPS91PR.XLS)
 
@@ -188,7 +198,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Soma de PESO por município em varredura completa dos 27 DBFs do zip atual do FTP; FRACAMO.TXT extraído do mesmo zip; tabelas de população baixadas do FTP em 2026-09-12 (Goias.zip 10.158 bytes, Last-Modified 2016-08-17 14:07:43 GMT; Parana.zip do mesmo diretório). Planilha completa dos 4.491 municípios em munic_peso_desvio.csv no scratchpad.
 
-### 21. [MÉDIA] LEIA_ME.DOC: seis linhas erradas na tabela de conferência e os 27 tamanhos em bytes descrevem um formato que não é o distribuído
+### 22. [MÉDIA] LEIA_ME.DOC: seis linhas erradas na tabela de conferência e os 27 tamanhos em bytes descrevem um formato que não é o distribuído
 
 **Arquivos.** LEIA_ME.DOC (55.296 bytes, 2025-01-09, dentro do zip; propriedades do documento: criado 1996-09-27, última gravação 2013-10-10 por "Tania Maria Orichio")
 
@@ -196,7 +206,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Texto do LEIA_ME.DOC extraído do zip atual; contagens reais obtidas dos cabeçalhos DBF (registros) e de cumsum(PESSOAN == 1) (domicílios) nos 27 arquivos; tamanhos reais do índice do zip e de stat. Zip reverificado por HEAD em 2026-09-12, inalterado desde 2025-01-09.
 
-### 22. [MÉDIA] O DBF não traz nenhum identificador de domicílio (V0102), e com ele perde-se a unidade submunicipal de amostragem
+### 23. [MÉDIA] O DBF não traz nenhum identificador de domicílio (V0102), e com ele perde-se a unidade submunicipal de amostragem
 
 **Arquivos.** Os 27 CD91AMOUP<UF>.DBF (141 campos, 493 bytes por registro)
 
@@ -204,7 +214,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Leitura dos 27 cabeçalhos DBF e comparação campo a campo (nome, tipo, tamanho, decimais): 0 UFs com layout divergente. Agrupamento e constância das variáveis de domicílio verificados por varredura completa. Zip do FTP reverificado em 2026-09-12.
 
-### 23. [MÉDIA] Dez domicílios com registros de pessoa ausentes: a numeração de morador pula, sem que os registros correspondentes existam
+### 24. [MÉDIA] Dez domicílios com registros de pessoa ausentes: a numeração de morador pula, sem que os registros correspondentes existam
 
 **Arquivos.** Dados/Região Norte/CD91AMOUP13.DBF (Amazonas) e Dados/Região Norte/CD91AMOUP15.DBF (Pará)
 
@@ -212,7 +222,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Leitura completa do campo PESSOAN (bytes 419-420) nos 27 DBFs do zip atual do FTP, agrupamento por cumsum(PESSOAN == 1) e comparação de max(PESSOAN) com o tamanho do grupo. Contexto de cada anomalia impresso com município, CD107, PARENDOM, idade, sexo, cômodos e peso. Cruzamento com a versão em CSV dos mesmos microdados (amostra preparada de 2018).
 
-### 24. [BAIXA] Byte corrompido: um parêntese dentro do campo de renda domiciliar em um registro do Maranhão
+### 25. [BAIXA] Byte corrompido: um parêntese dentro do campo de renda domiciliar em um registro do Maranhão
 
 **Arquivos.** Dados/Região Nordeste/CD91AMOUP21.DBF (166.426.556... na verdade 260.120.713 bytes), registro 335.416, offset absoluto 165.364.379
 
@@ -220,7 +230,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Varredura byte a byte das posições de campos numéricos nos 27 DBFs (conjunto permitido: 0x20, 0x2E, 0x30-0x39); localização confirmada por grep binário (grep -abo) e dump do registro com dd/od. Zip do FTP reverificado por HEAD em 2026-09-12.
 
-### 25. [BAIXA] DEMOCOMO e DEMODORM: o código de não aplicável usado no dado (99,98) não é o declarado (9999) e é indistinguível de um valor legítimo
+### 26. [BAIXA] DEMOCOMO e DEMODORM: o código de não aplicável usado no dado (99,98) não é o declarado (9999) e é indistinguível de um valor legítimo
 
 **Arquivos.** Campos DEMOCOMO (bytes 200-206) e DEMODORM (bytes 208-214) dos 27 CD91AMOUP<UF>.DBF x Documentação/Dicionário 1991.xls
 
@@ -228,7 +238,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Tabulação de todos os valores distintos dos dois campos nos 27 DBFs (209 e 119 valores distintos respectivamente); contagem cruzada com ESPECIE e com os campos em branco. Zip do FTP reverificado em 2026-09-12.
 
-### 26. [BAIXA] MIUFPAIS: código 48 presente no dado sem entrada no dicionário; a lista pula os códigos 28, 48 e 57 e declara um código 100 que nunca ocorre
+### 27. [BAIXA] MIUFPAIS: código 48 presente no dado sem entrada no dicionário; a lista pula os códigos 28, 48 e 57 e declara um código 100 que nunca ocorre
 
 **Arquivos.** Documentação/Dicionário 1991.xls (lista de categorias de MIUFPAIS) x campo MIUFPAIS (bytes 404-405) dos 27 DBFs
 
@@ -236,7 +246,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Lista de categorias parseada da aba Layout do dicionário do zip atual; tabulação completa do campo nos 17.045.712 registros.
 
-### 27. [BAIXA] Empacotamento: nomes internos do zip em CP850 sem marca UTF-8, byte de EOF do DOS solto no FRACAMO.TXT e arquivos sem quebra de linha final
+### 28. [BAIXA] Empacotamento: nomes internos do zip em CP850 sem marca UTF-8, byte de EOF do DOS solto no FRACAMO.TXT e arquivos sem quebra de linha final
 
 **Arquivos.** Microdados_Censo_Demografico_1991_Amostra.zip (35 entradas); Arquivos Auxiliares/FRACAMO.TXT (219.199 bytes); Arquivos Auxiliares/CÓDIGO ATIVIDADE.TXT (7.788 bytes); Arquivos Auxiliares/OCUPAÇÃO PRINCIPAL.TXT (13.235 bytes)
 
@@ -244,7 +254,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** zipinfo -v e unzip -l sobre a cópia local (idêntica à do FTP por tamanho e ETag); od -c no final do FRACAMO.TXT e dos dois TXT; listagem HTML dos diretórios Indice_de_Gini e Sexo_Populacao_Residente do FTP em 2026-09-12.
 
-### 28. [BAIXA] IDADEANO em branco em 41 registros — terceiro estado não previsto pelo dicionário, que declara NSA e Ignorado iguais a 0 (idade válida)
+### 29. [BAIXA] IDADEANO em branco em 41 registros — terceiro estado não previsto pelo dicionário, que declara NSA e Ignorado iguais a 0 (idade válida)
 
 **Arquivos.** Campo IDADEANO (bytes 374-376) dos 27 CD91AMOUP<UF>.DBF x Documentação/Dicionário 1991.xls
 
@@ -255,7 +265,7 @@ Dois subprodutos úteis para a carta:
 
 ## 2000
 
-### 29. [ALTA] RN.zip contem uma copia integral e byte-identica da Paraiba, sem qualquer aviso
+### 30. [ALTA] RN.zip contem uma copia integral e byte-identica da Paraiba, sem qualquer aviso
 
 **Arquivos.** RN.zip (36.516.253 bytes, Last-Modified Fri, 08 Sep 2017 18:44:15 GMT, ETag "22d319d-558b1f6b40f7b") contem 6 arquivos + a pasta RN/: DOM24.txt (15.939.756), DOM25.txt (20.223.244), FAMI24.TXT (12.306.718), FAMI25.TXT (15.406.918), PES24.txt (147.777.894), PES25.txt (185.047.488). PB.zip (20.277.900 bytes, LM 08/09/2017 18:43:59 GMT) contem DOM25.txt, FAMI25.TXT, PES25.txt com os mesmos tamanhos.
 
@@ -263,7 +273,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** curl -sI em https://ftp.ibge.gov.br/Censos/Censo_Demografico_2000/Microdados/RN.zip em 12/09/2026: HTTP 200, Content-Length 36516253, Last-Modified Fri, 08 Sep 2017 18:44:15 GMT — identico em tamanho a copia local baixada em 11/09/2026. Mesmo HEAD feito nas 27 UFs: todos IGUAIS em tamanho e todos com Last-Modified de 08/09/2017. O log 2_Atualizacoes_20170908.txt nao menciona o assunto.
 
-### 30. [ALTA] BA.zip tem zip dentro de zip, e o arquivo interno de pessoas vem em minusculas
+### 31. [ALTA] BA.zip tem zip dentro de zip, e o arquivo interno de pessoas vem em minusculas
 
 **Arquivos.** BA.zip (71.183.399 bytes, LM 08/09/2017 18:43:36 GMT) contem BA/DOM29.txt (65.172.004, data interna 2003-06-11 13:25), BA/FAMI29.zip (8.523.463, 2007-03-30 14:19) e BA/PES29.zip (54.279.937, 2008-09-24 15:10). PES29.zip contem pes29.txt (605.716.747 bytes) e FAMI29.zip contem FAMI29.TXT (49.762.558 bytes), ambos sem prefixo de pasta.
 
@@ -271,7 +281,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** curl -sI em BA.zip em 12/09/2026: Content-Length 71183399, Last-Modified Fri, 08 Sep 2017 18:43:36 GMT — igual a copia local. unzip -l BA.zip e unzip -l nos dois zips internos no mesmo dia. O log de atualizacoes nao cita o assunto.
 
-### 31. [MÉDIA] Os nomes dos arquivos nao seguem o padrao das macros SAS que o proprio IBGE distribui, e variam de UF para UF
+### 32. [MÉDIA] Os nomes dos arquivos nao seguem o padrao das macros SAS que o proprio IBGE distribui, e variam de UF para UF
 
 **Arquivos.** Os 81 .txt/.TXT dentro dos 27 zips, contra "SAS/LE DOMIC.sas", "SAS/LE PESSOAS.sas" e "SAS/LE FAMILIAS.sas" de 1_Documentacao_20170908.zip.
 
@@ -279,7 +289,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** unzip -l nos 27 zips e tabulacao dos radicais com sed/uniq -c em 12/09/2026; grep FILENAME nos tres .sas extraidos do zip de documentacao (Content-Length 2961444, Last-Modified 08/09/2017 18:43:23 GMT, confirmados por HEAD hoje).
 
-### 32. [BAIXA] Byte de fim de arquivo do DOS (0x1A) cria registro-fantasma em dois arquivos de Minas Gerais
+### 33. [BAIXA] Byte de fim de arquivo do DOS (0x1A) cria registro-fantasma em dois arquivos de Minas Gerais
 
 **Arquivos.** MG/Dom31.txt (105.797.373 bytes, data interna 2003-09-19 16:59) e MG/Pes31.txt (892.772.092 bytes, 2003-09-19 17:01), ambos dentro de MG.zip (104.522.854 bytes, LM 08/09/2017 18:43:54 GMT).
 
@@ -287,7 +297,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** tail -c 4 + xxd nos 81 arquivos extraidos dos zips baixados em 11/09/2026; HEAD do MG.zip no FTP em 12/09/2026 confirma Content-Length 104522854 e Last-Modified Fri, 08 Sep 2017 18:43:54 GMT, iguais a copia local.
 
-### 33. [BAIXA] Um registro de domicilio de Pernambuco tem 167 bytes em vez dos 170 declarados no layout
+### 34. [BAIXA] Um registro de domicilio de Pernambuco tem 167 bytes em vez dos 170 declarados no layout
 
 **Arquivos.** PE/DOM26.txt (38.811.625 bytes, data interna 2003-10-09 11:09), dentro de PE.zip (39.193.536 bytes, LM 08/09/2017 18:44:08 GMT). Layout declarado em "SAS/LE DOMIC.sas" do zip de documentacao: FILENAME ... LRECL=170.
 
@@ -295,7 +305,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** awk medindo length() em todos os 81 arquivos; inspecao campo a campo da linha 134.697 contra as linhas vizinhas; comparacao com "SAS/LE DOMIC.sas" extraido de 1_Documentacao_20170908.zip. HEAD do PE.zip em 12/09/2026: Content-Length 39193536, Last-Modified Fri, 08 Sep 2017 18:44:08 GMT.
 
-### 34. [BAIXA] Todos os arquivos de familias (e o de pessoas de SP) terminam sem quebra de linha final
+### 35. [BAIXA] Todos os arquivos de familias (e o de pessoas de SP) terminam sem quebra de linha final
 
 **Arquivos.** Os 27 FAMI<cod>.TXT (de AC/FAMI12.TXT, 2.173.558 bytes, a SP/FAMI35.TXT, 144.011.158 bytes) e SP/Pes35.txt (1.538.647.536 bytes, data interna 2010-04-28 08:20 — a mais recente de toda a distribuicao).
 
@@ -303,7 +313,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** tail -c 4 + xxd nos 81 arquivos; datas internas por unzip -l nos 27 zips; HEAD do SP.zip em 12/09/2026: Content-Length 194504171, Last-Modified Fri, 08 Sep 2017 18:44:46 GMT, igual a copia local.
 
-### 35. [BAIXA] A planilha auxiliar conta um domicilio particular a mais do que a amostra entrega, em uma area de ponderacao do Recife
+### 36. [BAIXA] A planilha auxiliar conta um domicilio particular a mais do que a amostra entrega, em uma area de ponderacao do Recife
 
 **Arquivos.** "Arquivos Auxiliares/Lista das Areas de Ponderacao-Brasil.xls" (coluna "Domicilios particulares ocupados na amostra") contra PE/DOM26.txt.
 
@@ -311,7 +321,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** leitura da planilha com readxl e cruzamento por codigo de area de ponderacao em R/data.table contra contagem por awk sobre os 27 DOM, em 12/09/2026; zip de documentacao e PE.zip conferidos por HEAD no mesmo dia, ambos com Last-Modified de 08/09/2017.
 
-### 36. [BAIXA] O proprio log de atualizacoes esta com texto repetido e frase corrompida
+### 37. [BAIXA] O proprio log de atualizacoes esta com texto repetido e frase corrompida
 
 **Arquivos.** 2_Atualizacoes_20170908.txt (482 bytes, ISO-8859-1, CRLF, LM 08/09/2017 18:43:23 GMT).
 
@@ -322,7 +332,7 @@ Dois subprodutos úteis para a carta:
 
 ## 2010 — agregados por setor
 
-### 37. [ALTA] Pessoa02 de SP_Capital e SP_Exceto_Capital com a numeração das 170 variáveis deslocada em +85, contrariando o dicionário oficial do próprio IBGE
+### 38. [ALTA] Pessoa02 de SP_Capital e SP_Exceto_Capital com a numeração das 170 variáveis deslocada em +85, contrariando o dicionário oficial do próprio IBGE
 
 **Arquivos.** SP_Capital_20260615.zip (175.587.279 bytes, Last-Modified 2026-06-15 11:41 GMT) → 'Base informaçoes setores2010 universo SP_Capital/EXCEL/pessoa02_sp1.xls' (45.099.520 bytes, data interna 2013-07-16, CRC32 58C7EC84) e '.../CSV/pessoa02_sp1.csv' (13.249.586 bytes, data interna 2026-06-15, CRC32 61FFEE9F). SP_Exceto_Capital_20260615.zip (461.345.153 bytes, Last-Modified 2026-06-15 11:45 GMT) → '.../EXCEL/pessoa02_sp2.xls' (117.155.328 bytes, 2013-07-16, CRC32 651F0276) e '.../CSV/pessoa02_sp2.csv' (34.473.156 bytes, 2026-06-15, CRC32 5F83489E). Referência canônica: Pessoa02_AC.xls (1.001.472 bytes, CRC32 FA25DD6F).
 
@@ -330,7 +340,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Índice do FTP em https://ftp.ibge.gov.br/Censos/Censo_Demografico_2010/Resultados_do_Universo/Agregados_por_Setores_Censitarios/ (lido em 12/09/2026): as 28 publicações estão datadas de 2026-06-15. Leitura do diretório central dos zips remotos por HTTP Range (sem baixar os arquivos inteiros) e inflação parcial dos membros CSV para ler o cabeçalho e as primeiras centenas de linhas. Os XLS atuais foram identificados por CRC32 e tamanho no diretório central remoto e conferidos contra as cópias locais em data_raw/tracts/2010/: CRC32 idêntico, logo são os mesmos bytes que li com readxl. O log 1_Atualizacoes_20260615.txt não menciona SP nem Pessoa02 em nenhuma das suas 14 entradas.
 
-### 38. [MÉDIA] Domicilio01 do Rio Grande do Sul é o único arquivo .xlsx de todo o lote; os outros 727 arquivos Excel são .xls
+### 39. [MÉDIA] Domicilio01 do Rio Grande do Sul é o único arquivo .xlsx de todo o lote; os outros 727 arquivos Excel são .xls
 
 **Arquivos.** RS_20260615.zip (137.504.353 bytes, Last-Modified 2026-06-15 11:37 GMT) → 'Base informaçoes setores2010 universo RS/EXCEL/Domicilio01_RS.xlsx', 21.367.859 bytes descompactados, data interna 2024-12-11 12:41, CRC32 19AF9AC8. Os outros 25 arquivos da mesma pasta EXCEL/ são .xls ou .XLS com datas internas entre 2011-11-03 e 2013-07-16.
 
@@ -338,7 +348,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Diretório central do RS_20260615.zip lido por HTTP Range em 12/09/2026, com listagem completa dos 55 membros. Contagem de extensões feita sobre os diretórios centrais das 28 publicações do lote atual.
 
-### 39. [MÉDIA] Entorno de CE, DF, MG, PE e RS sem as 19 colunas descritivas de geografia que as outras 23 publicações trazem
+### 40. [MÉDIA] Entorno de CE, DF, MG, PE e RS sem as 19 colunas descritivas de geografia que as outras 23 publicações trazem
 
 **Arquivos.** Entorno01_CE.csv, Entorno01_DF.csv, Entorno01_MG.csv, Entorno01_PE.csv, Entorno01_RS.csv (e os respectivos XLS) nos zips CE/DF/MG/PE/RS_20260615.zip. Controle: Entorno01_AC.csv em AC_20260615.zip.
 
@@ -346,7 +356,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Cabeçalho do Entorno01 de cada uma das 28 publicações do lote 20260615, obtido por HTTP Range sobre o membro CSV dentro do zip remoto, em 12/09/2026. Comparação direta da lista de colunas não-V entre AC (222) e CE (203).
 
-### 40. [MÉDIA] Basico: as 10 colunas decimais V003–V012 são gravadas como texto em 24 publicações e como número em MG, PR, RJ e SP_Exceto_Capital
+### 41. [MÉDIA] Basico: as 10 colunas decimais V003–V012 são gravadas como texto em 24 publicações e como número em MG, PR, RJ e SP_Exceto_Capital
 
 **Arquivos.** Basico_*.XLS / Basico_*.xls das 28 publicações (todos byte-idênticos aos de 2012, não tocados na republicação de 15/06/2026) e os Basico_*.csv de 15/06/2026. Casos numéricos: Basico_MG.xls (13.747.200 bytes), Basico_PR.XLS (7.391.744), Basico_RJ.xls (11.744.256), Basico_SP2.xls (20.137.472). Casos texto: as outras 24, p.ex. Basico_AC.XLS (512.512) e Basico_RS.XLS (12.288.000).
 
@@ -354,7 +364,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Extração do Basico de cada um dos 28 zips locais e leitura com readxl::read_excel(col_types='text') em 12/09/2026. Os XLS locais foram provados byte-idênticos aos do lote atual: comparação de CRC32 membro a membro entre ES_20231030/RS_20241211/SP_Capital_20231030/SP_Exceto_Capital_20231030/GO_20250915 e os respectivos *_20260615.zip devolveu 26 de 26 XLS idênticos em cada um dos 5 estados (130/130), com todos os 26 CSV de cada um alterados. O lado CSV foi conferido diretamente no lote atual, por HTTP Range, nas 28 publicações.
 
-### 41. [BAIXA] O log de atualização dos setores de 2010 registra uma data impossível: 15/19/2025
+### 42. [BAIXA] O log de atualização dos setores de 2010 registra uma data impossível: 15/19/2025
 
 **Arquivos.** https://ftp.ibge.gov.br/Censos/Censo_Demografico_2010/Resultados_do_Universo/Agregados_por_Setores_Censitarios/1_Atualizacoes_20260615.txt — 2.598 bytes, Last-Modified Mon, 15 Jun 2026 11:55:33 GMT, MD5 b8ee8516c0fe6fb04626064ae232ab03, linha 7
 
@@ -362,7 +372,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** download e leitura integral do log em 12/09/2026; cotejo com o nome do zip GO_20250915.zip preservado em data_raw/tracts/2010/ e com a listagem histórica do diretório
 
-### 42. [BAIXA] Grafia irregular de nomes e extensões dentro do mesmo lote: .XLS e .xls misturados na mesma pasta, e nomes em minúsculas só em São Paulo
+### 43. [BAIXA] Grafia irregular de nomes e extensões dentro do mesmo lote: .XLS e .xls misturados na mesma pasta, e nomes em minúsculas só em São Paulo
 
 **Arquivos.** Todo o lote 20260615. Exemplos: AC_20260615.zip tem 10 arquivos .XLS e 16 .xls na mesma pasta EXCEL/; SP_Capital_20260615.zip usa 'pessoa01_sp1.xls', 'pessoa02_sp1.xls' (minúsculas) enquanto AC usa 'Pessoa01_AC.XLS', 'Pessoa02_AC.xls'.
 
@@ -370,7 +380,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Contagem sobre os diretórios centrais dos 28 zips do lote 20260615, lidos por HTTP Range em 12/09/2026.
 
-### 43. [BAIXA] A documentação não foi atualizada em nenhuma das três correções: continua a de 30/10/2023, com conteúdo de 2011-2012
+### 44. [BAIXA] A documentação não foi atualizada em nenhuma das três correções: continua a de 30/10/2023, com conteúdo de 2011-2012
 
 **Arquivos.** Documentacao_Agregado_dos_Setores_2010_20231030.zip, 33 MB, Last-Modified 2023-10-30 17:16 — único arquivo do diretório que não foi republicado em 15/06/2026. Conteúdo: 'BASE DE INFORMAÇÕES POR SETOR CENSITÁRIO Censo 2010 - Universo novo.pdf' (753.731 bytes, data interna 2012-11-08) e 28 planilhas Descrição_UF.xls de 2011.
 
@@ -381,7 +391,7 @@ Dois subprodutos úteis para a carta:
 
 ## 2010 — microdados
 
-### 44. [MÉDIA] Idades demograficamente impossíveis (115 a 139 anos) no registro de pessoas, sem crítica nem imputação
+### 45. [MÉDIA] Idades demograficamente impossíveis (115 a 139 anos) no registro de pessoas, sem crítica nem imputação
 
 **Arquivos.** Amostra_Pessoas_*.txt nos 28 zips (AC.zip … TO.zip, todos Last-Modified 17/08/2016). Variáveis V6036 (pos. 62-64), V6033 (59-61), M6033 (442), V6040 (67). MD5 conferidos, ex.: RR.zip fed3a617e831b51071a9fcd79cd89c27, AC.zip 32b43b989ca33d91e68f901416bec0c3
 
@@ -389,7 +399,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Os 28 zips do FTP (https://ftp.ibge.gov.br/Censos/Censo_Demografico_2010/Resultados_Gerais_da_Amostra/Microdados/) têm Last-Modified: Wed, 17 Aug 2016 e Content-Length idêntico à cópia local; MD5 de RR.zip e AC.zip rebaixados do FTP == MD5 local. O único log (1_Atualizacoes_20160311.txt) não menciona idade. Além disso, a mesma cauda aparece idêntica no parquet publicado em censobr v0.5.0 (141 registros 110+, 1.326 pessoas), o que exclui artefato de leitura.
 
-### 45. [MÉDIA] V5110 e V5120 sem códigos numéricos no layout e completamente ausentes do dicionário de variáveis
+### 46. [MÉDIA] V5110 e V5120 sem códigos numéricos no layout e completamente ausentes do dicionário de variáveis
 
 **Arquivos.** Documentacao.zip (FTP Last-Modified 13/03/2018, 10.711.779 bytes) → Documentação/Layout/Layout_microdados_Amostra.xls, planilha PESS; e Documentação/Layout/Descrição das variáveis - Microdados da amostra do Censo Demográfico 2010.doc e .pdf (ambos 02/03/2018). Dados: Amostra_Pessoas_*.txt, posições 432 (V5110) e 433 (V5120).
 
@@ -397,7 +407,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** O Documentacao.zip no FTP tem hoje Content-Length 10.711.779, exatamente o tamanho da cópia que abri; Last-Modified 13/03/2018 — nenhuma revisão posterior. Nenhum log registra correção de documentação.
 
-### 46. [MÉDIA] Descrição da V1005 contaminada por resíduo de copy/paste ('1- Masculino / 2- Feminino') nas quatro planilhas do layout
+### 47. [MÉDIA] Descrição da V1005 contaminada por resíduo de copy/paste ('1- Masculino / 2- Feminino') nas quatro planilhas do layout
 
 **Arquivos.** Documentacao.zip → Documentação/Layout/Layout_microdados_Amostra.xls (125.440 bytes, 03/03/2016), planilhas DOMI, PESS, EMIG e MORT — a célula de descrição da V1005 (última posição de cada registro: 172, 540, 74 e 66).
 
@@ -405,7 +415,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Extraído do Documentacao.zip cuja cópia local tem exatamente o Content-Length que o FTP devolve hoje (10.711.779) e Last-Modified 13/03/2018. Os dados da V1005 em si estão corretos (valores 1 a 8 em todas as UFs, nenhum fora do domínio) — o defeito é só na descrição.
 
-### 47. [BAIXA] Idades impossíveis de emigrantes (V0304) e ano de partida igual ao ano de nascimento em partidas pré-1950
+### 48. [BAIXA] Idades impossíveis de emigrantes (V0304) e ano de partida igual ao ano de nascimento em partidas pré-1950
 
 **Arquivos.** Amostra_Emigracao_*.txt (28 arquivos, 53.777 registros). Variáveis V0304 (ano de nascimento, pos. 55-58), V0305 (ano da última partida, 59-62), M0304/M0305 (71/72).
 
@@ -413,7 +423,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Mesmos 28 zips com Last-Modified 17/08/2016 e MD5 idêntico ao local; único log de atualização é de 11/03/2016 e trata só da V1005. Os 53.777 registros do bruto aparecem intactos no parquet publicado em censobr v0.5.0 (peso total 560.532,76 nos dois).
 
-### 48. [BAIXA] Registro de mortalidade sem nenhuma informação de idade e sem marca de 'ignorado'
+### 49. [BAIXA] Registro de mortalidade sem nenhuma informação de idade e sem marca de 'ignorado'
 
 **Arquivos.** SP1.zip → SP1/Amostra_Mortalidade_35_outras.txt, linha 6.843 (de 14.459). Variáveis V7051 (pos. 57-59), V7052 (60-61), M7051 (64), M7052 (65).
 
@@ -421,7 +431,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** SP1.zip no FTP: Last-Modified 17/08/2016, Content-Length 136.561.102, idêntico à cópia local. Nenhum log de atualização posterior a 11/03/2016.
 
-### 49. [BAIXA] Arquivo de trava do LibreOffice com usuário e hostname internos do IBGE vazado dentro do Documentacao.zip oficial
+### 50. [BAIXA] Arquivo de trava do LibreOffice com usuário e hostname internos do IBGE vazado dentro do Documentacao.zip oficial
 
 **Arquivos.** Documentacao.zip → 'Documentação/Áreas de Ponderação/.~lock.Composição das Áreas de Ponderação.ods#', 108 bytes, datado 06/11/2013 12:50 no zip.
 
@@ -429,7 +439,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** O Documentacao.zip publicado hoje no FTP tem Content-Length 10.711.779 e Last-Modified 13/03/2018 — exatamente a cópia que abri e onde o arquivo de trava está presente (53 arquivos no zip).
 
-### 50. [BAIXA] Nomes de Unidade da Federação corrompidos no arquivo oficial de contagem de áreas de ponderação
+### 51. [BAIXA] Nomes de Unidade da Federação corrompidos no arquivo oficial de contagem de áreas de ponderação
 
 **Arquivos.** Documentacao.zip → 'Documentação/Áreas de Ponderação/Número de Áreas de Ponderação por UF.txt' (928 bytes, 17/04/2012).
 
@@ -437,7 +447,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Arquivo extraído do Documentacao.zip cujo tamanho no FTP (10.711.779) e Last-Modified (13/03/2018) conferem com a cópia local.
 
-### 51. [BAIXA] Layout remete a três arquivos de tabela de códigos que não existem no pacote de documentação
+### 52. [BAIXA] Layout remete a três arquivos de tabela de códigos que não existem no pacote de documentação
 
 **Arquivos.** Documentacao.zip → Documentação/Layout/Layout_microdados_Amostra.xls, descrições de V6461, V6471 (planilha PESS) e V3061 (planilha EMIG); versus o conteúdo real de Documentação/Anexos Auxiliares/.
 
@@ -445,7 +455,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Listagem completa do Documentacao.zip publicado hoje (Content-Length 10.711.779, Last-Modified 13/03/2018): 53 arquivos, nenhum com os nomes citados no layout.
 
-### 52. [BAIXA] Duas cópias concorrentes da tabela de países no mesmo pacote, com nomes que diferem só por acento e caixa
+### 53. [BAIXA] Duas cópias concorrentes da tabela de países no mesmo pacote, com nomes que diferem só por acento e caixa
 
 **Arquivos.** Documentacao.zip → Documentação/Anexos Auxiliares/: 'Migração e Deslocamento_Paises estrangeiros.xls' (41.472 bytes, 16/10/2012) e 'Migração e deslocamento_Países estrangeiros.xls' (29.696 bytes, 27/06/2012); idem para os dois .ods correspondentes (8.042 bytes 16/10/2012 e 19.816 bytes 28/06/2012).
 
@@ -453,7 +463,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Ambos os arquivos estão no Documentacao.zip publicado hoje no FTP (Content-Length 10.711.779, Last-Modified 13/03/2018).
 
-### 53. [BAIXA] Revisão de 2018 da documentação não registrada em nenhum log de atualização
+### 54. [BAIXA] Revisão de 2018 da documentação não registrada em nenhum log de atualização
 
 **Arquivos.** 1_Atualizacoes_20160311.txt (121 bytes) e Documentacao.zip (10.711.779 bytes, Last-Modified 13/03/2018), ambos em /Censos/Censo_Demografico_2010/Resultados_Gerais_da_Amostra/Microdados/.
 
@@ -461,7 +471,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** curl -sI nos dois arquivos e listagem HTML da pasta em 12/09/2026: a pasta contém apenas 1_Atualizacoes_20160311.txt, os 28 zips de UF e Documentacao.zip. Varri também /Censos/Censo_Demografico_2010/ e todas as subpastas de Resultados_Gerais_da_Amostra procurando por atualiz|errata|leia|readme|nota|correc — só existem errata_deslocamento.pdf e errata_migracao.pdf, que tratam do texto da publicação, não dos microdados.
 
-### 54. [BAIXA] Incoerência de nomenclatura entre o nome do zip de São Paulo e a pasta que ele contém
+### 55. [BAIXA] Incoerência de nomenclatura entre o nome do zip de São Paulo e a pasta que ele contém
 
 **Arquivos.** SP2_RM.zip (66.923.314 bytes) contém o diretório 'SP2-RM/' com Amostra_Domicilios_35_RMSP.txt etc.; SP1.zip contém 'SP1/' com sufixo '_35_outras'.
 
@@ -472,7 +482,7 @@ Dois subprodutos úteis para a carta:
 
 ## 2022
 
-### 55. [ALTA] Agregados por setor 2022 — o pacote 'xlsx' de características do domicílio 2 e 3 contém um CSV, e a versão .xlsx corrigida não existe
+### 56. [ALTA] Agregados por setor 2022 — o pacote 'xlsx' de características do domicílio 2 e 3 contém um CSV, e a versão .xlsx corrigida não existe
 
 **Arquivos.** https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios/Agregados_por_Setor_xlsx/Agregados_por_setores_caracteristicas_domicilio2_BR_20250417.zip — 83.971.374 bytes, Last-Modified Thu, 17 Apr 2025 13:18:56 GMT. E .../Agregados_por_setores_caracteristicas_domicilio3_BR_20250417.zip — 52.708.037 bytes, 17/04/2025
 
@@ -480,7 +490,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** central directory dos zips remotos lido por HTTP Range (nome, tamanho descomprimido e CRC32 de cada membro), em 12/09/2026; HEAD para Last-Modified e Content-Length
 
-### 56. [ALTA] V0006 do Básico troca de escala entre o preliminar e o definitivo mantendo o mesmo rótulo (proporção 0–1 apresentada como "Percentual")
+### 57. [ALTA] V0006 do Básico troca de escala entre o preliminar e o definitivo mantendo o mesmo rótulo (proporção 0–1 apresentada como "Percentual")
 
 **Arquivos.** Agregados_por_setores_basico_BR_20260520.zip (FTP 2026-05-20 10:37, 15 MB, MD5 local b7cde7107a14d82df0296dbb80141661) -> Agregados_por_setores_basico_BR.csv (140.970.380 bytes, 468.099 linhas, 38 colunas); dicionario_de_dados_agregados_por_setores_censitarios_20260520.xlsx (2026-05-12 18:29, 116 KB, MD5 18c6893f7f00be66900af9661ba7c90a); Agregados_preliminares_por_setores_censitarios_BR.zip (2024-03-21 08:55, 13 MB) e Dicionario_de_dados_agregados_preliminares.xlsx
 
@@ -488,7 +498,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Baixei o dicionário atual de https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios/dicionario_de_dados_agregados_por_setores_censitarios_20260520.xlsx e o pacote preliminar de https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios_preliminares/agregados_por_setores_csv/BR/ em 2026-09-12; comparei as distribuições no CSV bruto do definitivo (data_raw/tracts/2022/csv) e no CSV preliminar, e reconstruí a contagem de imputados por município nos dois.
 
-### 57. [MÉDIA] Microdados 2022 — o banco de descritores de Atividade grava como número os 55 códigos que começam com zero
+### 58. [MÉDIA] Microdados 2022 — o banco de descritores de Atividade grava como número os 55 códigos que começam com zero
 
 **Arquivos.** https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Microdados_e_Areas_de_Ponderacao/Documentacao/Bancos%20de%20descritores/Codifica%c3%a7%c3%a3o_Atividade%20CD2022.xlsx — 24.659 bytes, Last-Modified Thu, 16 Oct 2025 19:12:41 GMT, MD5 a3e7c1e75a756bdbf879bd7280700064. Par .ods: 16.298 bytes, Last-Modified Tue, 18 Aug 2026 00:05:08 GMT, MD5 cb7a3e844d60b788131a7ab76f2487e5
 
@@ -496,7 +506,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** download dos dez arquivos (.ods e .xlsx) dos cinco bancos de descritores em 12/09/2026 e comparação célula a célula via leitura direta de content.xml (ODS) e sharedStrings.xml + sheet1.xml (XLSX); inspeção de xl/styles.xml para confirmar a máscara 00000
 
-### 58. [MÉDIA] 11 setores com V0006 > 1 — mais domicílios imputados do que domicílios existentes
+### 59. [MÉDIA] 11 setores com V0006 > 1 — mais domicílios imputados do que domicílios existentes
 
 **Arquivos.** Agregados_por_setores_basico_BR.csv (do zip 20260520) e a versão anterior (20250417), colunas V0006 e V0007
 
@@ -504,7 +514,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** grep direto no CSV do zip 20260520 baixado em 2026-09-12 (linhas 25336, 106325, 319861, 444329, 447752, 455417 e outras) confirmando os valores "4,2542", "3,8718", "3,6140", "3,5568", "2,0000", "1,3825"; e comparação com o parquet construído a partir do zip 20250417 (data/tracts/2022/2022_tracts_Basico.parquet, de 04/05/2026), onde os MESMOS 11 setores com os MESMOS valores aparecem — a republicação de 20/05/2026 não os tocou.
 
-### 59. [MÉDIA] MP0411: coluna órfã (marca de imputação de uma variável que não é distribuída) e cópia byte a byte de MP0410
+### 60. [MÉDIA] MP0411: coluna órfã (marca de imputação de uma variável que não é distribuída) e cópia byte a byte de MP0410
 
 **Arquivos.** Layout Microdados CD2022 - acesso Público.xlsx (FTP Last-Modified 2026-08-28 16:47, 36 KB, MD5 2c48525b2a2bcb8ec1fa87efdc3513d4), aba PESS, posição 201; e as 27 Pessoas_<UF>_publico.csv (ex.: 14_RR.zip MD5 cade737322c1c251f7949717fb87a91c)
 
@@ -512,7 +522,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Layout baixado do FTP em 2026-09-12 (Documentacao/Layout e dicionário/); cabeçalho dos 27 CSVs comparado ao layout variável a variável; identidade MP0410 == MP0411 testada no parquet nacional de 21.538.508 linhas.
 
-### 60. [MÉDIA] Código 9 presente nos dados e não declarado no layout em três marcas de imputação (MP1010, MF0190, MF0200)
+### 61. [MÉDIA] Código 9 presente nos dados e não declarado no layout em três marcas de imputação (MP1010, MF0190, MF0200)
 
 **Arquivos.** Layout Microdados CD2022 - acesso Público.xlsx, abas PESS e FAMI; Pessoas_<UF>_publico.csv e Familia_<UF>_publico.csv das 27 UFs
 
@@ -520,7 +530,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Parser das categorias declaradas em cada rótulo do layout de 28/08/2026 confrontado com os valores observados nos parquets nacionais (265 colunas testadas nas 4 tabelas).
 
-### 61. [MÉDIA] TXT e CSV da mesma UF e tabela não estão alinhados linha a linha
+### 62. [MÉDIA] TXT e CSV da mesma UF e tabela não estão alinhados linha a linha
 
 **Arquivos.** txt/14_RR.zip (FTP 2026-08-29 01:05, 3,4 MB, MD5 838e2d33b9ba6f3a9b00f2af308d53f2) x csv/14_RR.zip (MD5 cade737322c1c251f7949717fb87a91c); txt/16_AP.zip x csv/16_AP.zip (MD5 1a5199f2d42f5ff7f38a7c06660ab7eb)
 
@@ -528,7 +538,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Baixei txt/14_RR.zip e txt/16_AP.zip do FTP em 2026-09-12, parseei pelas posições do layout público e comparei coluna a coluna com os CSVs já em data_raw; larguras das linhas (113/253/69/43) batem exatamente com a última posição declarada no layout.
 
-### 62. [BAIXA] F0220 = 5 e F0150 = 11: categorias observadas nos dados e ausentes do layout
+### 63. [BAIXA] F0220 = 5 e F0150 = 11: categorias observadas nos dados e ausentes do layout
 
 **Arquivos.** Familia_<UF>_publico.csv das 27 UFs; Layout Microdados CD2022 - acesso Público.xlsx, aba FAMI
 
@@ -536,7 +546,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Comparação automática entre as categorias extraídas dos rótulos do layout de 28/08/2026 e os valores observados em todas as 265 variáveis das 4 tabelas nos parquets nacionais; inspeção do domicílio 7061191 e dos 87 registros com F0220=5.
 
-### 63. [BAIXA] 13 variáveis com branco frequente sem a categoria "Branco"/"Não aplicável" no layout
+### 64. [BAIXA] 13 variáveis com branco frequente sem a categoria "Branco"/"Não aplicável" no layout
 
 **Arquivos.** Layout Microdados CD2022 - acesso Público.xlsx; Pessoas/Domicilios/Familia_<UF>_publico.csv
 
@@ -544,7 +554,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Cruzamento automático rótulo-por-rótulo (busca por "branco" e "não aplicável") contra a contagem de NA nos parquets nacionais; totais quilombolas por UF conferidos no agregado de setor de quilombolas (Brasil 1.317.569 no universo contra 1.324.414 na amostra pública).
 
-### 64. [BAIXA] Dois setores do Rio Grande do Sul sem qualquer geografia no Básico
+### 65. [BAIXA] Dois setores do Rio Grande do Sul sem qualquer geografia no Básico
 
 **Arquivos.** Agregados_por_setores_basico_BR.csv (zip 20260520), linhas 408755 e 408756
 
@@ -552,7 +562,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** grep direto nas duas linhas do CSV do zip 20260520 baixado em 2026-09-12; varredura de NA por coluna nos 468.099 setores (CD_MUN: 2 NA; CD_UF e CD_REGIAO: 0 NA).
 
-### 65. [BAIXA] Nome de arquivo com caractere não-ASCII em UTF-8 dentro de um índice servido em ISO-8859-1
+### 66. [BAIXA] Nome de arquivo com caractere não-ASCII em UTF-8 dentro de um índice servido em ISO-8859-1
 
 **Arquivos.** Agregados_por_setores_entorno_domic%c3%adlios_BR.zip (2025-04-17 10:02, 11 MB), em Agregados_por_Setores_Censitarios_Caracteristicas_urbanisticas_do_entorno_dos_domicilios/Agregados_por_Setor_csv/
 
@@ -560,7 +570,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Leitura do índice HTML do diretório em 2026-09-12 e HEAD no zip (HTTP 200, Last-Modified Thu, 17 Apr 2025 13:02:39 GMT); inspeção do nome do arquivo extraído em disco via Python (repr mostra ).
 
-### 66. [BAIXA] Diretório de Quilombolas duplicado no FTP, com duas publicações do mesmo produto a três dias de distância
+### 67. [BAIXA] Diretório de Quilombolas duplicado no FTP, com duas publicações do mesmo produto a três dias de distância
 
 **Arquivos.** Censos/Censo_Demografico_2022/Quilombolas_alfabetizacao_e_caracteristicas_dos_domicilios_Resultados_do_universo/ (2024-07-19 10:00) e Quilombolas_alfabetizacao_e_caracteristicas_dos_domic%c3%adlios_Resultados_do_universo/ (2024-07-22 10:00)
 
@@ -568,7 +578,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Listagem dos dois diretórios e de Tabelas_de_resultados em cada um, no FTP, em 2026-09-12.
 
-### 67. [BAIXA] Agregados por setor de 2022 espalhados por três diretórios distintos do FTP
+### 68. [BAIXA] Agregados por setor de 2022 espalhados por três diretórios distintos do FTP
 
 **Arquivos.** Agregados_por_Setores_Censitarios/Agregados_por_Setor_csv/ (13 zips), Agregados_por_Setores_Censitarios_Caracteristicas_urbanisticas_do_entorno_dos_domicilios/Agregados_por_Setor_csv/ (3 zips), Agregados_por_Setores_Censitarios_Rendimento_do_Responsavel/ (1 zip de setor entre 10 de outros recortes)
 
@@ -576,7 +586,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Listagem completa dos três diretórios no FTP em 2026-09-12; o código de download deste projeto (R/census_tracts_2022.R) precisa de dois endpoints varridos mais uma URL fixa por causa disso.
 
-### 68. [BAIXA] V0005 (média de moradores) perdeu precisão do preliminar para o definitivo
+### 69. [BAIXA] V0005 (média de moradores) perdeu precisão do preliminar para o definitivo
 
 **Arquivos.** Agregados_preliminares_por_setores_censitarios_BR.csv (2024-03-18) x Agregados_por_setores_basico_BR.csv (zip 20260520)
 
@@ -584,7 +594,7 @@ Dois subprodutos úteis para a carta:
 
 **Persiste.** Leitura dos dois CSVs e contagem das casas decimais em 2026-09-12.
 
-### 69. [BAIXA] P0180 = 99 "Ignorado" é indistinguível da supressão de confidencialidade
+### 70. [BAIXA] P0180 = 99 "Ignorado" é indistinguível da supressão de confidencialidade
 
 **Arquivos.** Pessoas_<UF>_publico.csv das 27 UFs; Nota metodológica 03/2026
 
