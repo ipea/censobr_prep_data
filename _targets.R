@@ -199,6 +199,11 @@ list(
              command = calibrate_1960_amostra_127(tabelas_1960_amostra_127, gabarito_1960_1965)
              ),
 
+  # reproducao dos sete quadros de 1965 com os pesos calibrados
+  tar_target(name = validacao_1965_1960_amostra_127,
+             command = validate_1965_1960_amostra_127(tabelas_calibradas_1960_amostra_127, gabarito_1960_1965)
+             ),
+
   tar_target(name = output_1960_amostra_127,
              command = save_1960_amostra_127(tabelas_calibradas_1960_amostra_127),
              format = "file"

@@ -129,7 +129,7 @@ tabelas_brutas_1960_amostra_127|stem|53f69fff28410c26|8aedf76f80c114cc|e24824e26
 tabelas_dedup_1960_amostra_127|stem|dfd461418670ccb0|755fdd1590d60a78|ea59052d603531ed|-872869844||t20710.6726555173s|s15046708b|15046708|rds|local|vector|||3.203||
 familias_1960_amostra_127|stem|2fbf9928a6abd473|afd5f36209dac000|f9f01f0de2b32993|-1921387331||t20710.6727707286s|s18473467b|18473467|rds|local|vector|||0.484||
 tabelas_1960_amostra_127|stem|dbabb59f225067e8|44907055433fbe40|7825c8d72f3c1c4c|1800949839||t20710.6729469112s|s20795886b|20795886|rds|local|vector|||6.469|NAs introduzidos por coerção|
-gabarito_1960_1965|stem|57fe491bbdb62e3d|7b94edf5d613bfc0|2c530c1562a7fbd1|-796961917|./references/censo_1960_resultados_preliminares_1965.csv|t20710.6760944241s|s43294b|43294|file|local|vector|||1.343|pacote 'DBI' foi compilado no R versão 4.5.3. pacote 'rvest' foi compilado no R versão 4.5.2. pacote 'openxlsx' foi compilado no R versão 4.5.3. pacote 'piggyback' foi compilado no R versão 4.5.3. pacote 'purrr' foi compilado no R versão 4.5.3. pacote 'curl' foi compilado no R versão 4.5.3. pacote 'readr' foi compilado no R versão 4.5.3. pacote 'stringr' foi compilado no R versão 4.5.2. pacote 'tarchetypes' foi compilado no R versão 4.5.3. pacote 'tibble' foi compilado no R versão 4.5.2. pacote 'tidyverse' foi compilado no R versão 4.5.3. pacote 'ggplot2' foi compilado no R versão 4.5.3. pacote 'tidyr' foi compilado no R versão 4.5.3. pacote 'forcats' foi compilado no R versão 4.5.3. pacote 'lubridate' foi compilado no R versão 4.5.2. pacote 'varhandle' foi compilado no R versão 4.5.2|
+gabarito_1960_1965|stem|d296011fa9177ae9|7b94edf5d613bfc0|2c530c1562a7fbd1|-796961917|./references/censo_1960_resultados_preliminares_1965.csv|t20710.709982628s|s148695b|148695|file|local|vector|||5.421|pacote 'DBI' foi compilado no R versão 4.5.3. pacote 'rvest' foi compilado no R versão 4.5.2. pacote 'openxlsx' foi compilado no R versão 4.5.3. pacote 'piggyback' foi compilado no R versão 4.5.3. pacote 'purrr' foi compilado no R versão 4.5.3. pacote 'curl' foi compilado no R versão 4.5.3. pacote 'readr' foi compilado no R versão 4.5.3. pacote 'stringr' foi compilado no R versão 4.5.2. pacote 'tarchetypes' foi compilado no R versão 4.5.3. pacote 'tibble' foi compilado no R versão 4.5.2. pacote 'tidyverse' foi compilado no R versão 4.5.3. pacote 'ggplot2' foi compilado no R versão 4.5.3. pacote 'tidyr' foi compilado no R versão 4.5.3. pacote 'forcats' foi compilado no R versão 4.5.3. pacote 'lubridate' foi compilado no R versão 4.5.2. pacote 'varhandle' foi compilado no R versão 4.5.2|
 cast_censobr_types|function|c16601eefad642bd
 write_censobr_parquet|function|886d5a747ef7bb30
 dicionario_state|object|915dd176aa24979d
@@ -143,6 +143,7 @@ add_geography_cols|function|4fd0585c088e3edb
 read_1960_amostra_127|function|704a0c3157ea4569
 detect_1960_amostra_127|function|8730bf830545d6c8
 add_state_info|function|c684c994f3388623
+validate_1965_1960_amostra_127|function|f6cc766721bffbba
 add_region_info|function|f0ece2ba0ee3a628
 coress|object|9f0cda529028d8d9
 detect_year_from_string|function|7e1010acf860e4c3
@@ -152,7 +153,7 @@ detect_2010_table_name|function|e48f91bbc36ef728
 recode_datasets_2000|function|50d8129d5cb9cdbf
 dicionario_municipality|object|8dbebb44c4ecc07c
 release_legacy_url|object|936270cb2bb28cb1
-calibrate_1960_amostra_127|function|eb322bea1a360d22
+calibrate_1960_amostra_127|function|310792e755bff994
 rename_files_toupper_lower_ext|function|52ec279aa40c70f9
 GEO_COLS_CENSOBR|object|1718f133d023ac48
 recode_datasets_2022|function|6c79d186791eeff9
@@ -213,5 +214,6 @@ clean_tracts_2022_prelim|function|f2a59b38d68ba929
 save_tracts_2022|function|572fd681a24160f8
 clean_tracts_2022|function|4de388b5f28b06ad
 clean_tracts_2000|function|d564b1efb91a37f4
-tabelas_calibradas_1960_amostra_127|stem|b716341e98db5fa4|d23648f7203223d2|447b7c0710e74e47|-1773709599||t20710.678520006s|s27690027b|27690027|rds|local|vector|||1.547||
-output_1960_amostra_127|stem|ac780e5585c1cf69|cd89a4a1fdfc672a|118775e3885d738b|-1648890890|./data_raw/microdata/1960/amostra_127/pessoas_1960_amostra_127.parquet*./data_raw/microdata/1960/amostra_127/domicilios_1960_amostra_127.parquet|t20710.6791495724s|s53571311b|53571311|file|local|vector|||52.984||
+tabelas_calibradas_1960_amostra_127|stem|db44a70b5000d8bf|d23648f7203223d2|188c31da9dc05a9b|-1773709599||t20710.7209066693s|s28002913b|28002913|rds|local|vector|||3.187||
+validacao_1965_1960_amostra_127|stem|52defb7809a22c21|30792589d3af510a|185c33b43625262c|-1972281259||t20710.721001605s|s18285b|18285|rds|local|vector|||5.219||
+output_1960_amostra_127|stem|d9be9ad6bfce7ba0|cd89a4a1fdfc672a|88523120a5ce5c47|-1648890890|./data_raw/microdata/1960/amostra_127/pessoas_1960_amostra_127.parquet*./data_raw/microdata/1960/amostra_127/domicilios_1960_amostra_127.parquet|t20710.7218867056s|s54484176b|54484176|file|local|vector|||73.782||

@@ -741,16 +741,20 @@ finalize_1960_amostra_127 <- function(tabelas){
 #
 # A calibração. Cada domicílio recebe um peso único, o mesmo para todas as
 # suas pessoas, tal que as somas ponderadas reproduzem exatamente as 176
-# células do quadro 1. É a calibração de Deville e Särndal com a distância
+# células do quadro 1 e as 8 do quadro 2 que contam quem sabe ler e
+# escrever, por sexo e região. É a calibração de Deville e Särndal com a distância
 # "raking": o peso é o peso de desenho (78,74 = 1/0,0127) vezes um fator
 # exp(x'λ), onde x conta quantas pessoas presentes o domicílio tem em cada
 # célula, e λ é resolvido por Newton. O fator fica perto de 1 quando o
 # arquivo está íntegro e afasta-se onde faltam ou sobram cartões — por isso
 # ele também é um diagnóstico, gravado em censobr_weight_fator.
 #
-# O que não entra. Os quadros 5, 6 e 7 (domicílios e residentes) implicam
-# um fator 1,6% a 3% menor que o das pessoas presentes, diferença ainda
-# sem explicação; servem de validação, não de restrição. Rondônia, Amapá,
+# O que não entra. O estado conjugal por sexo (quadro 5) foi testado e
+# rejeitado: leva o fator de alguns domicílios a 18 vezes o de desenho,
+# porque força os que perderam o cartão do chefe a compensar com peso o que
+# falta no arquivo. Os quadros 6 e 7 (domicílios e residentes) implicam um
+# fator 1,6% a 3,9% menor que o das pessoas presentes, diferença ainda sem
+# explicação. Todos servem de validação (passo 10), não de restrição. Rondônia, Amapá,
 # Acre, Fernando de Noronha e o Distrito Federal têm cobertura parcial e
 # nenhum peso cria o que não foi amostrado: a calibração só reproduz os
 # totais regionais publicados.
@@ -777,19 +781,28 @@ calibrate_1960_amostra_127 <- function(tabelas, gabarito_path){
   pessoas[is.na(idade), idade := 999L]
   pessoas[, faixa    := faixas[findInterval(idade, c(0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70))]]
   pessoas[, presente := !(V202 %in% c(3, 4))]
-  pessoas[, celula   := paste(regiao, situacao, sexo, faixa, sep = "|")]
+  pessoas[, celula   := paste("q1", regiao, situacao, sexo, faixa, sep = "|")]
 
   g1 <- gab[quadro == 1 & regiao != "Brasil" & linha != "TOTAIS" & coluna %in% c("urbana_homens", "urbana_mulheres", "rural_homens", "rural_mulheres")]
-  g1[, celula := paste(regiao, sub("_.*", "", coluna), sub(".*_", "", coluna), linha, sep = "|")]
-  celulas <- g1$celula; totais <- g1$valor
+  g1[, celula := paste("q1", regiao, sub("_.*", "", coluna), sub(".*_", "", coluna), linha, sep = "|")]
 
-  # X: uma linha por domicilio, uma coluna por celula, com o numero de pessoas presentes
-  cont <- pessoas[presente == TRUE & !is.na(situacao) & !is.na(sexo), .N, by = .(censobr_idhousehold, celula)]
+  # quadro 2: quem sabe ler e escrever, por sexo, entre as pessoas presentes de 5 anos e mais (V211 0 e 1); so "sabem"
+  # entra como restricao -- "nao sabem" ja fica determinado pelo quadro 1 menos "sabem" menos os sem declaracao
+  g2 <- gab[quadro == 2 & regiao != "Brasil" & linha == "5 e mais" & coluna %in% c("sabem_homens", "sabem_mulheres")]
+  g2[, celula := paste("q2", regiao, sub("_[a-z]+$", "", coluna), sub(".*_", "", coluna), sep = "|")]
+  pessoas[, alfabetizacao := data.table::fifelse(V211 %in% c(0, 1), "sabem", data.table::fifelse(V211 %in% c(2, 3), "nao_sabem", NA_character_))]
+  pessoas[, celula_q2 := data.table::fifelse(presente & idade >= 5 & alfabetizacao %in% "sabem" & !is.na(sexo), paste("q2", regiao, alfabetizacao, sexo, sep = "|"), NA_character_)]
+
+  celulas <- c(g1$celula, g2$celula); totais <- c(g1$valor, g2$valor)
+
+  # X: uma linha por domicilio, uma coluna por celula, com o numero de pessoas do domicilio em cada celula
+  cont <- rbind(pessoas[presente == TRUE & !is.na(situacao) & !is.na(sexo), .N, by = .(censobr_idhousehold, celula)],
+                pessoas[!is.na(celula_q2), .N, by = .(censobr_idhousehold, celula = celula_q2)])
   hh <- sort(unique(domicilios$censobr_idhousehold))
   X <- Matrix::sparseMatrix(i = match(cont$censobr_idhousehold, hh), j = match(cont$celula, celulas), x = cont$N,
                             dims = c(length(hh), length(celulas)))
   amostra <- as.numeric(Matrix::colSums(X))
-  message("  celulas: ", length(celulas), "; sem pessoa na amostra: ", sum(amostra == 0),
+  message("  celulas: ", length(celulas), " (quadro 1: ", nrow(g1), "; quadro 2: ", nrow(g2), "); sem pessoa na amostra: ", sum(amostra == 0),
           "; fator implicito (publicado / amostra x 78,74): min ", round(min(totais / amostra / 78.74), 3), " max ", round(max(totais / amostra / 78.74), 3))
 
   # raking de Deville-Sarndal: g = exp(X lambda), resolvido por Newton
@@ -826,9 +839,113 @@ calibrate_1960_amostra_127 <- function(tabelas, gabarito_path){
   message("  quadro 6 (validacao): diferenca relativa dos domicilios ", paste(range(comp[medida == "domicilios", dif_pct]), collapse = " a "),
           "%; dos residentes ", paste(range(comp[medida == "residentes", dif_pct]), collapse = " a "), "%")
 
-  pessoas[, c("regiao", "situacao", "sexo", "idade", "faixa", "presente", "celula") := NULL]
+  pessoas[, c("regiao", "situacao", "sexo", "idade", "faixa", "presente", "celula", "alfabetizacao", "celula_q2") := NULL]
   domicilios[, c("regiao", "situacao") := NULL]
   list(pessoas = pessoas, domicilios = domicilios)
+}
+
+
+# ------------------------------------------------------------------------------
+# Passo 10 — reprodução dos sete quadros de 1965 (validação)
+#
+# Com os pesos calibrados, recompõe cada célula dos quadros 2, 3, 4, 5 e 7
+# a partir das variáveis do arquivo e a compara com o valor publicado. Os
+# quadros 1, 2 (alfabetização por sexo) e 5 (estado conjugal por sexo) são
+# restrições da calibração e fecham por construção; o resto mede duas
+# coisas ao mesmo tempo: se a leitura dos códigos está certa (V211, V215,
+# V219, V223B, V105 a V110, pelo Boletim de Amostra CD 2) e se o universo
+# tabulado em 1965 é o mesmo do arquivo. Sai em
+# data_raw/microdata/1960/amostra_127/calibracao_1965_validacao.csv, uma
+# linha por célula com o publicado, o nosso e a diferença relativa.
+#
+# O que se sabe das diferenças que restam: no quadro 5 as colunas de
+# atividade classificam os inativos pela "atividade de que dependem" (a da
+# pessoa que os sustenta), informação que o arquivo não tem — só os totais
+# por estado conjugal comparam; nos quadros 6 e 7 os domicílios e residentes
+# publicados são 1,6% a 3,9% menores que os do arquivo, uniformemente por
+# item, o que aponta um universo menor na tabulação de 1965 e não erro de
+# leitura; no quadro 3 a construção civil e as "outras atividades" saem
+# 5% e 6% abaixo do publicado, uma diferença de classificação dos ramos
+# que o Boletim não resolve.
+# ------------------------------------------------------------------------------
+validate_1965_1960_amostra_127 <- function(tabelas, gabarito_path){
+
+  message("Comparing the seven 1965 tables with the calibrated file")
+
+  p <- data.table::copy(tabelas$pessoas); d <- data.table::copy(tabelas$domicilios)
+  gab <- data.table::fread(gabarito_path, encoding = "UTF-8")[regiao != "Brasil"]
+  regiao_uf <- c("0" = "Norte e Centro-Oeste", "1" = "Norte e Centro-Oeste", "2" = "Norte e Centro-Oeste", "3" = "Norte e Centro-Oeste",
+                 "4" = "Norte e Centro-Oeste", "6" = "Norte e Centro-Oeste", "91" = "Norte e Centro-Oeste", "94" = "Norte e Centro-Oeste", "97" = "Norte e Centro-Oeste",
+                 "10" = "Nordeste", "12" = "Nordeste", "14" = "Nordeste", "17" = "Nordeste", "19" = "Nordeste", "21" = "Nordeste", "24" = "Nordeste", "25" = "Nordeste",
+                 "30" = "Leste", "31" = "Leste", "40" = "Leste", "50" = "Leste", "51" = "Leste", "52" = "Leste", "54" = "Leste",
+                 "60" = "Sul", "71" = "Sul", "74" = "Sul", "81" = "Sul")
+  p[, regiao := regiao_uf[as.character(UF)]]
+  p[, presente := !(V202 %in% 3:4)]; p[, residente := !(V202 %in% 5:6)]; p[, sexo := data.table::fifelse(V202 %in% c(1, 3, 5), "homens", "mulheres")]
+  p[, idade := data.table::fifelse(V204 %in% 1, V204B, data.table::fifelse(V204 %in% 0, 0L, 999L))]; p[is.na(idade), idade := 999L]
+  p[, w := censobr_weight]
+
+  # quadro 1: presentes por situacao, sexo e faixa etaria
+  faixa1 <- c("0 a 4", "5 a 9", "10 a 14", "15 a 19", "20 a 24", "25 a 29", "30 a 39", "40 a 49", "50 a 59", "60 a 69", "70 e mais e ignorada")
+  q1 <- p[presente == TRUE]; q1[, linha := faixa1[findInterval(idade, c(0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70))]]
+  q1[, situacao := data.table::fifelse(V118 %in% c(1, 3), "urbana", "rural")]
+  n1 <- rbind(q1[, .(nosso = sum(w)), by = .(regiao, linha)][, coluna := "total"], q1[, .(nosso = sum(w)), by = .(regiao, linha, coluna = sexo)],
+              q1[, .(nosso = sum(w)), by = .(regiao, linha, coluna = situacao)], q1[, .(nosso = sum(w)), by = .(regiao, linha, coluna = paste0(situacao, "_", sexo))])
+  n1 <- rbind(n1, n1[, .(nosso = sum(nosso)), by = .(regiao, coluna)][, linha := "TOTAIS"])[, quadro := 1L]
+
+  # quadro 2: alfabetizacao, presentes de 5 anos e mais
+  q2 <- p[presente == TRUE & idade >= 5]
+  q2[, faixa := c("5 a 6", "7 a 12", "13 a 19", "20 a 24", "25 a 29", "30 a 39", "40 a 49", "50 a 59", "60 e mais e ignorada")[findInterval(idade, c(5, 7, 13, 20, 25, 30, 40, 50, 60))]]
+  q2[, alf := data.table::fifelse(V211 %in% c(0, 1), "sabem", data.table::fifelse(V211 %in% c(2, 3), "nao_sabem", "sem_declaracao"))]
+  q2 <- rbind(q2[, .(regiao, linha = faixa, sexo, alf, w)], q2[, .(regiao, linha = "5 e mais", sexo, alf, w)],
+              q2[idade >= 10, .(regiao, linha = "10 e mais", sexo, alf, w)], q2[idade >= 15, .(regiao, linha = "15 e mais", sexo, alf, w)])
+  n2 <- rbind(q2[, .(nosso = sum(w)), by = .(regiao, linha)][, coluna := "total"], q2[, .(nosso = sum(w)), by = .(regiao, linha, coluna = sexo)],
+              q2[alf != "sem_declaracao", .(nosso = sum(w)), by = .(regiao, linha, coluna = alf)],
+              q2[alf != "sem_declaracao", .(nosso = sum(w)), by = .(regiao, linha, coluna = paste0(alf, "_", sexo))])[, quadro := 2L]
+
+  # quadros 3 e 4: ramo (V223B) e rendimento (V219), presentes de 10 anos e mais
+  q3 <- p[presente == TRUE & idade >= 10]
+  q3[, ramo := data.table::fifelse(is.na(V223B), "condicoes_inativas", data.table::fifelse(V223B < 200, "agricultura_pecuaria_silvicultura",
+              data.table::fifelse(V223B < 300, "industrias_extrativas", data.table::fifelse(V223B <= 339, "industrias_transformacao",
+              data.table::fifelse(V223B == 351, "industrias_construcao", data.table::fifelse(V223B %in% 411:429, "comercio_mercadorias",
+              data.table::fifelse(V223B %in% 611:629, "transportes_comunicacoes_armazenagem", data.table::fifelse(V223B %in% 511:519, "prestacao_servicos", "outras_atividades"))))))))]
+  q3[, grupo := data.table::fifelse(is.na(V223B), "inativas", data.table::fifelse(V223B < 300, "agro", data.table::fifelse(V223B < 400, "ind", "outras")))]
+  q3[, renda := c("10001_20000", "20001_mais", "20001_mais", "sem_rendimento", "sem_declaracao", "ate_2100", "2101_3300", "3301_4500", "4501_6000", "6001_10000")[match(V219, 0:9)]]
+  q3[is.na(renda), renda := "sem_declaracao"]
+  n3 <- rbind(q3[, .(nosso = sum(w)), by = .(regiao, linha = ramo)][, coluna := "total"], q3[, .(nosso = sum(w)), by = .(regiao, linha = ramo, coluna = sexo)],
+              q3[, .(nosso = sum(w)), by = regiao][, `:=`(linha = "TOTAIS", coluna = "total")], q3[, .(nosso = sum(w)), by = .(regiao, coluna = sexo)][, linha := "TOTAIS"])[, quadro := 3L]
+  n4 <- rbind(q3[, .(nosso = sum(w)), by = .(regiao, linha = renda)][, coluna := "total"], q3[, .(nosso = sum(w)), by = .(regiao, linha = renda, coluna = paste0(grupo, "_", sexo))],
+              q3[, .(nosso = sum(w)), by = regiao][, `:=`(linha = "TOTAIS", coluna = "total")], q3[, .(nosso = sum(w)), by = .(regiao, coluna = paste0(grupo, "_", sexo))][, linha := "TOTAIS"])[, quadro := 4L]
+
+  # quadro 5: estado conjugal (V215), residentes de 15 anos e mais; so os totais por linha sao comparaveis
+  q5 <- p[residente == TRUE & idade >= 15]
+  q5[, linha := c("solteiros", "separados", "outros", "outros", "viuvos", "outros", "casados_civil_religioso", "casados_somente_civil", "casados_somente_religioso", "casados_sem_vinculo")[match(V215, 0:9)]]
+  q5[is.na(linha), linha := "outros"]
+  q5 <- rbind(q5[, .(regiao, linha, w)], q5[grepl("^casados", linha), .(regiao, linha = "casados", w)], q5[, .(regiao, linha = "TOTAIS", w)])
+  n5 <- q5[, .(nosso = sum(w)), by = .(regiao, linha)][, `:=`(coluna = "total", quadro = 5L)]
+
+  # quadros 6 e 7: domicilios particulares ocupados e residentes
+  d[, regiao := regiao_uf[as.character(UF)]]; d[, situacao := data.table::fifelse(V118 %in% c(1, 3), "urbana", "rural")]
+  dp <- d[!(V101 %in% 3)]
+  res <- p[residente == TRUE, .(res = sum(w)), by = censobr_idhousehold]; dp[res, res := i.res, on = "censobr_idhousehold"]; dp[is.na(res), res := 0]
+  itens <- list(TOTAIS = quote(TRUE), proprios = quote(V103 %in% 7), alugados = quote(V103 %in% 8), outra_condicao = quote(V103 %in% 9),
+                agua_rede_geral = quote(V105 %in% c(9, 0)), agua_poco_nascente = quote(V105 %in% c(1, 2)), agua_outra_sem_declaracao = quote(V105 %in% 3 | is.na(V105)),
+                fogao_lenha = quote(V107 %in% 9), fogao_carvao = quote(V107 %in% 0), fogao_gas = quote(V107 %in% 2), fogao_oleo_querosene = quote(V107 %in% 3),
+                instalacao_sanitaria = quote(V106 %in% 4:7), iluminacao_eletrica = quote(V108 %in% 5), radio = quote(V109 %in% 7), geladeira = quote(V110 %in% 9))
+  n67 <- data.table::rbindlist(lapply(names(itens), function(nm){ z <- dp[eval(itens[[nm]])]
+    rbind(z[, .(linha = nm, coluna = "dom_total", nosso = sum(censobr_weight)), by = regiao], z[, .(linha = nm, coluna = "pes_total", nosso = sum(res)), by = regiao],
+          z[, .(linha = nm, coluna = paste0("dom_", situacao), nosso = sum(censobr_weight)), by = .(regiao, situacao)][, -"situacao"],
+          z[, .(linha = nm, coluna = paste0("pes_", situacao), nosso = sum(res)), by = .(regiao, situacao)][, -"situacao"]) }))
+  n67[, quadro := data.table::fifelse(linha %in% c("proprios", "alugados", "outra_condicao"), 6L, 7L)]
+  n6t <- n67[linha == "TOTAIS"][, quadro := 6L]
+
+  nosso <- rbind(n1, n2, n3, n4, n5, n67, n6t)
+  comp <- merge(gab[, .(quadro, regiao, linha, coluna, publicado = valor)], nosso[, .(quadro, regiao, linha, coluna, nosso = round(nosso))], by = c("quadro", "regiao", "linha", "coluna"))
+  comp[, dif_pct := round(100 * (nosso / publicado - 1), 2)]
+  data.table::setorder(comp, quadro, regiao, linha, coluna)
+  data.table::fwrite(comp, "./data_raw/microdata/1960/amostra_127/calibracao_1965_validacao.csv", bom = TRUE)
+  resumo <- comp[, .(celulas = .N, dif_mediana_abs = round(median(abs(dif_pct)), 2), dif_max_abs = round(max(abs(dif_pct)), 1)), by = quadro]
+  message(paste(capture.output(print(resumo)), collapse = "\n"))
+  comp
 }
 
 

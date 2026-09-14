@@ -8,11 +8,11 @@ O estágio cobre a amostra de 1,27%. A amostra de 25% e a compilação das duas 
 
 **O arquivo.** `HHOLDA.txt`: 1.074.328 linhas de exatamente 62 caracteres, 68.756.992 bytes. Foi preservado no repositório `antrologos/ConsistenciaCenso1960Br` (pasta `Original Files`), onde em 2018 foi feito o primeiro exame de consistência; o passo 1 baixa esse arquivo, no commit `df7adcc`, e confere o tamanho. O exame de 2018 e o reexame de 2026 estão em `references/microdata_1960_amostra_127_consistencia.md`.
 
-**O gabarito.** Em março de 1965 o IBGE publicou, com estes mesmos cartões, os *Resultados Preliminares do Censo Demográfico*, Série Especial, volume II (biblioteca digital do IBGE, `liv84480`, 50 páginas). O volume descreve como a amostra foi sorteada e traz sete quadros de resultados para o Brasil e para as regiões Nordeste, Leste e Sul. Como foi tabulado antes do dano que o arquivo sofreu depois, ele é a referência externa de tudo o que se faz aqui: os quadros 1 e 6 estão transcritos e conferidos em `references/censo_1960_resultados_preliminares_1965.csv` (seção 7).
+**O gabarito.** Em março de 1965 o IBGE publicou, com estes mesmos cartões, os *Resultados Preliminares do Censo Demográfico*, Série Especial, volume II (biblioteca digital do IBGE, `liv84480`, 50 páginas). O volume descreve como a amostra foi sorteada e traz sete quadros de resultados para o Brasil e para as regiões Nordeste, Leste e Sul. Como foi tabulado antes do dano que o arquivo sofreu depois, ele é a referência externa de tudo o que se faz aqui: os sete quadros estão transcritos e conferidos em `references/censo_1960_resultados_preliminares_1965.csv` (seção 7).
 
-**A história do arquivo.** Um relatório interno do IPEA de abril de 1969 (*Processamento de uma amostra do Censo Demográfico de 1960*, repositório do IPEA) mostra que naquele ano o IPEA guardava 29 caixas com cerca de 56.000 cartões perfurados de uma subamostra desta amostra, para as regiões Nordeste, Sul e Leste, e que os cartões foram gravados em fita magnética no Rio Data Centro da PUC do Rio de Janeiro. O layout descrito lá — 26 variáveis de pessoa e 13 de domicílio, na mesma ordem — é o deste arquivo. Ou seja, o arquivo é a imagem de um baralho de cartões de 62 colunas que circulou entre instituições, de cartão para fita e de fita para disco, ao longo de décadas.
+**A história do arquivo.** Um relatório interno do IPEA de abril de 1969 (*Processamento de uma amostra do Censo Demográfico de 1960*, repositório do IPEA) mostra que naquele ano o IPEA guardava 29 caixas com cerca de 56.000 cartões perfurados de uma subamostra desta amostra, para as regiões Nordeste, Sul e Leste, e que os cartões foram gravados em fita magnética no Rio Data Centro da PUC do Rio de Janeiro. O layout descrito lá — 26 variáveis de pessoa e 13 de domicílio, na mesma ordem — é o deste arquivo. O relatório ensina mais quatro coisas. A subamostra do IPEA foi sorteada por grau de instrução do chefe, com frações diferentes por região (no Leste, uma família em 25 entre as sem instrução e todas as de chefe com curso superior), e excluiu os cartões de não moradores, hóspedes, empregados e os "com códigos impossíveis" em doze colunas — ou seja, já em 1969 havia cartões com códigos impossíveis, e parte dos valores fora do dicionário que os detectores encontram é erro de perfuração original, não dano de cópia. As subamostras 2, 3 e 4 "mantêm o agrupamento familiar; as demais estão misturadas": cartões de pessoa soltos do agrupamento eram uma realidade do processamento, o que dá verossimilhança ao cartão fora do lugar e às perdas de cartões de família deste arquivo. O arquivo `HHOLDA.txt` não descende da fita do IPEA: tem as 899.861 pessoas, inclusive não moradores e hóspedes, e as 814 pastas; é a imagem do baralho completo do IBGE. E a fita "IPEA 10" ficou no Rio Data Centro da PUC do Rio de Janeiro — uma pista arquivística, caso um dia se queira comparar. Em resumo: o arquivo é a imagem de um baralho de cartões de 62 colunas que circulou entre instituições, de cartão para fita e de fita para disco, ao longo de décadas.
 
-**A documentação do censo.** O boletim da amostra (`Questionário 1960 - amostra.pdf`) e as *Instruções ao Recenseador* (`doc0090.pdf`) estão em `D:\Dropbox\Workshop Censo\Censos\`; são a fonte para o significado dos códigos (seção 10).
+**A documentação do censo.** O boletim da amostra (`Questionário 1960 - amostra.pdf`) e as *Instruções ao Recenseador* (`doc0090.pdf`) estão em `D:\Dropbox\Workshop Censo\Censos\`; são a fonte para o significado dos códigos, transcritos em `read_guides/1960_amostra_127_codigos.csv` (o boletim traz o número de cada quadrícula; o arquivo grava o último dígito desse número, e é assim que 56 a 59 viram V215 = 6 a 9, 60 a 64 viram 0 a 4, e assim por diante).
 
 ## 2. Como o arquivo é
 
@@ -300,12 +300,16 @@ Registros de família nas linhas 5648 (V101 = 2) e 5651 (V101 = 4):
 - **Imputações determinísticas**, duas, sempre marcadas: nacionalidade (V208) em branco em 19 registros íntegros de pessoas nascidas em UFs brasileiras (V207 de 01 a 29) vira 9, brasileiro nato, com `censobr_v208_imputada`; e as 3 pessoas das linhas corrompidas, que perderam UF, município e chave, recebem os da família a que estão presas pela posição no arquivo. Nada mais é preenchido.
 - **Página de domicílio nas pessoas.** Cada pessoa leva V101 a V113 do seu próprio registro de família, como no original. Nas 373 famílias secundárias (V101 = 4 ou 5; 1.367 pessoas) essa página está em branco no arquivo e fica em branco aqui; o dicionário do `censobr` deve avisar, e a decisão sobre preencher as variáveis físicas do domicílio será discutida em issue no `ipea/censobr` (rascunho em `references/issue_familias_secundarias_1960_1970.md`).
 - **Códigos.** Filhos tidos e vivos (V217, V218) só têm códigos até 30, mais 99 = ignorado; 26 valores de V217 e 2 de V218 entre 31 e 98 viram NA, marcados em `censobr_v217_fora_da_faixa` e `censobr_v218_fora_da_faixa`. O número da idade, que a sintaxe original chamava AGE, fica em V204B; V204 diz se ele está em meses (0), anos (1), acima de 99 anos (5) ou é ignorado (9).
-- **Coerência entre parentes.** Três marcas, sem nenhuma correção: cônjuge do mesmo sexo do chefe (459 pessoas), filho mais velho que o chefe (130) e casamento antes dos 10 anos de idade, tomando V216 de 01 a 60 como 1901 a 1960 (1.774). Sobre esta última, ver a seção 10.
+- **Coerência entre parentes.** Três marcas, sem nenhuma correção: cônjuge do mesmo sexo do chefe (459 pessoas), filho mais velho que o chefe (130) e casamento antes dos 10 anos de idade (1.774). O boletim (quesito Q) e as Instruções ao Recenseador (p. 31) dizem o que V216 é: o ano do casamento ou da união com o cônjuge com quem a pessoa vive na data do censo, e 00 quando não vive com cônjuge. Por isso 1.315 dos 1.367 cônjuges marcados têm o mesmo ano do chefe: é o ano do casal. A impossibilidade está na idade de um dos dois, e a marca fica como está. O código 63, com 5.690 pessoas de todas as idades, não é ano; é ignorado. O dicionário de 2018, que lia 61 a 99 como 1861 a 1899, está corrigido no arquivo de códigos.
 - **Tipos.** UF, o número a posteriori e todas as V viram inteiros.
 
 ### Passo 9 — pesos calibrados a 1965
 
-Ver a seção 7. Cada domicílio recebe um peso único, o mesmo para todas as suas pessoas, tal que as somas reproduzem as 176 células do quadro 1 de 1965. O peso de desenho (78,74) fica em `censobr_weight_desenho` e o fator de calibração em `censobr_weight_fator`.
+Ver a seção 7. Cada domicílio recebe um peso único, o mesmo para todas as suas pessoas, tal que as somas reproduzem as 176 células do quadro 1 (região, situação, sexo, idade) e as 8 do quadro 2 que contam quem sabe ler e escrever, por sexo e região. O peso de desenho (78,74) fica em `censobr_weight_desenho` e o fator de calibração em `censobr_weight_fator`.
+
+### Passo 10 — reprodução dos sete quadros
+
+Com os pesos calibrados, cada célula dos quadros 2 a 7 é recomposta a partir das variáveis do arquivo e comparada com o valor publicado (`calibracao_1965_validacao.csv`). Ver a seção 7.
 
 ## 6. O que sai
 
@@ -337,11 +341,25 @@ As colunas do IBGE (UF, V116, V118, V101–V113, V202–V224) ficam com os nomes
 
 **Consequências.** O peso de desenho é o inverso da fração, 78,74. Mas a seleção por estratos e a estimativa de razão que o IBGE usava dão fatores ligeiramente diferentes por estrato, e a comparação com as tabelas publicadas revela quais: dividindo a população presente publicada pela nossa contagem, o fator implícito é 79,2 no Leste, 79,4 no Sul e 79,5 no Nordeste — com o urbano em 80,0 e o rural em 78,6. Quase uniforme, com o urbano um pouco acima do rural.
 
-**A transcrição.** Os quadros 1 (população presente por região, situação, sexo e onze faixas de idade) e 6 (domicílios particulares ocupados e pessoas residentes, por condição de ocupação e faixa de aluguel) foram lidos por OCR (Tesseract a 300 dpi e a camada de texto do PDF), transcritos e conferidos por aritmética: em cada linha, total = homens + mulheres = urbana + rural; em cada coluna, a soma das faixas = totais; alugados = soma das faixas de aluguel; totais = próprios + alugados + outra condição + sem declaração. As 870 células passam em todas as conferências; sete células ilegíveis foram resolvidas pelas restrições e estão marcadas na coluna `nota` do CSV. Norte e Centro-Oeste não têm quadros próprios: saem do Brasil menos as três regiões.
+**A transcrição.** Os sete quadros — 1 população presente por região, situação, sexo e idade; 2 alfabetização por sexo e idade; 3 ramo de atividade por sexo; 4 rendimento por grupo de atividade e sexo; 5 estado conjugal por grupo de atividade e sexo; 6 condição de ocupação e aluguel dos domicílios; 7 instalações dos domicílios — foram lidos por OCR (Tesseract a 300 dpi e a camada de texto do PDF), transcritos e conferidos por aritmética: em cada linha, total = homens + mulheres = urbana + rural, ou total = soma das colunas; em cada coluna, a soma das faixas = totais; casados = soma das quatro formas de união; alugados = soma das faixas de aluguel. São 2.775 células, todas preenchidas; as ilegíveis ou incoerentes foram resolvidas pelas restrições ou lidas na imagem, e estão marcadas na coluna `nota` do CSV. Sobra uma inconsistência de 2 pessoas na linha "casados" do quadro 5 do Brasil, que é da impressão original. Norte e Centro-Oeste não têm quadros próprios: saem do Brasil menos as três regiões.
 
-**A calibração** (passo 9). Cada domicílio recebe um peso único, calibrado pelo método de Deville e Särndal com distância "raking": peso de desenho vezes exp(x'λ), onde x conta quantas pessoas presentes o domicílio tem em cada uma das 176 células do quadro 1 (4 regiões × 2 situações × 2 sexos × 11 faixas) e λ é resolvido por Newton em poucas iterações. As 176 células são reproduzidas exatamente. O fator de calibração (`censobr_weight_fator`) fica entre 0,47 e 4,62, com mediana 1,001; por UF a mediana vai de 0,970 (Roraima) a 1,061 (Distrito Federal), e nas UFs do Nordeste, Leste e Sul fica entre 0,995 e 1,011. O fator é também um diagnóstico: afasta-se de 1 onde faltam ou sobram cartões.
+**A calibração** (passo 9). Cada domicílio recebe um peso único, calibrado pelo método de Deville e Särndal com distância "raking": peso de desenho vezes exp(x'λ), onde x conta quantas pessoas o domicílio tem em cada célula de restrição e λ é resolvido por Newton em poucas iterações. As restrições são as 176 células do quadro 1 (4 regiões × 2 situações × 2 sexos × 11 faixas de idade, pessoas presentes) e as 8 do quadro 2 que contam quem sabe ler e escrever, por sexo e região, entre os presentes de 5 anos e mais — só "sabem", porque "não sabem" já fica determinado pelo quadro 1. Todas são reproduzidas exatamente. O fator de calibração (`censobr_weight_fator`) fica entre 0,49 e 4,88, com mediana 1,001; por UF a mediana vai de 0,967 (Roraima) a 1,065 (Distrito Federal), e nas UFs do Nordeste, Leste e Sul fica entre 0,995 e 1,011. O fator é também um diagnóstico: afasta-se de 1 onde faltam ou sobram cartões.
 
-**A validação pelo quadro 6.** Os domicílios particulares ocupados e as pessoas residentes, com os pesos calibrados, ficam acima do publicado em 1965: de 0,2% (Nordeste rural) a 3,9% (Leste urbano) nos domicílios, e de −2,3% (Norte e Centro-Oeste rural) a 3,8% (Leste urbano) nos residentes. Nenhuma definição de domicílio testada (com ou sem as famílias sem registro, só V101 = 1 ou 2, só com página preenchida, só com residente) muda isso: as tabulações de domicílio de 1965 partem de um universo 1,6% a 3% menor que o das pessoas presentes, mais no urbano do Leste e do Sul, por razão ainda desconhecida. Fica registrado em `data_raw/microdata/1960/amostra_127/calibracao_1965_quadro6.csv`, e é uma das perguntas para os materiais adicionais de 1960.
+Duas restrições foram testadas e rejeitadas. O estado conjugal por sexo (quadro 5: solteiros, casados, separados, viúvos) leva o fator a variar de 0,05 a 18, porque força os domicílios que perderam o cartão do chefe, e têm cônjuge sem par, a compensar com peso o que falta no arquivo; só "casados" por sexo ainda dá 0,10 a 8,8. Os totais de domicílios e residentes (quadros 6 e 7) são inconsistentes com o quadro 1 em 1,6% a 3,9% (abaixo) e não podem ser impostos junto com ele. Ficam como validação.
+
+**A validação pelos sete quadros** (passo 10). Com os pesos calibrados, cada célula publicada é recomposta a partir do arquivo, lendo os códigos pelo boletim (`read_guides/1960_amostra_127_codigos.csv`). A diferença relativa, em módulo, por quadro:
+
+| quadro | células | mediana | percentil 90 | máxima |
+|---|---|---|---|---|
+| 1 população por situação, sexo e idade | 432 | 0,00% | 0,00% | 0,1% |
+| 2 alfabetização por sexo e idade | 432 | 0,06% | 0,7% | 8,8% |
+| 3 ramo de atividade por sexo | 120 | 1,0% | 5,5% | 35% |
+| 4 rendimento por atividade e sexo | 358 | 1,1% | 7,1% | 68% |
+| 5 estado conjugal (totais por linha) | 36 | 1,1% | 2,3% | 2,8% |
+| 6 domicílios por condição de ocupação | 96 | 1,7% | 3,5% | 3,9% |
+| 7 instalações dos domicílios | 288 | 1,8% | 3,7% | 12,5% |
+
+As máximas são células pequenas (mulheres com rendimento alto em Norte e Centro-Oeste, por exemplo). O que as diferenças sistemáticas dizem: no quadro 3, a construção civil e as "outras atividades" saem 4% e 5% abaixo do publicado, uma diferença de classificação dos ramos (V223B) que o boletim não resolve; no quadro 5, as colunas de atividade classificam os inativos pela "atividade de que dependem", a da pessoa que os sustenta, informação que o arquivo não tem, e por isso só os totais por estado conjugal comparam; nos quadros 6 e 7, domicílios e residentes publicados são 1,6% a 3,9% menores que os do arquivo, uniformemente por item de instalação e por condição de ocupação, o que aponta um universo menor na tabulação de 1965 (mais no urbano do Leste e do Sul) e não erro de leitura. Nenhuma definição de domicílio testada muda isso. Tudo está em `data_raw/microdata/1960/amostra_127/calibracao_1965_validacao.csv`, uma linha por célula.
 
 **Cobertura parcial.** Rondônia só tem Porto Velho (138 domicílios urbanos e 2 rurais); o Amapá tem um município, o Acre dois, Fernando de Noronha só urbano, o Distrito Federal só duas situações. Nenhum peso cria o que não foi amostrado: a calibração reproduz os totais regionais, e a estimativa para essas UFs isoladas descreve só o que foi sorteado.
 
@@ -349,34 +367,34 @@ As colunas do IBGE (UF, V116, V118, V101–V113, V202–V224) ficam com os nomes
 
 | UF | sigla | domicilios | familias | pessoas | pessoas_por_domicilio | fator_de_calibracao | populacao_presente_calibrada |
 |---|---|---|---|---|---|---|---|
-| 0 | RO | 140 | 140 | 675 | 4,82 | 0,991 | 51.306 |
-| 1 | AC | 476 | 476 | 2.929 | 6,15 | 0,977 | 221.417 |
-| 2 | AM | 1.625 | 1.640 | 9.771 | 6,01 | 0,973 | 737.312 |
-| 3 | RR | 58 | 58 | 401 | 6,91 | 0,970 | 28.990 |
-| 4 | PA | 3.561 | 3.575 | 20.450 | 5,74 | 0,975 | 1.569.221 |
-| 6 | AP | 210 | 210 | 1.354 | 6,45 | 0,971 | 102.098 |
-| 10 | MA | 5.896 | 5.902 | 31.155 | 5,28 | 1,005 | 2.447.217 |
-| 12 | PI | 2.809 | 2.816 | 16.328 | 5,81 | 1,005 | 1.274.553 |
-| 14 | CE | 7.347 | 7.349 | 41.204 | 5,61 | 1,005 | 3.240.539 |
-| 17 | RN | 2.778 | 2.779 | 14.639 | 5,27 | 1,005 | 1.145.328 |
-| 19 | PB | 4.876 | 4.890 | 25.864 | 5,30 | 1,004 | 2.027.690 |
-| 21 | PE | 10.500 | 10.513 | 52.672 | 5,02 | 1,005 | 4.131.738 |
-| 24 | FN | 62 | 63 | 293 | 4,73 | 1,006 | 22.710 |
-| 25 | AL | 3.093 | 3.093 | 15.707 | 5,08 | 1,004 | 1.234.833 |
-| 30 | SE | 2.376 | 2.377 | 11.472 | 4,83 | 0,995 | 894.331 |
-| 31 | BA | 15.402 | 15.428 | 79.920 | 5,19 | 0,995 | 6.204.792 |
-| 40 | MG | 23.311 | 23.334 | 126.835 | 5,44 | 0,998 | 9.866.314 |
-| 50 | Serra dos Aimorés | 872 | 874 | 4.776 | 5,48 | 0,997 | 367.108 |
-| 51 | ES | 2.427 | 2.441 | 13.916 | 5,73 | 0,998 | 1.083.883 |
-| 52 | RJ | 8.408 | 8.420 | 41.758 | 4,97 | 1,001 | 3.289.974 |
-| 54 | GB | 8.766 | 8.807 | 37.128 | 4,24 | 1,011 | 2.952.831 |
-| 60 | SP | 34.389 | 34.492 | 164.181 | 4,77 | 1,005 | 12.917.981 |
-| 71 | PR | 10.074 | 10.082 | 52.540 | 5,22 | 0,999 | 4.110.768 |
-| 74 | SC | 5.054 | 5.061 | 27.934 | 5,53 | 0,999 | 2.186.038 |
-| 81 | RS | 13.145 | 13.181 | 66.787 | 5,08 | 1,002 | 5.231.352 |
-| 91 | MT | 1.828 | 1.831 | 10.380 | 5,68 | 0,975 | 801.201 |
-| 94 | GO | 4.625 | 4.647 | 25.362 | 5,48 | 0,976 | 1.932.488 |
-| 97 | DF | 137 | 137 | 578 | 4,22 | 1,061 | 45.294 |
+| 0 | RO | 140 | 140 | 675 | 4,82 | 0,992 | 51.249 |
+| 1 | AC | 476 | 476 | 2.929 | 6,15 | 0,977 | 221.934 |
+| 2 | AM | 1.625 | 1.640 | 9.771 | 6,01 | 0,972 | 736.954 |
+| 3 | RR | 58 | 58 | 401 | 6,91 | 0,967 | 28.926 |
+| 4 | PA | 3.561 | 3.575 | 20.450 | 5,74 | 0,977 | 1.570.465 |
+| 6 | AP | 210 | 210 | 1.354 | 6,45 | 0,977 | 102.549 |
+| 10 | MA | 5.896 | 5.902 | 31.155 | 5,28 | 1,005 | 2.448.111 |
+| 12 | PI | 2.809 | 2.816 | 16.328 | 5,81 | 1,005 | 1.275.361 |
+| 14 | CE | 7.347 | 7.349 | 41.204 | 5,61 | 1,005 | 3.240.201 |
+| 17 | RN | 2.778 | 2.779 | 14.639 | 5,27 | 1,004 | 1.144.616 |
+| 19 | PB | 4.876 | 4.890 | 25.864 | 5,30 | 1,004 | 2.027.004 |
+| 21 | PE | 10.500 | 10.513 | 52.672 | 5,02 | 1,004 | 4.132.558 |
+| 24 | FN | 62 | 63 | 293 | 4,73 | 1,007 | 22.736 |
+| 25 | AL | 3.093 | 3.093 | 15.707 | 5,08 | 1,004 | 1.234.022 |
+| 30 | SE | 2.376 | 2.377 | 11.472 | 4,83 | 0,995 | 893.341 |
+| 31 | BA | 15.402 | 15.428 | 79.920 | 5,19 | 0,995 | 6.202.125 |
+| 40 | MG | 23.311 | 23.334 | 126.835 | 5,44 | 0,998 | 9.867.709 |
+| 50 | Serra dos Aimorés | 872 | 874 | 4.776 | 5,48 | 0,997 | 367.361 |
+| 51 | ES | 2.427 | 2.441 | 13.916 | 5,73 | 0,998 | 1.084.386 |
+| 52 | RJ | 8.408 | 8.420 | 41.758 | 4,97 | 1,002 | 3.291.075 |
+| 54 | GB | 8.766 | 8.807 | 37.128 | 4,24 | 1,011 | 2.953.235 |
+| 60 | SP | 34.389 | 34.492 | 164.181 | 4,77 | 1,006 | 12.919.247 |
+| 71 | PR | 10.074 | 10.082 | 52.540 | 5,22 | 0,999 | 4.112.656 |
+| 74 | SC | 5.054 | 5.061 | 27.934 | 5,53 | 0,998 | 2.184.132 |
+| 81 | RS | 13.145 | 13.181 | 66.787 | 5,08 | 1,002 | 5.230.103 |
+| 91 | MT | 1.828 | 1.831 | 10.380 | 5,68 | 0,981 | 801.846 |
+| 94 | GO | 4.625 | 4.647 | 25.362 | 5,48 | 0,977 | 1.930.000 |
+| 97 | DF | 137 | 137 | 578 | 4,22 | 1,065 | 45.405 |
 
 Total: 174.245 domicílios, 174.616 famílias, 897.009 pessoas.
 
@@ -389,17 +407,17 @@ Todas apresentadas ao usuário com a evidência e decididas em 2026-09-14:
 - **Cópias de Pernambuco:** remover pelo mecanismo (bloco copiado, cônjuge repetido, avulsa na cauda nos três municípios), marcar o resto.
 - **Famílias sem registro:** famílias e domicílios próprios, marcadas; a hipótese de anexar cônjuges sozinhos foi testada e descartada; a amostra de 25% pode confirmar pelas mesmas chaves de questionário.
 - **Imputações determinísticas:** nacionalidade e localização das linhas corrompidas, marcadas.
-- **Pesos:** calibrados aos totais de 1965, e não apenas o peso de desenho.
+- **Pesos:** calibrados aos quadros 1 e 2 de 1965, e não apenas o peso de desenho; as margens de estado conjugal e de domicílios foram testadas e rejeitadas (seção 7).
 
 ## 10. Em aberto
 
-- **V216 (ano do casamento) e a marca de casamento impossível.** O dicionário de 2018 lê 00 como "não tem", 01 a 60 como 1901 a 1960 e 61 a 99 como 1861 a 1899. O código 63, com 5.690 pessoas de todas as idades, casadas ou viúvas, não pode ser 1863. Das 1.774 pessoas marcadas, 1.367 são cônjuges e 1.315 têm o mesmo ano do chefe (nos casais o ano coincide em 99,3%); em 837 desses casais o ano é plausível para o chefe e impossível para a esposa. É inconsistência de origem, não dano de fita. Aguarda os materiais de 1960 que o usuário vai trazer (o boletim e as instruções ao recenseador já estão localizados).
-- **O universo dos quadros 5, 6 e 7 de 1965** (seção 7).
+- **O universo dos quadros 6 e 7 de 1965**, 1,6% a 3,9% menor que o das pessoas presentes (seção 7).
+- **A classificação dos ramos de atividade** (construção civil e "outras atividades" 4% a 5% abaixo do publicado).
 - **As 49 repetições avulsas dos três municípios** e as 150 famílias sem registro: confirmação pela amostra de 25%.
-- **Os quadros 2, 3, 4, 5 e 7 de 1965** ainda não foram transcritos; validam alfabetização, ramo de atividade, rendimento, estado conjugal e instalações do domicílio.
+- **A publicação especial** que o volume de 1965 promete, com o desenho detalhado da amostra e os erros de amostragem: não está na biblioteca digital do IBGE (a Série Especial de 1960 tem catalogados só o volume II e o volume IV, favelas da Guanabara), nem no Internet Archive (mesmos dois volumes, coleção Memória Estatística do Brasil), nem é citada no volume nacional definitivo, que descreve o desenho da amostra de 25% e o estimador de razão com pesos inteiros. Tudo indica que nunca saiu.
 
 ## 11. Como auditar
 
-- `linhas_problematicas.csv`, `duplicatas_removidas.csv` e `calibracao_1965_quadro6.csv`, em `data_raw/microdata/1960/amostra_127/`, listam tudo que foi apontado, removido e comparado.
-- `read_guides/1960_amostra_127_correcoes.csv` tem cada correção com o texto antes e depois; `references/censo_1960_resultados_preliminares_1965.csv` tem o gabarito.
-- Cada passo é um alvo do `targets`: `targets::tar_read(linhas_1960_amostra_127)`, `problemas_...`, `linhas_corrigidas_...`, `tabelas_brutas_...`, `tabelas_dedup_...`, `familias_...`, `tabelas_...`, `tabelas_calibradas_...` e `output_...`. Qualquer passo pode ser aberto e conferido sem rodar os outros.
+- `linhas_problematicas.csv`, `duplicatas_removidas.csv`, `calibracao_1965_quadro6.csv` e `calibracao_1965_validacao.csv`, em `data_raw/microdata/1960/amostra_127/`, listam tudo que foi apontado, removido e comparado.
+- `read_guides/1960_amostra_127_correcoes.csv` tem cada correção com o texto antes e depois; `read_guides/1960_amostra_127_codigos.csv` tem os códigos lidos no boletim; `references/censo_1960_resultados_preliminares_1965.csv` tem o gabarito.
+- Cada passo é um alvo do `targets`: `targets::tar_read(linhas_1960_amostra_127)`, `problemas_...`, `linhas_corrigidas_...`, `tabelas_brutas_...`, `tabelas_dedup_...`, `familias_...`, `tabelas_...`, `tabelas_calibradas_...`, `validacao_1965_...` e `output_...`. Qualquer passo pode ser aberto e conferido sem rodar os outros.
