@@ -743,11 +743,12 @@ finalize_1960_amostra_127 <- function(tabelas, municipios_path){
   # o municipio: V116 e o codigo da divisao territorial de 1960, com tres excecoes -- a Guanabara vem
   # codificada por distrito (54xx) e e um municipio so (541); Alagoas vem deslocada em 200; Fernando
   # de Noronha vem 2701 e e o unico municipio do territorio (2401)
+  # code_muni_1960 e o codigo da epoca; code_muni e o atual, pelo crosswalk 1960 -> 2010 da mesma tabela
   municipios <- data.table::fread(municipios_path, encoding = "UTF-8")
-  domicilios[, censobr_muni_1960 := data.table::fifelse(UF == 54L, 541L, data.table::fifelse(UF == 25L, V116 - 200L,
-                                    data.table::fifelse(UF == 24L, 2401L, V116)))]
+  domicilios[, code_muni_1960 := data.table::fifelse(UF == 54L, 541L, data.table::fifelse(UF == 25L, V116 - 200L,
+                                 data.table::fifelse(UF == 24L, 2401L, V116)))]
   domicilios[, censobr_muni_corrigido := UF %in% c(54L, 25L, 24L)]
-  domicilios[municipios, pop_urbana_muni := i.pop_urbana, on = c(UF = "uf60", censobr_muni_1960 = "cod60")]
+  domicilios[municipios, `:=`(code_muni = as.integer(i.code_muni_2010), pop_urbana_muni = i.pop_urbana), on = c(UF = "uf60", code_muni_1960 = "cod60")]
 
   # o desenho da amostra: a pasta e a unidade sorteada; o estrato e a regiao cruzada com um dos quatro
   # grupos de situacao de 1965 -- cidade de 100 mil ou mais, aglomerado urbano menor, rural, mista
@@ -758,15 +759,15 @@ finalize_1960_amostra_127 <- function(tabelas, municipios_path){
                     data.table::fifelse(grande, "cidade grande", "urbana menor")))]
   domicilios[pastas, censobr_estrato := paste(REGIAO_1960[as.character(UF)], i.grupo, sep = " - "), on = "censobr_upa"]
   pessoas[domicilios, `:=`(censobr_upa = i.censobr_upa, censobr_estrato = i.censobr_estrato,
-                           censobr_muni_1960 = i.censobr_muni_1960, censobr_muni_corrigido = i.censobr_muni_corrigido), on = "censobr_idhousehold"]
+                           code_muni = i.code_muni, code_muni_1960 = i.code_muni_1960, censobr_muni_corrigido = i.censobr_muni_corrigido), on = "censobr_idhousehold"]
   domicilios[, pop_urbana_muni := NULL]
   message("  desenho: ", data.table::uniqueN(domicilios$censobr_upa), " pastas (",
           paste(names(table(pastas$grupo)), table(pastas$grupo), collapse = ", "), ") em ",
           data.table::uniqueN(domicilios$censobr_estrato), " estratos; menor estrato com ",
           min(unique(domicilios[, .(censobr_estrato, censobr_upa)])[, .N, by = censobr_estrato]$N), " pastas")
 
-  data.table::setcolorder(pessoas, c("UF", "V116", "V118", "censobr_idhousehold", "censobr_idfamily", "linha", "censobr_weight", "censobr_upa", "censobr_estrato", "censobr_muni_1960", "censobr_muni_corrigido"))
-  data.table::setcolorder(domicilios, c("UF", "V116", "V118", "censobr_idhousehold", "linha", "censobr_weight", "censobr_upa", "censobr_estrato", "censobr_muni_1960", "censobr_muni_corrigido"))
+  data.table::setcolorder(pessoas, c("UF", "V116", "V118", "code_muni", "code_muni_1960", "censobr_muni_corrigido", "censobr_idhousehold", "censobr_idfamily", "linha", "censobr_weight", "censobr_upa", "censobr_estrato"))
+  data.table::setcolorder(domicilios, c("UF", "V116", "V118", "code_muni", "code_muni_1960", "censobr_muni_corrigido", "censobr_idhousehold", "linha", "censobr_weight", "censobr_upa", "censobr_estrato"))
 
   message("  pessoas: ", nrow(pessoas), " x ", ncol(pessoas), " | domicilios: ", nrow(domicilios), " x ", ncol(domicilios))
   list(pessoas = pessoas, domicilios = domicilios)

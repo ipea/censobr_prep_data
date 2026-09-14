@@ -176,7 +176,7 @@ derive_households_1970|function|5424809ee075757a
 sampling_errors_1960_amostra_127|function|2c4eb5d3bc8ed119
 validate_1965_1960_amostra_127|function|0163fbeda289a266
 calibrate_1960_amostra_127|function|0fb78cc97f17e275
-finalize_1960_amostra_127|function|931f784416b870ed
+finalize_1960_amostra_127|function|d9cff93d9667e555
 clean_microdata_2000|function|52dcda7a09234f1f
 clean_microdata_2010|function|a9ba352ff16a2b43
 add_geo_1970|function|8177f969783f45c6
@@ -216,8 +216,8 @@ clean_tracts_2022_prelim|function|f2a59b38d68ba929
 save_tracts_2022|function|572fd681a24160f8
 clean_tracts_2022|function|4de388b5f28b06ad
 clean_tracts_2000|function|d564b1efb91a37f4
-tabelas_1960_amostra_127|stem|6da42d24872a110d|e408b44c21525ffc|ff6b70d47cacac81|1800949839||t20710.8465706961s|s20947868b|20947868|rds|local|vector|||7.75|NAs introduzidos por coerção|
-tabelas_calibradas_1960_amostra_127|stem|167dc4d8f5b0b321|d23648f7203223d2|45cf00ad941e1d67|-1773709599||t20710.846675471s|s25567329b|25567329|rds|local|vector|||1.25||
-validacao_1965_1960_amostra_127|stem|aa55b4eaa34517ef|30792589d3af510a|d53d0d91bdb2e353|-1972281259||t20710.8467289317s|s18276b|18276|rds|local|vector|||2.875||
-erros_1960_amostra_127|stem|4f70fb7607e64ece|e6d11ede58603a1b|d8066114db0729bd|-892816702||t20710.8467522035s|s3872b|3872|rds|local|vector|||0.437||
-output_1960_amostra_127|stem|2616e22f9b43d574|cd89a4a1fdfc672a|6f8e161990e464b8|-1648890890|./data_raw/microdata/1960/amostra_127/pessoas_1960_amostra_127.parquet*./data_raw/microdata/1960/amostra_127/domicilios_1960_amostra_127.parquet|t20710.8474119399s|s41363063b|41363063|file|local|vector|||55.484||
+tabelas_1960_amostra_127|stem|6e7bbe463ddb7e61|e408b44c21525ffc|62405bdd4d96d8e2|1800949839||t20710.9270409221s|s20941694b|20941694|rds|local|vector|||7.687|NAs introduzidos por coerção|
+tabelas_calibradas_1960_amostra_127|stem|57ab38ac817342b6|d23648f7203223d2|b555c8f0132f0a89|-1773709599||t20710.9271497181s|s25566307b|25566307|rds|local|vector|||1.437||
+validacao_1965_1960_amostra_127|stem|aa55b4eaa34517ef|30792589d3af510a|d14e6fbd194270b9|-1972281259||t20710.9272033241s|s18276b|18276|rds|local|vector|||2.984||
+erros_1960_amostra_127|stem|4f70fb7607e64ece|e6d11ede58603a1b|f2bb87590f088b67|-892816702||t20710.9272268869s|s3872b|3872|rds|local|vector|||0.438||
+output_1960_amostra_127|stem|92d7b1c4c1fe7fa6|cd89a4a1fdfc672a|4937cdec84975e2e|-1648890890|./data_raw/microdata/1960/amostra_127/pessoas_1960_amostra_127.parquet*./data_raw/microdata/1960/amostra_127/domicilios_1960_amostra_127.parquet|t20710.9278901585s|s41375735b|41375735|file|local|vector|||55.703||
