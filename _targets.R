@@ -119,6 +119,80 @@ list(
              format = "file"
              ),
 
+  # 01a. microdata 1960 -- amostra de 1,27%, do arquivo bruto -------------------------
+  #
+  # Reconstrucao passo a passo da amostra de 1,27% (ver R/microdata_1960_amostra_127.R).
+  # Os read guides e o CSV de decisoes manuais sao inputs rastreados: qualquer
+  # mudanca neles refaz o que depende deles.
+  tar_target(name = raw_1960_amostra_127,
+             command = download_1960_amostra_127(),
+             format = "file"
+             ),
+
+  tar_target(name = guia_1960_amostra_127_familias,
+             command = "read_guides/readguide_1960_amostra_127_familias.csv",
+             format = "file"
+             ),
+
+  tar_target(name = guia_1960_amostra_127_pessoas,
+             command = "read_guides/readguide_1960_amostra_127_pessoas.csv",
+             format = "file"
+             ),
+
+  tar_target(name = correcoes_1960_amostra_127,
+             command = "read_guides/1960_amostra_127_correcoes.csv",
+             format = "file"
+             ),
+
+  # as linhas do arquivo, intactas
+  tar_target(name = linhas_1960_amostra_127,
+             command = read_1960_amostra_127(raw_1960_amostra_127)
+             ),
+
+  # as linhas suspeitas, com o resultado dos quatro testes, e a conferencia de
+  # que cada uma tem decisao escrita
+  tar_target(name = problemas_1960_amostra_127,
+             command = detect_1960_amostra_127(linhas_1960_amostra_127,
+                                               guia_1960_amostra_127_familias,
+                                               guia_1960_amostra_127_pessoas,
+                                               correcoes_1960_amostra_127)
+             ),
+
+  # as linhas depois das decisoes (depende de problemas_ so para garantir a ordem)
+  tar_target(name = linhas_corrigidas_1960_amostra_127,
+             command = {
+               problemas_1960_amostra_127
+               apply_corrections_1960_amostra_127(linhas_1960_amostra_127, correcoes_1960_amostra_127)
+             }
+             ),
+
+  # layout aplicado: lista com familias e pessoas, ainda em texto
+  tar_target(name = tabelas_brutas_1960_amostra_127,
+             command = parse_1960_amostra_127(linhas_corrigidas_1960_amostra_127,
+                                              guia_1960_amostra_127_familias,
+                                              guia_1960_amostra_127_pessoas)
+             ),
+
+  # duplicatas de Pernambuco removidas
+  tar_target(name = tabelas_dedup_1960_amostra_127,
+             command = dedup_1960_amostra_127(tabelas_brutas_1960_amostra_127)
+             ),
+
+  # familias pela chave do questionario, domicilios por V101, Rondonia devolvida
+  tar_target(name = familias_1960_amostra_127,
+             command = build_families_1960_amostra_127(tabelas_dedup_1960_amostra_127)
+             ),
+
+  # contagens, peso uniforme, codigos, marcas de coerencia, tipos
+  tar_target(name = tabelas_1960_amostra_127,
+             command = finalize_1960_amostra_127(familias_1960_amostra_127)
+             ),
+
+  tar_target(name = output_1960_amostra_127,
+             command = save_1960_amostra_127(tabelas_1960_amostra_127),
+             format = "file"
+             ),
+
   # 02. microdata 1970 ---------------------------------------------------------------
 
   # a fonte e a versao CEM, no release_legacy: o FWF do FTP traz 1.785

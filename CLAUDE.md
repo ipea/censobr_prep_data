@@ -74,7 +74,7 @@ The pipeline produces parquets of two distinct kinds, organized along two indepe
 
 | Edition | Raw source | Download stage |
 |---|---|---|
-| 1960 | Personal compilation by the maintainer (Rogério), assembled outside this project from two complementary sources | **No download stage, ever** — `censobr` consumes the semi-prepared input as given |
+| 1960 | Duas amostras. A de 1,27% (`HHOLDA.txt`, preservado no repositório `antrologos/ConsistenciaCenso1960Br`) é preparada passo a passo em `R/microdata_1960_amostra_127.R` (bloco `# 01a.`; documento didático em `references/microdata_1960_amostra_127_preparacao.md`; correções em `read_guides/1960_amostra_127_correcoes.csv`). A de 25% e a compilação das duas ainda estão fora do projeto — o `censobr` consome a compilação antiga via `release_legacy` | `download_1960_amostra_127()` para a de 1,27%; a compilação antiga não tem download |
 | 1970, 1980, 1991 | Amostra preparada pelo CEM, hospedada no release `release_legacy` deste repo. O FTP do IBGE republicou as três edições em 01/2025 em versões que perdem variáveis (1980, 1991: sem identificador de domicílio) ou trazem registros corrompidos (1970) — ver `references/microdata_<ano>_ftp_vs_*.md` | `download_microdata_<year>()` via `get_release_legacy()`; o FTP serve só como referência de validação |
 | 2000, 2010 | IBGE FTP — `https://ftp.ibge.gov.br/Censos/` | `download_microdata_<year>()` |
 | 2022 | IBGE FTP — amostra de acesso público, publicada em 31/08/2026 (a versão de acesso controlado não é redistribuível) | `download_microdata_2022()` |
