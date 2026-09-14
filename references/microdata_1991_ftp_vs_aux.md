@@ -207,12 +207,12 @@ Domicílios: 4.024.543 linhas e 58 colunas, na mesma ordem; 0 NA em
 |---|---:|---|
 | `V2012` | 108.050 | `9999999999` → `999999999` |
 | `name_region` | 276.692 | "Centro-oeste" → "Centro-Oeste" |
-| `code_muni`, `code_state`, `code_region`, `code_meso`, `code_micro`, `code_metro` | tipo | `int32` → `double` |
 
 Pessoas: `V2012` (552.020) e `V3045` (515.649) com o sentinela do dicionário;
 duas colunas novas (`numb_family_members`, `family_income_per_cap`); `V1102`
-continua gravada com zeros à esquerda (4 dígitos). A geografia entra inline,
-não por `add_geography_cols()`, como em 1980 e 2022.
+passa de texto com zeros à esquerda (4 dígitos) a inteiro, pela convenção de
+tipos. A geografia entra inline, não por `add_geography_cols()`, como em 1980
+e 2022.
 
 ## Para a carta ao IBGE
 

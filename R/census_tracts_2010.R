@@ -311,6 +311,7 @@ save_tracts_2010 <- function(br_df, data_version){
   # colunas censobr de geografia no inicio; convenção v0.6.0: code_* numeric.
   AT <- relocate_geo_cols_censobr(AT)
   AT <- code_cols_to_numeric(AT)
+  AT <- cast_censobr_types(AT, paste0("2010_tracts_", tolower(tbl)))
 
   # table_name é metadata interna do pipeline — não vai pro output.
   AT$table_name <- NULL

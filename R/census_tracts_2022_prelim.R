@@ -17,8 +17,8 @@
 #  - o publicado tem 57 colunas porque trazia, alem dos nomes crus do IBGE e
 #    dos censobr, seis colunas que so existem na malha definitiva (situacao,
 #    code_type, code_neighborhood, code_nucleo_urbano, code_favela e
-#    code_aglomerado). Aqui ficam as 29 da fonte com o nome original, mais as
-#    22 colunas censobr de geografia derivadas delas.
+#    code_aglomerado). Aqui ficam as 28 da fonte com o nome original (AREA_KM2
+#    vira area_km2), mais as 22 colunas censobr de geografia derivadas delas.
 #
 # Esta tabela guarda code_meso e code_micro, que o IBGE nao publica no Basico
 # definitivo de 2022.
@@ -91,6 +91,9 @@ clean_tracts_2022_prelim <- function(raw_csv_path){
                 paste0("V000", 1:7))
   df <- dplyr::mutate(df, dplyr::across(dplyr::all_of(num_cols), as.numeric))
 
+  # unica excecao a regra de manter as colunas do IBGE: area_km2 substitui AREA_KM2
+  df$AREA_KM2 <- NULL
+
   relocate_geo_cols_censobr(df)
 }
 
@@ -104,6 +107,7 @@ save_tracts_2022_prelim <- function(df, data_version){
   dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
   dest_file <- paste0(out_dir, "/2022_tracts_preliminares_", data_version, ".parquet")
+  df <- cast_censobr_types(df, "2022_tracts_preliminares")
   write_censobr_parquet(df, dest_file)
 
   dest_file

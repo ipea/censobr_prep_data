@@ -329,6 +329,7 @@ save_microdata_1970 <- function(arrw, dataset_name, data_version){
   temp_dir <- file.path(out_dir, paste0("tmp_", dataset_name))
   unlink(temp_dir, recursive = TRUE)
 
+  arrw <- cast_censobr_types(arrw, paste0("1970_", dataset_name))
   arrow::write_dataset(arrw,
                        path               = temp_dir,
                        format             = "parquet",

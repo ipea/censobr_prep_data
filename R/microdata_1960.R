@@ -83,6 +83,7 @@ save_microdata_1960 <- function(cleaned_df, data_version){
   # vs v0.5.0 onde era int32).
   out <- relocate_geo_cols_censobr(out)
   out <- code_cols_to_numeric(out)
+  out <- cast_censobr_types(out, paste0("1960_", ds))
 
   dir.create("./data/microdata_sample/1960/", recursive = TRUE, showWarnings = FALSE)
   dest_file <- paste0("./data/microdata_sample/1960/1960_", ds, "_", data_version, ".parquet")

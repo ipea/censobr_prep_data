@@ -309,12 +309,16 @@ save_tracts_2022 <- function(cleaned_dt, data_version){
   out <- cleaned_dt
   out$table_name <- NULL
 
-  # a chave do IBGE volta ao nome que tem no CSV; as colunas censobr vao para o inicio
+  # a chave do IBGE volta ao nome que tem no CSV; as colunas censobr vao para o inicio.
+  # Unica excecao a regra de manter as colunas do IBGE: situacao e area_km2
+  # substituem SITUACAO e AREA_KM2, que so diferem delas na caixa do nome.
   data.table::setnames(out, "CD_setor", "CD_SETOR")
+  out$SITUACAO <- out$AREA_KM2 <- NULL
   out <- relocate_geo_cols_censobr(out)
 
-  # convencao v0.6.0: code_* numeric.
+  # convencao v0.6.0: code_* numeric; depois o tipo declarado de cada coluna.
   out <- code_cols_to_numeric(out)
+  out <- cast_censobr_types(out, paste0("2022_tracts_", tolower(tbl)))
 
   # save data
   message("saving")

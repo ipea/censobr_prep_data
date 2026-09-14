@@ -283,6 +283,7 @@ save_tracts_2000 <- function(cleaned_dt, data_version){
   # colunas censobr de geografia no inicio; convencao v0.6.0: code_* numeric.
   out <- relocate_geo_cols_censobr(out)
   out <- code_cols_to_numeric(out)
+  out <- cast_censobr_types(out, paste0("2000_tracts_", tolower(tbl)))
 
   # save data
   message("saving")

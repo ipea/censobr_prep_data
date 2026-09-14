@@ -129,16 +129,16 @@ por `add_geography_cols()` — a coluna de origem muda de nome por tabela
 (`D0020`/`P0020`/`F0020`/`M0020`) e o ramo `year == 2022` daquela função
 pertence aos setores (`CD_MUN`).
 
-Tipos, derivados do layout público (`R/schema_col_classes.R`, ramo
-`year == 2022`): `DEC > 0` → `double` — sete variáveis, os quatro pesos (13
-decimais) e `D0240` (moradores por dormitório, 2 inteiros e 2 decimais),
-`D0360` e `F0260` (rendimentos per capita, 9 inteiros e 2 decimais); as
-demais inteiras, dimensionadas por `INT` (`≤ 2` → `int8`, `3–4` → `int16`,
-`5–9` → `int32`); `F0101` e `M0101` → `string`, porque carregam letra no
-valor (`"F001"`, `"M001"`), enquanto `P0101` é contagem e fica inteira. Os
-tipos coincidem, nas 256 variáveis comuns, com os que o consumidor verificou
-contra os dados do controlado. Declarar o schema evita que o `arrow` tipe
-como `null` as colunas em branco no primeiro bloco do primeiro arquivo lido.
+Tipos: na leitura do CSV o pipeline declara o schema derivado do layout
+público (`R/schema_col_classes.R`, ramo `year == 2022`), o que evita que o
+`arrow` tipe como `null` as colunas em branco no primeiro bloco do primeiro
+arquivo lido. No parquet publicado vale a convenção de tipos do produto
+(`schemas/censobr_types.csv`): `double` nas sete variáveis com decimais — os
+quatro pesos (13 decimais), `D0240` (moradores por dormitório, 2 inteiros e 2
+decimais), `D0360` e `F0260` (rendimentos per capita, 9 inteiros e 2
+decimais) —; `int32` em todas as demais, que são inteiras e cabem; `string`
+em `F0101` e `M0101`, que carregam letra no valor (`"F001"`, `"M001"`),
+enquanto `P0101` é contagem e fica inteira. Não há `int8`/`int16` no produto.
 
 Verificações:
 

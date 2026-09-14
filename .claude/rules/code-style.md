@@ -104,10 +104,10 @@ Foram visíveis no diff antigo de `R/census_tracts_2010.R` e na versão AI-style
 - Tabelas de arquivo único (Basico, PessoaRenda…) não têm prefixo: `V001`, `Situacao_setor`.
 - Não renomear V cols por hipótese de "ficar mais legível" — quebra os dicionários do IBGE que os usuários do `censobr` consultam.
 
-### Convenção v0.6.0
+### Convenção de tipos
 
-- Todas as `code_*` viram `numeric` (R double / Arrow `float64`), aplicado via `code_cols_to_numeric()` em `R/support_fun.R`.
-- Quebra intencional vs v0.5.0 (que tinha `code_tract` string e demais int32). Documentado em memória `project_conventions_v0_6_0`.
+- Cada coluna publicada tem o tipo declarado em `schemas/censobr_types.csv` (string / float64 / int32, regra mecânica descrita no CLAUDE.md), aplicado por `cast_censobr_types(x, dataset)` como último passo de todo `save_*`, depois de `code_cols_to_numeric()`.
+- Não se declara tipo à mão: o CSV sai da medição de toda coluna (scan por arquivo e fatias de colunas, com `memory_limit` no duckdb). Documentado em memória `project_conventions_v0_6_0`.
 
 ### Zero invenção
 

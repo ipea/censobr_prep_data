@@ -151,6 +151,7 @@ save_microdata_2000 <- function(arrw, dataset_name, data_version){
   unlink(temp_dir, recursive = TRUE)
 
   arrw <- relocate_geo_cols_censobr(arrw)
+  arrw <- cast_censobr_types(arrw, paste0("2000_", dataset_name))
   arrow::write_dataset(arrw,
                        path               = temp_dir,
                        format             = "parquet",
