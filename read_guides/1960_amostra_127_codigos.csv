@@ -100,7 +100,10 @@ V215,3,"Não vive com cônjuge: divorciado",Boletim de Amostra CD 2 (quesito P; 
 V215,4,"Não vive com cônjuge: viúvo",Boletim de Amostra CD 2 (quesito P; código 64)
 V216,00,"Não vive em companhia de cônjuge",Boletim de Amostra CD 2 (quesito Q) e Instruções ao Recenseador p. 31
 V216,01-60,"Ano do casamento ou da união, dois últimos dígitos (1901 a 1960)",Boletim de Amostra CD 2 (quesito Q) e Instruções ao Recenseador p. 31
-V216,61-99,"Código especial de processamento; 63 (5.690 registros de todas as idades) é ignorado; 61, 62 e 99 não são anos",distribuição dos dados; o dicionário de 2018 lia como 1861 a 1899, o que é impossível para o 63
+V216,61,"Casados no ano de 1900",Código do Censo 1960 (quesito Q; ver read_guides/1960_codigo_do_censo.csv)
+V216,62,"Casados em ano anterior a 1864",Código do Censo 1960 (quesito Q)
+V216,63,"Ignorado (5.690 registros de todas as idades)",Código do Censo 1960 (quesito Q)
+V216,64-99,"Ano do casamento ou da união, dois últimos dígitos (1864 a 1899)",Código do Censo 1960 (quesito Q)
 V217,00,"Não teve filhos",Boletim de Amostra CD 2 (quesito R)
 V217,99,"Ignorado",dicionário de 2018
 V218,00,"Nenhum filho vivo",Boletim de Amostra CD 2 (quesito S)

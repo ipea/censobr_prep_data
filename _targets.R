@@ -183,9 +183,15 @@ list(
              command = build_families_1960_amostra_127(tabelas_dedup_1960_amostra_127)
              ),
 
-  # contagens, peso uniforme, codigos, marcas de coerencia, tipos
+  # divisao territorial de 1960 com a populacao do AEB: nome do municipio e o criterio de cidade grande
+  tar_target(name = municipios_1960,
+             command = "./read_guides/1960_municipios.csv",
+             format = "file"
+             ),
+
+  # contagens, peso uniforme, codigos, marcas de coerencia, tipos, desenho da amostra
   tar_target(name = tabelas_1960_amostra_127,
-             command = finalize_1960_amostra_127(familias_1960_amostra_127)
+             command = finalize_1960_amostra_127(familias_1960_amostra_127, municipios_1960)
              ),
 
   # quadros 1 e 6 dos Resultados Preliminares de 1965, transcritos e conferidos

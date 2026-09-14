@@ -668,18 +668,18 @@ build_families_1960_amostra_127 <- function(tabelas){
 # Tipos. Todas as variáveis do IBGE viram inteiros; a chave do questionário e
 # as marcas ficam como estão.
 # ------------------------------------------------------------------------------
-finalize_1960_amostra_127 <- function(tabelas){
+finalize_1960_amostra_127 <- function(tabelas, municipios_path){
 
   message("Finalizing 1960 amostra de 1,27%")
 
   familias <- data.table::copy(tabelas$familias)
   pessoas  <- data.table::copy(tabelas$pessoas)
 
-  # filhos tidos e vivos fora da faixa do dicionario
+  # filhos tidos e vivos acima de 30: o dicionario de 2018 parava em 30, mas o Codigo do Censo
+  # (quesitos R e S) manda registrar o numero declarado; o valor fica e a marca aponta
   for(v in c("V217", "V218")){
     fora <- !is.na(pessoas[[v]]) & as.integer(pessoas[[v]]) >= 31 & as.integer(pessoas[[v]]) <= 98
     data.table::set(pessoas, j = paste0("censobr_", tolower(v), "_fora_da_faixa"), value = fora)
-    data.table::set(pessoas, i = which(fora), j = v, value = NA_character_)
   }
   data.table::setnames(pessoas, "AGE", "V204B")
 
@@ -705,7 +705,11 @@ finalize_1960_amostra_127 <- function(tabelas){
   pessoas[, censobr_flag_conjuge_mesmo_sexo := V203 == "8" & !is.na(sexo_chefe) & !is.na(V202) &
             (V202 %in% c("1", "3", "5")) == (sexo_chefe %in% c("1", "3", "5"))]
   pessoas[, censobr_flag_filho_mais_velho := V203 == "9" & !is.na(idade_anos) & !is.na(idade_chefe) & idade_anos > idade_chefe]
-  pessoas[, ano_casamento := data.table::fifelse(as.integer(V216) %in% 1:60, 1900L + as.integer(V216), NA_integer_)]
+  # quesito Q do Codigo do Censo: 01-60 = 1901-1960, 61 = 1900, 62 = antes de 1864 (fica 1863), 63 = ignorado, 64-99 = 1864-1899
+  pessoas[, ano_casamento := data.table::fifelse(as.integer(V216) %in% 1:60, 1900L + as.integer(V216),
+                             data.table::fifelse(as.integer(V216) %in% 61, 1900L,
+                             data.table::fifelse(as.integer(V216) %in% 62, 1863L,
+                             data.table::fifelse(as.integer(V216) %in% 64:99, 1800L + as.integer(V216), NA_integer_))))]
   pessoas[, censobr_flag_casamento_impossivel := !is.na(ano_casamento) & !is.na(idade_anos) & (ano_casamento - (1960L - idade_anos)) < 10]
   pessoas[, c("idade_anos", "sexo_chefe", "idade_chefe", "ano_casamento") := NULL]
   for(v in grep("^censobr_flag_", names(pessoas), value = TRUE)) data.table::set(pessoas, i = which(is.na(pessoas[[v]])), j = v, value = FALSE)
@@ -736,19 +740,33 @@ finalize_1960_amostra_127 <- function(tabelas){
   para_inteiro(pessoas); para_inteiro(domicilios)
   data.table::setnames(pessoas, "tipo", "censobr_tipo_registro")
 
-  # o desenho da amostra: a pasta e a unidade sorteada, o estrato e regiao x situacao das pastas
+  # o municipio: V116 e o codigo da divisao territorial de 1960, com tres excecoes -- a Guanabara vem
+  # codificada por distrito (54xx) e e um municipio so (541); Alagoas vem deslocada em 200; Fernando
+  # de Noronha vem 2701 e e o unico municipio do territorio (2401)
+  municipios <- data.table::fread(municipios_path, encoding = "UTF-8")
+  domicilios[, censobr_muni_1960 := data.table::fifelse(UF == 54L, 541L, data.table::fifelse(UF == 25L, V116 - 200L,
+                                    data.table::fifelse(UF == 24L, 2401L, V116)))]
+  domicilios[, censobr_muni_corrigido := UF %in% c(54L, 25L, 24L)]
+  domicilios[municipios, pop_urbana_muni := i.pop_urbana, on = c(UF = "uf60", censobr_muni_1960 = "cod60")]
+
+  # o desenho da amostra: a pasta e a unidade sorteada; o estrato e a regiao cruzada com um dos quatro
+  # grupos de situacao de 1965 -- cidade de 100 mil ou mais, aglomerado urbano menor, rural, mista
   domicilios[, censobr_upa := paste0(UF, "-", pasta)]
-  pastas <- domicilios[, .(urbanos = sum(V118 %in% c(1, 3)), rurais = sum(V118 %in% 5)), by = censobr_upa]
-  pastas[, tipo := data.table::fifelse(urbanos > 0 & rurais > 0, "mista", data.table::fifelse(rurais == 0, "urbana", "rural"))]
-  domicilios[pastas, censobr_estrato := paste(REGIAO_1960[as.character(UF)], i.tipo, sep = " - "), on = "censobr_upa"]
-  pessoas[domicilios, `:=`(censobr_upa = i.censobr_upa, censobr_estrato = i.censobr_estrato), on = "censobr_idhousehold"]
+  pastas <- domicilios[, .(urbanos = sum(V118 %in% c(1, 3)), rurais = sum(V118 %in% 5),
+                           grande = any(pop_urbana_muni >= 1e5, na.rm = TRUE)), by = censobr_upa]
+  pastas[, grupo := data.table::fifelse(urbanos > 0 & rurais > 0, "mista", data.table::fifelse(urbanos == 0, "rural",
+                    data.table::fifelse(grande, "cidade grande", "urbana menor")))]
+  domicilios[pastas, censobr_estrato := paste(REGIAO_1960[as.character(UF)], i.grupo, sep = " - "), on = "censobr_upa"]
+  pessoas[domicilios, `:=`(censobr_upa = i.censobr_upa, censobr_estrato = i.censobr_estrato,
+                           censobr_muni_1960 = i.censobr_muni_1960, censobr_muni_corrigido = i.censobr_muni_corrigido), on = "censobr_idhousehold"]
+  domicilios[, pop_urbana_muni := NULL]
   message("  desenho: ", data.table::uniqueN(domicilios$censobr_upa), " pastas (",
-          paste(names(table(pastas$tipo)), table(pastas$tipo), collapse = ", "), ") em ",
+          paste(names(table(pastas$grupo)), table(pastas$grupo), collapse = ", "), ") em ",
           data.table::uniqueN(domicilios$censobr_estrato), " estratos; menor estrato com ",
           min(unique(domicilios[, .(censobr_estrato, censobr_upa)])[, .N, by = censobr_estrato]$N), " pastas")
 
-  data.table::setcolorder(pessoas, c("UF", "V116", "V118", "censobr_idhousehold", "censobr_idfamily", "linha", "censobr_weight", "censobr_upa", "censobr_estrato"))
-  data.table::setcolorder(domicilios, c("UF", "V116", "V118", "censobr_idhousehold", "linha", "censobr_weight", "censobr_upa", "censobr_estrato"))
+  data.table::setcolorder(pessoas, c("UF", "V116", "V118", "censobr_idhousehold", "censobr_idfamily", "linha", "censobr_weight", "censobr_upa", "censobr_estrato", "censobr_muni_1960", "censobr_muni_corrigido"))
+  data.table::setcolorder(domicilios, c("UF", "V116", "V118", "censobr_idhousehold", "linha", "censobr_weight", "censobr_upa", "censobr_estrato", "censobr_muni_1960", "censobr_muni_corrigido"))
 
   message("  pessoas: ", nrow(pessoas), " x ", ncol(pessoas), " | domicilios: ", nrow(domicilios), " x ", ncol(domicilios))
   list(pessoas = pessoas, domicilios = domicilios)
@@ -878,14 +896,15 @@ calibrate_1960_amostra_127 <- function(tabelas, gabarito_path){
 # por estado conjugal comparam; nos quadros 6 e 7 os domicílios e residentes
 # publicados são 1,6% a 3,9% menores que os do arquivo, uniformemente por
 # item, o que aponta um universo menor na tabulação de 1965 e não erro de
-# leitura; no quadro 3 a construção civil sai 4,3% abaixo do publicado e as
-# "outras atividades" 5,2%, enquanto os outros sete ramos saem de 0,4% a 1,6%
-# acima. Duas explicações foram testadas e caíram: a fronteira entre ativos e
-# inativos, que no arquivo é limpa (ramo de atividade e atividade não
-# econômica nunca aparecem juntos na mesma pessoa), e a produção de energia e
-# o abastecimento de água, que ao migrarem para a construção afundam ainda
-# mais as "outras atividades". Como as listas de códigos do Boletim são só das
-# respostas mais frequentes, não há como decidir de fora do dado.
+# leitura; no quadro 3 os ramos seguem o Código do Censo de 1960
+# (read_guides/1960_codigo_do_censo.csv, quesito X), e os desempregados e os
+# de ocupação ignorada na última semana (quesito W = 4 e 5) contam em "outras
+# atividades" — com isso sete ramos ficam entre -0,4% e +0,7% e as "outras"
+# em -1,7%; sem isso as "outras" ficam 6% abaixo e os demais ramos todos
+# acima. A construção civil (classe 351) continua 6% abaixo do publicado e
+# não há regra do Código que a complete: energia e água (391, 392), pedras e
+# materiais de construção (252) e conservação de habitações (514) foram
+# testados e desajustam outras linhas mais do que consertam esta.
 # ------------------------------------------------------------------------------
 validate_1965_1960_amostra_127 <- function(tabelas, gabarito_path){
 
@@ -919,10 +938,10 @@ validate_1965_1960_amostra_127 <- function(tabelas, gabarito_path){
 
   # quadros 3 e 4: ramo (V223B) e rendimento (V219), presentes de 10 anos e mais
   q3 <- p[presente == TRUE & idade >= 10]
-  q3[, ramo := data.table::fifelse(is.na(V223B), "condicoes_inativas", data.table::fifelse(V223B < 200, "agricultura_pecuaria_silvicultura",
+  q3[, ramo := data.table::fifelse(is.na(V223B), "condicoes_inativas", data.table::fifelse(V223 %in% 4:5, "outras_atividades", data.table::fifelse(V223B < 200, "agricultura_pecuaria_silvicultura",
               data.table::fifelse(V223B < 300, "industrias_extrativas", data.table::fifelse(V223B <= 339, "industrias_transformacao",
               data.table::fifelse(V223B == 351, "industrias_construcao", data.table::fifelse(V223B %in% 411:429, "comercio_mercadorias",
-              data.table::fifelse(V223B %in% 611:629, "transportes_comunicacoes_armazenagem", data.table::fifelse(V223B %in% 511:519, "prestacao_servicos", "outras_atividades"))))))))]
+              data.table::fifelse(V223B %in% 611:629, "transportes_comunicacoes_armazenagem", data.table::fifelse(V223B %in% 511:519, "prestacao_servicos", "outras_atividades")))))))))]
   q3[, grupo := data.table::fifelse(is.na(V223B), "inativas", data.table::fifelse(V223B < 300, "agro", data.table::fifelse(V223B < 400, "ind", "outras")))]
   q3[, renda := c("10001_20000", "20001_mais", "20001_mais", "sem_rendimento", "sem_declaracao", "ate_2100", "2101_3300", "3301_4500", "4501_6000", "6001_10000")[match(V219, 0:9)]]
   q3[is.na(renda), renda := "sem_declaracao"]

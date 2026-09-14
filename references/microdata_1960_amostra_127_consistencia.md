@@ -198,7 +198,9 @@ domicílios, nunca o inverso; somas 875.853 e 899.861.
 
 - `V217`/`V218` (filhos tidos e vivos): todas as fontes param em 30 (mais 99);
   o xlsx acrescenta 31–98 sem fonte e deixa passar 26 registros com 31 a 97
-  filhos tidos (homem de 62 anos com 97, RS) e 2 com filhos vivos > 30. O
+  filhos tidos (homem de 62 anos com 97, RS) e 2 com filhos vivos > 30
+  (**[revisto]** o Código do Censo, quesitos R e S, manda registrar o número
+  declarado, sem teto; os valores ficam no arquivo preparado, marcados). O
   código 02, ausente da SPSS e do `.doc` e presente no SAS, era indispensável
   (45.323 e 55.686 registros). O 99 é "ignorado" (6.471 e 6.221 pessoas) e
   não está documentado; entra nas médias se não for excluído.
@@ -215,11 +217,14 @@ domicílios, nunca o inverso; somas 875.853 e 899.861.
   (é antes de 1864, como o dicionário final diz). **[revisto]** O Boletim de
   Amostra (quesito Q) e as *Instruções ao Recenseador* (p. 31) resolvem a
   variável: é o ano do casamento ou do início da união com o cônjuge com quem
-  a pessoa vive na data do censo, e 00 é "não vive com cônjuge". Os códigos
-  acima de 60 não são anos do século 19: o 63, com 5.690 pessoas de todas as
-  idades, casadas e viúvas, é ignorado. Daí também a marca de casamento
-  impossível ser, quase sempre, erro na idade e não no ano: 1.315 dos 1.367
-  cônjuges marcados têm o mesmo ano do chefe, porque é o ano do casal.
+  a pessoa vive na data do censo, e 00 é "não vive com cônjuge". **[revisto
+  de novo]** O *Código do Censo Demográfico – 1960* (quesito Q, p. 8) dá a
+  regra completa: 61 = casados em 1900, 62 = casados antes de 1864, 63 =
+  ignorado, e 64 a 99 = 1864 a 1899 — o dicionário final estava certo, salvo
+  o 63, que não é ano (5.690 pessoas de todas as idades, casadas e viúvas).
+  A marca de casamento impossível segue essa regra. Ela é, quase sempre,
+  erro na idade e não no ano: 1.315 dos 1.367 cônjuges marcados têm o mesmo
+  ano do chefe, porque é o ano do casal.
 - `V214` (curso): 71/72 seguem o SAS (71 Estatística, 72 Artes domésticas)
   contra SPSS e `.doc`; o 89 vem de um documento citado na observação e não
   disponível no repositório — 23 registros.

@@ -93,7 +93,10 @@ os erros de amostragem que ele deixou de incluir. Não a localizamos: da Série
 Especial de 1960, a Biblioteca tem apenas os volumes II e IV. Gostaríamos de
 saber se ela chegou a existir, se há no arquivo do Instituto a descrição dos
 estratos e das frações de sorteio dessa subamostra, e se os cartões perfurados
-ou as fitas originais dela foram preservados.
+ou as fitas originais dela foram preservados. Na mesma linha, gostaríamos de
+saber se existe exemplar oficial digitalizado do *Código do Censo Demográfico
+– 1960*, o manual de codificação do Serviço Nacional de Recenseamento: a cópia
+de que dispomos é particular, sem camada de texto e com linhas cortadas.
 
 Colocamo-nos à disposição para qualquer esclarecimento.
 
