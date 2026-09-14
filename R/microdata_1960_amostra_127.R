@@ -410,18 +410,36 @@ parse_1960_amostra_127 <- function(linhas, guia_familias, guia_pessoas){
 # municípios. Sem tratamento, Pernambuco fica com 5% de gente a mais e
 # famílias de 7,9 pessoas em média onde as vizinhas têm 5,0.
 #
-# A solução. Uma linha é considerada cópia quando repete, dentro da mesma
-# família (mesmo id_arquivo), todas as variáveis de uma linha anterior. A
-# cópia é removida em dois casos, que juntos cobrem as cópias de Pernambuco e
-# poupam coincidências legítimas noutros lugares:
+# A prova de que são cópias, e não pessoas. A comparação é dentro do mesmo
+# questionário: a linha repetida tem a mesma chave (UF, município, distrito,
+# pasta, boletim), o mesmo número a posteriori e os mesmos 54 caracteres de
+# dado de outra linha da mesma família; duas famílias parecidas nunca entram
+# na comparação. Dentro de uma família, duas linhas idênticas só podem ser
+# gêmeos de mesmo perfil ou uma cópia, e cinco fatos separam os dois casos:
+# 497 das repetidas são cônjuges; a taxa de linhas idênticas é 0,95 por mil
+# no país e 51 por mil em três municípios de Pernambuco; as repetidas formam
+# um bloco contíguo colado ao fim da família (99% das famílias atingidas),
+# que em 74% delas é exatamente todos os cartões da família menos o do
+# chefe, em ordem embaralhada; as famílias atingidas têm 7,9 pessoas e, sem
+# as repetidas, 4,6, igual às vizinhas; e a tabulação oficial de 1965
+# (Resultados Preliminares, Série Especial, vol. II), feita com estes mesmos
+# cartões antes do dano, só reproduz o Nordeste sem as cópias — o fator de
+# expansão implícito fica em 79,5, como nas outras regiões, e não em 78,4.
 #
-#   - quando a pessoa repetida é chefe ou cônjuge (nenhuma família tem dois
-#     chefes ou dois cônjuges idênticos);
-#   - quando a família tem duas ou mais linhas repetidas (uma cópia em bloco).
+# A solução segue a forma do defeito. Uma linha repetida é removida quando:
 #
-# Uma única linha repetida de filho ou outro parente, numa família sem outra
-# repetição, pode ser gêmeos com o mesmo perfil: fica no banco, marcada em
-# censobr_duplicata_mantida. As linhas removidas ficam registradas em
+#   - é chefe ou cônjuge (nenhuma família tem dois cônjuges idênticos); ou
+#   - a família tem duas ou mais linhas repetidas: é o bloco copiado (dois
+#     pares de gêmeos idênticos numa só família não acontecem); ou
+#   - é uma repetida avulsa na cauda da família, depois de todos os
+#     originais, num dos três municípios danificados (2135, 2113 e 2115),
+#     onde mesmo as repetidas avulsas são quatro vezes mais frequentes que
+#     no resto do país, e 45 das 49 estão na cauda — onde as cópias ficam.
+#
+# Uma linha repetida fora dessas condições — uma só, de filho ou parente,
+# numa família sem outra repetição, fora dos três municípios — é gêmeo ou
+# irmão de mesmo perfil e fica, marcada em censobr_duplicata_mantida. As
+# linhas removidas, com o motivo de cada uma, ficam registradas em
 # data_raw/microdata/1960/amostra_127/duplicatas_removidas.csv.
 # ------------------------------------------------------------------------------
 dedup_1960_amostra_127 <- function(tabelas){
@@ -434,20 +452,28 @@ dedup_1960_amostra_127 <- function(tabelas){
   vars <- setdiff(names(pessoas), c("linha", "id_arquivo", "censobr_diagnostico", "censobr_variaveis_anuladas"))
   pessoas[, conteudo := do.call(paste, c(.SD, sep = "|")), .SDcols = vars]
 
+  # repetida: mesma chave de questionario e mesmos 54 caracteres de dado de uma linha anterior da mesma familia
   pessoas[, repetida := duplicated(conteudo), by = id_arquivo]
-  pessoas[, n_repetidas_familia := sum(repetida), by = id_arquivo]
-  pessoas[, remover := repetida & (V203 %in% c("7", "8") | n_repetidas_familia >= 2)]
 
+  # o bloco copiado foi anexado ao fim da familia: fica depois da ultima linha original
+  pessoas[, na_cauda := repetida & linha > max(linha[!repetida]), by = id_arquivo]
+  pessoas[, n_repetidas := sum(repetida), by = id_arquivo]
+  pessoas[, municipio_danificado := UF %in% "21" & V116 %in% c("2135", "2113", "2115")]
+
+  pessoas[, remover := repetida & (V203 %in% c("7", "8") | n_repetidas >= 2 | (na_cauda & municipio_danificado))]
   pessoas[, censobr_duplicata_mantida := repetida & !remover]
 
-  removidas <- pessoas[remover == TRUE, .(linha, id_arquivo, UF, V116, tipo, V203, AGE, V202)]
+  removidas <- pessoas[remover == TRUE, .(linha, id_arquivo, UF, V116, tipo, V203, AGE, V202, na_cauda, n_repetidas,
+                                          motivo = data.table::fifelse(V203 %in% c("7", "8"), "conjuge_ou_chefe_repetido",
+                                                   data.table::fifelse(n_repetidas >= 2, "bloco_copiado", "avulsa_na_cauda_municipio_danificado")))]
   data.table::fwrite(removidas, "./data_raw/microdata/1960/amostra_127/duplicatas_removidas.csv", bom = TRUE)
 
   message("  linhas repetidas: ", sum(pessoas$repetida), "; removidas: ", nrow(removidas),
-          " (Pernambuco: ", sum(removidas$UF == "21"), "); mantidas com marca: ", sum(pessoas$censobr_duplicata_mantida))
+          " (", paste(names(table(removidas$motivo)), table(removidas$motivo), collapse = ", "),
+          "; Pernambuco: ", sum(removidas$UF %in% "21"), "); mantidas com marca: ", sum(pessoas$censobr_duplicata_mantida))
 
   pessoas <- pessoas[remover == FALSE]
-  pessoas[, c("conteudo", "repetida", "n_repetidas_familia", "remover") := NULL]
+  pessoas[, c("conteudo", "repetida", "na_cauda", "n_repetidas", "municipio_danificado", "remover") := NULL]
 
   list(familias = tabelas$familias, pessoas = pessoas)
 }
@@ -603,6 +629,15 @@ build_families_1960_amostra_127 <- function(tabelas){
 # se a idade está em meses (0), anos (1), acima de 99 anos (5) ou ignorada
 # (9); o número em si, que a sintaxe original chamava AGE, fica em V204B.
 #
+# Imputações determinísticas. Duas, e só porque a dedução não tem
+# alternativa: nacionalidade em branco em 19 registros íntegros de pessoas
+# nascidas em unidades da federação brasileiras (V207 de 01 a 29) vira 9,
+# brasileiro nato, marcada em censobr_v208_imputada; e as 3 pessoas das
+# linhas corrompidas, que perderam UF, município e chave, recebem os da
+# família a que estão presas pela posição no arquivo (censobr_diagnostico
+# já as identifica). Nada mais é preenchido: a página de domicílio das
+# famílias secundárias, por exemplo, fica em branco (ver abaixo).
+#
 # Coerência entre parentes. Três marcas, sem nenhuma correção — são dados
 # originais, e o usuário decide: cônjuge do mesmo sexo do chefe; filho mais
 # velho que o chefe; casamento antes dos 10 anos de idade (inclusive antes
@@ -625,6 +660,14 @@ finalize_1960_amostra_127 <- function(tabelas){
     data.table::set(pessoas, i = which(fora), j = v, value = NA_character_)
   }
   data.table::setnames(pessoas, "AGE", "V204B")
+
+  # imputacoes deterministicas, sempre marcadas: quem nasceu no Brasil (V207 de 01 a 29)
+  # e brasileiro nato (V208 = 9); a linha corrompida esta presa a uma familia e tem a localizacao dela
+  pessoas[, censobr_v208_imputada := is.na(V208) & V207 %in% sprintf("%02d", 1:29) & censobr_diagnostico != "corrompida"]
+  pessoas[censobr_v208_imputada == TRUE, V208 := "9"]
+  corrompidas <- which(pessoas$censobr_diagnostico == "corrompida")
+  local <- familias[pessoas[corrompidas], on = "censobr_idfamily", .(UF, V116, V118, distrito, pasta, boletim, chave)]
+  for(v in names(local)) data.table::set(pessoas, i = corrompidas, j = v, value = local[[v]])
 
   # contagens por domicilio
   pessoas[, `:=`(censobr_n_listadas   = .N,
@@ -675,6 +718,116 @@ finalize_1960_amostra_127 <- function(tabelas){
   data.table::setcolorder(domicilios, c("UF", "V116", "V118", "censobr_idhousehold", "linha", "censobr_weight"))
 
   message("  pessoas: ", nrow(pessoas), " x ", ncol(pessoas), " | domicilios: ", nrow(domicilios), " x ", ncol(domicilios))
+  list(pessoas = pessoas, domicilios = domicilios)
+}
+
+
+# ------------------------------------------------------------------------------
+# Passo 9 — pesos calibrados aos Resultados Preliminares de 1965
+#
+# O gabarito. Em março de 1965 o IBGE publicou, com estes mesmos cartões,
+# antes do dano da fita, os "Resultados Preliminares do Censo Demográfico",
+# Série Especial, vol. II (biblioteca do IBGE, liv84480). O quadro 1 dá a
+# população presente por região (Nordeste, Leste, Sul e o Brasil, de onde
+# sai Norte + Centro-Oeste por diferença), situação (urbana = quadros urbano
+# e suburbano, V118 = 1 ou 3; rural, V118 = 5), sexo e onze faixas de idade.
+# São 176 números, transcritos e conferidos por aritmética em
+# references/censo_1960_resultados_preliminares_1965.csv.
+#
+# O desenho. A amostra é de pastas (lotes de ~250 questionários), uma em
+# vinte, estratificadas por geografia e situação — o arquivo tem as 814
+# pastas sorteadas. O fator de expansão implícito nas tabelas de 1965 é
+# 79 a 80, quase uniforme, com o urbano um pouco acima do rural.
+#
+# A calibração. Cada domicílio recebe um peso único, o mesmo para todas as
+# suas pessoas, tal que as somas ponderadas reproduzem exatamente as 176
+# células do quadro 1. É a calibração de Deville e Särndal com a distância
+# "raking": o peso é o peso de desenho (78,74 = 1/0,0127) vezes um fator
+# exp(x'λ), onde x conta quantas pessoas presentes o domicílio tem em cada
+# célula, e λ é resolvido por Newton. O fator fica perto de 1 quando o
+# arquivo está íntegro e afasta-se onde faltam ou sobram cartões — por isso
+# ele também é um diagnóstico, gravado em censobr_weight_fator.
+#
+# O que não entra. Os quadros 5, 6 e 7 (domicílios e residentes) implicam
+# um fator 1,6% a 3% menor que o das pessoas presentes, diferença ainda
+# sem explicação; servem de validação, não de restrição. Rondônia, Amapá,
+# Acre, Fernando de Noronha e o Distrito Federal têm cobertura parcial e
+# nenhum peso cria o que não foi amostrado: a calibração só reproduz os
+# totais regionais publicados.
+# ------------------------------------------------------------------------------
+calibrate_1960_amostra_127 <- function(tabelas, gabarito_path){
+
+  message("Calibrating household weights to the 1965 preliminary results (quadro 1)")
+
+  pessoas    <- data.table::copy(tabelas$pessoas)
+  domicilios <- data.table::copy(tabelas$domicilios)
+  gab <- data.table::fread(gabarito_path, encoding = "UTF-8")
+
+  # as celulas do quadro 1: regiao x situacao x sexo x faixa de idade
+  regiao_uf <- c("0" = "Norte e Centro-Oeste", "1" = "Norte e Centro-Oeste", "2" = "Norte e Centro-Oeste", "3" = "Norte e Centro-Oeste",
+                 "4" = "Norte e Centro-Oeste", "6" = "Norte e Centro-Oeste", "91" = "Norte e Centro-Oeste", "94" = "Norte e Centro-Oeste", "97" = "Norte e Centro-Oeste",
+                 "10" = "Nordeste", "12" = "Nordeste", "14" = "Nordeste", "17" = "Nordeste", "19" = "Nordeste", "21" = "Nordeste", "24" = "Nordeste", "25" = "Nordeste",
+                 "30" = "Leste", "31" = "Leste", "40" = "Leste", "50" = "Leste", "51" = "Leste", "52" = "Leste", "54" = "Leste",
+                 "60" = "Sul", "71" = "Sul", "74" = "Sul", "81" = "Sul")
+  faixas <- c("0 a 4", "5 a 9", "10 a 14", "15 a 19", "20 a 24", "25 a 29", "30 a 39", "40 a 49", "50 a 59", "60 a 69", "70 e mais e ignorada")
+  pessoas[, regiao   := regiao_uf[as.character(UF)]]
+  pessoas[, situacao := data.table::fifelse(V118 %in% c(1, 3), "urbana", data.table::fifelse(V118 %in% 5, "rural", NA_character_))]
+  pessoas[, sexo     := data.table::fifelse(V202 %in% c(1, 3, 5), "homens", data.table::fifelse(V202 %in% c(2, 4, 6), "mulheres", NA_character_))]
+  pessoas[, idade    := data.table::fifelse(V204 %in% 1, V204B, data.table::fifelse(V204 %in% 0, 0L, 999L))]   # meses -> 0; 100+, ignorada, NA -> ultima faixa
+  pessoas[is.na(idade), idade := 999L]
+  pessoas[, faixa    := faixas[findInterval(idade, c(0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70))]]
+  pessoas[, presente := !(V202 %in% c(3, 4))]
+  pessoas[, celula   := paste(regiao, situacao, sexo, faixa, sep = "|")]
+
+  g1 <- gab[quadro == 1 & regiao != "Brasil" & linha != "TOTAIS" & coluna %in% c("urbana_homens", "urbana_mulheres", "rural_homens", "rural_mulheres")]
+  g1[, celula := paste(regiao, sub("_.*", "", coluna), sub(".*_", "", coluna), linha, sep = "|")]
+  celulas <- g1$celula; totais <- g1$valor
+
+  # X: uma linha por domicilio, uma coluna por celula, com o numero de pessoas presentes
+  cont <- pessoas[presente == TRUE & !is.na(situacao) & !is.na(sexo), .N, by = .(censobr_idhousehold, celula)]
+  hh <- sort(unique(domicilios$censobr_idhousehold))
+  X <- Matrix::sparseMatrix(i = match(cont$censobr_idhousehold, hh), j = match(cont$celula, celulas), x = cont$N,
+                            dims = c(length(hh), length(celulas)))
+  amostra <- as.numeric(Matrix::colSums(X))
+  message("  celulas: ", length(celulas), "; sem pessoa na amostra: ", sum(amostra == 0),
+          "; fator implicito (publicado / amostra x 78,74): min ", round(min(totais / amostra / 78.74), 3), " max ", round(max(totais / amostra / 78.74), 3))
+
+  # raking de Deville-Sarndal: g = exp(X lambda), resolvido por Newton
+  d <- rep(1 / 0.0127, length(hh)); lambda <- rep(0, length(celulas))
+  for(it in 1:100){
+    w <- d * as.numeric(exp(X %*% lambda))
+    F <- as.numeric(Matrix::crossprod(X, w)) - totais
+    if(max(abs(F) / totais) < 1e-10) break
+    J <- as.matrix(Matrix::crossprod(X, Matrix::Diagonal(x = w) %*% X))
+    lambda <- lambda - solve(J, F)
+  }
+  message("  Newton: ", it, " iteracoes; desvio maximo ", signif(max(abs(F) / totais), 3),
+          "; fator g: min ", round(min(w / d), 3), " mediana ", round(median(w / d), 3), " max ", round(max(w / d), 3))
+
+  pesos <- data.table::data.table(censobr_idhousehold = hh, censobr_weight = w, censobr_weight_fator = w / d)
+  domicilios[pesos, `:=`(censobr_weight = i.censobr_weight, censobr_weight_fator = i.censobr_weight_fator), on = "censobr_idhousehold"]
+  pessoas[pesos,    `:=`(censobr_weight = i.censobr_weight, censobr_weight_fator = i.censobr_weight_fator), on = "censobr_idhousehold"]
+  domicilios[, censobr_weight_desenho := 1 / 0.0127]
+  pessoas[,    censobr_weight_desenho := 1 / 0.0127]
+
+  # reproducao do quadro 6 (validacao, nao restricao): domicilios particulares ocupados e residentes
+  domicilios[, regiao := regiao_uf[as.character(UF)]]
+  domicilios[, situacao := data.table::fifelse(V118 %in% c(1, 3), "urbana", data.table::fifelse(V118 %in% 5, "rural", NA_character_))]
+  res <- pessoas[!(V202 %in% c(5, 6)), .(residentes = sum(censobr_weight)), by = .(regiao, situacao, censobr_idhousehold)]
+  res <- res[domicilios[!(V101 %in% 3), .(censobr_idhousehold)], on = "censobr_idhousehold"][, .(residentes = sum(residentes, na.rm = TRUE)), by = .(regiao, situacao)]
+  dom <- domicilios[!(V101 %in% 3), .(domicilios = sum(censobr_weight)), by = .(regiao, situacao)]
+  q6 <- gab[quadro == 6 & regiao != "Brasil" & linha == "TOTAIS" & coluna %in% c("dom_urbana", "dom_rural", "pes_urbana", "pes_rural")]
+  q6[, `:=`(situacao = sub(".*_", "", coluna), medida = data.table::fifelse(grepl("^dom", coluna), "domicilios", "residentes"))]
+  comp <- merge(q6[, .(regiao, situacao, medida, publicado = valor)],
+                rbind(dom[, .(regiao, situacao, medida = "domicilios", calibrado = domicilios)], res[, .(regiao, situacao, medida = "residentes", calibrado = residentes)]),
+                by = c("regiao", "situacao", "medida"))
+  comp[, dif_pct := round(100 * (calibrado / publicado - 1), 2)]
+  data.table::fwrite(comp[order(medida, regiao, situacao)], "./data_raw/microdata/1960/amostra_127/calibracao_1965_quadro6.csv", bom = TRUE)
+  message("  quadro 6 (validacao): diferenca relativa dos domicilios ", paste(range(comp[medida == "domicilios", dif_pct]), collapse = " a "),
+          "%; dos residentes ", paste(range(comp[medida == "residentes", dif_pct]), collapse = " a "), "%")
+
+  pessoas[, c("regiao", "situacao", "sexo", "idade", "faixa", "presente", "celula") := NULL]
+  domicilios[, c("regiao", "situacao") := NULL]
   list(pessoas = pessoas, domicilios = domicilios)
 }
 

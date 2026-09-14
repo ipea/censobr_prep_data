@@ -188,8 +188,19 @@ list(
              command = finalize_1960_amostra_127(familias_1960_amostra_127)
              ),
 
+  # quadros 1 e 6 dos Resultados Preliminares de 1965, transcritos e conferidos
+  tar_target(name = gabarito_1960_1965,
+             command = "./references/censo_1960_resultados_preliminares_1965.csv",
+             format = "file"
+             ),
+
+  # pesos de domicilio calibrados ao quadro 1 de 1965
+  tar_target(name = tabelas_calibradas_1960_amostra_127,
+             command = calibrate_1960_amostra_127(tabelas_1960_amostra_127, gabarito_1960_1965)
+             ),
+
   tar_target(name = output_1960_amostra_127,
-             command = save_1960_amostra_127(tabelas_1960_amostra_127),
+             command = save_1960_amostra_127(tabelas_calibradas_1960_amostra_127),
              format = "file"
              ),
 
