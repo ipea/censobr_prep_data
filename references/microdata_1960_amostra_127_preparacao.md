@@ -310,13 +310,13 @@ Registros de família nas linhas 5648 (V101 = 2) e 5651 (V101 = 4):
 - **Desenho.** `censobr_upa` é a pasta e `censobr_estrato` é a região cruzada com o grupo de situação da pasta — cidade grande, urbana menor, mista, rural — que são os quatro grupos do desenho de 1965 (seção 8).
 - **Tipos.** UF, o número a posteriori e todas as V viram inteiros.
 
-### Passo 9 — pesos calibrados a 1965
+### Passo 9 — dois pesos calibrados
 
-Ver a seção 7. Cada domicílio recebe um peso único, o mesmo para todas as suas pessoas, tal que as somas reproduzem as 176 células do quadro 1 (região, situação, sexo, idade) e as 8 do quadro 2 que contam quem sabe ler e escrever, por sexo e região. O peso de desenho (78,74) fica em `censobr_weight_desenho` e o fator de calibração em `censobr_weight_fator`.
+Ver a seção 7. Cada domicílio recebe pesos únicos, os mesmos para todas as suas pessoas. `censobr_weight`, o peso final, é calibrado aos resultados definitivos por unidade da federação (Série Nacional, vol. I: sexo × idade, população urbana e alfabetização; 543 células, sem o Distrito Federal); `censobr_weight_1965` é calibrado às 176 células do quadro 1 de 1965 (região, situação, sexo, idade) e às 8 do quadro 2 que contam quem sabe ler e escrever, por sexo e região. O peso de desenho (78,74) fica em `censobr_weight_desenho` e os fatores de calibração em `censobr_weight_fator` e `censobr_weight_1965_fator`. O guia do desenho amostral, seção 10, explica os dois.
 
-### Passo 10 — reprodução dos sete quadros
+### Passo 10 — reprodução dos sete quadros de 1965 e das tabelas definitivas
 
-Com os pesos calibrados, cada célula dos quadros 2 a 7 é recomposta a partir das variáveis do arquivo e comparada com o valor publicado (`calibracao_1965_validacao.csv`). Ver a seção 7.
+Com cada um dos dois pesos, cada célula dos quadros 1 a 7 de 1965 é recomposta a partir das variáveis do arquivo e comparada com o valor publicado (`calibracao_1965_validacao.csv`, coluna `peso`); o mesmo para as tabelas por unidade da federação dos resultados definitivos (`calibracao_definitivos_validacao.csv`). Ver a seção 7.
 
 ### Passo 11 — erros amostrais
 
@@ -346,7 +346,9 @@ As colunas do IBGE (UF, V116, V118, V101–V113, V202–V224) ficam com os nomes
 | `censobr_v208_imputada`, `censobr_v217_fora_da_faixa`, `censobr_v218_fora_da_faixa`, `censobr_flag_*` | imputação, filhos acima de 30 e marcas de coerência do passo 8 |
 | `code_muni`, `code_muni_1960`, `censobr_muni_corrigido` | o município no código atual (sete dígitos, pelo crosswalk 1960 → 2010) e no código da divisão territorial de 1960 (`read_guides/1960_municipios.csv`), e a marca das três UFs em que este difere de V116 (passo 8) |
 | `code_district_1960`, `name_district_1960`, `name_bairro_1960`, `censobr_favela` | o distrito (na Guanabara, a circunscrição ou a favela) e o seu nome pelo Código de Municípios e Distritos de 1960; o bairro e a marca de favela só no Rio (passo 8) |
-| `censobr_weight`, `censobr_weight_fator`, `censobr_weight_desenho` | peso calibrado, fator de calibração e peso de desenho (passo 9) |
+| `censobr_weight`, `censobr_weight_fator` | peso final, calibrado aos resultados definitivos por UF, e o seu fator em relação ao peso de desenho (passo 9) |
+| `censobr_weight_1965`, `censobr_weight_1965_fator` | peso calibrado aos quadros 1 e 2 dos Resultados Preliminares de 1965, e o seu fator (passo 9) |
+| `censobr_weight_desenho` | o peso de desenho nominal, 78,74 (passo 9) |
 | `censobr_upa`, `censobr_estrato` | a pasta sorteada e o estrato a que ela pertence, para calcular erro amostral (passo 8) |
 
 ## 7. O desenho da amostra e o gabarito de 1965
@@ -361,11 +363,13 @@ As colunas do IBGE (UF, V116, V118, V101–V113, V202–V224) ficam com os nomes
 
 **A transcrição.** Os sete quadros — 1 população presente por região, situação, sexo e idade; 2 alfabetização por sexo e idade; 3 ramo de atividade por sexo; 4 rendimento por grupo de atividade e sexo; 5 estado conjugal por grupo de atividade e sexo; 6 condição de ocupação e aluguel dos domicílios; 7 instalações dos domicílios — foram lidos por OCR (Tesseract a 300 dpi e a camada de texto do PDF), transcritos e conferidos por aritmética: em cada linha, total = homens + mulheres = urbana + rural, ou total = soma das colunas; em cada coluna, a soma das faixas = totais; casados = soma das quatro formas de união; alugados = soma das faixas de aluguel. São 2.775 células, todas preenchidas; as ilegíveis ou incoerentes foram resolvidas pelas restrições ou lidas na imagem, e estão marcadas na coluna `nota` do CSV. Sobra uma inconsistência de 2 pessoas na linha "casados" do quadro 5 do Brasil, que é da impressão original. Norte e Centro-Oeste não têm quadros próprios: saem do Brasil menos as três regiões.
 
-**A calibração** (passo 9). Cada domicílio recebe um peso único, calibrado pelo método de Deville e Särndal com distância "raking": peso de desenho vezes exp(x'λ), onde x conta quantas pessoas o domicílio tem em cada célula de restrição e λ é resolvido por Newton em poucas iterações. As restrições são as 176 células do quadro 1 (4 regiões × 2 situações × 2 sexos × 11 faixas de idade, pessoas presentes) e as 8 do quadro 2 que contam quem sabe ler e escrever, por sexo e região, entre os presentes de 5 anos e mais — só "sabem", porque "não sabem" já fica determinado pelo quadro 1. Todas são reproduzidas exatamente. O fator de calibração (`censobr_weight_fator`) fica entre 0,49 e 4,88, com mediana 1,001; por UF a mediana vai de 0,967 (Roraima) a 1,065 (Distrito Federal), e nas UFs do Nordeste, Leste e Sul fica entre 0,995 e 1,011. O fator é também um diagnóstico: afasta-se de 1 onde faltam ou sobram cartões.
+**A calibração a 1965** (passo 9, `censobr_weight_1965`). Cada domicílio recebe um peso único, calibrado pelo método de Deville e Särndal com distância "raking": peso de desenho vezes exp(x'λ), onde x conta quantas pessoas o domicílio tem em cada célula de restrição e λ é resolvido por Newton em poucas iterações. As restrições são as 176 células do quadro 1 (4 regiões × 2 situações × 2 sexos × 11 faixas de idade, pessoas presentes) e as 8 do quadro 2 que contam quem sabe ler e escrever, por sexo e região, entre os presentes de 5 anos e mais — só "sabem", porque "não sabem" já fica determinado pelo quadro 1. Todas são reproduzidas exatamente. O fator de calibração (`censobr_weight_fator`) fica entre 0,49 e 4,88, com mediana 1,001; por UF a mediana vai de 0,967 (Roraima) a 1,065 (Distrito Federal), e nas UFs do Nordeste, Leste e Sul fica entre 0,995 e 1,011. O fator é também um diagnóstico: afasta-se de 1 onde faltam ou sobram cartões.
 
 Duas restrições foram testadas e rejeitadas. O estado conjugal por sexo (quadro 5: solteiros, casados, separados, viúvos) leva o fator a variar de 0,05 a 18, porque força os domicílios que perderam o cartão do chefe, e têm cônjuge sem par, a compensar com peso o que falta no arquivo; só "casados" por sexo ainda dá 0,10 a 8,8. Os totais de domicílios e residentes (quadros 6 e 7) são inconsistentes com o quadro 1 em 1,6% a 3,9% (abaixo) e não podem ser impostos junto com ele. Ficam como validação.
 
-**A validação pelos sete quadros** (passo 10). Com os pesos calibrados, cada célula publicada é recomposta a partir do arquivo, lendo os códigos pelo Código do Censo (`read_guides/1960_codigo_do_censo.csv`). A diferença relativa, em módulo, por quadro:
+**A calibração aos resultados definitivos** (passo 9, `censobr_weight`, o peso final). O volume nacional dos resultados definitivos (Série Nacional, vol. I, transcrito em `references/censo_1960_resultados_definitivos_serie_nacional.csv` por `references/transcricao_1960_serie_nacional.py`) traz, por unidade da federação, a população presente por sexo e grupos de idade (tab. 33), por situação (tab. 34) e a alfabetização de 5 anos e mais (tab. 40). O peso final é calibrado a 543 células: sexo × onze faixas de idade em cada unidade da federação com oito pastas ou mais, só o total por sexo nas seis pequenas, a população urbana nas 21 grandes e quem sabe ler por sexo. O Distrito Federal fica fora, no peso de desenho; a cor e os domicílios ficam como validação; os fatores são mantidos entre 0,3 e 3,5 pela distância logit; o peso de desenho de Fernando de Noronha é 4, porque a sua única pasta era o cadastro inteiro. O fator tem percentis 1 e 99 em 0,68 e 1,38, mediana entre 0,86 e 1,10 nas unidades com oito pastas ou mais, e 0,51 a 0,72 nas pequenas. O guia do desenho amostral (seção 10) explica cada escolha e o que foi testado e rejeitado.
+
+**A validação pelos sete quadros** (passo 10). Com cada um dos dois pesos, cada célula publicada é recomposta a partir do arquivo, lendo os códigos pelo Código do Censo (`read_guides/1960_codigo_do_censo.csv`). A diferença relativa, em módulo, por quadro:
 
 | quadro | células | mediana | percentil 90 | máxima |
 |---|---|---|---|---|
@@ -404,7 +408,7 @@ Com isso, o passo 11 calcula o erro-padrão de cada estimativa somando, dentro d
 
 Nas 176 células do quadro 1 (região × situação × sexo × faixa de idade), o coeficiente de variação tem mediana de 3,5% e máximo de 11,6%, este nas células pequenas do Norte e Centro-Oeste. O efeito de desenho — quantas vezes a amostra é menos precisa que um sorteio pessoa a pessoa do mesmo tamanho — tem mediana 6,0 nessas células, e chega a 260 quando o domínio é definido por região e situação, porque a pasta é quase toda urbana ou quase toda rural e as pastas são justamente o que se sorteia. Dito de outro modo: para estimar quanta gente morava na zona urbana do Nordeste, esta amostra vale 817 sorteios, não 885 mil.
 
-Não há total do país na tabela com erro-padrão, e não é esquecimento: a soma dos pesos foi calibrada aos totais de 1965, então o país é reproduzido por construção, sem erro. O mesmo vale para as 184 células que entraram como restrição da calibração; os erros-padrão delas são os de antes da calibração, e portanto conservadores.
+Não há total do país na tabela com erro-padrão: com `censobr_weight` ele é a soma das células restritas mais o Distrito Federal, e com `censobr_weight_1965` foi calibrado diretamente. Para as células que entraram como restrição, os erros-padrão são os do estimador de conglomerado último, que ignora a calibração; com o peso final eles são conservadores, porque os totais são externos. A tabela traz os dois pesos, coluna `peso`.
 
 Tudo em `data_raw/microdata/1960/amostra_127/erros_amostrais.csv`, uma linha por domínio, com estimativa, erro-padrão, coeficiente de variação, efeito de desenho e número de pessoas.
 
@@ -452,7 +456,7 @@ Todas apresentadas ao usuário com a evidência e decididas em 2026-09-14:
 - **Cópias de Pernambuco:** remover pelo mecanismo (bloco copiado, cônjuge repetido, avulsa na cauda nos três municípios), marcar o resto.
 - **Famílias sem registro:** famílias e domicílios próprios, marcadas; a hipótese de anexar cônjuges sozinhos foi testada e descartada; a amostra de 25% pode confirmar pelas mesmas chaves de questionário.
 - **Imputações determinísticas:** nacionalidade e localização das linhas corrompidas, marcadas.
-- **Pesos:** calibrados aos quadros 1 e 2 de 1965, e não apenas o peso de desenho; as margens de estado conjugal e de domicílios foram testadas e rejeitadas (seção 7).
+- **Pesos:** o final calibrado aos resultados definitivos por UF (Série Nacional, vol. I), com o Distrito Federal no peso de desenho, cor e domicílios como validação e fatores entre 0,3 e 3,5; o de 1965 calibrado aos quadros 1 e 2, ao lado. As margens de estado conjugal, de domicílios, de cor e de idade nas UFs pequenas foram testadas e rejeitadas (seção 7 e guia do desenho, seção 10).
 - **Estratos:** os quatro grupos de situação de 1965, com a cidade grande definida pela população urbana municipal do Anuário de 1961 (100 mil ou mais, 34 municípios); o critério pela população total (64) foi calculado como sensibilidade (seção 8).
 - **Ramos do quadro 3:** os 18 ramos do Código do Censo agrupados nas nove linhas de 1965, com desempregados e ignorados em "outras atividades" — a hipótese que reproduz 1965, documentada como hipótese (seção 7).
 - **Filhos tidos e vivos acima de 30:** mantidos e marcados, porque o Código do Censo manda registrar o número declarado; a versão anterior deste estágio os anulava seguindo o dicionário de 2018.

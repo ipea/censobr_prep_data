@@ -132,13 +132,12 @@ gabarito_1960_1965|stem|d296011fa9177ae9|7b94edf5d613bfc0|2c530c1562a7fbd1|-7969
 distritos_1960|stem|de735f60b202224f|4e52817fbdb1c31b|2c530c1562a7fbd1|221800160|./read_guides/1960_distritos.csv|t20711.0795784308s|s1069803b|1069803|file|local|vector|||1.36|pacote 'DBI' foi compilado no R versão 4.5.3. pacote 'rvest' foi compilado no R versão 4.5.2. pacote 'openxlsx' foi compilado no R versão 4.5.3. pacote 'piggyback' foi compilado no R versão 4.5.3. pacote 'purrr' foi compilado no R versão 4.5.3. pacote 'curl' foi compilado no R versão 4.5.3. pacote 'readr' foi compilado no R versão 4.5.3. pacote 'stringr' foi compilado no R versão 4.5.2. pacote 'tarchetypes' foi compilado no R versão 4.5.3. pacote 'tibble' foi compilado no R versão 4.5.2. pacote 'tidyverse' foi compilado no R versão 4.5.3. pacote 'ggplot2' foi compilado no R versão 4.5.3. pacote 'tidyr' foi compilado no R versão 4.5.3. pacote 'forcats' foi compilado no R versão 4.5.3. pacote 'lubridate' foi compilado no R versão 4.5.2. pacote 'varhandle' foi compilado no R versão 4.5.2|
 municipios_1960|stem|c89cfe2bcb2e047e|af23de0c3a21bb13|2c530c1562a7fbd1|1351895092|./read_guides/1960_municipios.csv|t20711.0665326117s|s214275b|214275|file|local|vector|||0||
 tabelas_1960_amostra_127|stem|999d88e7b6b92607|9eaa9c7f07438f09|30b7049b954d3181|1800949839||t20711.4125915399s|s21440049b|21440049|rds|local|vector|||16.516|NAs introduzidos por coerção. NAs introduzidos por coerção|
-tabelas_calibradas_1960_amostra_127|stem|d8dac6daed52c912|d23648f7203223d2|8d0c669f18564317|-1773709599||t20711.4127828229s|s26046930b|26046930|rds|local|vector|||2.579||
-output_1960_amostra_127|stem|357670ddbf2a5958|cd89a4a1fdfc672a|12773736e6a5e05e|-1648890890|./data_raw/microdata/1960/amostra_127/pessoas_1960_amostra_127.parquet*./data_raw/microdata/1960/amostra_127/domicilios_1960_amostra_127.parquet|t20711.4136360832s|s43805719b|43805719|file|local|vector|||65.078||
-validacao_1965_1960_amostra_127|stem|aa55b4eaa34517ef|30792589d3af510a|182da6c9c4f532ea|-1972281259||t20711.4137364153s|s18276b|18276|rds|local|vector|||5.25||
+gabarito_1960_definitivos|stem|e76d0e63e670d811|2d6a3b1cec581bf3|2c530c1562a7fbd1|-757838787|./references/censo_1960_resultados_definitivos_serie_nacional.csv|t20711.569526441s|s161094b|161094|file|local|vector|||2.469|pacote 'DBI' foi compilado no R versão 4.5.3. pacote 'rvest' foi compilado no R versão 4.5.2. pacote 'openxlsx' foi compilado no R versão 4.5.3. pacote 'piggyback' foi compilado no R versão 4.5.3. pacote 'purrr' foi compilado no R versão 4.5.3. pacote 'curl' foi compilado no R versão 4.5.3. pacote 'readr' foi compilado no R versão 4.5.3. pacote 'stringr' foi compilado no R versão 4.5.2. pacote 'tarchetypes' foi compilado no R versão 4.5.3. pacote 'tibble' foi compilado no R versão 4.5.2. pacote 'tidyverse' foi compilado no R versão 4.5.3. pacote 'ggplot2' foi compilado no R versão 4.5.3. pacote 'tidyr' foi compilado no R versão 4.5.3. pacote 'forcats' foi compilado no R versão 4.5.3. pacote 'lubridate' foi compilado no R versão 4.5.2. pacote 'varhandle' foi compilado no R versão 4.5.2|
 cast_censobr_types|function|c16601eefad642bd
 write_censobr_parquet|function|886d5a747ef7bb30
 dicionario_state|object|915dd176aa24979d
 detect_csv_encoding|function|f72550b4e2756daa
+validate_definitivos_1960_amostra_127|function|d446fdbe76f80aea
 REGIAO_1960|object|785f3eeadfe8d308
 states_censobr|function|12be39b13c66ef36
 apply_corrections_1960_amostra_127|function|8eb4dd155ed6b50d
@@ -158,6 +157,7 @@ detect_2010_table_name|function|e48f91bbc36ef728
 recode_datasets_2000|function|50d8129d5cb9cdbf
 dicionario_municipality|object|8dbebb44c4ecc07c
 release_legacy_url|object|936270cb2bb28cb1
+raking_1960_amostra_127|function|e40c05859c1e9767
 rename_files_toupper_lower_ext|function|52ec279aa40c70f9
 GEO_COLS_CENSOBR|object|1718f133d023ac48
 recode_datasets_2022|function|6c79d186791eeff9
@@ -178,9 +178,8 @@ save_microdata_2022|function|9892e57edc3f61c4
 save_tracts_2022_prelim|function|4a34b8ed6c92bcd2
 save_1960_amostra_127|function|88259f8550666ef4
 derive_households_1970|function|5424809ee075757a
-sampling_errors_1960_amostra_127|function|4c053eea9f797cf8
-validate_1965_1960_amostra_127|function|0163fbeda289a266
-calibrate_1960_amostra_127|function|0fb78cc97f17e275
+sampling_errors_1960_amostra_127|function|756107ccad9a74cd
+validate_1965_1960_amostra_127|function|269f4afccc5f4604
 finalize_1960_amostra_127|function|ff411b58806c07a7
 clean_microdata_2000|function|52dcda7a09234f1f
 clean_microdata_2010|function|a9ba352ff16a2b43
@@ -198,6 +197,7 @@ clean_microdata_1960|function|8bb6f46597c92701
 pick_latest_per_uf|function|95da64d545f4ca88
 clean_tracts_2010|function|b4c88ebe5f0bb3ed
 get_release_legacy|function|8824c99a1a4688f2
+calibrate_1960_amostra_127|function|cc3a399eb420dc82
 relocate_geo_cols_censobr|function|094c1adcd4a1d0fc
 recode_basico_2022|function|54b121b6066265d7
 make_theme_dataset_2022|function|878e519203448fde
@@ -221,4 +221,8 @@ clean_tracts_2022_prelim|function|f2a59b38d68ba929
 save_tracts_2022|function|572fd681a24160f8
 clean_tracts_2022|function|4de388b5f28b06ad
 clean_tracts_2000|function|d564b1efb91a37f4
-erros_1960_amostra_127|stem|88b90d54dc1f8f8e|e6d11ede58603a1b|758d3660ec088917|-892816702||t20711.431197109s|s3880b|3880|rds|local|vector|||1.016||
+tabelas_calibradas_1960_amostra_127|stem|1926a0dae8226da9|6c1f09b2dfdf4eaa|292cf91876835e64|-1773709599||t20711.5890749672s|s31195639b|31195639|rds|local|vector|||3.5||
+output_1960_amostra_127|stem|46cf42481ebfd6c4|cd89a4a1fdfc672a|48bd34bd8434d7fa|-1648890890|./data_raw/microdata/1960/amostra_127/pessoas_1960_amostra_127.parquet*./data_raw/microdata/1960/amostra_127/domicilios_1960_amostra_127.parquet|t20711.5898951674s|s52899630b|52899630|file|local|vector|||69.062||
+erros_1960_amostra_127|stem|b87c1e768c547215|e6d11ede58603a1b|ecc5c02655dc8104|-892816702||t20711.589963255s|s6418b|6418|rds|local|vector|||2.39||
+validacao_definitivos_1960_amostra_127|stem|33897fbc80cfe15e|42760de194eaf36b|13eede0fcfd7fac0|-1648733318||t20711.5900315624s|s31534b|31534|rds|local|vector|||2.578||
+validacao_1965_1960_amostra_127|stem|d3f065905c506748|30792589d3af510a|be50602b4ea8b3eb|-1972281259||t20711.5901745999s|s31851b|31851|rds|local|vector|||8.953||

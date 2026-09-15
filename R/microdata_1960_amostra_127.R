@@ -811,53 +811,115 @@ finalize_1960_amostra_127 <- function(tabelas, municipios_path, distritos_path){
 
 
 # ------------------------------------------------------------------------------
-# Passo 9 — pesos calibrados aos Resultados Preliminares de 1965
+# Passo 9 — dois pesos calibrados: aos resultados definitivos e aos preliminares de 1965
 #
-# O gabarito. Em março de 1965 o IBGE publicou, com estes mesmos cartões,
+# Os gabaritos. Em março de 1965 o IBGE publicou, com estes mesmos cartões,
 # antes do dano da fita, os "Resultados Preliminares do Censo Demográfico",
 # Série Especial, vol. II (biblioteca do IBGE, liv84480). O quadro 1 dá a
 # população presente por região (Nordeste, Leste, Sul e o Brasil, de onde
 # sai Norte + Centro-Oeste por diferença), situação (urbana = quadros urbano
 # e suburbano, V118 = 1 ou 3; rural, V118 = 5), sexo e onze faixas de idade.
 # São 176 números, transcritos e conferidos por aritmética em
-# references/censo_1960_resultados_preliminares_1965.csv.
+# references/censo_1960_resultados_preliminares_1965.csv. Esses totais foram
+# estimados com esta mesma amostra: calibrar a eles repara o dano do arquivo
+# e devolve os pesos que o IBGE usou, mas não traz informação de fora.
+#
+# O volume nacional dos resultados definitivos (Série Nacional, vol. I, anos
+# 1970) traz, por unidade da federação, a população presente por sexo e
+# grupos de idade (tab. 33), por situação (tab. 34), por cor (tab. 37) e a
+# alfabetização de 5 anos e mais (tab. 40), transcritas em
+# references/censo_1960_resultados_definitivos_serie_nacional.csv. Para onze
+# unidades da federação são contagens completas; para as dezessete restantes,
+# apuradas só pelo Boletim de Amostra, são estimativas da amostra de 25%,
+# vinte vezes mais precisas que esta subamostra. Calibrar a elas ancora a
+# amostra no que o censo contou, por unidade da federação e não só por
+# região, e torna real a redução de variância.
 #
 # O desenho. A amostra é de pastas (lotes de ~250 questionários), uma em
-# vinte, estratificadas por geografia e situação — o arquivo tem as 814
-# pastas sorteadas. O fator de expansão implícito nas tabelas de 1965 é
-# 79 a 80, quase uniforme, com o urbano um pouco acima do rural.
+# vinte, estratificadas por unidade da federação e situação — o arquivo tem
+# as 814 pastas sorteadas. O fator de expansão implícito é 79 a 80 nas
+# unidades grandes; em Fernando de Noronha é 0,06, porque a sua única pasta
+# era o cadastro inteiro, e no Distrito Federal é 2,5 a 4, porque o arquivo
+# perdeu 80% dos seus boletins.
 #
 # A calibração. Cada domicílio recebe um peso único, o mesmo para todas as
-# suas pessoas, tal que as somas ponderadas reproduzem exatamente as 176
-# células do quadro 1 e as 8 do quadro 2 que contam quem sabe ler e
-# escrever, por sexo e região. É a calibração de Deville e Särndal com a distância
-# "raking": o peso é o peso de desenho (78,74 = 1/0,0127) vezes um fator
-# exp(x'λ), onde x conta quantas pessoas presentes o domicílio tem em cada
-# célula, e λ é resolvido por Newton. O fator fica perto de 1 quando o
-# arquivo está íntegro e afasta-se onde faltam ou sobram cartões — por isso
-# ele também é um diagnóstico, gravado em censobr_weight_fator.
+# suas pessoas, tal que as somas ponderadas reproduzem exatamente as células
+# do gabarito. É a calibração de Deville e Särndal com a distância "raking":
+# o peso é o peso de desenho (78,74 = 1/0,0127) vezes um fator exp(x'λ), onde
+# x conta quantas pessoas presentes o domicílio tem em cada célula, e λ é
+# resolvido por Newton. O fator fica perto de 1 quando o arquivo está íntegro
+# e afasta-se onde faltam ou sobram cartões — por isso ele também é um
+# diagnóstico, gravado nas colunas *_fator.
 #
-# A reprodução dos sete quadros, inclusive o 6, é o passo 10.
+# censobr_weight, o peso final, é calibrado aos definitivos, em cinco blocos
+# de células, todos de pessoas presentes e nenhum com o Distrito Federal, que
+# fica no peso de desenho por decisão (nenhum peso cria o que o arquivo
+# perdeu), com a distância logit, que mantém cada fator entre 0,3 e 3,5, e com
+# o peso de desenho de Fernando de Noronha corrigido para 4, porque a sua única
+# pasta era o cadastro inteiro: (a) sexo × onze faixas de idade por unidade da federação com oito
+# pastas ou mais; (b) só o total por sexo nas seis pequenas (RO, AC, RR, AP,
+# Fernando de Noronha, Serra dos Aimorés); (c) população urbana, nas
+# unidades com oito pastas ou mais; (d) quem sabe ler e escrever, de 5 anos
+# e mais, por sexo, por unidade da federação com oito pastas ou mais, pelas
+# quatro pequenas do Norte e Centro-Oeste juntas, e por Noronha e Aimorés.
+# Juntar as quatro pequenas do Norte e Centro-Oeste em faixas de idade foi
+# testado e rejeitado (fatores até 7 em Rondônia). A cor foi
+# testada e rejeitada como restrição: no arquivo, quem ficou sem código de
+# cor (dano, cinco vezes mais que o "sem declaração" publicado) faz falta aos
+# pretos e pardos, e a calibração compensava inflando as famílias grandes com
+# código válido, até fatores de 6.
+#
+# censobr_weight_1965 é o peso calibrado às 184 células de 1965 (quadro 1 e
+# os que sabem ler do quadro 2, por sexo e região); serve para reproduzir a
+# publicação de 1965 e para medir, contra o peso final, quanto os
+# preliminares se afastam dos definitivos.
 #
 # O que não entra. O estado conjugal por sexo (quadro 5) foi testado e
 # rejeitado: leva o fator de alguns domicílios a 18 vezes o de desenho,
 # porque força os que perderam o cartão do chefe a compensar com peso o que
-# falta no arquivo. Os quadros 6 e 7 (domicílios e residentes) implicam um
-# fator 1,6% a 3,9% menor que o das pessoas presentes, diferença ainda sem
-# explicação. Todos servem de validação (passo 10), não de restrição. Rondônia, Amapá,
-# Acre, Fernando de Noronha e o Distrito Federal têm cobertura parcial e
-# nenhum peso cria o que não foi amostrado: a calibração só reproduz os
-# totais regionais publicados.
+# falta no arquivo. Os domicílios (quadros 6 e 7 de 1965, tab. 7 dos
+# definitivos) servem de validação, não de restrição. Rondônia, Amapá, Acre,
+# Fernando de Noronha e o Distrito Federal têm cobertura parcial e nenhum
+# peso cria o que não foi amostrado.
 # ------------------------------------------------------------------------------
-calibrate_1960_amostra_127 <- function(tabelas, gabarito_path){
+raking_1960_amostra_127 <- function(X, totais, d, limites = NULL){
 
-  message("Calibrating household weights to the 1965 preliminary results (quadro 1)")
+  # calibracao de Deville-Sarndal resolvida por Newton: g = exp(X lambda) (raking) ou, com limites (L, U), a
+  # distancia logit, que mantem cada fator entre L e U -- o raking puro faz o fator crescer com o tamanho do
+  # domicilio (exp da soma dos lambdas das pessoas), e nas UFs de uma pasta chegava a 9
+  if(is.null(limites)){ g <- function(u) exp(u); dg <- function(u) exp(u) }
+  else {
+    L <- limites[1]; U <- limites[2]; A <- (U - L) / ((1 - L) * (U - 1))
+    g  <- function(u){ e <- exp(A * u); (L * (U - 1) + U * (1 - L) * e) / ((U - 1) + (1 - L) * e) }
+    dg <- function(u){ e <- exp(A * u); A * e * (1 - L) * (U - 1) * (U - L) / ((U - 1) + (1 - L) * e)^2 }
+  }
+  lambda <- rep(0, ncol(X))
+  u <- as.numeric(X %*% lambda); w <- d * g(u); F <- as.numeric(Matrix::crossprod(X, w)) - totais
+  for(it in 1:200){
+    if(max(abs(F) / totais) < 1e-10) break
+    J <- as.matrix(Matrix::crossprod(X, Matrix::Diagonal(x = d * dg(u)) %*% X))
+    passo <- solve(J, F)
+    for(k in 0:12){                                            # meio passo enquanto o desvio nao cair
+      lambda_novo <- lambda - passo / 2^k
+      u_novo <- as.numeric(X %*% lambda_novo); w_novo <- d * g(u_novo); F_novo <- as.numeric(Matrix::crossprod(X, w_novo)) - totais
+      if(max(abs(F_novo) / totais) < max(abs(F) / totais)) break
+    }
+    lambda <- lambda_novo; u <- u_novo; w <- w_novo; F <- F_novo
+  }
+  message("  Newton: ", it, " iteracoes; desvio maximo ", signif(max(abs(F) / totais), 3),
+          "; fator g: min ", round(min(w / d), 3), " mediana ", round(median(w / d), 3), " max ", round(max(w / d), 3))
+  w
+}
+
+calibrate_1960_amostra_127 <- function(tabelas, gabarito_path, definitivos_path){
+
+  message("Calibrating household weights to the definitive results (Serie Nacional) and to the 1965 preliminary results")
 
   pessoas    <- data.table::copy(tabelas$pessoas)
   domicilios <- data.table::copy(tabelas$domicilios)
   gab <- data.table::fread(gabarito_path, encoding = "UTF-8")
+  def <- data.table::fread(definitivos_path, encoding = "UTF-8")[nivel == "uf"]
 
-  # as celulas do quadro 1: regiao x situacao x sexo x faixa de idade
   regiao_uf <- REGIAO_1960
   faixas <- c("0 a 4", "5 a 9", "10 a 14", "15 a 19", "20 a 24", "25 a 29", "30 a 39", "40 a 49", "50 a 59", "60 a 69", "70 e mais e ignorada")
   pessoas[, regiao   := regiao_uf[as.character(UF)]]
@@ -867,49 +929,80 @@ calibrate_1960_amostra_127 <- function(tabelas, gabarito_path){
   pessoas[is.na(idade), idade := 999L]
   pessoas[, faixa    := faixas[findInterval(idade, c(0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70))]]
   pessoas[, presente := !(V202 %in% c(3, 4))]
-  pessoas[, celula   := paste("q1", regiao, situacao, sexo, faixa, sep = "|")]
+  pessoas[, alfabetizacao := data.table::fifelse(V211 %in% c(0, 1), "sabem", data.table::fifelse(V211 %in% c(2, 3), "nao_sabem", NA_character_))]
+  hh <- sort(unique(domicilios$censobr_idhousehold))
+  d <- rep(1 / 0.0127, length(hh))
 
+  # --- 1965: regiao x situacao x sexo x faixa (quadro 1) e quem sabe ler, por sexo e regiao (quadro 2)
+  pessoas[, celula := paste("q1", regiao, situacao, sexo, faixa, sep = "|")]
   g1 <- gab[quadro == 1 & regiao != "Brasil" & linha != "TOTAIS" & coluna %in% c("urbana_homens", "urbana_mulheres", "rural_homens", "rural_mulheres")]
   g1[, celula := paste("q1", regiao, sub("_.*", "", coluna), sub(".*_", "", coluna), linha, sep = "|")]
-
-  # quadro 2: quem sabe ler e escrever, por sexo, entre as pessoas presentes de 5 anos e mais (V211 0 e 1); so "sabem"
-  # entra como restricao -- "nao sabem" ja fica determinado pelo quadro 1 menos "sabem" menos os sem declaracao
   g2 <- gab[quadro == 2 & regiao != "Brasil" & linha == "5 e mais" & coluna %in% c("sabem_homens", "sabem_mulheres")]
   g2[, celula := paste("q2", regiao, sub("_[a-z]+$", "", coluna), sub(".*_", "", coluna), sep = "|")]
-  pessoas[, alfabetizacao := data.table::fifelse(V211 %in% c(0, 1), "sabem", data.table::fifelse(V211 %in% c(2, 3), "nao_sabem", NA_character_))]
   pessoas[, celula_q2 := data.table::fifelse(presente & idade >= 5 & alfabetizacao %in% "sabem" & !is.na(sexo), paste("q2", regiao, alfabetizacao, sexo, sep = "|"), NA_character_)]
-
   celulas <- c(g1$celula, g2$celula); totais <- c(g1$valor, g2$valor)
-
-  # X: uma linha por domicilio, uma coluna por celula, com o numero de pessoas do domicilio em cada celula
   cont <- rbind(pessoas[presente == TRUE & !is.na(situacao) & !is.na(sexo), .N, by = .(censobr_idhousehold, celula)],
                 pessoas[!is.na(celula_q2), .N, by = .(censobr_idhousehold, celula = celula_q2)])
-  hh <- sort(unique(domicilios$censobr_idhousehold))
-  X <- Matrix::sparseMatrix(i = match(cont$censobr_idhousehold, hh), j = match(cont$celula, celulas), x = cont$N,
-                            dims = c(length(hh), length(celulas)))
+  X <- Matrix::sparseMatrix(i = match(cont$censobr_idhousehold, hh), j = match(cont$celula, celulas), x = cont$N, dims = c(length(hh), length(celulas)))
+  message("  1965: ", length(celulas), " celulas (quadro 1: ", nrow(g1), "; quadro 2: ", nrow(g2), ")")
+  w1965 <- raking_1960_amostra_127(X, totais, d)
+
+  # --- definitivos: as faixas de idade por sexo so para a UF com 8 pastas ou mais; as pequenas (RO, AC, RR, AP,
+  # Fernando de Noronha, Serra dos Aimores) ficam com o total por sexo. Juntar as pequenas do Norte e Centro-Oeste
+  # num "resto" com faixas de idade foi testado e rejeitado: os fatores implicitos das quatro vao de 0,7 a 1,6, e a
+  # estrutura etaria conjunta so fechava inflando familias grandes de Rondonia ate 7 vezes. O DF fica fora de tudo.
+  pastas_uf <- domicilios[UF != 97, .(pastas = data.table::uniqueN(censobr_upa)), by = UF]
+  pastas_uf[, regiao := regiao_uf[as.character(UF)]]
+  pastas_uf[, grupo := data.table::fifelse(pastas >= 8, as.character(UF), NA_character_)]
+  pessoas[pastas_uf, grupo := i.grupo, on = "UF"]
+  # quem sabe ler: as quatro pequenas do Norte e Centro-Oeste juntas; Noronha e Aimores sozinhas
+  pessoas[, grupo_d := data.table::fifelse(!is.na(grupo), grupo, data.table::fifelse(regiao == "Norte e Centro-Oeste", "resto Norte e Centro-Oeste", as.character(UF)))]
+  pessoas[, cel_a := data.table::fifelse(presente & !is.na(grupo) & !is.na(sexo), paste("a", grupo, sexo, faixa, sep = "|"), NA_character_)]
+  pessoas[, cel_b := data.table::fifelse(presente & UF != 97 & is.na(grupo) & !is.na(sexo), paste("b", UF, sexo, sep = "|"), NA_character_)]
+  # a populacao urbana so e restricao onde ha 8 pastas ou mais: com uma ou duas pastas o corte urbano/rural da UF
+  # nao tem como ser reproduzido sem fatores extremos (Acre: 0,23 na pasta urbana, 6 na rural)
+  ufs_c <- pastas_uf[pastas >= 8, UF]
+  pessoas[, cel_c := data.table::fifelse(presente & UF %in% ufs_c & V118 %in% c(1, 3), paste("c", UF, sep = "|"), NA_character_)]
+  pessoas[, cel_d := data.table::fifelse(presente & UF != 97 & idade >= 5 & alfabetizacao %in% "sabem" & !is.na(sexo), paste("d", grupo_d, sexo, sep = "|"), NA_character_)]
+
+  def[tabela == 33 & item %in% c("70 e mais", "ignorada"), item := "70 e mais e ignorada"]
+  t33 <- def[tabela == 33 & sexo != "total", .(valor = sum(valor)), by = .(uf60, item, sexo)]
+  t33[pastas_uf, grupo := i.grupo, on = c(uf60 = "UF")]
+  alvo_a <- t33[!is.na(grupo) & item != "total", .(celula = paste("a", grupo, sexo, item, sep = "|"), total = valor)]
+  alvo_b <- t33[item == "total" & uf60 %in% pastas_uf[is.na(grupo), UF], .(celula = paste("b", uf60, sexo, sep = "|"), total = valor)]
+  alvo_c <- def[tabela == 34 & item == "urbana" & sexo == "total" & uf60 %in% ufs_c, .(celula = paste("c", uf60, sep = "|"), total = valor)]
+  t40 <- def[tabela == 40 & item == "sabem" & sexo != "total" & uf60 != 97]
+  t40[pastas_uf, grupo := i.grupo, on = c(uf60 = "UF")]
+  t40[is.na(grupo), grupo := data.table::fifelse(regiao_uf[as.character(uf60)] == "Norte e Centro-Oeste", "resto Norte e Centro-Oeste", as.character(uf60))]
+  alvo_d <- t40[, .(total = sum(valor)), by = .(grupo, sexo)][, .(celula = paste("d", grupo, sexo, sep = "|"), total)]
+  alvos <- rbind(alvo_a, alvo_b, alvo_c, alvo_d)
+
+  cont <- data.table::rbindlist(lapply(c("cel_a", "cel_b", "cel_c", "cel_d"), function(v) pessoas[!is.na(get(v)), .N, by = .(censobr_idhousehold, celula = get(v))]))
+  if(any(!cont$celula %in% alvos$celula)) stop("celulas da amostra sem total publicado: ", paste(head(unique(cont$celula[!cont$celula %in% alvos$celula])), collapse = ", "))
+  X <- Matrix::sparseMatrix(i = match(cont$censobr_idhousehold, hh), j = match(cont$celula, alvos$celula), x = cont$N, dims = c(length(hh), nrow(alvos)))
   amostra <- as.numeric(Matrix::colSums(X))
-  message("  celulas: ", length(celulas), " (quadro 1: ", nrow(g1), "; quadro 2: ", nrow(g2), "); sem pessoa na amostra: ", sum(amostra == 0),
-          "; fator implicito (publicado / amostra x 78,74): min ", round(min(totais / amostra / 78.74), 3), " max ", round(max(totais / amostra / 78.74), 3))
+  if(any(amostra == 0)) stop("celulas sem pessoa na amostra: ", paste(alvos$celula[amostra == 0], collapse = ", "))
+  alvos[, implicito := round(total / amostra / 78.74, 2)]
+  message("  definitivos: ", nrow(alvos), " celulas (a ", nrow(alvo_a), ", b ", nrow(alvo_b), ", c ", nrow(alvo_c), ", d ", nrow(alvo_d),
+          "); fator implicito (publicado / amostra x 78,74) fora de [0,5; 2]: ", paste0(alvos[implicito < 0.5 | implicito > 2, paste0(celula, "=", implicito)], collapse = " "))
+  # o peso de desenho de Fernando de Noronha e 4, nao 78,74: a sua unica pasta era o cadastro inteiro (a amostra de
+  # 25% mostra uma pasta em vez de vinte), so houve a etapa de um domicilio em quatro. Nas outras unidades ficam
+  # os 78,74. Os fatores ficam entre 0,3 e 3,5 (distancia logit); o raking puro dava ate 9 em Rondonia.
+  d_def <- d; d_def[hh %in% domicilios[UF == 24, censobr_idhousehold]] <- 4
+  w <- raking_1960_amostra_127(X, alvos$total, d_def, limites = c(0.3, 3.5))
 
-  # raking de Deville-Sarndal: g = exp(X lambda), resolvido por Newton
-  d <- rep(1 / 0.0127, length(hh)); lambda <- rep(0, length(celulas))
-  for(it in 1:100){
-    w <- d * as.numeric(exp(X %*% lambda))
-    F <- as.numeric(Matrix::crossprod(X, w)) - totais
-    if(max(abs(F) / totais) < 1e-10) break
-    J <- as.matrix(Matrix::crossprod(X, Matrix::Diagonal(x = w) %*% X))
-    lambda <- lambda - solve(J, F)
-  }
-  message("  Newton: ", it, " iteracoes; desvio maximo ", signif(max(abs(F) / totais), 3),
-          "; fator g: min ", round(min(w / d), 3), " mediana ", round(median(w / d), 3), " max ", round(max(w / d), 3))
-
-  pesos <- data.table::data.table(censobr_idhousehold = hh, censobr_weight = w, censobr_weight_fator = w / d)
-  domicilios[pesos, `:=`(censobr_weight = i.censobr_weight, censobr_weight_fator = i.censobr_weight_fator), on = "censobr_idhousehold"]
-  pessoas[pesos,    `:=`(censobr_weight = i.censobr_weight, censobr_weight_fator = i.censobr_weight_fator), on = "censobr_idhousehold"]
+  pesos <- data.table::data.table(censobr_idhousehold = hh, censobr_weight = w, censobr_weight_fator = w / d, censobr_weight_1965 = w1965, censobr_weight_1965_fator = w1965 / d)
+  domicilios[pesos, `:=`(censobr_weight = i.censobr_weight, censobr_weight_fator = i.censobr_weight_fator, censobr_weight_1965 = i.censobr_weight_1965, censobr_weight_1965_fator = i.censobr_weight_1965_fator), on = "censobr_idhousehold"]
+  pessoas[pesos,    `:=`(censobr_weight = i.censobr_weight, censobr_weight_fator = i.censobr_weight_fator, censobr_weight_1965 = i.censobr_weight_1965, censobr_weight_1965_fator = i.censobr_weight_1965_fator), on = "censobr_idhousehold"]
   domicilios[, censobr_weight_desenho := 1 / 0.0127]
   pessoas[,    censobr_weight_desenho := 1 / 0.0127]
+  fator_uf <- domicilios[, .(fator = round(median(censobr_weight_fator), 2)), by = UF][order(UF)]
+  message("  fator mediano do peso final por UF: ", paste0(fator_uf$UF, "=", fator_uf$fator, collapse = " "))
 
-  pessoas[, c("regiao", "situacao", "sexo", "idade", "faixa", "presente", "celula", "alfabetizacao", "celula_q2") := NULL]
+  pessoas[, c("regiao", "situacao", "sexo", "idade", "faixa", "presente", "alfabetizacao", "celula", "celula_q2", "grupo", "grupo_d", "cel_a", "cel_b", "cel_c", "cel_d") := NULL]
+  colunas <- c("censobr_weight", "censobr_weight_fator", "censobr_weight_1965", "censobr_weight_1965_fator", "censobr_weight_desenho")
+  data.table::setcolorder(pessoas,    c(names(pessoas)[seq_len(match("censobr_weight", names(pessoas)))], colunas[-1]))
+  data.table::setcolorder(domicilios, c(names(domicilios)[seq_len(match("censobr_weight", names(domicilios)))], colunas[-1]))
   list(pessoas = pessoas, domicilios = domicilios)
 }
 
@@ -945,15 +1038,18 @@ calibrate_1960_amostra_127 <- function(tabelas, gabarito_path){
 # ------------------------------------------------------------------------------
 validate_1965_1960_amostra_127 <- function(tabelas, gabarito_path){
 
-  message("Comparing the seven 1965 tables with the calibrated file")
+  message("Comparing the seven 1965 tables with the calibrated file, with each of the two weights")
 
-  p <- data.table::copy(tabelas$pessoas); d <- data.table::copy(tabelas$domicilios)
+  p0 <- data.table::copy(tabelas$pessoas); d0 <- data.table::copy(tabelas$domicilios)
   gab <- data.table::fread(gabarito_path, encoding = "UTF-8")[regiao != "Brasil"]
   regiao_uf <- REGIAO_1960
-  p[, regiao := regiao_uf[as.character(UF)]]
-  p[, presente := !(V202 %in% 3:4)]; p[, residente := !(V202 %in% 5:6)]; p[, sexo := data.table::fifelse(V202 %in% c(1, 3, 5), "homens", "mulheres")]
-  p[, idade := data.table::fifelse(V204 %in% 1, V204B, data.table::fifelse(V204 %in% 0, 0L, 999L))]; p[is.na(idade), idade := 999L]
-  p[, w := censobr_weight]
+  p0[, regiao := regiao_uf[as.character(UF)]]
+  p0[, presente := !(V202 %in% 3:4)]; p0[, residente := !(V202 %in% 5:6)]; p0[, sexo := data.table::fifelse(V202 %in% c(1, 3, 5), "homens", "mulheres")]
+  p0[, idade := data.table::fifelse(V204 %in% 1, V204B, data.table::fifelse(V204 %in% 0, 0L, 999L))]; p0[is.na(idade), idade := 999L]
+
+  comp <- data.table::rbindlist(lapply(c("censobr_weight", "censobr_weight_1965"), function(peso){
+  p <- data.table::copy(p0); d <- data.table::copy(d0)
+  p[, w := get(peso)]; d[, w := get(peso)]
 
   # quadro 1: presentes por situacao, sexo e faixa etaria
   faixa1 <- c("0 a 4", "5 a 9", "10 a 14", "15 a 19", "20 a 24", "25 a 29", "30 a 39", "40 a 49", "50 a 59", "60 a 69", "70 e mais e ignorada")
@@ -1003,8 +1099,8 @@ validate_1965_1960_amostra_127 <- function(tabelas, gabarito_path){
                 fogao_lenha = quote(V107 %in% 9), fogao_carvao = quote(V107 %in% 0), fogao_gas = quote(V107 %in% 2), fogao_oleo_querosene = quote(V107 %in% 3),
                 instalacao_sanitaria = quote(V106 %in% 4:7), iluminacao_eletrica = quote(V108 %in% 5), radio = quote(V109 %in% 7), geladeira = quote(V110 %in% 9))
   n67 <- data.table::rbindlist(lapply(names(itens), function(nm){ z <- dp[eval(itens[[nm]])]
-    rbind(z[, .(linha = nm, coluna = "dom_total", nosso = sum(censobr_weight)), by = regiao], z[, .(linha = nm, coluna = "pes_total", nosso = sum(res)), by = regiao],
-          z[, .(linha = nm, coluna = paste0("dom_", situacao), nosso = sum(censobr_weight)), by = .(regiao, situacao)][, -"situacao"],
+    rbind(z[, .(linha = nm, coluna = "dom_total", nosso = sum(w)), by = regiao], z[, .(linha = nm, coluna = "pes_total", nosso = sum(res)), by = regiao],
+          z[, .(linha = nm, coluna = paste0("dom_", situacao), nosso = sum(w)), by = .(regiao, situacao)][, -"situacao"],
           z[, .(linha = nm, coluna = paste0("pes_", situacao), nosso = sum(res)), by = .(regiao, situacao)][, -"situacao"]) }))
   n67[, quadro := data.table::fifelse(linha %in% c("proprios", "alugados", "outra_condicao"), 6L, 7L)]
   n6t <- n67[linha == "TOTAIS"][, quadro := 6L]
@@ -1012,9 +1108,77 @@ validate_1965_1960_amostra_127 <- function(tabelas, gabarito_path){
   nosso <- rbind(n1, n2, n3, n4, n5, n67, n6t)
   comp <- merge(gab[, .(quadro, regiao, linha, coluna, publicado = valor)], nosso[, .(quadro, regiao, linha, coluna, nosso = round(nosso))], by = c("quadro", "regiao", "linha", "coluna"))
   comp[, dif_pct := round(100 * (nosso / publicado - 1), 2)]
-  data.table::setorder(comp, quadro, regiao, linha, coluna)
+  comp[, peso := peso]
+  comp
+  }))
+  data.table::setorder(comp, peso, quadro, regiao, linha, coluna)
   data.table::fwrite(comp, "./data_raw/microdata/1960/amostra_127/calibracao_1965_validacao.csv", bom = TRUE)
-  resumo <- comp[, .(celulas = .N, dif_mediana_abs = round(median(abs(dif_pct)), 2), dif_max_abs = round(max(abs(dif_pct)), 1)), by = quadro]
+  resumo <- comp[, .(celulas = .N, dif_mediana_abs = round(median(abs(dif_pct)), 2), dif_max_abs = round(max(abs(dif_pct)), 1)), by = .(peso, quadro)]
+  message(paste(capture.output(print(resumo)), collapse = "\n"))
+  comp
+}
+
+
+# ------------------------------------------------------------------------------
+# Passo 10b — reprodução das tabelas por unidade da federação dos resultados
+# definitivos (Série Nacional, vol. I), com cada um dos dois pesos. Com
+# censobr_weight, as células que foram restrição fecham por construção; o que
+# informa são as outras: presentes e residentes (tab. 32), a população rural
+# (34), os brancos e a cor por unidade da federação (37), os que não sabem ler
+# (40), os domicílios e moradores (tab. 7), o Distrito Federal, e as faixas
+# de idade das unidades sem margem própria. Sai em
+# data_raw/microdata/1960/amostra_127/calibracao_definitivos_validacao.csv.
+# ------------------------------------------------------------------------------
+validate_definitivos_1960_amostra_127 <- function(tabelas, definitivos_path){
+
+  message("Comparing the definitive results (Serie Nacional, vol. I) with the calibrated file")
+
+  p0 <- data.table::copy(tabelas$pessoas); d0 <- data.table::copy(tabelas$domicilios)
+  def <- data.table::fread(definitivos_path, encoding = "UTF-8")[nivel == "uf"]
+  def[tabela == 33 & item %in% c("70 e mais", "ignorada"), item := "70 e mais e ignorada"]
+  def <- def[, .(publicado = sum(valor)), by = .(tabela, uf60, nome, item, sexo, medida)]
+  faixas <- c("0 a 4", "5 a 9", "10 a 14", "15 a 19", "20 a 24", "25 a 29", "30 a 39", "40 a 49", "50 a 59", "60 a 69", "70 e mais e ignorada")
+  p0[, presente := !(V202 %in% 3:4)]; p0[, residente := !(V202 %in% 5:6)]
+  p0[, sexo := data.table::fifelse(V202 %in% c(1, 3, 5), "homens", "mulheres")]
+  p0[, idade := data.table::fifelse(V204 %in% 1, V204B, data.table::fifelse(V204 %in% 0, 0L, 999L))]; p0[is.na(idade), idade := 999L]
+  p0[, faixa := faixas[findInterval(idade, c(0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70))]]
+  p0[, situacao := data.table::fifelse(V118 %in% c(1, 3), "urbana", data.table::fifelse(V118 %in% 5, "rural", NA_character_))]
+  p0[, alf := data.table::fifelse(V211 %in% 0:1, "sabem", data.table::fifelse(V211 %in% 2:3, "nao sabem", NA_character_))]
+  p0[, cor := c("brancos", "pretos", "amarelos", "pardos")[match(V206, 4:7)]]; p0[is.na(cor), cor := "sem declaracao"]
+  d0[, situacao := data.table::fifelse(V118 %in% c(1, 3), "urbana", data.table::fifelse(V118 %in% 5, "rural", NA_character_))]
+
+  # os totais por sexo e por item, como as tabelas publicam
+  com_totais <- function(x){
+    x <- rbind(x, x[, .(nosso = sum(nosso)), by = .(tabela, uf60, item)][, sexo := "total"])
+    rbind(x, x[, .(nosso = sum(nosso)), by = .(tabela, uf60, sexo)][, item := "total"])
+  }
+  comp <- data.table::rbindlist(lapply(c("censobr_weight", "censobr_weight_1965"), function(peso){
+    p <- data.table::copy(p0); d <- data.table::copy(d0)
+    p[, w := get(peso)]; d[, w := get(peso)]
+    n32 <- rbind(p[presente == TRUE, .(nosso = sum(w)), by = .(uf60 = UF, sexo)][, item := "presente"],
+                 p[residente == TRUE, .(nosso = sum(w)), by = .(uf60 = UF, sexo)][, item := "residente"])[, tabela := 32L]
+    n32 <- rbind(n32, n32[, .(nosso = sum(nosso)), by = .(tabela, uf60, item)][, sexo := "total"])
+    n33 <- com_totais(p[presente == TRUE, .(nosso = sum(w)), by = .(uf60 = UF, item = faixa, sexo)][, tabela := 33L])
+    n34 <- com_totais(p[presente == TRUE & !is.na(situacao), .(nosso = sum(w)), by = .(uf60 = UF, item = situacao, sexo)][, tabela := 34L])
+    n37 <- com_totais(p[presente == TRUE, .(nosso = sum(w)), by = .(uf60 = UF, item = cor, sexo)][, tabela := 37L])[sexo != "total"]
+    n40 <- p[presente == TRUE & idade >= 5 & !is.na(alf), .(nosso = sum(w)), by = .(uf60 = UF, item = alf, sexo)][, tabela := 40L]
+    n40 <- rbind(n40, p[presente == TRUE & idade >= 5, .(nosso = sum(w)), by = .(uf60 = UF, sexo)][, `:=`(item = "5 e mais", tabela = 40L)])
+    n40 <- rbind(n40, n40[, .(nosso = sum(nosso)), by = .(tabela, uf60, item)][, sexo := "total"])
+    dp <- d[!(V101 %in% 3) & !is.na(situacao)]
+    res <- p[residente == TRUE, .(res = sum(w)), by = censobr_idhousehold]; dp[res, res := i.res, on = "censobr_idhousehold"]; dp[is.na(res), res := 0]
+    n7 <- rbind(dp[, .(nosso = sum(w)), by = .(uf60 = UF, item = situacao)][, medida := "domicilios"], dp[, .(nosso = sum(res)), by = .(uf60 = UF, item = situacao)][, medida := "pessoas"])
+    n7 <- rbind(n7, n7[, .(nosso = sum(nosso)), by = .(uf60, medida)][, item := "total"])[, `:=`(tabela = 7L, sexo = "")]
+    nosso <- rbind(n32, n33, n34, n37, n40, n7, fill = TRUE); nosso[is.na(medida), medida := ""]
+    out <- merge(def, nosso, by = c("tabela", "uf60", "item", "sexo", "medida"))
+    out[, peso := peso]
+    out
+  }))
+  comp[, nosso := round(nosso)]
+  comp[, dif_pct := round(100 * (nosso / publicado - 1), 2)]
+  data.table::setorder(comp, peso, tabela, uf60, item, sexo, medida)
+  data.table::fwrite(comp[, .(peso, tabela, uf60, nome, item, sexo, medida, publicado, nosso, dif_pct)],
+                     "./data_raw/microdata/1960/amostra_127/calibracao_definitivos_validacao.csv", bom = TRUE)
+  resumo <- comp[uf60 != 97, .(celulas = .N, dif_mediana_abs = round(median(abs(dif_pct)), 2), dif_p90_abs = round(quantile(abs(dif_pct), 0.9), 1)), by = .(peso, tabela)]
   message(paste(capture.output(print(resumo)), collapse = "\n"))
   comp
 }
@@ -1059,21 +1223,24 @@ sampling_errors_1960_amostra_127 <- function(tabelas){
 
   message("Estimating sampling errors for the 1960 amostra de 1,27%")
 
-  p <- data.table::copy(tabelas$pessoas)
-  p[, regiao := REGIAO_1960[as.character(UF)]]
-  p[, situacao := data.table::fifelse(V118 %in% c(1, 3), "urbana", data.table::fifelse(V118 %in% 5, "rural", NA_character_))]
-  p[, sexo := data.table::fifelse(V202 %in% c(1, 3, 5), "homens", "mulheres")]
-  p[, idade := data.table::fifelse(V204 %in% 1, V204B, data.table::fifelse(V204 %in% 0, 0L, 999L))]; p[is.na(idade), idade := 999L]
-  p[, faixa := c("0 a 4", "5 a 9", "10 a 14", "15 a 19", "20 a 24", "25 a 29", "30 a 39", "40 a 49", "50 a 59", "60 a 69", "70 e mais e ignorada")[findInterval(idade, c(0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70))]]
-  p <- p[!(V202 %in% c(3, 4)) & !is.na(V202) & !is.na(regiao) & !is.na(situacao)]
+  p0 <- data.table::copy(tabelas$pessoas)
+  p0[, regiao := REGIAO_1960[as.character(UF)]]
+  p0[, situacao := data.table::fifelse(V118 %in% c(1, 3), "urbana", data.table::fifelse(V118 %in% 5, "rural", NA_character_))]
+  p0[, sexo := data.table::fifelse(V202 %in% c(1, 3, 5), "homens", "mulheres")]
+  p0[, idade := data.table::fifelse(V204 %in% 1, V204B, data.table::fifelse(V204 %in% 0, 0L, 999L))]; p0[is.na(idade), idade := 999L]
+  p0[, faixa := c("0 a 4", "5 a 9", "10 a 14", "15 a 19", "20 a 24", "25 a 29", "30 a 39", "40 a 49", "50 a 59", "60 a 69", "70 e mais e ignorada")[findInterval(idade, c(0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70))]]
+  p0 <- p0[!(V202 %in% c(3, 4)) & !is.na(V202) & !is.na(regiao) & !is.na(situacao)]
 
   # a pasta que nao tem ninguem do dominio entra na conta com total zero: e por isso
   # que o numero de pastas do estrato vem da amostra toda, e nao do dominio
-  pastas_estrato <- unique(p[, .(censobr_estrato, censobr_upa)])[, .(n = .N), by = censobr_estrato]
-  n_amostra <- nrow(p); n_populacao <- sum(p$censobr_weight)
+  pastas_estrato <- unique(p0[, .(censobr_estrato, censobr_upa)])[, .(n = .N), by = censobr_estrato]
+
+  res <- data.table::rbindlist(lapply(c("censobr_weight", "censobr_weight_1965"), function(peso){
+  p <- data.table::copy(p0); p[, w := get(peso)]
+  n_amostra <- nrow(p); n_populacao <- sum(p$w)
 
   erro_padrao <- function(por){
-    pasta <- p[, .(t = sum(censobr_weight)), by = c(por, "censobr_estrato", "censobr_upa")]
+    pasta <- p[, .(t = sum(w)), by = c(por, "censobr_estrato", "censobr_upa")]
     estr  <- pasta[, .(soma = sum(t), soma2 = sum(t^2)), by = c(por, "censobr_estrato")]
     estr[pastas_estrato, n := i.n, on = "censobr_estrato"]
     estr[, v := (1 - 1 / 20) * n / (n - 1) * (soma2 - soma^2 / n)]
@@ -1093,12 +1260,14 @@ sampling_errors_1960_amostra_127 <- function(tabelas){
                    erro_padrao("regiao")[, `:=`(situacao = "ambas", sexo = "ambos", faixa = "todas")],
                    erro_padrao("situacao")[, `:=`(regiao = "Brasil", sexo = "ambos", faixa = "todas")],
                    fill = TRUE)
-  brasil <- p[, .(regiao = "Brasil", situacao = "ambas", sexo = "ambos", faixa = "todas", estimativa = sum(censobr_weight))]
-  res <- rbind(brasil, totais, celulas, fill = TRUE)[, .(regiao, situacao, sexo, faixa, estimativa = round(estimativa),
-                                                         erro_padrao = round(erro_padrao), cv_pct, deff, pessoas)]
+  brasil <- p[, .(regiao = "Brasil", situacao = "ambas", sexo = "ambos", faixa = "todas", estimativa = sum(w))]
+  rbind(brasil, totais, celulas, fill = TRUE)[, .(peso = peso, regiao, situacao, sexo, faixa, estimativa = round(estimativa),
+                                                  erro_padrao = round(erro_padrao), cv_pct, deff, pessoas)]
+  }))
   data.table::fwrite(res, "./data_raw/microdata/1960/amostra_127/erros_amostrais.csv", bom = TRUE)
 
-  message("  ", nrow(res), " dominios; nas 176 celulas do quadro 1 o coeficiente de variacao tem mediana ",
+  celulas <- res[peso == "censobr_weight" & faixa != "todas"]
+  message("  ", nrow(res) / 2, " dominios por peso; com censobr_weight, nas 176 celulas do quadro 1 o coeficiente de variacao tem mediana ",
           round(median(celulas$cv_pct), 2), "% e maximo ", round(max(celulas$cv_pct), 1),
           "%; efeito de desenho mediano ", round(median(celulas$deff, na.rm = TRUE), 1))
   res

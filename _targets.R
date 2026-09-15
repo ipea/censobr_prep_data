@@ -206,14 +206,24 @@ list(
              format = "file"
              ),
 
-  # pesos de domicilio calibrados ao quadro 1 de 1965
-  tar_target(name = tabelas_calibradas_1960_amostra_127,
-             command = calibrate_1960_amostra_127(tabelas_1960_amostra_127, gabarito_1960_1965)
+  # tabelas por UF dos resultados definitivos (Serie Nacional, vol. I), transcritas e conferidas
+  tar_target(name = gabarito_1960_definitivos,
+             command = "./references/censo_1960_resultados_definitivos_serie_nacional.csv",
+             format = "file"
              ),
 
-  # reproducao dos sete quadros de 1965 com os pesos calibrados
+  # pesos de domicilio: censobr_weight calibrado aos definitivos, censobr_weight_1965 ao quadro 1 de 1965
+  tar_target(name = tabelas_calibradas_1960_amostra_127,
+             command = calibrate_1960_amostra_127(tabelas_1960_amostra_127, gabarito_1960_1965, gabarito_1960_definitivos)
+             ),
+
+  # reproducao dos sete quadros de 1965 e das tabelas definitivas, com cada um dos dois pesos
   tar_target(name = validacao_1965_1960_amostra_127,
              command = validate_1965_1960_amostra_127(tabelas_calibradas_1960_amostra_127, gabarito_1960_1965)
+             ),
+
+  tar_target(name = validacao_definitivos_1960_amostra_127,
+             command = validate_definitivos_1960_amostra_127(tabelas_calibradas_1960_amostra_127, gabarito_1960_definitivos)
              ),
 
   # erros amostrais pelo desenho de pastas: o que a publicacao especial de 1965 daria

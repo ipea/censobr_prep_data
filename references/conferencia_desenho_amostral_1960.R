@@ -26,7 +26,7 @@ setorder(pessoas, censobr_estrato, ordem_cadastro)
 desenho <- svydesign(ids = ~censobr_upa, strata = ~censobr_estrato, weights = ~censobr_weight,
                      fpc = ~fpc, data = pessoas)
 
-nosso <- fread("data_raw/microdata/1960/amostra_127/erros_amostrais.csv", encoding = "UTF-8")
+nosso <- fread("data_raw/microdata/1960/amostra_127/erros_amostrais.csv", encoding = "UTF-8")[peso == "censobr_weight"]
 por_regiao <- svyby(~um, ~regiao, desenho, svytotal)
 
 message("total do Brasil: survey ", round(coef(svytotal(~um, desenho))), " | nosso ", nosso[regiao == "Brasil" & situacao == "ambas", estimativa])
