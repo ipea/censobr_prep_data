@@ -61,7 +61,8 @@
 # se faz é devolvê-los à ordem do cadastro.
 #
 # Public API, na ordem dos targets: download_1960_amostra_25,
-# audit_1960_amostra_25, read_1960_amostra_25, build_1960_amostra_25.
+# audit_1960_amostra_25, read_1960_amostra_25, build_1960_amostra_25,
+# weight_1960_amostra_25.
 
 
 # As dezessete unidades que sobreviveram, do nome do arquivo para o código de
@@ -452,5 +453,169 @@ build_1960_amostra_25 <- function(paths, uf, municipios_path, distritos_path){
           round(100 * domicilios[!is.na(name_district_1960), .N] / nrow(domicilios), 1), "%")
 
   rm(familias, pessoas, domicilios); gc(verbose = FALSE)
+  saida
+}
+
+
+# ------------------------------------------------------------------------------
+# Passo 5 — o desenho e os dois pesos
+#
+# O desenho desta amostra é outro, e é mais simples que o da amostra de 1,27%.
+# Lá sorteou-se uma pasta em vinte e a pasta entrou inteira, de modo que a
+# unidade primária era a pasta. Aqui não há sorteio de pastas — todas entram —,
+# e o que se sorteia é o domicílio, um em quatro, sistematicamente, pelas
+# "Linhas de Amostra" impressas em intervalos regulares de quatro linhas nas
+# Folhas de Coleta CD 7 e CD 8, dentro de cada setor censitário. Uma etapa só.
+#
+#  - censobr_upa é o domicílio: todas as suas pessoas entram ou saem juntas. No
+#    boletim individual é a própria pessoa e no coletivo o grupo do boletim,
+#    porque foi isso que a Lista CD 3 sorteou.
+#  - censobr_estrato é pasta × situação. A seleção foi sistemática dentro do
+#    setor, e o setor é, por definição, "área territorial contínua situada num
+#    só quadro (urbano, suburbano ou rural), do mesmo distrito administrativo".
+#    Toda pasta está num só município, e cruzá-la com V118 separa as pastas
+#    mistas nas suas partes urbana e rural: é a aproximação mais fina do setor
+#    que o arquivo permite.
+#  - a correção de população finita é 1/4 exatamente, em todas as unidades,
+#    inclusive Fernando de Noronha, onde o sorteio de um em quatro aconteceu
+#    normalmente.
+#
+# Dois pesos, como na amostra de 1,27%.
+#
+# censobr_weight é razão à contagem completa por município × situação, e não
+# precisa de solver: lá as células eram de pessoa (sexo × idade) e um domicílio
+# cruzava muitas, o que obrigava ao Newton de Deville-Särndal; aqui cada
+# domicílio pertence a exatamente uma célula e a calibração é razão em forma
+# fechada. A âncora é a Sinopse Preliminar, que é a contagem completa e é o que
+# o IBGE declarou ter usado nestas dezessete unidades, refinada do nível de
+# unidade da federação para o de município.
+#
+# O colapso tem dois degraus, e o princípio é que a âncora municipal não se
+# abandona. A célula de situação vira município inteiro quando o seu fator sai
+# de [2; 8], quando o universo é menor que 100, e também quando o universo tem
+# uma situação que a amostra não alcançou — ali a população daquele lado não
+# teria a quem se agarrar, e é o caso de Cristalândia, em Goiás, cujos 2.345
+# habitantes urbanos não têm um domicílio urbano sorteado. Só o município sem
+# universo nenhum desce para a unidade da federação × situação; subir todo
+# município de fator baixo para a UF, como uma primeira versão fazia, inflava
+# Alpinópolis, Itueta e Abadia dos Dourados em 23 mil pessoas, porque a elas o
+# fator do estado não se aplica.
+#
+# A Serra dos Aimorés é a única unidade sem contagem completa: os tomos de Minas
+# e do Espírito Santo excluem a região do litígio dos dois estados, com todas as
+# letras, e não publicam tabela própria para ela. A única publicação que a traz
+# é a Série Nacional, e é a ela que a região calibra — âncora que é estimativa
+# publicada, não contagem completa, e isso fica dito aqui e no documento.
+#
+# censobr_weight_ibge reproduz o método do IBGE ao pé da letra para estas
+# unidades: razão a unidade da federação × urbana/rural com peso inteiro
+# sorteado para fechar o total, com semente fixa. Serve para medir quanto o
+# refinamento municipal vale e para reproduzir a Série Regional inclusive nos
+# seus artefatos de arredondamento.
+# ------------------------------------------------------------------------------
+weight_1960_amostra_25 <- function(paths, uf, municipios_path, definitivos_path){
+
+  message("Weighting 1960 amostra de 25%: ", uf)
+
+  in_dir     <- file.path("./data_raw/microdata/1960/amostra_25", uf)
+  domicilios <- data.table::setDT(arrow::read_parquet(file.path(in_dir, "domicilios.parquet")))
+  pessoas    <- data.table::setDT(arrow::read_parquet(file.path(in_dir, "pessoas_geo.parquet")))
+  codigo_uf  <- as.integer(UF_1960_AMOSTRA_25[[uf]])
+
+  # as colunas de desenho: uma etapa so, o domicilio e a unidade, pasta x situacao e o estrato
+  domicilios[, situacao := data.table::fifelse(V118 == 5L, "rural", "urbana")]
+  domicilios[, `:=`(censobr_upa     = censobr_idhousehold,
+                    censobr_estrato = paste0("UF ", UF, " - pasta ", v001, " - ", situacao),
+                    censobr_fpc     = 0.25,
+                    censobr_weight_desenho = 4)]
+
+  # o universo: a contagem completa por municipio x situacao
+  municipios <- data.table::fread(municipios_path, encoding = "UTF-8")
+  universo <- data.table::melt(municipios[uf60 == codigo_uf, .(uf60, cod60, urbana = pop_urbana, rural = pop_rural)],
+                               id.vars = c("uf60", "cod60"), variable.name = "situacao",
+                               value.name = "universo", variable.factor = FALSE)
+
+  # a Serra dos Aimores nao tem contagem completa: a sua unica publicacao e a Serie Nacional
+  if(uf == "sa"){
+    def <- data.table::fread(definitivos_path, encoding = "UTF-8")
+    sa  <- def[tabela == 34 & uf60 == 50 & sexo == "total" & item %in% c("urbana", "rural")]
+    universo <- data.table::data.table(uf60 = 50L, cod60 = 5001L, situacao = sa$item, universo = sa$valor)
+    message("  ancora da Serie Nacional: urbana ", sa[item == "urbana", valor], ", rural ", sa[item == "rural", valor])
+  }
+
+  celulas <- domicilios[, .(pes = sum(censobr_n_presentes)), by = .(code_muni_1960, situacao)]
+  celulas[universo, universo := i.universo, on = c(code_muni_1960 = "cod60", "situacao")]
+  celulas[, `:=`(nivel = "municipio x situacao", fator = universo / pes)]
+
+  # o municipio inteiro, que e a ancora que nao se abandona: entra quando a celula de
+  # situacao e instavel e tambem quando o universo tem uma situacao que a amostra nao
+  # alcancou -- ali a populacao daquele lado nao teria a quem se agarrar
+  uni_muni <- universo[, .(uni_m = sum(universo, na.rm = TRUE),
+                           sits = sum(!is.na(universo) & universo > 0)), by = .(code_muni_1960 = cod60)]
+  celulas[uni_muni, `:=`(uni_m = i.uni_m, sits_universo = i.sits), on = "code_muni_1960"]
+  celulas[, sits_amostra := .N, by = code_muni_1960]
+  sobe <- celulas[is.na(fator) | is.na(universo) | universo < 100 | fator < 2 | fator > 8 |
+                    sits_amostra < sits_universo, unique(code_muni_1960)]
+  if(length(sobe) > 0){
+    m <- celulas[code_muni_1960 %in% sobe, .(pes2 = sum(pes)), by = code_muni_1960]
+    celulas[m, pes2 := i.pes2, on = "code_muni_1960"]
+    celulas[code_muni_1960 %in% sobe, `:=`(pes = pes2, universo = uni_m, nivel = "municipio")]
+    celulas[, fator := universo / pes]
+  }
+
+  # a UF x situacao e o ultimo recurso, so para o municipio sem universo proprio
+  sem <- celulas[is.na(universo) | universo == 0, unique(code_muni_1960)]
+  if(length(sem) > 0){
+    u <- celulas[nivel == "municipio x situacao", .(pes3 = sum(pes), uni3 = sum(universo)), by = situacao]
+    celulas[u, `:=`(pes3 = i.pes3, uni3 = i.uni3), on = "situacao"]
+    celulas[code_muni_1960 %in% sem, `:=`(pes = pes3, universo = uni3, nivel = "UF x situacao")]
+    celulas[, c("pes3", "uni3") := NULL][, fator := universo / pes]
+  }
+  celulas[, c("uni_m", "sits_universo", "sits_amostra", "pes2") := NULL]
+  if(celulas[is.na(fator) | fator <= 0, .N] > 0)
+    stop(uf, ": ", celulas[is.na(fator) | fator <= 0, .N], " celulas sem fator utilizavel depois do colapso")
+
+  domicilios[celulas, `:=`(censobr_weight = i.fator, censobr_weight_nivel = i.nivel),
+             on = c("code_muni_1960", "situacao")]
+
+  # o peso do IBGE: razao a UF x situacao com peso inteiro sorteado para fechar o total
+  set.seed(1960L)
+  domicilios[, censobr_weight_ibge := NA_integer_]
+  for(s in unique(domicilios$situacao)){
+    idx   <- which(domicilios$situacao == s)
+    n     <- domicilios$censobr_n_presentes[idx]
+    alvo  <- universo[situacao == s, sum(universo, na.rm = TRUE)]
+    r     <- alvo / sum(n)
+    base  <- floor(r)
+    ordem <- sample.int(length(idx))
+    cum   <- cumsum(n[ordem])
+    k     <- sum(cum <= alvo - base * sum(n))
+    promove <- logical(length(idx))
+    if(k > 0) promove[ordem[seq_len(k)]] <- TRUE
+    resto <- alvo - base * sum(n) - (if(k > 0) cum[k] else 0)
+    if(resto > 0){
+      sobra <- ordem[-seq_len(k)]
+      exato <- sobra[which(n[sobra] == resto)[1]]
+      if(!is.na(exato)){ promove[exato] <- TRUE; resto <- 0 }
+    }
+    data.table::set(domicilios, i = idx, j = "censobr_weight_ibge", value = base + as.integer(promove))
+    message("  peso IBGE ", s, ": razao ", round(r, 4), ", inteiros ", base, "/", base + 1L, ", residuo ", resto)
+  }
+
+  # a pessoa leva o peso e as colunas de desenho do seu domicilio
+  leva <- c("situacao", "censobr_upa", "censobr_estrato", "censobr_fpc", "censobr_weight_desenho",
+            "censobr_weight", "censobr_weight_nivel", "censobr_weight_ibge")
+  pessoas[domicilios, (leva) := mget(paste0("i.", leva)), on = "censobr_idhousehold"]
+
+  saida <- c(file.path(in_dir, "domicilios_pesos.parquet"), file.path(in_dir, "pessoas_pesos.parquet"))
+  arrow::write_parquet(domicilios, saida[1], compression = "zstd", compression_level = 1)
+  arrow::write_parquet(pessoas,    saida[2], compression = "zstd", compression_level = 1)
+
+  message("  ", data.table::uniqueN(domicilios$censobr_estrato), " estratos | fator de ",
+          round(min(domicilios$censobr_weight), 3), " a ", round(max(domicilios$censobr_weight), 3),
+          " (mediana ", round(stats::median(domicilios$censobr_weight), 3), ") | colapsados: ",
+          domicilios[censobr_weight_nivel != "municipio x situacao", .N], " domicilios")
+
+  rm(domicilios, pessoas); gc(verbose = FALSE)
   saida
 }

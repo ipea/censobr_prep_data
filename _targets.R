@@ -297,6 +297,18 @@ list(
              format = "file"
              ),
 
+  # uma etapa so: o domicilio e a unidade sorteada e a pasta x situacao o estrato.
+  # Dois pesos -- razao a contagem completa por municipio x situacao e o metodo do
+  # IBGE por UF x situacao -- ver R/microdata_1960_amostra_25.R.
+  tar_target(name = pesos_1960_amostra_25,
+             command = weight_1960_amostra_25(tabelas_1960_amostra_25,
+                                              ufs_1960_amostra_25,
+                                              municipios_1960,
+                                              gabarito_1960_definitivos),
+             pattern = map(ufs_1960_amostra_25, tabelas_1960_amostra_25),
+             format = "file"
+             ),
+
   # 02. microdata 1970 ---------------------------------------------------------------
 
   # a fonte e a versao CEM, no release_legacy: o FWF do FTP traz 1.785
