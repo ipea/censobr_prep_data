@@ -228,7 +228,7 @@ list(
 
   # erros amostrais pelo desenho de pastas: o que a publicacao especial de 1965 daria
   tar_target(name = erros_1960_amostra_127,
-             command = sampling_errors_1960_amostra_127(tabelas_calibradas_1960_amostra_127)
+             command = sampling_errors_1960_amostra_127(tabelas_calibradas_1960_amostra_127, gabarito_1960_definitivos)
              ),
 
   tar_target(name = output_1960_amostra_127,

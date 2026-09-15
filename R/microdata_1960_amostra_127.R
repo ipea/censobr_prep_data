@@ -113,6 +113,15 @@ REGIAO_1960 <- c("0" = "Norte e Centro-Oeste", "1" = "Norte e Centro-Oeste", "2"
                  "10" = "Nordeste", "12" = "Nordeste", "14" = "Nordeste", "17" = "Nordeste", "19" = "Nordeste", "21" = "Nordeste", "24" = "Nordeste", "25" = "Nordeste",
                  "30" = "Leste", "31" = "Leste", "40" = "Leste", "50" = "Leste", "51" = "Leste", "52" = "Leste", "54" = "Leste",
                  "60" = "Sul", "71" = "Sul", "74" = "Sul", "81" = "Sul")
+# As vizinhas de cada UF dentro da sua regiao, em ordem de preferencia (adjacencia em 1960): e a tabela da regra
+# de colapso dos estratos com uma pasta so (passo 8). Fernando de Noronha nao precisa dela (estrato de certeza).
+VIZINHAS_1960 <- list("0" = c(2, 91, 1), "1" = c(2, 0), "2" = c(4, 3, 1, 0, 91), "3" = c(2, 4), "4" = c(2, 6, 94, 91), "6" = c(4, 2),
+                      "91" = c(94, 4, 2, 0), "94" = c(91, 4, 97), "97" = c(94, 91),
+                      "10" = c(12, 14), "12" = c(10, 14, 21), "14" = c(12, 17, 19, 21), "17" = c(19, 14), "19" = c(21, 17, 14),
+                      "21" = c(19, 25, 14, 12), "24" = c(21), "25" = c(21, 19),
+                      "30" = c(31, 40), "31" = c(30, 40, 51), "40" = c(52, 51, 31, 50), "50" = c(51, 40), "51" = c(50, 40, 52, 31),
+                      "52" = c(54, 40, 51), "54" = c(52, 40),
+                      "60" = c(71), "71" = c(60, 74), "74" = c(71, 81), "81" = c(74, 71))
 
 
 # Passo 1 — baixar o arquivo bruto
@@ -770,12 +779,24 @@ finalize_1960_amostra_127 <- function(tabelas, municipios_path, distritos_path){
   domicilios[pastas, grupo_pasta := i.grupo, on = "censobr_upa"]
   domicilios[, censobr_estrato := paste0("UF ", UF, " - ", grupo_pasta)]
 
-  # estrato com uma pasta so nao mede variancia: onde isso acontece, o grupo de situacao inteiro daquela regiao
-  # vira um estrato so -- mais grosso que o desenho, e portanto conservador
-  domicilios[, regiao_grupo := paste(REGIAO_1960[as.character(UF)], grupo_pasta, sep = " - ")]
-  por_estrato <- unique(domicilios[, .(censobr_estrato, regiao_grupo, censobr_upa)])[, .N, by = .(censobr_estrato, regiao_grupo)]
-  domicilios[regiao_grupo %in% por_estrato[N == 1, regiao_grupo], censobr_estrato := regiao_grupo]
-  domicilios[, c("grupo_pasta", "regiao_grupo") := NULL]
+  # estrato com uma pasta so nao mede variancia: a UF solitaria naquele grupo se junta a primeira vizinha da mesma
+  # regiao (VIZINHAS_1960) que tenha pasta no grupo, ate nenhum estrato ficar com uma pasta. Fernando de Noronha
+  # fica sozinho de proposito: a sua unica pasta era o cadastro inteiro (nao houve sorteio de pasta), o estrato e
+  # de certeza e a etapa das pastas nao tem variancia ali -- no survey, fpc = 1 para a UF 24
+  celulas <- unique(domicilios[, .(UF, grupo_pasta, censobr_upa)])[, .(pastas = .N), by = .(UF, grupo_pasta)]
+  celulas[, estrato := paste0("UF ", UF, " - ", grupo_pasta)]
+  repeat{
+    por_estrato <- celulas[, .(pastas = sum(pastas)), by = estrato]
+    solitaria <- celulas[estrato %in% por_estrato[pastas == 1, estrato] & UF != 24][1]
+    if(is.na(solitaria$UF)) break
+    vizinhas <- VIZINHAS_1960[[as.character(solitaria$UF)]]
+    vizinha  <- celulas[UF %in% vizinhas & grupo_pasta == solitaria$grupo_pasta & UF != 24][order(match(UF, vizinhas))][1]
+    if(is.na(vizinha$UF)) stop("sem vizinha com pasta no grupo para o estrato ", solitaria$estrato)
+    celulas[estrato == solitaria$estrato, estrato := vizinha$estrato]
+  }
+  celulas[, rotulo := paste0("UF ", paste(sort(unique(UF)), collapse = "+"), " - ", grupo_pasta), by = estrato]
+  domicilios[celulas, censobr_estrato := i.rotulo, on = c("UF", "grupo_pasta")]
+  domicilios[, grupo_pasta := NULL]
   pessoas[domicilios, `:=`(censobr_upa = i.censobr_upa, censobr_estrato = i.censobr_estrato,
                            code_muni = i.code_muni, code_muni_1960 = i.code_muni_1960, censobr_muni_corrigido = i.censobr_muni_corrigido), on = "censobr_idhousehold"]
   domicilios[, pop_urbana_muni := NULL]
@@ -807,6 +828,69 @@ finalize_1960_amostra_127 <- function(tabelas, municipios_path, distritos_path){
 
   message("  pessoas: ", nrow(pessoas), " x ", ncol(pessoas), " | domicilios: ", nrow(domicilios), " x ", ncol(domicilios))
   list(pessoas = pessoas, domicilios = domicilios)
+}
+
+
+# ------------------------------------------------------------------------------
+# As células da calibração aos resultados definitivos
+#
+# Usadas duas vezes: pelo passo 9, para calibrar, e pelo passo 11, para a
+# variância pelos resíduos da calibração. Devolve a matriz X, domicílio ×
+# célula, com o número de pessoas do domicílio em cada célula; os totais
+# publicados (alvos, com o fator implícito de cada célula); e a ordem dos
+# domicílios (hh), que é a das linhas de X.
+# ------------------------------------------------------------------------------
+celulas_definitivos_1960_amostra_127 <- function(pessoas, domicilios, def){
+
+  pessoas <- data.table::copy(pessoas)
+  def     <- data.table::copy(def)
+  regiao_uf <- REGIAO_1960
+  faixas <- c("0 a 4", "5 a 9", "10 a 14", "15 a 19", "20 a 24", "25 a 29", "30 a 39", "40 a 49", "50 a 59", "60 a 69", "70 e mais e ignorada")
+  pessoas[, regiao   := regiao_uf[as.character(UF)]]
+  pessoas[, sexo     := data.table::fifelse(V202 %in% c(1, 3, 5), "homens", data.table::fifelse(V202 %in% c(2, 4, 6), "mulheres", NA_character_))]
+  pessoas[, idade    := data.table::fifelse(V204 %in% 1, V204B, data.table::fifelse(V204 %in% 0, 0L, 999L))]   # meses -> 0; 100+, ignorada, NA -> ultima faixa
+  pessoas[is.na(idade), idade := 999L]
+  pessoas[, faixa    := faixas[findInterval(idade, c(0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70))]]
+  pessoas[, presente := !(V202 %in% c(3, 4))]
+  pessoas[, alfabetizacao := data.table::fifelse(V211 %in% c(0, 1), "sabem", data.table::fifelse(V211 %in% c(2, 3), "nao_sabem", NA_character_))]
+  hh <- sort(unique(domicilios$censobr_idhousehold))
+  # --- definitivos: as faixas de idade por sexo so para a UF com 8 pastas ou mais; as pequenas (RO, AC, RR, AP,
+  # Fernando de Noronha, Serra dos Aimores) ficam com o total por sexo. Juntar as pequenas do Norte e Centro-Oeste
+  # num "resto" com faixas de idade foi testado e rejeitado: os fatores implicitos das quatro vao de 0,7 a 1,6, e a
+  # estrutura etaria conjunta so fechava inflando familias grandes de Rondonia ate 7 vezes. O DF fica fora de tudo.
+  pastas_uf <- domicilios[UF != 97, .(pastas = data.table::uniqueN(censobr_upa)), by = UF]
+  pastas_uf[, regiao := regiao_uf[as.character(UF)]]
+  pastas_uf[, grupo := data.table::fifelse(pastas >= 8, as.character(UF), NA_character_)]
+  pessoas[pastas_uf, grupo := i.grupo, on = "UF"]
+  # quem sabe ler: as quatro pequenas do Norte e Centro-Oeste juntas; Noronha e Aimores sozinhas
+  pessoas[, grupo_d := data.table::fifelse(!is.na(grupo), grupo, data.table::fifelse(regiao == "Norte e Centro-Oeste", "resto Norte e Centro-Oeste", as.character(UF)))]
+  pessoas[, cel_a := data.table::fifelse(presente & !is.na(grupo) & !is.na(sexo), paste("a", grupo, sexo, faixa, sep = "|"), NA_character_)]
+  pessoas[, cel_b := data.table::fifelse(presente & UF != 97 & is.na(grupo) & !is.na(sexo), paste("b", UF, sexo, sep = "|"), NA_character_)]
+  # a populacao urbana so e restricao onde ha 8 pastas ou mais: com uma ou duas pastas o corte urbano/rural da UF
+  # nao tem como ser reproduzido sem fatores extremos (Acre: 0,23 na pasta urbana, 6 na rural)
+  ufs_c <- pastas_uf[pastas >= 8, UF]
+  pessoas[, cel_c := data.table::fifelse(presente & UF %in% ufs_c & V118 %in% c(1, 3), paste("c", UF, sep = "|"), NA_character_)]
+  pessoas[, cel_d := data.table::fifelse(presente & UF != 97 & idade >= 5 & alfabetizacao %in% "sabem" & !is.na(sexo), paste("d", grupo_d, sexo, sep = "|"), NA_character_)]
+
+  def[tabela == 33 & item %in% c("70 e mais", "ignorada"), item := "70 e mais e ignorada"]
+  t33 <- def[tabela == 33 & sexo != "total", .(valor = sum(valor)), by = .(uf60, item, sexo)]
+  t33[pastas_uf, grupo := i.grupo, on = c(uf60 = "UF")]
+  alvo_a <- t33[!is.na(grupo) & item != "total", .(celula = paste("a", grupo, sexo, item, sep = "|"), total = valor)]
+  alvo_b <- t33[item == "total" & uf60 %in% pastas_uf[is.na(grupo), UF], .(celula = paste("b", uf60, sexo, sep = "|"), total = valor)]
+  alvo_c <- def[tabela == 34 & item == "urbana" & sexo == "total" & uf60 %in% ufs_c, .(celula = paste("c", uf60, sep = "|"), total = valor)]
+  t40 <- def[tabela == 40 & item == "sabem" & sexo != "total" & uf60 != 97]
+  t40[pastas_uf, grupo := i.grupo, on = c(uf60 = "UF")]
+  t40[is.na(grupo), grupo := data.table::fifelse(regiao_uf[as.character(uf60)] == "Norte e Centro-Oeste", "resto Norte e Centro-Oeste", as.character(uf60))]
+  alvo_d <- t40[, .(total = sum(valor)), by = .(grupo, sexo)][, .(celula = paste("d", grupo, sexo, sep = "|"), total)]
+  alvos <- rbind(alvo_a, alvo_b, alvo_c, alvo_d)
+
+  cont <- data.table::rbindlist(lapply(c("cel_a", "cel_b", "cel_c", "cel_d"), function(v) pessoas[!is.na(get(v)), .N, by = .(censobr_idhousehold, celula = get(v))]))
+  if(any(!cont$celula %in% alvos$celula)) stop("celulas da amostra sem total publicado: ", paste(head(unique(cont$celula[!cont$celula %in% alvos$celula])), collapse = ", "))
+  X <- Matrix::sparseMatrix(i = match(cont$censobr_idhousehold, hh), j = match(cont$celula, alvos$celula), x = cont$N, dims = c(length(hh), nrow(alvos)))
+  amostra <- as.numeric(Matrix::colSums(X))
+  if(any(amostra == 0)) stop("celulas sem pessoa na amostra: ", paste(alvos$celula[amostra == 0], collapse = ", "))
+  alvos[, implicito := round(total / amostra / 78.74, 2)]
+  list(X = X, alvos = alvos, hh = hh)
 }
 
 
@@ -947,49 +1031,16 @@ calibrate_1960_amostra_127 <- function(tabelas, gabarito_path, definitivos_path)
   message("  1965: ", length(celulas), " celulas (quadro 1: ", nrow(g1), "; quadro 2: ", nrow(g2), ")")
   w1965 <- raking_1960_amostra_127(X, totais, d)
 
-  # --- definitivos: as faixas de idade por sexo so para a UF com 8 pastas ou mais; as pequenas (RO, AC, RR, AP,
-  # Fernando de Noronha, Serra dos Aimores) ficam com o total por sexo. Juntar as pequenas do Norte e Centro-Oeste
-  # num "resto" com faixas de idade foi testado e rejeitado: os fatores implicitos das quatro vao de 0,7 a 1,6, e a
-  # estrutura etaria conjunta so fechava inflando familias grandes de Rondonia ate 7 vezes. O DF fica fora de tudo.
-  pastas_uf <- domicilios[UF != 97, .(pastas = data.table::uniqueN(censobr_upa)), by = UF]
-  pastas_uf[, regiao := regiao_uf[as.character(UF)]]
-  pastas_uf[, grupo := data.table::fifelse(pastas >= 8, as.character(UF), NA_character_)]
-  pessoas[pastas_uf, grupo := i.grupo, on = "UF"]
-  # quem sabe ler: as quatro pequenas do Norte e Centro-Oeste juntas; Noronha e Aimores sozinhas
-  pessoas[, grupo_d := data.table::fifelse(!is.na(grupo), grupo, data.table::fifelse(regiao == "Norte e Centro-Oeste", "resto Norte e Centro-Oeste", as.character(UF)))]
-  pessoas[, cel_a := data.table::fifelse(presente & !is.na(grupo) & !is.na(sexo), paste("a", grupo, sexo, faixa, sep = "|"), NA_character_)]
-  pessoas[, cel_b := data.table::fifelse(presente & UF != 97 & is.na(grupo) & !is.na(sexo), paste("b", UF, sexo, sep = "|"), NA_character_)]
-  # a populacao urbana so e restricao onde ha 8 pastas ou mais: com uma ou duas pastas o corte urbano/rural da UF
-  # nao tem como ser reproduzido sem fatores extremos (Acre: 0,23 na pasta urbana, 6 na rural)
-  ufs_c <- pastas_uf[pastas >= 8, UF]
-  pessoas[, cel_c := data.table::fifelse(presente & UF %in% ufs_c & V118 %in% c(1, 3), paste("c", UF, sep = "|"), NA_character_)]
-  pessoas[, cel_d := data.table::fifelse(presente & UF != 97 & idade >= 5 & alfabetizacao %in% "sabem" & !is.na(sexo), paste("d", grupo_d, sexo, sep = "|"), NA_character_)]
-
-  def[tabela == 33 & item %in% c("70 e mais", "ignorada"), item := "70 e mais e ignorada"]
-  t33 <- def[tabela == 33 & sexo != "total", .(valor = sum(valor)), by = .(uf60, item, sexo)]
-  t33[pastas_uf, grupo := i.grupo, on = c(uf60 = "UF")]
-  alvo_a <- t33[!is.na(grupo) & item != "total", .(celula = paste("a", grupo, sexo, item, sep = "|"), total = valor)]
-  alvo_b <- t33[item == "total" & uf60 %in% pastas_uf[is.na(grupo), UF], .(celula = paste("b", uf60, sexo, sep = "|"), total = valor)]
-  alvo_c <- def[tabela == 34 & item == "urbana" & sexo == "total" & uf60 %in% ufs_c, .(celula = paste("c", uf60, sep = "|"), total = valor)]
-  t40 <- def[tabela == 40 & item == "sabem" & sexo != "total" & uf60 != 97]
-  t40[pastas_uf, grupo := i.grupo, on = c(uf60 = "UF")]
-  t40[is.na(grupo), grupo := data.table::fifelse(regiao_uf[as.character(uf60)] == "Norte e Centro-Oeste", "resto Norte e Centro-Oeste", as.character(uf60))]
-  alvo_d <- t40[, .(total = sum(valor)), by = .(grupo, sexo)][, .(celula = paste("d", grupo, sexo, sep = "|"), total)]
-  alvos <- rbind(alvo_a, alvo_b, alvo_c, alvo_d)
-
-  cont <- data.table::rbindlist(lapply(c("cel_a", "cel_b", "cel_c", "cel_d"), function(v) pessoas[!is.na(get(v)), .N, by = .(censobr_idhousehold, celula = get(v))]))
-  if(any(!cont$celula %in% alvos$celula)) stop("celulas da amostra sem total publicado: ", paste(head(unique(cont$celula[!cont$celula %in% alvos$celula])), collapse = ", "))
-  X <- Matrix::sparseMatrix(i = match(cont$censobr_idhousehold, hh), j = match(cont$celula, alvos$celula), x = cont$N, dims = c(length(hh), nrow(alvos)))
-  amostra <- as.numeric(Matrix::colSums(X))
-  if(any(amostra == 0)) stop("celulas sem pessoa na amostra: ", paste(alvos$celula[amostra == 0], collapse = ", "))
-  alvos[, implicito := round(total / amostra / 78.74, 2)]
-  message("  definitivos: ", nrow(alvos), " celulas (a ", nrow(alvo_a), ", b ", nrow(alvo_b), ", c ", nrow(alvo_c), ", d ", nrow(alvo_d),
+  # --- definitivos: as celulas estao em celulas_definitivos_1960_amostra_127, que o passo 11 tambem usa
+  cal <- celulas_definitivos_1960_amostra_127(tabelas$pessoas, domicilios, def)
+  alvos <- cal$alvos
+  message("  definitivos: ", nrow(alvos), " celulas (", paste0(alvos[, .N, by = .(bloco = substr(celula, 1, 1))][, paste(bloco, N)], collapse = ", "),
           "); fator implicito (publicado / amostra x 78,74) fora de [0,5; 2]: ", paste0(alvos[implicito < 0.5 | implicito > 2, paste0(celula, "=", implicito)], collapse = " "))
   # o peso de desenho de Fernando de Noronha e 4, nao 78,74: a sua unica pasta era o cadastro inteiro (a amostra de
   # 25% mostra uma pasta em vez de vinte), so houve a etapa de um domicilio em quatro. Nas outras unidades ficam
   # os 78,74. Os fatores ficam entre 0,3 e 3,5 (distancia logit); o raking puro dava ate 9 em Rondonia.
   d_def <- d; d_def[hh %in% domicilios[UF == 24, censobr_idhousehold]] <- 4
-  w <- raking_1960_amostra_127(X, alvos$total, d_def, limites = c(0.3, 3.5))
+  w <- raking_1960_amostra_127(cal$X, alvos$total, d_def, limites = c(0.3, 3.5))
 
   pesos <- data.table::data.table(censobr_idhousehold = hh, censobr_weight = w, censobr_weight_fator = w / d, censobr_weight_1965 = w1965, censobr_weight_1965_fator = w1965 / d)
   domicilios[pesos, `:=`(censobr_weight = i.censobr_weight, censobr_weight_fator = i.censobr_weight_fator, censobr_weight_1965 = i.censobr_weight_1965, censobr_weight_1965_fator = i.censobr_weight_1965_fator), on = "censobr_idhousehold"]
@@ -1196,30 +1247,43 @@ validate_definitivos_1960_amostra_127 <- function(tabelas, definitivos_path){
 # Como se calcula. A amostra é de conglomerados: sorteou-se uma pasta em
 # vinte, e a pasta traz ~220 domicílios inteiros, todos parecidos entre si
 # porque são vizinhos. Tratar a amostra como se fosse aleatória simples
-# subestima a variância, às vezes muito. O estimador correto soma, dentro de
-# cada estrato, a dispersão dos totais entre as pastas daquele estrato:
+# subestima a variância, às vezes muito. O estimador soma, dentro de cada
+# estrato, a dispersão dos totais entre as pastas daquele estrato, com a
+# correção de população finita da etapa que sorteia as pastas:
 #
-#   V = (1 - 1/20) * soma_h  n_h/(n_h-1) * soma_i (t_hi - média dos t_h)^2
+#   V_entre = soma_h (1 - f_h) n_h/(n_h-1) soma_i (t_hi - média dos t_h)^2
 #
-# onde t_hi é o total estimado dentro da pasta i do estrato h. É o estimador
-# de conglomerado último, com reposição — o mesmo de survey::svydesign(ids =
+# onde t_hi é o total estimado dentro da pasta i do estrato h e f_h = 1/20.
+# É o estimador de conglomerado último, o mesmo de survey::svydesign(ids =
 # ~censobr_upa, strata = ~censobr_estrato, weights = ~censobr_weight, fpc =
-# ~I(rep(1/20, .N))), aqui escrito à mão para não acrescentar dependência ao
-# pipeline (o `survey` está no renv e serve de conferência).
+# ~fpc), escrito à mão para não acrescentar dependência ao pipeline (o
+# `survey` está no renv e serve de conferência). Fernando de Noronha é um
+# estrato de certeza: a sua única pasta era o cadastro inteiro, f = 1, e a
+# etapa das pastas não contribui variância ali (no survey, fpc = 1).
 #
-# O fator (1 - 1/20) é a correção de população finita da etapa que sorteia as
-# pastas. A dispersão entre pastas já contém 95% da variância da etapa
-# anterior — um domicílio em quatro, no campo —, e o 1/20 que fica de fora
-# vale entre 0,1% e 1,2% da variância. Sem a correção o erro-padrão sairia
-# 2,5% maior sem contrapartida.
+# A etapa anterior — um domicílio em quatro, no campo — entra em parte na
+# dispersão entre pastas (95% dela) e em parte não; o que falta é
 #
-# O efeito de desenho (deff) é essa variância dividida pela de uma amostra
-# aleatória simples de pessoas do mesmo tamanho, N²(1-f)P(1-P)/(n-1); diz
-# quantas vezes a amostra é menos precisa do que seria se cada pessoa tivesse
-# sido sorteada isoladamente. Para o total do país ele não existe, porque uma
-# amostra de tamanho fixo estima esse total sem erro por construção.
+#   V_dentro = soma_i f_i (1 - 1/4) m_i/(m_i-1) soma_k (w_k y_k - média da pasta)^2
+#
+# somado sobre as pastas sorteadas, com m_i domicílios na pasta i e f_i a
+# fração de sorteio da pasta (1/20; Noronha 1). Vale entre 0,1% e 1,2% da
+# variância; entra porque custa três linhas e fecha a conta.
+#
+# Para `censobr_weight`, calibrado a totais externos (resultados definitivos),
+# vale também a variância pelos resíduos da calibração: os mesmos dois
+# termos, com y_k trocado por e_k = y_k - x_k'B, o resíduo da regressão
+# ponderada de y nas células da calibração. É o estimador de Deville e
+# Särndal; nas células restritas ele dá zero, e nos domínios próximos delas
+# dá bem menos que o estimador de desenho. Para `censobr_weight_1965` ele
+# não vale (os totais de 1965 vieram desta mesma amostra) e fica vazio.
+#
+# O efeito de desenho (deff) é a variância de desenho dividida pela de uma
+# amostra aleatória simples de pessoas do mesmo tamanho, N²(1-f)P(1-P)/(n-1);
+# diz quantas vezes a amostra é menos precisa do que seria se cada pessoa
+# tivesse sido sorteada isoladamente. Para o total do país ele não existe.
 # ------------------------------------------------------------------------------
-sampling_errors_1960_amostra_127 <- function(tabelas){
+sampling_errors_1960_amostra_127 <- function(tabelas, definitivos_path){
 
   message("Estimating sampling errors for the 1960 amostra de 1,27%")
 
@@ -1231,45 +1295,72 @@ sampling_errors_1960_amostra_127 <- function(tabelas){
   p0[, faixa := c("0 a 4", "5 a 9", "10 a 14", "15 a 19", "20 a 24", "25 a 29", "30 a 39", "40 a 49", "50 a 59", "60 a 69", "70 e mais e ignorada")[findInterval(idade, c(0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70))]]
   p0 <- p0[!(V202 %in% c(3, 4)) & !is.na(V202) & !is.na(regiao) & !is.na(situacao)]
 
-  # a pasta que nao tem ninguem do dominio entra na conta com total zero: e por isso
-  # que o numero de pastas do estrato vem da amostra toda, e nao do dominio
-  pastas_estrato <- unique(p0[, .(censobr_estrato, censobr_upa)])[, .(n = .N), by = censobr_estrato]
+  # o domicilio e a unidade que carrega o peso; a pasta, a que foi sorteada. O numero de pastas do estrato e o de
+  # domicilios da pasta vem da amostra toda: a pasta ou o domicilio sem ninguem do dominio entra na conta com zero
+  cal <- celulas_definitivos_1960_amostra_127(tabelas$pessoas, tabelas$domicilios, data.table::fread(definitivos_path, encoding = "UTF-8")[nivel == "uf"])
+  hh  <- cal$hh
+  dom <- tabelas$domicilios[match(hh, censobr_idhousehold), .(censobr_upa, censobr_estrato, censobr_weight, censobr_weight_1965, f = data.table::fifelse(UF == 24, 1, 1 / 20))]
+  pastas   <- dom[, .(m = .N, estrato = censobr_estrato[1], f = f[1]), by = censobr_upa]
+  estratos <- pastas[, .(n = .N, f = f[1]), by = estrato]
 
   res <- data.table::rbindlist(lapply(c("censobr_weight", "censobr_weight_1965"), function(peso){
   p <- data.table::copy(p0); p[, w := get(peso)]
+  w_hh <- dom[[peso]]
   n_amostra <- nrow(p); n_populacao <- sum(p$w)
+  # a projecao da calibracao, so para o peso final: e o unico com totais externos
+  XtWX <- if(peso == "censobr_weight") as.matrix(Matrix::crossprod(cal$X, Matrix::Diagonal(x = w_hh) %*% cal$X)) else NULL
+
+  # a variancia de um total, dado o valor z_k = w_k y_k (ou w_k e_k) de cada domicilio na ordem de hh
+  variancia <- function(z){
+    s  <- rowsum(cbind(z, z^2), dom$censobr_upa)
+    pp <- pastas[match(rownames(s), censobr_upa)]
+    pp[, `:=`(s1 = s[, 1], s2 = s[, 2])]
+    pp[, dentro := data.table::fifelse(m > 1, f * (1 - 1 / 4) * m / (m - 1) * (s2 - s1^2 / m), 0)]
+    e <- pp[, .(soma = sum(s1), soma2 = sum(s1^2), dentro = sum(dentro)), by = estrato]
+    e[estratos, `:=`(n = i.n, f = i.f), on = "estrato"]
+    e[, entre := data.table::fifelse(f < 1, (1 - f) * n / (n - 1) * (soma2 - soma^2 / n), 0)]
+    e[, sum(entre) + sum(dentro)]
+  }
 
   erro_padrao <- function(por){
-    pasta <- p[, .(t = sum(w)), by = c(por, "censobr_estrato", "censobr_upa")]
-    estr  <- pasta[, .(soma = sum(t), soma2 = sum(t^2)), by = c(por, "censobr_estrato")]
-    estr[pastas_estrato, n := i.n, on = "censobr_estrato"]
-    estr[, v := (1 - 1 / 20) * n / (n - 1) * (soma2 - soma^2 / n)]
-    out <- estr[, .(estimativa = sum(soma), variancia = sum(v)), by = por]
-    out[p[, .(pessoas = .N), by = por], pessoas := i.pessoas, on = por]
+    # pessoas de cada domicilio em cada dominio; Y e a matriz domicilio x dominio
+    y <- p[, .(y = .N), by = c(por, "censobr_idhousehold")]
+    y[, dominio := .GRP, by = por]
+    dominios <- unique(y[, c(por, "dominio"), with = FALSE])[order(dominio)]
+    Y <- Matrix::sparseMatrix(i = match(y$censobr_idhousehold, hh), j = y$dominio, x = y$y, dims = c(length(hh), nrow(dominios)))
+    B <- if(is.null(XtWX)) NULL else solve(XtWX, as.matrix(Matrix::crossprod(cal$X, Matrix::Diagonal(x = w_hh) %*% Y)))
+    v <- sapply(seq_len(ncol(Y)), function(j){
+      yj <- as.numeric(Y[, j])
+      c(variancia(w_hh * yj), if(is.null(B)) NA_real_ else variancia(w_hh * (yj - as.numeric(cal$X %*% B[, j]))))
+    })
+    out <- data.table::copy(dominios)
+    out[, `:=`(estimativa = as.numeric(Matrix::crossprod(Y, w_hh)), variancia = v[1, ], variancia_calibrada = v[2, ])]
+    out[y[, .(pessoas = sum(y)), by = dominio], pessoas := i.pessoas, on = "dominio"]
 
     # referencia: amostra aleatoria simples de pessoas do mesmo tamanho, N^2 (1-f) P(1-P)/(n-1)
     out[, parte := estimativa / n_populacao]
     out[, v_srs := n_populacao^2 * (1 - n_amostra / n_populacao) * parte * (1 - parte) / (n_amostra - 1)]
     out[, `:=`(erro_padrao = sqrt(variancia), cv_pct = round(100 * sqrt(variancia) / estimativa, 2),
-               deff = data.table::fifelse(parte < 1, round(variancia / v_srs, 1), NA_real_))]
-    out[, .SD, .SDcols = c(por, "estimativa", "erro_padrao", "cv_pct", "deff", "pessoas")]
+               deff = data.table::fifelse(parte < 1 - 1e-6, round(variancia / v_srs, 1), NA_real_),
+               erro_padrao_calibrado = sqrt(variancia_calibrada), cv_calibrado_pct = round(100 * sqrt(variancia_calibrada) / estimativa, 2))]
+    out[, .SD, .SDcols = c(por, "estimativa", "erro_padrao", "cv_pct", "deff", "pessoas", "erro_padrao_calibrado", "cv_calibrado_pct")]
   }
 
   celulas <- erro_padrao(c("regiao", "situacao", "sexo", "faixa"))
   totais  <- rbind(erro_padrao(c("regiao", "situacao"))[, `:=`(sexo = "ambos", faixa = "todas")],
                    erro_padrao("regiao")[, `:=`(situacao = "ambas", sexo = "ambos", faixa = "todas")],
                    erro_padrao("situacao")[, `:=`(regiao = "Brasil", sexo = "ambos", faixa = "todas")],
+                   erro_padrao(character(0))[, `:=`(regiao = "Brasil", situacao = "ambas", sexo = "ambos", faixa = "todas")],
                    fill = TRUE)
-  brasil <- p[, .(regiao = "Brasil", situacao = "ambas", sexo = "ambos", faixa = "todas", estimativa = sum(w))]
-  rbind(brasil, totais, celulas, fill = TRUE)[, .(peso = peso, regiao, situacao, sexo, faixa, estimativa = round(estimativa),
-                                                  erro_padrao = round(erro_padrao), cv_pct, deff, pessoas)]
+  rbind(totais, celulas, fill = TRUE)[, .(peso = peso, regiao, situacao, sexo, faixa, estimativa = round(estimativa), erro_padrao = round(erro_padrao),
+                                          cv_pct, deff, pessoas, erro_padrao_calibrado = round(erro_padrao_calibrado), cv_calibrado_pct)]
   }))
   data.table::fwrite(res, "./data_raw/microdata/1960/amostra_127/erros_amostrais.csv", bom = TRUE)
 
   celulas <- res[peso == "censobr_weight" & faixa != "todas"]
   message("  ", nrow(res) / 2, " dominios por peso; com censobr_weight, nas 176 celulas do quadro 1 o coeficiente de variacao tem mediana ",
-          round(median(celulas$cv_pct), 2), "% e maximo ", round(max(celulas$cv_pct), 1),
-          "%; efeito de desenho mediano ", round(median(celulas$deff, na.rm = TRUE), 1))
+          round(median(celulas$cv_pct), 2), "% e maximo ", round(max(celulas$cv_pct), 1), "%; efeito de desenho mediano ", round(median(celulas$deff, na.rm = TRUE), 1),
+          "; pelos residuos da calibracao, mediana ", round(median(celulas$cv_calibrado_pct), 2), "% e maximo ", round(max(celulas$cv_calibrado_pct), 1), "%")
   res
 }
 

@@ -261,7 +261,14 @@ v_ultimo <- function(t, h, ordem = NULL, sd = FALSE, fpc = 1 - 1 / 20){
   else { setorder(dt, h, o); v <- dt[, .(v = if(.N > 1) .N / (2 * (.N - 1)) * sum(diff(t)^2) else NA_real_), by = h] }
   fpc * sum(v$v, na.rm = TRUE)
 }
-h47 <- tp$estrato; h16 <- paste(REGIAO_1960[as.character(tp$UF)], tp$grupo, sep = " - ")
+# tres estratificacoes: a adotada (UF, com a vizinha da mesma regiao onde a UF ficaria sozinha), a regra
+# anterior (o grupo de situacao inteiro da regiao) e a mais grossa de todas (regiao x situacao)
+h_adotado <- tp$estrato
+h_grupo <- paste(REGIAO_1960[as.character(tp$UF)], tp$grupo, sep = " - ")
+uf_grupo <- paste0("UF ", tp$UF, " - ", tp$grupo)
+sozinhas <- names(which(table(uf_grupo) == 1))
+h_colapso <- fifelse(uf_grupo %in% sozinhas, h_grupo, uf_grupo)
+h16 <- h_grupo
 # variancia pos-calibracao: residuo da regressao dos totais por domicilio nas 184 celulas calibradas
 faixas <- c("0 a 4", "5 a 9", "10 a 14", "15 a 19", "20 a 24", "25 a 29", "30 a 39", "40 a 49", "50 a 59", "60 a 69", "70 e mais e ignorada")
 p[, sexo := fifelse(V202 %in% c(1, 3, 5), "homens", fifelse(V202 %in% c(2, 4, 6), "mulheres", NA_character_))]
@@ -285,23 +292,25 @@ res <- rbindlist(lapply(vars, function(v){
   B <- solve(XtWX, as.numeric(XtW %*% yh[[v]])); ee <- yh[[v]] - as.numeric(X %*% B)
   te <- data.table(hd, we = wd * ee)[, .(t = sum(we)), by = .(h, upa)]
   data.table(total = rotulos[v], estimativa = round(Y), pastas_com = sum(t > 0),
-             adotado = sqrt(v_ultimo(t, h47)), sem_fpc = sqrt(v_ultimo(t, h47, fpc = 1)), regiao_16 = sqrt(v_ultimo(t, h16)),
-             dif_sucessivas = sqrt(v_ultimo(t, h47, ordem = tp$pasta_n, sd = TRUE)), residuos_calibracao = sqrt(v_ultimo(te$t, te$h)),
+             adotado = sqrt(v_ultimo(t, h_adotado)), sem_fpc = sqrt(v_ultimo(t, h_adotado, fpc = 1)),
+             colapso_regiao = sqrt(v_ultimo(t, h_colapso)), regiao_16 = sqrt(v_ultimo(t, h16)),
+             dif_sucessivas = sqrt(v_ultimo(t, h_adotado, ordem = tp$pasta_n, sd = TRUE)), residuos_calibracao = sqrt(v_ultimo(te$t, te$h)),
              aas = sqrt(N^2 * (1 - n_amostra / N) * parte * (1 - parte) / (n_amostra - 1)))
 }))
 res[, `:=`(cv_pct = round(100 * adotado / estimativa, 2), deff = round((adotado / aas)^2, 1))]
 cat("\nD2 erros-padrao (milhares) dos cinco totais, por estimador:\n")
-print(res[, .(total, estimativa, pastas_com, adotado = round(adotado / 1e3), sem_fpc = round(sem_fpc / 1e3), regiao_16 = round(regiao_16 / 1e3), dif_sucessivas = round(dif_sucessivas / 1e3),
+print(res[, .(total, estimativa, pastas_com, adotado = round(adotado / 1e3), sem_fpc = round(sem_fpc / 1e3), colapso_regiao = round(colapso_regiao / 1e3),
+              regiao_16 = round(regiao_16 / 1e3), dif_sucessivas = round(dif_sucessivas / 1e3),
               residuos_calibracao = round(residuos_calibracao / 1e3), aas = round(aas / 1e3), cv_pct, deff)])
-long <- melt(res[, .(total, adotado, sem_fpc, regiao_16, dif_sucessivas, residuos_calibracao, aas)], id.vars = c("total", "adotado"), variable.name = "estimador", value.name = "ep")
+long <- melt(res[, .(total, adotado, sem_fpc, colapso_regiao, regiao_16, dif_sucessivas, residuos_calibracao, aas)], id.vars = c("total", "adotado"), variable.name = "estimador", value.name = "ep")
 long[, razao := ep / adotado]
-long[, estimador := factor(estimador, levels = c("sem_fpc", "regiao_16", "dif_sucessivas", "residuos_calibracao", "aas"),
-                           labels = c("sem correção finita", "estratos região × situação", "diferenças sucessivas", "resíduos da calibração", "se fosse aleatória simples"))]
+long[, estimador := factor(estimador, levels = c("sem_fpc", "colapso_regiao", "regiao_16", "dif_sucessivas", "residuos_calibracao", "aas"),
+                           labels = c("sem correção finita", "colapso no grupo da região", "estratos região × situação", "diferenças sucessivas", "resíduos da calibração", "se fosse aleatória simples"))]
 long[, total := factor(total, levels = rotulos)]
 g <- ggplot(long, aes(total, razao, fill = estimador)) + geom_col(position = position_dodge(width = 0.8), width = 0.75) + geom_hline(yintercept = 1, linetype = 2) +
   scale_fill_brewer(palette = "Set2") + scale_x_discrete(labels = label_wrap(16)) +
   labs(x = NULL, y = "erro-padrão relativo ao estimador adotado", fill = NULL, title = "Os estimadores alternativos, em cinco totais: o que cada um muda",
-       subtitle = "1 = conglomerado último com correção finita e 47 estratos (o adotado). Barras abaixo de 1 são erros menores.") + tema + theme(legend.position = "bottom")
+       subtitle = "1 = conglomerado último com correção finita e 75 estratos (o adotado). Barras abaixo de 1 são erros menores.") + tema + theme(legend.position = "bottom")
 salva("fig09_estimadores.png", g, 10, 5.5)
 
 # a componente da primeira etapa (1 domicilio em 4), contra a medida pela segunda
@@ -311,6 +320,7 @@ for(P in c(0.5, 0.2, 0.05, 0.01)){ cv1 <- sqrt((1 - 0.25) / n25 * (1 - P) / P); 
 
 # estratos do pipeline
 pe <- unique(d[, .(censobr_estrato, censobr_upa)])[, .N, by = censobr_estrato]
-cat("\nE1 estratos:", nrow(pe), "| de UF:", pe[grepl("^UF ", censobr_estrato), .N], "| de regiao:", pe[!grepl("^UF ", censobr_estrato), .N], "| pastas por estrato: min", min(pe$N), "mediana", median(pe$N), "max", max(pe$N), "\n")
-cat("E1 estratos de regiao (colapsados):", pe[!grepl("^UF ", censobr_estrato)][order(censobr_estrato), paste0(censobr_estrato, " (", N, ")", collapse = "; ")], "\n")
+cat("\nE1 estratos:", nrow(pe), "| de UF sozinha:", pe[!grepl("\\+", censobr_estrato), .N], "| juntados a uma vizinha:", pe[grepl("\\+", censobr_estrato), .N],
+    "| pastas por estrato: min", min(pe$N), "mediana", median(pe$N), "max", max(pe$N), "\n")
+cat("E1 estratos juntados:", pe[grepl("\\+", censobr_estrato)][order(censobr_estrato), paste0(censobr_estrato, " (", N, ")", collapse = "; ")], "\n")
 cat("\nfiguras em", dir_fig, ":", paste(list.files(dir_fig), collapse = ", "), "\n")
