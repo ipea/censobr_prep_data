@@ -1505,10 +1505,10 @@
 40,Estado de Minas Gerais,4919,Uberaba,31,3170107,491,87833,72053,15780,AEB
 40,Estado de Minas Gerais,4920,Uberlândia,31,3170206,492,88282,71717,16565,AEB
 40,Estado de Minas Gerais,4921,Veríssimo,31,3171105,492,5214,822,4392,AEB
-50,Serra dos Aimorés,5001,Região da Serra dos Aimorés (unidade adotada no Recenseamento de 1960; 99 = litígio MG/ES na malha de 1960 do geobr),99,99,,,,,""
-50,Serra dos Aimorés,5110,Barra de São Francisco,32,3200904,511,,,,""
-50,Serra dos Aimorés,5112,Ecoporanga,32,3202108,511,,,,""
-50,Serra dos Aimorés,5113,Mantenópolis,32,3203304,511,,,,""
+50,Serra dos Aimorés,5001,Região da Serra dos Aimorés (unidade adotada no Recenseamento de 1960; 99 = litígio MG/ES na malha de 1960 do geobr),99,99,,,,,
+50,Serra dos Aimorés,5110,Barra de São Francisco,32,3200904,511,,,,
+50,Serra dos Aimorés,5112,Ecoporanga,32,3202108,511,,,,
+50,Serra dos Aimorés,5113,Mantenópolis,32,3203304,511,,,,
 51,Estado do Espírito Santo,5111,Conceição da Barra,32,3201605,511,32059,2765,29294,AEB
 51,Estado do Espírito Santo,5114,Mucurici,32,3203601,511,3916,,3916,AEB
 51,Estado do Espírito Santo,5115,Nova Venécia,32,3203908,511,43901,6169,37732,AEB
@@ -2116,7 +2116,7 @@
 71,Estado do Paraná,7102,Guaratuba,41,4109609,710,6694,2541,4153,AEB
 71,Estado do Paraná,7103,Morretes,41,4116208,710,11654,3430,8224,AEB
 71,Estado do Paraná,7104,Paranaguá,41,4118204,710,38825,28755,10070,AEB
-71,Estado do Paraná,7110,Bocaiúva do Sul,41,4103107,711,18149,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
+71,Estado do Paraná,7110,Bocaiúva do Sul,41,4103107,711,18346,2101,16245,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 3"
 71,Estado do Paraná,7111,Cerro Azul,41,4105201,711,17304,2058,15246,AEB
 71,Estado do Paraná,7112,Rio Branco do Sul,41,4122206,711,20429,2037,18392,AEB
 71,Estado do Paraná,7120,Bituruna,41,4102901,712,7484,634,6850,AEB
@@ -2162,68 +2162,68 @@
 71,Estado do Paraná,7192,Ipiranga,41,4110508,719,17877,2622,15255,AEB
 71,Estado do Paraná,7193,Ortigueira,41,4117305,719,17678,2144,15534,AEB
 71,Estado do Paraná,7194,Prudentópolis,41,4120606,719,30182,4721,25461,AEB
-71,Estado do Paraná,7195,Reserva,41,4121703,719,13793,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
+71,Estado do Paraná,7195,Reserva,41,4121703,719,13828,1042,12786,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 9"
 71,Estado do Paraná,7200,Cruz Machado,41,4106803,720,13712,428,13284,AEB
 71,Estado do Paraná,7201,Irati,41,4110706,720,30817,14115,16702,AEB
 71,Estado do Paraná,7202,Mallet,41,4113908,720,10342,2584,7758,AEB
 71,Estado do Paraná,7203,Paulo Frontin,41,4118709,720,6531,742,5789,AEB
 71,Estado do Paraná,7204,Rebouças,41,4121505,720,9885,2423,7462,AEB
-71,Estado do Paraná,7205,Rio Azul,41,4122008,720,10059,1634,8425,AEB
+71,Estado do Paraná,7205,Rio Azul,41,4122008,720,10059,1967,8092,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 10"
 71,Estado do Paraná,7206,São João do Triunfo,41,4125100,720,9399,1339,8060,AEB
 71,Estado do Paraná,7207,São Mateus do Sul,41,4125605,720,19097,3848,15249,AEB
 71,Estado do Paraná,7208,Teixeira Soares,41,4127007,720,11624,2721,8903,AEB
 71,Estado do Paraná,7209,União da Vitória,41,4128203,720,30592,16887,13705,AEB
 71,Estado do Paraná,7220,Alto Paraná,41,4100608,722,30566,5167,25399,AEB
-71,Estado do Paraná,7221,Araruna,41,4101705,722,16893,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
+71,Estado do Paraná,7221,Araruna,41,4101705,722,17009,2871,14138,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 11"
 71,Estado do Paraná,7222,Barracão,41,4102604,722,14954,1423,13531,AEB
-71,Estado do Paraná,7223,Campo Mourão,41,4104303,722,140362,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
+71,Estado do Paraná,7223,Campo Mourão,41,4104303,722,141157,19489,121668,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 11"
 71,Estado do Paraná,7224,Capanema,41,4104501,722,29306,4053,25253,AEB
 71,Estado do Paraná,7225,Cascavel,41,4104808,722,39598,5274,34324,AEB
 71,Estado do Paraná,7226,Chopinzinho,41,4105409,722,21797,1303,20494,AEB
 71,Estado do Paraná,7227,Cianorte,41,4105508,722,49731,8086,41645,AEB
 71,Estado do Paraná,7228,Clevelândia,41,4105706,722,23634,6130,17504,AEB
 71,Estado do Paraná,7229,Coronel Vivida,41,4106506,722,14552,1280,13272,AEB
-71,Estado do Paraná,7230,Cruzeiro do Oeste,41,4106605,723,135326,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
-71,Estado do Paraná,7231,Cruzeiro do Sul,41,4106704,723,10119,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
-71,Estado do Paraná,7232,Engenheiro Beltrão,41,4107504,723,14177,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
+71,Estado do Paraná,7230,Cruzeiro do Oeste,41,4106605,723,135816,20289,115527,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 12"
+71,Estado do Paraná,7231,Cruzeiro do Sul,41,4106704,723,10159,1218,8941,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 12"
+71,Estado do Paraná,7232,Engenheiro Beltrão,41,4107504,723,14314,779,13535,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 12"
 71,Estado do Paraná,7233,Floraí,41,4107801,723,13566,1755,11811,AEB
 71,Estado do Paraná,7234,Foz do Iguaçu,41,4108304,723,28212,9753,18459,AEB
 71,Estado do Paraná,7235,Francisco Beltrão,41,4108403,723,55496,4989,50507,AEB
-71,Estado do Paraná,7236,Goio-Erê,41,4108601,723,23660,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
+71,Estado do Paraná,7236,Goio-Erê,41,4108601,723,23732,4491,19241,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 13"
 71,Estado do Paraná,7237,Guaíra,41,4108809,723,21486,8890,12596,AEB
 71,Estado do Paraná,7238,Guaraniaçu,41,4109302,723,21422,1580,19842,AEB
 71,Estado do Paraná,7239,Jussara,41,4113007,723,8471,999,7472,AEB
 71,Estado do Paraná,7240,Laranjeiras do Sul,41,4113304,724,36087,5918,30169,AEB
 71,Estado do Paraná,7241,Loanda,41,4113502,724,20612,8175,12437,AEB
-71,Estado do Paraná,7242,Mandaguaçu,41,4114104,724,26608,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
+71,Estado do Paraná,7242,Mandaguaçu,41,4114104,724,26721,3316,23405,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 14"
 71,Estado do Paraná,7243,Mandaguari,41,4114203,724,24630,8210,16420,AEB
 71,Estado do Paraná,7244,Mangueirinha,41,4114401,724,11659,1088,10571,AEB
 71,Estado do Paraná,7245,Manoel Ribas,41,4114500,724,54994,5520,49474,AEB
 71,Estado do Paraná,7246,Marialva,41,4114807,724,35866,5533,30333,AEB
 71,Estado do Paraná,7247,Maringá,41,4115200,724,104131,47592,56539,AEB
 71,Estado do Paraná,7248,Nova Esperança,41,4116901,724,43095,9975,33120,AEB
-71,Estado do Paraná,7249,Nova Londrina,41,4117107,724,18246,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
-71,Estado do Paraná,7250,Paraíso do Norte,41,4118006,725,25286,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
-71,Estado do Paraná,7251,Paranacity,41,4118105,725,29305,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
+71,Estado do Paraná,7249,Nova Londrina,41,4117107,724,18366,6068,12298,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 15"
+71,Estado do Paraná,7250,Paraíso do Norte,41,4118006,725,21218,6209,15009,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 15"
+71,Estado do Paraná,7251,Paranacity,41,4118105,725,23729,3816,19913,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 15"
 71,Estado do Paraná,7252,Paranavaí,41,4118402,725,63189,25058,38131,AEB
 71,Estado do Paraná,7253,Pato Branco,41,4118501,725,51581,10333,41248,AEB
 71,Estado do Paraná,7254,Peabiru,41,4118808,725,19180,5368,13812,AEB
 71,Estado do Paraná,7255,Pitanga,41,4119608,725,56006,4362,51644,AEB
 71,Estado do Paraná,7256,Querência do Norte,41,4121000,725,7517,1423,6094,AEB
-71,Estado do Paraná,7257,Rondon,41,4122602,725,37892,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
+71,Estado do Paraná,7257,Rondon,41,4122602,725,38063,3168,34895,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 16"
 71,Estado do Paraná,7258,Santa Cruz de Monte Castelo,41,4123303,725,7199,1297,5902,AEB
 71,Estado do Paraná,7259,Santa Isabel do Ivaí,41,4123709,725,12635,955,11680,AEB
 71,Estado do Paraná,7260,Santo Antônio,41,4124400,726,26263,2399,23864,AEB
 71,Estado do Paraná,7261,São Carlos do Ivaí,41,4124608,726,10108,1509,8599,AEB
 71,Estado do Paraná,7262,São João do Caiuá,41,4124905,726,18542,2305,16237,AEB
-71,Estado do Paraná,7263,São Jorge,41,4125308,726,22082,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
+71,Estado do Paraná,7263,São Jorge,41,4125308,726,22361,2559,19802,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 17"
 71,Estado do Paraná,7264,São Pedro do Ivaí,41,4125803,726,11606,3078,8528,AEB
 71,Estado do Paraná,7265,Tamboara,41,4126702,726,11831,1529,10302,AEB
 71,Estado do Paraná,7266,Terra Boa,41,4127205,726,16697,2485,14212,AEB
 71,Estado do Paraná,7267,Terra Rica,41,4127304,726,18619,3129,15490,AEB
 71,Estado do Paraná,7268,Toledo,41,4127700,726,24959,5926,19033,AEB
 71,Estado do Paraná,7300,Alvorada do Sul,41,4100806,730,12803,1260,11543,AEB
-71,Estado do Paraná,7301,Amoreira,41,4126009,730,16991,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
+71,Estado do Paraná,7301,Amoreira,41,4126009,730,17315,3117,14198,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 18"
 71,Estado do Paraná,7302,Andirá,41,4101101,730,14930,4431,10499,AEB
 71,Estado do Paraná,7303,Apucarana,41,4101408,730,66091,22506,43585,AEB
 71,Estado do Paraná,7304,Arapongas,41,4101507,730,38067,21210,16857,AEB
@@ -2232,7 +2232,7 @@
 71,Estado do Paraná,7307,Astorga,41,4102109,730,25445,7970,17475,AEB
 71,Estado do Paraná,7308,Bandeirantes,41,4102406,730,30220,6995,23225,AEB
 71,Estado do Paraná,7309,Bela Vista do Paraíso,41,4102802,730,17372,8192,9180,AEB
-71,Estado do Paraná,7310,Bom Sucesso,41,4103206,731,22484,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
+71,Estado do Paraná,7310,Bom Sucesso,41,4103206,731,22624,2494,20130,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 19"
 71,Estado do Paraná,7311,Borrazópolis,41,4103305,731,17945,2375,15570,AEB
 71,Estado do Paraná,7312,Cafeara,41,4103404,731,7754,1241,6513,AEB
 71,Estado do Paraná,7313,Califórnia,41,4103503,731,9004,1416,7588,AEB
@@ -2244,12 +2244,12 @@
 71,Estado do Paraná,7319,Cornélio Procópio,41,4106407,731,45341,18198,27143,AEB
 71,Estado do Paraná,7320,Faxinal,41,4107603,732,22830,2764,20066,AEB
 71,Estado do Paraná,7321,Florestópolis,41,4108007,732,16274,2556,13718,AEB
-71,Estado do Paraná,7322,Guaraci,41,4109203,732,17402,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
+71,Estado do Paraná,7322,Guaraci,41,4109203,732,17437,4274,13163,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 20"
 71,Estado do Paraná,7323,Ibiporã,41,4109807,732,25956,6560,19396,AEB
 71,Estado do Paraná,7324,Iguaraçu,41,4110003,732,15631,2566,13065,AEB
 71,Estado do Paraná,7325,Itaguajé,41,4110904,732,17735,3539,14196,AEB
 71,Estado do Paraná,7326,Itambaracá,41,4111001,732,11079,1432,9647,AEB
-71,Estado do Paraná,7327,Jacarezinho,41,4111803,732,42662,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
+71,Estado do Paraná,7327,Jacarezinho,41,4111803,732,42863,15054,27809,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 20"
 71,Estado do Paraná,7328,Jaguapitã,41,4111902,732,21873,5047,16826,AEB
 71,Estado do Paraná,7329,Jandaia do Sul,41,4112108,732,31448,7767,23681,AEB
 71,Estado do Paraná,7330,Jataizinho,41,4112702,733,18194,2544,15650,AEB
@@ -2266,7 +2266,7 @@
 71,Estado do Paraná,7341,Sabáudia,41,4122701,734,10145,1490,8655,AEB
 71,Estado do Paraná,7342,Santa Amélia,41,4123105,734,6552,1098,5454,AEB
 71,Estado do Paraná,7343,Santa Fé,41,4123402,734,12797,1756,11041,AEB
-71,Estado do Paraná,7344,Santa Mariana,41,4123907,734,20298,,,https://biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t14_pr.pdf
+71,Estado do Paraná,7344,Santa Mariana,41,4123907,734,20400,5556,14844,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 22"
 71,Estado do Paraná,7345,Santo Antônio da Platina,41,4124103,734,31460,9777,21683,AEB
 71,Estado do Paraná,7346,Santo Inácio,41,4124509,734,11420,1609,9811,AEB
 71,Estado do Paraná,7347,São Jerônimo da Serra,41,4124707,734,31453,2488,28965,AEB
