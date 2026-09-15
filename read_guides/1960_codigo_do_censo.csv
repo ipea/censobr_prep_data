@@ -718,6 +718,11 @@ H (domicílio),V108,7,Ignorado,,,24,
 I (domicílio),V109,7,Tem,,,24,
 I (domicílio),V109,8,Não tem,,,24,
 I (domicílio),V109,9,Ignorado,,,24,
-J (domicílio),V110,9,Tem,,,24,"o exemplar termina aqui; o quesito L (televisão, V111) não consta"
-J (domicílio),V110,0,Não tem,,,24,"o exemplar termina aqui; o quesito L (televisão, V111) não consta"
-J (domicílio),V110,1,Ignorado,,,24,"o exemplar termina aqui; o quesito L (televisão, V111) não consta"
+J (domicílio),V110,9,Tem,,,24,
+J (domicílio),V110,0,Não tem,,,24,
+J (domicílio),V110,1,Ignorado,,,24,
+L (domicílio),V111,1,Tem,,,25,
+L (domicílio),V111,2,Não tem,,,25,
+L (domicílio),V111,3,Ignorado,,,25,
+M (domicílio),V112,00,Não havendo indicação do número total de cômodos,,,25,campo de dois dígitos; declaração de um algarismo recebe zero à frente
+N (domicílio),V113,000,Não havendo indicação do número de peças servindo de dormitório,,,25,campo de três dígitos; a declaração recebe zeros à frente até completá-lo

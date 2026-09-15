@@ -357,15 +357,14 @@ read_1960_amostra_25 <- function(paths, uf, guia_familias, guia_pessoas, correco
 # principal: fica ausente, como no estágio da amostra de 1,27%, e a decisão
 # está em discussão no ipea/censobr#87.
 #
-# O "Ignorado" do questionário. O Código do Censo dá a cada quesito do domicílio
-# um código próprio de ignorado — V102 = 7, V103 = 0, V105 = 4, V106 = 9,
-# V107 = 5, V108 = 7, V109 = 9, V110 = 1 —, e esses ficam como estão, porque são
-# categorias do dicionário. O exemplar do Código que temos se interrompe no
-# quesito J e não cobre cômodos nem dormitórios, que são campos numéricos; neles
-# o ignorado foi gravado como zero, e zero não é uma categoria que o usuário
-# enxergue: 23.109 domicílios com zero cômodos abrigam 121.769 pessoas, média de
-# 5,28, acima da média do país. Viram ausente, marcado em
-# censobr_comodos_ignorado.
+# Nada de valor se altera aqui. O Código do Censo dá a cada quesito do domicílio
+# um código próprio para a resposta ausente — V102 = 7, V103 = 0, V105 = 4,
+# V106 = 9, V107 = 5, V108 = 7, V109 = 9, V110 = 1, V111 = 3 —, e para os dois
+# campos numéricos manda, na p. 25, "não havendo indicação do número total de
+# cômodos codifique-se 00" e "não havendo indicação do número de peças servindo
+# de dormitório codifique-se 000". São 23.109 e 24.285 domicílios, concentrados
+# por lote de perfuração, e ficam com o código do dicionário, que
+# read_guides/1960_codigo_do_censo.csv traz rotulado.
 #
 # A geografia. V116 é o código do Código de Zonas Fisiográficas, Municípios e
 # Distritos de 1960, com três correções: Alagoas vem deslocada em +200, Fernando
@@ -397,12 +396,6 @@ build_1960_amostra_25 <- function(paths, uf, municipios_path, distritos_path){
 
   familias[, censobr_tipo_unidade := data.table::fifelse(V101 == 9, "boletim individual",
                                      data.table::fifelse(V101 == 3, "domicilio coletivo", "domicilio particular"))]
-
-  # o ignorado dos campos numericos veio como zero -- ver o cabecalho deste passo
-  familias[, censobr_comodos_ignorado := V112 == 0 | V113 == 0]
-  familias[is.na(censobr_comodos_ignorado), censobr_comodos_ignorado := FALSE]
-  familias[V112 == 0, V112 := NA_integer_]
-  familias[V113 == 0, V113 := NA_integer_]
 
   # contagens por domicilio
   pessoas[, `:=`(censobr_n_listadas   = .N,
@@ -443,7 +436,7 @@ build_1960_amostra_25 <- function(paths, uf, municipios_path, distritos_path){
              on = "censobr_idhousehold"]
 
   # a pessoa leva a geografia do seu domicilio e a pagina do seu proprio boletim
-  leva <- c(geo, "censobr_tipo_unidade", "censobr_comodos_ignorado", pagina)
+  leva <- c(geo, "censobr_tipo_unidade", pagina)
   pessoas[familias, (leva) := mget(paste0("i.", leva)), on = "censobr_idfamily"]
 
   data.table::setcolorder(domicilios, c(geo, "censobr_idhousehold", "censobr_tipo_unidade"))
@@ -456,8 +449,7 @@ build_1960_amostra_25 <- function(paths, uf, municipios_path, distritos_path){
   message("  ", format(nrow(domicilios), big.mark = ".", decimal.mark = ","), " domicilios (",
           domicilios[censobr_tipo_unidade == "boletim individual", .N], " individuais, ",
           domicilios[censobr_tipo_unidade == "domicilio coletivo", .N], " coletivos) | distrito com nome: ",
-          round(100 * domicilios[!is.na(name_district_1960), .N] / nrow(domicilios), 1), "% | comodos ignorados: ",
-          domicilios[censobr_comodos_ignorado == TRUE, .N])
+          round(100 * domicilios[!is.na(name_district_1960), .N] / nrow(domicilios), 1), "%")
 
   rm(familias, pessoas, domicilios); gc(verbose = FALSE)
   saida
