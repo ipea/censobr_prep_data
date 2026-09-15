@@ -4968,70 +4968,179 @@
 60,7112,Rio Branco Do Sul,01,Rio Branco Do Sul,,distrito,711,Zona do Alto Ribeira,240,OCR (Tesseract por) do Código de Municípios e Distritos de 1960; código do município conferido pela DTB ()
 60,7112,Rio Branco Do Sul,03,Açungui,,distrito,711,Zona do Alto Ribeira,240,OCR (Tesseract por) do Código de Municípios e Distritos de 1960; código do município conferido pela DTB ()
 71,7100,Antonina,01,Antonina,,distrito,710,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7100,Antonina,03,Cacatu,,distrito,,,240,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 240"
 71,7101,Guaraqueçaba,01,Guaraqueçaba,,distrito,710,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7101,Guaraqueçaba,03,Ararapira,,distrito,,,240,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 240"
+71,7101,Guaraqueçaba,05,Serra Negra,,distrito,,,240,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 240"
 71,7102,Guaratuba,01,Guaratuba,,distrito,710,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7102,Guaratuba,03,Garuva,,distrito,,,240,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 240"
 71,7103,Morretes,01,Morretes,,distrito,710,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7103,Morretes,03,Pôrto de Cima,,distrito,,,240,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 240"
 71,7104,Paranaguá,01,Paranaguá,,distrito,710,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7104,Paranaguá,03,Alexandra,,distrito,,,240,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 240"
+71,7104,Paranaguá,05,Matinhos,,distrito,,,240,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 240"
 71,7110,Bocaiúva do Sul,01,Bocaiúva do Sul,,distrito,711,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7110,Bocaiúva do Sul,03,Paranaí,,distrito,,,240,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 240"
+71,7110,Bocaiúva do Sul,05,Tunas,,distrito,,,240,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 240"
 71,7111,Cerro Azul,01,Cerro Azul,,distrito,711,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7111,Cerro Azul,03,São Sebastião,,distrito,,,240,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 240"
+71,7111,Cerro Azul,05,Varzeão,,distrito,,,240,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 240"
 71,7112,Rio Branco do Sul,01,Rio Branco do Sul,,distrito,711,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7112,Rio Branco do Sul,03,Açungui,,distrito,,,240,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 240"
 71,7120,Bituruna,01,Bituruna,,distrito,712,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7120,Bituruna,03,Santo Antônio do Iratim,,distrito,,,256,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 256"
 71,7121,Guarapuava,01,Guarapuava,,distrito,712,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7121,Guarapuava,03,Candói,,distrito,,,256,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 256"
+71,7121,Guarapuava,05,Canta Galo,,distrito,,,256,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 256"
+71,7121,Guarapuava,07,Goioxim,,distrito,,,256,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 256"
+71,7121,Guarapuava,09,Guairacá,,distrito,,,256,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 256"
+71,7121,Guarapuava,11,Guará,,distrito,,,256,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 256"
+71,7121,Guarapuava,13,Guarapuavinha,,distrito,,,256,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 256"
+71,7121,Guarapuava,15,Marquinho,,distrito,,,256,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 256"
+71,7121,Guarapuava,17,Palmeirinha,,distrito,,,256,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 256"
+71,7121,Guarapuava,19,Pedro Lustosa,,distrito,,,256,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 256"
+71,7121,Guarapuava,21,Pinhão,,distrito,,,256,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 256"
 71,7122,Palmas,01,Palmas,,distrito,712,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7122,Palmas,03,General Carneiro,,distrito,,,256,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 256"
+71,7122,Palmas,05,Jangada do Sul,,distrito,,,256,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 256"
+71,7122,Palmas,07,São José de Palmas,,distrito,,,256,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 256"
 71,7130,Castro,01,Castro,,distrito,713,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7130,Castro,03,Abapã,,distrito,,,241,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 241"
+71,7130,Castro,05,Socavão,,distrito,,,241,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 241"
 71,7131,Piraí do Sul,01,Piraí do Sul,,distrito,713,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7140,Arapoti,01,Arapoti,,distrito,714,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7140,Arapoti,03,Calógeras,,distrito,,,242,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 242"
 71,7141,Contenda,01,Contenda,,distrito,714,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7141,Contenda,03,Areia Branca,,distrito,,,242,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 242"
 71,7142,Jaguariaíva,01,Jaguariaíva,,distrito,714,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7142,Jaguariaíva,03,Bertagnoli,,distrito,,,242,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 242"
 71,7143,Lapa,01,Lapa,,distrito,714,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7143,Lapa,03,Água Azul,,distrito,,,242,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 242"
+71,7143,Lapa,05,Antônio Olinto,,distrito,,,242,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 242"
+71,7143,Lapa,07,Mariental,,distrito,,,242,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 242"
 71,7144,Palmeira,01,Palmeira,,distrito,714,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7144,Palmeira,03,Papagaios Novos,,distrito,,,242,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 242"
 71,7145,Ponta Grossa,01,Ponta Grossa,,distrito,714,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7145,Ponta Grossa,03,Guaragi,,distrito,,,242,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 242"
+71,7145,Ponta Grossa,05,Itaiacoca,,distrito,,,242,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 242"
+71,7145,Ponta Grossa,07,Uvaia,,distrito,,,242,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 242"
 71,7146,Porto Amazonas,01,Porto Amazonas,,distrito,714,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7147,Sengés,01,Sengés,,distrito,714,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7148,Tibagi,01,Tibagi,,distrito,714,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7148,Tibagi,03,Alto do Amparo,,distrito,,,243,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 243"
+71,7148,Tibagi,05,Ventania,,distrito,,,243,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 243"
 71,7150,Almirante Tamandaré,01,Almirante Tamandaré,,distrito,715,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7150,Almirante Tamandaré,03,Campo Magro,,distrito,,,241,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 241"
 71,7151,Araucária,01,Araucária,,distrito,715,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7151,Araucária,03,Guajuvira,,distrito,,,241,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 241"
 71,7152,Campina Grande do Sul,01,Campina Grande do Sul,,distrito,715,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7153,Campo Largo,01,Campo Largo,,distrito,715,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7153,Campo Largo,03,Balsa Nova,,distrito,,,241,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 241"
+71,7153,Campo Largo,05,Bateias,,distrito,,,241,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 241"
+71,7153,Campo Largo,07,Ferraria,,distrito,,,241,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 241"
+71,7153,Campo Largo,09,São Luís do Purunã,,distrito,,,241,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 241"
+71,7153,Campo Largo,11,São Silvestre,,distrito,,,241,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 241"
+71,7153,Campo Largo,13,Três Córregos,,distrito,,,241,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 241"
 71,7154,Colombo,01,Colombo,,distrito,715,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7155,Curitiba,01,Curitiba,,distrito,715,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7155,Curitiba,03,Campo Comprido,,distrito,,,241,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 241"
+71,7155,Curitiba,05,Santa Felicidade,,distrito,,,241,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 241"
+71,7155,Curitiba,07,Tatuquara,,distrito,,,241,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 241"
+71,7155,Curitiba,09,Umbará,,distrito,,,241,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 241"
 71,7156,Piraquara,01,Piraquara,,distrito,715,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7157,Rio Negro,01,Rio Negro,,distrito,715,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7157,Rio Negro,03,Campo do Tenente,,distrito,,,242,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 242"
+71,7157,Rio Negro,05,Pangaré,,distrito,,,242,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 242"
+71,7157,Rio Negro,07,Pien,,distrito,,,242,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 242"
 71,7158,São José dos Pinhais,01,São José dos Pinhais,,distrito,715,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7158,São José dos Pinhais,03,Campo Largo da Roseira,,distrito,,,242,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 242"
+71,7158,São José dos Pinhais,05,Mandirituba,,distrito,,,242,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 242"
 71,7159,Tijucas do Sul,01,Tijucas do Sul,,distrito,715,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7159,Tijucas do Sul,03,Agudos do Sul,,distrito,,,242,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 242"
 71,7170,Abatiá,01,Abatiá,,distrito,717,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7171,Carlópolis,01,Carlópolis,,distrito,717,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7172,Curiúva,01,Curiúva,,distrito,717,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7172,Curiúva,03,Sapopema,,distrito,,,243,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 243"
 71,7173,Ibaiti,01,Ibaiti,,distrito,717,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7173,Ibaiti,03,Vassoural,,distrito,,,243,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 243"
+71,7173,Ibaiti,05,Vila Guaí,,distrito,,,243,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 243"
 71,7174,Jaboti,01,Jaboti,,distrito,717,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7174,Jaboti,03,Conselheiro Mayrinck,,distrito,,,243,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 243"
 71,7175,Japira,01,Japira,,distrito,717,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7176,Joaquim Távora,01,Joaquim Távora,,distrito,717,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7176,Joaquim Távora,03,Guapirama,,distrito,,,243,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 243"
+71,7176,Joaquim Távora,05,Joá,,distrito,,,243,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 243"
 71,7177,Jundiaí do Sul,01,Jundiaí do Sul,,distrito,717,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7178,Pinhalão,01,Pinhalão,,distrito,717,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7178,Pinhalão,03,Lavrinha,,distrito,,,243,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 243"
 71,7179,Quatiguá,01,Quatiguá,,distrito,717,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7180,Ribeirão do Pinhal,01,Ribeirão do Pinhal,,distrito,718,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7181,Siqueira Campos,01,Siqueira Campos,,distrito,718,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7181,Siqueira Campos,03,Marimbondo,,distrito,,,244,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 244"
+71,7181,Siqueira Campos,05,Salto do Itararé,,distrito,,,244,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 244"
 71,7182,Tomazina,01,Tomazina,,distrito,718,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7182,Tomazina,03,Sapé,,distrito,,,244,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 244"
 71,7183,Wenceslau Braz,01,Wenceslau Braz,,distrito,718,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7183,Wenceslau Braz,03,Santana do Itararé,,distrito,,,244,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 244"
+71,7183,Wenceslau Braz,05,São José da Boa Vista,,distrito,,,244,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 244"
 71,7190,Cândido de Abreu,01,Cândido de Abreu,,distrito,719,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7190,Cândido de Abreu,03,Teresa Cristina,,distrito,,,244,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 244"
+71,7190,Cândido de Abreu,05,Três Bicos,,distrito,,,244,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 244"
 71,7191,Imbituva,01,Imbituva,,distrito,719,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7191,Imbituva,03,Apiaba,,distrito,,,244,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 244"
+71,7191,Imbituva,05,Guamiranga,,distrito,,,244,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 244"
 71,7192,Ipiranga,01,Ipiranga,,distrito,719,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7192,Ipiranga,03,Bitumirim,,distrito,,,244,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 244"
+71,7192,Ipiranga,05,Ivaí,,distrito,,,244,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 244"
 71,7193,Ortigueira,01,Ortigueira,,distrito,719,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7193,Ortigueira,03,Barreiro,,distrito,,,244,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 244"
+71,7193,Ortigueira,05,Lajeado Bonito,,distrito,,,244,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 244"
+71,7193,Ortigueira,07,Monjolinho,,distrito,,,244,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 244"
+71,7193,Ortigueira,09,Natingui,,distrito,,,244,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 244"
 71,7194,Prudentópolis,01,Prudentópolis,,distrito,719,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7194,Prudentópolis,03,Jaciaba,,distrito,,,245,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 245"
+71,7194,Prudentópolis,05,Patos Velhos,,distrito,,,245,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 245"
 71,7195,Reserva,01,Reserva,,distrito,719,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7195,Reserva,03,José Lacerda,,distrito,,,245,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 245"
 71,7200,Cruz Machado,01,Cruz Machado,,distrito,720,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7200,Cruz Machado,03,Pinaré,,distrito,,,245,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 245"
+71,7200,Cruz Machado,05,Santana,,distrito,,,245,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 245"
 71,7201,Irati,01,Irati,,distrito,720,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7201,Irati,03,Gonçalves Júnior,,distrito,,,245,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 245"
+71,7201,Irati,05,Guamirim,,distrito,,,245,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 245"
+71,7201,Irati,07,Itapará,,distrito,,,245,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 245"
 71,7202,Mallet,01,Mallet,,distrito,720,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7202,Mallet,03,Dorizon,,distrito,,,245,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 245"
+71,7202,Mallet,05,Rio Claro do Sul,,distrito,,,245,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 245"
 71,7203,Paulo Frontin,01,Paulo Frontin,,distrito,720,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7203,Paulo Frontin,03,Vera Guarani,,distrito,,,245,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 245"
 71,7204,Rebouças,01,Rebouças,,distrito,720,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7205,Rio Azul,01,Rio Azul,,distrito,720,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7205,Rio Azul,03,Soares,,distrito,,,245,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 245"
 71,7206,São João do Triunfo,01,São João do Triunfo,,distrito,720,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7206,São João do Triunfo,03,Palmira,,distrito,,,245,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 245"
 71,7207,São Mateus do Sul,01,São Mateus do Sul,,distrito,720,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7207,São Mateus do Sul,03,Caitá,,distrito,,,246,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 246"
+71,7207,São Mateus do Sul,05,Fluviópolis,,distrito,,,246,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 246"
+71,7207,São Mateus do Sul,07,Lajeado,,distrito,,,246,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 246"
 71,7208,Teixeira Soares,01,Teixeira Soares,,distrito,720,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7208,Teixeira Soares,03,Angaí,,distrito,,,246,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 246"
+71,7208,Teixeira Soares,05,Fernandes Pinheiro,,distrito,,,246,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 246"
+71,7208,Teixeira Soares,07,Guaraúna,,distrito,,,246,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 246"
 71,7209,União da Vitória,01,União da Vitória,,distrito,720,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7209,União da Vitória,03,Paula Freitas,,distrito,,,246,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 246"
+71,7209,União da Vitória,05,Pôrto Vitória,,distrito,,,246,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 246"
 71,7220,Alto Paraná,01,Alto Paraná,,distrito,722,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7220,Alto Paraná,03,Maristela,,distrito,,,246,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 246"
+71,7220,Alto Paraná,05,Santa Maria,,distrito,,,246,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 246"
+71,7220,Alto Paraná,07,Sumaré,,distrito,,,246,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 246"
 71,7221,Araruna,01,Araruna,,distrito,722,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7221,Araruna,03,São Vicente,,distrito,,,246,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 246"
 71,7222,Barracão,01,Barracão,,distrito,722,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7222,Barracão,03,Bom Jesus do Barracão,,distrito,,,246,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 246"
+71,7222,Barracão,05,Salgado Filho,,distrito,,,246,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 246"
+71,7222,Barracão,07,São Sebastião da Bela Vista,,distrito,,,246,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 246"
+71,7222,Barracão,09,Siqueira Belo,,distrito,,,246,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 246"
 71,7223,Campo Mourão,01,Campo Mourão,,distrito,722,,245,"leitura visual do Código de Municípios e Distritos de 1960 (bloco do município, p. 245)"
 71,7223,Campo Mourão,03,Barbosa Ferraz,,distrito,722,,245,"leitura visual do Código de Municípios e Distritos de 1960 (bloco do município, p. 245)"
 71,7223,Campo Mourão,05,Barreirinho d'Oeste,,distrito,722,,245,"leitura visual do Código de Municípios e Distritos de 1960 (bloco do município, p. 245)"
@@ -5045,10 +5154,15 @@
 71,7223,Campo Mourão,21,Roncador,,distrito,722,,246,"leitura visual do Código de Municípios e Distritos de 1960 (bloco do município, p. 246)"
 71,7223,Campo Mourão,23,Ubiratã,,distrito,722,,246,"leitura visual do Código de Municípios e Distritos de 1960 (bloco do município, p. 246)"
 71,7224,Capanema,01,Capanema,,distrito,722,,246,"leitura visual do Código de Municípios e Distritos de 1960 (bloco do município, p. 246)"
+71,7224,Capanema,03,Ampere,,distrito,,,247,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 247"
+71,7224,Capanema,05,Pérola d'Oeste,,distrito,,,247,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 247"
 71,7225,Cascavel,01,Cascavel,,distrito,722,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7225,Cascavel,03,Corbélia,,distrito,,,247,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 247"
 71,7226,Chopinzinho,01,Chopinzinho,,distrito,722,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7227,Cianorte,01,Cianorte,,distrito,722,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7228,Clevelândia,01,Clevelândia,,distrito,722,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7228,Clevelândia,03,Mariópolis,,distrito,,,247,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 247"
+71,7228,Clevelândia,05,Vitorino,,distrito,,,247,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 247"
 71,7229,Coronel Vivida,01,Coronel Vivida,,distrito,722,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7230,Cruzeiro do Oeste,01,Cruzeiro do Oeste,,distrito,723,,246,"leitura visual do Código de Municípios e Distritos de 1960 (bloco do município, p. 246)"
 71,7230,Cruzeiro do Oeste,03,Alto Piquiri,,distrito,723,,246,"leitura visual do Código de Municípios e Distritos de 1960 (bloco do município, p. 246)"
@@ -5063,18 +5177,47 @@
 71,7232,Engenheiro Beltrão,01,Engenheiro Beltrão,,distrito,723,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7233,Floraí,01,Floraí,,distrito,723,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7234,Foz do Iguaçu,01,Foz do Iguaçu,,distrito,723,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7234,Foz do Iguaçu,03,Gaúcha,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
+71,7234,Foz do Iguaçu,05,Matelândia,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
+71,7234,Foz do Iguaçu,07,Medianeira,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
 71,7235,Francisco Beltrão,01,Francisco Beltrão,,distrito,723,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7236,Goio-Erê,01,Goio-Erê,,distrito,723,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7236,Goio-Erê,03,Mariluz,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
+71,7236,Goio-Erê,05,Moreira Salles,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
+71,7236,Goio-Erê,07,Paraná d'Oeste,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
 71,7237,Guaíra,01,Guaíra,,distrito,723,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7237,Guaíra,03,Maripá,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
+71,7237,Guaíra,05,Memória,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
+71,7237,Guaíra,07,Terra Roxa d'Oeste,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
+71,7237,Guaíra,09,Vila Palotina,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
 71,7238,Guaraniaçu,01,Guaraniaçu,,distrito,723,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7238,Guaraniaçu,03,Campo Bonito,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
+71,7238,Guaraniaçu,05,Catanduvas,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
+71,7238,Guaraniaçu,07,Faxinal de São João,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
+71,7238,Guaraniaçu,09,Mato Queimado,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
 71,7239,Jussara,01,Jussara,,distrito,723,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7240,Laranjeiras do Sul,01,Laranjeiras do Sul,,distrito,724,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7240,Laranjeiras do Sul,03,Barreirinho,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
+71,7240,Laranjeiras do Sul,05,Campo Nôvo,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
+71,7240,Laranjeiras do Sul,07,Erveira,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
+71,7240,Laranjeiras do Sul,09,Espigão Alto,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
+71,7240,Laranjeiras do Sul,11,Pôrto Santana,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
+71,7240,Laranjeiras do Sul,13,Rio Bonito,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
+71,7240,Laranjeiras do Sul,15,Virmond,,distrito,,,248,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 248"
 71,7241,Loanda,01,Loanda,,distrito,724,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7241,Loanda,03,Pôrto Rico,,distrito,,,249,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 249"
+71,7241,Loanda,05,Pôrto São José,,distrito,,,249,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 249"
 71,7242,Mandaguaçu,01,Mandaguaçu,,distrito,724,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7243,Mandaguari,01,Mandaguari,,distrito,724,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7244,Mangueirinha,01,Mangueirinha,,distrito,724,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7244,Mangueirinha,03,Covó,,distrito,,,249,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 249"
 71,7245,Manoel Ribas,01,Manoel Ribas,,distrito,724,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7245,Manoel Ribas,03,Guaritá,,distrito,,,249,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 249"
+71,7245,Manoel Ribas,05,Ivaiporã,,distrito,,,249,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 249"
 71,7246,Marialva,01,Marialva,,distrito,724,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7246,Marialva,03,Aquidabã,,distrito,,,249,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 249"
+71,7246,Marialva,05,Itambé,,distrito,,,249,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 249"
+71,7246,Marialva,07,Sarandi,,distrito,,,249,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 249"
 71,7247,Maringá,01,Maringá,,distrito,724,,248,"leitura visual do Código de Municípios e Distritos de 1960 (bloco do município, p. 248)"
 71,7247,Maringá,03,Floriano,,distrito,724,,248,"leitura visual do Código de Municípios e Distritos de 1960 (bloco do município, p. 248)"
 71,7247,Maringá,05,Ivatuba,,distrito,724,,248,"leitura visual do Código de Municípios e Distritos de 1960 (bloco do município, p. 248)"
@@ -5084,14 +5227,40 @@
 71,7248,Nova Esperança,07,Iroí,,distrito,724,,248,"leitura visual do Código de Municípios e Distritos de 1960 (bloco do município, p. 248)"
 71,7248,Nova Esperança,09,Uniflor,,distrito,724,,248,"leitura visual do Código de Municípios e Distritos de 1960 (bloco do município, p. 248)"
 71,7249,Nova Londrina,01,Nova Londrina,,distrito,724,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7249,Nova Londrina,03,Diamante do Norte,,distrito,,,249,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 249"
+71,7249,Nova Londrina,05,Itaúna do Sul,,distrito,,,249,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 249"
+71,7249,Nova Londrina,07,Marilena,,distrito,,,249,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 249"
 71,7250,Paraíso do Norte,01,Paraíso do Norte,,distrito,725,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7250,Paraíso do Norte,03,Mirador,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
+71,7250,Paraíso do Norte,05,Nova Aliança do Ivaí,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
 71,7251,Paranacity,01,Paranacity,,distrito,725,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7251,Paranacity,03,Inajá,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
+71,7251,Paranacity,05,Paranapoema,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
 71,7252,Paranavaí,01,Paranavaí,,distrito,725,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7252,Paranavaí,03,Catarinenses,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
+71,7252,Paranavaí,05,Comur,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
+71,7252,Paranavaí,07,Guairacá,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
+71,7252,Paranavaí,09,Jurema,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
+71,7252,Paranavaí,11,Planaltina do Paraná,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
 71,7253,Pato Branco,01,Pato Branco,,distrito,725,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7253,Pato Branco,03,Bom Sucesso,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
+71,7253,Pato Branco,05,Coxilha Rica,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
+71,7253,Pato Branco,07,Dois Vizinhos,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
+71,7253,Pato Branco,09,Vargem Bonita,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
+71,7253,Pato Branco,11,Verê,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
 71,7254,Peabiru,01,Peabiru,,distrito,725,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7255,Pitanga,01,Pitanga,,distrito,725,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7255,Pitanga,03,Barra Bonita,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
+71,7255,Pitanga,05,Bela Vista,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
+71,7255,Pitanga,07,Boa Ventura,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
+71,7255,Pitanga,09,Palmital,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
+71,7255,Pitanga,11,Santa Maria,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
 71,7256,Querência do Norte,01,Querência do Norte,,distrito,725,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7256,Querência do Norte,03,Paranaguaçu,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
+71,7256,Querência do Norte,05,Pôrto Brasília,,distrito,,,250,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 250"
 71,7257,Rondon,01,Rondon,,distrito,725,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7257,Rondon,03,Cidade Gaúcha,,distrito,,,251,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 251"
+71,7257,Rondon,05,Guaporema,,distrito,,,251,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 251"
 71,7258,Santa Cruz de Monte Castelo,01,Santa Cruz de Monte Castelo,,distrito,725,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7259,Santa Isabel do Ivaí,01,Santa Isabel do Ivaí,,distrito,725,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7260,Santo Antônio,01,Santo Antônio,,distrito,726,,250,"leitura visual do Código de Municípios e Distritos de 1960 (bloco do município, p. 250)"
@@ -5108,57 +5277,99 @@
 71,7266,Terra Boa,01,Terra Boa,,distrito,726,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7267,Terra Rica,01,Terra Rica,,distrito,726,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7268,Toledo,01,Toledo,,distrito,726,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7268,Toledo,03,Dez de Maio,,distrito,,,251,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 251"
+71,7268,Toledo,05,General Rondon,,distrito,,,251,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 251"
+71,7268,Toledo,07,Margarida,,distrito,,,251,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 251"
+71,7268,Toledo,11,Mercedes,,distrito,,,251,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 251"
+71,7268,Toledo,13,Novo Sarandi,,distrito,,,251,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 251"
+71,7268,Toledo,15,Pôrto Mendes,,distrito,,,251,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 251"
+71,7268,Toledo,17,Quatro Pontes,,distrito,,,251,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 251"
 71,7300,Alvorada do Sul,01,Alvorada do Sul,,distrito,730,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7301,Amoreira,01,Amoreira,,distrito,730,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7301,Amoreira,03,Nova América da Colina,,distrito,,,252,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 252"
 71,7302,Andirá,01,Andirá,,distrito,730,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7303,Apucarana,01,Apucarana,,distrito,730,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7303,Apucarana,03,Pirapó,,distrito,,,252,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 252"
+71,7303,Apucarana,05,São José do Cambira,,distrito,,,252,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 252"
 71,7304,Arapongas,01,Arapongas,,distrito,730,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7305,Araruva,01,Araruva,,distrito,730,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7305,Araruva,03,Rio Bom,,distrito,,,252,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 252"
 71,7306,Assaí,01,Assaí,,distrito,730,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7307,Astorga,01,Astorga,,distrito,730,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7307,Astorga,03,Içara,,distrito,,,252,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 252"
+71,7307,Astorga,05,Santa Zélia,,distrito,,,252,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 252"
+71,7307,Astorga,07,Tupinambá,,distrito,,,252,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 252"
 71,7308,Bandeirantes,01,Bandeirantes,,distrito,730,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7309,Bela Vista do Paraíso,01,Bela Vista do Paraíso,,distrito,730,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7309,Bela Vista do Paraíso,03,Santa Margarida,,distrito,,,252,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 252"
 71,7310,Bom Sucesso,01,Bom Sucesso,,distrito,731,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7311,Borrazópolis,01,Borrazópolis,,distrito,731,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7311,Borrazópolis,03,Santo Antônio do Palmita,,distrito,,,253,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 253"
 71,7312,Cafeara,01,Cafeara,,distrito,731,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7313,Califórnia,01,Califórnia,,distrito,731,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7314,Cambará,01,Cambará,,distrito,731,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7315,Cambé,01,Cambé,,distrito,731,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7315,Cambé,03,Prata,,distrito,,,253,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 253"
 71,7316,Centenário do Sul,01,Centenário do Sul,,distrito,731,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7317,Colorado,01,Colorado,,distrito,731,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7318,Congonhinhas,01,Congonhinhas,,distrito,731,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7319,Cornélio Procópio,01,Cornélio Procópio,,distrito,731,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7319,Cornélio Procópio,03,Congonhas,,distrito,,,253,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 253"
 71,7320,Faxinal,01,Faxinal,,distrito,732,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7321,Florestópolis,01,Florestópolis,,distrito,732,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7321,Florestópolis,03,Miraselva,,distrito,,,253,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 253"
+71,7321,Florestópolis,05,Prado Ferreira,,distrito,,,253,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 253"
 71,7322,Guaraci,01,Guaraci,,distrito,732,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7322,Guaraci,03,Bentópolis,,distrito,,,253,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 253"
+71,7322,Guaraci,05,Nossa Senhora das Graças,,distrito,,,253,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 253"
 71,7323,Ibiporã,01,Ibiporã,,distrito,732,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7324,Iguaraçu,01,Iguaraçu,,distrito,732,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7324,Iguaraçu,03,Flórida,,distrito,,,254,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 254"
 71,7325,Itaguajé,01,Itaguajé,,distrito,732,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7326,Itambaracá,01,Itambaracá,,distrito,732,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7326,Itambaracá,03,São Joaquim do Pontal,,distrito,,,254,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 254"
 71,7327,Jacarezinho,01,Jacarezinho,,distrito,732,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7327,Jacarezinho,03,Barra do Jacaré,,distrito,,,254,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 254"
 71,7328,Jaguapitã,01,Jaguapitã,,distrito,732,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7329,Jandaia do Sul,01,Jandaia do Sul,,distrito,732,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7329,Jandaia do Sul,03,Marumbi,,distrito,,,254,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 254"
 71,7330,Jataizinho,01,Jataizinho,,distrito,733,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7330,Jataizinho,03,Frei Timótheo,,distrito,,,254,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 254"
+71,7330,Jataizinho,05,São João,,distrito,,,254,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 254"
 71,7331,Leópolis,01,Leópolis,,distrito,733,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7332,Lobato,01,Lobato,,distrito,733,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7333,Londrina,01,Londrina,,distrito,733,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7333,Londrina,03,Guaravera,,distrito,,,254,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 254"
+71,7333,Londrina,05,Irerê,,distrito,,,254,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 254"
+71,7333,Londrina,07,São Luiz,,distrito,,,254,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 254"
+71,7333,Londrina,09,Tamarana,,distrito,,,254,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 254"
 71,7334,Lupionópolis,01,Lupionópolis,,distrito,733,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7335,Munhoz de Melo,01,Munhoz de Melo,,distrito,733,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7336,Nova Fátima,01,Nova Fátima,,distrito,733,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7337,Porecatu,01,Porecatu,,distrito,733,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7338,Primeiro de Maio,01,Primeiro de Maio,,distrito,733,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7338,Primeiro de Maio,03,Ibiaci,,distrito,,,255,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 255"
 71,7339,Ribeirão Claro,01,Ribeirão Claro,,distrito,733,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7340,Rolândia,01,Rolândia,,distrito,734,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7340,Rolândia,03,Pitangueiras,,distrito,,,255,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 255"
+71,7340,Rolândia,05,São Martinho,,distrito,,,255,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 255"
 71,7341,Sabáudia,01,Sabáudia,,distrito,734,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7342,Santa Amélia,01,Santa Amélia,,distrito,734,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7343,Santa Fé,01,Santa Fé,,distrito,734,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7344,Santa Mariana,01,Santa Mariana,,distrito,734,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7345,Santo Antônio da Platina,01,Santo Antônio da Platina,,distrito,734,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7345,Santo Antônio da Platina,03,Conselheiro Zacarias,,distrito,,,255,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 255"
+71,7345,Santo Antônio da Platina,05,Monte Real,,distrito,,,255,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 255"
 71,7346,Santo Inácio,01,Santo Inácio,,distrito,734,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7347,São Jerônimo da Serra,01,São Jerônimo da Serra,,distrito,734,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7347,São Jerônimo da Serra,03,Santa Cecília do Pavão,,distrito,,,255,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 255"
+71,7347,São Jerônimo da Serra,05,Santo Antônio do Pari,,distrito,,,255,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 255"
 71,7348,Sertaneja,01,Sertaneja,,distrito,734,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7348,Sertaneja,03,Paranagi,,distrito,,,256,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 256"
 71,7349,Sertanópolis,01,Sertanópolis,,distrito,734,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 71,7350,Uraí,01,Uraí,,distrito,735,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
+71,7350,Uraí,03,Cruzeiro do Norte,,distrito,,,256,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 256"
+71,7350,Uraí,05,Rancho Alegre,,distrito,,,256,"leitura visual em folha de contato do Codigo de Municipios e Distritos de 1960, p. 256"
 74,7400,Biguaçu,01,Biguaçu,,distrito,740,,,regra do Código: o distrito 01 é a sede e tem o nome do município (linha não lida pelo OCR)
 74,7400,Biguaçu,05,Ganchos,,distrito,071,Zona de Florianópolis a Taca,259,OCR (Tesseract por) do Código de Municípios e Distritos de 1960; código do município conferido pela DTB ()
 74,7400,Biguaçu,07,Guadoranga,,distrito,071,Zona de Florianópolis a Taca,259,OCR (Tesseract por) do Código de Municípios e Distritos de 1960; código do município conferido pela DTB ()
