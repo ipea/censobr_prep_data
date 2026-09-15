@@ -740,9 +740,9 @@ finalize_1960_amostra_127 <- function(tabelas, municipios_path){
   para_inteiro(pessoas); para_inteiro(domicilios)
   data.table::setnames(pessoas, "tipo", "censobr_tipo_registro")
 
-  # o municipio: V116 e o codigo da divisao territorial de 1960, com tres excecoes -- a Guanabara vem
-  # codificada por distrito (54xx) e e um municipio so (541); Alagoas vem deslocada em 200; Fernando
-  # de Noronha vem 2701 e e o unico municipio do territorio (2401)
+  # o municipio: V116 e o codigo do "Codigo de Municipios e Distritos" de 1960, com tres excecoes -- na
+  # Guanabara V116 e o bairro (54xx) e o municipio e um so (541, convencao da DTB); Alagoas vem deslocada
+  # em 200 (o Codigo da 23xx); Fernando de Noronha vem 2701 e o territorio tem um municipio, 2401
   # code_muni_1960 e o codigo da epoca; code_muni e o atual, pelo crosswalk 1960 -> 2010 da mesma tabela
   municipios <- data.table::fread(municipios_path, encoding = "UTF-8")
   domicilios[, code_muni_1960 := data.table::fifelse(UF == 54L, 541L, data.table::fifelse(UF == 25L, V116 - 200L,

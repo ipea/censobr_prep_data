@@ -64,11 +64,11 @@ G,V207,26,São Paulo,Brasil,,3,a lista de países remete ao 'Código para uso da
 G,V207,27,Sergipe,Brasil,,3,a lista de países remete ao 'Código para uso da Agência Municipal de Estatística' para os que faltam
 G,V207,28,Serra dos Aimorés (região em litígio),Brasil,,3,a lista de países remete ao 'Código para uso da Agência Municipal de Estatística' para os que faltam
 G,V207,29,Brasileiro nato sem declaração da Unidade da Federação,Brasil,,3,a lista de países remete ao 'Código para uso da Agência Municipal de Estatística' para os que faltam
-G,V207,99,Estrangeiro ou naturalizado sem declaração do país,Brasil,,3,a lista de países remete ao 'Código para uso da Agência Municipal de Estatística' para os que faltam
+G,V207,99,"Estrangeiro ou naturalizado sem declaração do país, ou nascido a bordo",Brasil,,3,"não legível ou ausente no exemplar digitalizado do Código; rótulo do Código para uso da Agência Municipal de Estatística (grupos de divulgação, p. 205-236), confirmado pelo dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)"
 G,V207,30,Açores,Outros países,,4,
 G,V207,31,África do Sul,Outros países,,4,
 G,V207,32,Alemanha (Ocidental e Oriental),Outros países,,4,
-G,V207,33,Argélia,Outros países,,4,não legível ou ausente no exemplar digitalizado do Código; rótulo do dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)
+G,V207,33,"Outros países da África (Argélia, Cabo Verde, Camarões, Congo, Costa do Marfim, Daomé, Eritreia etc.)",Outros países,,4,"não legível ou ausente no exemplar digitalizado do Código; rótulo do Código para uso da Agência Municipal de Estatística (grupos de divulgação, p. 205-236), confirmado pelo dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)"
 G,V207,34,Argentina,Outros países,,4,
 G,V207,35,"URSS (inclusive Armênia, Bessarábia, Estônia, Geórgia, Letônia, Lituânia, Rússia e Ucrânia)",Outros países,,4,
 G,V207,36,Austrália,Outros países,,4,
@@ -97,17 +97,17 @@ G,V207,58,França,Outros países,,4,
 G,V207,59,Grécia,Outros países,,4,
 G,V207,60,Guatemala,Outros países,,4,
 G,V207,61,Guiana Inglesa,Outros países,,4,
-G,V207,62,Guiana Francesa,Outros países,,4,
-G,V207,63,Guiana Holandesa (Suriname),Outros países,,4,
+G,V207,62,Guiana Holandesa (Suriname),Outros países,,4,"não legível ou ausente no exemplar digitalizado do Código; rótulo do Código para uso da Agência Municipal de Estatística (grupos de divulgação, p. 205-236), confirmado pelo dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)"
+G,V207,63,Guiana Francesa,Outros países,,4,"não legível ou ausente no exemplar digitalizado do Código; rótulo do Código para uso da Agência Municipal de Estatística (grupos de divulgação, p. 205-236), confirmado pelo dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)"
 G,V207,64,Haiti,Outros países,,4,
 G,V207,65,Holanda,Outros países,,4,
 G,V207,66,Honduras,Outros países,,4,
-G,V207,67,Honduras Britânica,Outros países,,4,
+G,V207,67,Honduras Britânica e outros países da América (ilhas do Caribe),Outros países,,4,"não legível ou ausente no exemplar digitalizado do Código; rótulo do Código para uso da Agência Municipal de Estatística (grupos de divulgação, p. 205-236), confirmado pelo dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)"
 G,V207,68,Hungria,Outros países,,4,
 G,V207,69,Índia,Outros países,,4,
-G,V207,70,Irã,Outros países,,4,
+G,V207,70,Irã e outros países da Ásia,Outros países,,4,"não legível ou ausente no exemplar digitalizado do Código; rótulo do Código para uso da Agência Municipal de Estatística (grupos de divulgação, p. 205-236), confirmado pelo dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)"
 G,V207,71,Iraque,Outros países,,4,
-G,V207,72,Irlanda (Eire),Outros países,,4,
+G,V207,72,Irlanda (Eire) e outros países da Europa,Outros países,,4,"não legível ou ausente no exemplar digitalizado do Código; rótulo do Código para uso da Agência Municipal de Estatística (grupos de divulgação, p. 205-236), confirmado pelo dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)"
 G,V207,73,Israel,Outros países,,4,
 G,V207,74,Itália,Outros países,,4,
 G,V207,75,Jamaica,Outros países,,4,
@@ -117,7 +117,7 @@ G,V207,78,México,Outros países,,4,
 G,V207,79,Nicarágua,Outros países,,4,
 G,V207,80,Nigéria,Outros países,,4,
 G,V207,81,Noruega,Outros países,,4,
-G,V207,82,Nova Zelândia,Outros países,,4,
+G,V207,82,Nova Zelândia e outros países da Oceania,Outros países,,4,"não legível ou ausente no exemplar digitalizado do Código; rótulo do Código para uso da Agência Municipal de Estatística (grupos de divulgação, p. 205-236), confirmado pelo dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)"
 G,V207,83,Panamá,Outros países,,4,
 G,V207,84,Paquistão,Outros países,,4,
 G,V207,85,Paraguai,Outros países,,4,
@@ -567,7 +567,7 @@ X,V223B,316,Indústrias da borracha,Indústria de transformação,,19,
 X,V223B,317,Indústrias do fumo,Indústria de transformação,,19,
 X,V223B,318,Indústrias de papel e papelão,Indústria de transformação,,19,
 X,V223B,321,Indústrias do mobiliário (inclusive colchoarias),Indústria de transformação,,19,
-X,V223B,322,Indústrias de madeira,Indústria de transformação,,19,não legível ou ausente no exemplar digitalizado do Código; rótulo do dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)
+X,V223B,322,Indústrias de madeira,Indústria de transformação,,19,"não legível ou ausente no exemplar digitalizado do Código; rótulo do Código para uso da Agência Municipal de Estatística (grupos de divulgação, p. 205-236), confirmado pelo dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)"
 X,V223B,323,"Indústrias de couro, peles e produtos similares (exclusive artigos do vestuário e calçados)",Indústria de transformação,,19,
 X,V223B,324,Indústrias farmacêuticas,Indústria de transformação,,19,
 X,V223B,325,Indústrias de plásticos,Indústria de transformação,,19,
@@ -596,8 +596,8 @@ X,V223B,418,Comércio de produtos farmacêuticos,Comércio de mercadorias,,20,
 X,V223B,421,Comércio de combustíveis e lubrificantes,Comércio de mercadorias,,20,
 X,V223B,422,Comércio ambulante,Comércio de mercadorias,,20,
 X,V223B,423,Feiras e mercados,Comércio de mercadorias,,20,
-X,V223B,424,Atividades auxiliares do comércio,Comércio de mercadorias,,20,não legível ou ausente no exemplar digitalizado do Código; rótulo do dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)
-X,V223B,429,Atividades não compreendidas nas classes anteriores ou mal definidas,Comércio de mercadorias,,20,não legível ou ausente no exemplar digitalizado do Código; rótulo do dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)
+X,V223B,424,Atividades auxiliares do comércio de mercadorias,Comércio de mercadorias,,20,"não legível ou ausente no exemplar digitalizado do Código; rótulo do Código para uso da Agência Municipal de Estatística (grupos de divulgação, p. 205-236), confirmado pelo dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)"
+X,V223B,429,Atividades não compreendidas nas classes anteriores ou mal definidas,Comércio de mercadorias,,20,"não legível ou ausente no exemplar digitalizado do Código; rótulo do Código para uso da Agência Municipal de Estatística (grupos de divulgação, p. 205-236), confirmado pelo dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)"
 X,V223B,451,Comércio de imóveis,"Comércio de imóveis e valores mobiliários, crédito, seguros e capitalização",,21,
 X,V223B,452,Comércio de títulos e moedas,"Comércio de imóveis e valores mobiliários, crédito, seguros e capitalização",,21,
 X,V223B,453,Bancos e casas bancárias,"Comércio de imóveis e valores mobiliários, crédito, seguros e capitalização",,21,
@@ -629,7 +629,7 @@ X,V223B,712,Ensino particular,Atividades sociais,,21,
 X,V223B,713,Assistência médico-hospitalar pública,Atividades sociais,,21,
 X,V223B,714,Assistência médico-hospitalar particular,Atividades sociais,,21,
 X,V223B,715,"Saneamento, abastecimento e melhoramentos urbanos (exclusive abastecimento d'água e serviços de esgoto)",Atividades sociais,,21,
-X,V223B,716,Previdência social,Atividades sociais,,21,não legível ou ausente no exemplar digitalizado do Código; rótulo do dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)
+X,V223B,716,Previdência social,Atividades sociais,,21,"não legível ou ausente no exemplar digitalizado do Código; rótulo do Código para uso da Agência Municipal de Estatística (grupos de divulgação, p. 205-236), confirmado pelo dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)"
 X,V223B,717,Assistência e beneficência,Atividades sociais,,21,
 X,V223B,718,Culto e atividades auxiliares,Atividades sociais,,21,
 X,V223B,721,Instituições culturais,Atividades sociais,,21,
