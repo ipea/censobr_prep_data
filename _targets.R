@@ -236,6 +236,56 @@ list(
              format = "file"
              ),
 
+  # 01b. microdata 1960 -- amostra de 25%, dos arquivos brutos por UF -----------------
+
+  # Sao 17 arquivos, um por UF, e 18 milhoes de registros. O eixo do branching e
+  # a UF porque tudo se decompoe por ela: o municipio e a pasta aninham na UF sem
+  # excecao. Cada branch grava parquet e devolve caminho, nunca a tabela -- ver
+  # R/microdata_1960_amostra_25.R.
+  tar_target(name = ufs_1960_amostra_25,
+             command = names(UF_1960_AMOSTRA_25)
+             ),
+
+  tar_target(name = raw_1960_amostra_25,
+             command = download_1960_amostra_25(),
+             format = "file"
+             ),
+
+  tar_target(name = guia_1960_amostra_25_familias,
+             command = "read_guides/readguide_1960_amostra_25_familias.csv",
+             format = "file"
+             ),
+
+  tar_target(name = guia_1960_amostra_25_pessoas,
+             command = "read_guides/readguide_1960_amostra_25_pessoas.csv",
+             format = "file"
+             ),
+
+  tar_target(name = correcoes_1960_amostra_25,
+             command = "read_guides/1960_amostra_25_correcoes.csv",
+             format = "file"
+             ),
+
+  tar_target(name = auditoria_1960_amostra_25,
+             command = audit_1960_amostra_25(raw_1960_amostra_25,
+                                             ufs_1960_amostra_25,
+                                             guia_1960_amostra_25_familias,
+                                             guia_1960_amostra_25_pessoas,
+                                             correcoes_1960_amostra_25),
+             pattern = map(ufs_1960_amostra_25)
+             ),
+
+  tar_target(name = tabelas_brutas_1960_amostra_25,
+             command = read_1960_amostra_25(raw_1960_amostra_25,
+                                            ufs_1960_amostra_25,
+                                            guia_1960_amostra_25_familias,
+                                            guia_1960_amostra_25_pessoas,
+                                            correcoes_1960_amostra_25,
+                                            auditoria_1960_amostra_25),
+             pattern = map(ufs_1960_amostra_25, auditoria_1960_amostra_25),
+             format = "file"
+             ),
+
   # 02. microdata 1970 ---------------------------------------------------------------
 
   # a fonte e a versao CEM, no release_legacy: o FWF do FTP traz 1.785
