@@ -68,7 +68,7 @@ G,V207,99,Estrangeiro ou naturalizado sem declaração do país,Brasil,,3,a list
 G,V207,30,Açores,Outros países,,4,
 G,V207,31,África do Sul,Outros países,,4,
 G,V207,32,Alemanha (Ocidental e Oriental),Outros países,,4,
-G,V207,33,[ilegível no exemplar digitalizado],Outros países,,4,
+G,V207,33,Argélia,Outros países,,4,não legível ou ausente no exemplar digitalizado do Código; rótulo do dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)
 G,V207,34,Argentina,Outros países,,4,
 G,V207,35,"URSS (inclusive Armênia, Bessarábia, Estônia, Geórgia, Letônia, Lituânia, Rússia e Ucrânia)",Outros países,,4,
 G,V207,36,Austrália,Outros países,,4,
@@ -567,7 +567,7 @@ X,V223B,316,Indústrias da borracha,Indústria de transformação,,19,
 X,V223B,317,Indústrias do fumo,Indústria de transformação,,19,
 X,V223B,318,Indústrias de papel e papelão,Indústria de transformação,,19,
 X,V223B,321,Indústrias do mobiliário (inclusive colchoarias),Indústria de transformação,,19,
-X,V223B,322,"[linha cortada no exemplar digitalizado; indústrias da madeira, pela sequência]",Indústria de transformação,,19,"[linha cortada no exemplar digitalizado; indústrias da madeira, pela sequência]"
+X,V223B,322,Indústrias de madeira,Indústria de transformação,,19,não legível ou ausente no exemplar digitalizado do Código; rótulo do dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)
 X,V223B,323,"Indústrias de couro, peles e produtos similares (exclusive artigos do vestuário e calçados)",Indústria de transformação,,19,
 X,V223B,324,Indústrias farmacêuticas,Indústria de transformação,,19,
 X,V223B,325,Indústrias de plásticos,Indústria de transformação,,19,
@@ -596,8 +596,8 @@ X,V223B,418,Comércio de produtos farmacêuticos,Comércio de mercadorias,,20,
 X,V223B,421,Comércio de combustíveis e lubrificantes,Comércio de mercadorias,,20,
 X,V223B,422,Comércio ambulante,Comércio de mercadorias,,20,
 X,V223B,423,Feiras e mercados,Comércio de mercadorias,,20,
-X,V223B,424,[não consta do Código; ocorre no arquivo],Comércio de mercadorias,,20,[não consta do Código; ocorre no arquivo]
-X,V223B,429,"[não consta do Código; ocorre no arquivo, pelo padrão: atividades não compreendidas nas classes anteriores ou mal definidas]",Comércio de mercadorias,,20,"[não consta do Código; ocorre no arquivo, pelo padrão: atividades não compreendidas nas classes anteriores ou mal definidas]"
+X,V223B,424,Atividades auxiliares do comércio,Comércio de mercadorias,,20,não legível ou ausente no exemplar digitalizado do Código; rótulo do dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)
+X,V223B,429,Atividades não compreendidas nas classes anteriores ou mal definidas,Comércio de mercadorias,,20,não legível ou ausente no exemplar digitalizado do Código; rótulo do dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)
 X,V223B,451,Comércio de imóveis,"Comércio de imóveis e valores mobiliários, crédito, seguros e capitalização",,21,
 X,V223B,452,Comércio de títulos e moedas,"Comércio de imóveis e valores mobiliários, crédito, seguros e capitalização",,21,
 X,V223B,453,Bancos e casas bancárias,"Comércio de imóveis e valores mobiliários, crédito, seguros e capitalização",,21,
@@ -629,7 +629,7 @@ X,V223B,712,Ensino particular,Atividades sociais,,21,
 X,V223B,713,Assistência médico-hospitalar pública,Atividades sociais,,21,
 X,V223B,714,Assistência médico-hospitalar particular,Atividades sociais,,21,
 X,V223B,715,"Saneamento, abastecimento e melhoramentos urbanos (exclusive abastecimento d'água e serviços de esgoto)",Atividades sociais,,21,
-X,V223B,716,[linha cortada no exemplar digitalizado; ocorre no arquivo],Atividades sociais,,21,[linha cortada no exemplar digitalizado; ocorre no arquivo]
+X,V223B,716,Previdência social,Atividades sociais,,21,não legível ou ausente no exemplar digitalizado do Código; rótulo do dicionário de códigos do IBGE que acompanha o arquivo (dicionario_60_last.doc)
 X,V223B,717,Assistência e beneficência,Atividades sociais,,21,
 X,V223B,718,Culto e atividades auxiliares,Atividades sociais,,21,
 X,V223B,721,Instituições culturais,Atividades sociais,,21,

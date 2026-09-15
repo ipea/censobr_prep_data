@@ -748,7 +748,14 @@ finalize_1960_amostra_127 <- function(tabelas, municipios_path){
   domicilios[, code_muni_1960 := data.table::fifelse(UF == 54L, 541L, data.table::fifelse(UF == 25L, V116 - 200L,
                                  data.table::fifelse(UF == 24L, 2401L, V116)))]
   domicilios[, censobr_muni_corrigido := UF %in% c(54L, 25L, 24L)]
+  domicilios[municipios, code_muni := as.integer(i.code_muni_2010), on = c(UF = "uf60", code_muni_1960 = "cod60")]
+
+  # codigo sem par na divisao territorial, numa pasta cujas demais familias sao todas de um so municipio:
+  # e erro de perfuracao (7234 por 6234 em Sao Paulo, 724Z por 7240 no Parana) e o municipio da pasta o corrige
+  domicilios[, muni_pasta := if(data.table::uniqueN(code_muni_1960[!is.na(code_muni)]) == 1) code_muni_1960[!is.na(code_muni)][1] else NA_integer_, by = .(UF, pasta)]
+  domicilios[is.na(code_muni) & !is.na(muni_pasta), `:=`(code_muni_1960 = muni_pasta, censobr_muni_corrigido = TRUE)]
   domicilios[municipios, `:=`(code_muni = as.integer(i.code_muni_2010), pop_urbana_muni = i.pop_urbana), on = c(UF = "uf60", code_muni_1960 = "cod60")]
+  domicilios[, muni_pasta := NULL]
 
   # o desenho da amostra: a pasta e a unidade sorteada; o estrato e a regiao cruzada com um dos quatro
   # grupos de situacao de 1965 -- cidade de 100 mil ou mais, aglomerado urbano menor, rural, mista
