@@ -34,6 +34,16 @@ A descrição que existe é a do volume II de 1965, páginas 5 e 6, e é curta. 
 
 A fração de amostragem nominal é, portanto, ¼ × 1/20 = 1/80 = 1,25%; o volume fala em "aproximadamente 1,27%" porque o número de boletins por pasta variava. O peso de desenho nominal, o inverso da fração, é 80: cada pessoa da subamostra representa oitenta pessoas.
 
+Em figura:
+
+```
+todos os domicilios do pais  ->  1 em 4, no setor  ->  amostra de 25% (boletins CD 2)
+                                                        reunidos em pastas de ~250 boletins, na ordem dos setores
+                                                        classificadas em estratos: geografia x situacao
+                                                  ->  1 pasta em 20, sistematico, dentro de cada estrato
+                                                  ->  814 pastas = a amostra de 1,27% (todos os boletins da pasta)
+```
+
 Por que sortear pastas inteiras, e não pessoas? Porque era barato. As pastas já existiam como pacotes físicos; perfurar cartões para 814 pastas era um trabalho que cabia no calendário de uma publicação preliminar, e sortear pessoas espalhadas por milhares de pastas não cabia. O custo estatístico dessa escolha é o assunto da seção 8: as pessoas de uma mesma pasta são vizinhas e parecidas, e a amostra tem menos informação do que os seus 897 mil registros sugerem.
 
 O volume promete "uma publicação especial" com a descrição detalhada do desenho e os erros de amostragem. Ela não existe na biblioteca do IBGE, no Internet Archive nem nas citações dos volumes definitivos; tudo indica que nunca saiu. O que vai abaixo sobre estratos e erros é, por isso, reconstrução a partir do próprio arquivo, e em cada ponto dizemos o que é fato documentado, o que o dado mostra e o que é escolha nossa.
@@ -167,14 +177,147 @@ Três cuidados. Subconjuntos devem ser feitos com `subset()` sobre o objeto de d
 - **Domínios pequenos.** Com efeitos de desenho de 5 a 10, uma célula precisa de milhares de pessoas na amostra para ter erro relativo abaixo de 5%.
 - **Comparações com 1965.** Os quadros 1 e 2 são reproduzidos exatamente por construção; os demais diferem por poucos por cento, e as diferenças estão explicadas ou documentadas no documento de preparação (seção 7).
 
-## 11. O que ainda pode melhorar
+## 11. Como incorporar melhor o desenho: as possibilidades, uma a uma
 
-- **Usar a ordem do cadastro.** Como o sorteio foi sistemático numa lista ordenada por zona fisiográfica, o estimador de diferenças sucessivas (pares de pastas vizinhas na numeração tratados como estratos colapsados) refletiria a estratificação implícita e daria erros-padrão menores e mais próximos dos verdadeiros. É uma alternativa ao estimador atual, não uma correção dele, e exige documentar a ordem usada.
-- **Estratos por unidade da federação onde couber.** Cruzar unidade da federação com situação e colapsar os estratos com uma pasta só chegaria mais perto da geografia do IBGE. O ganho é pequeno fora das unidades grandes.
-- **Correção de população finita.** Incluir a fração de 1/20 reduz o erro-padrão em cerca de 2,5%. Deixamos de fora por prudência.
-- **Variância pós-calibração.** Calcular os erros-padrão sobre os resíduos da regressão nas margens calibradas (o estimador de regressão generalizada) daria intervalos menores para variáveis correlacionadas com idade, sexo, situação e alfabetização.
-- **Pesos replicados.** Publicar um conjunto de pesos de replicação (jackknife por pasta dentro do estrato, ou bootstrap) pouparia o usuário de montar o desenho; custa dezenas de colunas.
-- **A amostra de 25%.** Ela tem a chave do questionário e cobre 17 unidades da federação; permite recuperar o Distrito Federal, confirmar os cartões perdidos e as repetições, e testar o desenho pasta a pasta.
+Esta seção percorre cada forma de melhorar o cálculo do erro-padrão, com a intuição, um exemplo numérico calculado neste arquivo e o que cada uma exige. Nada aqui muda os pesos nem os estratos das tabelas; muda o que se faz com eles. Para tornar tudo concreto, cinco totais servem de exemplo ao longo da seção, todos para a população presente:
+
+| total (pessoas) | estimativa | pastas com o atributo |
+|---|---|---|
+| operários da construção civil (classe 351) | 748.117 | 657 |
+| pessoas com rendimento acima de Cr$ 10 mil | 2.525.829 | 748 |
+| analfabetos de 15 anos e mais | 15.828.389 | 816 |
+| solteiros de 15 anos e mais | 13.425.845 | 814 |
+| população urbana do Nordeste | 5.449.423 | 106 |
+
+E o resumo, em milhares de pessoas, dos erros-padrão que cada alternativa dá; as subseções explicam cada coluna:
+
+| total | atual (16 estratos) | com correção finita | estratos UF × situação | diferenças sucessivas | resíduos da calibração | jackknife | se fosse aleatória simples |
+|---|---|---|---|---|---|---|---|
+| construção civil | 29 | 28 | 28 | 27 | 26 | 29 | 8 |
+| rendimento > 10 mil | 83 | 81 | 80 | 70 | 65 | 83 | 14 |
+| analfabetos 15+ | 215 | 209 | 202 | 196 | 34 | 215 | 31 |
+| solteiros 15+ | 141 | 138 | 137 | 133 | 52 | 141 | 29 |
+| urbana do Nordeste | 193 | 188 | 186 | 184 | 0 | 193 | 20 |
+
+A última coluna é o erro-padrão que uma amostra aleatória simples de pessoas do mesmo tamanho teria; a razão entre ela e a primeira, ao quadrado, é o efeito de desenho (14 na construção, 36 no rendimento, 48 nos analfabetos, 95 no urbano do Nordeste). É a medida do que a amostragem por pastas custa.
+
+### 11.1 O ponto de partida: o que o estimador atual supõe
+
+O estimador da seção 8 trata a amostra como se, em cada um dos 16 estratos, as pastas tivessem sido sorteadas **com reposição e independentemente umas das outras**, e como se os pesos fossem fixos. Nenhuma das duas coisas é exatamente verdade: as pastas foram sorteadas sistematicamente num cadastro ordenado (o que é melhor que independente), e os pesos foram calibrados (o que os torna dependentes da amostra). As duas simplificações erram para o lado seguro, isto é, produzem erros-padrão maiores que os verdadeiros. As alternativas abaixo relaxam uma simplificação de cada vez.
+
+Uma imagem para fixar. Pense no cadastro de uma unidade da federação como uma fila de pastas, e nos estratos como cores:
+
+```
+cadastro (uma UF)      U U U U U U U U U U U U U U U U U U U U   M M M M M M M M   R R R R R R R R R R R R
+número da pasta        02 04 06 08 10 12 14 16 18 20 22 24 ...   ...              ...
+sorteio (uma em 20)          ^                                       ^                         ^
+```
+
+U, M e R são as pastas urbanas, mistas e rurais; cada grupo é uma sequência própria (é o que a numeração mostra, seção 5), e em cada sequência sorteia-se uma pasta a cada vinte. O estimador atual olha para as pastas sorteadas de um estrato e mede o quanto os seus totais diferem entre si; quanto mais diferem, maior o erro-padrão.
+
+### 11.2 A correção de população finita
+
+**A ideia.** Se uma amostra tomasse todas as pastas do cadastro, não haveria erro amostral nenhum. Tomando uma fração f delas, a variância de um total é proporcional a (1 − f): sortear 5% das pastas deixa 95% do "espaço" para variar. A correção multiplica a variância por (1 − 1/20) = 0,95, e o erro-padrão por 0,975.
+
+**O exemplo.** Construção civil: 29 mil vira 28 mil; rendimento alto: 83 vira 81. Um ganho de 2,5% em qualquer estimativa.
+
+**Por que ficou de fora.** Porque a subamostra tem duas etapas. A primeira, um domicílio em quatro dentro de cada setor, também tem variância própria; o estimador de conglomerado último sem correção finita estima aproximadamente a soma das duas etapas, e é assim que se usa em amostras de conglomerados com fração pequena. Pôr a correção da segunda etapa sem acrescentar a variância da primeira dentro das pastas sorteadas subestimaria um pouco. O ganho é pequeno e a omissão é conservadora; se um dia se acrescentar a componente da primeira etapa, a correção entra junto.
+
+### 11.3 Estratos mais finos: unidade da federação cruzada com situação
+
+**A ideia.** O estrato diz de que grupo de pastas a variação "conta". Com região × situação, duas pastas urbanas menores do Ceará e do Maranhão estão no mesmo estrato, e a diferença entre elas (que é, em parte, a diferença entre Ceará e Maranhão) entra no erro-padrão. Se o IBGE estratificou por unidade da federação, essa diferença não existia no sorteio e não deveria contar. Cruzar unidade da federação com os quatro grupos dá 88 estratos, dos quais 16 têm uma pasta só e precisam ser colapsados (voltam ao estrato regional), porque com uma pasta não se mede variação.
+
+**O exemplo.** Rendimento alto: 83 vira 80; analfabetos: 215 vira 202; construção: 29 vira 28. Ganhos de 3% a 6%.
+
+**O que custa e o que arrisca.** Nada nas tabelas: é só outra coluna de estrato, que qualquer usuário pode construir com `UF` e o grupo de `censobr_estrato`. O risco é o colapso: juntar estratos que eram separados no sorteio superestima; separar estratos que eram juntos subestima. Como não sabemos qual geografia o IBGE usou, a região é a aposta segura e a unidade da federação é a alternativa a documentar.
+
+### 11.4 Usar a ordem do cadastro: o estimador de diferenças sucessivas
+
+**A ideia.** Numa amostra sistemática sobre uma lista ordenada, as pastas sorteadas vêm em ordem: a primeira da zona A, depois outra da zona A, depois uma da zona B, e assim por diante. Pastas vizinhas na lista são parecidas (mesma zona, municípios contíguos), e o que o sorteio realmente deixa ao acaso é o ponto de partida dentro do intervalo de vinte. Um estimador que mede a variância pelas **diferenças entre pastas consecutivas na ordem do sorteio** captura essa estrutura: em vez de comparar cada pasta com a média do estrato inteiro, compara cada pasta com a sua vizinha. Formalmente, dentro de cada estrato com as pastas ordenadas pelo número,
+
+  V_SD(Ŷ) = Σ_h n_h / (2(n_h − 1)) · Σ_{i=2}^{n_h} (t_{h,i} − t_{h,i−1})²
+
+É o estimador que o Census Bureau americano usa para amostras sistemáticas (o "v2" de Wolter), e o que o próprio IBGE recomenda para a PNAD. A figura:
+
+```
+ordem no cadastro (pastas urbanas de Sao Paulo, sorteadas):
+  pasta   60118  60158  60198  60238  60278  60318 ...
+  zona      A      A      A      A      B      B   ...
+  total    t1     t2     t3     t4     t5     t6   ...
+estimador atual:      (t1 - t̄)² + (t2 - t̄)² + ...      compara com a media de todo o estrato
+diferencas sucessivas: (t2 - t1)² + (t3 - t2)² + ...   compara cada pasta com a vizinha
+```
+
+Na capital paulista, os 39 números de pasta urbanos sorteados estão a 40 um do outro em 25 dos 38 intervalos, e a 44 ou 46 em outros seis; os saltos maiores (62, 64, 78, 80, 82) são buracos de numeração do cadastro. É a grade do sorteio, visível.
+
+**O exemplo.** Rendimento alto: 83 vira 70 (−16%); analfabetos: 215 vira 196 (−9%); solteiros: 141 vira 133; construção: 29 vira 27. O ganho é maior justamente nas variáveis com forte padrão espacial, que é onde a ordenação por zona mais ajuda.
+
+**O que custa e o que arrisca.** Custa documentar a ordem (o número da pasta dentro de cada sequência de situação de cada unidade da federação, que as tabelas já trazem em `pasta` e `UF`). Arrisca duas coisas: se a ordem usada não for a do sorteio, o estimador perde a justificativa; e se houver periodicidade no cadastro alinhada com o intervalo de vinte, subestima. A numeração mostra que a ordem é por zona, município e setor, sem periodicidade visível. É a alternativa mais bem fundamentada para variáveis com padrão espacial.
+
+### 11.5 A variância depois da calibração: resíduos em vez de valores
+
+**A ideia.** Os pesos foram calibrados para que 184 totais (idade × sexo × situação × região, e alfabetização por sexo e região) sejam reproduzidos exatamente. Para esses totais, o erro amostral é zero por construção. Para qualquer outra variável, a calibração "fixa" a parte dela que se explica pelas margens e deixa ao acaso só o resto. A variância correta do estimador calibrado é, portanto, a variância do **resíduo** da regressão da variável nas margens, e não a da variável em si. É o resultado clássico de Deville e Särndal: o estimador calibrado é assintoticamente igual ao estimador de regressão generalizada (GREG), e a variância se calcula com os resíduos e = y − x'B, onde B é o coeficiente da regressão ponderada de y nas colunas de calibração.
+
+Na prática: monta-se, por domicílio, o total da variável (y) e o vetor x com o número de pessoas do domicílio em cada uma das 184 células; estima-se B por mínimos quadrados ponderados; calcula-se e; e aplica-se o estimador de conglomerado último aos totais de w·e por pasta.
+
+**O exemplo.** Aqui o efeito é grande e didático:
+
+- população urbana do Nordeste: 193 mil vira **zero**, porque ela é uma das margens calibradas;
+- analfabetos de 15 anos e mais: 215 mil vira 34 mil, porque "sabe ler, por sexo e região" é margem, e a idade também; o resíduo é só o que a faixa de 15 anos e mais não determina;
+- solteiros de 15 anos e mais: 141 vira 52, porque estado conjugal se explica muito por idade e sexo;
+- rendimento alto: 83 vira 65 (−22%), e construção civil 29 vira 26 (−10%): variáveis pouco explicadas pelas margens ganham pouco.
+
+**O que custa e o que arrisca.** Custa reproduzir as células de calibração no cálculo, o que o pacote `survey` faz sozinho: com um objeto de desenho construído com os pesos de desenho e a chamada `calibrate(desenho, ~celulas, totais_publicados)`, as funções `svytotal` e `svymean` passam a usar os resíduos automaticamente. O risco é assumir que as margens de 1965 são exatas; elas têm erro de amostragem próprio (foram estimadas da mesma amostra) e um pouco de erro de processamento, mas ambos são pequenos diante do que a calibração remove. Esta é a alternativa **correta** para os pesos que as tabelas trazem, e a que recomendamos adotar como padrão.
+
+### 11.6 Pesos replicados: jackknife
+
+**A ideia.** Em vez de fórmula, repetição. Constrói-se uma coleção de conjuntos de pesos, cada um simulando "a amostra sem uma pasta": retira-se a pasta i do estrato h e multiplicam-se os pesos das outras n_h − 1 pastas do estrato por n_h/(n_h − 1), para que o estrato continue somando o mesmo. Calcula-se a estimativa com cada conjunto; a dispersão das 817 estimativas em torno da estimativa completa é a variância:
+
+  V_JK(Ŷ) = Σ_h (n_h − 1)/n_h · Σ_i (Ŷ_(hi) − Ŷ)²
+
+```
+pasta       peso original   réplica 1 (sem a pasta 1)   réplica 2 (sem a pasta 2) ...
+  1 (h=A)        78,8              0                         78,8 · 3/2
+  2 (h=A)        78,8           78,8 · 3/2                       0
+  3 (h=A)        78,8           78,8 · 3/2                    78,8 · 3/2
+  4 (h=B)        80,1             80,1                         80,1
+  ...
+```
+
+**O exemplo.** Para totais e médias o jackknife dá **exatamente** o estimador de conglomerado último: 29, 83, 215, 141 e 193 mil, os mesmos números. Não é ganho de precisão; é ganho de conveniência: o usuário não precisa saber o que é estrato nem pasta, só multiplicar pelas colunas de peso.
+
+**O que custa.** 817 colunas a mais em 897 mil linhas (uns 6 GB em ponto flutuante), o que é inviável para distribuir. As alternativas de tamanho razoável são o jackknife por grupos aleatórios de pastas (por exemplo, 100 réplicas) ou o bootstrap da subseção seguinte. Com o `survey`, `as.svrepdesign(desenho, type = "JK1")` constrói as réplicas a partir de `censobr_upa` e `censobr_estrato` sem gravar nada.
+
+### 11.7 Pesos replicados: bootstrap de Rao e Wu
+
+**A ideia.** Em cada estrato, sorteiam-se n_h − 1 pastas com reposição entre as n_h sorteadas; os pesos são multiplicados por n_h/(n_h − 1) vezes o número de vezes que a pasta saiu. Repete-se, digamos, 200 vezes. A variância é a dispersão das 200 estimativas. Diferente do jackknife, o bootstrap funciona também para estatísticas não lineares — medianas, quantis, índice de Gini, coeficientes de modelos —, que são o que muita gente quer estimar com esta amostra.
+
+**O que custa.** 200 colunas de peso (cerca de 1,4 GB) ou, melhor, a instrução de gerá-las: `as.svrepdesign(desenho, type = "subbootstrap", replicates = 200)`. Se a compilação com a amostra de 25% for distribuir pesos replicados, esta é a forma a escolher, e um número de réplicas entre 200 e 500.
+
+### 11.8 Domínios pequenos e o que não fazer
+
+A estimativa de um domínio usa as pastas que têm alguém do domínio, mas a variância usa todas as pastas do estrato (as sem ninguém entram com zero), e é assim que deve ser: um município com uma pasta sorteada é, para fins de variância, um domínio que poderia ter recebido outra pasta e não recebeu nenhuma. Duas regras práticas:
+
+- Um domínio precisa de pastas em pelo menos dois estratos ou de várias pastas num estrato para ter erro-padrão calculável; com uma pasta o erro é indefinido, e com duas é uma estimativa com um grau de liberdade.
+- Estimativas por município a partir desta amostra não devem ser publicadas. A amostra foi desenhada para regiões e situações; para municípios ela é uma ou duas pastas de um bairro. O caminho para estimativas locais é a amostra de 25%, que tem dezenas de pastas por município médio, ou modelos de pequenas áreas, que estão fora do escopo deste pipeline.
+
+### 11.9 O que muda com a amostra de 25%
+
+A amostra de 25% sobreviveu para 17 unidades da federação, com a mesma chave de questionário (distrito, pasta, boletim). O seu desenho é outro e mais simples: um domicílio em quatro, sistematicamente, dentro de cada setor — quase uma amostra aleatória simples estratificada por setor, com efeito de desenho perto de 1. Na compilação, as duas amostras se combinam: onde a de 25% existe, ela domina; onde não existe, a de 1,27% é tudo o que há. Três consequências para o desenho:
+
+- O Distrito Federal volta a ter os seus boletins: a truncagem das duas pastas deixa de importar.
+- Nas 17 unidades da federação, os erros-padrão caem para uma fração dos daqui, e a estratificação passa a ser por setor.
+- A amostra de 1,27% continua sendo a única nacional, e a única em que se pode reproduzir 1965. Para estimativas nacionais consistentes com as publicadas, ela é a referência; para estimativas estaduais e locais, a de 25%.
+
+### 11.10 Recomendação e ordem
+
+1. **Adotar a variância pós-calibração como padrão** (11.5). É a variância correta dos pesos que as tabelas trazem, dá o maior ganho e o `survey` a calcula com uma chamada. Custo: reproduzir as 184 células no objeto de desenho, o que o passo 11 do pipeline pode passar a fazer.
+2. **Oferecer o estimador de diferenças sucessivas como alternativa documentada** (11.4) para variáveis com padrão espacial, com a ordem do cadastro explicada.
+3. **Manter os 16 estratos** como estrato oficial e documentar a alternativa por unidade da federação (11.3).
+4. **Deixar a correção finita de fora** até que a componente da primeira etapa entre junto (11.2).
+5. **Distribuir pesos de bootstrap na compilação** (11.7), 200 a 500 réplicas, se a compilação quiser poupar o usuário de montar o desenho; caso contrário, documentar a chamada do `survey` que os gera.
+
+Nenhum desses itens muda um número das tabelas atuais; todos mudam quão estreitos são os intervalos de confiança que se publicam com elas, e todos na direção de intervalos mais estreitos e mais honestos.
 
 ## 12. Glossário
 

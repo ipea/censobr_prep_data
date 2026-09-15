@@ -768,6 +768,10 @@ finalize_1960_amostra_127 <- function(tabelas, municipios_path){
   pessoas[domicilios, `:=`(censobr_upa = i.censobr_upa, censobr_estrato = i.censobr_estrato,
                            code_muni = i.code_muni, code_muni_1960 = i.code_muni_1960, censobr_muni_corrigido = i.censobr_muni_corrigido), on = "censobr_idhousehold"]
   domicilios[, pop_urbana_muni := NULL]
+
+  # V116 ilegivel (o caractere corrompido de "724Z" foi anulado no passo 4): recebe o municipio deduzido pela pasta, marcado
+  domicilios[is.na(V116) & !is.na(code_muni_1960), `:=`(V116 = code_muni_1960, censobr_muni_corrigido = TRUE)]
+  pessoas[is.na(V116) & !is.na(code_muni_1960), `:=`(V116 = code_muni_1960, censobr_muni_corrigido = TRUE)]
   message("  desenho: ", data.table::uniqueN(domicilios$censobr_upa), " pastas (",
           paste(names(table(pastas$grupo)), table(pastas$grupo), collapse = ", "), ") em ",
           data.table::uniqueN(domicilios$censobr_estrato), " estratos; menor estrato com ",
