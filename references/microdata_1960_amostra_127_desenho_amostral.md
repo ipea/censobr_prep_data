@@ -167,7 +167,9 @@ As regiões são as do volume de 1965: Nordeste (MA, PI, CE, RN, PB, PE, FN, AL)
 
   V(Ŷ) = Σ_h n_h/(n_h − 1) · Σ_i (t_hi − t̄_h)²
 
-Isto é o estimador de "conglomerado último" (ultimate cluster): a variância vem inteiramente da dispersão entre pastas dentro de cada estrato. Três detalhes: as pastas que não têm ninguém do domínio estimado entram com total zero, e é por isso que n_h é o número de pastas do estrato na amostra toda, e não só das que têm o domínio; a fração de uma pasta em vinte não entra como correção de população finita (ela reduziria a variância em 5%; ignorá-la é conservador); e a calibração é ignorada no cálculo (para variáveis correlacionadas com as margens, a variância verdadeira é menor; ignorar é conservador de novo). O passo 11 do pipeline faz essa conta à mão para não acrescentar dependência; `survey::svydesign(ids = ~censobr_upa, strata = ~censobr_estrato, weights = ~censobr_weight)` dá o mesmo resultado.
+multiplicada pela **correção de população finita** (1 − 1/20) = 0,95, que é a fração de pastas sorteadas em cada estrato. Isto é o estimador de "conglomerado último" (ultimate cluster): a variância vem inteiramente da dispersão entre pastas dentro de cada estrato. Dois detalhes: as pastas que não têm ninguém do domínio estimado entram com total zero, e é por isso que n_h é o número de pastas do estrato na amostra toda, e não só das que têm o domínio; e a calibração é ignorada no cálculo, o que é conservador (seção 11.5).
+
+O passo 11 do pipeline faz essa conta à mão, para que o cálculo não dependa de pacote externo. Que ela está certa se verifica com o `survey`, que está no `renv` do projeto: `svydesign(ids = ~censobr_upa, strata = ~censobr_estrato, weights = ~censobr_weight, fpc = ~I(rep(1/20, .N)))` seguido de `svytotal` devolve os mesmos números até o último dígito — 298.019 no Leste, 261.593 no Nordeste, 188.363 no Norte e Centro-Oeste, 325.023 no Sul. O script da conferência é `references/conferencia_desenho_amostral_1960.R`.
 
 **O efeito de desenho.** É a razão entre a variância assim calculada e a que uma amostra aleatória simples de pessoas do mesmo tamanho teria. Diz "quantas vezes menos precisa" a amostra é do que parece. Um efeito de desenho 10 numa célula com 4.810 pessoas significa que ela vale o que valeriam 481 sorteios independentes.
 
@@ -175,26 +177,26 @@ Isto é o estimador de "conglomerado último" (ultimate cluster): a variância v
 
 | domínio | estimativa | erro-padrão | coeficiente de variação | efeito de desenho |
 |---|---|---|---|---|
-| Brasil, urbana | 32.471.377 | 517.218 | 1,6% | 196 |
-| Brasil, rural | 37.647.694 | 569.710 | 1,5% | 238 |
-| Leste | 24.659.232 | 305.761 | 1,24% | 75 |
-| Sul | 24.445.902 | 333.466 | 1,4% | 89 |
-| Nordeste | 15.524.609 | 268.389 | 1,7% | 76 |
-| Norte e Centro-Oeste | 5.489.328 | 193.256 | 3,5% | 94 |
-| Norte e Centro-Oeste, urbana | 2.242.836 | 209.141 | 9,3% | 258 |
+| Brasil, urbana | 32.471.377 | 504.122 | 1,55% | 186 |
+| Brasil, rural | 37.647.694 | 555.285 | 1,47% | 226 |
+| Leste | 24.659.232 | 298.019 | 1,21% | 71 |
+| Sul | 24.445.902 | 325.023 | 1,33% | 85 |
+| Nordeste | 15.524.609 | 261.593 | 1,69% | 72 |
+| Norte e Centro-Oeste | 5.489.328 | 188.363 | 3,43% | 90 |
+| Norte e Centro-Oeste, urbana | 2.242.836 | 203.845 | 9,09% | 245 |
 
-Os efeitos de desenho de 70 a 260 nesses domínios grandes assustam, e têm uma razão simples: a situação e a região são atributos da pasta inteira. Estimar quanta gente mora no urbano do Nordeste é contar quantas pastas urbanas foram sorteadas no Nordeste e o tamanho de cada uma — e isso varia de sorteio para sorteio muito mais do que a contagem de pessoas sugere. Nas 176 células do quadro 1 (região × situação × sexo × idade), onde a variável de interesse varia dentro das pastas, o efeito de desenho tem mediana 6,3 e o coeficiente de variação mediana 3,6%, máximo 11,9%. Um exemplo completo, mulheres do urbano do Nordeste:
+Os efeitos de desenho de 70 a 260 nesses domínios grandes assustam, e têm uma razão simples: a situação e a região são atributos da pasta inteira. Estimar quanta gente mora no urbano do Nordeste é contar quantas pastas urbanas foram sorteadas no Nordeste e o tamanho de cada uma — e isso varia de sorteio para sorteio muito mais do que a contagem de pessoas sugere. Nas 176 células do quadro 1 (região × situação × sexo × idade), onde a variável de interesse varia dentro das pastas, o efeito de desenho tem mediana 6,0 e o coeficiente de variação mediana 3,5%, máximo 11,6%. Um exemplo completo, mulheres do urbano do Nordeste:
 
 | faixa de idade | estimativa | erro-padrão | CV | efeito de desenho | pessoas na amostra |
 |---|---|---|---|---|---|
-| 0 a 4 | 417.327 | 18.975 | 4,5% | 11,1 | 5.294 |
-| 5 a 9 | 381.630 | 17.470 | 4,6% | 10,3 | 4.810 |
-| 20 a 24 | 286.222 | 10.938 | 3,8% | 5,4 | 3.582 |
-| 40 a 49 | 240.804 | 9.603 | 4,0% | 4,9 | 3.039 |
-| 60 a 69 | 101.760 | 6.120 | 6,0% | 4,7 | 1.277 |
-| 70 e mais | 67.782 | 4.336 | 6,4% | 3,6 | 837 |
+| 0 a 4 | 417.327 | 18.072 | 4,3% | 10,1 | 5.294 |
+| 5 a 9 | 381.630 | 16.584 | 4,4% | 9,3 | 4.810 |
+| 20 a 24 | 286.222 | 10.343 | 3,6% | 4,8 | 3.582 |
+| 40 a 49 | 240.804 | 8.884 | 3,7% | 4,2 | 3.039 |
+| 60 a 69 | 101.760 | 5.817 | 5,7% | 4,3 | 1.277 |
+| 70 e mais | 67.782 | 4.224 | 6,2% | 3,4 | 837 |
 
-Os efeitos são maiores nas crianças (famílias grandes se concentram em pastas) e menores nos idosos. Uma célula dessas, que com 4.810 pessoas pareceria ter um erro relativo de 1,4% se fosse aleatória simples, tem 4,6%.
+Os efeitos são maiores nas crianças (famílias grandes se concentram em pastas) e menores nos idosos. Uma célula dessas, que com 4.810 pessoas pareceria ter um erro relativo de 1,4% se fosse aleatória simples, tem 4,4%.
 
 **Duas ausências.** Não há erro-padrão para o total do país nem para as 184 células calibradas, e não é esquecimento: a soma dos pesos foi calibrada a esses totais, e eles são reproduzidos por construção, sem erro. Os erros-padrão que a tabela traz para essas células são os de antes da calibração, e portanto conservadores. A tabela completa, com 191 domínios, está em `data_raw/microdata/1960/amostra_127/erros_amostrais.csv`.
 
@@ -268,19 +270,19 @@ sorteio (uma em 20)          ^                                       ^          
 
 U, M e R são as pastas urbanas, mistas e rurais; cada grupo é uma sequência própria (é o que a numeração mostra, seção 5), e em cada sequência sorteia-se uma pasta a cada vinte. O estimador atual olha para as pastas sorteadas de um estrato e mede o quanto os seus totais diferem entre si; quanto mais diferem, maior o erro-padrão.
 
-### 11.2 A correção de população finita, e a etapa que falta junto com ela
+### 11.2 A correção de população finita: adotada
 
-**A ideia.** Se uma amostra tomasse todas as pastas do cadastro, não haveria erro amostral nenhum. Tomando uma fração f delas, a variância de um total é proporcional a (1 − f): sortear 5% das pastas deixa 95% do "espaço" para variar. A correção multiplica a variância por (1 − 1/20) = 0,95, e o erro-padrão por 0,975. Construção civil: 29 mil vira 28 mil; rendimento alto: 83 vira 81. Um ganho de 2,5% em qualquer estimativa.
+**A ideia.** Se uma amostra tomasse todas as pastas do cadastro, não haveria erro amostral nenhum. Tomando uma fração f delas, a variância de um total é proporcional a (1 − f): sortear 5% das pastas deixa 95% do "espaço" para variar. A correção multiplica a variância por (1 − 1/20) = 0,95, e o erro-padrão por 0,975.
 
-**Por que ela não entra sozinha.** A amostra tem duas etapas, e — como a seção 7 explica — elas estão em ordem invertida: primeiro o domicílio (um em quatro, no campo), depois a pasta (uma em vinte, no escritório). Decompondo a variância total em relação à população de 1960:
+**A dúvida que havia.** A amostra tem duas etapas, e — como a seção 7 explica — elas estão em ordem invertida: primeiro o domicílio (um em quatro, no campo), depois a pasta (uma em vinte, no escritório). Decompondo a variância total em relação à população de 1960:
 
   V(Ŷ) = V₁ + E[V₂]
 
-onde V₁ é a variância de estimar a população a partir da amostra de 25% **inteira**, e V₂ é a variância de estimar a amostra de 25% a partir das pastas sorteadas. O estimador de conglomerado último mede E[V₂] e ignora V₁; a correção de população finita reduziria E[V₂] em 5%. Aplicar a correção sem somar V₁ é trocar um erro por outro, na mesma direção: as duas omissões se compensam, e o resultado é conservador por pouco.
+onde V₁ é a variância de estimar a população a partir da amostra de 25% **inteira**, e V₂ é a variância de estimar a amostra de 25% a partir das pastas sorteadas. O estimador de conglomerado último mede E[V₂]; a correção de população finita se aplica a ele. A pergunta era se valia a pena aplicar a correção enquanto V₁ ficava de fora — se as duas omissões se compensassem, o melhor seria não mexer em nenhuma.
 
-V₁ é pequena, mas não é zero. A amostra de 25% é sistemática de um em quatro dentro de cada setor, quase uma amostra aleatória simples estratificada por setor, com efeito de desenho perto de 1; a sua contribuição para a variância de um total nacional é da ordem de um quinto da de uma amostra de 1,27% aleatória simples — ou seja, alguns por cento de E[V₂], que tem efeito de desenho 7 a 250. Somar V₁ e a correção finita ao mesmo tempo mudaria os erros-padrão em poucos por cento, para baixo.
+**A medida resolveu.** V₁ é a variância de uma amostra sistemática de um em quatro, com 17,5 milhões de pessoas e efeito de desenho perto de 1. O coeficiente de variação que ela produz para um total é de **0,02%** para uma proporção de 50% e **0,21%** para uma de 1%, contra os 3,5% que o nosso estimador mede. Em variância, V₁ vale entre 0,003% e 0,3% de E[V₂] — três ordens de grandeza abaixo dos 5% da correção finita. Não há compensação nenhuma: ignorar a correção era inflar o erro-padrão em 2,5% de graça.
 
-**A pendência.** Fazer isso certo exige a amostra de 25%: é ela que dá o número de domicílios do universo em cada pasta, e portanto a fração da primeira etapa dentro de cada conglomerado. Fica registrado como tarefa para o estágio da amostra de 25%: **incluir a correção de população finita de 1/20 na segunda etapa e, junto com ela, a componente de variância da primeira etapa.** Enquanto isso, nenhuma das duas entra.
+**A decisão: a correção entra**, com f = 1/20 em todos os estratos, e V₁ continua de fora, documentado. O valor nominal da fração é o do desenho declarado em 1965, e o cadastro reconstruído o confirma (razão cadastro/sorteadas de 19,9, quartis 19,1 e 21,3). Os erros-padrão de toda a seção 8 já trazem a correção: o do Nordeste, por exemplo, caiu de 268.389 para 261.593.
 
 ### 11.3 Estratos mais finos: o que a mudança para unidade da federação × situação fez
 
@@ -347,6 +349,8 @@ svytotal(~I(V223B == 351), subset(sdr, !(V202 %in% c(3, 4))), na.rm = TRUE)
 Dois cuidados. O primeiro é que `as_sdr_design()` exige que os dados estejam **ordenados na ordem do sorteio** antes de construir o desenho, e ordena por estrato e depois pela variável indicada; é por isso que a ordenação vem antes. O segundo é que o método pressupõe que essa ordem seja de fato a do cadastro — o que a seção 5 demonstra para esta amostra, mas que deixaria de valer se alguém reordenasse as tabelas.
 
 Sem os dois pacotes, a fórmula acima é uma linha de `data.table`: dentro de cada estrato, ordenar os totais das pastas pela ordem do cadastro, tomar as diferenças consecutivas ao quadrado, somar e multiplicar por n/(2(n−1)).
+
+**Quanto custa.** Nada, se for pela fórmula. Medido neste arquivo: o estimador de conglomerado último e o de diferenças sucessivas levam **menos de um décimo de segundo cada um** — os dois operam sobre os 817 totais por pasta, não sobre as 897 mil linhas, e a única diferença entre eles é uma ordenação. O que custa é a outra forma de calcular a mesma coisa: construir os **pesos replicados** de diferenças sucessivas (`as_sdr_design` com 96 réplicas) leva cerca de **10 segundos** e produz 96 colunas de peso. Ou seja, se a preocupação for tempo de máquina, a fórmula direta não é motivo para evitar o método; os pesos replicados é que são caros, e só compensam se o usuário for calcular muitas estatísticas não lineares.
 
 ### 11.5 A variância depois da calibração: por que ela **não** deve ser o padrão
 
@@ -416,14 +420,21 @@ A amostra de 25% sobreviveu para 17 unidades da federação, com a mesma chave d
 
 ### 11.10 Recomendação e ordem
 
-1. **Manter o estimador de conglomerado último como padrão** (seções 8 e 11.5), com os 47 estratos de unidade da federação × situação já adotados. É o que responde à pergunta do usuário — quanto erra esta amostra em relação ao Brasil de 1960 — e é conservador pelo pouco que omite.
-2. **Calibrar aos totais do universo, e não às estimativas de 1965** (11.5). Sexo, idade, cor, nacionalidade e alfabetização foram apuradas em 100% dos domicílios e publicadas por unidade da federação e situação nos tomos do Volume 1. Calibrar a elas torna real a redução de variância, permite usar a fórmula dos resíduos com legitimidade e ancora a amostra na contagem completa. É a melhoria de maior valor que resta, e implica transcrever essas tabelas como se fez com as de 1965.
-3. **Oferecer o estimador de diferenças sucessivas como alternativa documentada** (11.4) para variáveis com padrão espacial, agora que a ordem do cadastro está demonstrada (seção 5) e que ela é reconstruível a partir do número da pasta.
-4. **Correção de população finita junto com a variância da primeira etapa** (11.2), no estágio da amostra de 25%, que é o que fornece o insumo.
-5. **Distribuir pesos de bootstrap na compilação** (11.7), 200 a 500 réplicas, se a compilação quiser poupar o usuário de montar o desenho; caso contrário, documentar a chamada que os gera.
-6. **Não adotar a variância pós-calibração como padrão** enquanto a calibração for às tabelas de 1965 (11.5).
+O que está adotado, depois das decisões de 2026-09-15:
 
-Nenhum desses itens muda um número das tabelas atuais; todos mudam quão estreitos são os intervalos de confiança que se publicam com elas.
+1. **Estimador de conglomerado último com correção de população finita**, sobre os 47 estratos de unidade da federação × situação. É o padrão do passo 11, confere com o `survey` até o último dígito, e responde à pergunta do usuário: quanto erra esta amostra em relação ao Brasil de 1960.
+2. **Sem variância pós-calibração** (11.5), enquanto a calibração for às tabelas de 1965, que saíram desta mesma amostra.
+3. **Sem unidade secundária de amostragem**: a pasta é a última unidade sorteada e o domicílio é a etapa anterior (seção 7).
+
+O que fica como opção documentada, não como padrão:
+
+4. **Diferenças sucessivas** (11.4), para variáveis com padrão espacial. A fórmula é instantânea; os pesos replicados custam 10 segundos e 96 colunas.
+5. **Pesos de bootstrap** (11.7), 200 a 500 réplicas, se a compilação quiser poupar o usuário de montar o desenho.
+
+O que fica como tarefa, em ordem de valor:
+
+6. **Calibrar aos totais do universo, e não às estimativas de 1965** (11.5). Sexo, idade, cor, nacionalidade e alfabetização foram apuradas em 100% dos domicílios e publicadas por unidade da federação e situação nos tomos do Volume I. Calibrar a elas torna real a redução de variância, permite usar a fórmula dos resíduos com legitimidade e ancora a amostra na contagem completa. Implica transcrever essas tabelas como se fez com as de 1965.
+7. **A componente de variância da primeira etapa** (11.2), se um dia se quiser o rigor completo: vale entre 0,003% e 0,3% do total, e exige o número de domicílios do universo por pasta, que só a amostra de 25% dá.
 
 ## 12. Glossário
 

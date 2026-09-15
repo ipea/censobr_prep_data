@@ -3856,6 +3856,37 @@
       "Maintainer": "Charlie Gao <charlie.gao@posit.co>",
       "Repository": "CRAN"
     },
+    "mitools": {
+      "Package": "mitools",
+      "Version": "2.7",
+      "Source": "Repository",
+      "Priority": null,
+      "Depends": [
+        null
+      ],
+      "Imports": [
+        "DBI",
+        "methods",
+        "stats"
+      ],
+      "LinkingTo": [
+        null
+      ],
+      "Suggests": [
+        "RODBC",
+        "foreign"
+      ],
+      "Enhances": [
+        null
+      ],
+      "License": "GPL-2",
+      "License_is_FOSS": null,
+      "License_restricts_use": null,
+      "OS_type": null,
+      "NeedsCompilation": "no",
+      "Repository": "CRAN",
+      "Type": "source"
+    },
     "modelr": {
       "Package": "modelr",
       "Version": "0.1.11",
@@ -5657,6 +5688,107 @@
       "Author": "Hadley Wickham [aut, cre, cph], Posit Software, PBC [cph, fnd]",
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
       "Repository": "CRAN"
+    },
+    "survey": {
+      "Package": "survey",
+      "Version": "4.5",
+      "Source": "Repository",
+      "Priority": null,
+      "Depends": [
+        "R (>= 4.1.0)",
+        "grid",
+        "methods",
+        "Matrix",
+        "survival"
+      ],
+      "Imports": [
+        "stats",
+        "graphics",
+        "splines",
+        "lattice",
+        "minqa",
+        "numDeriv",
+        "mitools (>= 2.4)",
+        "Rcpp (>= 0.12.8)"
+      ],
+      "LinkingTo": [
+        "Rcpp",
+        "RcppArmadillo"
+      ],
+      "Suggests": [
+        "foreign",
+        "MASS",
+        "KernSmooth",
+        "hexbin",
+        "RSQLite",
+        "quantreg",
+        "parallel",
+        "CompQuadForm",
+        "DBI",
+        "AER",
+        "SUMMER (>= 1.4.0)",
+        "R.rsp",
+        "knitr",
+        "testthat (>= 3.0.0)"
+      ],
+      "Enhances": [
+        null
+      ],
+      "License": "GPL-2 | GPL-3",
+      "License_is_FOSS": null,
+      "License_restricts_use": null,
+      "OS_type": null,
+      "NeedsCompilation": "yes",
+      "Repository": "CRAN",
+      "Type": "source"
+    },
+    "svrep": {
+      "Package": "svrep",
+      "Version": "0.9.1",
+      "Source": "Repository",
+      "Priority": null,
+      "Depends": [
+        "R (>= 4.1.0)",
+        "survey (>= 4.1)"
+      ],
+      "Imports": [
+        "DBI",
+        "Matrix",
+        "methods",
+        "mvtnorm",
+        "rlang",
+        "sampling",
+        "stats",
+        "utils"
+      ],
+      "LinkingTo": [
+        null
+      ],
+      "Suggests": [
+        "knitr",
+        "covr",
+        "testthat (>= 3.0.0)",
+        "rmarkdown",
+        "tidycensus",
+        "dplyr",
+        "srvyr",
+        "withr",
+        "prettydoc",
+        "RSQLite",
+        "torch",
+        "ggplot2",
+        "scales"
+      ],
+      "Enhances": [
+        null
+      ],
+      "License": "GPL (>= 3)",
+      "License_is_FOSS": null,
+      "License_restricts_use": null,
+      "OS_type": null,
+      "NeedsCompilation": "no",
+      "Repository": "CRAN",
+      "Type": "source"
     },
     "sys": {
       "Package": "sys",

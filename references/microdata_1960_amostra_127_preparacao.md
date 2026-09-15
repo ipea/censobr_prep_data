@@ -391,18 +391,18 @@ Duas colunas dizem como o sorteio foi feito: `censobr_upa` é a pasta, e `censob
 
 Que o critério geográfico do IBGE era a unidade da federação, e não a região, foi **demonstrado**, não suposto: a amostra de 25% guarda o número da pasta de cada domicílio e portanto reconstrói o cadastro de sorteio inteiro (13.411 pastas em 17 unidades da federação). Dentro de cada unidade da federação × grupo de situação, as pastas sorteadas caem de vinte em vinte no cadastro, cada estrato com o seu próprio início aleatório — 77% dos espaçamentos são exatamente 20 e 90% ficam entre 19 e 21, contra 12% quando se ignora a situação e 72% quando se usa a região no lugar da unidade da federação. O mesmo teste confirma o corte de cidade grande pela população urbana municipal de 100 mil, que ajusta melhor que a população total, que 50 mil e que 200 mil. O guia do desenho amostral traz as tabelas e os exemplos.
 
-Com isso, o passo 11 calcula o erro-padrão de cada estimativa somando, dentro de cada estrato, a dispersão dos totais entre as pastas. É o mesmo que `survey::svydesign(ids = ~censobr_upa, strata = ~censobr_estrato, weights = ~censobr_weight)` faria, escrito à mão para não acrescentar dependência ao pipeline. O resultado, para a população presente:
+Com isso, o passo 11 calcula o erro-padrão de cada estimativa somando, dentro de cada estrato, a dispersão dos totais entre as pastas. A variância traz a correção de população finita de uma pasta em vinte, porque a componente da etapa anterior (um domicílio em quatro) vale entre 0,003% e 0,3% dela. É o mesmo que `survey::svydesign(ids = ~censobr_upa, strata = ~censobr_estrato, weights = ~censobr_weight, fpc = ~I(rep(1/20, .N)))` faria, escrito à mão para não acrescentar dependência ao pipeline; o `survey` está no renv e confere o resultado em `references/conferencia_desenho_amostral_1960.R`. O resultado, para a população presente:
 
 | domínio | estimativa | erro-padrão | coeficiente de variação |
 |---|---|---|---|
-| Brasil, urbana | 32.471.377 | 517.218 | 1,6% |
-| Brasil, rural | 37.647.694 | 569.710 | 1,5% |
-| Leste | 24.659.232 | 305.761 | 1,24% |
-| Sul | 24.445.902 | 333.466 | 1,4% |
-| Nordeste | 15.524.609 | 268.389 | 1,7% |
-| Norte e Centro-Oeste | 5.489.328 | 193.256 | 3,5% |
+| Brasil, urbana | 32.471.377 | 504.122 | 1,55% |
+| Brasil, rural | 37.647.694 | 555.285 | 1,47% |
+| Leste | 24.659.232 | 298.019 | 1,21% |
+| Sul | 24.445.902 | 325.023 | 1,33% |
+| Nordeste | 15.524.609 | 261.593 | 1,69% |
+| Norte e Centro-Oeste | 5.489.328 | 188.363 | 3,43% |
 
-Nas 176 células do quadro 1 (região × situação × sexo × faixa de idade), o coeficiente de variação tem mediana de 3,6% e máximo de 11,9%, este nas células pequenas do Norte e Centro-Oeste. O efeito de desenho — quantas vezes a amostra é menos precisa que um sorteio pessoa a pessoa do mesmo tamanho — tem mediana 6,6 nessas células, e chega a 260 quando o domínio é definido por região e situação, porque a pasta é quase toda urbana ou quase toda rural e as pastas são justamente o que se sorteia. Dito de outro modo: para estimar quanta gente morava na zona urbana do Nordeste, esta amostra vale 817 sorteios, não 885 mil.
+Nas 176 células do quadro 1 (região × situação × sexo × faixa de idade), o coeficiente de variação tem mediana de 3,5% e máximo de 11,6%, este nas células pequenas do Norte e Centro-Oeste. O efeito de desenho — quantas vezes a amostra é menos precisa que um sorteio pessoa a pessoa do mesmo tamanho — tem mediana 6,0 nessas células, e chega a 260 quando o domínio é definido por região e situação, porque a pasta é quase toda urbana ou quase toda rural e as pastas são justamente o que se sorteia. Dito de outro modo: para estimar quanta gente morava na zona urbana do Nordeste, esta amostra vale 817 sorteios, não 885 mil.
 
 Não há total do país na tabela com erro-padrão, e não é esquecimento: a soma dos pesos foi calibrada aos totais de 1965, então o país é reproduzido por construção, sem erro. O mesmo vale para as 184 células que entraram como restrição da calibração; os erros-padrão delas são os de antes da calibração, e portanto conservadores.
 

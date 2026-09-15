@@ -17,6 +17,8 @@ logs/crew_workers/
 .pdf
 *.pdf
 !reports/*.pdf
+# fontes primarias do censo, versionadas de proposito (ver references/fontes_1960/README.md)
+!references/**/*.pdf
 # .claude/ subdirs that should NOT be ignored (versioned for the team):
 #   .claude/settings.json   — shared hooks / permissions
 #   .claude/rules/          — scope rules and policies (incl. scope.md)

@@ -1035,12 +1035,20 @@ validate_1965_1960_amostra_127 <- function(tabelas, gabarito_path){
 # subestima a variância, às vezes muito. O estimador correto soma, dentro de
 # cada estrato, a dispersão dos totais entre as pastas daquele estrato:
 #
-#   V = soma_h  n_h/(n_h-1) * soma_i (t_hi - média dos t_h)^2
+#   V = (1 - 1/20) * soma_h  n_h/(n_h-1) * soma_i (t_hi - média dos t_h)^2
 #
 # onde t_hi é o total estimado dentro da pasta i do estrato h. É o estimador
 # de conglomerado último, com reposição — o mesmo de survey::svydesign(ids =
-# ~censobr_upa, strata = ~censobr_estrato, weights = ~censobr_weight), aqui
-# escrito à mão para não acrescentar dependência ao pipeline.
+# ~censobr_upa, strata = ~censobr_estrato, weights = ~censobr_weight, fpc =
+# ~I(rep(1/20, .N))), aqui escrito à mão para não acrescentar dependência ao
+# pipeline (o `survey` está no renv e serve de conferência).
+#
+# O fator (1 - 1/20) é a correção de população finita da etapa que sorteia as
+# pastas. Ela entra sozinha porque a etapa anterior — um domicílio em quatro,
+# no campo — contribui com uma variância desprezível: para uma proporção de
+# 1%, a pior das hipóteses, ela vale 0,3% da variância medida aqui, e para uma
+# de 50% vale 0,003%. Ignorar a correção, como se fazia antes, inflava o
+# erro-padrão em 2,5% sem contrapartida.
 #
 # O efeito de desenho (deff) é essa variância dividida pela de uma amostra
 # aleatória simples de pessoas do mesmo tamanho, N²(1-f)P(1-P)/(n-1); diz
@@ -1069,7 +1077,7 @@ sampling_errors_1960_amostra_127 <- function(tabelas){
     pasta <- p[, .(t = sum(censobr_weight)), by = c(por, "censobr_estrato", "censobr_upa")]
     estr  <- pasta[, .(soma = sum(t), soma2 = sum(t^2)), by = c(por, "censobr_estrato")]
     estr[pastas_estrato, n := i.n, on = "censobr_estrato"]
-    estr[, v := n / (n - 1) * (soma2 - soma^2 / n)]
+    estr[, v := (1 - 1 / 20) * n / (n - 1) * (soma2 - soma^2 / n)]
     out <- estr[, .(estimativa = sum(soma), variancia = sum(v)), by = por]
     out[p[, .(pessoas = .N), by = por], pessoas := i.pessoas, on = por]
 
