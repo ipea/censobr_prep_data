@@ -757,14 +757,25 @@ finalize_1960_amostra_127 <- function(tabelas, municipios_path, distritos_path){
   domicilios[municipios, `:=`(code_muni = as.integer(i.code_muni_2010), pop_urbana_muni = i.pop_urbana), on = c(UF = "uf60", code_muni_1960 = "cod60")]
   domicilios[, muni_pasta := NULL]
 
-  # o desenho da amostra: a pasta e a unidade sorteada; o estrato e a regiao cruzada com um dos quatro
-  # grupos de situacao de 1965 -- cidade de 100 mil ou mais, aglomerado urbano menor, rural, mista
+  # o desenho da amostra: a pasta e a unidade sorteada; o estrato e a UF cruzada com um dos quatro grupos de
+  # situacao de 1965 -- cidade de 100 mil ou mais, aglomerado urbano menor, rural, mista. A UF como criterio
+  # geografico vem do cadastro de pastas reconstruido pela amostra de 25%: dentro de UF x grupo as pastas
+  # sorteadas caem de 20 em 20 no cadastro, com inicio proprio em cada estrato (77% dos passos exatos, 90% em
+  # 19 a 21); qualquer outro recorte ajusta pior.
   domicilios[, censobr_upa := paste0(UF, "-", pasta)]
   pastas <- domicilios[, .(urbanos = sum(V118 %in% c(1, 3)), rurais = sum(V118 %in% 5),
                            grande = any(pop_urbana_muni >= 1e5, na.rm = TRUE)), by = censobr_upa]
   pastas[, grupo := data.table::fifelse(urbanos > 0 & rurais > 0, "mista", data.table::fifelse(urbanos == 0, "rural",
                     data.table::fifelse(grande, "cidade grande", "urbana menor")))]
-  domicilios[pastas, censobr_estrato := paste(REGIAO_1960[as.character(UF)], i.grupo, sep = " - "), on = "censobr_upa"]
+  domicilios[pastas, grupo_pasta := i.grupo, on = "censobr_upa"]
+  domicilios[, censobr_estrato := paste0("UF ", UF, " - ", grupo_pasta)]
+
+  # estrato com uma pasta so nao mede variancia: onde isso acontece, o grupo de situacao inteiro daquela regiao
+  # vira um estrato so -- mais grosso que o desenho, e portanto conservador
+  domicilios[, regiao_grupo := paste(REGIAO_1960[as.character(UF)], grupo_pasta, sep = " - ")]
+  por_estrato <- unique(domicilios[, .(censobr_estrato, regiao_grupo, censobr_upa)])[, .N, by = .(censobr_estrato, regiao_grupo)]
+  domicilios[regiao_grupo %in% por_estrato[N == 1, regiao_grupo], censobr_estrato := regiao_grupo]
+  domicilios[, c("grupo_pasta", "regiao_grupo") := NULL]
   pessoas[domicilios, `:=`(censobr_upa = i.censobr_upa, censobr_estrato = i.censobr_estrato,
                            code_muni = i.code_muni, code_muni_1960 = i.code_muni_1960, censobr_muni_corrigido = i.censobr_muni_corrigido), on = "censobr_idhousehold"]
   domicilios[, pop_urbana_muni := NULL]

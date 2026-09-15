@@ -387,31 +387,20 @@ O desenho amostral — o que o IBGE fez em 1960, o que o arquivo mostra, os peso
 
 A amostra é de conglomerados: sorteou-se uma pasta em vinte, e a pasta traz todos os ~220 domicílios de um lote de trabalho, que são vizinhos e parecidos entre si. Uma amostra assim é menos precisa que uma amostra do mesmo tamanho sorteada pessoa a pessoa, e quem tratar as 897 mil linhas como se fossem 897 mil sorteios independentes vai publicar intervalos de confiança pequenos demais.
 
-Duas colunas dizem como o sorteio foi feito: `censobr_upa` é a pasta, e `censobr_estrato` é a região cruzada com o grupo de situação da pasta — os quatro grupos do desenho de 1965. São 817 pastas em 16 estratos:
+Duas colunas dizem como o sorteio foi feito: `censobr_upa` é a pasta, e `censobr_estrato` é a unidade da federação cruzada com o grupo de situação da pasta — os quatro grupos do desenho de 1965: cidade de 100 mil habitantes ou mais, aglomerado urbano menor, mista, rural. São 817 pastas em 47 estratos (39 de unidade da federação e 8 de região, onde o estrato ficaria com uma pasta só), de 2 a 72 pastas cada, mediana 12.
 
-| região | cidade grande | urbana menor | mista | rural |
-|---|---|---|---|---|
-| Leste | 72 | 42 | 108 | 63 |
-| Sul | 64 | 63 | 92 | 70 |
-| Nordeste | 22 | 20 | 64 | 70 |
-| Norte e Centro-Oeste | 6 | 12 | 29 | 20 |
+Que o critério geográfico do IBGE era a unidade da federação, e não a região, foi **demonstrado**, não suposto: a amostra de 25% guarda o número da pasta de cada domicílio e portanto reconstrói o cadastro de sorteio inteiro (13.411 pastas em 17 unidades da federação). Dentro de cada unidade da federação × grupo de situação, as pastas sorteadas caem de vinte em vinte no cadastro, cada estrato com o seu próprio início aleatório — 77% dos espaçamentos são exatamente 20 e 90% ficam entre 19 e 21, contra 12% quando se ignora a situação e 72% quando se usa a região no lugar da unidade da federação. O mesmo teste confirma o corte de cidade grande pela população urbana municipal de 100 mil, que ajusta melhor que a população total, que 50 mil e que 200 mil. O guia do desenho amostral traz as tabelas e os exemplos.
 
-Mista é a pasta que tem domicílios urbanos e rurais; rural, a que só tem rurais; as puramente urbanas se dividem pelo tamanho da cidade. O corte de 100 mil habitantes não se deduz da amostra — um município que recebeu uma pasta inteira já parece ter 90 mil habitantes, e o cálculo acusaria 216 municípios acima de 100 mil — e vem de fora: a população urbana de cada município em 1960, do Anuário Estatístico do Brasil de 1961, casada pelo código de município (`read_guides/1960_municipios.csv`, passo 8). Cidade grande é a pasta puramente urbana de município com população urbana de 100 mil ou mais: 34 municípios, de São Paulo (3,3 milhões) e Rio de Janeiro (3,2 milhões) a Olinda e Teresina (100 mil), todos com pasta na amostra depois das correções de Guanabara, Alagoas e Fernando de Noronha.
+Com isso, o passo 11 calcula o erro-padrão de cada estimativa somando, dentro de cada estrato, a dispersão dos totais entre as pastas. É o mesmo que `survey::svydesign(ids = ~censobr_upa, strata = ~censobr_estrato, weights = ~censobr_weight)` faria, escrito à mão para não acrescentar dependência ao pipeline. O resultado, para a população presente:
 
-É uma escolha nossa, e vale dizer por quê. O volume de 1965 fala em "cidades de 100 000 e mais habitantes" e, noutra seção, define cidade como a sede municipal, mas não diz como operacionalizou o corte. A numeração das pastas (seção 7) mostra que as pastas urbanas de um município grande formam um estrato só, e não distingue a cidade das vilas do mesmo município, porque as vilas, com poucos setores, caem em pastas mistas. O critério alternativo, população total do município, daria 64 municípios e estratos de cidade grande maiores (75, 73, 24 e 8 pastas); calculado como sensibilidade, ele muda pouco — os erros-padrão das células ficam entre 0,99 e 1,2 vezes os do critério urbano, mediana 1,00 — e fica pior no Norte e Centro-Oeste urbano (+8%). Pela população urbana ficam 34, perto das "cerca de trinta cidades" que o país tinha. Estratos diferentes dos do IBGE dão erros-padrão um pouco diferentes dos verdadeiros; onde os nossos são mais grossos, o erro sai maior, que é o lado seguro. A fração de uma pasta em vinte também não entra como correção de população finita, pelo mesmo motivo.
-
-Com isso, o passo 11 calcula o erro-padrão de cada estimativa somando, dentro de cada estrato, a dispersão dos totais entre as pastas. É o mesmo que `survey::svydesign(ids = ~censobr_upa, strata = ~censobr_estrato, weights = ~censobr_weight)` faria, escrito à mão para não acrescentar dependência ao pipeline. O resultado, para a população presente, e o que os quatro grupos mudam em relação a três (urbana, mista, rural, 12 estratos):
-
-| domínio | estimativa | erro-padrão | coeficiente de variação | erro-padrão com 12 estratos |
-|---|---|---|---|---|
-| Brasil, urbana | 32.471.377 | 517.287 | 1,6% | 526.209 |
-| Brasil, rural | 37.647.694 | 576.427 | 1,5% | 576.427 |
-| Leste | 24.659.232 | 307.307 | 1,25% | 308.755 |
-| Sul | 24.445.902 | 332.447 | 1,4% | 332.030 |
-| Nordeste | 15.524.609 | 263.393 | 1,7% | 265.597 |
-| Norte e Centro-Oeste | 5.489.328 | 218.714 | 4,0% | 235.304 |
-
-Separar as cidades grandes só mexe nos domínios urbanos, como deve ser: o erro-padrão da população urbana do Norte e Centro-Oeste cai 8%, o do Brasil urbano 2%, e nas 176 células do quadro 1 a razão entre o erro com 16 estratos e o com 12 vai de 0,79 a 1,00 (mediana 0,98 nas células urbanas, 1 nas rurais).
+| domínio | estimativa | erro-padrão | coeficiente de variação |
+|---|---|---|---|
+| Brasil, urbana | 32.471.377 | 517.218 | 1,6% |
+| Brasil, rural | 37.647.694 | 569.710 | 1,5% |
+| Leste | 24.659.232 | 305.761 | 1,24% |
+| Sul | 24.445.902 | 333.466 | 1,4% |
+| Nordeste | 15.524.609 | 268.389 | 1,7% |
+| Norte e Centro-Oeste | 5.489.328 | 193.256 | 3,5% |
 
 Nas 176 células do quadro 1 (região × situação × sexo × faixa de idade), o coeficiente de variação tem mediana de 3,6% e máximo de 11,9%, este nas células pequenas do Norte e Centro-Oeste. O efeito de desenho — quantas vezes a amostra é menos precisa que um sorteio pessoa a pessoa do mesmo tamanho — tem mediana 6,6 nessas células, e chega a 260 quando o domínio é definido por região e situação, porque a pasta é quase toda urbana ou quase toda rural e as pastas são justamente o que se sorteia. Dito de outro modo: para estimar quanta gente morava na zona urbana do Nordeste, esta amostra vale 817 sorteios, não 885 mil.
 
