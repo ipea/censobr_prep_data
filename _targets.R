@@ -286,6 +286,17 @@ list(
              format = "file"
              ),
 
+  # o boletim e a familia: 1, 2, 3 e 9 abrem domicilio e 4 e 5 entram no anterior.
+  # A geografia usa os mesmos guias do bloco 01a -- ver R/microdata_1960_amostra_25.R.
+  tar_target(name = tabelas_1960_amostra_25,
+             command = build_1960_amostra_25(tabelas_brutas_1960_amostra_25,
+                                             ufs_1960_amostra_25,
+                                             municipios_1960,
+                                             distritos_1960),
+             pattern = map(ufs_1960_amostra_25, tabelas_brutas_1960_amostra_25),
+             format = "file"
+             ),
+
   # 02. microdata 1970 ---------------------------------------------------------------
 
   # a fonte e a versao CEM, no release_legacy: o FWF do FTP traz 1.785

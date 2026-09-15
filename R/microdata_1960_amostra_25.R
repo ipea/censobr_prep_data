@@ -61,7 +61,7 @@
 # se faz é devolvê-los à ordem do cadastro.
 #
 # Public API, na ordem dos targets: download_1960_amostra_25,
-# audit_1960_amostra_25, read_1960_amostra_25.
+# audit_1960_amostra_25, read_1960_amostra_25, build_1960_amostra_25.
 
 
 # As dezessete unidades que sobreviveram, do nome do arquivo para o código de
@@ -331,5 +331,134 @@ read_1960_amostra_25 <- function(paths, uf, guia_familias, guia_pessoas, correco
           " | anulados: ", sum(familias$censobr_variaveis_anuladas != "") + sum(pessoas$censobr_variaveis_anuladas != ""))
 
   rm(familias, pessoas); gc(verbose = FALSE)
+  saida
+}
+
+
+# ------------------------------------------------------------------------------
+# Passo 4 — famílias, domicílios e geografia
+#
+# O boletim é a família, não o domicílio. Um domicílio com mais de uma família
+# tem um boletim por família, com números de boletim diferentes e a página de
+# domicílio preenchida só no primeiro. V101 diz o que cada um é: 1 = domicílio
+# particular único, 2 = principal de um domicílio com mais de uma família, 3 =
+# coletivo, 4 = segunda família, 5 = terceira, 9 = boletim individual. Então 1,
+# 2, 3 e 9 abrem domicílio; 4 e 5 entram no domicílio anterior. São 3.071.284
+# boletins para 3.066.365 domicílios.
+#
+# O boletim individual (V101 = 9) é o morador de domicílio coletivo sorteado
+# pessoa a pessoa pela Lista CD 3, com a página de domicílio em branco por
+# construção e sempre uma pessoa só. São 195.445, 6,4% dos boletins, e no
+# Distrito Federal 8.698 dos 14.818 — o acampamento da construção de Brasília.
+# Tratá-los como domicílio infla a contagem em 6,4% e envenena qualquer média
+# por domicílio, e é por isso que censobr_tipo_unidade os separa.
+#
+# A página de domicílio das famílias conviventes não é preenchida a partir da
+# principal: fica ausente, como no estágio da amostra de 1,27%, e a decisão
+# está em discussão no ipea/censobr#87.
+#
+# O "Ignorado" do questionário. O Código do Censo dá a cada quesito do domicílio
+# um código próprio de ignorado — V102 = 7, V103 = 0, V105 = 4, V106 = 9,
+# V107 = 5, V108 = 7, V109 = 9, V110 = 1 —, e esses ficam como estão, porque são
+# categorias do dicionário. O exemplar do Código que temos se interrompe no
+# quesito J e não cobre cômodos nem dormitórios, que são campos numéricos; neles
+# o ignorado foi gravado como zero, e zero não é uma categoria que o usuário
+# enxergue: 23.109 domicílios com zero cômodos abrigam 121.769 pessoas, média de
+# 5,28, acima da média do país. Viram ausente, marcado em
+# censobr_comodos_ignorado.
+#
+# A geografia. V116 é o código do Código de Zonas Fisiográficas, Municípios e
+# Distritos de 1960, com três correções: Alagoas vem deslocada em +200, Fernando
+# de Noronha vem 2701 e o seu único município é 2401, e o Distrito Federal vem
+# 9701 contra 9700 do livro — esta última não era precisa na amostra de 1,27% e
+# sem ela os 14.818 domicílios de Brasília ficam sem município. Com as três, o
+# casamento fecha em 100% dos 3.071.284 boletins nas dezessete unidades. V117 é
+# o distrito, e o guia cobre 91,6% dos boletins; o que falta são 1.178 pares
+# município-distrito de páginas do livro que a amostra de 1,27% não alcançava.
+# ------------------------------------------------------------------------------
+build_1960_amostra_25 <- function(paths, uf, municipios_path, distritos_path){
+
+  message("Building households and geography in 1960 amostra de 25%: ", uf)
+
+  in_dir   <- file.path("./data_raw/microdata/1960/amostra_25", uf)
+  familias <- data.table::setDT(arrow::read_parquet(file.path(in_dir, "familias.parquet")))
+  pessoas  <- data.table::setDT(arrow::read_parquet(file.path(in_dir, "pessoas.parquet")))
+  data.table::setnames(pessoas, "AGE", "V204B")
+
+  # a chave do questionario liga a pessoa a sua familia; o arquivo ja esta na ordem do cadastro
+  familias[, censobr_idfamily := seq_len(.N)]
+  pessoas[familias, censobr_idfamily := i.censobr_idfamily, on = c("v001", "v002")]
+  if(anyNA(pessoas$censobr_idfamily)) stop(uf, ": ha pessoa sem registro de familia")
+
+  # 1, 2, 3 e 9 abrem domicilio; 4 e 5 entram no anterior
+  familias[, censobr_convivente_isolada := V101 %in% c(4, 5) & !(data.table::shift(V101) %in% c(2, 4, 5))]
+  familias[, censobr_idhousehold := cumsum(!(V101 %in% c(4, 5)) | censobr_convivente_isolada)]
+  pessoas[familias, censobr_idhousehold := i.censobr_idhousehold, on = "censobr_idfamily"]
+
+  familias[, censobr_tipo_unidade := data.table::fifelse(V101 == 9, "boletim individual",
+                                     data.table::fifelse(V101 == 3, "domicilio coletivo", "domicilio particular"))]
+
+  # o ignorado dos campos numericos veio como zero -- ver o cabecalho deste passo
+  familias[, censobr_comodos_ignorado := V112 == 0 | V113 == 0]
+  familias[is.na(censobr_comodos_ignorado), censobr_comodos_ignorado := FALSE]
+  familias[V112 == 0, V112 := NA_integer_]
+  familias[V113 == 0, V113 := NA_integer_]
+
+  # contagens por domicilio
+  pessoas[, `:=`(censobr_n_listadas   = .N,
+                 censobr_n_residentes = sum(!V202 %in% c(5, 6)),
+                 censobr_n_presentes  = sum(!V202 %in% c(3, 4)),
+                 censobr_n_familias   = data.table::uniqueN(censobr_idfamily)), by = censobr_idhousehold]
+
+  # o municipio: as tres correcoes, e o codigo atual pelo crosswalk da mesma tabela
+  municipios <- data.table::fread(municipios_path, encoding = "UTF-8")
+  familias[, code_muni_1960 := data.table::fifelse(UF == 25L, V116 - 200L,
+                               data.table::fifelse(UF == 24L, 2401L,
+                               data.table::fifelse(UF == 97L, 9700L, V116)))]
+  familias[, censobr_muni_corrigido := UF %in% c(25L, 24L, 97L)]
+  familias[municipios, `:=`(code_muni = as.integer(i.code_muni_2010), name_muni_1960 = i.nome),
+           on = c(UF = "uf60", code_muni_1960 = "cod60")]
+  if(familias[is.na(name_muni_1960), .N] > 0)
+    stop(uf, ": ", familias[is.na(name_muni_1960), .N], " boletins sem municipio no guia")
+
+  # o distrito: V117 e o codigo do mesmo livro
+  distritos <- data.table::fread(distritos_path, encoding = "UTF-8")
+  distritos <- unique(distritos[, .(uf60, code_muni_1960, code_district_1960 = as.integer(code_district_1960),
+                                    name_district_1960, tipo)])
+  familias[, code_district_1960 := V117]
+  familias[distritos, `:=`(name_district_1960 = i.name_district_1960, censobr_favela = i.tipo == "favela"),
+           on = c(UF = "uf60", "code_muni_1960", "code_district_1960")]
+  familias[is.na(censobr_favela), censobr_favela := FALSE]
+
+  # a tabela de domicilios e a pagina do boletim que abriu o domicilio
+  geo <- c("UF", "V116", "V117", "V118", "code_muni", "code_muni_1960", "name_muni_1960",
+           "code_district_1960", "name_district_1960", "censobr_favela", "censobr_muni_corrigido")
+  pagina <- paste0("V1", sprintf("%02d", 1:13))
+  domicilios <- familias[!(V101 %in% c(4, 5)) | censobr_convivente_isolada == TRUE]
+  domicilios <- domicilios[, .SD[1], by = censobr_idhousehold]
+  contagens  <- pessoas[, .SD[1], by = censobr_idhousehold,
+                        .SDcols = c("censobr_n_listadas", "censobr_n_residentes", "censobr_n_presentes", "censobr_n_familias")]
+  domicilios[contagens, `:=`(censobr_n_listadas = i.censobr_n_listadas, censobr_n_residentes = i.censobr_n_residentes,
+                             censobr_n_presentes = i.censobr_n_presentes, censobr_n_familias = i.censobr_n_familias),
+             on = "censobr_idhousehold"]
+
+  # a pessoa leva a geografia do seu domicilio e a pagina do seu proprio boletim
+  leva <- c(geo, "censobr_tipo_unidade", "censobr_comodos_ignorado", pagina)
+  pessoas[familias, (leva) := mget(paste0("i.", leva)), on = "censobr_idfamily"]
+
+  data.table::setcolorder(domicilios, c(geo, "censobr_idhousehold", "censobr_tipo_unidade"))
+  data.table::setcolorder(pessoas,    c(geo, "censobr_idhousehold", "censobr_idfamily", "censobr_tipo_unidade"))
+
+  saida <- c(file.path(in_dir, "domicilios.parquet"), file.path(in_dir, "pessoas_geo.parquet"))
+  arrow::write_parquet(domicilios, saida[1], compression = "zstd", compression_level = 1)
+  arrow::write_parquet(pessoas,    saida[2], compression = "zstd", compression_level = 1)
+
+  message("  ", format(nrow(domicilios), big.mark = ".", decimal.mark = ","), " domicilios (",
+          domicilios[censobr_tipo_unidade == "boletim individual", .N], " individuais, ",
+          domicilios[censobr_tipo_unidade == "domicilio coletivo", .N], " coletivos) | distrito com nome: ",
+          round(100 * domicilios[!is.na(name_district_1960), .N] / nrow(domicilios), 1), "% | comodos ignorados: ",
+          domicilios[censobr_comodos_ignorado == TRUE, .N])
+
+  rm(familias, pessoas, domicilios); gc(verbose = FALSE)
   saida
 }
