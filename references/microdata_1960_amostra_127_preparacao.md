@@ -381,6 +381,8 @@ As máximas são células pequenas (mulheres com rendimento alto em Norte e Cent
 
 ## 8. Quanto se pode confiar numa estimativa
 
+O desenho amostral — o que o IBGE fez em 1960, o que o arquivo mostra, os pesos, os estratos e o cálculo do erro-padrão — está explicado do zero, para quem não conhece a amostra nem o vocabulário da época, em `references/microdata_1960_amostra_127_desenho_amostral.md`. Esta seção é o resumo técnico.
+
 A amostra é de conglomerados: sorteou-se uma pasta em vinte, e a pasta traz todos os ~220 domicílios de um lote de trabalho, que são vizinhos e parecidos entre si. Uma amostra assim é menos precisa que uma amostra do mesmo tamanho sorteada pessoa a pessoa, e quem tratar as 897 mil linhas como se fossem 897 mil sorteios independentes vai publicar intervalos de confiança pequenos demais.
 
 Duas colunas dizem como o sorteio foi feito: `censobr_upa` é a pasta, e `censobr_estrato` é a região cruzada com o grupo de situação da pasta — os quatro grupos do desenho de 1965. São 817 pastas em 16 estratos:
