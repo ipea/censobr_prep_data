@@ -1044,11 +1044,10 @@ validate_1965_1960_amostra_127 <- function(tabelas, gabarito_path){
 # pipeline (o `survey` está no renv e serve de conferência).
 #
 # O fator (1 - 1/20) é a correção de população finita da etapa que sorteia as
-# pastas. Ela entra sozinha porque a etapa anterior — um domicílio em quatro,
-# no campo — contribui com uma variância desprezível: para uma proporção de
-# 1%, a pior das hipóteses, ela vale 0,3% da variância medida aqui, e para uma
-# de 50% vale 0,003%. Ignorar a correção, como se fazia antes, inflava o
-# erro-padrão em 2,5% sem contrapartida.
+# pastas. A dispersão entre pastas já contém 95% da variância da etapa
+# anterior — um domicílio em quatro, no campo —, e o 1/20 que fica de fora
+# vale entre 0,1% e 1,2% da variância. Sem a correção o erro-padrão sairia
+# 2,5% maior sem contrapartida.
 #
 # O efeito de desenho (deff) é essa variância dividida pela de uma amostra
 # aleatória simples de pessoas do mesmo tamanho, N²(1-f)P(1-P)/(n-1); diz

@@ -88,6 +88,8 @@ Quatro coisas que a seção 3.1 deixa em aberto, e que a Parte II vai resolver o
 
 **Os tomos do Volume I (resultados definitivos, Série Regional, 19 tomos, um por unidade da federação).** A introdução de cada tomo tem uma seção "Amostragem" que descreve a amostra de 25% — o que está resumido na seção 1 — e o método de estimativa usado nos resultados definitivos: estimativa de razão em **48 grupos**, formados depois da seleção por situação (urbana, rural), sexo, posição na família (chefe, cônjuge, outros; moradores ausentes à parte) e faixa de idade, com pesos inteiros escolhidos ao acaso entre as pessoas do grupo para que a soma reproduzisse a contagem do universo. Grupos com razão universo/amostra acima de 16 ou com menos de 100 pessoas no universo eram fundidos com o seguinte. Isso é o desenho da **amostra de 25%**, não desta subamostra, mas importa por duas razões: mostra que a amostra de 25% é, para efeito de variância, uma amostra sistemática de domicílios com efeito de desenho próximo de 1 (seção 13.2), e mostra que as margens do universo por unidade da federação existem publicadas, o que abre uma alternativa de calibração (seção 13.5).
 
+**Os dois grupos de tomos, e o que isso diz sobre a amostra de 25%.** A "Apresentação" do volume nacional dos resultados definitivos (*Série Nacional*, vol. I) conta como a divulgação foi feita: "O plano de divulgação inicialmente estabelecido previa a apuração dos dados em duas etapas, sendo os resultados, para cada Unidade da Federação, apresentados em duas partes. De acordo com esse plano inicial, foram publicados os resultados definitivos relativos às seguintes Unidades da Federação: Rondônia, Roraima, Amapá, Acre, Amazonas, Pará, Maranhão, Piauí, Espírito Santo, Guanabara e Santa Catarina. A apuração dos dados correspondentes às Unidades da Federação restantes foi feita com base apenas no formulário CD.2 – Boletim de Amostra, tendo sido modificado o plano inicial, com a redução do número de tabelas e a reunião dos resultados em um único volume para cada Unidade da Federação. Os resultados apresentados, entretanto, abrangem todos os itens investigados." Os tomos das onze primeiras unidades da federação saíram em duas partes ainda no Serviço Nacional de Recenseamento e nos primeiros anos da Fundação IBGE (a 1ª parte de Santa Catarina é datada de janeiro de 1968 e a 2ª, de novembro de 1968); os das outras dezessete saíram em volume único, na década de 1970, já sob a presidência de Isaac Kerstenetzky, e o volume nacional "encerra a apresentação dos resultados definitivos". Duas consequências para este texto. Primeira: a amostra de 25% foi apurada e publicada para **todas** as unidades da federação, com o mesmo método de estimativa de razão em 48 grupos, ainda que os seus microdados só sobrevivam para dezessete — e as dezessete são exatamente as do segundo grupo, apuradas mais tarde e, tudo indica, já em computador, enquanto as onze do primeiro grupo, apuradas em equipamento de cartões, são as que hoje só têm esta subamostra. Segunda: nos tomos das dezessete, **as tabelas de sexo, idade, cor e alfabetização também são estimativas da amostra de 25%**, ancoradas nos totais da Sinopse Preliminar de 1961–1962 (população total, urbana e rural e domicílios, por município, apurados na contagem completa); só nos onze tomos do primeiro grupo essas tabelas vêm do universo. Isso importa para a calibração da seção 13.5.
+
 **O relatório do IPEA de abril de 1969** (*Processamento de uma amostra do Censo Demográfico de 1960*, 5 páginas datilografadas, cópia carbono de leitura difícil). Registra que o IPEA recebeu 29 caixas com cerca de 56 mil cartões — uma **subamostra** desta subamostra, para as regiões Nordeste, Leste e Sul, selecionada por grau de instrução do chefe da família —, que a dividiu em dez subamostras pelo último dígito do número de enumeração, excluiu não residentes, convidados e empregados e cartões com códigos impossíveis, e gravou tudo na fita magnética "IPEA 10" no Rio Datacentro da PUC-Rio. A página 4 lista o conteúdo de cada cartão de pessoa (situação, sexo e condição de presença, parentesco, idade, religião, cor, naturalidade, nacionalidade, procedência, tempo de residência, alfabetização, série concluída, curso, estado conjugal, ano do casamento, filhos tidos e vivos, rendimento, atividade, ocupação, ramo, posição na ocupação), que é exatamente o leiaute do arquivo de hoje. O relatório não descreve o desenho, mas prova três coisas: que os cartões circularam fora do IBGE já em 1969, que o leiaute do cartão é o que o arquivo tem, e que o nosso arquivo (1.074.328 cartões) é o baralho inteiro, não a subamostra do IPEA.
 
 **O Volume IV da Série Especial** (*Favelas — Estado da Guanabara*, 108 páginas). Publica as favelas cariocas por zona e circunscrição censitária. A sua seção "Amostragem" é idêntica à dos tomos do Volume I: vem dos resultados **definitivos** (amostra de 25% e universo), e não desta subamostra. Serve de gabarito para os domicílios em favelas que a subamostra identifica, não como fonte sobre o desenho.
@@ -458,7 +460,7 @@ Duas colunas, presentes nas tabelas de pessoas e de domicílios, dizem como o so
 | Norte e Centro-Oeste – urbana menor | 12 | Rondônia, Acre e Pará |
 | Norte e Centro-Oeste – mista | 29 | Acre e Amapá |
 
-Esses oito estratos são mais grossos que o desenho, o que **aumenta** o erro-padrão estimado — é o lado seguro do erro. Uma regra mais fina (juntar só a unidade da federação solitária a uma vizinha, em vez de dissolver o grupo inteiro da região) é possível e pouparia alguma variância; não foi adotada porque exigiria escolher a vizinha, e a regra atual é transparente.
+Esses oito estratos reúnem 266 das 817 pastas e são mais grossos que o desenho, o que **aumenta** o erro-padrão estimado — é o lado seguro do erro. Uma regra mais fina (juntar só a unidade da federação solitária a uma vizinha da mesma região e do mesmo grupo, em vez de dissolver o grupo inteiro da região) é possível e pouparia variância nos domínios do Leste, do Nordeste e do Norte e Centro-Oeste; está na lista de tarefas da seção 13.10, e exige uma tabela de vizinhas.
 
 As regiões são as do Volume II: Nordeste (MA, PI, CE, RN, PB, PE, FN, AL), Leste (SE, BA, MG, Serra dos Aimorés, ES, RJ, GB), Sul (SP, PR, SC, RS) e Norte e Centro-Oeste (RO, AC, AM, RR, PA, AP, MT, GO, DF).
 
@@ -586,32 +588,35 @@ U, M e R são as pastas urbanas, mistas e rurais; cada grupo é uma sequência p
 
 **A ideia.** Se uma amostra tomasse todas as pastas do cadastro, não haveria erro amostral nenhum. Tomando uma fração $f$ delas, a variância de um total é proporcional a $(1 - f)$: sortear 5% das pastas deixa 95% do "espaço" para variar. A correção multiplica a variância por $(1 - 1/20) = 0{,}95$ e o erro-padrão por $0{,}975$.
 
-**A dúvida.** A amostra tem duas etapas, e — como a seção 11 explica — elas estão em ordem invertida: primeiro o domicílio (um em quatro, no campo), depois a pasta (uma em vinte, no escritório). Decompondo a variância total em relação à população de 1960:
+**A dúvida.** A amostra tem duas etapas, e — como a seção 11 explica — elas estão em ordem invertida: primeiro o domicílio (um em quatro, no campo), depois a pasta (uma em vinte, no escritório). Para a variância a ordem cronológica não importa, e vale a decomposição clássica da amostragem em duas etapas:
 
 $$
-V(\hat{Y}) = V_1 + E_1\!\left[V_2\right],
+V(\hat{Y}) = V_{\text{pastas}} + V_{\text{dom}}, \qquad V_{\text{dom}} = \frac{N_h}{n_h} \sum_{j=1}^{N_h} V_{2j},
 $$
 
-onde $V_1$ é a variância de estimar a população a partir da amostra de 25% **inteira**, e $V_2$ é a variância de estimar a amostra de 25% a partir das pastas sorteadas. O estimador de conglomerado último mede $E_1[V_2]$; a correção de população finita se aplica a ele. A pergunta era se valia a pena aplicar a correção enquanto $V_1$ ficava de fora — se as duas omissões se compensassem, o melhor seria não mexer em nenhuma.
+onde $V_{\text{pastas}}$ é a variância entre os totais verdadeiros das pastas, $V_{2j}$ é a variância que o sorteio de um domicílio em quatro produz no total estimado da pasta $j$, e a soma percorre todas as $N_h$ pastas do cadastro. A pergunta era o que o estimador da seção 12.2 faz com $V_{\text{dom}}$. A resposta, também clássica, é que o estimador entre pastas **já contém $(1 - 1/20)$ de $V_{\text{dom}}$**: cada total de pasta $t_{hi}$ carrega o ruído da etapa dos domicílios, e a dispersão entre pastas o absorve. O que fica de fora é só a fração $1/20$ — a mesma fração que a correção finita desconta. A dúvida era se valia a pena descontar 5% de $V_{\text{pastas}}$ deixando de fora $V_{\text{dom}}/20$.
 
-**A medida.** $V_1$ é a variância de uma amostra sistemática de um em quatro com $n_1 = 0{,}25 \times 70{,}1$ milhões $\approx 17{,}5$ milhões de pessoas e efeito de desenho perto de 1 (é o que os tomos do Volume I descrevem: linhas de amostra a cada quatro, com variação deliberada das séries). Para um total cuja proporção na população é $P$, o coeficiente de variação da primeira etapa é aproximadamente
+**A medida.** $V_{\text{dom}}$ se estima com a própria amostra, sem nenhuma informação externa, porque dentro de cada pasta o sorteio de um em quatro é, para todos os efeitos, aleatório simples com fração $1/4$ (é o que os "vários processos" de variação das linhas de amostra garantem), de modo que o cadastro da pasta tinha $4 n_i$ domicílios. Com $u_k = w_k y_k / 20$ o total do domicílio $k$ na escala da amostra de 25%,
 
 $$
-\text{CV}_1 \approx \sqrt{\frac{(1 - f_1)\,(1 - P)}{n_1\,P}}, \qquad f_1 = \tfrac{1}{4},
+\widehat{V}_{2i} = \left(1 - \tfrac{1}{4}\right) \frac{n_i}{n_i - 1} \sum_{k \in i} \left(u_k - \bar{u}_i\right)^2, \qquad \widehat{V}_{\text{dom}} = 20^2 \sum_{i \in s} \widehat{V}_{2i}, \qquad \text{parte que falta} = \tfrac{1}{20}\widehat{V}_{\text{dom}} = 20 \sum_{i \in s} \widehat{V}_{2i},
 $$
 
-o que dá:
+o que, em termos dos totais ponderados dos domicílios $w_k y_k$, dá a parte que falta igual a $0{,}0375$ vezes a soma, sobre as pastas sorteadas, da soma de quadrados dos totais dos domicílios em torno da média da pasta — três linhas de código sobre a tabela de domicílios. Medida nos cinco totais-exemplo e em duas células:
 
-| proporção $P$ do total na população | CV da primeira etapa | CV mediano medido pela segunda etapa | razão de variâncias $V_1 / V_2$ |
+| total | $V_{\text{dom}}$ como fração da variância | parte que falta ($V_{\text{dom}}/20$) | aumento do erro-padrão se incluída |
 |---|---|---|---|
-| 50% | 0,021% | 3,5% | 0,00004 |
-| 20% | 0,041% | 3,5% | 0,00014 |
-| 5% | 0,090% | 3,5% | 0,00067 |
-| 1% | 0,206% | 3,5% | 0,0035 |
+| operários da construção civil | 7,4% | 0,37% | +0,19% |
+| rendimento acima de Cr\$ 10 mil | 2,0% | 0,10% | +0,05% |
+| analfabetos de 15 anos e mais | 2,6% | 0,13% | +0,07% |
+| solteiros de 15 anos e mais | 8,2% | 0,41% | +0,21% |
+| população urbana do Nordeste | 2,4% | 0,12% | +0,06% |
+| mulheres de 20 a 24 anos, urbano do Nordeste | 16% | 0,81% | +0,41% |
+| mulheres de 70 anos e mais, urbano do Nordeste | 24% | 1,20% | +0,60% |
 
-Em variância, $V_1$ vale entre 0,003% e 0,3% de $E_1[V_2]$ — três ordens de grandeza abaixo dos 5% da correção finita. Não há compensação nenhuma: omitir a correção seria inflar o erro-padrão em 2,5% de graça.
+A etapa dos domicílios pesa de 2% a 24% da variância — mais nas células pequenas e nos idosos, que se espalham entre os domicílios —, mas 95% disso o estimador já mede. A parte que falta vale entre 0,1% e 1,2% da variância, ou seja, entre 0,05% e 0,6% do erro-padrão, contra os 5% da variância que a correção finita desconta. Não há compensação: omitir a correção seria inflar o erro-padrão em 2,5% para compensar uma omissão de 0,3%.
 
-**A decisão.** A correção entra, com $f = 1/20$ em todos os estratos, e $V_1$ fica de fora, documentado. O valor nominal da fração é o do desenho declarado, e o cadastro reconstruído o confirma (razão cadastro/sorteadas 19,9, quartis 19,1 e 21,3). Se um dia se quiser o rigor completo, $V_1$ exige o número de domicílios do universo por pasta, que só a amostra de 25% dá; está anotado como pendência.
+**A decisão.** A correção entra, com $f = 1/20$ em todos os estratos. O valor nominal da fração é o do desenho declarado, e o cadastro reconstruído o confirma (razão cadastro/sorteadas 19,9, quartis 19,1 e 21,3). A parte que falta de $V_{\text{dom}}$ está anotada como tarefa (seção 13.10): incluí-la custa três linhas e completa a conta, mas muda o erro-padrão em menos de 1%.
 
 ### 13.3 A estratificação: por que unidade da federação × situação, e o que a alternativa mais grossa daria
 
@@ -709,9 +714,11 @@ O primeiro termo é o erro do dano, e é dele que a variância pós-calibração
 
 **Portanto.** O padrão é o estimador de conglomerado último aplicado aos pesos calibrados, que é o que a seção 12 descreve e o que o passo 11 calcula. Ele estima a ordem de grandeza certa de $\hat{Y}(S) - Y$. A variância pós-calibração responde a outra pergunta, legítima mas diferente: "quanto o dano do arquivo afastou este número do que a amostra íntegra teria dado?" — útil para avaliar a reparação, não para publicar um intervalo de confiança sobre o Brasil de 1960.
 
-**Onde ela seria legítima, e isso é uma oportunidade real.** A calibração a totais verdadeiramente conhecidos reduz a variância de verdade, e aí a fórmula dos resíduos é a correta. Esses totais existem: sexo, idade, cor, nacionalidade e alfabetização eram quesitos do **universo** em 1960, não da amostra, e estão publicados por unidade da federação e situação nos tomos do Volume I dos resultados definitivos. Calibrar a eles — em vez de às estimativas amostrais de 1965 — tornaria real a redução de variância e, de quebra, ancoraria a amostra na contagem completa em vez de numa tabulação preliminar. É a melhoria de maior valor que resta (seção 13.10).
+**Onde ela seria legítima, e isso é uma oportunidade real.** A calibração a totais externos, conhecidos com precisão muito maior que a desta amostra, reduz a variância de verdade, e aí a fórmula dos resíduos é a correta. Esses totais existem, em dois níveis. A Sinopse Preliminar de 1961–1962 traz, da **contagem completa** e para todos os municípios, a população total, urbana e rural e o número de domicílios. Os tomos do Volume I trazem sexo, idade, cor, nacionalidade e alfabetização por unidade da federação e situação — do universo nos onze tomos do primeiro grupo e da amostra de 25% nos dezessete do segundo (seção 3.3); a estimativa da amostra de 25% tem variância vinte vezes menor que a desta subamostra, o que para efeito prático a torna uma constante. Calibrar a esses totais — em vez de às estimativas de 1965 — tornaria real a redução de variância e ancoraria a amostra na contagem completa e nas estimativas definitivas. As duas calibrações não se somam: os totais externos substituem os de 1965 nas margens demográficas, e as tabelas de 1965 passam a servir só de validação, como os quadros 3 a 7 já servem. É a melhoria de maior valor que resta (seção 13.10).
 
-### 13.6 Pesos replicados: jackknife
+### 13.6 Pesos replicados: jackknife (não será feito)
+
+**Decisão.** As tabelas não trazem, nem trarão, colunas de pesos replicados de nenhum tipo. As duas subseções seguintes explicam o que eles são, para que o leitor saiba o que está deixando de lado e como obtê-los por conta própria a partir das colunas de desenho, com uma linha do `survey`.
 
 **A ideia.** Em vez de fórmula, repetição. Constrói-se uma coleção de conjuntos de pesos, cada um simulando "a amostra sem uma pasta": retira-se a pasta $i$ do estrato $h$ e multiplicam-se os pesos das outras $n_h - 1$ pastas do estrato por $n_h/(n_h - 1)$, para que o estrato continue somando o mesmo. Calcula-se a estimativa $\hat{Y}_{(hi)}$ com cada conjunto; a dispersão das 817 estimativas em torno da estimativa completa é a variância:
 
@@ -732,7 +739,7 @@ pasta       peso original   réplica 1 (sem a pasta 1)   réplica 2 (sem a pasta
 
 **O que custa.** 817 colunas a mais em 897 mil linhas (uns 6 GB em ponto flutuante), inviável para distribuir. As alternativas de tamanho razoável são o jackknife por grupos aleatórios de pastas (por exemplo, 100 réplicas) ou o bootstrap da subseção seguinte. Com o `survey`, `as.svrepdesign(desenho, type = "JK1")` constrói as réplicas a partir de `censobr_upa` e `censobr_estrato` sem gravar nada.
 
-### 13.7 Pesos replicados: bootstrap de Rao e Wu (opção)
+### 13.7 Pesos replicados: bootstrap de Rao e Wu (não será feito)
 
 **A ideia.** Em cada estrato, sorteiam-se $n_h - 1$ pastas com reposição entre as $n_h$ sorteadas; se a pasta $i$ saiu $m_{hi}^{(b)}$ vezes na réplica $b$, os seus pesos são multiplicados por
 
@@ -742,7 +749,7 @@ $$
 
 Repete-se, digamos, 200 vezes; a variância é a dispersão das 200 estimativas. Diferente do jackknife, o bootstrap funciona também para estatísticas não lineares — medianas, quantis, índice de Gini, coeficientes de modelos —, que são o que muita gente quer estimar com esta amostra.
 
-**O que custa.** 200 colunas de peso (cerca de 1,4 GB) ou, melhor, a instrução de gerá-las: `as.svrepdesign(desenho, type = "subbootstrap", replicates = 200)`. Se a compilação com a amostra de 25% for distribuir pesos replicados, esta é a forma a escolher, e um número de réplicas entre 200 e 500.
+**O que custa.** 200 colunas de peso (cerca de 1,4 GB). Quem precisar deles os gera a partir das colunas de desenho: `as.svrepdesign(desenho, type = "subbootstrap", replicates = 200)`.
 
 ### 13.8 Domínios pequenos e o que não fazer
 
@@ -759,24 +766,27 @@ A amostra de 25% sobreviveu para 17 unidades da federação, com a mesma chave d
 - Nas 17 unidades da federação, os erros-padrão caem para uma fração dos daqui, e a estratificação passa a ser por setor.
 - A amostra de 1,27% continua sendo a única nacional, e a única em que se pode reproduzir 1965. Para estimativas nacionais consistentes com as publicadas, ela é a referência; para estimativas estaduais e locais, a de 25%.
 
-### 13.10 O que está adotado, o que é opção e o que é tarefa
+### 13.10 O que está adotado, o que é opção, o que foi descartado e o que é tarefa
 
 **Adotado** (o que o passo 11 calcula e o que as colunas de desenho dão a qualquer usuário do `survey`):
 
 1. **Estimador de conglomerado último com correção de população finita** (12.2, 13.2), sobre os 47 estratos de unidade da federação × situação (11, 13.3). Confere com o `survey` até o último dígito, e responde à pergunta que interessa: quanto erra esta amostra em relação ao Brasil de 1960.
 2. **Sem variância pós-calibração** (13.5), enquanto a calibração for às tabelas de 1965, que saíram desta mesma amostra.
-3. **Sem unidade secundária de amostragem** (11): a pasta é a última unidade sorteada e o domicílio é a etapa anterior, cuja componente de variância é desprezível (13.2).
+3. **Sem unidade secundária de amostragem** (11): a pasta é a última unidade sorteada e o domicílio é a etapa anterior, cuja variância o estimador já contém em 95% (13.2).
 
 **Opção documentada**, não padrão:
 
-4. **Diferenças sucessivas** (13.4), para variáveis com padrão espacial. A fórmula é instantânea; os pesos replicados custam dez segundos e 96 colunas.
-5. **Pesos de bootstrap** (13.7), 200 a 500 réplicas, se a compilação quiser poupar o usuário de montar o desenho.
+4. **Diferenças sucessivas** (13.4), para variáveis com padrão espacial. As tabelas trazem tudo o que ela exige (`censobr_estrato`, `censobr_upa` e a ordem do cadastro em `pasta`); a fórmula é instantânea.
+
+**Descartado:**
+
+5. **Pesos replicados** de qualquer tipo (13.6, 13.7). As colunas de desenho bastam para quem quiser construí-los.
 
 **Tarefa**, em ordem de valor:
 
-6. **Calibrar aos totais do universo, e não às estimativas de 1965** (13.5). Sexo, idade, cor, nacionalidade e alfabetização foram apuradas em 100% dos domicílios e publicadas por unidade da federação e situação nos tomos do Volume I. Calibrar a elas torna real a redução de variância, permite usar a fórmula dos resíduos com legitimidade e ancora a amostra na contagem completa. Implica transcrever essas tabelas como se fez com as de 1965.
-7. **A componente de variância da primeira etapa** (13.2), se um dia se quiser o rigor completo: vale entre 0,003% e 0,3% do total, e exige o número de domicílios do universo por pasta, que só a amostra de 25% dá.
-8. **Uma regra de colapso mais fina** para os oito estratos de região (11), juntando só a unidade da federação solitária a uma vizinha.
+6. **Calibrar aos totais externos, e não às estimativas de 1965** (13.5): os totais da contagem completa da Sinopse Preliminar (população por situação e domicílios, por município) e as margens de sexo, idade, cor, nacionalidade e alfabetização dos tomos do Volume I. Torna real a redução de variância, permite a fórmula dos resíduos e ancora a amostra por unidade da federação, e não só por região. Implica transcrever essas tabelas como se fez com as de 1965, escolher o nível das margens (por unidade da federação onde há pastas suficientes; por região onde não há) e limitar os fatores nas unidades da federação truncadas ou de uma pasta só.
+7. **Uma regra de colapso mais fina** para os oito estratos de região (11), que reúnem 266 das 817 pastas: juntar só a unidade da federação solitária a uma vizinha da mesma região e do mesmo grupo. Exige uma tabela de vizinhas; o ganho aparece nos domínios do Leste, do Nordeste e do Norte e Centro-Oeste.
+8. **A parte que falta da variância da etapa dos domicílios** (13.2): três linhas no passo 11, sem informação externa; completa a conta e muda o erro-padrão em menos de 1%.
 
 ## 14. Como usar em R
 
@@ -835,7 +845,8 @@ Três cuidados. Subconjuntos devem ser feitos com `subset()` sobre o objeto de d
 ## 17. Fontes
 
 - IBGE, Serviço Nacional de Recenseamento. *Censo Demográfico: resultados preliminares*. Série Especial, vol. II. Rio de Janeiro, março de 1965 (Biblioteca do IBGE, `liv84480`; cópia em `references/fontes_1960/1965_resultados_preliminares_vol2.pdf`), pp. 10–11 para o desenho; transcrição dos sete quadros em `references/censo_1960_resultados_preliminares_1965.csv`.
-- IBGE. *Censo Demográfico de 1960*, Série Regional, Volume I (19 tomos, um por unidade da federação): a seção "Amostragem" da introdução descreve a amostra de 25% (linhas de amostra nas Folhas de Coleta CD 7 e CD 8) e a estimativa de razão em 48 grupos, e promete de novo o volume com os erros de amostragem. Em `D:\Dropbox\Bancos_Dados\Censos\Censo 1960\4 - Ponderação do Censo de 1960\3-Publicações Originais dos Resultados\`.
+- IBGE. *Censo Demográfico de 1960*, Série Regional, Volume I (19 tomos; onze unidades da federação em duas partes, 1967–1969; dezessete em volume único, anos 1970): a seção "Amostragem" da introdução descreve a amostra de 25% (linhas de amostra nas Folhas de Coleta CD 7 e CD 8) e a estimativa de razão em 48 grupos, e promete de novo o volume com os erros de amostragem. Em `D:\Dropbox\Bancos_Dados\Censos\Censo 1960\4 - Ponderação do Censo de 1960\3-Publicações Originais dos Resultados\` (as primeiras partes e os volumes únicos) e na Biblioteca do IBGE, `biblioteca.ibge.gov.br/visualizacao/periodicos/68/cd_1960_v1_t<tomo>[_p1|_p2]_<uf>.pdf` (inclusive as segundas partes).
+- IBGE. *Censo Demográfico de 1960 — Brasil*, Série Nacional, Volume I (177 p., 62 tabelas; Fundação IBGE, anos 1970): a "Apresentação" que explica os dois grupos de tomos e a apuração das dezessete unidades da federação só pelo Boletim de Amostra. Internet Archive, item `censodem1960br`.
 - IPEA. *Processamento de uma amostra do Censo Demográfico de 1960*, abril de 1969: a história dos cartões e o leiaute do cartão de pessoa. Cópia em `references/fontes_1960/1969_ipea_processamento_amostra_1960.pdf`.
 - IBGE. *Censo Demográfico de 1960 — Favelas, Estado da Guanabara*. Série Especial, vol. IV: as favelas cariocas por zona e circunscrição censitária, a partir dos resultados **definitivos**, não desta subamostra. Cópia em `references/fontes_1960/1960_serie_especial_vol4_favelas.pdf`.
 - IBGE, Serviço Nacional de Recenseamento. *Código do Censo Demográfico – 1960* (manual de codificação, 25 p.); *Código para uso da Agência Municipal de Estatística* (236 p.); *Código de Zonas Fisiográficas, Municípios e Distritos, situação em 1º-7-1960* (313 p.). Transcrições em `read_guides/1960_codigo_do_censo.csv`, `read_guides/1960_municipios.csv` e `read_guides/1960_distritos.csv`.
