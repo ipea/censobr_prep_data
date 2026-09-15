@@ -1,0 +1,26 @@
+﻿variavel,inicio,fim,rotulo,valores_validos,observacao
+v001,1,5,"Pasta (número da pasta no cadastro nacional de arquivamento; par, alocado em blocos por UF)",,Os dois primeiros dígitos NÃO são o código da UF: o Paraná começa em 70002 e Fernando de Noronha em 27002. A UF vem do nome do arquivo.
+v002,6,8,Boletim de Amostra dentro da pasta,,"O boletim é a família, não o domicílio: um domicílio com mais de uma família tem um boletim por família."
+v003,9,10,Identificação do registro,00,00 = registro de família; 01 a 49 = registro de pessoa. É o que separa os dois layouts no mesmo arquivo.
+v004,11,11,Dígito verificador,,Em branco em 5.371 registros. Nenhum dos esquemas de verificação testados o reproduz: não serve de teste de integridade.
+v100,12,13,Total de pessoas do boletim,,"Confere com o número de registros de pessoa em 100% dos boletins, fora o bloco realocado de São Paulo."
+V101,14,14,Espécie do Domicílio,1;2;3;4;5;9,
+V102,15,15,Tipo do Domicílio,;4;5;6;7,
+V103,16,16,Condição de Ocupação,;7;8;9;0,
+V104,17,17,Aluguel Mensal,;0;1;2;3;4;5;6;7;8;9,
+V105,18,18,Abastecimento de Água,;9;0;1;2;3;4,
+V106,19,19,Instalação Sanitária,;4;5;6;7;8;9,
+V107,20,20,Fogão,;9;0;1;2;3;4;5,
+V108,21,21,Iluminação Elétrica,;5;6;7,
+V109,22,22,Rádio,;7;8;9,
+V110,23,23,Geladeira,;9;0;1,
+V111,24,24,Televisão,;1;2;3,
+V112,25,26,Total de Comodos,00;01;02;03;04;05;06;07;08;09;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25;26;27;28;29;30;31;32;33;34;35;36;37;38;39;40;41;42;43;44;45;46;47;48;49;50;51;52;53;54;55;56;57;58;59;60;NA,
+V113,27,29,Peças Servindo Domitório,;000;001;002;003;004;005;006;007;008;009;010;011;012;013;014;015;016;017;018;019;020;021;022;023;024;025;026;027;028;029;030;031;032;033;034;035;036;037;038;039;040;041;042;043;044;045;046;047;048;049;050;051;052;053;054;055;056;057;058;059;060,"Três caracteres nesta amostra, contra dois na de 1,27%."
+V116,30,33,Município (Não há rótulos identificadores para os códigos de municípios -- esta amostra não é representativa para essa unidade geográfica),,
+V117,34,35,"Distrito (código do Código de Zonas Fisiográficas, Municípios e Distritos de 1960)",,"Na amostra de 1,27% o distrito está na chave do questionário; aqui está no corpo do registro."
+V118,36,36,Situação,1;3;5,
+V119,37,38,Total de famílias,00,Campo previsto no layout e nunca gravado: 00 em todos os 3.071.284 registros.
+V120,39,40,Total de moradores,00,Campo previsto no layout e nunca gravado: 00 em todos os registros.
+V121,41,42,Peso do domicílio,00,Campo previsto no layout e nunca gravado: 00 em todos os registros. O peso do IBGE não veio no arquivo.
+V122,43,54,Filler,,Zeros em todos os registros.
