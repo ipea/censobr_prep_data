@@ -19,9 +19,9 @@ Em 1970 é a mesma coisa com `V006` (espécie da família) e o bloco `V007` a `V
 | censo | famílias secundárias | pessoas nelas | o que fica em branco |
 |---|---|---|---|
 | 1960 (amostra de 1,27%) | 373 | 1.367 | `V102` a `V113` |
-| 1970 (amostra de 25%) | (a contar) | 822.746 | `V007` a `V021` |
+| 1970 (amostra de 25%) | em 233.856 domicílios | 822.748 | `V007` a `V021` |
 
-Em 1970 são quase 830 mil pessoas, cerca de 3% da amostra, sem condição de ocupação, água, sanitário, cômodos e dormitórios. Quem faz uma tabela de "pessoas por tipo de abastecimento de água" a partir do arquivo de pessoas perde essas pessoas ou as põe numa categoria "sem informação" que não existe no censo.
+Em 1970 são 822.748 pessoas, 3,3% da amostra, espalhadas por 233.856 domicílios, sem condição de ocupação, água, sanitário, cômodos e dormitórios. (Na tabela de domicílios essas famílias não têm linha própria: ela traz 4.507.529 famílias únicas e 233.857 principais.) Quem faz uma tabela de "pessoas por tipo de abastecimento de água" a partir do arquivo de pessoas perde essas pessoas ou as põe numa categoria "sem informação" que não existe no censo.
 
 Um exemplo de 1960 (linhas 5648 a 5657 do arquivo): a família principal tem `V101` = 2, um chefe de 33 anos e uma pessoa de 23; a segunda família, `V101` = 4, tem um chefe de 38 anos, a esposa de 27 e quatro filhos. As duas moram no mesmo domicílio. A página do domicílio existe uma vez, no boletim da primeira; no boletim da segunda, `V102` a `V113` estão vazios.
 
