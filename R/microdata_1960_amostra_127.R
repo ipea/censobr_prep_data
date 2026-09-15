@@ -668,7 +668,7 @@ build_families_1960_amostra_127 <- function(tabelas){
 # Tipos. Todas as variáveis do IBGE viram inteiros; a chave do questionário e
 # as marcas ficam como estão.
 # ------------------------------------------------------------------------------
-finalize_1960_amostra_127 <- function(tabelas, municipios_path){
+finalize_1960_amostra_127 <- function(tabelas, municipios_path, distritos_path){
 
   message("Finalizing 1960 amostra de 1,27%")
 
@@ -772,13 +772,27 @@ finalize_1960_amostra_127 <- function(tabelas, municipios_path){
   # V116 ilegivel (o caractere corrompido de "724Z" foi anulado no passo 4): recebe o municipio deduzido pela pasta, marcado
   domicilios[is.na(V116) & !is.na(code_muni_1960), `:=`(V116 = code_muni_1960, censobr_muni_corrigido = TRUE)]
   pessoas[is.na(V116) & !is.na(code_muni_1960), `:=`(V116 = code_muni_1960, censobr_muni_corrigido = TRUE)]
+
+  # o distrito: as posicoes 7-8 da chave sao o codigo de distrito do Codigo de Municipios e Distritos de 1960;
+  # na Guanabara o par (V116, distrito) e (bairro, circunscricao ou favela), e a chave do join e o bairro
+  distritos <- data.table::fread(distritos_path, encoding = "UTF-8")
+  domicilios[, code_district_1960 := as.integer(distrito)]
+  domicilios[, chave_muni := data.table::fifelse(UF == 54L, V116, code_muni_1960)]
+  domicilios[distritos, `:=`(name_district_1960 = i.name_district_1960, name_bairro_1960 = i.name_bairro_1960, censobr_favela = i.tipo == "favela"),
+             on = c(chave_muni = "code_muni_1960", code_district_1960 = "code_district_1960")]
+  domicilios[is.na(censobr_favela), censobr_favela := FALSE]
+  domicilios[, chave_muni := NULL]
+  pessoas[domicilios, `:=`(code_district_1960 = i.code_district_1960, name_district_1960 = i.name_district_1960,
+                           name_bairro_1960 = i.name_bairro_1960, censobr_favela = i.censobr_favela), on = "censobr_idhousehold"]
+  message("  distritos: ", domicilios[!is.na(name_district_1960), .N], " de ", nrow(domicilios), " domicilios com nome de distrito; favelas: ",
+          domicilios[censobr_favela == TRUE, .N], " domicilios")
   message("  desenho: ", data.table::uniqueN(domicilios$censobr_upa), " pastas (",
           paste(names(table(pastas$grupo)), table(pastas$grupo), collapse = ", "), ") em ",
           data.table::uniqueN(domicilios$censobr_estrato), " estratos; menor estrato com ",
           min(unique(domicilios[, .(censobr_estrato, censobr_upa)])[, .N, by = censobr_estrato]$N), " pastas")
 
-  data.table::setcolorder(pessoas, c("UF", "V116", "V118", "code_muni", "code_muni_1960", "censobr_muni_corrigido", "censobr_idhousehold", "censobr_idfamily", "linha", "censobr_weight", "censobr_upa", "censobr_estrato"))
-  data.table::setcolorder(domicilios, c("UF", "V116", "V118", "code_muni", "code_muni_1960", "censobr_muni_corrigido", "censobr_idhousehold", "linha", "censobr_weight", "censobr_upa", "censobr_estrato"))
+  data.table::setcolorder(pessoas, c("UF", "V116", "V118", "code_muni", "code_muni_1960", "code_district_1960", "name_district_1960", "name_bairro_1960", "censobr_favela", "censobr_muni_corrigido", "censobr_idhousehold", "censobr_idfamily", "linha", "censobr_weight", "censobr_upa", "censobr_estrato"))
+  data.table::setcolorder(domicilios, c("UF", "V116", "V118", "code_muni", "code_muni_1960", "code_district_1960", "name_district_1960", "name_bairro_1960", "censobr_favela", "censobr_muni_corrigido", "censobr_idhousehold", "linha", "censobr_weight", "censobr_upa", "censobr_estrato"))
 
   message("  pessoas: ", nrow(pessoas), " x ", ncol(pessoas), " | domicilios: ", nrow(domicilios), " x ", ncol(domicilios))
   list(pessoas = pessoas, domicilios = domicilios)

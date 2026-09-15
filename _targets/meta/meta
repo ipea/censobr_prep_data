@@ -175,7 +175,7 @@ derive_households_1970|function|5424809ee075757a
 sampling_errors_1960_amostra_127|function|2c4eb5d3bc8ed119
 validate_1965_1960_amostra_127|function|0163fbeda289a266
 calibrate_1960_amostra_127|function|0fb78cc97f17e275
-finalize_1960_amostra_127|function|4408fc0e02741a1b
+finalize_1960_amostra_127|function|e4227ccf9a312631
 clean_microdata_2000|function|52dcda7a09234f1f
 clean_microdata_2010|function|a9ba352ff16a2b43
 add_geo_1970|function|8177f969783f45c6
@@ -215,9 +215,10 @@ clean_tracts_2022_prelim|function|f2a59b38d68ba929
 save_tracts_2022|function|572fd681a24160f8
 clean_tracts_2022|function|4de388b5f28b06ad
 clean_tracts_2000|function|d564b1efb91a37f4
-municipios_1960|stem|7292e1a51c9c4e3b|af23de0c3a21bb13|2c530c1562a7fbd1|1351895092|./read_guides/1960_municipios.csv|t20711.0630310368s|s212922b|212922|file|local|vector|||1.297|pacote 'DBI' foi compilado no R versão 4.5.3. pacote 'rvest' foi compilado no R versão 4.5.2. pacote 'openxlsx' foi compilado no R versão 4.5.3. pacote 'piggyback' foi compilado no R versão 4.5.3. pacote 'purrr' foi compilado no R versão 4.5.3. pacote 'curl' foi compilado no R versão 4.5.3. pacote 'readr' foi compilado no R versão 4.5.3. pacote 'stringr' foi compilado no R versão 4.5.2. pacote 'tarchetypes' foi compilado no R versão 4.5.3. pacote 'tibble' foi compilado no R versão 4.5.2. pacote 'tidyverse' foi compilado no R versão 4.5.3. pacote 'ggplot2' foi compilado no R versão 4.5.3. pacote 'tidyr' foi compilado no R versão 4.5.3. pacote 'forcats' foi compilado no R versão 4.5.3. pacote 'lubridate' foi compilado no R versão 4.5.2. pacote 'varhandle' foi compilado no R versão 4.5.2|
-tabelas_1960_amostra_127|stem|80308e9c07b3fc1d|e408b44c21525ffc|10df68f1c5030833|1800949839||t20711.0633328359s|s20941677b|20941677|rds|local|vector|||7.5|NAs introduzidos por coerção|
-tabelas_calibradas_1960_amostra_127|stem|69d8bdb00ed02b0e|d23648f7203223d2|d744726a1969c745|-1773709599||t20711.0634344502s|s25566049b|25566049|rds|local|vector|||1.344||
-validacao_1965_1960_amostra_127|stem|aa55b4eaa34517ef|30792589d3af510a|3d0406ad30565674|-1972281259||t20711.0634821709s|s18276b|18276|rds|local|vector|||2.531||
-erros_1960_amostra_127|stem|4f70fb7607e64ece|e6d11ede58603a1b|b39aadd3c8198d75|-892816702||t20711.063503555s|s3872b|3872|rds|local|vector|||0.407||
-output_1960_amostra_127|stem|edbc4d7b82d9cda3|cd89a4a1fdfc672a|f6149d924cc70884|-1648890890|./data_raw/microdata/1960/amostra_127/pessoas_1960_amostra_127.parquet*./data_raw/microdata/1960/amostra_127/domicilios_1960_amostra_127.parquet|t20711.0641409634s|s41375602b|41375602|file|local|vector|||53.625||
+distritos_1960|stem|de735f60b202224f|4e52817fbdb1c31b|2c530c1562a7fbd1|221800160|./read_guides/1960_distritos.csv|t20711.0795784308s|s1069803b|1069803|file|local|vector|||1.36|pacote 'DBI' foi compilado no R versão 4.5.3. pacote 'rvest' foi compilado no R versão 4.5.2. pacote 'openxlsx' foi compilado no R versão 4.5.3. pacote 'piggyback' foi compilado no R versão 4.5.3. pacote 'purrr' foi compilado no R versão 4.5.3. pacote 'curl' foi compilado no R versão 4.5.3. pacote 'readr' foi compilado no R versão 4.5.3. pacote 'stringr' foi compilado no R versão 4.5.2. pacote 'tarchetypes' foi compilado no R versão 4.5.3. pacote 'tibble' foi compilado no R versão 4.5.2. pacote 'tidyverse' foi compilado no R versão 4.5.3. pacote 'ggplot2' foi compilado no R versão 4.5.3. pacote 'tidyr' foi compilado no R versão 4.5.3. pacote 'forcats' foi compilado no R versão 4.5.3. pacote 'lubridate' foi compilado no R versão 4.5.2. pacote 'varhandle' foi compilado no R versão 4.5.2|
+municipios_1960|stem|c89cfe2bcb2e047e|af23de0c3a21bb13|2c530c1562a7fbd1|1351895092|./read_guides/1960_municipios.csv|t20711.0665326117s|s214275b|214275|file|local|vector|||0||
+tabelas_1960_amostra_127|stem|44480bea9b8e169a|9eaa9c7f07438f09|725be232ca0c94fe|1800949839||t20711.0799323185s|s21437292b|21437292|rds|local|vector|||7.453|NAs introduzidos por coerção. NAs introduzidos por coerção|
+tabelas_calibradas_1960_amostra_127|stem|b713aa751b64f1b7|d23648f7203223d2|631eb6f7489b9555|-1773709599||t20711.0800358747s|s26048478b|26048478|rds|local|vector|||1.157||
+erros_1960_amostra_127|stem|4f70fb7607e64ece|e6d11ede58603a1b|df0c15deb683ffc6|-892816702||t20711.0800619295s|s3872b|3872|rds|local|vector|||0.64||
+output_1960_amostra_127|stem|7d422fb8b151af0b|cd89a4a1fdfc672a|ec8e91be618af953|-1648890890|./data_raw/microdata/1960/amostra_127/pessoas_1960_amostra_127.parquet*./data_raw/microdata/1960/amostra_127/domicilios_1960_amostra_127.parquet|t20711.0806950413s|s43805674b|43805674|file|local|vector|||52.968||
+validacao_1965_1960_amostra_127|stem|aa55b4eaa34517ef|30792589d3af510a|af4c2d9b69757656|-1972281259||t20711.0807430277s|s18276b|18276|rds|local|vector|||2.578||

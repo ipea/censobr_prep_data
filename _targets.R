@@ -189,9 +189,15 @@ list(
              format = "file"
              ),
 
+  # distritos, e os bairros, circunscricoes e favelas da Guanabara, do Codigo de Municipios e Distritos de 1960
+  tar_target(name = distritos_1960,
+             command = "./read_guides/1960_distritos.csv",
+             format = "file"
+             ),
+
   # contagens, peso uniforme, codigos, marcas de coerencia, tipos, desenho da amostra
   tar_target(name = tabelas_1960_amostra_127,
-             command = finalize_1960_amostra_127(familias_1960_amostra_127, municipios_1960)
+             command = finalize_1960_amostra_127(familias_1960_amostra_127, municipios_1960, distritos_1960)
              ),
 
   # quadros 1 e 6 dos Resultados Preliminares de 1965, transcritos e conferidos
