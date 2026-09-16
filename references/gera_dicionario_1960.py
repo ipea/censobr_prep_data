@@ -244,7 +244,7 @@ GEO = [
     ("code_district_1960", "Código do Distrito no Código de Zonas Fisiográficas, Municípios e "
                            "Distritos de 1960", VALOR),
     ("name_district_1960", "Nome do Distrito em 1960", TEXTO +
-     [("", "Nome não transcrito: restam 715 pares município-distrito que o Código traz impressos e "
+     [("", "Nome não transcrito: restam 720 pares município-distrito que o Código traz impressos e "
            "cuja leitura visual não foi feita")]),
     ("name_bairro_1960", "Bairro. Só na Guanabara, onde o censo codificou a cidade por bairro em vez "
                          "de por distrito", TEXTO +
