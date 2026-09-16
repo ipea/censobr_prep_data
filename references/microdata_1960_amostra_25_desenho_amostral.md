@@ -46,7 +46,7 @@ O arquivo não traz o número do setor. Traz o número da **pasta**, que é o lo
 
 **A pasta está num só município.** Sem exceção, nas 13.411. Isso permite usá-la na estratificação sem contaminar a geografia.
 
-**A fração realizada não é exatamente um quarto.** O fator implícito — população publicada dividida pelos presentes na amostra — vai de **3,668 em Sergipe a 4,441 em Fernando de Noronha**, com 3,915 no conjunto. O volume de 1965 já dizia "aproximadamente 25%". As causas são as de sempre: domicílio fechado, recusa, folha mal preenchida, e o arredondamento da própria regra de quatro linhas em setores pequenos.
+**A fração realizada não é exatamente um quarto.** O fator implícito — população publicada dividida pelos presentes na amostra — vai de **3,627 em Sergipe a 4,532 em Fernando de Noronha**, com 3,870 no conjunto. O volume de 1965 já dizia "aproximadamente 25%". As causas são as de sempre: domicílio fechado, recusa, folha mal preenchida, e o arredondamento da própria regra de quatro linhas em setores pequenos.
 
 ---
 
@@ -74,24 +74,38 @@ Esta é uma escolha nossa, e é conservadora nos dois sentidos. A pasta é mais 
 
 ## 5. Os dois pesos
 
-### `censobr_weight` — razão à contagem completa por município × situação
+### `censobr_weight` — calibrado a três margens, por unidade da federação
 
-Este é o peso final. É a razão entre a população que a contagem completa apurou e a que a amostra encontrou, célula a célula, com a célula sendo **município × situação**.
+Este é o peso final. Ele resolve de uma vez, por unidade da federação, três conjuntos de totais publicados:
 
-Duas coisas a notar.
+1. **município × situação**, da **Sinopse Preliminar** — a contagem completa, e a única fonte que abre a população por município;
+2. **sexo × onze faixas etárias**, da tabela 33 da **Série Nacional**, os resultados definitivos;
+3. **sabem ler e escrever, de 5 anos e mais, por sexo**, da tabela 40 da Série Nacional.
 
-**Não precisa de solver.** Na amostra de 1,27% as células de calibração eram de pessoa — sexo por faixa de idade — e um domicílio cruzava muitas delas, o que obrigava ao Newton de Deville–Särndal. Aqui cada domicílio pertence a exatamente uma célula, e a calibração é razão em forma fechada.
+O solver é o mesmo da amostra de 1,27% — o raking de Deville–Särndal com distância logit, `raking_1960_amostra_127()`, que mantém o fator de calibração entre limites: aqui entre 0,25 e 3 vezes o peso de desenho, isto é, pesos entre 1 e 12. Converge em quatro a oito iterações de Newton nas dezessete unidades, com desvio relativo máximo abaixo de 10⁻¹⁰.
 
-**A âncora é externa.** É a Sinopse Preliminar, a contagem completa publicada por município e situação — e é exatamente o que o IBGE declarou ter usado nestas dezessete unidades: *"o processo de estimativa de razão baseou-se na população urbana e rural constante das Sinopses Preliminares"*. O que fazemos é refinar o nível: o IBGE calibrou por unidade da federação, nós por município.
+**Por que duas fontes, e não uma.** As duas publicações dizem coisas diferentes, e nenhuma basta sozinha.
 
-O fator vai de **1,18 a 8,02**, com mediana **3,95**.
+A Sinopse Preliminar é a única que desce ao município — e é o que o IBGE declarou ter usado nestas dezessete unidades: *"o processo de estimativa de razão baseou-se na população urbana e rural constante das Sinopses Preliminares"*. Mas é a safra **preliminar**: por unidade da federação ela fica sistematicamente acima dos resultados definitivos, de 0,2% no Paraná a 2,0% em Mato Grosso e Goiás, com mediana de **1,19%**. Calibrar só a ela, como uma primeira versão deste módulo fazia, deixava as dezessete unidades daqui 1,2% acima dos definitivos enquanto as onze da amostra de 1,27% ficavam exatas — uma descontinuidade que apareceria nas fronteiras estaduais de um banco que se apresenta como um censo só.
 
-**O colapso.** Célula magra dá fator instável, e o remédio é agregar. A regra tem dois degraus, e o princípio é que a âncora municipal não se abandona:
+A Série Nacional é definitiva e traz a estrutura demográfica, que é exatamente a mesma a que a amostra de 1,27% calibra — mas não publica município.
 
-1. A célula de situação vira **município inteiro** quando o seu fator sai de [2; 8], quando o universo é menor que 100, ou quando o universo tem uma situação que a amostra não alcançou. Este terceiro caso é o de Cristalândia, em Goiás, cujos 2.345 habitantes urbanos não têm um domicílio urbano sorteado: sem o colapso, essa população não teria a que se prender.
-2. Só o município **sem universo nenhum** desceria para a unidade da federação × situação. Nenhum desce.
+A solução é usar cada uma para o que ela tem: **a Sinopse dá a forma, a Série Nacional dá a escala**. Os alvos municipais entram reescalados pela razão entre o total definitivo da unidade e a soma dos municípios na Sinopse, de modo que as duas margens somem a mesma população e o sistema seja consistente. O que se reproduz do município, portanto, é a sua **participação** na população do estado, e não a contagem da Sinopse em si.
 
-São 9.958 domicílios colapsados, 0,32% do total. Uma primeira versão da regra mandava todo município de fator baixo direto para o nível do estado, e isso inflava Alpinópolis, Itueta e Abadia dos Dourados em 23 mil pessoas — porque a elas o fator do estado simplesmente não se aplica. O erro foi encontrado na validação.
+**A circularidade, dita.** Para estas dezessete unidades as tabelas da Série Nacional foram apuradas com esta mesma amostra. Calibrar a elas não acrescenta informação externa: troca a âncora da safra preliminar pela definitiva, que é o que alinha os dois estágios de 1960. Em consequência, a variância pelos resíduos da calibração — legítima na amostra de 1,27%, onde onze unidades vêm do universo — aqui daria zero sem significado, e não se publica.
+
+**O colapso da margem municipal.** Célula magra dá fator instável, e sem agregação a margem pediria fatores de até 27 (Itu), que não caberiam nos limites do raking. A regra tem dois degraus, e o princípio é que a âncora municipal não se abandona:
+
+1. A célula de situação vira **município inteiro** quando o seu fator implícito sai de [2; 8], quando o universo é menor que 100, ou quando o universo tem uma situação que a amostra não alcançou. Este terceiro caso é o de Cristalândia, em Goiás, cujos 2.345 habitantes urbanos não têm um domicílio urbano sorteado: sem o colapso, essa população não teria a que se prender.
+2. Só o município **sem universo nenhum** ficaria fora da margem municipal, preso às margens demográficas. Nenhum fica.
+
+São 9.958 domicílios colapsados, 0,32% do total. Uma primeira versão da regra mandava todo município de fator baixo direto para o nível do estado, e isso inflava Alpinópolis, Itueta e Abadia dos Dourados em 23 mil pessoas — porque a elas o fator do estado simplesmente não se aplica. O erro foi encontrado na validação. A coluna `censobr_weight_nivel` registra, domicílio a domicílio, em que nível a sua âncora municipal ficou.
+
+**Duas células que saem.** A margem municipal e a de sexo × idade somam a mesma população, o que torna o sistema de Newton singular: sai a **menor célula municipal**, que é a que menos custa, e a sua população fica presa às margens demográficas. E sai a faixa **idade ignorada** da tabela 33 — o arquivo tem quase nenhuma, 118 pessoas em Sergipe, 0,06%, contra uma célula publicada grande demais para caber nos limites do fator.
+
+**Fernando de Noronha é exceção.** Com 75 domicílios não há como sustentar vinte e duas células de sexo × idade, e ali a margem demográfica é só o total por sexo — como a amostra de 1,27% já fazia. É a única unidade em que a regra dispara.
+
+**Os pesos resultantes** vão de **1,00 a 11,77**, com mediana **3,93**; entre o primeiro e o nonagésimo nono percentil, de 2,99 a 4,79. A dispersão em torno de 4 é o que separa os municípios cuja fração realizada de sorteio se afastou de um em quatro.
 
 ### `censobr_weight_ibge` — o método publicado, ao pé da letra
 
@@ -111,7 +125,9 @@ Duas ressalvas a declarar.
 
 **Serra dos Aimorés** é a única unidade cuja âncora não é contagem completa. Os tomos de Minas e do Espírito Santo excluem a região do litígio dos dois estados — *"a exemplo do que se fez em 1940 e 1950"* — e não publicam tabela própria para ela. A única publicação que a traz é a Série Nacional, e é a ela que a região calibra. Como essa linha da Série Nacional foi ela própria estimada com esta amostra, há circularidade, e ela fica dita.
 
-**Alto Garças, em Mato Grosso**, tem 4.630 habitantes publicados e **nenhum domicílio sorteado**. Com `censobr_weight` essa população não tem a que se prender, e Mato Grosso fecha 4.630 pessoas abaixo do publicado. Com `censobr_weight_ibge`, que é por estado, ela se redistribui e o total fecha. É buraco de cobertura da amostra, não defeito do método.
+**Alto Garças, em Mato Grosso**, é o único município das dezessete unidades **inteiramente ausente da amostra**: 4.630 habitantes publicados e nenhum domicílio sorteado. A causa está no cadastro de pastas — a pasta **91008** é a única falha na sequência das 211 pastas de Mato Grosso, e cai exatamente entre Alto Araguaia (91006) e Guiratinga (91010 e seguintes); 4.630 habitantes divididos por 4,9 moradores e por quatro dão cerca de 236 domicílios, que é uma pasta. Perdeu-se uma pasta inteira, não domicílios avulsos.
+
+Com a margem de unidade da federação, o total de Mato Grosso fecha: a população de Alto Garças se redistribui pelos demais municípios do estado. Ela não deixa de ser contada, mas é contada no lugar errado — e por isso **não se deve estimar nada para Alto Garças**, que sai da tabela com zero.
 
 ---
 
@@ -155,21 +171,21 @@ O pipeline calcula os mesmos números à mão, para não acrescentar dependênci
 
 | domínio | estimativa | erro-padrão | CV | efeito de desenho |
 |---|---|---|---|---|
-| pessoas | 58.638.580 | 16.035 | 0,027% | — |
-| presentes | 57.948.156 | 15.886 | 0,027% | — |
-| população urbana | 25.941.017 | 10.785 | 0,042% | 2,74 |
-| população rural | 32.007.139 | 11.664 | 0,036% | 3,19 |
-| analfabetos de 15 anos e mais | 13.520.687 | 6.755 | 0,050% | 1,49 |
-| crianças de 0 a 4 anos | 7.413.679 | 4.994 | 0,067% | 1,31 |
-| pessoas com rendimento | 36.687.921 | 11.478 | 0,031% | 3,27 |
+| pessoas | 57.989.910 | 15.767 | 0,027% | — |
+| presentes | 57.304.420 | 15.619 | 0,027% | — |
+| população urbana | 25.649.415 | 10.570 | 0,041% | 2,69 |
+| população rural | 31.655.005 | 11.499 | 0,036% | 3,17 |
+| analfabetos de 15 anos e mais | 13.349.995 | 6.617 | 0,050% | 1,47 |
+| crianças de 0 a 4 anos | 7.332.459 | 4.940 | 0,067% | 1,31 |
+| pessoas com rendimento | 36.270.721 | 11.264 | 0,031% | 3,22 |
 
 **Esta amostra é enormemente precisa.** Os coeficientes de variação ficam entre 0,027% e 0,067% nos grandes agregados. Isso é o que se espera de um domicílio em quatro, com 3,07 milhões de domicílios sorteados: a correção de população finita sozinha já retira um quarto da variância, e o que sobra é dividido por três milhões.
 
 Para dar escala: nos mesmos domínios, a amostra de 1,27% tem coeficientes de variação entre 1% e 3% — **de vinte a cinquenta vezes maiores**. Ela é vinte vezes menor e sofre um segundo estágio de conglomeração, em que a pasta inteira entra ou não entra.
 
-**O efeito de desenho fica entre 1,31 e 3,27.** Ele mede quantas vezes esta amostra é menos precisa que um sorteio pessoa a pessoa do mesmo tamanho. Está acima de um porque **o domicílio entra inteiro**: pessoas do mesmo domicílio se parecem — moram no mesmo lugar, têm renda correlacionada, a mesma situação urbana ou rural —, e isso custa precisão.
+**O efeito de desenho fica entre 1,31 e 3,22.** Ele mede quantas vezes esta amostra é menos precisa que um sorteio pessoa a pessoa do mesmo tamanho. Está acima de um porque **o domicílio entra inteiro**: pessoas do mesmo domicílio se parecem — moram no mesmo lugar, têm renda correlacionada, a mesma situação urbana ou rural —, e isso custa precisão.
 
-O padrão dos valores é informativo. O efeito é **menor** nas variáveis que variam muito dentro do domicílio (crianças de 0 a 4 anos, 1,31; analfabetismo, 1,49) e **maior** nas que são praticamente constantes dentro dele (urbano ou rural, 2,74 e 3,19). No limite, uma variável que fosse idêntica para todos os moradores de um domicílio teria efeito de desenho igual ao tamanho médio do domicílio, que aqui é 4,9.
+O padrão dos valores é informativo. O efeito é **menor** nas variáveis que variam muito dentro do domicílio (crianças de 0 a 4 anos, 1,31; analfabetismo, 1,47) e **maior** nas que são praticamente constantes dentro dele (urbano ou rural, 2,69 e 3,17). No limite, uma variável que fosse idêntica para todos os moradores de um domicílio teria efeito de desenho igual ao tamanho médio do domicílio, que aqui é 4,9.
 
 Em domínios que são quase toda a população o efeito de desenho perde sentido — o denominador tende a zero — e fica ausente da tabela.
 
@@ -214,7 +230,7 @@ Em compensação, a amostra de 1,27% **cobre as 28 unidades da federação** e e
 2. **A seleção foi sistemática, e o estimador a trata como aleatória dentro do estrato.** Isso também é conservador, quando a ordenação da folha carrega informação — e ela carrega, porque o recenseador percorria o setor geograficamente.
 3. **A fração realizada não é 1/4**, mas 1/3,92 no conjunto, com variação por unidade. A correção finita usa 1/4, que é o desenho; o desvio está absorvido no peso.
 4. **Cinco estratos têm um domicílio** e não contribuem com variância. É 0,03% dos estratos.
-5. **Alto Garças não tem domicílio sorteado**, e com `censobr_weight` a sua população não é representada.
+5. **Alto Garças não tem domicílio sorteado** — perdeu-se a pasta 91008 inteira. A sua população é redistribuída pelos demais municípios de Mato Grosso pela margem da unidade da federação; não estime nada para ele.
 6. **O erro-padrão não cobre erro de transcrição**, que a comparação com a amostra de 1,27% mostra ser da ordem de alguns por cento em variáveis do domicílio.
 7. **Não estime abaixo do município.**
 
@@ -226,5 +242,5 @@ Em compensação, a amostra de 1,27% **cobre as 28 unidades da federação** e e
 - IBGE, *Censo Demográfico de 1960 — Brasil*, Série Nacional vol. I, em [`fontes_1960/1960_serie_nacional_vol1_brasil.pdf`](fontes_1960/1960_serie_nacional_vol1_brasil.pdf).
 - IBGE, *Resultados Preliminares do Censo Demográfico de 1960*, Série Especial vol. II, março de 1965, em [`fontes_1960/1965_resultados_preliminares_vol2.pdf`](fontes_1960/1965_resultados_preliminares_vol2.pdf) — descreve o desenho da subamostra de 1,27% e, de passagem, o da amostra geral.
 - IBGE, Serviço Nacional de Recenseamento, *Código do Censo Demográfico — 1960*, em [`fontes_1960/1960_codigo_do_censo_demografico.pdf`](fontes_1960/1960_codigo_do_censo_demografico.pdf).
-- Sinopse Preliminar do Censo Demográfico de 1960, por unidade da federação — a âncora de `censobr_weight`.
+- Sinopse Preliminar do Censo Demográfico de 1960, por unidade da federação — a margem municipal de `censobr_weight` e a âncora inteira de `censobr_weight_ibge`.
 - O guia irmão, [`microdata_1960_amostra_127_desenho_amostral.md`](microdata_1960_amostra_127_desenho_amostral.md), para o vocabulário, o cadastro de pastas e a engenharia reversa do sorteio de 1965.

@@ -483,24 +483,31 @@ build_1960_amostra_25 <- function(paths, uf, municipios_path, distritos_path){
 #
 # Dois pesos, como na amostra de 1,27%.
 #
-# censobr_weight é razão à contagem completa por município × situação, e não
-# precisa de solver: lá as células eram de pessoa (sexo × idade) e um domicílio
-# cruzava muitas, o que obrigava ao Newton de Deville-Särndal; aqui cada
-# domicílio pertence a exatamente uma célula e a calibração é razão em forma
-# fechada. A âncora é a Sinopse Preliminar, que é a contagem completa e é o que
-# o IBGE declarou ter usado nestas dezessete unidades, refinada do nível de
-# unidade da federação para o de município.
+# censobr_weight calibra a duas margens ao mesmo tempo, por unidade da federação,
+# pelo raking de Deville-Särndal com distância logit — o mesmo solver da amostra
+# de 1,27%, em raking_1960_amostra_127().
 #
-# O colapso tem dois degraus, e o princípio é que a âncora municipal não se
-# abandona. A célula de situação vira município inteiro quando o seu fator sai
-# de [2; 8], quando o universo é menor que 100, e também quando o universo tem
-# uma situação que a amostra não alcançou — ali a população daquele lado não
-# teria a quem se agarrar, e é o caso de Cristalândia, em Goiás, cujos 2.345
-# habitantes urbanos não têm um domicílio urbano sorteado. Só o município sem
-# universo nenhum desce para a unidade da federação × situação; subir todo
-# município de fator baixo para a UF, como uma primeira versão fazia, inflava
-# Alpinópolis, Itueta e Abadia dos Dourados em 23 mil pessoas, porque a elas o
-# fator do estado não se aplica.
+# A Sinopse Preliminar dá a distribuição entre municípios, que a Série Nacional
+# não publica; a Série Nacional dá o nível e a estrutura demográfica, que é a
+# mesma a que a amostra de 1,27% calibra. As duas margens juntas põem os dois
+# estágios de 1960 na mesma régua. Com a âncora municipal sozinha, como uma
+# primeira versão fazia, as dezessete unidades daqui ficavam 1,2% acima dos
+# resultados definitivos enquanto as onze da amostra de 1,27% ficavam exatas —
+# uma descontinuidade nas fronteiras estaduais, num banco que se apresenta como
+# um censo só.
+#
+# As três margens: município × situação, da Sinopse, reescalada para somar o
+# total definitivo da unidade; sexo × onze faixas etárias, da tabela 33; e
+# sabem ler de 5 anos e mais por sexo, da tabela 40. Uma célula de sexo × idade
+# sai por ser implicada — as duas primeiras margens somam a mesma população, e
+# sem isso o sistema de Newton fica singular.
+#
+# Há uma circularidade a declarar: para estas dezessete unidades as tabelas da
+# Série Nacional foram apuradas com esta mesma amostra. Calibrar a elas não
+# acrescenta informação; troca a âncora da safra preliminar para a definitiva,
+# que é o que alinha os dois estágios. Em consequência, a variância pelos
+# resíduos da calibração, legítima na amostra de 1,27%, aqui daria zero sem
+# significado e não se publica.
 #
 # A Serra dos Aimorés é a única unidade sem contagem completa: os tomos de Minas
 # e do Espírito Santo excluem a região do litígio dos dois estados, com todas as
@@ -544,40 +551,109 @@ weight_1960_amostra_25 <- function(paths, uf, municipios_path, definitivos_path)
     message("  ancora da Serie Nacional: urbana ", sa[item == "urbana", valor], ", rural ", sa[item == "rural", valor])
   }
 
+  # --------------------------------------------------------------------------
+  # A calibracao: tres margens, resolvidas juntas por unidade da federacao.
+  # A Sinopse da a forma (a distribuicao entre municipios), a Serie Nacional da
+  # a escala e a estrutura demografica -- que e a mesma a que a amostra de 1,27%
+  # calibra, e e o que poe os dois estagios de 1960 na mesma regua.
+  # --------------------------------------------------------------------------
+  def <- data.table::fread(definitivos_path, encoding = "UTF-8")
+  def <- def[nivel == "uf" & uf60 == codigo_uf]
+  alvo_uf <- def[tabela == 32L & item == "presente" & sexo %in% c("homens", "mulheres"), sum(valor)]
+  if(length(alvo_uf) != 1 || is.na(alvo_uf) || alvo_uf <= 0)
+    stop(uf, ": sem total de presentes na Serie Nacional para a unidade ", codigo_uf)
+
+  pessoas[, presente := V202 %in% c(1L, 2L, 5L, 6L)]
+  pessoas[, sexo  := data.table::fifelse(V202 %in% c(1L, 3L, 5L), "homens", "mulheres")]
+  pessoas[, idade := data.table::fifelse(V204 == 1L, V204B,
+                     data.table::fifelse(V204 == 5L, 100L + V204B,
+                     data.table::fifelse(V204 == 0L, 0L, NA_integer_)))]
+  pessoas[, faixa := as.character(cut(idade, c(-1, 4, 9, 14, 19, 24, 29, 39, 49, 59, 69, Inf),
+                     labels = c("0 a 4", "5 a 9", "10 a 14", "15 a 19", "20 a 24", "25 a 29",
+                                "30 a 39", "40 a 49", "50 a 59", "60 a 69", "70 e mais")))]
+  pessoas[is.na(faixa), faixa := "ignorada"]
+  pessoas[, sit := data.table::fifelse(V118 == 5L, "rural", "urbana")]
+  pres <- pessoas[presente == TRUE]
+
+  # margem 1: municipio x situacao, da Sinopse. A celula de situacao vira municipio
+  # inteiro quando o seu fator implicito sai de [2; 8], quando o universo e menor
+  # que 100 e quando uma das situacoes do universo nao foi alcancada pela amostra --
+  # a ancora municipal nao se abandona, e so o municipio sem universo proprio fica
+  # de fora da margem, preso as margens demograficas. Sem esse colapso a margem
+  # pediria fatores de ate 27 (Itu) e nao caberia nos limites do raking.
   celulas <- domicilios[, .(pes = sum(censobr_n_presentes)), by = .(code_muni_1960, situacao)]
   celulas[universo, universo := i.universo, on = c(code_muni_1960 = "cod60", "situacao")]
-  celulas[, `:=`(nivel = "municipio x situacao", fator = universo / pes)]
-
-  # o municipio inteiro, que e a ancora que nao se abandona: entra quando a celula de
-  # situacao e instavel e tambem quando o universo tem uma situacao que a amostra nao
-  # alcancou -- ali a populacao daquele lado nao teria a quem se agarrar
   uni_muni <- universo[, .(uni_m = sum(universo, na.rm = TRUE),
                            sits = sum(!is.na(universo) & universo > 0)), by = .(code_muni_1960 = cod60)]
   celulas[uni_muni, `:=`(uni_m = i.uni_m, sits_universo = i.sits), on = "code_muni_1960"]
   celulas[, sits_amostra := .N, by = code_muni_1960]
-  sobe <- celulas[is.na(fator) | is.na(universo) | universo < 100 | fator < 2 | fator > 8 |
+  celulas[, fator := universo / pes]
+  sobe <- celulas[is.na(fator) | universo < 100 | fator < 2 | fator > 8 |
                     sits_amostra < sits_universo, unique(code_muni_1960)]
-  if(length(sobe) > 0){
-    m <- celulas[code_muni_1960 %in% sobe, .(pes2 = sum(pes)), by = code_muni_1960]
-    celulas[m, pes2 := i.pes2, on = "code_muni_1960"]
-    celulas[code_muni_1960 %in% sobe, `:=`(pes = pes2, universo = uni_m, nivel = "municipio")]
-    celulas[, fator := universo / pes]
+  celulas[, `:=`(cel_mun = paste0("mun_", code_muni_1960, "_", situacao),
+                 alvo_mun = as.numeric(universo),
+                 nivel = "municipio x situacao")]
+  celulas[code_muni_1960 %in% sobe, `:=`(cel_mun = paste0("mun_", code_muni_1960),
+                                         alvo_mun = as.numeric(uni_m),
+                                         nivel = "municipio")]
+  celulas[is.na(alvo_mun) | alvo_mun <= 0, `:=`(cel_mun = NA_character_, nivel = "sem ancora municipal")]
+  m1 <- unique(celulas[!is.na(cel_mun), .(celula = cel_mun, alvo = alvo_mun)])
+  m1[, alvo := alvo * alvo_uf / sum(alvo)]
+  pres[celulas, cel_mun := i.cel_mun, on = c("code_muni_1960", sit = "situacao")]
+
+  # margem 2: sexo x faixa etaria, da tabela 33. A idade ignorada fica fora: o
+  # arquivo tem quase nenhuma e a celula publicada e grande demais para caber.
+  # Em unidade pequena demais para vinte e duas celulas -- so Fernando de Noronha,
+  # com 76 domicilios -- fica so o total por sexo, como na amostra de 1,27%.
+  m2 <- def[tabela == 33L & sexo %in% c("homens", "mulheres") & !item %in% c("total", "ignorada"),
+            .(celula = paste0("sx_", sexo, "_", item), alvo = as.numeric(valor))]
+  pres[, cel_sx := paste0("sx_", sexo, "_", faixa)]
+  if(nrow(domicilios) < 40 * (nrow(m1) + nrow(m2))){
+    m2 <- def[tabela == 32L & item == "presente" & sexo %in% c("homens", "mulheres"),
+              .(celula = paste0("sx_", sexo), alvo = as.numeric(valor))]
+    pres[, cel_sx := paste0("sx_", sexo)]
+    message("  unidade pequena: margem de idade trocada pelo total por sexo")
   }
 
-  # a UF x situacao e o ultimo recurso, so para o municipio sem universo proprio
-  sem <- celulas[is.na(universo) | universo == 0, unique(code_muni_1960)]
-  if(length(sem) > 0){
-    u <- celulas[nivel == "municipio x situacao", .(pes3 = sum(pes), uni3 = sum(universo)), by = situacao]
-    celulas[u, `:=`(pes3 = i.pes3, uni3 = i.uni3), on = "situacao"]
-    celulas[code_muni_1960 %in% sem, `:=`(pes = pes3, universo = uni3, nivel = "UF x situacao")]
-    celulas[, c("pes3", "uni3") := NULL][, fator := universo / pes]
-  }
-  celulas[, c("uni_m", "sits_universo", "sits_amostra", "pes2") := NULL]
-  if(celulas[is.na(fator) | fator <= 0, .N] > 0)
-    stop(uf, ": ", celulas[is.na(fator) | fator <= 0, .N], " celulas sem fator utilizavel depois do colapso")
+  # margem 3: sabem ler e escrever, 5 anos e mais, por sexo, da tabela 40
+  m3 <- def[tabela == 40L & item == "sabem" & sexo %in% c("homens", "mulheres"),
+            .(celula = paste0("lit_", sexo), alvo = as.numeric(valor))]
+  pres[, cel_lit := data.table::fifelse(!is.na(idade) & idade >= 5L & V211 %in% c(0L, 1L),
+                                        paste0("lit_", sexo), NA_character_)]
 
-  domicilios[celulas, `:=`(censobr_weight = i.fator, censobr_weight_nivel = i.nivel),
-             on = c("code_muni_1960", "situacao")]
+  # as margens 1 e 2 somam quase a mesma populacao e o sistema de Newton fica
+  # singular, ou perto disso: sai a menor celula municipal, que e a que menos
+  # custa, e a sua populacao fica presa as margens demograficas
+  alvos <- data.table::rbindlist(list(m1[-which.min(m1$alvo)], m2, m3))
+  alvos <- alvos[alvo > 0]
+
+  # X: uma linha por domicilio, uma coluna por celula, o valor e quantas pessoas
+  # presentes daquele domicilio caem na celula
+  longo <- data.table::rbindlist(list(
+    pres[!is.na(cel_mun), .(id = censobr_idhousehold, celula = cel_mun)],
+    pres[, .(id = censobr_idhousehold, celula = cel_sx)],
+    pres[!is.na(cel_lit), .(id = censobr_idhousehold, celula = cel_lit)]))
+  longo <- longo[, .N, by = .(id, celula)]
+  vazias <- alvos[!celula %in% longo$celula]
+  if(nrow(vazias) > 0)
+    message("  ", nrow(vazias), " celulas com alvo e sem amostra, fora da calibracao: ",
+            paste(vazias$celula, collapse = ", "))
+  alvos <- alvos[celula %in% longo$celula]
+  longo <- longo[celula %in% alvos$celula]
+
+  ids <- domicilios$censobr_idhousehold
+  X <- Matrix::sparseMatrix(i = match(longo$id, ids), j = match(longo$celula, alvos$celula),
+                            x = longo$N, dims = c(length(ids), nrow(alvos)))
+  message("  calibrando ", format(nrow(alvos)), " celulas em ", format(nrow(domicilios)), " domicilios")
+  # os limites do fator: a ancora municipal ja vem contida em [2; 8] pelo colapso,
+  # isto e, g em [0,5; 2], e as margens demograficas pedem alguma folga em cima disso
+  w <- raking_1960_amostra_127(X, alvos$alvo, rep(4, length(ids)), limites = c(0.25, 3))
+  desvio <- max(abs(as.numeric(Matrix::crossprod(X, w)) - alvos$alvo) / alvos$alvo)
+  if(desvio > 1e-6) stop(uf, ": o raking nao convergiu, desvio relativo maximo ", signif(desvio, 3))
+
+  domicilios[celulas, censobr_weight_nivel := i.nivel, on = c("code_muni_1960", "situacao")]
+  domicilios[, `:=`(censobr_weight = w, censobr_weight_fator = w / 4)]
+
 
   # o peso do IBGE: razao a UF x situacao com peso inteiro sorteado para fechar o total
   set.seed(1960L)
@@ -605,16 +681,17 @@ weight_1960_amostra_25 <- function(paths, uf, municipios_path, definitivos_path)
 
   # a pessoa leva o peso e as colunas de desenho do seu domicilio
   leva <- c("situacao", "censobr_upa", "censobr_estrato", "censobr_fpc", "censobr_weight_desenho",
-            "censobr_weight", "censobr_weight_nivel", "censobr_weight_ibge")
+            "censobr_weight", "censobr_weight_fator", "censobr_weight_nivel", "censobr_weight_ibge")
+  pessoas[, c("presente", "sexo", "idade", "faixa", "sit") := NULL]
   pessoas[domicilios, (leva) := mget(paste0("i.", leva)), on = "censobr_idhousehold"]
 
   saida <- c(file.path(in_dir, "domicilios_pesos.parquet"), file.path(in_dir, "pessoas_pesos.parquet"))
   arrow::write_parquet(domicilios, saida[1], compression = "zstd", compression_level = 1)
   arrow::write_parquet(pessoas,    saida[2], compression = "zstd", compression_level = 1)
 
-  message("  ", data.table::uniqueN(domicilios$censobr_estrato), " estratos | fator de ",
+  message("  ", data.table::uniqueN(domicilios$censobr_estrato), " estratos | peso de ",
           round(min(domicilios$censobr_weight), 3), " a ", round(max(domicilios$censobr_weight), 3),
-          " (mediana ", round(stats::median(domicilios$censobr_weight), 3), ") | colapsados: ",
+          " (mediana ", round(stats::median(domicilios$censobr_weight), 3), ") | ancora municipal colapsada em ",
           domicilios[censobr_weight_nivel != "municipio x situacao", .N], " domicilios")
 
   rm(domicilios, pessoas); gc(verbose = FALSE)

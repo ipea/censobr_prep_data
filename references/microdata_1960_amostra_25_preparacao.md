@@ -138,15 +138,27 @@ O desenho desta amostra é **outro**, e mais simples que o da amostra de 1,27%. 
 - **`censobr_estrato`** é **pasta × situação**. A seleção foi sistemática dentro do setor, e o setor é, por definição, "área territorial contínua situada num só quadro (urbano, suburbano ou rural), do mesmo distrito administrativo". Toda pasta está num só município, e cruzá-la com `V118` separa as pastas mistas nas suas partes urbana e rural: é a aproximação mais fina do setor que o arquivo permite. Dão **18.400 estratos**, mediana de 193 domicílios; só cinco têm um domicílio.
 - **`censobr_fpc`** é 0,25 em todas as unidades, Fernando de Noronha inclusive, onde o sorteio de um em quatro aconteceu normalmente.
 
-**`censobr_weight`** é razão à contagem completa por **município × situação**, em forma fechada: cada domicílio pertence a exatamente uma célula, o que dispensa o solver de Deville–Särndal que a amostra de 1,27% precisava. A âncora é a **Sinopse Preliminar**, que é a contagem completa e é o que o IBGE declarou ter usado nestas dezessete unidades, refinada do nível de unidade da federação para o de município. O fator vai de 1,18 a 8,02, com mediana 3,95.
+**`censobr_weight`** calibra a **três margens ao mesmo tempo**, por unidade da federação, pelo raking de Deville–Särndal com distância logit — o mesmo solver da amostra de 1,27%, `raking_1960_amostra_127()`, com o fator limitado entre 0,25 e 3 vezes o peso de desenho. As margens:
 
-O colapso tem dois degraus, e o princípio é que **a âncora municipal não se abandona**. A célula de situação vira município inteiro quando o seu fator sai de [2; 8], quando o universo é menor que 100, e também quando o universo tem uma situação que a amostra não alcançou — é o caso de Cristalândia, em Goiás, cujos 2.345 habitantes urbanos não têm um domicílio urbano sorteado. São 9.958 domicílios colapsados. Nenhum desce para a unidade da federação.
+1. **município × situação**, da **Sinopse Preliminar**, que é a contagem completa e a única fonte que desce ao município;
+2. **sexo × onze faixas etárias**, da tabela 33 da **Série Nacional**, os resultados definitivos;
+3. **sabem ler e escrever, de 5 anos e mais, por sexo**, da tabela 40.
 
-**`censobr_weight_ibge`** reproduz o método do IBGE ao pé da letra para estas unidades: razão a unidade da federação × urbana/rural com **peso inteiro** — 3, 4 ou 5 — sorteado com semente fixa para fechar o total. Fecha exato nas dezessete.
+A razão de serem duas fontes é que nenhuma basta. A Sinopse é preliminar e fica de 0,2% a 2,0% acima dos definitivos, com mediana de 1,19%; a Série Nacional é definitiva mas não publica município. Usa-se então **a Sinopse para a forma e a Série Nacional para a escala**: os alvos municipais entram reescalados de modo que somem o total definitivo da unidade. Uma primeira versão deste módulo calibrava só à Sinopse, em forma fechada, e deixava as dezessete unidades daqui 1,2% acima dos definitivos enquanto as onze da amostra de 1,27% ficavam exatas — uma descontinuidade nas fronteiras estaduais do banco compilado. Com as três margens, os dois estágios de 1960 passam a estar na mesma régua.
 
-**Serra dos Aimorés** é a única unidade sem contagem completa. Os tomos de Minas (p. 6) e do Espírito Santo (p. 7–8) excluem a região do litígio dos dois estados, com todas as letras, e não publicam tabela própria para ela. A única publicação que a traz é a Série Nacional, e é a ela que a região calibra — âncora que é estimativa publicada, não contagem completa.
+O peso vai de **1,00 a 11,77**, com mediana **3,93**, e o Newton converge em quatro a oito iterações nas dezessete unidades.
 
-**Dezesseis das dezessete unidades reproduzem a contagem completa dígito a dígito.** A exceção é Mato Grosso, 4.630 pessoas abaixo, e a razão é de cobertura, não de método: **Alto Garças**, com 4.630 habitantes publicados, não tem um único domicílio sorteado na amostra, de modo que a sua população não tem a que se prender. Com o peso do IBGE, que é por estado, ela se distribui pelos demais municípios e o total fecha.
+O colapso da margem municipal tem dois degraus, e o princípio é que **a âncora municipal não se abandona**. A célula de situação vira município inteiro quando o seu fator sai de [2; 8], quando o universo é menor que 100, e também quando o universo tem uma situação que a amostra não alcançou — é o caso de Cristalândia, em Goiás, cujos 2.345 habitantes urbanos não têm um domicílio urbano sorteado. São 9.958 domicílios colapsados, e `censobr_weight_nivel` registra o nível de cada um. Nenhum município fica sem âncora municipal.
+
+Duas células saem do sistema. A margem municipal e a de sexo × idade somam a mesma população, o que torna o Newton singular: sai a **menor célula municipal**, a que menos custa. E sai a faixa de **idade ignorada** da tabela 33, que o arquivo quase não tem — 118 pessoas em Sergipe — contra uma célula publicada grande demais para caber nos limites do fator. Em **Fernando de Noronha**, com 75 domicílios, vinte e duas células de sexo × idade não se sustentam, e a margem demográfica ali é só o total por sexo; é a única unidade em que a regra dispara.
+
+**A circularidade fica dita.** Para estas dezessete unidades as tabelas da Série Nacional foram apuradas com esta mesma amostra: calibrar a elas não traz informação externa, apenas troca a âncora da safra preliminar pela definitiva. Por isso a variância pelos resíduos da calibração, legítima na amostra de 1,27%, aqui daria zero sem significado e não se publica.
+
+**`censobr_weight_ibge`** reproduz o método do IBGE ao pé da letra para estas unidades: razão a unidade da federação × urbana/rural com **peso inteiro** — 3, 4 ou 5 — sorteado com semente fixa para fechar o total da Sinopse. Fecha exato nas dezessete, e é o que mede quanto a calibração nova desloca as margens.
+
+**Serra dos Aimorés** é a única unidade sem contagem completa. Os tomos de Minas (p. 6) e do Espírito Santo (p. 7–8) excluem a região do litígio dos dois estados, com todas as letras, e não publicam tabela própria para ela. A única publicação que a traz é a Série Nacional, e é a ela que a região calibra inteiramente — âncora que é estimativa publicada, não contagem completa.
+
+**Alto Garças, em Mato Grosso**, é o único município das dezessete unidades inteiramente ausente da amostra: 4.630 habitantes publicados e nenhum domicílio sorteado. A causa está no cadastro — a pasta **91008** é a única falha na sequência das 211 pastas de Mato Grosso, e cai exatamente entre Alto Araguaia (91006) e Guiratinga (91010 e seguintes); 4.630 habitantes divididos por 4,9 moradores e por quatro dão cerca de 236 domicílios, que é uma pasta. Perdeu-se uma pasta inteira. Com a margem de unidade da federação o total de Mato Grosso fecha, porque essa população se redistribui pelos demais municípios — contada, mas no lugar errado. Não se estima nada para Alto Garças.
 
 ---
 
@@ -154,17 +166,23 @@ O colapso tem dois degraus, e o princípio é que **a âncora municipal não se 
 
 As cinco tabelas por unidade da federação da Série Nacional, vol. I — condição de presença (32), idade por sexo (33), situação do domicílio (34), cor (37) e alfabetização de 5 anos e mais (40) — reproduzidas com os dois pesos:
 
-| tabela | erro mediano | erro máximo |
-|---|---|---|
-| 32 condição de presença | 1,22% | 2,04% |
-| 33 idade × sexo | 1,23% | 20,0% |
-| 34 situação | 1,23% | 2,27% |
-| 37 cor | 1,30% | 8,33% |
-| 40 alfabetização | 1,12% | 3,11% |
+| tabela | células | `censobr_weight` mediano / máximo | `censobr_weight_ibge` mediano / máximo |
+|---|---|---|---|
+| 32 condição de presença | 68 | **0,003%** / 0,31% | 1,22% / 2,17% |
+| 33 idade × sexo | 405 | **0,000%** / 16,0% | 1,17% / 20,0% |
+| 34 situação | 66 | **0,288%** / 1,11% | 1,27% / 5,01% |
+| 37 cor | 166 | **0,132%** / 12,0% | 1,20% / 12,2% |
+| 40 alfabetização | 102 | **0,137%** / 1,04% | 1,06% / 3,27% |
 
-O erro mediano de cerca de 1,2% é **sistemático e esperado**: é a distância entre a Sinopse Preliminar, que é a âncora da calibração, e os resultados definitivos que a Série Nacional publica — a mesma distância de 0,56% a 2% por unidade que o arquivo municipal já mostrava. Os erros máximos estão todos em Fernando de Noronha e na Serra dos Aimorés, em células de quatro ou cinco pessoas: é arredondamento, não método.
+As duas colunas medem coisas diferentes, e a diferença entre elas é o ponto.
 
-Há uma circularidade a declarar: para estas dezessete unidades as tabelas da Série Nacional **foram apuradas com esta mesma amostra**, com o método que `censobr_weight_ibge` reproduz. Então a comparação com `censobr_weight_ibge` mede o quanto a nossa leitura difere da do IBGE, e a comparação com `censobr_weight` mede quanto o refinamento municipal desloca as margens. As duas dão o mesmo resultado, o que é a notícia boa.
+`censobr_weight_ibge` erra **1,2% em todas as tabelas**, e esse erro é sistemático e esperado: é a distância entre a Sinopse Preliminar, que é a âncora daquele peso, e os resultados definitivos que a Série Nacional publica — a mesma distância de 0,2% a 2,0% por unidade que o arquivo municipal já mostrava, e o viés que a calibração nova existe para remover.
+
+`censobr_weight` erra **0,003% na condição de presença e 0,000% na idade por sexo**, porque são margens da calibração, e erra 0,13% na cor e 0,14% na alfabetização, que **não são**. Esse resíduo pequeno em tabelas não calibradas é a evidência de que a leitura do arquivo está certa: nada obriga a cor a fechar, e ela fecha.
+
+A situação (tabela 34) fica em 0,29%, e é por construção: a margem municipal vem da Sinopse, cujo corte urbano/rural difere ligeiramente do da Série Nacional. Reproduzimos a **participação** de cada município no estado, tal como a Sinopse a mediu, e o nível total, tal como os definitivos o fixaram; a diferença entre as duas leituras do corte urbano/rural aparece aqui. Os erros máximos continuam todos em Fernando de Noronha e na Serra dos Aimorés, em células de quatro ou cinco pessoas: é arredondamento.
+
+Há uma circularidade a declarar: para estas dezessete unidades as tabelas da Série Nacional **foram apuradas com esta mesma amostra**, com o método que `censobr_weight_ibge` reproduz. Calibrar a elas, portanto, não acrescenta informação — troca a âncora preliminar pela definitiva, que é o que alinha os dois estágios de 1960 — e a variância pelos resíduos da calibração não se publica aqui.
 
 **O teste corrigiu um erro nosso.** A tabela 37 publica cinco categorias de cor, e "sem declaração" é apenas o ignorado (`V206` = 9): em Mato Grosso o publicado dá 139 e o nosso código 9 dá 138. O código 8, *índia*, tinha sido posto ali e pertence a *pardos*, que é onde o censo de 1960 o classificava. Antes da correção aquela célula errava 4.521%; depois, o erro máximo da tabela inteira cai para 8,3%.
 
@@ -182,17 +200,17 @@ $$V(\hat Y) = \sum_h (1 - f)\,\frac{n_h}{n_h - 1}\sum_{i \in h}\left(w_i y_i - \
 
 | domínio | estimativa | erro-padrão | CV | efeito de desenho |
 |---|---|---|---|---|
-| pessoas | 58.638.580 | 16.035 | 0,027% | — |
-| presentes | 57.948.156 | 15.886 | 0,027% | — |
-| urbana | 25.941.017 | 10.785 | 0,042% | 2,74 |
-| rural | 32.007.139 | 11.664 | 0,036% | 3,19 |
-| analfabetos de 15 anos e mais | 13.520.687 | 6.755 | 0,050% | 1,49 |
-| crianças de 0 a 4 anos | 7.413.679 | 4.994 | 0,067% | 1,31 |
-| pessoas com rendimento | 36.687.921 | 11.478 | 0,031% | 3,27 |
+| pessoas | 57.989.910 | 15.767 | 0,027% | — |
+| presentes | 57.304.420 | 15.619 | 0,027% | — |
+| urbana | 25.649.415 | 10.570 | 0,041% | 2,69 |
+| rural | 31.655.005 | 11.499 | 0,036% | 3,17 |
+| analfabetos de 15 anos e mais | 13.349.995 | 6.617 | 0,050% | 1,47 |
+| crianças de 0 a 4 anos | 7.332.459 | 4.940 | 0,067% | 1,31 |
+| pessoas com rendimento | 36.270.721 | 11.264 | 0,031% | 3,22 |
 
 Os coeficientes de variação ficam entre 0,027% e 0,067%: **uma amostra de um domicílio em quatro, com 3,07 milhões de domicílios, é extraordinariamente precisa**. Para comparação, a amostra de 1,27% tem coeficientes de variação de 1% a 3% nos mesmos domínios — é vinte vezes menor e sofre um segundo estágio de conglomeração.
 
-Os efeitos de desenho ficam entre 1,31 e 3,27, acima de um como se esperava, porque o domicílio entra inteiro ou não entra: pessoas do mesmo domicílio se parecem, e isso custa precisão. Em domínios que são quase toda a população o efeito de desenho perde sentido — o denominador tende a zero — e fica ausente.
+Os efeitos de desenho ficam entre 1,31 e 3,22, acima de um como se esperava, porque o domicílio entra inteiro ou não entra: pessoas do mesmo domicílio se parecem, e isso custa precisão. Em domínios que são quase toda a população o efeito de desenho perde sentido — o denominador tende a zero — e fica ausente.
 
 Essa precisão é do **desenho**, e não cobre o erro de cobertura nem o de transcrição. A seção 9 mostra que o segundo não é desprezível.
 
@@ -228,26 +246,26 @@ As variáveis substantivas divergem muito mais, e a divergência é **entre as d
 
 | uf60 | domicílios | pessoas | pastas | municípios | estratos | expandido | fator |
 |---|---|---|---|---|---|---|---|
-| 14 Ceará | 157.889 | 850.533 | 706 | 142 | 1.087 | 3.337.856 | 3,982 |
-| 17 Rio Grande do Norte | 59.421 | 305.939 | 266 | 83 | 382 | 1.157.258 | 3,837 |
-| 19 Paraíba | 102.220 | 535.250 | 461 | 88 | 638 | 2.018.023 | 3,821 |
-| 21 Pernambuco | 221.756 | 1.080.408 | 968 | 102 | 1.283 | 4.136.900 | 3,882 |
-| 24 Fernando de Noronha | 75 | 307 | 1 | 1 | 1 | 1.319 | 4,441 |
-| 25 Alagoas | 68.139 | 329.454 | 300 | 69 | 396 | 1.271.062 | 3,904 |
-| 30 Sergipe | 44.059 | 209.544 | 195 | 62 | 257 | 760.273 | 3,668 |
-| 31 Bahia | 313.602 | 1.597.093 | 1.392 | 194 | 2.034 | 5.990.605 | 3,796 |
-| 40 Minas Gerais | 489.505 | 2.494.671 | 2.229 | 483 | 3.283 | 9.790.783 | 3,971 |
+| 14 Ceará | 157.889 | 850.533 | 706 | 142 | 1.087 | 3.289.658 | 3,924 |
+| 17 Rio Grande do Norte | 59.421 | 305.939 | 266 | 83 | 382 | 1.140.803 | 3,782 |
+| 19 Paraíba | 102.220 | 535.250 | 461 | 88 | 638 | 1.991.093 | 3,770 |
+| 21 Pernambuco | 221.756 | 1.080.408 | 968 | 102 | 1.283 | 4.080.479 | 3,829 |
+| 24 Fernando de Noronha | 75 | 307 | 1 | 1 | 1 | 1.346 | 4,532 |
+| 25 Alagoas | 68.139 | 329.454 | 300 | 69 | 396 | 1.256.133 | 3,858 |
+| 30 Sergipe | 44.059 | 209.544 | 195 | 62 | 257 | 751.780 | 3,627 |
+| 31 Bahia | 313.602 | 1.597.093 | 1.392 | 194 | 2.034 | 5.918.981 | 3,751 |
+| 40 Minas Gerais | 489.505 | 2.494.671 | 2.229 | 483 | 3.283 | 9.698.082 | 3,934 |
 | 50 Serra dos Aimorés | 17.705 | 98.908 | 74 | 1 | 75 | 382.794 | 3,885 |
-| 52 Rio de Janeiro | 178.824 | 878.115 | 764 | 61 | 997 | 3.402.728 | 3,916 |
-| 60 São Paulo | 740.936 | 3.319.710 | 3.140 | 503 | 3.877 | 12.974.699 | 3,954 |
-| 71 Paraná | 224.179 | 1.111.227 | 945 | 162 | 1.293 | 4.272.847 | 3,876 |
-| 81 Rio Grande do Sul | 293.054 | 1.409.136 | 1.265 | 150 | 1.761 | 5.448.823 | 3,909 |
-| 91 Mato Grosso | 45.199 | 227.936 | 211 | 63 | 324 | 905.582 | 4,033 |
-| 94 Goiás | 95.005 | 500.664 | 456 | 179 | 674 | 1.954.862 | 3,959 |
-| 97 Distrito Federal | 14.797 | 34.874 | 38 | 1 | 38 | 141.742 | 4,121 |
-| **total** | **3.066.365** | **14.983.769** | **13.411** | **2.344** | **18.400** | **57.948.156** | |
+| 52 Rio de Janeiro | 178.824 | 878.115 | 764 | 61 | 997 | 3.367.681 | 3,875 |
+| 60 São Paulo | 740.936 | 3.319.710 | 3.140 | 503 | 3.877 | 12.823.757 | 3,908 |
+| 71 Paraná | 224.179 | 1.111.227 | 945 | 162 | 1.293 | 4.263.738 | 3,868 |
+| 81 Rio Grande do Sul | 293.054 | 1.409.136 | 1.265 | 150 | 1.761 | 5.388.615 | 3,865 |
+| 91 Mato Grosso | 45.199 | 227.936 | 211 | 63 | 324 | 892.237 | 3,974 |
+| 94 Goiás | 95.005 | 500.664 | 456 | 179 | 674 | 1.917.450 | 3,883 |
+| 97 Distrito Federal | 14.797 | 34.874 | 38 | 1 | 38 | 139.793 | 4,064 |
+| **total** | **3.066.365** | **14.983.769** | **13.411** | **2.344** | **18.400** | **57.304.420** | |
 
-O fator realizado — universo dividido por presentes na amostra — vai de **3,668 em Sergipe a 4,441 em Fernando de Noronha**, com 3,915 no conjunto. Não é 4: a fração realizada nunca foi exatamente um em quatro, e o volume de 1965 já dizia "aproximadamente 25%".
+O fator realizado — população expandida dividida por presentes na amostra — vai de **3,627 em Sergipe a 4,532 em Fernando de Noronha**, com 3,870 no conjunto. Não é 4: a fração realizada nunca foi exatamente um em quatro, e o volume de 1965 já dizia "aproximadamente 25%". A coluna de expandido é, agora, a população presente que a Série Nacional publica para cada unidade — a calibração fecha nela por construção.
 
 ---
 
@@ -270,16 +288,17 @@ Os intermediários de cada passo ficam ao lado, para auditoria: `familias.parque
 4. **O ignorado fica com o código do dicionário**, inclusive o `00` de cômodos e o `000` de dormitórios. Não se cria coluna de marca para o que o *Código do Censo* já documenta.
 5. **Três correções de código de município**: Alagoas −200, Fernando de Noronha 2701→2401, Distrito Federal 9701→9700.
 6. **O estrato é pasta × situação** e a unidade primária é o domicílio, com correção finita de 1/4.
-7. **Dois pesos**: `censobr_weight`, calibrado por município × situação à contagem completa, e `censobr_weight_ibge`, que reproduz o método publicado do IBGE.
+7. **Dois pesos**: `censobr_weight`, calibrado a três margens — município × situação da Sinopse, sexo × idade e alfabetização dos resultados definitivos — pelo raking de Deville–Särndal, e `censobr_weight_ibge`, que reproduz o método publicado do IBGE.
 8. **A âncora municipal não se abandona no colapso** — o município sobe no máximo ao seu próprio total.
 9. **Serra dos Aimorés calibra à Série Nacional**, por não ter contagem completa, e isso fica documentado.
+10. **A escala vem dos resultados definitivos, a forma municipal vem da Sinopse.** É o que põe as dezessete unidades daqui na mesma régua das onze da amostra de 1,27%, e o que remove o viés de 1,2% que a âncora preliminar deixava.
 
 ---
 
 ## 13. Em aberto
 
 - **O nome do distrito falta em 4,6% dos domicílios.** `code_district_1960` está correto em 100% dos registros; o que falta é traduzir código em nome para 715 pares município–distrito que o *Código de Zonas Fisiográficas, Municípios e Distritos* traz impressos e que ninguém transcreveu. O livro são 313 páginas de scan sem camada de texto, e o método de leitura está em [`references/folha_contato_codigo_1960.py`](folha_contato_codigo_1960.py), com o que falta listado em [`read_guides/1960_amostra_25_distritos_pendentes.csv`](../read_guides/1960_amostra_25_distritos_pendentes.csv). Quatro atalhos foram testados e descartados: a regra de sequência dos códigos vale em 69% dos municípios; a divisão territorial de 2022 impõe grafia moderna e desconhece distrito extinto; a Sinopse Preliminar tem camada de texto tão danificada quanto; e a divisão territorial de **1970** erra 18% dos pares, porque os códigos foram reaproveitados — em Alto Paraná o 07 era Sumaré em 1960 e Socavão em 1970.
-- **Alto Garças (Mato Grosso), 4.630 habitantes, não tem domicílio sorteado.** É buraco de cobertura da amostra.
+- **Alto Garças (Mato Grosso), 4.630 habitantes, não tem domicílio sorteado** — a pasta 91008 é a única falha na sequência das 211 pastas do estado, e é uma pasta inteira que se perdeu. A margem da unidade da federação redistribui essa população pelos demais municípios, de modo que o total do estado fecha; não se estima nada para Alto Garças.
 - **O desacordo com a amostra de 1,27%** nas variáveis do domicílio — 8,65% no tipo de construção — fica medido e não resolvido. É assunto da compilação.
 - **O dígito verificador não serve de teste.** Há 5.371 registros de pessoa com ele em branco, e nove esquemas de verificação foram testados sem que nenhum passasse de 10,9% de acerto, que é o acaso.
 - **A compilação das duas amostras** é um estágio à parte, e é ela que produzirá o que o `censobr` distribui.
