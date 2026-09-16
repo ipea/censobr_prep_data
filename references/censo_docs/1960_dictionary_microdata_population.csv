@@ -1,0 +1,913 @@
+tipo_linha,variavel,rotulo,codigo,descricao
+secao,VARIÁVEIS GEOGRÁFICAS,,,
+codigo,code_region,Código da Região de hoje,Valor,
+codigo,,,,"Não aplicável - a Serra dos Aimorés era a região em litígio entre Minas Gerais e o Espírito Santo, recenseada como unidade à parte, e não tem correspondente de hoje"
+codigo,name_region,Nome da Região de hoje,Texto,
+codigo,,,,"Não aplicável - a Serra dos Aimorés era a região em litígio entre Minas Gerais e o Espírito Santo, recenseada como unidade à parte, e não tem correspondente de hoje"
+codigo,code_state,"Código da Unidade da Federação de hoje. A Guanabara entra como Rio de Janeiro (33) e Fernando de Noronha como Pernambuco (26), porque é esse o território delas hoje",Valor,
+codigo,,,,"Não aplicável - a Serra dos Aimorés era a região em litígio entre Minas Gerais e o Espírito Santo, recenseada como unidade à parte, e não tem correspondente de hoje"
+codigo,abbrev_state,Sigla da Unidade da Federação de hoje,Texto,
+codigo,,,,"Não aplicável - a Serra dos Aimorés era a região em litígio entre Minas Gerais e o Espírito Santo, recenseada como unidade à parte, e não tem correspondente de hoje"
+codigo,name_state,Nome da Unidade da Federação de hoje,Texto,
+codigo,,,,"Não aplicável - a Serra dos Aimorés era a região em litígio entre Minas Gerais e o Espírito Santo, recenseada como unidade à parte, e não tem correspondente de hoje"
+codigo,code_muni,"Código do Município no padrão de hoje, de sete dígitos, o mesmo de 1991 a 2022. Pelo crosswalk de read_guides/1960_municipios.csv",Valor,
+codigo,,,,"Não aplicável - a Serra dos Aimorés era a região em litígio entre Minas Gerais e o Espírito Santo, recenseada como unidade à parte, e não tem correspondente de hoje"
+codigo,situacao,"Situação do domicílio, agregando o quadro urbano e o suburbano",urbana,Quadro urbano ou suburbano (V118 = 1 ou 3)
+codigo,,,rural,Quadro rural (V118 = 5)
+codigo,code_muni_1960,Código do Município na Divisão Territorial Brasileira de 1960,Valor,
+codigo,name_muni_1960,Nome do Município em 1960,Texto,
+codigo,code_district_1960,"Código do Distrito no Código de Zonas Fisiográficas, Municípios e Distritos de 1960",Valor,
+codigo,name_district_1960,Nome do Distrito em 1960,Texto,
+codigo,,,,Nome não transcrito: restam 720 pares município-distrito que o Código traz impressos e cuja leitura visual não foi feita
+codigo,name_bairro_1960,"Bairro. Só na Guanabara, onde o censo codificou a cidade por bairro em vez de por distrito",Texto,
+codigo,,,,Não aplicável - as demais unidades da federação
+codigo,name_region_1960,Região em que os volumes do Censo de 1960 publicam os resultados,Norte,
+codigo,,,Nordeste,
+codigo,,,Leste,
+codigo,,,Sul,
+codigo,,,Centro-Oeste,
+codigo,code_state_1960,Código da Unidade da Federação no padrão do IBGE em 1960: a Guanabara é 34 e Fernando de Noronha é 20,Valor,
+codigo,,,,"Não aplicável - a Serra dos Aimorés era a região em litígio entre Minas Gerais e o Espírito Santo, recenseada como unidade à parte, e não tem correspondente de hoje"
+codigo,abbrev_state_1960,Sigla da Unidade da Federação em 1960,Texto,
+codigo,,,,"Não aplicável - a Serra dos Aimorés era a região em litígio entre Minas Gerais e o Espírito Santo, recenseada como unidade à parte, e não tem correspondente de hoje"
+codigo,name_state_1960,"Nome da Unidade da Federação em 1960, como a Série Nacional o publica",Texto,
+secao,VARIÁVEIS DE IDENTIFICAÇÃO DO REGISTRO,,,
+codigo,censobr_idperson,ID único da pessoa no Censo de 1960. Refeito na compilação: UF × 10.000.000 + sequência dentro da unidade da federação,Valor,
+codigo,censobr_idfamily,"ID único da família no Censo de 1960. O Boletim de Amostra era por família, não por domicílio",Valor,
+codigo,censobr_idhousehold,ID único do domicílio no Censo de 1960. É a chave para juntar esta tabela à de domicílios,Valor,
+codigo,censobr_amostra,"De qual das duas amostras do Censo de 1960 o registro vem. A de 1,27% cobre as onze unidades da federação em que os microdados da de 25% não sobreviveram; nas outras dezessete ela é subamostra daquela, e por isso não entra",25%,"Registro advindo da amostra de 25%, o Boletim de Amostra de um domicílio em cada quatro"
+codigo,,,"1,27%","Registro advindo da amostra de 1,27%, a subamostra de uma pasta em vinte sorteada em 1965"
+codigo,censobr_tipo_unidade,"Espécie da unidade recenseada, derivada de V101",domicilio particular,"V101 = 1, 2, 4 ou 5"
+codigo,,,domicilio coletivo,V101 = 3
+codigo,,,boletim individual,"V101 = 9. Morador de domicílio coletivo recenseado pessoa a pessoa pela Lista CD 3, com as variáveis do domicílio em branco por construção. Não ocorre na amostra de 1,27%"
+codigo,v001,"Pasta. O lote de trabalho de cerca de 250 Boletins de Amostra, numerado num cadastro nacional, e a unidade sorteada na amostra de 1,27%",Valor,
+codigo,v002,Boletim de Amostra dentro da pasta,Valor,
+codigo,v003,Identificação: tipo de registro e numeração das pessoas dentro do domicílio,Valor,
+codigo,,,,"Informação faltante - Amostra de 1,27%"
+codigo,v004,Dígito verificador,Valor,
+codigo,,,,"Informação faltante - Amostra de 1,27%"
+secao,CARACTERÍSTICAS DO DOMICÍLIO,,,
+codigo,V101,Espécie do Domicílio,1,Domicílio Particular Único
+codigo,,,2,Domicílio Particular 1ª Família
+codigo,,,3,Domicílio Coletivo
+codigo,,,4,Domicílio Particular 2ª Família
+codigo,,,5,Domicílio Particular 3ª Família
+codigo,,,9,Boletim Individual
+codigo,,,,"Nas famílias conviventes (códigos 4 e 5) a página do domicílio, V102 a V113, vem em branco: o censo a perguntou uma vez só, no boletim da família principal"
+codigo,V102,Tipo do Domicílio,4,Durável
+codigo,,,5,Rústico
+codigo,,,6,Improvisado
+codigo,,,7,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V103,Condição de Ocupação,7,Próprio
+codigo,,,8,Alugado
+codigo,,,9,Outra
+codigo,,,0,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V104,"Aluguel Mensal, em cruzeiros de 1960",0,Até Cr$ 500
+codigo,,,1,de Cr$ 500 a 1.000
+codigo,,,2,de Cr$ 1.001 a 2.000
+codigo,,,3,de Cr$ 2.001 a 4.000
+codigo,,,4,de Cr$ 4.001 a 6.000
+codigo,,,5,de Cr$ 6.001 a 10.000
+codigo,,,6,de Cr$ 10.001 a 20.000
+codigo,,,7,de Cr$ 20.001 e Mais
+codigo,,,8,não Paga Aluguel
+codigo,,,9,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V105,Abastecimento de Água,9,Rede Geral com Canalização Interna
+codigo,,,0,Rede Geral com Canalização Externa
+codigo,,,1,Poço/Nascente com canalização
+codigo,,,2,Poço/Nascente sem canalização
+codigo,,,3,Outra forma de abastecimento
+codigo,,,4,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V106,Instalação Sanitária,4,Rede de Esgoto
+codigo,,,5,Fossa Asséptica
+codigo,,,6,Fossa Rudimentar
+codigo,,,7,Outro Escoadouro
+codigo,,,8,não Tem
+codigo,,,9,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V107,Fogão,9,Lenha
+codigo,,,0,Carvão
+codigo,,,1,Elétrico
+codigo,,,2,Gás
+codigo,,,3,Óleo/Querosene
+codigo,,,4,não Tem
+codigo,,,5,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V108,Iluminação Elétrica,5,Tem
+codigo,,,6,não Tem
+codigo,,,7,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V109,Rádio,7,Tem
+codigo,,,8,não Tem
+codigo,,,9,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V110,Geladeira,9,Tem
+codigo,,,0,não Tem
+codigo,,,1,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V111,Televisão,1,Tem
+codigo,,,2,não Tem
+codigo,,,3,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V112,Total de Cômodos,Valor,
+codigo,,,0,"Não havendo indicação do número total de cômodos (código do próprio questionário, Código do Censo, p. 25)"
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V113,Peças Servindo de Dormitório,Valor,
+codigo,,,0,"Não havendo indicação do número de peças servindo de dormitório (código do próprio questionário, Código do Censo, p. 25)"
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+secao,VARIÁVEIS GEOGRÁFICAS DO QUESTIONÁRIO,,,
+codigo,UF,"Unidade da Federação, no código do próprio Censo de 1960",0,Rondônia
+codigo,,,1,Acre
+codigo,,,2,Amazonas
+codigo,,,3,Roraima
+codigo,,,4,Pará
+codigo,,,6,Amapá
+codigo,,,10,Maranhão
+codigo,,,12,Piauí
+codigo,,,14,Ceará
+codigo,,,17,Rio Grande do Norte
+codigo,,,19,Paraíba
+codigo,,,21,Pernambuco
+codigo,,,24,Fernando de Noronha
+codigo,,,25,Alagoas
+codigo,,,30,Sergipe
+codigo,,,31,Bahia
+codigo,,,40,Minas Gerais
+codigo,,,50,Serra dos Aimorés
+codigo,,,51,Espírito Santo
+codigo,,,52,Rio de Janeiro
+codigo,,,54,Guanabara
+codigo,,,60,São Paulo
+codigo,,,71,Paraná
+codigo,,,74,Santa Catarina
+codigo,,,81,Rio Grande do Sul
+codigo,,,91,Mato Grosso
+codigo,,,94,Goiás
+codigo,,,97,Distrito Federal
+codigo,V116,"Código do Município no padrão do Censo de 1960, como o arquivo o traz, sem as correções aplicadas em code_muni_1960",Valor,
+codigo,V117,"Distrito, no código do questionário",Valor,
+codigo,V118,"Situação de moradia, no código do questionário",1,Urbana
+codigo,,,3,Suburbana
+codigo,,,5,Rural
+secao,VARIÁVEIS DE IDENTIFICAÇÃO BÁSICA,,,
+codigo,V202,Sexo e condição de presença,1,Homem Presente
+codigo,,,2,Mulher Presente
+codigo,,,3,Homem Ausente
+codigo,,,4,Mulher Ausente
+codigo,,,5,Homem não Morador
+codigo,,,6,Mulher não Morador
+codigo,V203,Relação Com Chefe,7,Chefe
+codigo,,,8,Cônjuge
+codigo,,,9,Filho Ou Enteado
+codigo,,,0,Neto
+codigo,,,1,Pais e Sogros
+codigo,,,2,Outros Parentes
+codigo,,,3,Agregado
+codigo,,,4,"Hóspede, pensionista ou Empregado Doméstico"
+codigo,,,5,Ignorado
+codigo,,,6,Boletim Individual
+codigo,V204,Tipo de Idade - Meses Ou Anos,0,Meses
+codigo,,,1,Anos
+codigo,,,5,Idade acima de 99 anos (os valores da V204B indicam os dois últimos caracteres da idade)
+codigo,,,9,Ignorado (a variável V204B indica necessariamente 999)
+codigo,V204B,Idade Meses/Anos,Valor,"Idade Em Meses (0-11), Se V204 = 0"
+codigo,,,,"Idade Em Anos (1-99), Se V204 = 1"
+codigo,,,,"Últimos Dois Dígitos da Idade Em Anos, Para Pessoas Com Mais de 99 Anos, Se V204 = 5"
+codigo,V205,Religião,5,Católica Romana
+codigo,,,6,Protestante
+codigo,,,7,Espírita
+codigo,,,8,Budista
+codigo,,,9,Israelita
+codigo,,,0,Ortodoxa
+codigo,,,1,Maometana
+codigo,,,2,Outra Religião
+codigo,,,3,Sem Religião
+codigo,,,4,Ignorado
+codigo,V206,Cor,4,Branca
+codigo,,,5,Preta
+codigo,,,6,Amarela
+codigo,,,7,Parda
+codigo,,,8,Índia
+codigo,,,9,Ignorado
+secao,MIGRAÇÃO,,,
+codigo,V207,Naturalidade: unidade da federação ou país de nascimento,01,Acre
+codigo,,,02,Alagoas
+codigo,,,03,Amapá
+codigo,,,04,Amazonas
+codigo,,,05,Bahia
+codigo,,,06,Distrito Federal (Brasília)
+codigo,,,07,Ceará
+codigo,,,08,Espírito Santo
+codigo,,,09,Rio de Janeiro (Estado)
+codigo,,,10,Fernando de Noronha
+codigo,,,11,Goiás
+codigo,,,12,"Guanabara (Rio de Janeiro, antigo Distrito Federal)"
+codigo,,,13,Rondônia (Guaporé)
+codigo,,,14,Maranhão
+codigo,,,15,Mato Grosso
+codigo,,,16,Minas Gerais
+codigo,,,17,Pará
+codigo,,,18,Paraíba
+codigo,,,19,Paraná
+codigo,,,20,Pernambuco
+codigo,,,21,Piauí
+codigo,,,22,Rio Branco
+codigo,,,23,Rio Grande do Norte
+codigo,,,24,Rio Grande do Sul
+codigo,,,25,Santa Catarina
+codigo,,,26,São Paulo
+codigo,,,27,Sergipe
+codigo,,,28,Serra dos Aimorés (região em litígio)
+codigo,,,29,Brasileiro nato sem declaração da Unidade da Federação
+codigo,,,99,"Estrangeiro ou naturalizado sem declaração do país, ou nascido a bordo"
+codigo,,,30,Açores
+codigo,,,31,África do Sul
+codigo,,,32,Alemanha (Ocidental e Oriental)
+codigo,,,33,"Outros países da África (Argélia, Cabo Verde, Camarões, Congo, Costa do Marfim, Daomé, Eritreia etc.)"
+codigo,,,34,Argentina
+codigo,,,35,"URSS (inclusive Armênia, Bessarábia, Estônia, Geórgia, Letônia, Lituânia, Rússia e Ucrânia)"
+codigo,,,36,Austrália
+codigo,,,37,Áustria
+codigo,,,38,Bélgica
+codigo,,,39,Bolívia
+codigo,,,40,Bulgária
+codigo,,,41,Canadá
+codigo,,,42,Chile
+codigo,,,43,China
+codigo,,,44,Síria
+codigo,,,45,Colômbia
+codigo,,,46,Coréia
+codigo,,,47,Costa Rica
+codigo,,,48,Cuba
+codigo,,,49,Dinamarca
+codigo,,,50,Egito (República Árabe Unida)
+codigo,,,51,Equador
+codigo,,,52,"Grã-Bretanha (Inglaterra, Escócia, Irlanda do Norte, Reino Unido)"
+codigo,,,53,Iugoslávia (inclusive Eslovênia)
+codigo,,,54,Espanha
+codigo,,,55,Estados Unidos (inclusive Porto Rico)
+codigo,,,56,Filipinas
+codigo,,,57,Finlândia
+codigo,,,58,França
+codigo,,,59,Grécia
+codigo,,,60,Guatemala
+codigo,,,61,Guiana Inglesa
+codigo,,,62,Guiana Holandesa (Suriname)
+codigo,,,63,Guiana Francesa
+codigo,,,64,Haiti
+codigo,,,65,Holanda
+codigo,,,66,Honduras
+codigo,,,67,Honduras Britânica e outros países da América (ilhas do Caribe)
+codigo,,,68,Hungria
+codigo,,,69,Índia
+codigo,,,70,Irã e outros países da Ásia
+codigo,,,71,Iraque
+codigo,,,72,Irlanda (Eire) e outros países da Europa
+codigo,,,73,Israel
+codigo,,,74,Itália
+codigo,,,75,Jamaica
+codigo,,,76,Japão
+codigo,,,77,Líbano
+codigo,,,78,México
+codigo,,,79,Nicarágua
+codigo,,,80,Nigéria
+codigo,,,81,Noruega
+codigo,,,82,Nova Zelândia e outros países da Oceania
+codigo,,,83,Panamá
+codigo,,,84,Paquistão
+codigo,,,85,Paraguai
+codigo,,,86,Pérsia
+codigo,,,87,Peru
+codigo,,,88,Polônia
+codigo,,,89,Portugal
+codigo,,,90,República Dominicana
+codigo,,,91,Romênia
+codigo,,,92,Salvador
+codigo,,,93,Suécia
+codigo,,,94,Suíça
+codigo,,,95,Tcheco-Eslováquia
+codigo,,,96,Turquia
+codigo,,,97,Uruguai
+codigo,,,98,Venezuela
+codigo,V208,Nacionalidade,9,Brasileiro Nato
+codigo,,,0,Brasil Naturalizado
+codigo,,,1,Estrangeiro
+codigo,V209,Procedência: Urbana Ou Rural (Para pessoas não naturais do município onde habitam),0,Zona Rural de Outro Município
+codigo,,,1,Zona Urbana de Outro Município
+codigo,,,2,Procedência Desconhecida - para pessoas nascidas na UF onde residem ou marcados como não morador presente
+codigo,,,3,Procedência Desconhecida - para pessoas não naturais da UF onde residem
+codigo,V299,Tempo de Imigração,2,Menos de 1 Ano
+codigo,,,3,1 Ano
+codigo,,,4,2 Anos
+codigo,,,5,3 Anos
+codigo,,,6,4 Anos
+codigo,,,7,5 Anos
+codigo,,,8,6 a 10 Anos
+codigo,,,9,11 Anos e Mais
+codigo,,,1,Sem declaração de tempo (naturalidade codificada como 01 ou 31)
+codigo,,,0,Não se aplica - natural da Unidade da Federação onde reside (naturalidade codificada como 20). É o caso de 10.447.845 registros
+codigo,V210,Lugar de residência anterior,00,Natural da Unidade da Federação (quesito I = 20)
+codigo,,,29,"Natural do Brasil, sem resposta"
+codigo,,,99,"Natural do exterior, sem resposta"
+codigo,,,01-98,"Unidade da Federação ou país de residência anterior, pelos códigos do quesito G"
+secao,EDUCAÇÃO (APENAS PARA PESSOAS COM 5 ANOS OU MAIS),,,
+codigo,V211,Alfabetização,0,Lê e Frequenta Escola
+codigo,,,1,Lê e não Frequenta Escola
+codigo,,,2,não Lê e Frequenta Escola
+codigo,,,3,não Lê e não Frequenta Escola
+codigo,,,4,Ignorada
+codigo,,,,Não aplicável (4 anos de idade ou menos) ou Informação Faltante (Registro Corrompido)
+codigo,V212,Última Série Concluída,4,Primeira Série
+codigo,,,5,Segunda Série
+codigo,,,6,Terceira Série
+codigo,,,7,Quarta Série
+codigo,,,8,Quinta Série
+codigo,,,9,Sexta Série
+codigo,,,0,Está cursando o Primeiro ano do Elementar (não possui série concluída)
+codigo,,,1,Nunca Frequentou Escola
+codigo,,,2,Ignorado
+codigo,,,,Não aplicável (4 anos de idade ou menos) ou Informação Faltante (Registro Corrompido)
+codigo,V213,Grau do Curso,2,Elementar (Primário)
+codigo,,,3,Médio Primeiro Ciclo (Ginasial)
+codigo,,,4,"Médio Segundo Ciclo (Secundário, Científico etc.)"
+codigo,,,5,Superior
+codigo,,,6,Ignorado
+codigo,,,1,Nunca Frequentou Escola
+codigo,,,0,Está cursando o Primeiro ano do Elementar (não possui série concluída)
+codigo,,,,Não aplicável (4 anos de idade ou menos) ou Informação Faltante (Registro Corrompido)
+codigo,V214,Curso completo,X,Menor de 10 anos (em branco no arquivo)
+codigo,,,00,Prejudicado (sem curso completo)
+codigo,,,99,Ignorado
+codigo,,,89,Curso de grau não determinado
+codigo,,,10,Primário
+codigo,,,11,Comercial
+codigo,,,13,Serviços sanitários
+codigo,,,14,Militar
+codigo,,,15,Agricultura e pecuária
+codigo,,,16,Emendativo
+codigo,,,17,Industrial
+codigo,,,19,Outros
+codigo,,,20,Ginasial
+codigo,,,21,Comercial
+codigo,,,22,Normal ou pedagógico
+codigo,,,24,Militar
+codigo,,,25,Agricultura e pecuária
+codigo,,,26,Emendativo
+codigo,,,27,Industrial
+codigo,,,29,Outros
+codigo,,,40,Colegial (científico e clássico)
+codigo,,,41,Comercial
+codigo,,,42,Normal ou pedagógico
+codigo,,,44,Militar
+codigo,,,45,Agricultura e pecuária
+codigo,,,47,Industrial
+codigo,,,49,Outros
+codigo,,,33,Serviços sanitários
+codigo,,,34,Militar
+codigo,,,36,Educação física
+codigo,,,38,Eclesiástico
+codigo,,,39,Outros
+codigo,,,50,Bacharelado e didática em geografia e história
+codigo,,,51,Bacharelado e didática em história natural
+codigo,,,52,"Bacharelado e didática em letras (clássicas, neolatinas e anglo-germânicas)"
+codigo,,,53,"Bacharelado e didática em matemática, física, química e desenho"
+codigo,,,54,"Bacharelado e didática em outros cursos (astronomia, ciências sociais, filosofia, teologia etc.)"
+codigo,,,57,Belas artes
+codigo,,,60,Medicina
+codigo,,,61,Farmácia
+codigo,,,62,Odontologia
+codigo,,,63,Veterinária
+codigo,,,64,Engenharia
+codigo,,,65,Arquitetura
+codigo,,,66,Química industrial
+codigo,,,67,Direito
+codigo,,,68,Agronomia
+codigo,,,70,"Ciências econômicas, contábeis e atuariais"
+codigo,,,71,Ciências estatísticas
+codigo,,,72,Artes domésticas
+codigo,,,73,Serviços sanitários
+codigo,,,74,Militar
+codigo,,,76,Educação física
+codigo,,,78,Eclesiástico
+codigo,,,79,Outros
+codigo,,,,Não aplicável (9 anos de idade ou menos)
+secao,NUPCIALIDADE (APENAS PARA PESSOAS COM 10 ANOS OU MAIS),,,
+codigo,V215,Estado Conjugal,6,Casamento Civil e Religioso
+codigo,,,7,Somente Casamento Civil
+codigo,,,8,Somente Casamento Religioso
+codigo,,,9,Vivendo Maritalmente
+codigo,,,0,Solteiro
+codigo,,,1,Separado
+codigo,,,2,Desquitado
+codigo,,,3,Divorciado
+codigo,,,4,Viúvo
+codigo,,,5,Ignorado
+codigo,,,,Não aplicável (9 anos de idade ou menos) ou Informação Faltante (Registro Corrompido)
+codigo,V216,Ano do casamento,00,Não tem cônjuge ou não vive em companhia do cônjuge
+codigo,,,01-60,"Ano do casamento, dois últimos algarismos (1901 a 1960)"
+codigo,,,61,Casados no ano de 1900
+codigo,,,62,Casados em ano anterior a 1864
+codigo,,,63,Ignorado
+codigo,,,64-99,"Ano do casamento, dois últimos algarismos (1864 a 1899)"
+codigo,,,,Não aplicável (9 anos de idade ou menos)
+secao,FECUNDIDADE (APENAS PARA PESSOAS COM 10 ANOS OU MAIS - INCLUSIVE HOMENS),,,
+codigo,V217,Filhos Tidos,Valor,
+codigo,,,,Não aplicável (9 anos de idade ou menos) ou Informação Faltante (Registro Corrompido)
+codigo,V218,Filhos Vivos,Valor,
+codigo,,,,Não aplicável (9 anos de idade ou menos) ou Informação Faltante (Registro Corrompido)
+secao,TRABALHO E RENDIMENTO,,,
+codigo,V219,"Rendimentos mensais, em cruzeiros de 1960",5,Até Cr$ 2.100
+codigo,,,6,de Cr$ 2.101 a 3.300
+codigo,,,7,de Cr$ 3.301 a 4.500
+codigo,,,8,de Cr$ 4.501 a 6.000
+codigo,,,9,de Cr$ 6.001 a 10.000
+codigo,,,0,de Cr$ 10.001 a 20.000
+codigo,,,1,de Cr$ 20.001 a 50.000
+codigo,,,2,de Cr$ 50.001 e Mais
+codigo,,,3,não Tem
+codigo,,,4,Ignorado
+codigo,,,,Não aplicável (9 anos de idade ou menos) ou Informação Faltante (Registro Corrompido)
+codigo,V220,Atividade não Econômica,4,Afazeres Domésticos
+codigo,,,5,Estudante
+codigo,,,6,Aposentado
+codigo,,,7,Vive de Rendas
+codigo,,,8,Doença Temporária
+codigo,,,9,Invalidez Permanente
+codigo,,,0,Detento
+codigo,,,1,Sem Ocupação
+codigo,,,2,Ignorado
+codigo,,,3,Prejudicado (Economicamente ativos)
+codigo,,,,Não aplicável (9 anos de idade ou menos) ou Informação Faltante (Registro Corrompido)
+codigo,V221,Ocupação habitual,111,Agricultores (fazendeiros)
+codigo,,,112,Pecuaristas
+codigo,,,113,Avicultores e criadores de pequenos animais
+codigo,,,114,Industriais
+codigo,,,115,Comerciantes
+codigo,,,116,Hoteleiros e donos de pensão
+codigo,,,117,Outros proprietários
+codigo,,,121,"Administradores, diretores e assistentes no serviço público (inclusive cargos eletivos)"
+codigo,,,122,Diretores e gerentes de bancos e companhias de seguros
+codigo,,,123,Administradores e gerentes na agropecuária
+codigo,,,124,"Outros administradores, diretores e gerentes"
+codigo,,,181,Coletores e exatores
+codigo,,,182,Caixas e tesoureiros
+codigo,,,183,Cobradores
+codigo,,,184,Contadores e guarda-livros
+codigo,,,185,Despachantes (regularização de documentos)
+codigo,,,186,Almoxarifes e armazenistas
+codigo,,,187,Datilógrafos
+codigo,,,188,Taquígrafos
+codigo,,,189,Operadores de apuração mecânica
+codigo,,,191,Auxiliares de escritório e de administração em geral
+codigo,,,211,Engenheiros
+codigo,,,212,Arquitetos
+codigo,,,213,Agrimensores e topógrafos
+codigo,,,214,Desenhistas e cartógrafos
+codigo,,,215,Químicos
+codigo,,,216,Farmacêuticos
+codigo,,,217,Práticos de farmácia
+codigo,,,218,Laboratoristas
+codigo,,,221,Agrônomos
+codigo,,,222,Veterinários
+codigo,,,223,Naturalistas
+codigo,,,231,Médicos
+codigo,,,232,Dentistas
+codigo,,,241,Assistentes sociais
+codigo,,,242,Parteiras
+codigo,,,243,Enfermeiros e massagistas
+codigo,,,244,Protéticos
+codigo,,,245,Operadores de raios X e ortopedistas práticos
+codigo,,,251,Matemáticos e físicos
+codigo,,,252,Professores primários
+codigo,,,253,Professores secundários
+codigo,,,254,Professores superiores
+codigo,,,255,Professores sem especificação
+codigo,,,256,"Sociólogos, economistas, atuários e estatísticos"
+codigo,,,257,Inspetores de alunos
+codigo,,,261,Magistrados
+codigo,,,262,"Procuradores, promotores e curadores públicos"
+codigo,,,263,Advogados e defensores públicos
+codigo,,,264,Tabeliães e oficiais de registro
+codigo,,,265,Escrivães e auxiliares de justiça
+codigo,,,271,Religiosos
+codigo,,,281,Escritores e jornalistas
+codigo,,,291,Escultores e pintores
+codigo,,,292,Técnicos de publicidade
+codigo,,,293,Decoradores e cenógrafos
+codigo,,,294,Cinegrafistas
+codigo,,,295,Fotógrafos
+codigo,,,311,Técnicos agrícolas e práticos rurais
+codigo,,,312,Tratoristas
+codigo,,,313,Aradores
+codigo,,,321,"Chacareiros, hortelãos e floricultores"
+codigo,,,322,Jardineiros
+codigo,,,323,Trabalhadores agrícolas e de enxada
+codigo,,,324,Trabalhadores de pecuária
+codigo,,,331,Pescadores
+codigo,,,332,Caçadores
+codigo,,,341,Madeireiros e lenhadores
+codigo,,,342,Carvoeiros (fabricantes)
+codigo,,,343,Seringueiros
+codigo,,,344,Ervateiros
+codigo,,,345,"Apanhadores, descascadores e quebradores de produtos vegetais"
+codigo,,,411,Mineiros
+codigo,,,421,Canteiros e marroeiros
+codigo,,,431,Ocupações relativas à perfuração de poços de petróleo e de gás e trabalhadores afins
+codigo,,,441,Garimpeiros
+codigo,,,511,Modeladores e formistas de metais
+codigo,,,512,Fundidores de metais
+codigo,,,513,Laminadores e trefiladores
+codigo,,,514,Afiadores e amoladores
+codigo,,,521,Estampadores mecânicos
+codigo,,,522,Fresadores e furadores
+codigo,,,523,Torneiros mecânicos
+codigo,,,524,Mecânicos de motor a explosão
+codigo,,,525,"Mecânicos, sem especificação"
+codigo,,,526,Galvanizadores e niqueladores
+codigo,,,527,Soldadores
+codigo,,,528,Caldeireiros
+codigo,,,529,Ferreiros e serralheiros
+codigo,,,531,Lanterneiros de veículos
+codigo,,,532,Rebitadores de metais
+codigo,,,533,Funileiros de metais
+codigo,,,534,Ferradores
+codigo,,,541,Cardadores e penteadores
+codigo,,,542,"Maçaroqueiros, bobinadores e espuladores"
+codigo,,,543,Fiandeiros
+codigo,,,544,Rendeiras
+codigo,,,545,Urdidores e remetedores
+codigo,,,546,Cordoeiros
+codigo,,,547,Tecelões
+codigo,,,548,Tapeceiros
+codigo,,,549,Redeiros
+codigo,,,551,Alvejadores e tintureiros têxteis
+codigo,,,552,Estampadores têxteis
+codigo,,,553,Acabadores de pano
+codigo,,,554,Cerzideiras
+codigo,,,561,Correeiros e seleiros
+codigo,,,562,Curtidores
+codigo,,,571,Alfaiates e costureiras
+codigo,,,572,Bordadeiras
+codigo,,,573,Chapeleiros (de palha)
+codigo,,,574,"Chapeleiros, exclusive de palha"
+codigo,,,575,Sapateiros
+codigo,,,576,Bolseiros e cinteiros
+codigo,,,581,Marceneiros
+codigo,,,582,Carpinteiros
+codigo,,,583,Tanoeiros
+codigo,,,584,Serradores
+codigo,,,585,Estofadores e capoteiros
+codigo,,,586,Colchoeiros
+codigo,,,587,Lustradores de madeira (inclusive móveis)
+codigo,,,591,Eletricistas
+codigo,,,592,Radiotécnicos (consertadores e montadores)
+codigo,,,611,Mestres de obras
+codigo,,,612,Armadores de concreto
+codigo,,,613,Pedreiros
+codigo,,,614,Serventes de pedreiro
+codigo,,,615,Pintores e caiadores
+codigo,,,616,Estucadores
+codigo,,,617,Ladrilheiros e taqueiros
+codigo,,,618,Encanadores
+codigo,,,619,Vidraceiros (colocador de vidros)
+codigo,,,621,Calceteiros e asfaltadores
+codigo,,,622,Calafates
+codigo,,,623,Operadores de máquinas na construção civil
+codigo,,,631,Linguiceiros e salsicheiros
+codigo,,,632,Charqueadores
+codigo,,,633,Magarefes
+codigo,,,634,Manteigueiros e queijeiros
+codigo,,,635,Doceiros e confeiteiros
+codigo,,,636,Macarroneiros e pasteleiros
+codigo,,,637,Padeiros
+codigo,,,638,Farinheiros e moleiros
+codigo,,,639,Ocupações concernentes às usinas e engenhos de açúcar
+codigo,,,641,Ocupações concernentes às destilarias de bebidas
+codigo,,,642,Ocupações concernentes à moagem e torrefação de café
+codigo,,,643,Ocupações concernentes à industrialização do pescado
+codigo,,,651,Linotipistas
+codigo,,,652,Tipógrafos
+codigo,,,653,Clicheristas e gravadores
+codigo,,,654,Impressores
+codigo,,,655,"Revisores, na indústria gráfica"
+codigo,,,656,Encadernadores e cartonadores
+codigo,,,657,Outras ocupações específicas da indústria gráfica
+codigo,,,661,Vidreiros e ampoleiros
+codigo,,,662,Ceramistas e louceiros
+codigo,,,663,Pintores cerâmicos
+codigo,,,664,Oleiros
+codigo,,,671,"Mestres, contramestres e técnicos industriais"
+codigo,,,672,Ourives e relojoeiros
+codigo,,,673,Lapidadores
+codigo,,,674,Vulcanizadores e recauchutadores
+codigo,,,675,Fogueteiros
+codigo,,,676,Outras ocupações técnicas e semi-técnicas no processo de produção
+codigo,,,681,Cesteiros e esteireiros
+codigo,,,682,Vassoureiros
+codigo,,,683,Marmoristas
+codigo,,,684,Charuteiros e cigarreiros
+codigo,,,685,Polidores e esmerilhadores
+codigo,,,686,Pintores a pistola
+codigo,,,687,Maleiros
+codigo,,,688,Foguistas (exclusive embarcação e trem)
+codigo,,,689,Embaladores e expedidores
+codigo,,,711,Açougueiros
+codigo,,,712,Vendedores ambulantes
+codigo,,,713,Balconistas e entregadores
+codigo,,,714,Vendedores de jornais e revistas
+codigo,,,721,Pracistas e viajantes comerciais
+codigo,,,722,Representantes comerciais
+codigo,,,723,Propagandistas
+codigo,,,731,Corretores e agenciadores
+codigo,,,732,Compradores
+codigo,,,733,Leiloeiros
+codigo,,,811,Aviadores civis
+codigo,,,812,Aeromoços
+codigo,,,821,Oficiais de marinha mercante
+codigo,,,822,Mestres de embarcação
+codigo,,,823,Maquinistas de embarcação
+codigo,,,824,Foguistas de embarcação
+codigo,,,825,Marinheiros civis
+codigo,,,826,Taifeiros
+codigo,,,827,Barqueiros e canoeiros
+codigo,,,831,Práticos de porto
+codigo,,,832,Guindasteiros
+codigo,,,833,Estivadores
+codigo,,,841,Agentes de estrada de ferro
+codigo,,,842,Condutores e chefes de trem
+codigo,,,843,Maquinistas
+codigo,,,844,Foguistas de trem
+codigo,,,845,Guarda-freios
+codigo,,,846,Manobreiros e sinaleiros
+codigo,,,851,Motoristas
+codigo,,,852,Trocadores
+codigo,,,853,Motorneiros de bonde
+codigo,,,854,Condutores de bonde
+codigo,,,855,Carroceiros e tropeiros
+codigo,,,861,Inspetores e despachantes nos transportes
+codigo,,,862,Trabalhadores de conservação de rodovias
+codigo,,,863,Trabalhadores de conservação de ferrovias
+codigo,,,871,Agentes postais e telegráficos
+codigo,,,872,Telegrafistas e radiotelegrafistas
+codigo,,,873,Telefonistas
+codigo,,,874,Carteiros
+codigo,,,875,Manipuladores nos Correios e Telégrafos
+codigo,,,876,Guarda-fios
+codigo,,,911,Cozinheiros
+codigo,,,912,Garçons
+codigo,,,913,Amas e copeiras
+codigo,,,921,"Porteiros, faxineiros e ascensoristas de edifícios"
+codigo,,,931,Barbeiros e cabeleireiros
+codigo,,,932,Manicuras e pedicuros
+codigo,,,933,Lavadeiras e engomadeiras
+codigo,,,934,Engraxates
+codigo,,,941,Músicos
+codigo,,,942,"Artistas de cinema, teatro e circo"
+codigo,,,943,Locutores e artistas de rádio e televisão
+codigo,,,944,Operadores de radiodifusão
+codigo,,,945,Operadores cinematográficos
+codigo,,,951,Atletas profissionais
+codigo,,,961,Lavadores de carros
+codigo,,,962,Enceradores
+codigo,,,971,Oficiais e praças das Forças Armadas
+codigo,,,972,Oficiais e praças do Corpo de Bombeiros
+codigo,,,973,Delegados e comissários de polícia
+codigo,,,974,Investigadores e peritos policiais
+codigo,,,975,Guardas civis e inspetores de tráfego
+codigo,,,976,Carcereiros e guardas de presídio
+codigo,,,981,Apontadores e capatazes
+codigo,,,982,Aprendizes
+codigo,,,983,"Contínuos, vigias e serventes"
+codigo,,,984,Guardas sanitários
+codigo,,,985,Inspetores e fiscais
+codigo,,,986,Lixeiros
+codigo,,,987,Lubrificadores
+codigo,,,988,"Operadores de máquinas, exclusive na construção civil"
+codigo,,,989,"Trabalhadores braçais, sem especificação"
+codigo,,,998,Outras ocupações ou ocupações mal definidas
+codigo,,,999,Sem declaração de ocupação
+codigo,,,,Não aplicável (9 anos de idade ou menos e/ou não trabalhou no ano anterior à data do Censo)
+codigo,V223,Ocupação Na Última Semana,2,Mesma Ocupação Declarada na V221
+codigo,,,3,Outra Ocupação
+codigo,,,4,Desempregado
+codigo,,,5,Ignorado
+codigo,,,,Não aplicável (9 anos de idade ou menos e/ou não trabalhou no ano anterior à data do Censo) ou Informação Faltante (Registro Corrompido)
+codigo,V223B,Ramo e classe de atividade,111,Cultura de agave ou sisal
+codigo,,,112,Cultura de algodão
+codigo,,,113,Cultura de arroz
+codigo,,,114,Cultura de banana
+codigo,,,115,Cultura de cacau
+codigo,,,116,Cultura de café
+codigo,,,117,Cultura de cana
+codigo,,,118,Cultura de fumo
+codigo,,,119,Cultura de trigo
+codigo,,,120,Outras culturas não compreendidas nas classes anteriores
+codigo,,,121,Fruticultura (exclusive banana)
+codigo,,,122,Horticultura e floricultura
+codigo,,,123,Silvicultura
+codigo,,,129,Atividades agrícolas mal definidas
+codigo,,,151,Pecuária
+codigo,,,152,Avicultura e cunicultura
+codigo,,,153,Apicultura e sericicultura
+codigo,,,191,Agropecuária
+codigo,,,211,Extração de borracha e gomas não elásticas
+codigo,,,212,Extração de erva-mate
+codigo,,,213,Extração de plantas fibrosas
+codigo,,,214,Extração de frutos e sementes oleaginosas e ceras
+codigo,,,215,Extração de madeiras
+codigo,,,216,Produção de carvão vegetal
+codigo,,,219,Atividades não compreendidas nas classes anteriores ou mal definidas
+codigo,,,251,"Extração e beneficiamento de minerais metálicos e não metálicos (exclusive petróleo, gás natural e carvão de pedra)"
+codigo,,,252,Extração e aparelhamento de pedras e outros materiais de construção
+codigo,,,253,Extração de petróleo e gás natural
+codigo,,,254,Extração de carvão de pedra
+codigo,,,255,Exploração de salinas e fontes hidrominerais
+codigo,,,256,Faiscação e garimpagem
+codigo,,,259,Atividades não compreendidas nas classes anteriores ou mal definidas
+codigo,,,291,Caça
+codigo,,,292,Pesca e piscicultura
+codigo,,,311,Indústrias metalúrgicas
+codigo,,,312,Indústrias mecânicas
+codigo,,,313,Indústrias de material elétrico e de material de comunicações
+codigo,,,314,Indústrias de material de transportes (construção e montagem)
+codigo,,,315,Indústrias de minerais não metálicos (exclusive combustíveis minerais)
+codigo,,,316,Indústrias da borracha
+codigo,,,317,Indústrias do fumo
+codigo,,,318,Indústrias de papel e papelão
+codigo,,,321,Indústrias do mobiliário (inclusive colchoarias)
+codigo,,,322,Indústrias de madeira
+codigo,,,323,"Indústrias de couro, peles e produtos similares (exclusive artigos do vestuário e calçados)"
+codigo,,,324,Indústrias farmacêuticas
+codigo,,,325,Indústrias de plásticos
+codigo,,,326,Indústrias químicas
+codigo,,,327,Indústrias de produtos derivados do petróleo e do carvão (exclusive produção de gás de iluminação)
+codigo,,,328,Indústrias têxteis
+codigo,,,331,Indústrias domiciliárias têxteis
+codigo,,,332,Indústrias domiciliárias de artigos de palha
+codigo,,,333,Indústrias do vestuário
+codigo,,,334,Indústrias do calçado
+codigo,,,335,Indústrias de produtos alimentares e estimulantes
+codigo,,,336,Indústrias de bebidas e álcoois
+codigo,,,337,Indústrias editoriais e gráficas
+codigo,,,339,Atividades não compreendidas nas classes anteriores ou mal definidas
+codigo,,,351,Construção civil
+codigo,,,391,Produção de energia elétrica e gás
+codigo,,,392,Abastecimento d'água e serviços de esgoto
+codigo,,,411,Comércio de animais vivos e matérias-primas (exclusive aves para alimentação)
+codigo,,,412,"Comércio de gêneros alimentícios, bebidas e estimulantes"
+codigo,,,413,"Comércio de tecidos e produtos afins, calçados, artigos do vestuário e armarinho"
+codigo,,,414,"Comércio de móveis, tapeçarias, objetos de arte e ornamentação"
+codigo,,,415,"Comércio de papel, impressos e artigos de escritório"
+codigo,,,416,"Comércio de ferragens, louças, materiais de construção e produtos metalúrgicos"
+codigo,,,417,"Comércio de máquinas, aparelhos, instrumentos, material elétrico, veículos e acessórios"
+codigo,,,418,Comércio de produtos farmacêuticos
+codigo,,,421,Comércio de combustíveis e lubrificantes
+codigo,,,422,Comércio ambulante
+codigo,,,423,Feiras e mercados
+codigo,,,424,Atividades auxiliares do comércio de mercadorias
+codigo,,,429,Atividades não compreendidas nas classes anteriores ou mal definidas
+codigo,,,451,Comércio de imóveis
+codigo,,,452,Comércio de títulos e moedas
+codigo,,,453,Bancos e casas bancárias
+codigo,,,454,Caixas econômicas e cooperativas de crédito
+codigo,,,455,Seguros e capitalização
+codigo,,,459,Atividades não compreendidas nas classes anteriores ou mal definidas
+codigo,,,511,Serviços de alojamento e de alimentação
+codigo,,,512,Serviços de higiene pessoal
+codigo,,,513,"Serviços de confecção, conservação e reparação de artigos de uso pessoal"
+codigo,,,514,"Serviços de conservação, reparação e ornamentação de habitações e locais de trabalho"
+codigo,,,515,"Serviços de conservação, reparação e instalação de máquinas e veículos"
+codigo,,,516,"Serviços de diversões (espetáculos, radiodifusão, televisão e desportos)"
+codigo,,,517,Serviços domésticos remunerados
+codigo,,,518,Serviços de administração e conservação de edifícios
+codigo,,,519,Atividades não compreendidas nas classes anteriores ou mal definidas
+codigo,,,611,Transportes a tração e condução animal
+codigo,,,612,Transportes rodoviários por veículos motorizados
+codigo,,,613,Transportes urbanos de ferro-carril
+codigo,,,614,Transportes ferroviários
+codigo,,,615,"Transportes marítimos, fluviais e lacustres"
+codigo,,,616,Serviços portuários
+codigo,,,617,Transportes aéreos
+codigo,,,618,"Serviços postais, telegráficos e de radiocomunicações"
+codigo,,,621,Telefones
+codigo,,,622,Armazenagem
+codigo,,,629,Atividades não compreendidas nas classes anteriores ou mal definidas
+codigo,,,711,Ensino público
+codigo,,,712,Ensino particular
+codigo,,,713,Assistência médico-hospitalar pública
+codigo,,,714,Assistência médico-hospitalar particular
+codigo,,,715,"Saneamento, abastecimento e melhoramentos urbanos (exclusive abastecimento d'água e serviços de esgoto)"
+codigo,,,716,Previdência social
+codigo,,,717,Assistência e beneficência
+codigo,,,718,Culto e atividades auxiliares
+codigo,,,721,Instituições culturais
+codigo,,,722,Sindicatos e associações de classe
+codigo,,,729,Atividades não compreendidas nas classes anteriores ou mal definidas
+codigo,,,751,Advocacia e atividades auxiliares
+codigo,,,752,"Engenharia, arquitetura e atividades auxiliares"
+codigo,,,753,Odontologia e atividades auxiliares
+codigo,,,754,"Agronomia, veterinária e atividades auxiliares"
+codigo,,,755,Medicina e atividades auxiliares
+codigo,,,756,"Ciências, letras, artes e atividades auxiliares"
+codigo,,,757,Contabilidade e atividades auxiliares
+codigo,,,759,Atividades não compreendidas nas classes anteriores ou mal definidas
+codigo,,,811,Poder Legislativo
+codigo,,,812,Justiça e atividades auxiliares
+codigo,,,813,Serviço administrativo federal
+codigo,,,814,Serviço administrativo estadual
+codigo,,,815,Serviço administrativo municipal
+codigo,,,816,Serviço administrativo autárquico
+codigo,,,819,Atividades não compreendidas nas classes anteriores ou mal definidas
+codigo,,,851,Exército
+codigo,,,852,Marinha de Guerra
+codigo,,,853,Aviação Militar
+codigo,,,854,Polícia Militar
+codigo,,,855,Polícia Civil
+codigo,,,856,Corpo de Bombeiros
+codigo,,,859,Outras organizações de segurança
+codigo,,,911,Representações estrangeiras
+codigo,,,912,Outras atividades não compreendidas nos demais ramos
+codigo,,,919,Atividades mal definidas ou não declaradas
+codigo,,,,Não aplicável (9 anos de idade ou menos e/ou não trabalhou no ano anterior à data do Censo)
+codigo,V224,Posição Na Ocupação,0,Membro da Família
+codigo,,,1,Ignorado
+codigo,,,5,Empregado Público
+codigo,,,6,Empregado Particular
+codigo,,,7,Trabalha Por Conta-própria
+codigo,,,8,Parceiro Ou Meeiro
+codigo,,,9,Empregador
+codigo,,,,Não aplicável (9 anos de idade ou menos e/ou não trabalhou no ano anterior à data do Censo) ou Informação Faltante (Registro Corrompido)
+secao,VARIÁVEIS DERIVADAS CALCULADAS A PARTIR DOS DADOS (ADICIONADAS PELO censobr),,,
+subsecao,Características dos domicílios,,,
+codigo,censobr_n_listadas,Número de pessoas listadas no Boletim de Amostra,Valor,
+codigo,censobr_n_residentes,Número de moradores residentes do domicílio (exclusive não moradores presentes),Valor,
+codigo,censobr_n_presentes,Número de pessoas presentes no domicílio (exclusive moradores ausentes),Valor,
+codigo,censobr_n_familias,Número de famílias no domicílio (no máximo 3 - o IBGE classifica domicílios com 4 famílias ou mais como Coletivos),Valor,
+secao,VARIÁVEIS PARA IMPLEMENTAR O PLANO AMOSTRAL (ADICIONADAS PELO censobr),,,
+codigo,censobr_estrato,"Estrato do desenho amostral. Na amostra de 25% é a pasta cruzada com a situação (18.400 estratos); na de 1,27% é a unidade da federação cruzada com o grupo de situação da pasta (21 estratos), recalculada para as onze unidades que entram na compilação",Texto,
+codigo,censobr_upa,"Unidade Primária de Amostragem. Na amostra de 25% é o domicílio, que é o que se sorteia; na de 1,27% é a pasta",Valor,
+codigo,censobr_fpc,Correção de população finita da primeira etapa,0.25,Amostra de 25%: um domicílio em quatro
+codigo,,,0.05,"Amostra de 1,27%: uma pasta em vinte"
+codigo,censobr_usa,Unidade Secundária de Amostragem: o domicílio,Valor,
+codigo,censobr_fpc2,Correção de população finita da segunda etapa,1,"Amostra de 25%: não há segunda etapa, e ela não contribui para a variância"
+codigo,,,0.25,"Amostra de 1,27%: um domicílio em quatro dentro da pasta"
+codigo,censobr_weight,"Peso final da pessoa para expansão. Calibrado aos resultados definitivos da Série Nacional, vol. I, por unidade da federação, pelo raking de Deville-Särndal com distância logit. Na amostra de 25% as margens são município × situação da Sinopse Preliminar, sexo × faixa etária e alfabetização; na de 1,27%, sexo × faixa etária, situação e alfabetização",Valor,
+codigo,censobr_weight_fator,Razão entre o peso final e o peso de desenho. Mede o quanto a calibração deslocou cada registro,Valor,
+codigo,censobr_weight_desenho,"Peso nominal do desenho, sem calibração",4,Amostra de 25%: um domicílio em quatro
+codigo,,,78.740157480315,"Amostra de 1,27%: um domicílio em quatro, uma pasta em vinte"
+codigo,censobr_weight_nivel,Nível em que ficou a âncora municipal da calibração,municipio x situacao,A célula de situação do município foi usada como está
+codigo,,,municipio,A célula de situação era instável e colapsou para o município inteiro
+codigo,,,,"Não se aplica - Registro advindo da amostra de 1,27%"
+codigo,censobr_weight_ibge,"Peso inteiro do método que o IBGE descreve nos tomos da Série Regional: razão a unidade da federação × situação, com peso inteiro sorteado para fechar o total da Sinopse Preliminar. Serve para reproduzir os volumes publicados, inclusive nos seus artefatos de arredondamento",3,
+codigo,,,4,
+codigo,,,5,
+codigo,,,,"Não se aplica - Registro advindo da amostra de 1,27%"
+codigo,censobr_weight_1965,Peso calibrado aos quadros dos Resultados Preliminares de 1965,Valor,
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+codigo,censobr_weight_1965_fator,Razão entre esse peso e o peso de desenho,Valor,
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+secao,VARIÁVEIS DE DIAGNÓSTICO E CONSISTÊNCIA (ADICIONADAS PELO censobr),,,
+codigo,censobr_favela,"Registro em favela. Só na Guanabara, onde o Código de Municípios e Distritos dá código próprio às favelas",1,Sim
+codigo,,,0,Não
+codigo,censobr_muni_corrigido,"Código de município corrigido na leitura: Alagoas vinha deslocada em +200, Fernando de Noronha como 2701, o Distrito Federal como 9701 e a Guanabara codificada por bairro",1,Sim
+codigo,,,0,Não
+codigo,censobr_uf_corrigida,Unidade da federação corrigida na leitura: 64 famílias de Porto Velho estavam gravadas como Roraima,1,Sim
+codigo,,,0,Não
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+codigo,censobr_diagnostico,Diagnóstico do dano de fita no registro. O arquivo da amostra de 25% não sofreu dano: 948 MB sem um caractere fora de [0-9 ],sem_problema,Registro íntegro
+codigo,,,valor_isolado,"Um valor fora do dicionário, anulado e anotado em censobr_variaveis_anuladas"
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+codigo,censobr_variaveis_anuladas,"Lista das variáveis cujo valor saiu do dicionário e foi anulado, separadas por espaço. Fica vazia, e não ausente, quando o registro não teve nenhuma variável anulada",Texto,
+codigo,censobr_tipo_registro,Tipo do registro de pessoa no arquivo de origem,2,Chefe
+codigo,,,3,Demais pessoas
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+codigo,censobr_duplicata_mantida,"Linha repetida que foi mantida, com marca, por não se encaixar no mecanismo de cópia identificado",1,Sim
+codigo,,,0,Não
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+codigo,censobr_familia_origem,Como a família foi reconstruída na leitura,registro,A família tem o seu registro no arquivo
+codigo,,,registro_perdido,A família foi reconstruída a partir dos registros de pessoa
+codigo,,,anexada_anterior,Pessoa anexada à família anterior
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+codigo,censobr_v208_imputada,Nacionalidade imputada deterministicamente a partir da naturalidade,1,Sim
+codigo,,,0,Não
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+codigo,censobr_v217_fora_da_faixa,Filhos tidos fora da faixa do dicionário,1,Sim
+codigo,,,0,Não
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+codigo,censobr_v218_fora_da_faixa,Filhos vivos fora da faixa do dicionário,1,Sim
+codigo,,,0,Não
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+codigo,censobr_flag_conjuge_mesmo_sexo,"Cônjuge do mesmo sexo do chefe. Marca de coerência, sem correção",1,Sim
+codigo,,,0,Não
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+codigo,censobr_flag_filho_mais_velho,"Filho mais velho incompatível com a idade do chefe. Marca de coerência, sem correção",1,Sim
+codigo,,,0,Não
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+codigo,censobr_flag_casamento_impossivel,"Ano de casamento incompatível com a idade. Marca de coerência, sem correção",1,Sim
+codigo,,,0,Não
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+codigo,censobr_linha,Número da linha do registro no arquivo de origem,Valor,

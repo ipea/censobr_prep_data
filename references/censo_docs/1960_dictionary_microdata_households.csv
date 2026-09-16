@@ -1,0 +1,204 @@
+tipo_linha,variavel,rotulo,codigo,descricao
+secao,VARIÁVEIS GEOGRÁFICAS,,,
+codigo,code_region,Código da Região de hoje,Valor,
+codigo,,,,"Não aplicável - a Serra dos Aimorés era a região em litígio entre Minas Gerais e o Espírito Santo, recenseada como unidade à parte, e não tem correspondente de hoje"
+codigo,name_region,Nome da Região de hoje,Texto,
+codigo,,,,"Não aplicável - a Serra dos Aimorés era a região em litígio entre Minas Gerais e o Espírito Santo, recenseada como unidade à parte, e não tem correspondente de hoje"
+codigo,code_state,"Código da Unidade da Federação de hoje. A Guanabara entra como Rio de Janeiro (33) e Fernando de Noronha como Pernambuco (26), porque é esse o território delas hoje",Valor,
+codigo,,,,"Não aplicável - a Serra dos Aimorés era a região em litígio entre Minas Gerais e o Espírito Santo, recenseada como unidade à parte, e não tem correspondente de hoje"
+codigo,abbrev_state,Sigla da Unidade da Federação de hoje,Texto,
+codigo,,,,"Não aplicável - a Serra dos Aimorés era a região em litígio entre Minas Gerais e o Espírito Santo, recenseada como unidade à parte, e não tem correspondente de hoje"
+codigo,name_state,Nome da Unidade da Federação de hoje,Texto,
+codigo,,,,"Não aplicável - a Serra dos Aimorés era a região em litígio entre Minas Gerais e o Espírito Santo, recenseada como unidade à parte, e não tem correspondente de hoje"
+codigo,code_muni,"Código do Município no padrão de hoje, de sete dígitos, o mesmo de 1991 a 2022. Pelo crosswalk de read_guides/1960_municipios.csv",Valor,
+codigo,,,,"Não aplicável - a Serra dos Aimorés era a região em litígio entre Minas Gerais e o Espírito Santo, recenseada como unidade à parte, e não tem correspondente de hoje"
+codigo,situacao,"Situação do domicílio, agregando o quadro urbano e o suburbano",urbana,Quadro urbano ou suburbano (V118 = 1 ou 3)
+codigo,,,rural,Quadro rural (V118 = 5)
+codigo,code_muni_1960,Código do Município na Divisão Territorial Brasileira de 1960,Valor,
+codigo,name_muni_1960,Nome do Município em 1960,Texto,
+codigo,code_district_1960,"Código do Distrito no Código de Zonas Fisiográficas, Municípios e Distritos de 1960",Valor,
+codigo,name_district_1960,Nome do Distrito em 1960,Texto,
+codigo,,,,Nome não transcrito: restam 720 pares município-distrito que o Código traz impressos e cuja leitura visual não foi feita
+codigo,name_bairro_1960,"Bairro. Só na Guanabara, onde o censo codificou a cidade por bairro em vez de por distrito",Texto,
+codigo,,,,Não aplicável - as demais unidades da federação
+codigo,name_region_1960,Região em que os volumes do Censo de 1960 publicam os resultados,Norte,
+codigo,,,Nordeste,
+codigo,,,Leste,
+codigo,,,Sul,
+codigo,,,Centro-Oeste,
+codigo,code_state_1960,Código da Unidade da Federação no padrão do IBGE em 1960: a Guanabara é 34 e Fernando de Noronha é 20,Valor,
+codigo,,,,"Não aplicável - a Serra dos Aimorés era a região em litígio entre Minas Gerais e o Espírito Santo, recenseada como unidade à parte, e não tem correspondente de hoje"
+codigo,abbrev_state_1960,Sigla da Unidade da Federação em 1960,Texto,
+codigo,,,,"Não aplicável - a Serra dos Aimorés era a região em litígio entre Minas Gerais e o Espírito Santo, recenseada como unidade à parte, e não tem correspondente de hoje"
+codigo,name_state_1960,"Nome da Unidade da Federação em 1960, como a Série Nacional o publica",Texto,
+secao,VARIÁVEIS DE IDENTIFICAÇÃO DO REGISTRO,,,
+codigo,censobr_idhousehold,ID único do domicílio no Censo de 1960. Refeito na compilação: UF × 10.000.000 + sequência dentro da unidade da federação,Valor,
+codigo,censobr_amostra,"De qual das duas amostras do Censo de 1960 o registro vem. A de 1,27% cobre as onze unidades da federação em que os microdados da de 25% não sobreviveram; nas outras dezessete ela é subamostra daquela, e por isso não entra",25%,"Registro advindo da amostra de 25%, o Boletim de Amostra de um domicílio em cada quatro"
+codigo,,,"1,27%","Registro advindo da amostra de 1,27%, a subamostra de uma pasta em vinte sorteada em 1965"
+codigo,censobr_tipo_unidade,"Espécie da unidade recenseada, derivada de V101",domicilio particular,"V101 = 1, 2, 4 ou 5"
+codigo,,,domicilio coletivo,V101 = 3
+codigo,,,boletim individual,"V101 = 9. Morador de domicílio coletivo recenseado pessoa a pessoa pela Lista CD 3, com as variáveis do domicílio em branco por construção. Não ocorre na amostra de 1,27%"
+codigo,v001,"Pasta. O lote de trabalho de cerca de 250 Boletins de Amostra, numerado num cadastro nacional, e a unidade sorteada na amostra de 1,27%",Valor,
+codigo,v002,Boletim de Amostra dentro da pasta,Valor,
+codigo,v003,Identificação: tipo de registro e numeração das pessoas dentro do domicílio,Valor,
+codigo,,,,"Informação faltante - Amostra de 1,27%"
+codigo,v004,Dígito verificador,Valor,
+codigo,,,,"Informação faltante - Amostra de 1,27%"
+codigo,v100,Total de pessoas declarado no registro de família,Valor,
+codigo,,,,"Informação faltante - Amostra de 1,27%"
+secao,CARACTERÍSTICAS DO DOMICÍLIO,,,
+codigo,V101,Espécie do Domicílio,1,Domicílio Particular Único
+codigo,,,2,Domicílio Particular 1ª Família
+codigo,,,3,Domicílio Coletivo
+codigo,,,9,Boletim Individual
+codigo,,,,"Os códigos 4 e 5 (2ª e 3ª famílias) não ocorrem nesta tabela: o domicílio leva o código da família principal, e as famílias conviventes aparecem na tabela de pessoas"
+codigo,V102,Tipo do Domicílio,4,Durável
+codigo,,,5,Rústico
+codigo,,,6,Improvisado
+codigo,,,7,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V103,Condição de Ocupação,7,Próprio
+codigo,,,8,Alugado
+codigo,,,9,Outra
+codigo,,,0,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V104,"Aluguel Mensal, em cruzeiros de 1960",0,Até Cr$ 500
+codigo,,,1,de Cr$ 500 a 1.000
+codigo,,,2,de Cr$ 1.001 a 2.000
+codigo,,,3,de Cr$ 2.001 a 4.000
+codigo,,,4,de Cr$ 4.001 a 6.000
+codigo,,,5,de Cr$ 6.001 a 10.000
+codigo,,,6,de Cr$ 10.001 a 20.000
+codigo,,,7,de Cr$ 20.001 e Mais
+codigo,,,8,não Paga Aluguel
+codigo,,,9,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V105,Abastecimento de Água,9,Rede Geral com Canalização Interna
+codigo,,,0,Rede Geral com Canalização Externa
+codigo,,,1,Poço/Nascente com canalização
+codigo,,,2,Poço/Nascente sem canalização
+codigo,,,3,Outra forma de abastecimento
+codigo,,,4,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V106,Instalação Sanitária,4,Rede de Esgoto
+codigo,,,5,Fossa Asséptica
+codigo,,,6,Fossa Rudimentar
+codigo,,,7,Outro Escoadouro
+codigo,,,8,não Tem
+codigo,,,9,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V107,Fogão,9,Lenha
+codigo,,,0,Carvão
+codigo,,,1,Elétrico
+codigo,,,2,Gás
+codigo,,,3,Óleo/Querosene
+codigo,,,4,não Tem
+codigo,,,5,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V108,Iluminação Elétrica,5,Tem
+codigo,,,6,não Tem
+codigo,,,7,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V109,Rádio,7,Tem
+codigo,,,8,não Tem
+codigo,,,9,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V110,Geladeira,9,Tem
+codigo,,,0,não Tem
+codigo,,,1,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V111,Televisão,1,Tem
+codigo,,,2,não Tem
+codigo,,,3,Ignorado
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V112,Total de Cômodos,Valor,
+codigo,,,0,"Não havendo indicação do número total de cômodos (código do próprio questionário, Código do Censo, p. 25)"
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+codigo,V113,Peças Servindo de Dormitório,Valor,
+codigo,,,0,"Não havendo indicação do número de peças servindo de dormitório (código do próprio questionário, Código do Censo, p. 25)"
+codigo,,,,"Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou Informação Faltante (Registro Corrompido)"
+secao,VARIÁVEIS GEOGRÁFICAS DO QUESTIONÁRIO,,,
+codigo,UF,"Unidade da Federação, no código do próprio Censo de 1960",0,Rondônia
+codigo,,,1,Acre
+codigo,,,2,Amazonas
+codigo,,,3,Roraima
+codigo,,,4,Pará
+codigo,,,6,Amapá
+codigo,,,10,Maranhão
+codigo,,,12,Piauí
+codigo,,,14,Ceará
+codigo,,,17,Rio Grande do Norte
+codigo,,,19,Paraíba
+codigo,,,21,Pernambuco
+codigo,,,24,Fernando de Noronha
+codigo,,,25,Alagoas
+codigo,,,30,Sergipe
+codigo,,,31,Bahia
+codigo,,,40,Minas Gerais
+codigo,,,50,Serra dos Aimorés
+codigo,,,51,Espírito Santo
+codigo,,,52,Rio de Janeiro
+codigo,,,54,Guanabara
+codigo,,,60,São Paulo
+codigo,,,71,Paraná
+codigo,,,74,Santa Catarina
+codigo,,,81,Rio Grande do Sul
+codigo,,,91,Mato Grosso
+codigo,,,94,Goiás
+codigo,,,97,Distrito Federal
+codigo,V116,"Código do Município no padrão do Censo de 1960, como o arquivo o traz, sem as correções aplicadas em code_muni_1960",Valor,
+codigo,V117,"Distrito, no código do questionário",Valor,
+codigo,V118,"Situação de moradia, no código do questionário",1,Urbana
+codigo,,,3,Suburbana
+codigo,,,5,Rural
+secao,VARIÁVEIS DERIVADAS CALCULADAS A PARTIR DOS DADOS (ADICIONADAS PELO censobr),,,
+subsecao,Características dos domicílios,,,
+codigo,censobr_n_listadas,Número de pessoas listadas no Boletim de Amostra,Valor,
+codigo,censobr_n_residentes,Número de moradores residentes do domicílio (exclusive não moradores presentes),Valor,
+codigo,censobr_n_presentes,Número de pessoas presentes no domicílio (exclusive moradores ausentes),Valor,
+codigo,censobr_n_familias,Número de famílias no domicílio (no máximo 3 - o IBGE classifica domicílios com 4 famílias ou mais como Coletivos),Valor,
+secao,VARIÁVEIS PARA IMPLEMENTAR O PLANO AMOSTRAL (ADICIONADAS PELO censobr),,,
+codigo,censobr_estrato,"Estrato do desenho amostral. Na amostra de 25% é a pasta cruzada com a situação (18.400 estratos); na de 1,27% é a unidade da federação cruzada com o grupo de situação da pasta (21 estratos), recalculada para as onze unidades que entram na compilação",Texto,
+codigo,censobr_upa,"Unidade Primária de Amostragem. Na amostra de 25% é o domicílio, que é o que se sorteia; na de 1,27% é a pasta",Valor,
+codigo,censobr_fpc,Correção de população finita da primeira etapa,0.25,Amostra de 25%: um domicílio em quatro
+codigo,,,0.05,"Amostra de 1,27%: uma pasta em vinte"
+codigo,censobr_usa,Unidade Secundária de Amostragem: o domicílio,Valor,
+codigo,censobr_fpc2,Correção de população finita da segunda etapa,1,"Amostra de 25%: não há segunda etapa, e ela não contribui para a variância"
+codigo,,,0.25,"Amostra de 1,27%: um domicílio em quatro dentro da pasta"
+codigo,censobr_weight,"Peso final da pessoa para expansão. Calibrado aos resultados definitivos da Série Nacional, vol. I, por unidade da federação, pelo raking de Deville-Särndal com distância logit. Na amostra de 25% as margens são município × situação da Sinopse Preliminar, sexo × faixa etária e alfabetização; na de 1,27%, sexo × faixa etária, situação e alfabetização",Valor,
+codigo,censobr_weight_fator,Razão entre o peso final e o peso de desenho. Mede o quanto a calibração deslocou cada registro,Valor,
+codigo,censobr_weight_desenho,"Peso nominal do desenho, sem calibração",4,Amostra de 25%: um domicílio em quatro
+codigo,,,78.740157480315,"Amostra de 1,27%: um domicílio em quatro, uma pasta em vinte"
+codigo,censobr_weight_nivel,Nível em que ficou a âncora municipal da calibração,municipio x situacao,A célula de situação do município foi usada como está
+codigo,,,municipio,A célula de situação era instável e colapsou para o município inteiro
+codigo,,,,"Não se aplica - Registro advindo da amostra de 1,27%"
+codigo,censobr_weight_ibge,"Peso inteiro do método que o IBGE descreve nos tomos da Série Regional: razão a unidade da federação × situação, com peso inteiro sorteado para fechar o total da Sinopse Preliminar. Serve para reproduzir os volumes publicados, inclusive nos seus artefatos de arredondamento",3,
+codigo,,,4,
+codigo,,,5,
+codigo,,,,"Não se aplica - Registro advindo da amostra de 1,27%"
+codigo,censobr_weight_1965,Peso calibrado aos quadros dos Resultados Preliminares de 1965,Valor,
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+codigo,censobr_weight_1965_fator,Razão entre esse peso e o peso de desenho,Valor,
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+secao,VARIÁVEIS DE DIAGNÓSTICO E CONSISTÊNCIA (ADICIONADAS PELO censobr),,,
+codigo,censobr_favela,"Registro em favela. Só na Guanabara, onde o Código de Municípios e Distritos dá código próprio às favelas",1,Sim
+codigo,,,0,Não
+codigo,censobr_muni_corrigido,"Código de município corrigido na leitura: Alagoas vinha deslocada em +200, Fernando de Noronha como 2701, o Distrito Federal como 9701 e a Guanabara codificada por bairro",1,Sim
+codigo,,,0,Não
+codigo,censobr_uf_corrigida,Unidade da federação corrigida na leitura: 64 famílias de Porto Velho estavam gravadas como Roraima,1,Sim
+codigo,,,0,Não
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+codigo,censobr_diagnostico,Diagnóstico do dano de fita no registro. O arquivo da amostra de 25% não sofreu dano: 948 MB sem um caractere fora de [0-9 ],sem_problema,Registro íntegro
+codigo,,,valor_isolado,"Um valor fora do dicionário, anulado e anotado em censobr_variaveis_anuladas"
+codigo,,,registro_perdido,"Família reconstruída a partir dos registros de pessoa, sem o registro de família correspondente"
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+codigo,censobr_variaveis_anuladas,"Lista das variáveis cujo valor saiu do dicionário e foi anulado, separadas por espaço. Fica vazia, e não ausente, quando o registro não teve nenhuma variável anulada",Texto,
+codigo,censobr_familia_origem,Como a família foi reconstruída na leitura,registro,A família tem o seu registro no arquivo
+codigo,,,registro_perdido,A família foi reconstruída a partir dos registros de pessoa
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+codigo,censobr_convivente_isolada,Família convivente cujo registro de família principal não está no arquivo,1,Sim
+codigo,,,0,Não
+codigo,censobr_dois_chefes,Domicílio com dois registros na posição de chefe,1,Sim
+codigo,,,0,Não
+codigo,,,,Não se aplica - Registro advindo da amostra de 25%
+codigo,censobr_linha,Número da linha do registro no arquivo de origem,Valor,

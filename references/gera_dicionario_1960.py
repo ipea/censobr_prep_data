@@ -36,7 +36,6 @@ TEXTO = [("Texto", "")]
 FALTA_127 = ("", "Informação faltante - Amostra de 1,27%")
 NA_NO_25 = ("", "Não se aplica - Registro advindo da amostra de 25%")
 NA_NO_127 = ("", "Não se aplica - Registro advindo da amostra de 1,27%")
-CORROMPIDO = ("", "Informação Faltante (Registro Corrompido)")
 NAO_APLICA_DOM = ("", "Não Aplicável (Domicílios Coletivos, Improvisados ou Boletins Individuais) ou "
                       "Informação Faltante (Registro Corrompido)")
 SEM_AIMORES = ("", "Não aplicável - a Serra dos Aimorés era a região em litígio entre Minas Gerais e o "
@@ -73,15 +72,16 @@ V102 = ("Tipo do Domicílio", [
 V103 = ("Condição de Ocupação", [
     ("7", "Próprio"), ("8", "Alugado"), ("9", "Outra"), ("0", "Ignorado"), NAO_APLICA_DOM])
 
-V104 = ("Aluguel Mensal", [
-    ("0", "Até 500"), ("1", "de 500 a 1000"), ("2", "de 1001 a 2000"), ("3", "de 2001 a 4000"),
-    ("4", "de 4001 a 6000"), ("5", "de 6001 a 10000"), ("6", "de 10001 a 20000"),
-    ("7", "de 20001 e Mais"), ("8", "não Paga Aluguel"), ("9", "Ignorado"), NAO_APLICA_DOM])
+V104 = ("Aluguel Mensal, em cruzeiros de 1960", [
+    ("0", "Até Cr$ 500"), ("1", "de Cr$ 500 a 1.000"), ("2", "de Cr$ 1.001 a 2.000"),
+    ("3", "de Cr$ 2.001 a 4.000"), ("4", "de Cr$ 4.001 a 6.000"), ("5", "de Cr$ 6.001 a 10.000"),
+    ("6", "de Cr$ 10.001 a 20.000"), ("7", "de Cr$ 20.001 e Mais"), ("8", "não Paga Aluguel"),
+    ("9", "Ignorado"), NAO_APLICA_DOM])
 
 V105 = ("Abastecimento de Água", [
     ("9", "Rede Geral com Canalização Interna"), ("0", "Rede Geral com Canalização Externa"),
     ("1", "Poço/Nascente com canalização"), ("2", "Poço/Nascente sem canalização"),
-    ("3", "Outra forma de abastecimento"), ("4", "Ignorada"), NAO_APLICA_DOM])
+    ("3", "Outra forma de abastecimento"), ("4", "Ignorado"), NAO_APLICA_DOM])
 
 V106 = ("Instalação Sanitária", [
     ("4", "Rede de Esgoto"), ("5", "Fossa Asséptica"), ("6", "Fossa Rudimentar"),
@@ -124,47 +124,48 @@ V118 = ("Situação de moradia, no código do questionário", [
 # pessoas
 V202 = ("Sexo e condição de presença", [
     ("1", "Homem Presente"), ("2", "Mulher Presente"), ("3", "Homem Ausente"),
-    ("4", "Mulher Ausente"), ("5", "Homem não Morador"), ("6", "Mulher não Morador"), CORROMPIDO])
+    ("4", "Mulher Ausente"), ("5", "Homem não Morador"), ("6", "Mulher não Morador")])
 
 V203 = ("Relação Com Chefe", [
     ("7", "Chefe"), ("8", "Cônjuge"), ("9", "Filho Ou Enteado"), ("0", "Neto"),
     ("1", "Pais e Sogros"), ("2", "Outros Parentes"), ("3", "Agregado"),
     ("4", "Hóspede, pensionista ou Empregado Doméstico"), ("5", "Ignorado"),
-    ("6", "Boletim Individual"), CORROMPIDO])
+    ("6", "Boletim Individual")])
 
 V204 = ("Tipo de Idade - Meses Ou Anos", [
     ("0", "Meses"), ("1", "Anos"),
     ("5", "Idade acima de 99 anos (os valores da V204B indicam os dois últimos caracteres da idade)"),
-    ("9", "Ignorado (a variável V204B indica necessariamente 999)"), CORROMPIDO])
+    ("9", "Ignorado (a variável V204B indica necessariamente 999)")])
 
 V204B = ("Idade Meses/Anos", [
     ("Valor", "Idade Em Meses (0-11), Se V204 = 0"),
     ("", "Idade Em Anos (1-99), Se V204 = 1"),
-    ("", "Últimos Dois Dígitos da Idade Em Anos, Para Pessoas Com Mais de 99 Anos, Se V204 = 5"),
-    CORROMPIDO])
+    ("", "Últimos Dois Dígitos da Idade Em Anos, Para Pessoas Com Mais de 99 Anos, Se V204 = 5"),])
 
 V205 = ("Religião", [
     ("5", "Católica Romana"), ("6", "Protestante"), ("7", "Espírita"), ("8", "Budista"),
     ("9", "Israelita"), ("0", "Ortodoxa"), ("1", "Maometana"), ("2", "Outra Religião"),
-    ("3", "Sem Religião"), ("4", "Ignorado"), CORROMPIDO])
+    ("3", "Sem Religião"), ("4", "Ignorado")])
 
 V206 = ("Cor", [
     ("4", "Branca"), ("5", "Preta"), ("6", "Amarela"), ("7", "Parda"), ("8", "Índia"),
-    ("9", "Ignorado"), CORROMPIDO])
+    ("9", "Ignorado")])
 
 V208 = ("Nacionalidade", [
-    ("9", "Brasileiro Nato"), ("0", "Brasil Naturalizado"), ("1", "Estrangeiro"), CORROMPIDO])
+    ("9", "Brasileiro Nato"), ("0", "Brasil Naturalizado"), ("1", "Estrangeiro")])
 
 V209 = ("Procedência: Urbana Ou Rural (Para pessoas não naturais do município onde habitam)", [
     ("0", "Zona Rural de Outro Município"), ("1", "Zona Urbana de Outro Município"),
     ("2", "Procedência Desconhecida - para pessoas nascidas na UF onde residem ou marcados como "
           "não morador presente"),
-    ("3", "Procedência Desconhecida - para pessoas não naturais da UF onde residem"), CORROMPIDO])
+    ("3", "Procedência Desconhecida - para pessoas não naturais da UF onde residem")])
 
 V299 = ("Tempo de Imigração", [
     ("2", "Menos de 1 Ano"), ("3", "1 Ano"), ("4", "2 Anos"), ("5", "3 Anos"), ("6", "4 Anos"),
-    ("7", "5 Anos"), ("8", "6 a 10 Anos"), ("9", "11 Anos e Mais"), ("1", "Ausência de Informação"),
-    ("", "Não se aplica (Pessoas naturais do município) ou Informação Faltante (Registro Corrompido)")])
+    ("7", "5 Anos"), ("8", "6 a 10 Anos"), ("9", "11 Anos e Mais"),
+    ("1", "Sem declaração de tempo (naturalidade codificada como 01 ou 31)"),
+    ("0", "Não se aplica - natural da Unidade da Federação onde reside (naturalidade codificada "
+          "como 20). É o caso de 10.447.845 registros")])
 
 V211 = ("Alfabetização", [
     ("0", "Lê e Frequenta Escola"), ("1", "Lê e não Frequenta Escola"),
@@ -198,10 +199,10 @@ V218 = ("Filhos Vivos", [
     ("Valor", ""),
     ("", "Não aplicável (9 anos de idade ou menos) ou Informação Faltante (Registro Corrompido)")])
 
-V219 = ("Rendimentos", [
-    ("5", "Até 2100"), ("6", "de 2101 a 3300"), ("7", "de 3301 a 4500"), ("8", "de 4501 a 6000"),
-    ("9", "de 6001 a 10000"), ("0", "de 10001 a 20000"), ("1", "de 20001 a 50000"),
-    ("2", "de 50001 e Mais"), ("3", "não Tem"), ("4", "Ignorado"),
+V219 = ("Rendimentos mensais, em cruzeiros de 1960", [
+    ("5", "Até Cr$ 2.100"), ("6", "de Cr$ 2.101 a 3.300"), ("7", "de Cr$ 3.301 a 4.500"),
+    ("8", "de Cr$ 4.501 a 6.000"), ("9", "de Cr$ 6.001 a 10.000"), ("0", "de Cr$ 10.001 a 20.000"),
+    ("1", "de Cr$ 20.001 a 50.000"), ("2", "de Cr$ 50.001 e Mais"), ("3", "não Tem"), ("4", "Ignorado"),
     ("", "Não aplicável (9 anos de idade ou menos) ou Informação Faltante (Registro Corrompido)")])
 
 V220 = ("Atividade não Econômica", [
@@ -328,7 +329,17 @@ DESENHO = [
     ("censobr_weight_1965_fator", "Razão entre esse peso e o peso de desenho", VALOR + [NA_NO_25]),
 ]
 
-DIAG_COMUM = [
+def diag_comum(tabela):
+  """as marcas de auditoria comuns as duas tabelas. censobr_diagnostico lista so
+  as categorias que de fato ocorrem em cada uma: o dano de fita e da amostra de
+  1,27%, e o que sobrevive na compilacao e o que veio das onze unidades dela."""
+  diagnostico = [("sem_problema", "Registro íntegro"),
+                 ("valor_isolado", "Um valor fora do dicionário, anulado e anotado em "
+                                   "censobr_variaveis_anuladas")]
+  if tabela == "households":
+    diagnostico.append(("registro_perdido", "Família reconstruída a partir dos registros de pessoa, "
+                                            "sem o registro de família correspondente"))
+  return [
     ("censobr_favela", "Registro em favela. Só na Guanabara, onde o Código de Municípios e Distritos "
                        "dá código próprio às favelas", [SIM, NAO]),
     ("censobr_muni_corrigido", "Código de município corrigido na leitura: Alagoas vinha deslocada em "
@@ -338,19 +349,12 @@ DIAG_COMUM = [
                              "estavam gravadas como Roraima", [SIM, NAO, NA_NO_25]),
     ("censobr_diagnostico", "Diagnóstico do dano de fita no registro. O arquivo da amostra de 25% não "
                             "sofreu dano: 948 MB sem um caractere fora de [0-9 ]",
-     [("sem_problema", "Registro íntegro"),
-      ("valor_isolado", "Um valor fora do dicionário, anulado e anotado em censobr_variaveis_anuladas"),
-      ("registro_perdido", "Família reconstruída a partir dos registros de pessoa, sem o registro de "
-                           "família correspondente"),
-      ("reparo", "Registro reparado pela chave do questionário"),
-      ("recuperada", "Linha recuperada"),
-      ("corrompida", "Linha corrompida, com a localização recuperada"),
-      ("realocada", "Linha realocada para o seu boletim"),
-      NA_NO_25]),
+     diagnostico + [NA_NO_25]),
     ("censobr_variaveis_anuladas", "Lista das variáveis cujo valor saiu do dicionário e foi anulado, "
-                                   "separadas por espaço",
-     TEXTO + [("", "Registro sem variável anulada")]),
-]
+                                   "separadas por espaço. Fica vazia, e não ausente, quando o registro "
+                                   "não teve nenhuma variável anulada",
+     TEXTO),
+  ]
 
 
 def secoes_domicilios():
@@ -379,7 +383,7 @@ def secoes_domicilios():
         ("VARIÁVEIS DERIVADAS CALCULADAS A PARTIR DOS DADOS (ADICIONADAS PELO censobr)",
          "Características dos domicílios", CONTAGENS),
         ("VARIÁVEIS PARA IMPLEMENTAR O PLANO AMOSTRAL (ADICIONADAS PELO censobr)", None, DESENHO),
-        ("VARIÁVEIS DE DIAGNÓSTICO E CONSISTÊNCIA (ADICIONADAS PELO censobr)", None, DIAG_COMUM + [
+        ("VARIÁVEIS DE DIAGNÓSTICO E CONSISTÊNCIA (ADICIONADAS PELO censobr)", None, diag_comum("households") + [
             ("censobr_familia_origem", "Como a família foi reconstruída na leitura",
              [("registro", "A família tem o seu registro no arquivo"),
               ("registro_perdido", "A família foi reconstruída a partir dos registros de pessoa"),
@@ -426,22 +430,28 @@ def secoes_pessoas():
             ("V210", "Lugar de residência anterior", codigo_do_censo("V210"))]),
         ("EDUCAÇÃO (APENAS PARA PESSOAS COM 5 ANOS OU MAIS)", None, [
             ("V211", V211[0], V211[1]), ("V212", V212[0], V212[1]), ("V213", V213[0], V213[1]),
-            ("V214", "Curso completo", codigo_do_censo("V214"))]),
+            ("V214", "Curso completo", codigo_do_censo("V214") +
+             [("", "Não aplicável (9 anos de idade ou menos)")])]),
         ("NUPCIALIDADE (APENAS PARA PESSOAS COM 10 ANOS OU MAIS)", None, [
             ("V215", V215[0], V215[1]),
-            ("V216", "Ano do casamento", codigo_do_censo("V216"))]),
+            ("V216", "Ano do casamento", codigo_do_censo("V216") +
+             [("", "Não aplicável (9 anos de idade ou menos)")])]),
         ("FECUNDIDADE (APENAS PARA PESSOAS COM 10 ANOS OU MAIS - INCLUSIVE HOMENS)", None, [
             ("V217", V217[0], V217[1]), ("V218", V218[0], V218[1])]),
         ("TRABALHO E RENDIMENTO", None, [
             ("V219", V219[0], V219[1]), ("V220", V220[0], V220[1]),
-            ("V221", "Ocupação habitual", codigo_do_censo("V221")),
+            ("V221", "Ocupação habitual", codigo_do_censo("V221") +
+             [("", "Não aplicável (9 anos de idade ou menos e/ou não trabalhou no ano anterior "
+                   "à data do Censo)")]),
             ("V223", V223[0], V223[1]),
-            ("V223B", "Ramo e classe de atividade", codigo_do_censo("V223B")),
+            ("V223B", "Ramo e classe de atividade", codigo_do_censo("V223B") +
+             [("", "Não aplicável (9 anos de idade ou menos e/ou não trabalhou no ano anterior "
+                   "à data do Censo)")]),
             ("V224", V224[0], V224[1])]),
         ("VARIÁVEIS DERIVADAS CALCULADAS A PARTIR DOS DADOS (ADICIONADAS PELO censobr)",
          "Características dos domicílios", CONTAGENS),
         ("VARIÁVEIS PARA IMPLEMENTAR O PLANO AMOSTRAL (ADICIONADAS PELO censobr)", None, DESENHO),
-        ("VARIÁVEIS DE DIAGNÓSTICO E CONSISTÊNCIA (ADICIONADAS PELO censobr)", None, DIAG_COMUM + [
+        ("VARIÁVEIS DE DIAGNÓSTICO E CONSISTÊNCIA (ADICIONADAS PELO censobr)", None, diag_comum("population") + [
             ("censobr_tipo_registro", "Tipo do registro de pessoa no arquivo de origem",
              [("2", "Chefe"), ("3", "Demais pessoas"), NA_NO_25]),
             ("censobr_duplicata_mantida", "Linha repetida que foi mantida, com marca, por não se "
@@ -550,7 +560,27 @@ def gera(nome, secoes, cls_secao, cls_subsecao, largura_td, largura_pt, largura_
     print("%s: %d variaveis, %d linhas de codigo, %d bytes" % (nome, nvar, ncod, len(novo)))
 
 
+def tabela_plana(nome, secoes):
+    """o mesmo conteudo em forma tabular, que alimenta as duas abas da planilha"""
+    linhas = []
+    for titulo, subtitulo, variaveis in secoes:
+        linhas.append(["secao", titulo, "", "", ""])
+        if subtitulo:
+            linhas.append(["subsecao", subtitulo, "", "", ""])
+        for var, rotulo, codigos in variaveis:
+            for i, (valor, desc) in enumerate(codigos):
+                linhas.append(["codigo", var if i == 0 else "", rotulo if i == 0 else "", valor, desc])
+    dest = os.path.join(SAIDA, "1960_dictionary_microdata_%s.csv" % nome)
+    with io.open(dest, "w", encoding="utf-8", newline="") as fh:
+        w = csv.writer(fh)
+        w.writerow(["tipo_linha", "variavel", "rotulo", "codigo", "descricao"])
+        w.writerows(linhas)
+    print("%s: %d linhas para a planilha" % (nome, len(linhas)))
+
+
 if __name__ == "__main__":
     os.makedirs(SAIDA, exist_ok=True)
     gera("households", secoes_domicilios(), "xl88", "xl91", 1062, 798, 422, 317, 371, 279)
     gera("population", secoes_pessoas(), "xl91", "xl94", 1033, 775, 413, 310, 341, 256)
+    tabela_plana("households", secoes_domicilios())
+    tabela_plana("population", secoes_pessoas())
