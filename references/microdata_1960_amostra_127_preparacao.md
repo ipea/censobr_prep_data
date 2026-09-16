@@ -2,7 +2,7 @@
 
 Este documento acompanha o código de `R/microdata_1960_amostra_127.R` (bloco `# 01a.` de `_targets.R`). Para cada passo ele diz qual é o problema, como o problema aparece no arquivo, por que ele aparece assim, o que o código faz e como o resultado fica. Todos os números vêm da execução do pipeline em 2026-09-14; os exemplos são linhas reais do arquivo.
 
-O estágio cobre a amostra de 1,27%. A amostra de 25% e a compilação das duas — que é o que o `censobr` distribui como microdados de 1960 — virão depois, e enquanto não vêm o `censobr` continua consumindo a compilação antiga guardada no release `release_legacy`.
+O estágio cobre a amostra de 1,27%. A amostra de 25% está em [`microdata_1960_amostra_25_preparacao.md`](microdata_1960_amostra_25_preparacao.md) e a compilação das duas — que é o que o `censobr` distribui como microdados de 1960 — em [`microdata_1960_compilacao.md`](microdata_1960_compilacao.md). Na compilação, esta amostra entra nas **onze** unidades da federação em que a de 25% não sobreviveu; nas outras dezessete ela é subamostra daquela, e empilhar as duas contaria a mesma gente duas vezes.
 
 ## 1. De onde vêm os dados
 
@@ -324,7 +324,7 @@ O que a publicação especial de 1965 daria e nunca deu: o erro-padrão de cada 
 
 ## 6. O que sai
 
-Duas tabelas em `data_raw/microdata/1960/amostra_127/`, intermediárias — a compilação com a amostra de 25% é que produzirá os parquets do `censobr`:
+Duas tabelas em `data_raw/microdata/1960/amostra_127/`, intermediárias — quem produz os parquets do `censobr` é a compilação com a amostra de 25%:
 
 | arquivo | linhas | colunas | tamanho |
 |---|---|---|---|
@@ -461,7 +461,7 @@ Todas apresentadas ao usuário com a evidência e decididas em 2026-09-14:
 - **Estratos:** os quatro grupos de situação de 1965, com a cidade grande definida pela população urbana municipal do Anuário de 1961 (100 mil ou mais, 34 municípios); o critério pela população total (64) foi calculado como sensibilidade (seção 8).
 - **Ramos do quadro 3:** os 18 ramos do Código do Censo agrupados nas nove linhas de 1965, com desempregados e ignorados em "outras atividades" — a hipótese que reproduz 1965, documentada como hipótese (seção 7).
 - **Filhos tidos e vivos acima de 30:** mantidos e marcados, porque o Código do Censo manda registrar o número declarado; a versão anterior deste estágio os anulava seguindo o dicionário de 2018.
-- **Geografia e tipos do `censobr`:** não entram aqui. Estas duas tabelas guardam a unidade da federação e o município nos códigos de 1960, como o arquivo os traz, e são intermediárias: quem produz os parquets do `censobr`, com `code_state`, `name_muni` e a convenção de tipos, é a compilação com a amostra de 25%, que já tem o mapeamento em `R/microdata_1960.R`. O que entrou (passo 8) foi o município em duas colunas, como em todos os censos anteriores a 1991: `code_muni` no formato atual, o mesmo de 1991 a 2022, e `code_muni_1960` no código da época, ambos por `read_guides/1960_municipios.csv`. O nome do município e a população estão na mesma tabela, a um join.
+- **Geografia e tipos do `censobr`:** não entram aqui. Estas duas tabelas guardam a unidade da federação e o município nos códigos de 1960, como o arquivo os traz, e são intermediárias: quem produz os parquets do `censobr`, com `code_state`, `name_muni_1960` e a convenção de tipos, é a compilação com a amostra de 25%, em `R/microdata_1960.R`. O que entrou (passo 8) foi o município em duas colunas, como em todos os censos anteriores a 1991: `code_muni` no formato atual, o mesmo de 1991 a 2022, e `code_muni_1960` no código da época, ambos por `read_guides/1960_municipios.csv`. O nome do município e a população estão na mesma tabela, a um join.
 
 ## 11. Em aberto
 

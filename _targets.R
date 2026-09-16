@@ -93,32 +93,6 @@ list(
              ),
   
   
-  # 01. microdata 1960 ---------------------------------------------------------------
-
-  # input: amostra compilada pelo Rogerio (nao existe no FTP IBGE), hospedada
-  # no release_legacy deste repo.
-  tar_target(name = raw_microdata_paths_1960,
-             command = download_microdata_1960(),
-             format = "file"
-             ),
-
-  tar_target(name = dataset_names_microdata_1960,
-             command = c("households", "population")
-             ),
-
-  # branch per dataset: read parquet, rename v* -> V*, attach dataset sentinel
-  tar_target(name = clean_microdata_table_1960,
-             command = clean_microdata_1960(raw_microdata_paths_1960, dataset_names_microdata_1960),
-             pattern = map(dataset_names_microdata_1960)
-             ),
-
-  # branch per dataset: cast code_* to numeric (v0.6.0 convention) + save parquet
-  tar_target(name = output_microdata_1960,
-             command = save_microdata_1960(clean_microdata_table_1960, data_version),
-             pattern = map(clean_microdata_table_1960),
-             format = "file"
-             ),
-
   # 01a. microdata 1960 -- amostra de 1,27%, do arquivo bruto -------------------------
   #
   # Reconstrucao passo a passo da amostra de 1,27% (ver R/microdata_1960_amostra_127.R).
@@ -329,6 +303,66 @@ list(
                                                    output_1960_amostra_127[2]),
              format = "file"
              ),
+
+  # 01c. microdata 1960 -- a compilacao das duas amostras ----------------------------
+  #
+  # A particao e por unidade da federacao: dezessete vem da amostra de 25% e onze
+  # da de 1,27%, que nas dezessete e subamostra daquela e duplicaria gente. Um
+  # branch por unidade, um parquet por unidade, e o arquivo unico so no save, por
+  # streaming -- ver R/microdata_1960.R. Substitui o bloco # 01., que apenas
+  # renomeava as colunas da compilacao antiga do release_legacy.
+  tar_target(name = unidades_1960,
+             command = c(names(UF_1960_AMOSTRA_25), names(UF_1960_AMOSTRA_127))
+             ),
+
+  # o estrato da amostra de 1,27% foi construido sobre as 28 unidades e nao
+  # sobrevive ao corte: dos 75, so 23 tem pasta nas onze que ficam
+  tar_target(name = estratos_1960_compilada,
+             command = estratos_1960(output_1960_amostra_127[2])
+             ),
+
+  tar_target(name = compilada_1960,
+             command = compile_1960(pesos_1960_amostra_25,
+                                    output_1960_amostra_127,
+                                    estratos_1960_compilada,
+                                    unidades_1960,
+                                    municipios_1960,
+                                    gabarito_1960_definitivos),
+             pattern = map(unidades_1960),
+             format = "file"
+             ),
+
+  # as duas validacoes agregam o pais inteiro e por isso nao sao ramificadas
+  tar_target(name = validacao_1960,
+             command = validate_1960(compilada_1960, gabarito_1960_definitivos),
+             format = "file"
+             ),
+
+  tar_target(name = erros_1960,
+             command = sampling_errors_1960(compilada_1960),
+             format = "file"
+             ),
+
+  # o dicionario coluna a coluna: e por ele que os nomes se conferem antes de publicar
+  tar_target(name = dicionario_1960_compilada,
+             command = dicionario_1960(compilada_1960,
+                                       guia_1960_amostra_25_familias,
+                                       guia_1960_amostra_25_pessoas),
+             format = "file"
+             ),
+
+  tar_target(name = dataset_names_microdata_1960,
+             command = c("households", "population")
+             ),
+
+  tar_target(name = output_microdata_1960,
+             command = save_microdata_1960(compilada_1960,
+                                           dataset_names_microdata_1960,
+                                           data_version),
+             pattern = map(dataset_names_microdata_1960),
+             format = "file"
+             ),
+
 
   # 02. microdata 1970 ---------------------------------------------------------------
 

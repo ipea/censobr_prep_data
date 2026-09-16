@@ -260,7 +260,8 @@ GEO_COLS_CENSOBR <- c(
   "code_weighting", "code_tract",
   "code_situacao", "situacao", "code_type", "area_km2",
   "code_muni_1960", "code_muni_1970", "code_muni_1980",
-  "abbrev_state_1960", "name_state_1960",
+  "name_muni_1960", "code_district_1960", "name_district_1960", "name_bairro_1960",
+  "name_region_1960", "code_state_1960", "abbrev_state_1960", "name_state_1960",
   "abbrev_state_1970", "name_state_1970")
 
 relocate_geo_cols_censobr <- function(df){

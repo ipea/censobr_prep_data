@@ -1,0 +1,166 @@
+tabela,ordem,coluna,tipo,rotulo,preenchido_25_pct,preenchido_127_pct,nome_antigo,situacao_vs_publicado
+households,1,code_region,integer,"Regiao de hoje, do IBGE",100,100,code_region,mantida
+households,2,name_region,character,Nome da regiao de hoje,100,100,name_region,mantida
+households,3,code_state,numeric,"Unidade da federacao de hoje: Guanabara entra como Rio de Janeiro (33) e Fernando de Noronha como Pernambuco (26); a Serra dos Aimores, repartida entre MG e ES, fica vazia",100,100,code_state,mantida
+households,4,abbrev_state,character,Sigla da unidade da federacao de hoje,100,100,abbrev_state,mantida
+households,5,name_state,character,Nome da unidade da federacao de hoje,100,100,name_state,mantida
+households,6,code_muni,integer,"Municipio no codigo de hoje, sete digitos",100,100,,nova
+households,7,code_muni_1960,integer,Municipio no codigo da divisao territorial de 1960,100,100,code_muni_1960,mantida
+households,8,name_muni_1960,character,Nome do municipio em 1960,100,100,name_muni,renomeada
+households,9,code_district_1960,integer,"Distrito no codigo do Codigo de Zonas Fisiograficas, Municipios e Distritos de 1960",100,100,,nova
+households,10,name_district_1960,character,Nome do distrito em 1960,98.1,100,,nova
+households,11,name_bairro_1960,character,"Bairro, so na Guanabara, onde o censo codificou a cidade por bairro",0,100,,nova
+households,12,name_region_1960,character,"Regiao em que os volumes de 1960 publicam: Norte, Nordeste, Leste, Sul, Centro-Oeste",100,100,,nova
+households,13,code_state_1960,numeric,"Unidade da federacao no codigo do IBGE em 1960: Guanabara 34, Fernando de Noronha 20; a Serra dos Aimores nunca teve codigo",100,100,,nova
+households,14,abbrev_state_1960,character,Sigla da unidade da federacao em 1960,100,100,,nova
+households,15,name_state_1960,character,"Nome da unidade da federacao em 1960, como a Serie Nacional a publica",100,100,,nova
+households,16,censobr_idhousehold,integer,"Identificador do domicilio, unico no pais",100,100,censobr_idhousehold,mantida
+households,17,censobr_amostra,character,"De qual das duas amostras o registro vem: 25% ou 1,27%",100,100,censobr_source,renomeada
+households,18,censobr_tipo_unidade,character,"Domicilio particular, domicilio coletivo ou boletim individual",100,100,,nova
+households,19,v001,integer,"Pasta (número da pasta no cadastro nacional de arquivamento; par, alocado em blocos por UF)",100,100,v001,mantida
+households,20,v002,integer,Boletim de Amostra dentro da pasta,100,100,v002,mantida
+households,21,v003,integer,Identificação do registro / ordem da pessoa no boletim,100,0,v003,mantida
+households,22,v004,integer,Dígito verificador,100,0,v004,mantida
+households,23,v100,integer,Total de pessoas do boletim,100,0,v100,mantida
+households,24,V101,integer,Espécie do Domicílio,100,99.6,V101,mantida
+households,25,V102,integer,Tipo do Domicílio,96.9,98.8,V102,mantida
+households,26,V103,integer,Condição de Ocupação,96.8,98.8,V103,mantida
+households,27,V104,integer,Aluguel Mensal,96.8,98.8,V104,mantida
+households,28,V105,integer,Abastecimento de Água,96.8,98.7,V105,mantida
+households,29,V106,integer,Instalação Sanitária,96.8,98.7,V106,mantida
+households,30,V107,integer,Fogão,96.8,98.8,V107,mantida
+households,31,V108,integer,Iluminação Elétrica,96.8,98.8,V108,mantida
+households,32,V109,integer,Rádio,96.8,98.8,V109,mantida
+households,33,V110,integer,Geladeira,96.8,98.8,V110,mantida
+households,34,V111,integer,Televisão,96.8,98.8,V111,mantida
+households,35,V112,integer,Total de Comodos,96.8,98.7,V112,mantida
+households,36,V113,integer,Peças Servindo Domitório,96.8,98.8,V113,mantida
+households,37,UF,integer,Unidade da federacao no codigo do proprio censo de 1960,100,100,UF,mantida
+households,38,V116,integer,Município (Não há rótulos identificadores para os códigos de municípios -- esta amostra não é representativa para essa unidade geográfica),100,100,V116,mantida
+households,39,V117,integer,"Distrito (código do Código de Zonas Fisiográficas, Municípios e Distritos de 1960)",100,100,V117,mantida
+households,40,V118,integer,Situação,100,100,V118,mantida
+households,41,situacao,character,Urbana (quadro urbano ou suburbano) ou rural,100,100,censobr_urban,renomeada
+households,42,censobr_n_listadas,integer,Pessoas listadas no boletim,100,100,,nova
+households,43,censobr_n_residentes,integer,Moradores residentes do domicilio,100,100,censobr_ndwellers,renomeada
+households,44,censobr_n_presentes,integer,Pessoas presentes no domicilio,100,100,censobr_npersons,renomeada
+households,45,censobr_n_familias,integer,Familias no domicilio,100,100,censobr_nfamilies,renomeada
+households,46,censobr_estrato,character,Estrato do desenho amostral,100,100,censobr_estrato,mantida
+households,47,censobr_upa,integer,"Unidade da primeira etapa: o domicilio na amostra de 25%, a pasta na de 1,27%",100,100,censobr_upa,mantida
+households,48,censobr_fpc,numeric,"Fracao de sorteio da primeira etapa: 1/4 na amostra de 25%, 1/20 na de 1,27%",100,100,,nova
+households,49,censobr_usa,integer,Unidade da segunda etapa: o domicilio,100,100,,nova
+households,50,censobr_fpc2,numeric,"Fracao de sorteio da segunda etapa: 1 na amostra de 25%, onde nao ha segunda etapa, e 1/4 na de 1,27%",100,100,,nova
+households,51,censobr_weight,numeric,"Peso final, calibrado aos resultados definitivos da Serie Nacional",100,100,censobr_weight,mantida
+households,52,censobr_weight_fator,numeric,Razao entre o peso final e o peso de desenho,100,100,,nova
+households,53,censobr_weight_desenho,numeric,"Peso nominal do desenho: 4 na amostra de 25%, 78,74 na de 1,27%",100,100,,nova
+households,54,censobr_weight_nivel,character,Nivel em que a ancora municipal ficou na calibracao; so na amostra de 25%,100,0,,nova
+households,55,censobr_weight_ibge,integer,Peso inteiro do metodo publicado pelo IBGE; so na amostra de 25%,100,0,,nova
+households,56,censobr_weight_1965,numeric,"Peso calibrado aos Resultados Preliminares de 1965; so na amostra de 1,27%",0,100,,nova
+households,57,censobr_weight_1965_fator,numeric,"Razao entre esse peso e o de desenho; so na amostra de 1,27%",0,100,,nova
+households,58,censobr_favela,logical,"Registro em favela, so na Guanabara",100,100,,nova
+households,59,censobr_muni_corrigido,logical,Codigo de municipio corrigido na leitura,100,100,,nova
+households,60,censobr_uf_corrigida,logical,"Unidade da federacao corrigida na leitura; so na amostra de 1,27%",0,100,,nova
+households,61,censobr_diagnostico,character,"Diagnostico do dano de fita no registro; so na amostra de 1,27%",0,100,censobr_diag_households,renomeada
+households,62,censobr_variaveis_anuladas,character,Variaveis cujo valor saiu do dicionario e foi anulado,100,99.6,censobr_diag_households_vars,renomeada
+households,63,censobr_familia_origem,character,"Como a familia foi reconstruida; so na amostra de 1,27%",0,100,,nova
+households,64,censobr_convivente_isolada,logical,Familia convivente sem a principal no arquivo,100,100,,nova
+households,65,censobr_dois_chefes,logical,"Domicilio com dois registros na posicao de chefe; so na amostra de 1,27%",0,100,,nova
+households,66,censobr_linha,integer,Linha do registro no arquivo de origem,100,100,,nova
+population,1,code_region,integer,"Regiao de hoje, do IBGE",100,100,code_region,mantida
+population,2,name_region,character,Nome da regiao de hoje,100,100,name_region,mantida
+population,3,code_state,numeric,"Unidade da federacao de hoje: Guanabara entra como Rio de Janeiro (33) e Fernando de Noronha como Pernambuco (26); a Serra dos Aimores, repartida entre MG e ES, fica vazia",100,100,code_state,mantida
+population,4,abbrev_state,character,Sigla da unidade da federacao de hoje,100,100,abbrev_state,mantida
+population,5,name_state,character,Nome da unidade da federacao de hoje,100,100,name_state,mantida
+population,6,code_muni,integer,"Municipio no codigo de hoje, sete digitos",100,100,,nova
+population,7,code_muni_1960,integer,Municipio no codigo da divisao territorial de 1960,100,100,code_muni_1960,mantida
+population,8,name_muni_1960,character,Nome do municipio em 1960,100,100,name_muni,renomeada
+population,9,code_district_1960,integer,"Distrito no codigo do Codigo de Zonas Fisiograficas, Municipios e Distritos de 1960",100,100,,nova
+population,10,name_district_1960,character,Nome do distrito em 1960,97.9,100,,nova
+population,11,name_bairro_1960,character,"Bairro, so na Guanabara, onde o censo codificou a cidade por bairro",0,100,,nova
+population,12,name_region_1960,character,"Regiao em que os volumes de 1960 publicam: Norte, Nordeste, Leste, Sul, Centro-Oeste",100,100,,nova
+population,13,code_state_1960,numeric,"Unidade da federacao no codigo do IBGE em 1960: Guanabara 34, Fernando de Noronha 20; a Serra dos Aimores nunca teve codigo",100,100,,nova
+population,14,abbrev_state_1960,character,Sigla da unidade da federacao em 1960,100,100,,nova
+population,15,name_state_1960,character,"Nome da unidade da federacao em 1960, como a Serie Nacional a publica",100,100,,nova
+population,16,censobr_idperson,integer,"Identificador da pessoa, unico no pais",100,100,censobr_idperson,mantida
+population,17,censobr_idfamily,integer,"Identificador da familia, unico no pais: o boletim de 1960 era por familia",100,100,censobr_idfamily,mantida
+population,18,censobr_idhousehold,integer,"Identificador do domicilio, unico no pais",100,100,censobr_idhousehold,mantida
+population,19,censobr_amostra,character,"De qual das duas amostras o registro vem: 25% ou 1,27%",100,100,censobr_source,renomeada
+population,20,censobr_tipo_unidade,character,"Domicilio particular, domicilio coletivo ou boletim individual",100,100,,nova
+population,21,v001,integer,"Pasta (número da pasta no cadastro nacional de arquivamento; par, alocado em blocos por UF)",100,100,v001,mantida
+population,22,v002,integer,Boletim de Amostra dentro da pasta,100,100,v002,mantida
+population,23,v003,integer,Identificação do registro / ordem da pessoa no boletim,100,0,v003,mantida
+population,24,v004,integer,Dígito verificador,100,0,v004,mantida
+population,25,V101,integer,Espécie do Domicílio,100,99.7,V101,mantida
+population,26,V102,integer,Tipo do Domicílio,99.2,98.8,V102,mantida
+population,27,V103,integer,Condição de Ocupação,99.2,98.8,V103,mantida
+population,28,V104,integer,Aluguel Mensal,99.2,98.8,V104,mantida
+population,29,V105,integer,Abastecimento de Água,99.2,98.8,V105,mantida
+population,30,V106,integer,Instalação Sanitária,99.2,98.8,V106,mantida
+population,31,V107,integer,Fogão,99.2,98.8,V107,mantida
+population,32,V108,integer,Iluminação Elétrica,99.2,98.8,V108,mantida
+population,33,V109,integer,Rádio,99.2,98.8,V109,mantida
+population,34,V110,integer,Geladeira,99.2,98.8,V110,mantida
+population,35,V111,integer,Televisão,99.2,98.8,V111,mantida
+population,36,V112,integer,Total de Comodos,99.2,98.8,V112,mantida
+population,37,V113,integer,Peças Servindo Domitório,99.2,98.8,V113,mantida
+population,38,UF,integer,Unidade da federacao no codigo do proprio censo de 1960,100,100,UF,mantida
+population,39,V116,integer,Município (Não há rótulos identificadores para os códigos de municípios -- esta amostra não é representativa para essa unidade geográfica),100,100,V116,mantida
+population,40,V117,integer,"Distrito (código do Código de Zonas Fisiográficas, Municípios e Distritos de 1960)",100,100,V117,mantida
+population,41,V118,integer,Situação,100,100,V118,mantida
+population,42,situacao,character,Urbana (quadro urbano ou suburbano) ou rural,100,100,censobr_urban,renomeada
+population,43,V202,integer,Sexo,100,100,V202,mantida
+population,44,V203,integer,Relação Com Chefe,100,100,V203,mantida
+population,45,V204,integer,Tipo de Idade - Meses Ou Anos,100,100,V204,mantida
+population,46,V204B,integer,"Idade, em anos ou em meses conforme V204",100,100,V204B,mantida
+population,47,V205,integer,Religião,100,100,V205,mantida
+population,48,V206,integer,Cor,100,100,V206,mantida
+population,49,V207,integer,Naturalidade,100,100,V207,mantida
+population,50,V208,integer,Nacionalidade,100,100,V208,mantida
+population,51,V209,integer,"Procedência: Urbana Ou Rural 
+(Para pessoas não naturais do município onde habitam)",100,100,V209,mantida
+population,52,V299,integer,Tempo de Imigração,100,100,V299,mantida
+population,53,V210,integer,Lugar Residência Anterior,100,100,V210,mantida
+population,54,V211,integer,Alfabetização,83.2,88.4,V211,mantida
+population,55,V212,integer,Última Série Concluiu,83.2,88.4,V212,mantida
+population,56,V213,integer,Grau do Curso,83.2,88.4,V213,mantida
+population,57,V214,integer,Curso Completo,67.8,78.4,V214,mantida
+population,58,V215,integer,Estado Conjugal,67.8,78.4,V215,mantida
+population,59,V216,integer,Ano do Casamento,67.8,78.4,V216,mantida
+population,60,V217,integer,Filhos Tidos,67.8,78.4,V217,mantida
+population,61,V218,integer,Filhos Vivos,67.8,78.4,V218,mantida
+population,62,V219,integer,Rendimentos,67.8,78.4,V219,mantida
+population,63,V220,integer,Atividade não Econômica,67.8,78.4,V220,mantida
+population,64,V221,integer,Ocupação Habitual,34.6,36.6,V221,mantida
+population,65,V223,integer,Ocupação Na Ultima Semana,34.6,36.6,V223,mantida
+population,66,V223B,integer,Ramo  e   Classe de Atividade,34.6,36.6,V223B,mantida
+population,67,V224,integer,Posição Na Ocupação,34.6,36.6,V224,mantida
+population,68,censobr_n_listadas,integer,Pessoas listadas no boletim,100,100,,nova
+population,69,censobr_n_residentes,integer,Moradores residentes do domicilio,100,100,censobr_ndwellers,renomeada
+population,70,censobr_n_presentes,integer,Pessoas presentes no domicilio,100,100,censobr_npersons,renomeada
+population,71,censobr_n_familias,integer,Familias no domicilio,100,100,censobr_nfamilies,renomeada
+population,72,censobr_estrato,character,Estrato do desenho amostral,100,100,censobr_estrato,mantida
+population,73,censobr_upa,integer,"Unidade da primeira etapa: o domicilio na amostra de 25%, a pasta na de 1,27%",100,100,censobr_upa,mantida
+population,74,censobr_fpc,numeric,"Fracao de sorteio da primeira etapa: 1/4 na amostra de 25%, 1/20 na de 1,27%",100,100,,nova
+population,75,censobr_usa,integer,Unidade da segunda etapa: o domicilio,100,100,,nova
+population,76,censobr_fpc2,numeric,"Fracao de sorteio da segunda etapa: 1 na amostra de 25%, onde nao ha segunda etapa, e 1/4 na de 1,27%",100,100,,nova
+population,77,censobr_weight,numeric,"Peso final, calibrado aos resultados definitivos da Serie Nacional",100,100,censobr_weight,mantida
+population,78,censobr_weight_fator,numeric,Razao entre o peso final e o peso de desenho,100,100,,nova
+population,79,censobr_weight_desenho,numeric,"Peso nominal do desenho: 4 na amostra de 25%, 78,74 na de 1,27%",100,100,,nova
+population,80,censobr_weight_nivel,character,Nivel em que a ancora municipal ficou na calibracao; so na amostra de 25%,100,0,,nova
+population,81,censobr_weight_ibge,integer,Peso inteiro do metodo publicado pelo IBGE; so na amostra de 25%,100,0,,nova
+population,82,censobr_weight_1965,numeric,"Peso calibrado aos Resultados Preliminares de 1965; so na amostra de 1,27%",0,100,,nova
+population,83,censobr_weight_1965_fator,numeric,"Razao entre esse peso e o de desenho; so na amostra de 1,27%",0,100,,nova
+population,84,censobr_favela,logical,"Registro em favela, so na Guanabara",100,100,,nova
+population,85,censobr_muni_corrigido,logical,Codigo de municipio corrigido na leitura,100,100,,nova
+population,86,censobr_uf_corrigida,logical,"Unidade da federacao corrigida na leitura; so na amostra de 1,27%",0,100,,nova
+population,87,censobr_diagnostico,character,"Diagnostico do dano de fita no registro; so na amostra de 1,27%",0,100,censobr_diag_households,renomeada
+population,88,censobr_variaveis_anuladas,character,Variaveis cujo valor saiu do dicionario e foi anulado,100,100,censobr_diag_households_vars,renomeada
+population,89,censobr_tipo_registro,character,"Chefe ou demais pessoas; so na amostra de 1,27%",0,100,,nova
+population,90,censobr_duplicata_mantida,logical,"Linha repetida mantida com marca; so na amostra de 1,27%",0,100,,nova
+population,91,censobr_familia_origem,character,"Como a familia foi reconstruida; so na amostra de 1,27%",0,100,,nova
+population,92,censobr_v208_imputada,logical,"Nacionalidade imputada deterministicamente; so na amostra de 1,27%",0,100,,nova
+population,93,censobr_v217_fora_da_faixa,logical,Filhos tidos fora da faixa do dicionario,0,100,,nova
+population,94,censobr_v218_fora_da_faixa,logical,Filhos vivos fora da faixa do dicionario,0,100,,nova
+population,95,censobr_flag_conjuge_mesmo_sexo,logical,Conjuge do mesmo sexo do chefe,0,100,,nova
+population,96,censobr_flag_filho_mais_velho,logical,Filho mais velho incompativel com a idade do chefe,0,100,,nova
+population,97,censobr_flag_casamento_impossivel,logical,Ano de casamento incompativel com a idade,0,100,,nova
+population,98,censobr_linha,integer,Linha do registro no arquivo de origem,100,100,,nova

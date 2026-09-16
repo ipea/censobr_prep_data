@@ -68,7 +68,6 @@ clean_microdata_table_1960|pattern|d95668b7006cf142|a4bf6b317472d42c||-244505359
 clean_tract_2022_prelim|stem|f70239ad6f29e60c|b2d6c1f7e001b204|db13251c2a825261|1913446617||t20710.1327769177s|s13654115b|13654115|rds|local|vector|||2.266|There were 4 warnings in `dplyr::mutate()`. The first warning was: ℹ In argument: `dplyr::across(dplyr::all_of(num_cols), as.numeric)`. Caused by warning: ! NAs introduzidos por coerção ℹ Run `dplyr::last_dplyr_warnings()` to see the 3 remaining warnings.|
 output_microdata_1991|pattern|70499e1559f02b54|7fa1011819e01be7||1452556710||||822819295|file|local|vector||output_microdata_1991_5739e85cd879201d*output_microdata_1991_787c89b31d78a998|976.5||
 output_microdata_1980|pattern|06dfe95d5caf9cdc|03586482bdea5b1d||706942976||||609874019|file|local|vector||output_microdata_1980_2a4fae2fb4a33a99*output_microdata_1980_120aa6c0033bd018|1278.187||
-output_microdata_1960|pattern|bcc920af5be6d44d|5707e29b162bdfd9||1491982521||||312124314|file|local|vector||output_microdata_1960_1516a788d49b8db2*output_microdata_1960_243052d2c085b44c|748.063||
 output_microdata_1970|pattern|0e2c673635fbfcfa|fac1bc1d8d0318c3||1481011226||||385311006|file|local|vector||output_microdata_1970_9d79b763476a199e*output_microdata_1970_89db28466eb860ce|856.344||
 output_tracts_paths_2022|pattern|beb087f296c33c17|7811e543392f8a00||-162927412||||435578849|file|local|vector||output_tracts_paths_2022_d8410ea0fa6ef048*output_tracts_paths_2022_2db16218b2557b84*output_tracts_paths_2022_03d18f3ac19f69fa*output_tracts_paths_2022_1c3b08203224b3ce*output_tracts_paths_2022_a122657d1e27e01a*output_tracts_paths_2022_0dda2e827b7c1584*output_tracts_paths_2022_709e58df09a983c3*output_tracts_paths_2022_6fb25d537c04ca5a|85.578||
 output_tracts_paths_2000|pattern|80a8f9a44631d4a1|ed6112d0b66af40a||-423216673||||358289624|file|local|vector||output_tracts_paths_2000_50ff8f19d8dc0be6*output_tracts_paths_2000_a0a5aad1ea3ccdf5*output_tracts_paths_2000_518bfbd0241b9088*output_tracts_paths_2000_ab2a49b6aace5e9c*output_tracts_paths_2000_6591e44c72fb226f*output_tracts_paths_2000_df56a54eece20d7d|58.189||
@@ -215,7 +214,52 @@ pesos_1960_amostra_25|pattern|360f7ce1450ebbc5|537c9e1e0fa0bb80||-373961442||||4
 validacao_definitivos_1960_amostra_25|stem|0a6120560612b80c|5487db3e2d4e7cd6|bebacfe446a23aaf|-280094157|./data_raw/microdata/1960/amostra_25/validacao_definitivos.csv|t20712.5053338891s|s100368b|100368|file|local|vector|||24.297||
 erros_1960_amostra_25|stem|c97d95fdf53a03c0|e75b3bc240c97563|93f5a3ef7ef0c924|636317572|./data_raw/microdata/1960/amostra_25/erros_amostrais.csv|t20712.5060384066s|s614b|614|file|local|vector|||60.468||
 comparacao_127_1960_amostra_25|stem|7ab88dd691a49812|7cd0c2474a232a7b|b06dd72d75538985|787732786|./data_raw/microdata/1960/amostra_25/comparacao_amostra_127.csv|t20712.506116194s|s8677b|8677|file|local|vector|||6.375|Using an external vector in selections was deprecated in tidyselect 1.1.0. ℹ Please use `all_of()` or `any_of()` instead.   # Was:   data %>% select(vars)    # Now:   data %>% select(all_of(vars))  See <https://tidyselect.r-lib.org/reference/faq-external-vector.html>.|
+clean_microdata_1960|function|8bb6f46597c92701
+download_microdata_1960|function|bd20630b5e35857d
+erros_1960_amostra_127|stem|2bb0da5ff0353dc2|d7c990a89f48efc7|b7f4500064d814a0|-892816702||t20712.5146454146s|s7487b|7487|rds|local|vector|||15.688||
+validacao_1965_1960_amostra_127|stem|d3f065905c506748|30792589d3af510a|5b1670d24e6ed1ce|-1972281259||t20712.514798373s|s31851b|31851|rds|local|vector|||9.625||
+validacao_definitivos_1960_amostra_127|stem|33897fbc80cfe15e|42760de194eaf36b|ff82bdeea48fb1ca|-1648733318||t20712.5148653871s|s31534b|31534|rds|local|vector|||2.063||
+unidades_1960|stem|f507998c7273db98|9f581a55e2a24cf4|f7b074dbe3e26f82|-781870471||t20712.6027923021s|s135b|135|rds|local|vector||unidades_1960_d0b111413eb083ab*unidades_1960_b96fb55d4bda6070*unidades_1960_6ea1f8c44b7ecac7*unidades_1960_833df055a9d15520*unidades_1960_ccff7c1c96a6f0ed*unidades_1960_6d90b3054d22bb93*unidades_1960_e54dd2925b74f3f0*unidades_1960_b50dc055ff59a4f2*unidades_1960_3b9f00178b35b621*unidades_1960_9989a18645f78309*unidades_1960_3f0306f726766123*unidades_1960_61b6ca7c04dad664*unidades_1960_9318226f76535894*unidades_1960_c1707837767bba0e*unidades_1960_67f6d4dee6d0cd27*unidades_1960_931e447b88df6263*unidades_1960_871486aad1ad8082*unidades_1960_8d14fb377fec30ea*unidades_1960_b01743018a231922*unidades_1960_012e11293ddf821a*unidades_1960_bef57bb7e420f746*unidades_1960_7121b948a222ff34*unidades_1960_f50bf8b1d3a36c2f*unidades_1960_b83fc0a9c024e04a*unidades_1960_0f115a99ea7b8c01*unidades_1960_d2765ea545405eca*unidades_1960_93506c9800e8f14b*unidades_1960_ed9d66f7bbfbaae6|3.093|pacote 'DBI' foi compilado no R versão 4.5.3. pacote 'rvest' foi compilado no R versão 4.5.2. pacote 'openxlsx' foi compilado no R versão 4.5.3. pacote 'piggyback' foi compilado no R versão 4.5.3. pacote 'purrr' foi compilado no R versão 4.5.3. pacote 'curl' foi compilado no R versão 4.5.3. pacote 'readr' foi compilado no R versão 4.5.3. pacote 'stringr' foi compilado no R versão 4.5.2. pacote 'tarchetypes' foi compilado no R versão 4.5.3. pacote 'tibble' foi compilado no R versão 4.5.2. pacote 'tidyverse' foi compilado no R versão 4.5.3. pacote 'ggplot2' foi compilado no R versão 4.5.3. pacote 'tidyr' foi compilado no R versão 4.5.3. pacote 'forcats' foi compilado no R versão 4.5.3. pacote 'lubridate' foi compilado no R versão 4.5.2. pacote 'varhandle' foi compilado no R versão 4.5.2|
+estratos_1960_compilada|stem|cbd8760b5f05ca7d|cd43b561c108f077|4a36f977a78b62ba|-2143601339||t20712.6028134639s|s415b|415|rds|local|vector|||0.297||
+compilada_1960_f4fdc2d86b56eeb0|branch|aeeeaa33d90735a1|79a01947c91028cc|8a2c77c55189841e|-252989481|./data_raw/microdata/1960/compilada/al/domicilios.parquet*./data_raw/microdata/1960/compilada/al/pessoas.parquet|t20712.613815717s|s12271583b|12271583|file|local|vector|compilada_1960||4.203|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_0ad79e9812fb20ca|branch|2b364133a02651f7|79a01947c91028cc|8a2c77c55189841e|2090849161|./data_raw/microdata/1960/compilada/ba/domicilios.parquet*./data_raw/microdata/1960/compilada/ba/pessoas.parquet|t20712.6139584061s|s56772416b|56772416|file|local|vector|compilada_1960||12.063|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_2e1a6597963dd103|branch|1b0514c876d4bbce|79a01947c91028cc|8a2c77c55189841e|-1540024513|./data_raw/microdata/1960/compilada/ce/domicilios.parquet*./data_raw/microdata/1960/compilada/ce/pessoas.parquet|t20712.6140286697s|s30346344b|30346344|file|local|vector|compilada_1960||5.594|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_418656cfd6f6f5f5|branch|0cb8e5d2bc293c03|79a01947c91028cc|8a2c77c55189841e|-1169068183|./data_raw/microdata/1960/compilada/df/domicilios.parquet*./data_raw/microdata/1960/compilada/df/pessoas.parquet|t20712.6140413188s|s1629239b|1629239|file|local|vector|compilada_1960||0.703|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_0bddebdb4a1e7787|branch|f42ded5b1314d250|79a01947c91028cc|8a2c77c55189841e|-1213397382|./data_raw/microdata/1960/compilada/fn/domicilios.parquet*./data_raw/microdata/1960/compilada/fn/pessoas.parquet|t20712.6140490329s|s75950b|75950|file|local|vector|compilada_1960||0.39|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_6f45c7fe7bf167c3|branch|daff93259a77a38a|79a01947c91028cc|8a2c77c55189841e|-1453351944|./data_raw/microdata/1960/compilada/go/domicilios.parquet*./data_raw/microdata/1960/compilada/go/pessoas.parquet|t20712.6140951639s|s18309240b|18309240|file|local|vector|compilada_1960||3.766|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_927c00425a7a0162|branch|b8bc9ddb03322ad0|79a01947c91028cc|8a2c77c55189841e|90973202|./data_raw/microdata/1960/compilada/mg/domicilios.parquet*./data_raw/microdata/1960/compilada/mg/pessoas.parquet|t20712.6143095501s|s86874547b|86874547|file|local|vector|compilada_1960||18.312|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_1ebfd3a9cebe3b0d|branch|faec74b2741730a3|79a01947c91028cc|8a2c77c55189841e|-1358405842|./data_raw/microdata/1960/compilada/mt/domicilios.parquet*./data_raw/microdata/1960/compilada/mt/pessoas.parquet|t20712.6143397415s|s8804847b|8804847|file|local|vector|compilada_1960||1.984|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_1e3543be83c5662a|branch|e3abec91441c26f9|79a01947c91028cc|8a2c77c55189841e|1054316185|./data_raw/microdata/1960/compilada/pb/domicilios.parquet*./data_raw/microdata/1960/compilada/pb/pessoas.parquet|t20712.6143845949s|s19411661b|19411661|file|local|vector|compilada_1960||3.625|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_c8d5a0120a8182fd|branch|875c5186146ca6ab|79a01947c91028cc|8a2c77c55189841e|527580524|./data_raw/microdata/1960/compilada/pe/domicilios.parquet*./data_raw/microdata/1960/compilada/pe/pessoas.parquet|t20712.6144805954s|s39745993b|39745993|file|local|vector|compilada_1960||7.907|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_763e5fc4deef0711|branch|56a68990d3d934e1|79a01947c91028cc|8a2c77c55189841e|-1325437805|./data_raw/microdata/1960/compilada/pr/domicilios.parquet*./data_raw/microdata/1960/compilada/pr/pessoas.parquet|t20712.6145770844s|s41332123b|41332123|file|local|vector|compilada_1960||7.938|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_fc758175d1e2081b|branch|0c6813b62052979e|79a01947c91028cc|8a2c77c55189841e|-978475134|./data_raw/microdata/1960/compilada/rj/domicilios.parquet*./data_raw/microdata/1960/compilada/rj/pessoas.parquet|t20712.6146538264s|s33633705b|33633705|file|local|vector|compilada_1960||6.235|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_7d7ea327b81a4992|branch|32783a86bbf552f3|79a01947c91028cc|8a2c77c55189841e|-2108485914|./data_raw/microdata/1960/compilada/rn/domicilios.parquet*./data_raw/microdata/1960/compilada/rn/pessoas.parquet|t20712.6146863341s|s11238062b|11238062|file|local|vector|compilada_1960||2.407|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_37f6124036f57625|branch|7979fc9c0e60747a|79a01947c91028cc|8a2c77c55189841e|-679109060|./data_raw/microdata/1960/compilada/rs/domicilios.parquet*./data_raw/microdata/1960/compilada/rs/pessoas.parquet|t20712.6148154456s|s51747167b|51747167|file|local|vector|compilada_1960||10.906|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_86ec4036bc2780d3|branch|517cb6fdf25aee3e|79a01947c91028cc|8a2c77c55189841e|-1569282343|./data_raw/microdata/1960/compilada/sa/domicilios.parquet*./data_raw/microdata/1960/compilada/sa/pessoas.parquet|t20712.6148346673s|s3522839b|3522839|file|local|vector|compilada_1960||1.172|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_ce3afff7106ca822|branch|37ccc2e11bbd5b4d|79a01947c91028cc|8a2c77c55189841e|-766465699|./data_raw/microdata/1960/compilada/se/domicilios.parquet*./data_raw/microdata/1960/compilada/se/pessoas.parquet|t20712.6148589146s|s8266215b|8266215|file|local|vector|compilada_1960||1.813|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_8c5a7027d0424735|branch|f0a0e76223cbfdfc|79a01947c91028cc|8a2c77c55189841e|1642482561|./data_raw/microdata/1960/compilada/sp/domicilios.parquet*./data_raw/microdata/1960/compilada/sp/pessoas.parquet|t20712.6150462551s|s123791941b|123791941|file|local|vector|compilada_1960||15.921|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_2cf5e2e365f1a11a|branch|dd2c3a5755e01a2f|79a01947c91028cc|8a2c77c55189841e|-1641762261|./data_raw/microdata/1960/compilada/ro/domicilios.parquet*./data_raw/microdata/1960/compilada/ro/pessoas.parquet|t20712.6150957756s|s90318b|90318|file|local|vector|compilada_1960||3.843|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_6e9c5718161d35eb|branch|a53117177b2ef11a|79a01947c91028cc|8a2c77c55189841e|1679343375|./data_raw/microdata/1960/compilada/ac/domicilios.parquet*./data_raw/microdata/1960/compilada/ac/pessoas.parquet|t20712.6151407902s|s163092b|163092|file|local|vector|compilada_1960||3.734|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_7233aef3987a17f9|branch|339618b8673f212b|79a01947c91028cc|8a2c77c55189841e|1791664855|./data_raw/microdata/1960/compilada/am/domicilios.parquet*./data_raw/microdata/1960/compilada/am/pessoas.parquet|t20712.6151858106s|s425919b|425919|file|local|vector|compilada_1960||3.734|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_e349dd693a4eacca|branch|6c2ed1eddf3ed90a|79a01947c91028cc|8a2c77c55189841e|1452034678|./data_raw/microdata/1960/compilada/rr/domicilios.parquet*./data_raw/microdata/1960/compilada/rr/pessoas.parquet|t20712.6152305986s|s77136b|77136|file|local|vector|compilada_1960||3.718|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_bd32f8dcfedf6db0|branch|5677874597fa8fb4|79a01947c91028cc|8a2c77c55189841e|-464254209|./data_raw/microdata/1960/compilada/pa/domicilios.parquet*./data_raw/microdata/1960/compilada/pa/pessoas.parquet|t20712.615276748s|s842256b|842256|file|local|vector|compilada_1960||3.843|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_17697e745eea1d0e|branch|df68e66e62ae2cb9|79a01947c91028cc|8a2c77c55189841e|-1634682587|./data_raw/microdata/1960/compilada/ap/domicilios.parquet*./data_raw/microdata/1960/compilada/ap/pessoas.parquet|t20712.6153219698s|s108592b|108592|file|local|vector|compilada_1960||3.75|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_ad593cab5e8abe44|branch|3199d012ebdebdd6|79a01947c91028cc|8a2c77c55189841e|1673333172|./data_raw/microdata/1960/compilada/ma/domicilios.parquet*./data_raw/microdata/1960/compilada/ma/pessoas.parquet|t20712.6153810609s|s1274926b|1274926|file|local|vector|compilada_1960||5.031|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_54a8a546c3ed2476|branch|4162425bc94a829b|79a01947c91028cc|8a2c77c55189841e|1975687033|./data_raw/microdata/1960/compilada/pi/domicilios.parquet*./data_raw/microdata/1960/compilada/pi/pessoas.parquet|t20712.6154659332s|s661727b|661727|file|local|vector|compilada_1960||7.094|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_fa65156ef2896641|branch|45f5af727e4f3e63|79a01947c91028cc|8a2c77c55189841e|-1715540993|./data_raw/microdata/1960/compilada/es/domicilios.parquet*./data_raw/microdata/1960/compilada/es/pessoas.parquet|t20712.6155528439s|s602689b|602689|file|local|vector|compilada_1960||7.172|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_89f3f6cda1f808ce|branch|994d3d11b2499915|79a01947c91028cc|8a2c77c55189841e|1876439053|./data_raw/microdata/1960/compilada/gb/domicilios.parquet*./data_raw/microdata/1960/compilada/gb/pessoas.parquet|t20712.6156427782s|s1759317b|1759317|file|local|vector|compilada_1960||7.5|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960_4bf7158764961b59|branch|ad33630c80178ffe|79a01947c91028cc|8a2c77c55189841e|-221520472|./data_raw/microdata/1960/compilada/sc/domicilios.parquet*./data_raw/microdata/1960/compilada/sc/pessoas.parquet|t20712.6157310765s|s1157251b|1157251|file|local|vector|compilada_1960||7.344|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+compilada_1960|pattern|637da1458448e8b9|79a01947c91028cc||1793338418||||554937095|file|local|vector||compilada_1960_f4fdc2d86b56eeb0*compilada_1960_0ad79e9812fb20ca*compilada_1960_2e1a6597963dd103*compilada_1960_418656cfd6f6f5f5*compilada_1960_0bddebdb4a1e7787*compilada_1960_6f45c7fe7bf167c3*compilada_1960_927c00425a7a0162*compilada_1960_1ebfd3a9cebe3b0d*compilada_1960_1e3543be83c5662a*compilada_1960_c8d5a0120a8182fd*compilada_1960_763e5fc4deef0711*compilada_1960_fc758175d1e2081b*compilada_1960_7d7ea327b81a4992*compilada_1960_37f6124036f57625*compilada_1960_86ec4036bc2780d3*compilada_1960_ce3afff7106ca822*compilada_1960_8c5a7027d0424735*compilada_1960_2cf5e2e365f1a11a*compilada_1960_6e9c5718161d35eb*compilada_1960_7233aef3987a17f9*compilada_1960_e349dd693a4eacca*compilada_1960_bd32f8dcfedf6db0*compilada_1960_17697e745eea1d0e*compilada_1960_ad593cab5e8abe44*compilada_1960_54a8a546c3ed2476*compilada_1960_fa65156ef2896641*compilada_1960_89f3f6cda1f808ce*compilada_1960_4bf7158764961b59|161.702||
+output_microdata_1960_94fbdfb23a0d5ce1|branch|78cc71f9932b66c7|3adf2faaeb730977|6ce130e20ed317e8|1966941274|./data/microdata_sample/1960/1960_households_v0.7.0.parquet|t20712.621746544s|s89772629b|89772629|file|local|vector|output_microdata_1960||441.968||
+output_microdata_1960_05b92a9aa7e63ee5|branch|d922353837c05491|3adf2faaeb730977|6ce130e20ed317e8|-260702267|./data/microdata_sample/1960/1960_population_v0.7.0.parquet|t20712.6372609706s|s388626914b|388626914|file|local|vector|output_microdata_1960||1340.063||
+output_microdata_1960|pattern|69cc46e638d5d0e7|3adf2faaeb730977||1491982521||||478399543|file|local|vector||output_microdata_1960_94fbdfb23a0d5ce1*output_microdata_1960_05b92a9aa7e63ee5|1782.031||
+validacao_1960|stem|a82953ac801b5fa0|32e161c3b60dc561|63f6edbe40a1c019|-1939605913|./data_raw/microdata/1960/compilada/validacao_definitivos.csv|t20712.6374100319s|s66386b|66386|file|local|vector|||12.547|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+dicionario_1960_compilada|stem|3b741ce5f5e9b8e7|16593fdc461cf345|13a218a9f7472a71|1560189361|./references/microdata_1960_compilacao_dicionario.csv|t20712.6374247773s|s16985b|16985|file|local|vector|||1.125||
 states_censobr|function|12be39b13c66ef36
+COLUNAS_1960_DOM|object|82a2796f7eeba0b6
+COLUNAS_1960_PES|object|f6558c3e82975840
+NOMES_1960_ANTIGOS|object|449f4a208428be60
+ROTULOS_1960_CENSOBR|object|0cf1f6f6a27c8763
 cast_censobr_types|function|c16601eefad642bd
 unzip_censobr|function|aab397e780bfe943
 VIZINHAS_1960|object|8e9a29092487da70
@@ -235,19 +279,23 @@ add_region_info|function|f0ece2ba0ee3a628
 add_state_info|function|c684c994f3388623
 write_censobr_parquet|function|886d5a747ef7bb30
 LINHAS_1960_AMOSTRA_25|object|f6b75cabdf95dfed
+UF_1960_AMOSTRA_127|object|ccad471cb64a2fc3
 detect_year_from_string|function|7e1010acf860e4c3
 read_1960_amostra_127|function|704a0c3157ea4569
 dicionario_municipality|object|8dbebb44c4ecc07c
 UF_SIGLAS|object|60faf777c6394fdb
 detect_1960_amostra_127|function|8730bf830545d6c8
-recode_datasets_2000|function|50d8129d5cb9cdbf
+MUNI_1960_ATUAL|object|0641b150b265f4c0
+TIPOS_1960_FALTANTES|object|9e6813d4049aacec
 UF_1960_AMOSTRA_25|object|09121aada89c30fa
+UF_1960_CODIGOS|object|f236d198b3ae4551
+recode_datasets_2000|function|50d8129d5cb9cdbf
 raking_1960_amostra_127|function|e40c05859c1e9767
 coress|object|9f0cda529028d8d9
 list_folders|function|bcfbf4f7465afa51
 match_names_2000|function|f36f135566f6ab46
 detect_2010_table_name|function|e48f91bbc36ef728
-GEO_COLS_CENSOBR|object|1718f133d023ac48
+GEO_COLS_CENSOBR|object|f9abd0917865cdd6
 rename_cols_censobr|function|05384b76ebeb16f1
 build_1960_amostra_25|function|b7b970bf348864a3
 recode_datasets_2022|function|6c79d186791eeff9
@@ -260,6 +308,7 @@ readmerge_censobr|function|52e5078511ba17e8
 clean_microdata_2010|function|a9ba352ff16a2b43
 add_geo_1970|function|8177f969783f45c6
 clean_microdata_2000|function|52dcda7a09234f1f
+dicionario_1960|function|a7365279a5501f67
 save_microdata_1991|function|f98ef4b056611681
 save_microdata_1970|function|970494cf50ce858a
 save_microdata_1980|function|3d194f47a9063093
@@ -272,15 +321,18 @@ get_areas_ponderacao_2010|function|f68147103ee1aec8
 download_1960_amostra_127|function|8a90e3cb6c3e3d35
 download_tract_2022_prelim|function|d12567dd643944db
 get_release_legacy|function|8824c99a1a4688f2
-clean_microdata_1960|function|8bb6f46597c92701
 save_1960_amostra_127|function|88259f8550666ef4
 derive_households_1970|function|5424809ee075757a
 save_tracts_2022_prelim|function|4a34b8ed6c92bcd2
 leitura_1960_amostra_25|function|64e77e5d4b006975
+estratos_1960|function|fdc3df67c8f3289f
 pick_latest_per_uf|function|95da64d545f4ca88
 compare_127_1960_amostra_25|function|be8940f3a5729d66
+validate_1960|function|d0f0307f3e86275d
+sampling_errors_1960|function|98dbd3127b0270ac
 sampling_errors_1960_amostra_25|function|aef06a2bde7df361
 validate_definitivos_1960_amostra_25|function|dd4af797925c4f14
+compile_1960|function|c48540aeeb7e7be9
 weight_1960_amostra_25|function|887ab5f9aeaa4764
 download_microdata_2010|function|5e8495b7cc7e601a
 download_microdata_2022|function|6dcce093fe5bb92b
@@ -290,12 +342,11 @@ download_microdata_2000|function|75410818e036ff8b
 make_theme_dataset_2000|function|c54854a9029cd478
 recode_basico_2000|function|ab3085cc994074da
 clean_tracts_2010|function|b4c88ebe5f0bb3ed
-relocate_geo_cols_censobr|function|094c1adcd4a1d0fc
+relocate_geo_cols_censobr|function|3bd92d03cc946aea
 make_theme_dataset_2022|function|878e519203448fde
 recode_basico_2022|function|54b121b6066265d7
 sampling_errors_1960_amostra_127|function|8f835f7733f0036c
 calibrate_1960_amostra_127|function|97cda427076263e8
-download_microdata_1960|function|bd20630b5e35857d
 download_1960_amostra_25|function|3a8456466f72a731
 download_microdata_1991|function|b938accf3aa1da2c
 download_microdata_1970|function|21603fb1ecc14d73
@@ -304,18 +355,16 @@ read_1960_amostra_25|function|661bb6d296cd5f6a
 audit_1960_amostra_25|function|acb0dd76f11e0dfc
 download_tract_2010|function|7e2d4e73b72737ac
 clean_tracts_2000|function|d564b1efb91a37f4
-clean_tracts_2022_prelim|function|f2a59b38d68ba929
-save_tracts_2010|function|286addd001ffb308
-clean_microdata_1991|function|4578f2aea58e752e
-save_tracts_2022|function|572fd681a24160f8
-save_microdata_2010|function|ab40ac63d716a829
-save_tracts_2000|function|425a52004a8e0c3f
-clean_microdata_1980|function|ac775ae4e3423f16
-clean_microdata_2022|function|ce31d7f675b0ca7b
-save_microdata_1960|function|70a977f732957651
-save_microdata_2000|function|ca4f3979c3eae3b2
-clean_microdata_1970|function|1a91a132e1b0d966
+clean_tracts_2022_prelim|function|fc20e0c0178b5baf
+save_tracts_2010|function|1194811cd154610e
+clean_microdata_1991|function|d7f63d7073696e60
+save_tracts_2022|function|37e791480caf0178
+save_microdata_2010|function|a4b55d89dc8e5300
+save_tracts_2000|function|161330701d1e8450
+clean_microdata_1980|function|94fa8dfffb2ff608
+clean_microdata_2022|function|e7e101bc8b5a4379
+save_microdata_2000|function|59a8ad1bfb366864
+save_microdata_1960|function|d14193a740d73927
+clean_microdata_1970|function|a1929d4069711170
 clean_tracts_2022|function|4de388b5f28b06ad
-erros_1960_amostra_127|stem|2bb0da5ff0353dc2|d7c990a89f48efc7|b7f4500064d814a0|-892816702||t20712.5146454146s|s7487b|7487|rds|local|vector|||15.688||
-validacao_1965_1960_amostra_127|stem|d3f065905c506748|30792589d3af510a|5b1670d24e6ed1ce|-1972281259||t20712.514798373s|s31851b|31851|rds|local|vector|||9.625||
-validacao_definitivos_1960_amostra_127|stem|33897fbc80cfe15e|42760de194eaf36b|ff82bdeea48fb1ca|-1648733318||t20712.5148653871s|s31534b|31534|rds|local|vector|||2.063||
+erros_1960|stem|410570b2988e1884|b9a5ef38131ba376|3b93f4517f7c0421|1532038630|./data_raw/microdata/1960/compilada/erros_amostrais.csv|t20712.6387257243s|s707b|707|file|local|vector|||42.875||
