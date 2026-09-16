@@ -123,7 +123,7 @@ O IBGE publica o tema Pessoa02 de São Paulo com os nomes das 170 variáveis des
 - **[IBGE]** Sete variáveis têm decimais: os quatro pesos (13 decimais) e `D0240` (moradores por dormitório, 2 inteiros e 2 decimais), `D0360` e `F0260` (rendimentos per capita, 9 inteiros e 2 decimais).
 - **[produto]** `code_weighting` existe só nos produtos de 2000 e 2010. 1970, 1980 e 1991 não a têm, e 1960 não tem `code_muni` (não há crosswalk 1960 → 2010; desde 13/09/2026 tem `code_state`, `abbrev_state`, `name_state`, `code_region`, `name_region` e `name_muni`, além de `code_muni_1960`). A ausência em 2022 rompe com 2000/2010, não com "todas as edições".
 - **[produto]** O pipeline grava apenas `2022_<tabela>.publico_<versão>.parquet`; nenhum arquivo `.controlado` é produzido aqui, e o consumidor, no HEAD do GitHub, ainda grava o nome sem sufixo.
-- **[produto]** Tamanhos em disco (v0.7.0): households 144.295.923 bytes (137,61 MiB), population 639.194.018 (609,58 MiB), families 95,08 MiB, mortality 5,50 MiB.
+- **[produto]** Tamanhos em disco (v1.0.0): households 144.164.237 bytes (137,49 MiB), population 639.164.776 (609,56 MiB), families 99.665.411 (95,05 MiB), mortality 5.762.209 (5,50 MiB).
 - **[IBGE]** O controle `D0100` é uma sequência nacional **com lacunas**: vai de 1 a 7.806.723 com 116.809 valores ausentes (1,50%) — exatamente os domicílios eliminados pela subamostra de 50% e pela supressão global. Na versão de acesso controlado, seis variáveis da tabela de pessoas excedem 32 bits (a área de ponderação e os cinco códigos de país `P0510`, `P0590`, `P0630`, `P0830`, `P1150`), não só uma.
 
 ---

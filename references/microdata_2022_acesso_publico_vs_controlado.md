@@ -112,12 +112,12 @@ sufixo de modalidade entra no token da tabela, e o nome mantém os três
 campos separados por `_` das outras edições. Nenhum arquivo `.controlado` é
 produzido aqui.
 
-| tabela | bytes (v0.7.0) | MiB | linhas | colunas |
+| tabela | bytes (v1.0.0) | MiB | linhas | colunas |
 |---|---:|---:|---:|---:|
-| households | 144.295.923 | 137,61 | 7.689.914 | 60 (55 + 5) |
-| population | 639.194.018 | 609,58 | 21.538.508 | 173 (168 + 5) |
-| families | 99.697.955 | 95,08 | 6.550.107 | 28 (23 + 5) |
-| mortality | 5.762.231 | 5,50 | 430.961 | 19 (14 + 5) |
+| households | 144.164.237 | 137,49 | 7.689.914 | 60 (55 + 5) |
+| population | 639.164.776 | 609,56 | 21.538.508 | 173 (168 + 5) |
+| families | 99.665.411 | 95,05 | 6.550.107 | 28 (23 + 5) |
+| mortality | 5.762.209 | 5,50 | 430.961 | 19 (14 + 5) |
 
 280 colunas ao todo: 260 variáveis do IBGE e 5 de geografia em cada tabela —
 `code_region`, `name_region`, `code_state`, `abbrev_state`, `name_state`,

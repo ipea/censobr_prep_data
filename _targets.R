@@ -85,13 +85,15 @@ targets::tar_source('./R')
 
 list(
   
-  # v1.0.0 e nao v0.7.1: 1960 deixou de ser a compilacao antiga, que nunca fora
+  # A versao publica anterior e a v0.6.0. O salto de numero e proporcional ao
+  # que mudou desde ela: 1960 deixou de ser a compilacao antiga, que nunca fora
   # auditada, e passou a sair da reconstrucao dos dois arquivos brutos -- duas
   # tabelas novas, de 66 e 98 colunas, com os pesos calibrados aos resultados
-  # definitivos da Serie Nacional e o desenho amostral de verdade. Na rodada
-  # anterior, a v0.7.0, 1970 trocara de fonte (FTP -> versao CEM no
-  # release_legacy), o shift de SP em pessoa02 de 2010 fora corrigido e 1980
-  # mudara code_muni, V602, V212 e V213.
+  # definitivos da Serie Nacional e o desenho amostral de verdade; 1970 trocou
+  # de fonte (FTP -> versao CEM no release_legacy); o shift de SP em pessoa02 de
+  # 2010 foi corrigido; 1980 mudou code_muni, V602, V212 e V213; entrou a
+  # amostra publica de 2022; e os setores preliminares de 2022 recuperaram
+  # 15.969.053 pessoas que o inner join com o basico definitivo descartava.
   tar_target(name = data_version,
              command = "v1.0.0"
              ),
