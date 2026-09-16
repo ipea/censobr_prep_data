@@ -62,7 +62,8 @@
 #
 # Public API, na ordem dos targets: download_1960_amostra_25,
 # audit_1960_amostra_25, read_1960_amostra_25, build_1960_amostra_25,
-# weight_1960_amostra_25.
+# weight_1960_amostra_25, validate_definitivos_1960_amostra_25,
+# sampling_errors_1960_amostra_25, compare_127_1960_amostra_25.
 
 
 # As dezessete unidades que sobreviveram, do nome do arquivo para o código de
@@ -617,5 +618,241 @@ weight_1960_amostra_25 <- function(paths, uf, municipios_path, definitivos_path)
           domicilios[censobr_weight_nivel != "municipio x situacao", .N], " domicilios")
 
   rm(domicilios, pessoas); gc(verbose = FALSE)
+  saida
+}
+
+
+# ------------------------------------------------------------------------------
+# Passo 6 — reprodução das tabelas publicadas
+#
+# A pergunta é uma só: com os pesos do passo 5, esta amostra devolve o que o
+# IBGE publicou? A Série Nacional traz, por unidade da federação, a condição de
+# presença (tabela 32), a idade por sexo (33), a situação do domicílio (34), a
+# cor (37), a alfabetização de 5 anos e mais (40) e os domicílios particulares
+# (7). São seis tabelas e 34 unidades, já transcritas e com a aritmética
+# fechada em references/censo_1960_resultados_definitivos_serie_nacional.csv.
+#
+# O que informa não é o que fecha por construção. censobr_weight calibra à
+# população por município e situação, então a tabela 34 fecha por definição e a
+# 32 quase, porque o universo é de presentes. O que testa de verdade são as
+# tabelas que a calibração não viu: a idade por sexo, a cor, a alfabetização e
+# a contagem de domicílios. Se elas saírem certas, o arquivo e os pesos estão
+# certos; se saírem tortas, o erro está na leitura, não no peso.
+#
+# Para estas dezessete unidades há uma circularidade a declarar: as tabelas da
+# Série Nacional foram apuradas com esta mesma amostra, com o método que
+# censobr_weight_ibge reproduz. Então a comparação com censobr_weight_ibge mede
+# o quanto a nossa leitura difere da do IBGE, e a comparação com censobr_weight
+# mede quanto o refinamento municipal desloca as margens.
+# ------------------------------------------------------------------------------
+validate_definitivos_1960_amostra_25 <- function(paths, definitivos_path){
+
+  message("Validating 1960 amostra de 25% against the Serie Nacional")
+
+  def <- data.table::fread(definitivos_path, encoding = "UTF-8")
+  def <- def[nivel == "uf" & uf60 %in% UF_1960_AMOSTRA_25]
+
+  medido <- list()
+  for(uf in names(UF_1960_AMOSTRA_25)){
+    p <- data.table::setDT(arrow::read_parquet(
+      file.path("./data_raw/microdata/1960/amostra_25", uf, "pessoas_pesos.parquet"),
+      col_select = c("UF", "V118", "V202", "V204", "V204B", "V206", "V211",
+                     "censobr_upa", "censobr_weight", "censobr_weight_ibge")))
+
+    p[, sexo     := data.table::fifelse(V202 %in% c(1L, 3L, 5L), "homens", "mulheres")]
+    p[, presente := V202 %in% c(1L, 2L, 5L, 6L)]
+    p[, residente:= V202 %in% c(1L, 2L, 3L, 4L)]
+    p[, situacao := data.table::fifelse(V118 == 5L, "rural", "urbana")]
+    p[, idade    := data.table::fifelse(V204 == 1L, V204B,
+                    data.table::fifelse(V204 == 5L, 100L + V204B,
+                    data.table::fifelse(V204 == 0L, 0L, NA_integer_)))]
+    p[, faixa := cut(idade, c(-1, 4, 9, 14, 19, 24, 29, 39, 49, 59, 69, Inf),
+                     labels = c("0 a 4", "5 a 9", "10 a 14", "15 a 19", "20 a 24", "25 a 29",
+                                "30 a 39", "40 a 49", "50 a 59", "60 a 69", "70 e mais"))]
+    p[, faixa := as.character(faixa)][is.na(faixa), faixa := "ignorada"]
+    # a tabela 37 publica cinco categorias, e "sem declaracao" e so o ignorado
+    # (V206 = 9): em Mato Grosso o publicado da 139 e o nosso 9 da 138. O codigo
+    # 8, india, entra em pardos, que e onde o censo de 1960 o classificava
+    p[, cor := c("4" = "brancos", "5" = "pretos", "6" = "amarelos", "7" = "pardos",
+                 "8" = "pardos", "9" = "sem declaracao")[as.character(V206)]]
+    p[, alfab := data.table::fifelse(V211 %in% c(0L, 1L), "sabem",
+                 data.table::fifelse(V211 %in% c(2L, 3L), "nao sabem", NA_character_))]
+
+    for(w in c("censobr_weight", "censobr_weight_ibge")){
+      p[, peso := as.numeric(get(w))]
+      pres <- p[presente == TRUE]
+      medido[[length(medido) + 1]] <- data.table::rbindlist(list(
+        p[presente  == TRUE, .(tabela = 32L, item = "presente",  valor = sum(peso)), by = sexo],
+        p[residente == TRUE, .(tabela = 32L, item = "residente", valor = sum(peso)), by = sexo],
+        pres[, .(tabela = 33L, valor = sum(peso)), by = .(item = faixa, sexo)],
+        pres[, .(tabela = 34L, valor = sum(peso)), by = .(item = situacao, sexo)],
+        pres[!is.na(cor), .(tabela = 37L, valor = sum(peso)), by = .(item = cor, sexo)],
+        pres[idade >= 5, .(tabela = 40L, item = "5 e mais", valor = sum(peso)), by = sexo],
+        pres[idade >= 5 & !is.na(alfab), .(tabela = 40L, valor = sum(peso)), by = .(item = alfab, sexo)]
+      ), fill = TRUE)[, `:=`(uf60 = as.integer(UF_1960_AMOSTRA_25[[uf]]), peso = w)]
+    }
+    rm(p); gc(verbose = FALSE)
+  }
+  medido <- data.table::rbindlist(medido)
+  medido[, valor := round(valor)]
+
+  # o publicado, na mesma forma
+  pub <- def[tabela %in% c(32L, 33L, 34L, 37L, 40L) & sexo %in% c("homens", "mulheres"),
+             .(uf60, tabela, item, sexo, publicado = valor)]
+  cmp <- merge(medido, pub, by = c("uf60", "tabela", "item", "sexo"), all.x = TRUE)
+  cmp[, `:=`(dif = valor - publicado, dif_pct = round(100 * (valor - publicado) / publicado, 3))]
+
+  dir.create("./data_raw/microdata/1960/amostra_25", recursive = TRUE, showWarnings = FALSE)
+  saida <- "./data_raw/microdata/1960/amostra_25/validacao_definitivos.csv"
+  data.table::fwrite(cmp[order(peso, tabela, uf60, item, sexo)], saida)
+
+  resumo <- cmp[!is.na(publicado), .(celulas = .N,
+                                     erro_mediano_pct = round(median(abs(dif_pct), na.rm = TRUE), 2),
+                                     erro_max_pct = round(max(abs(dif_pct), na.rm = TRUE), 2)),
+                by = .(peso, tabela)]
+  print(resumo)
+  saida
+}
+
+
+# ------------------------------------------------------------------------------
+# Passo 7 — erros amostrais
+#
+# O desenho é de uma etapa: dentro de cada estrato — pasta × situação — os
+# domicílios foram sorteados sistematicamente, um em quatro. A variância de um
+# total é a dispersão dos totais expandidos entre os domicílios do estrato, com
+# a correção de população finita de 1/4:
+#
+#   V = Σ_h (1 − f) · n_h/(n_h − 1) · Σ_i (w_i y_i − média_h)²,  f = 1/4
+#
+# É o que survey::svydesign(ids = ~censobr_upa, strata = ~censobr_estrato,
+# weights = ~censobr_weight, fpc = ~censobr_fpc) daria, escrito à mão para não
+# acrescentar dependência ao pipeline. O estrato com um domicílio só não mede
+# variância e entra com contribuição zero; são cinco em 18.400.
+#
+# O efeito de desenho esperado fica perto de 1 nas variáveis de domicílio, e
+# acima de 1 nas de pessoa, pela aglomeração dentro do domicílio: o domicílio
+# entra inteiro ou não entra.
+# ------------------------------------------------------------------------------
+sampling_errors_1960_amostra_25 <- function(paths){
+
+  message("Computing sampling errors in 1960 amostra de 25%")
+
+  dominios <- list(
+    pessoas          = quote(TRUE),
+    presentes        = quote(!V202 %in% c(3L, 4L)),
+    urbana           = quote(!V202 %in% c(3L, 4L) & V118 != 5L),
+    rural            = quote(!V202 %in% c(3L, 4L) & V118 == 5L),
+    analfabetos_15   = quote(V211 %in% c(2L, 3L) & !is.na(idade) & idade >= 15L),
+    criancas_0_4     = quote(!V202 %in% c(3L, 4L) & !is.na(idade) & idade <= 4L),
+    com_rendimento   = quote(V219 %in% 1:8))
+
+  acum <- list(); n_total <- 0; N_total <- 0
+  for(uf in names(UF_1960_AMOSTRA_25)){
+    p <- data.table::setDT(arrow::read_parquet(
+      file.path("./data_raw/microdata/1960/amostra_25", uf, "pessoas_pesos.parquet"),
+      col_select = c("UF", "V118", "V202", "V204", "V204B", "V211", "V219",
+                     "censobr_upa", "censobr_estrato", "censobr_weight")))
+    p[, idade := data.table::fifelse(V204 == 1L, V204B,
+                 data.table::fifelse(V204 == 5L, 100L + V204B, NA_integer_))]
+    n_total <- n_total + nrow(p); N_total <- N_total + sum(p$censobr_weight)
+
+    for(d in names(dominios)){
+      p[, y := as.integer(eval(dominios[[d]]))]
+      # o total do dominio em cada domicilio, ja expandido
+      dom <- p[, .(t = sum(y * censobr_weight), n_pes = sum(y)),
+               by = .(censobr_estrato, censobr_upa)]
+      acum[[length(acum) + 1]] <- dom[, .(dominio = d, uf = uf, n_dom = .N,
+                                          soma = sum(t), soma2 = sum(t^2),
+                                          pessoas = sum(n_pes)), by = censobr_estrato]
+    }
+    rm(p); gc(verbose = FALSE)
+  }
+  e <- data.table::rbindlist(acum)
+
+  # a variancia dentro do estrato, com correcao finita de 1/4
+  e[, v := data.table::fifelse(n_dom > 1,
+             (1 - 0.25) * n_dom / (n_dom - 1) * (soma2 - soma^2 / n_dom), 0)]
+  r <- e[, .(estimativa = sum(soma), variancia = sum(v), pessoas = sum(pessoas),
+             estratos = .N, domicilios = sum(n_dom)), by = dominio]
+  r[, `:=`(erro_padrao = sqrt(variancia),
+           cv_pct = round(100 * sqrt(variancia) / estimativa, 3))]
+  # efeito de desenho: quantas vezes esta amostra e menos precisa que um sorteio
+  # simples de pessoas do mesmo tamanho, com a mesma correcao finita
+  r[, p_chapeu := estimativa / N_total]
+  r[, v_srs := N_total^2 * (1 - 0.25) * p_chapeu * (1 - p_chapeu) / (n_total - 1)]
+  # num dominio que e quase toda a populacao o denominador tende a zero e o
+  # efeito de desenho perde sentido: fica ausente
+  r[, deff := data.table::fifelse(p_chapeu < 0.98, round(variancia / v_srs, 2), NA_real_)]
+  r[, c("variancia", "p_chapeu", "v_srs") := NULL]
+  print(r[order(-estimativa)])
+
+  saida <- "./data_raw/microdata/1960/amostra_25/erros_amostrais.csv"
+  data.table::fwrite(r, saida)
+  saida
+}
+
+
+# ------------------------------------------------------------------------------
+# Passo 8 — a amostra de 1,27% dentro desta
+#
+# A amostra de 1,27% é uma subamostra desta: uma pasta em vinte, sorteada em
+# 1965 do mesmo cadastro. Os dois arquivos, portanto, descrevem os mesmos
+# domicílios, e casam pela chave do questionário — pasta e boletim. É a única
+# validação registro a registro que existe para 1960, e nenhuma das duas
+# amostras a tem sozinha.
+#
+# Ela serve a dois propósitos. O primeiro é alarme de erro nosso: se a chave
+# casar mal, ou se o município e a situação divergirem acima de uma fração de
+# um por cento, o defeito está no nosso parsing, não nas fontes. O segundo é
+# medir o desacordo real entre as duas transcrições, que existe e é grande em
+# algumas variáveis — a de 1,27% foi perfurada de cartões que sofreram dano de
+# fita, e a de 25% não. Este passo não corrige nada: entrega a matriz de
+# divergência por unidade da federação e por variável, que é o insumo da
+# compilação das duas amostras.
+# ------------------------------------------------------------------------------
+compare_127_1960_amostra_25 <- function(paths, path_127){
+
+  message("Comparing 1960 amostra de 25% with the 1,27% sample, record by record")
+
+  d127 <- data.table::setDT(arrow::read_parquet(path_127))
+  d127 <- d127[UF %in% UF_1960_AMOSTRA_25]
+  d127[, `:=`(pasta_n = as.integer(pasta), boletim_n = as.integer(boletim))]
+  vars <- c("V101", "V102", "V103", "V104", "V105", "V106", "V107",
+            "V108", "V109", "V110", "V111", "V112", "V113", "V116", "V118")
+
+  out <- list()
+  for(uf in names(UF_1960_AMOSTRA_25)){
+    codigo <- as.integer(UF_1960_AMOSTRA_25[[uf]])
+    a <- data.table::setDT(arrow::read_parquet(
+      file.path("./data_raw/microdata/1960/amostra_25", uf, "domicilios_pesos.parquet"),
+      col_select = c("UF", "v001", "v002", vars)))
+    b <- d127[UF == codigo, c("pasta_n", "boletim_n", vars), with = FALSE]
+    if(nrow(b) == 0) next
+
+    m <- merge(a, b, by.x = c("v001", "v002"), by.y = c("pasta_n", "boletim_n"),
+               suffixes = c("_25", "_127"))
+    linhas <- data.table::rbindlist(lapply(vars, function(v){
+      x <- m[[paste0(v, "_25")]]; y <- m[[paste0(v, "_127")]]
+      comparaveis <- !is.na(x) & !is.na(y)
+      data.table(uf = uf, variavel = v, comparaveis = sum(comparaveis),
+                 divergentes = sum(comparaveis & x != y))
+    }))
+    linhas[, `:=`(casados = nrow(m), na_127 = nrow(b), sem_par_127 = nrow(b) - nrow(m))]
+    out[[length(out) + 1]] <- linhas
+    rm(a, b, m); gc(verbose = FALSE)
+  }
+  r <- data.table::rbindlist(out)
+  r[, divergencia_pct := round(100 * divergentes / comparaveis, 2)]
+
+  saida <- "./data_raw/microdata/1960/amostra_25/comparacao_amostra_127.csv"
+  data.table::fwrite(r[order(uf, variavel)], saida)
+
+  message("  domicilios da amostra de 1,27% nas dezessete unidades: ",
+          format(sum(unique(r[, .(uf, na_127)])$na_127), big.mark = ".", decimal.mark = ","),
+          " | casados: ", format(sum(unique(r[, .(uf, casados)])$casados), big.mark = ".", decimal.mark = ","),
+          " | sem par: ", sum(unique(r[, .(uf, sem_par_127)])$sem_par_127))
+  print(r[, .(divergencia_pct = round(100 * sum(divergentes) / sum(comparaveis), 2)),
+          by = variavel][order(-divergencia_pct)])
   saida
 }

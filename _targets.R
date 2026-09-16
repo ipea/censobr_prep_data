@@ -309,6 +309,27 @@ list(
              format = "file"
              ),
 
+  # as duas validacoes agregam o pais inteiro e por isso nao sao ramificadas;
+  # leem os parquets por UF e acumulam -- ver R/microdata_1960_amostra_25.R
+  tar_target(name = validacao_definitivos_1960_amostra_25,
+             command = validate_definitivos_1960_amostra_25(pesos_1960_amostra_25,
+                                                            gabarito_1960_definitivos),
+             format = "file"
+             ),
+
+  tar_target(name = erros_1960_amostra_25,
+             command = sampling_errors_1960_amostra_25(pesos_1960_amostra_25),
+             format = "file"
+             ),
+
+  # a unica validacao registro a registro que 1960 tem: a amostra de 1,27% e
+  # subamostra desta e casa pela chave do questionario
+  tar_target(name = comparacao_127_1960_amostra_25,
+             command = compare_127_1960_amostra_25(pesos_1960_amostra_25,
+                                                   output_1960_amostra_127[2]),
+             format = "file"
+             ),
+
   # 02. microdata 1970 ---------------------------------------------------------------
 
   # a fonte e a versao CEM, no release_legacy: o FWF do FTP traz 1.785

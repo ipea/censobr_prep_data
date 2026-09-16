@@ -1,0 +1,165 @@
+# Codigo de Zonas Fisiograficas, Municipios e Distritos de 1960 -- ESTADO DO PARANA
+# Lido nas folhas de contato. Formato: pagina | codigo do municipio | NOME DO MUNICIPIO | codigo:nome do distrito, ...
+240|7100|ANTONINA|01:Antonina,03:Cacatu
+240|7101|GUARAQUECABA|01:Guaraqueçaba,03:Ararapira,05:Serra Negra
+240|7102|GUARATUBA|01:Guaratuba,03:Garuva
+240|7103|MORRETES|01:Morretes,03:Pôrto de Cima
+240|7104|PARANAGUA|01:Paranaguá,03:Alexandra,05:Matinhos
+240|7110|BOCAIUVA DO SUL|01:Bocaiúva do Sul,03:Paranaí,05:Tunas
+240|7111|CERRO AZUL|01:Cêrro Azul,03:São Sebastião,05:Varzeão
+240|7112|RIO BRANCO DO SUL|01:Rio Branco do Sul,03:Açungui
+241|7130|CASTRO|01:Castro,03:Abapã,05:Socavão
+241|7131|PIRAI DO SUL|01:Piraí do Sul
+241|7150|ALMIRANTE TAMANDARE|01:Almirante Tamandaré,03:Campo Magro
+241|7151|ARAUCARIA|01:Araucária,03:Guajuvira
+241|7152|CAMPINA GRANDE DO SUL|01:Campina Grande do Sul
+241|7153|CAMPO LARGO|01:Campo Largo,03:Balsa Nova,05:Bateias,07:Ferraria,09:São Luís do Purunã,11:São Silvestre,13:Três Córregos
+241|7154|COLOMBO|01:Colombo
+241|7155|CURITIBA|01:Curitiba,03:Campo Comprido,05:Santa Felicidade,07:Tatuquara,09:Umbará
+241|7156|PIRAQUARA|01:Piraquara
+242|7157|RIO NEGRO|01:Rio Negro,03:Campo do Tenente,05:Pangaré,07:Pien
+242|7158|SAO JOSE DOS PINHAIS|01:São José dos Pinhais,03:Campo Largo da Roseira,05:Mandirituba
+242|7159|TIJUCAS DO SUL|01:Tijucas do Sul,03:Agudos do Sul
+242|7140|ARAPOTI|01:Arapoti,03:Calógeras
+242|7141|CONTENDA|01:Contenda,03:Areia Branca
+242|7142|JAGUARIAIVA|01:Jaguariaíva,03:Bertagnoli
+242|7143|LAPA|01:Lapa,03:Água Azul,05:Antônio Olinto,07:Mariental
+242|7144|PALMEIRA|01:Palmeira,03:Papagaios Novos
+242|7145|PONTA GROSSA|01:Ponta Grossa,03:Guaragi,05:Itaiacoca,07:Uvaia
+243|7146|PORTO AMAZONAS|01:Pôrto Amazonas
+243|7147|SENGES|01:Sengés
+243|7148|TIBAGI|01:Tibagi,03:Alto do Amparo,05:Ventania
+243|7170|ABATIA|01:Abatiá
+243|7171|CARLOPOLIS|01:Carlópolis
+243|7172|CURIUVA|01:Curiúva,03:Sapopema
+243|7173|IBAITI|01:Ibaiti,03:Vassoural,05:Vila Guaí
+243|7174|JABOTI|01:Jaboti,03:Conselheiro Mayrinck
+243|7175|JAPIRA|01:Japira
+243|7176|JOAQUIM TAVORA|01:Joaquim Távora,03:Guapirama,05:Joá
+243|7177|JUNDIAI DO SUL|01:Jundiaí do Sul
+243|7178|PINHALAO|01:Pinhalão,03:Lavrinha
+244|7179|QUATIGUA|01:Quatiguá
+244|7180|RIBEIRAO DO PINHAL|01:Ribeirão do Pinhal
+244|7181|SIQUEIRA CAMPOS|01:Siqueira Campos,03:Marimbondo,05:Salto do Itararé
+244|7182|TOMAZINA|01:Tomazina,03:Sapé
+244|7183|VENCESLAU BRAS|01:Venceslau Brás,03:Santana do Itararé,05:São José da Boa Vista
+244|7190|CANDIDO DE ABREU|01:Cândido de Abreu,03:Teresa Cristina,05:Três Bicos
+244|7191|IMBITUVA|01:Imbituva,03:Apiaba,05:Guamiranga
+244|7192|IPIRANGA|01:Ipiranga,03:Bitumirim,05:Ivaí
+244|7193|ORTIGUEIRA|01:Ortigueira,03:Barreiro,05:Lajeado Bonito,07:Monjolinho,09:Natingui
+245|7194|PRUDENTOPOLIS|01:Prudentópolis,03:Jaciaba,05:Patos Velhos
+245|7195|RESERVA|01:Reserva,03:José Lacerda
+245|7200|CRUZ MACHADO|01:Cruz Machado,03:Pinaré,05:Santana
+245|7201|IRATI|01:Irati,03:Gonçalves Júnior,05:Guamirim,07:Itapará
+245|7202|MALLET|01:Mallet,03:Dorizon,05:Rio Claro do Sul
+245|7203|PAULO FRONTIN|01:Paulo Frontin,03:Vera Guarani
+245|7204|REBOUCAS|01:Rebouças
+245|7205|RIO AZUL|01:Rio Azul,03:Soares
+245|7206|SAO JOAO DO TRIUNFO|01:São João do Triunfo,03:Palmira
+245|7207|SAO MATEUS DO SUL|01:São Mateus do Sul
+246|7207c|SAO MATEUS DO SUL (cont)|03:Caitá,05:Fluviópolis,07:Lajeado
+246|7208|TEIXEIRA SOARES|01:Teixeira Soares,03:Angaí,05:Fernandes Pinheiro,07:Guaraúna
+246|7209|UNIAO DA VITORIA|01:União da Vitória,03:Paula Freitas,05:Pôrto Vitória
+246|7220|ALTO PARANA|01:Alto Paraná,03:Maristela,05:Santa Maria,07:Sumaré
+246|7221|ARARUNA|01:Araruna,03:São Vicente
+246|7222|BARRACAO|01:Barracão,03:Bom Jesus do Barracão,05:Salgado Filho,07:São Sebastião da Bela Vista,09:Siqueira Belo
+246|7223|CAMPO MOURAO|01:Campo Mourão,03:Barbosa Ferraz,05:Barreirinho d'Oeste,07:Campina da Lagoa,09:Farol,11:Fênix,13:Iretama,15:Juranda,17:Mamburê,19:Quinta do Sol,21:Roncador,23:Ubiratã
+247|7224|CAPANEMA|01:Capanema,03:Ampere,05:Pérola d'Oeste
+247|7225|CASCAVEL|01:Cascavel,03:Corbélia
+247|7226|CHOPINZINHO|01:Chopinzinho
+247|7227|CIANORTE|01:Cianorte
+247|7228|CLEVELANDIA|01:Clevelândia,03:Mariópolis,05:Vitorino
+247|7229|CORONEL VIVIDA|01:Coronel Vivida
+247|7230|CRUZEIRO DO OESTE|01:Cruzeiro do Oeste,03:Alto Piquiri,05:Iporã,07:Maria Helena,09:Pôrto Camargo,11:Saltinho d'Oeste,13:Tuneiras,15:Umuarama,17:Xambrê
+247|7231|CRUZEIRO DO SUL|01:Cruzeiro do Sul
+247|7232|ENGENHEIRO BELTRAO|01:Engenheiro Beltrão
+248|7233|FLORAI|01:Floraí
+248|7234|FOZ DO IGUACU|01:Foz do Iguaçu,03:Gaúcha,05:Matelândia,07:Medianeira
+248|7235|FRANCISCO BELTRAO|01:Francisco Beltrão
+248|7236|GOIO-ERE|01:Goio-Erê,03:Mariluz,05:Moreira Salles,07:Paraná d'Oeste
+248|7237|GUAIRA|01:Guaíra,03:Maripá,05:Memória,07:Terra Roxa d'Oeste,09:Vila Palotina
+248|7238|GUARANIACU|01:Guaraniaçu,03:Campo Bonito,05:Catanduvas,07:Faxinal de São João,09:Mato Queimado
+248|7239|JUSSARA|01:Jussara
+248|7240|LARANJEIRAS DO SUL|01:Laranjeiras do Sul,03:Barreirinho,05:Campo Nôvo,07:Erveira,09:Espigão Alto,11:Pôrto Santana,13:Rio Bonito,15:Virmond
+249|7241|LOANDA|01:Loanda,03:Pôrto Rico,05:Pôrto São José
+249|7242|MANDAGUACU|01:Mandaguaçu
+249|7243|MANDAGUARI|01:Mandaguari
+249|7244|MANGUEIRINHA|01:Mangueirinha,03:Covó
+249|7245|MANUEL RIBAS|01:Manuel Ribas,03:Guaritá,05:Ivaiporã
+249|7246|MARIALVA|01:Marialva,03:Aquidabã,05:Itambé,07:Sarandi
+249|7247|MARINGA|01:Maringá,03:Floriano,05:Ivatuba
+249|7248|NOVA ESPERANCA|01:Nova Esperança,03:Atalaia,05:Barão de Lucena,07:Iroí,09:Uniflor
+249|7249|NOVA LONDRINA|01:Nova Londrina,03:Diamante do Norte,05:Itaúna do Sul,07:Marilena
+250|7250|PARAISO DO NORTE|01:Paraíso do Norte,03:Mirador,05:Nova Aliança do Ivaí
+250|7251|PARANACITY|01:Paranacity,03:Inajá,05:Paranapoema
+250|7252|PARANAVAI|01:Paranavaí,03:Catarinenses,05:Comur,07:Guairacá,09:Jurema,11:Planaltina do Paraná
+250|7253|PATO BRANCO|01:Pato Branco,03:Bom Sucesso,05:Coxilha Rica,07:Dois Vizinhos,09:Vargem Bonita,11:Verê
+250|7254|PEABIRU|01:Peabiru
+250|7255|PITANGA|01:Pitanga,03:Barra Bonita,05:Bela Vista,07:Boa Ventura,09:Palmital,11:Santa Maria
+250|7256|QUERENCIA DO NORTE|01:Querência do Norte,03:Paranaguaçu,05:Pôrto Brasília
+251|7257|RONDON|01:Rondon,03:Cidade Gaúcha,05:Guaporema
+251|7258|SANTA CRUZ DO MONTE CASTELO|01:Santa Cruz do Monte Castelo
+251|7259|SANTA ISABEL DO IVAI|01:Santa Isabel do Ivaí
+251|7260|SANTO ANTONIO|01:Santo Antônio,03:Ampere,05:Canzianópolis,07:Governador Lupion,09:Marcianópolis,11:Nova Esperança
+251|7261|SAO CARLOS DO IVAI|01:São Carlos do Ivaí
+251|7262|SAO JOAO DO CAIUA|01:São João do Caiuá
+251|7263|SAO JORGE|01:São Jorge
+251|7264|SAO PEDRO DO IVAI|01:São Pedro do Ivaí
+251|7265|TAMBOARA|01:Tamboara
+251|7266|TERRA BOA|01:Terra Boa
+251|7267|TERRA RICA|01:Terra Rica
+251|7268|TOLEDO|01:Toledo,03:Dez de Maio,05:General Rondon,07:Margarida,11:Mercedes,13:Novo Sarandi,15:Pôrto Mendes,17:Quatro Pontes
+252|7300|ALVORADA DO SUL|01:Alvorada do Sul
+252|7301|AMOREIRA|01:Amoreira,03:Nova América da Colina
+252|7302|ANDIRA|01:Andirá
+252|7303|APUCARANA|01:Apucarana,03:Pirapó,05:São José do Cambira
+252|7304|ARAPONGAS|01:Arapongas
+252|7305|ARARUVA|01:Araruva,03:Rio Bom
+252|7306|ASSAI|01:Assaí
+252|7307|ASTORGA|01:Astorga,03:Içara,05:Santa Zélia,07:Tupinambá
+252|7308|BANDEIRANTES|01:Bandeirantes
+252|7309|BELA VISTA DO PARAISO|01:Bela Vista do Paraíso,03:Santa Margarida
+253|7310|BOM SUCESSO|01:Bom Sucesso
+253|7311|BORRAZOPOLIS|01:Borrazópolis,03:Santo Antônio do Palmita
+253|7312|CAFEARA|01:Cafeara
+253|7313|CALIFORNIA|01:Califórnia
+253|7314|CAMBARA|01:Cambará
+253|7315|CAMBE|01:Cambé,03:Prata
+253|7316|CENTENARIO DO SUL|01:Centenário do Sul
+253|7317|COLORADO|01:Colorado
+253|7318|CONGONHINHAS|01:Congonhinhas
+253|7319|CORNELIO PROCOPIO|01:Cornélio Procópio,03:Congonhas
+253|7320|FAXINAL|01:Faxinal
+253|7321|FLORESTOPOLIS|01:Florestópolis,03:Miraselva,05:Prado Ferreira
+253|7322|GUARACI|01:Guaraci,03:Bentópolis,05:Nossa Senhora das Graças
+253|7323|IBIPORA|01:Ibiporã
+254|7324|IGUARACU|01:Iguaraçu,03:Flórida
+254|7325|ITAGUAJE|01:Itaguajé
+254|7326|ITAMBARACA|01:Itambaracá,03:São Joaquim do Pontal
+254|7327|JACAREZINHO|01:Jacarèzinho,03:Barra do Jacaré
+254|7328|JAGUAPITA|01:Jaguapitã
+254|7329|JANDAIA DO SUL|01:Jandaia do Sul,03:Marumbi
+254|7330|JATAIZINHO|01:Jataìzinho,03:Frei Timótheo,05:São João
+254|7331|LEOPOLIS|01:Leópolis
+254|7332|LOBATO|01:Lobato
+254|7333|LONDRINA|01:Londrina,03:Guaravera,05:Irerê,07:São Luiz,09:Tamarana
+254|7334|LUPIONOPOLIS|01:Lupionópolis
+254|7335|MUNHOZ DE MELO|01:Munhoz de Melo
+255|7336|NOVA FATIMA|01:Nova Fátima
+255|7337|PORECATU|01:Porecatu
+255|7338|PRIMEIRO DE MAIO|01:Primeiro de Maio,03:Ibiaci
+255|7339|RIBEIRAO CLARO|01:Ribeirão Claro
+255|7340|ROLANDIA|01:Rolândia,03:Pitangueiras,05:São Martinho
+255|7341|SABAUDIA|01:Sabáudia
+255|7342|SANTA AMELIA|01:Santa Amélia
+255|7343|SANTA FE|01:Santa Fé
+255|7344|SANTA MARIANA|01:Santa Mariana
+255|7345|SANTO ANTONIO DA PLATINA|01:Santo Antônio da Platina,03:Conselheiro Zacarias,05:Monte Real
+255|7346|SANTO INACIO|01:Santo Inácio
+255|7347|SAO JERONIMO DA SERRA|01:São Jerônimo da Serra,03:Santa Cecília do Pavão,05:Santo Antônio do Pari
+256|7348|SERTANEJA|01:Sertaneja,03:Paranagi
+256|7349|SERTANOPOLIS|01:Sertanópolis
+256|7350|URAI|01:Uraí,03:Cruzeiro do Norte,05:Rancho Alegre
+256|7120|BITURUNA|01:Bituruna,03:Santo Antônio do Iratim
+256|7121|GUARAPUAVA|01:Guarapuava,03:Candói,05:Canta Galo,07:Goioxim,09:Guairacá,11:Guará,13:Guarapuavinha,15:Marquinho,17:Palmeirinha,19:Pedro Lustosa,21:Pinhão
+256|7122|PALMAS|01:Palmas,03:General Carneiro,05:Jangada do Sul,07:São José de Palmas

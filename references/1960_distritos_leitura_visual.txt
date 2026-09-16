@@ -1,0 +1,360 @@
+# Codigo de Zonas Fisiograficas, Municipios e Distritos de 1960 -- leitura em folhas de contato
+# Formato: uf60 | pagina | codigo do municipio | NOME DO MUNICIPIO | codigo:nome do distrito, ...
+21|70|2142|TIMBAUBA|01:Timbaúba,03:Cruanji,05:Livramento do Tiúma
+21|70|2143|VICENCIA|01:Vicência,03:Murupe
+21|70|2144|VITORIA DE SANTO ANTAO|01:Vitória de Santo Antão,03:Pirituba,05:Pombos
+21|70|2150|AGRESTINA|01:Agrestina,03:Barra do Chata,05:Barra do Jardim
+21|70|2151|ALAGOINHA|01:Alagoinha,03:Perpétuo Socorro
+21|70|2152|ALTINHO|01:Altinho,03:Ibirajuba,05:Ituguaçu
+21|70|2153|ANGELIM|01:Angelim,03:Jucati,05:Jupi
+21|70|2154|BELO JARDIM|01:Belo Jardim,03:Água Fria,05:Serra do Vento,07:Xucuru
+21|68|2126|MACAPARANA|01:Macaparana
+21|68|2127|MARAIAL|01:Maraial,03:Jaqueira,05:Sertãozinho de Baixo
+21|68|2128|MORENO|01:Moreno
+21|68|2129|NAZARE DA MATA|01:Nazaré da Mata,03:Buenos Aires,05:Tracunhaém
+21|68|2130|OLINDA|01:Olinda
+21|68|2131|PALMARES|01:Palmares,03:Santo Antônio das Trempes
+21|68|2132|PAUDALHO|01:Paudalho,03:Lagoa do Itaenga
+21|68|2133|PAULISTA|01:Paulista,03:Abreu e Lima,05:Paratibe,07:Praia da Conceição
+21|68|2134|QUIPAPA|01:Quipapá,03:Igarapeba,05:Iraci,07:Pau-Ferro
+21|68|2135|RECIFE|01:Afogados,03:Beberibe,05:Boa Viagem
+31|109|3308|ITUACU|01:Ituaçu,03:Caraibuna,05:Contendas do Sincorá,07:Sussuarana,09:Tanhaçu
+31|109|3309|LENCOIS|01:Lençóis,03:Afrânio Peixoto,05:Itacira
+31|109|3310|MORRO DO CHAPEU|01:Morro do Chapéu,03:Barro Alto,05:Cafarnaum,07:Camirim,09:Canarana,11:Dias Coelho,13:Duas Barras do Morro,15:Lagoa do Boi,17:Mulungu do Morro,19:Várzea do Céu,21:Ventura
+31|109|3311|MUCUGE|01:Mucugê,03:Guiné,05:Ibicoara,07:João Correia
+31|109|3312|PALMEIRAS|01:Palmeiras,03:Caeté-Açu
+31|109|3313|PIATA|01:Piatã,03:Abaíra,05:Bastião,07:Boninal,09:Cabrália
+21|66|2110|AGUA PRETA|01:Água Preta,03:Xexéu
+21|66|2111|ALIANCA|01:Aliança,03:Macujê,05:Tupaoca,07:Upatininga
+21|66|2112|AMARAJI|01:Amaraji,03:Primavera de Santo Antônio
+21|66|2113|BARREIROS|01:Barreiros,03:Carimã,05:São José da Coroa Grande
+21|66|2114|BONITO|01:Bonito,03:Bentevi,05:Guabiraba,07:Iuiteporã
+21|66|2115|CABO|01:Cabo,03:Juçaral,05:Ponte dos Carvalhos,07:Santo Agostinho
+21|66|2116|CARPINA|01:Carpina,03:Lagoa do Carro
+21|66|2117|CATENDE|01:Catende
+31|101|3280|CASTRO ALVES|01:Castro Alves,03:Argoim,05:Crussaí,07:Paratigi,09:Petim,11:Sítio do Meio,13:Tabuleiro do Castro
+31|101|3281|CORACAO DE MARIA|01:Coração de Maria,03:Itacava
+31|101|3282|FEIRA DE SANTANA|01:Feira de Santana,03:Anguera,05:Bonfim da Feira,07:Humildes,09:Ipuaçu,11:Jaguara,13:Jaíba,15:Maria Quitéria,17:Pacatu,19:Tiquaruçu
+31|101|3283|IACU|01:Iaçu,03:João Amaro,05:Lajedo Alto
+31|101|3284|IPIRA|01:Ipirá,03:Pintadas
+81|276|8550|ARROIO GRANDE|01:Arroio Grande,03:Santa Isabel do Sul
+81|276|8551|CAMAQUA|01:Camaquã,03:Arambaré
+81|276|8552|JAGUARAO|01:Jaguarão
+81|276|8553|PEDRO OSORIO|01:Pedro Osório,05:Freire
+81|276|8554|PELOTAS|01:Pelotas,03:Capão do Leão,05:Cerrito Alegre,07:Dunas,09:Morro Redondo,11:Santa Eulália,13:Santa Silvana,15:Quilombo
+81|276|8555|SAO LOURENCO DO SUL|01:São Lourenço do Sul,03:Boqueirão
+81|276|8556|TAPES|01:Tapes,03:Cerro Grande,05:Vasconcelos
+81|276|8300|ARATIBA|01:Aratiba,03:Barra do Rio Azul
+81|276|8301|CAMPINAS DO SUL|01:Campinas do Sul,03:Jacutinga
+# (resolvida) p.276 (Rio Grande do Sul). O codigo do municipio saiu partido entre
+# as duas faixas de recorte (8550 lido como "0 ... 855") e a sequencia de distritos de
+# Pelotas e de Pedro Osorio nao fechou. Precisa de uma folha de uma pagina so.
+52|178|5321|MANGARATIBA|01:Mangaratiba,03:Conceição de Jacareí,05:Itacurussá,07:Vila Muriqui
+52|178|5322|PARATI|01:Parati,03:Parati Mirim,05:Tarituba
+52|178|5220|BOM JESUS DO ITABAPOANA|01:Bom Jesus do Itabapoana,03:Calheiros,05:Carabuçu,07:Pirapitinga do Bom Jesus,09:Rosal
+52|178|5221|CAMBUCI|01:Cambuci,03:Funil,05:Monte Verde,07:São João do Paraíso,09:São José de Ubá,11:Três Irmãos
+52|178|5222|ITAPERUNA|01:Itaperuna,03:Boaventura,05:Comendador Venâncio,07:Itajara,09:Laje de Muriaé,11:Nossa Senhora da Penha,13:Retiro de Muriaé
+51|173|5134|CASTELO|01:Castelo,03:Aracuí,05:Conceição do Castelo
+51|173|5135|GUACUI|01:Guaçuí,03:Divisa,05:Imbuí,07:São Pedro de Rates,09:São Tiago
+51|173|5136|IUNA|01:Iúna,03:Ibatiba,05:Irupi,07:Pequia
+51|173|5137|JERONIMO MONTEIRO|01:Jerônimo Monteiro
+51|173|5138|MIMOSO DO SUL|01:Mimoso do Sul,03:Conceição do Muqui,05:Dona América,07:Ponte de Itabapoana,09:Santo Antônio do Muqui,11:São José das Tôrres,13:São Pedro de Itabapoana
+51|173|5139|MUNIZ FREIRE|01:Muniz Freire,03:Itaici,05:Piaçu,07:Vieira Machado
+51|173|5140|MUQUI|01:Muqui,03:Camará
+51|173|5141|SAO JOSE DO CALCADO|01:São José do Calçado,03:Airituba,05:Alto Calçado,07:Bom Jesus do Norte
+52|181|5239|SUMIDOURO|01:Sumidouro
+52|181|5240|TRAJANO DE MORAIS|01:Trajano de Morais,03:Doutor Elias,05:Sodrelândia,07:Vila da Grama,09:Visconde de Imbé
+52|181|5251|NOVA FRIBURGO|01:Nova Friburgo,03:Amparo,05:Campo do Coelho,07:Conselheiro Paulino,09:Lumiar,11:Riograndina
+52|181|5252|PETROPOLIS|01:Petrópolis,03:Cascatinha,05:Itaipava,07:Pedro do Rio,09:São José do Rio Prêto
+52|181|5253|TEREZOPOLIS|01:Terezópolis,03:Nhunguaçu,05:Paquequer Pequeno
+21|74|2180|SAO BENTO DO UNA|01:São Bento do Una,03:Cabanas,05:Cachoeirinha,07:Capoeiras,09:Espírito Santo
+21|74|2181|SAO CAITANO|01:São Caitano,03:Tacaimbó,05:Tapiraim
+21|74|2182|SAO JOAQUIM DO MONTE|01:São Joaquim do Monte,03:Batateira,05:Santana de São Joaquim
+21|74|2183|SURUBIM|01:Surubim,03:Casinhas,05:Vertentes do Lério
+21|74|2184|TAQUARITINGA DO NORTE|01:Taquaritinga do Norte,03:Gravatá de Jaburu
+21|74|2185|TORITAMA|01:Toritama
+21|74|2186|VERTENTES|01:Vertentes,03:Cambucá,05:Frei Miguelinho
+21|74|2230|AGUAS BELAS|01:Águas Belas,03:Iati,05:Itaíba
+14|41|1565|PALHANO|01:Palhano
+14|41|1566|QUIXERE|01:Quixerê
+14|41|1567|RUSSAS|01:Russas,03:Bonhu,05:Flôres
+14|41|1568|SAO JOAO DO JAGUARIBE|01:São João do Jaguaribe
+14|41|1569|TABULEIRO DO NORTE|01:Tabuleiro do Norte,03:Ôlho d'Água da Bica
+14|41|1580|JAGUARETAMA|01:Jaguaretama
+14|41|1581|JAGUARIBARA|01:Jaguaribara,03:Poço Comprido
+14|41|1582|JAGUARIBE|01:Jaguaribe,03:Foiticeiro,05:Mapuá,07:Nova Floresta
+# RELER SOZINHAS (leitura ambigua na folha de tres paginas):
+#   p.102 (Bahia): Riachao do Jacuipe e Santo Estevao com codigo repetido/obscuro
+#   p.251/252 (Parana): Toledo 7268, o codigo 09 caiu na emenda entre as paginas
+14|42|1441|ALTANEIRA|01:Altaneira
+14|42|1442|ASSARE|01:Assaré,03:Amaro,05:Aratama,07:Tarrafas
+14|42|1443|AURORA|01:Aurora,03:Ingàzeiras,05:Tipi
+14|42|1444|BAIXIO|01:Baixio
+14|42|1445|CARIUS|01:Cariús,03:Caipu,05:São Bartolomeu,07:São Sebastião
+14|42|1446|CEDRO|01:Cedro,03:Várzea
+14|42|1447|FARIAS BRITO|01:Farias Brito,03:Cariutaba,05:Nova Betânia,07:Quincucá
+14|42|1448|ICO|01:Icó,03:Icozinho,05:Cruzeirinho,07:Lima Campos,09:Pedrinhas
+14|35|1545|PEDRA BRANCA|01:Pedra Branca,03:Mineirolândia,05:Riachão do Banabuiú,07:Tróia
+14|35|1546|PIQUET CARNEIRO|01:Piquet Carneiro,03:Ibicuã
+14|35|1547|QUIXADA|01:Quixadá,03:Banabuiú,05:Caiçarinha,07:Chorró,09:Custódio?,11:Daniel Queirós,13:Dom Maurício,15:Ibaretama,17:Juatama,19:Rinaré,21:Sitiá,23:Tapuiará
+14|35|1548|QUIXERAMOBIM|01:Quixeramobim,03:Encantado,05:Lacerda,07:Macaoca,09:Madalena,11:Manituba,13:Passagem,15:Pirabibu,17:São Miguel,19:Uruquê
+14|35|1549|SENADOR POMPEU|01:Senador Pompeu,03:Engenheiro José Lopes,05:São Joaquim do Salgado
+81|283|8352|ESPUMOSO|01:Espumoso,03:Alto Alegre,05:Campos Borges,07:Jacuizinho,09:Rincão da Estrela
+81|283|8353|IBIRUBA|01:Ibirubá,03:Alfredo Brenner,05:Quinze de Novembro
+81|283|8354|IJUI|01:Ijuí,03:Ajuricaba,05:Barro Preto,07:Coronel Barros,09:Doutor Bozano,11:Doutor Pestana,13:Ramada
+81|283|8355|JULIO DE CASTILHOS|01:Júlio de Castilhos,03:Canhemborá,05:Ivorá,07:Pinhal Grande,09:Nova Palma,11:Quevedos
+81|283|8356|MARAU|01:Marau,03:Camargo,05:Maria
+81|283|8357|NAO-ME-TOQUE|01:Não-Me-Toque,03:Cochinho,05:São José do Centro
+81|283|8358|PANAMBI|01:Panambi,03:Condor
+40|162|4222|CURVELO|01:Curvelo,03:Angueretá,05:Inimutaba,07:Morro da Garça,09:Ponte do Paraúna,11:Santa Rita do Cedro,13:Tomás Gonzaga
+40|162|4223|FELIXLANDIA|01:Felixlândia,03:São José do Buriti
+40|162|4224|LASSANCE|01:Lassance
+40|162|4225|MORADA NOVA DE MINAS|01:Morada Nova de Minas,03:Biquinhas,05:Frei Orlando
+40|162|4226|PIRAPORA|01:Pirapora,03:Buritizeiro
+40|162|4227|SAO GONCALO DO ABAETE|01:São Gonçalo do Abaeté,03:Canoeiros
+40|162|4228|VARZEA DA PALMA|01:Várzea da Palma,03:Guaicuí
+40|162|4010|JOAO PINHEIRO|01:João Pinheiro,03:Caatinga,05:Canabrava,07:Veredas
+40|162|4011|PARACATU|01:Paracatu
+40|137|4505|ITAMARANDIBA|01:Itamarandiba,03:Aricanduva,05:Carbonita,07:Padre João Afonso,09:Penha de França
+40|137|4506|MINAS NOVAS|01:Minas Novas,03:Berilo,05:Chapada,07:Francisco Badaró,09:Leme do Prado
+40|137|4507|SERRO|01:Sêrro,03:Casa de Telha,05:Itapanhoacanga,07:Milho Verde,09:Santo Antônio do Itambé,11:Santo Antônio do Rio do Peixe,13:São Gonçalo do Rio das Pedras
+40|137|4508|TURMALINA|01:Turmalina,03:Caçaratiba,05:Veredinha
+40|137|4509|VIRGEM DA LAPA|01:Virgem da Lapa
+40|137|4520|ALVINOPOLIS|01:Alvinópolis,03:Fonseca,05:Major Ezequiel
+40|137|4521|BALDIM|01:Baldim,03:Amanda,05:São Vicente
+14|47|1487|PORANGA|01:Poranga,03:Macambira
+14|47|1488|SAO BENEDITO|01:São Benedito,03:Graça,05:Inhuçu
+14|47|1489|TIANGUA|01:Tianguá,03:Arapá,05:Caruataí,07:Pindoguaba,09:Tabainha
+14|47|1490|UBAJARA|01:Ubajara,03:Araticum,05:Jaburuna
+14|47|1491|VICOSA DO CEARA|01:Viçosa do Ceará,03:General Tibúrcio,05:Lambedouro,07:Padre Vieira,09:Quatiguaba
+14|47|1590|IRACEMA|01:Iracema,03:Potiretama
+14|47|1591|PEREIRO|01:Pereiro,03:Ererê
+14|47|1640|ABAIARA|01:Abaiara
+31|103|3382|PINDOBACU|01:Pindobaçu
+31|103|3383|SAUDE|01:Saúde,03:Caldeirão Grande,05:Mirangaba,07:Nuguaçu,09:Ponto Novo,11:Taquarandi
+31|103|3384|SENHOR DO BONFIM|01:Senhor do Bonfim,03:Andorinha,05:Carrapichel,07:Igara,09:Tijuaçu
+31|103|3390|BAIXA GRANDE|01:Baixa Grande
+31|103|3391|IBIQUERA|01:Ibiquera
+31|103|3392|ITABERABA|01:Itaberaba,03:Brejo Novo,05:Tupim
+31|103|3393|JACOBINA|01:Jacobina,03:Caem,05:Catinga do Moura,07:Itaitu,09:Itapeipu,11:São José do Jacuípe,13:Serrolândia,15:Várzea Nova
+81|287|8414|NOVO HAMBURGO|01:Novo Hamburgo,03:Hamburgo Velho,05:Lomba Grande,07:Floresta Imperial
+81|287|8415|ROCA SALES|01:Roca Sales
+14|34|1530|SAO LUIS DO CURU|01:São Luís do Curu
+14|34|1531|TRAIRI|01:Trairi,03:Mundaú
+14|34|1532|URUOCA|01:Uruoca,03:Paracuá
+14|34|1533|URUBURETAMA|01:Uruburetama,03:Cemoaba,05:São Joaquim,07:Tururu,09:Umirim
+14|34|1540|BOA VIAGEM|01:Boa Viagem,03:Domingos da Costa,05:Ibuaçú,07:Jacampari
+14|34|1542|ITATIRA|01:Itatira,03:Lagoa do Mato
+14|34|1544|MOMBACA|01:Mombaça,03:Boa Vista,05:Carnaúbas,07:Catolé
+81|287|8416|ROLANTE|01:Rolante,05:Riozinho
+81|287|8417|SANTA CRUZ DO SUL|01:Santa Cruz do Sul,03:Boa Vista,05:Formosa,07:Gramado Xavier,09:Erveiras,11:Monte Alverne,13:Rio Pardinho,15:Fontoura Gonçalves,17:Sinimbu,19:Trombudo,21:Serafim Schmidt
+81|287|8419|SANTO ANTONIO|01:Santo Antônio,03:Caraá,05:Entrepelado,07:Miraguaia,09:Rolantinho da Figueira
+81|287|8420|SAO LEOPOLDO|01:São Leopoldo,03:Sapucaia
+31|102|3285|IRARA|01:Irará,03:Água Fria,05:Bento Simões,07:Boa Esperança,09:Ouriçangas,11:Pataiba,13:Pedrão,15:Santanópolis
+31|102|3286|RIACHAO DO JACUIPE|01:Riachão do Jacuípe,03:Candeal,05:Gavião,07:Ichu
+31|102|3287|SANTA TERESINHA|01:Santa Teresinha,03:Monte Cruzeiro,05:Novo Paraíso
+31|102|3289|SERRA PRETA|01:Serra Preta
+31|102|3290|TANQUINHO|01:Tanquinho
+31|102|3380|CAMPO FORMOSO|01:Campo Formoso,03:Delfino,05:Itinga da Serra
+31|102|3381|JAGUARARI|01:Jaguarari,03:Juacema
+#   p.102 (Bahia): Santo Estevao 3288 tem um distrito cujo nome nao renderiza (entre
+#     Cavunge 03 e Ipecaeta 07) -- falta so ele nessa pagina
+52|181|5250|BOM JARDIM|01:Bom Jardim,03:Banquete,05:Barra Alegre,07:São José do Ribeirão
+# PENDENTES DE UMA LINHA SO (o resto da pagina esta lido):
+#   p.35  Quixada 1547, distrito 09: o nome sai "Custodi" -- a ultima letra se funde aos pontos
+#   p.102 Santo Estevao 3288: um distrito entre Cavunge 03 e Ipecaeta 07 nao renderiza
+#   p.181 Bom Jardim 5250: ha uma linha ilegivel entre Barra Alegre e Sao Jose do Ribeirao
+40|163|4012|PRESIDENTE OLEGARIO|01:Presidente Olegário,03:Galena,05:Lagamar,07:Ponte Firme
+40|163|4013|UNAI|01:Unaí,03:Buritis,05:Fróis,07:Garapuava,09:Serra Bonita
+40|163|4014|VAZANTE|01:Vazante,03:Claro de Minas,05:Guarda-Mor
+40|163|4800|ABADIA DOS DOURADOS|01:Abadia dos Dourados
+40|163|4801|ARAXA|01:Araxá
+40|163|4802|CARMO DO PARANAIBA|01:Carmo do Paranaíba,03:Quintinos
+40|163|4803|CASCALHO RICO|01:Cascalho Rico
+40|163|4804|COROMANDEL|01:Coromandel,03:Alegre,05:Santa Rosa dos Dourados
+40|163|4805|ESTRELA DO SUL|01:Estrêla do Sul,03:Chapada de Minas,05:Grupiara,07:Santa Rita da Estrêla
+60|203|6147|JARINU|01:Jarinu
+60|203|6148|JOANOPOLIS|01:Joanópolis
+60|203|6149|MONTE ALEGRE DO SUL|01:Monte Alegre do Sul
+60|203|6150|NAZARE PAULISTA|01:Nazaré Paulista
+60|203|6151|PEDREIRA|01:Pedreira
+60|203|6152|PIRACAIA|01:Piracaia,03:Batatuba
+60|203|6153|SERRA NEGRA|01:Serra Negra
+60|203|6154|SOCORRO|01:Socorro
+60|203|6200|ARACOIABA DA SERRA|01:Araçoiaba da Serra,03:Bacaetaba,05:Capela do Alto
+60|203|6201|BARUERI|01:Barueri,03:Aldeia,05:Carapicuíba
+60|203|6202|BOITUVA|01:Boituva,03:Iperó
+60|203|6203|CABREUVA|01:Cabreúva
+60|203|6204|CAIEIRAS|01:Caieiras
+91|295|9190|PONTA PORA|01:Ponta Porã,03:Bocajá,05:Cabeceira do Apa,07:Eugênio Penzo,09:Laguna Carapã,11:Rio Verde do Sul,13:Sanga Puitã
+91|295|9191|RIO BRILHANTE|01:Rio Brilhante,03:Arooira
+91|295|9192|ROCHEDO|01:Rochedo
+91|295|9193|SIDROLANDIA|01:Sidrolândia,03:Capão Sêco
+91|295|9194|TERENOS|01:Terenos
+91|295|9200|AGUA CLARA|01:Água Clara,03:Alto Sucuriú
+91|295|9201|APARECIDA DO TABOADO|01:Aparecida do Taboado,03:Cupins
+91|295|9202|CAMAPUA|01:Camapuã,03:Ponte Vermelha
+91|295|9203|CASSILANDIA|01:Cassilândia,03:Baús
+91|295|9204|COXIM|01:Coxim,03:Pedro Gomes
+40|143|4601|BARBACENA|01:Barbacena,03:Correia de Almeida,05:Destêrro do Melo,07:Ibertioga,09:Padre Brito,11:Tugúrio
+40|143|4602|BARROSO|01:Barroso
+40|143|4603|BELO VALE|01:Belo Vale,03:Santana do Paraopeba
+40|143|4604|BONFIM|01:Bonfim,03:Piedade dos Gerais,05:Rio Manso,07:Santo Antônio da Vargem Alegre
+40|143|4605|CAPELA NOVA|01:Capela Nova
+40|143|4606|CARANDAI|01:Carandaí,03:Caranaíba,05:Hermilo Alves
+40|143|4607|CRUCILANDIA|01:Crucilândia
+40|143|4608|DESTERRO DE ENTRE RIOS|01:Destêrro de Entre Rios,03:São Sebastião do Gil
+40|143|4609|DORES DE CAMPOS|01:Dores de Campos
+40|143|4610|ENTRE RIOS DE MINAS|01:Entre Rios de Minas,03:Serra do Camapuã
+40|143|4611|JECEABA|01:Jeceaba
+52|177|5307|SAO GONCALO|01:São Gonçalo,03:Ipiiba,05:Monjolo,07:Neves,09:Sete Pontes
+52|177|5308|SAO JOAO DE MERITI|01:São João de Meriti,03:Coelho da Rocha,05:São Mateus
+52|177|5310|ITAGUAI|01:Itaguaí,03:Coroa Grande,05:Ibituporanga,07:Paracambi,09:Seropédica
+52|177|5311|NOVA IGUACU|01:Nova Iguaçu,03:Belford Roxo,05:Cava,07:Japeri,09:Mesquita,11:Queimados
+52|177|5320|ANGRA DOS REIS|01:Angra dos Reis,03:Abraão,05:Cunhambebe,07:Jacuecanga
+31|95|3134|COARACI|01:Coaraci,03:Almadina
+31|95|3135|GANDU|01:Gandu,03:Itamari,05:Nova Ibiá
+31|95|3136|IBICARAI|01:Ibicaraí,03:Firmino Alves,05:Floresta Azul,07:Itaiá,09:Santa Cruz da Vitória
+31|95|3137|ILHEUS|01:Ilhéus,03:Aritaguá,05:Banco Central,07:Banco da Vitória,09:Castelo Novo,11:Coutos,13:Inema,15:Itapitanga,17:Japu,19:Olivença,21:Pimenteira,23:Rio do Braço
+31|95|3138|IPIAU|01:Ipiaú,03:Algodão,05:Barra do Rocha,07:Ibirataia
+31|95|3139|ITABUNA|01:Itabuna,03:Buerarema,05:Ferradas,07:Itaguira,09:Itapé,11:Jussari
+81|269|8500|OSORIO|01:Osório,03:Barra do Ouro,05:Capão da Canoa,07:Itati,09:Maquiné,11:Palmares do Sul,13:Passinhos,15:Terra de Areia,17:Tramandaí
+81|269|8501|RIO GRANDE|01:Rio Grande,03:Cassino,05:Povo Novo,07:Quinta,09:Taim
+81|269|8502|SANTA VITORIA DO PALMAR|01:Santa Vitória do Palmar,03:Chuí
+81|269|8503|SAO JOSE DO NORTE|01:São José do Norte,03:Bojuru,05:Estreito,07:Mostardas,09:Tavares
+81|269|8504|TORRES|01:Torres,03:Glória,05:Morro Azul,07:São Pedro de Alcântara,09:Três Cachoeiras,11:Três Forquilhas
+40|132|4458|PORTO FIRME|01:Pôrto Firme
+40|132|4459|PRESIDENTE BERNARDES|01:Presidente Bernardes
+40|132|4460|PRESIDENTE SOARES|01:Presidente Soares
+40|132|4461|RAUL SOARES|01:Raul Soares,03:Bicuíba,05:Santana do Tabuleiro,07:São Vicente da Estrela,09:Vermelho Novo,11:Vermelho Velho
+40|132|4462|RECREIO|01:Recreio,03:Angaturama,05:Conceição da Boa Vista
+40|132|4463|RIO CASCA|01:Rio Casca,03:Jurumirim
+40|132|4464|RIO ESPERA|01:Rio Espera,03:Lamim,05:Piranguita
+40|132|4465|RIO NOVO|01:Rio Nôvo,03:Goianá
+40|132|4466|RIO POMBA|01:Rio Pomba,03:Silveirânia
+40|132|4467|RIO PRETO|01:Rio Prêto,03:Santa Bárbara do Monte Verde,05:São Sebastião do Barreado
+#   p.177 Rio Bonito 5306: so aparecem 01 e 07 (Boa Esperanca) -- a folha comeca no meio da pagina, reler
+#   p.313 (Brasilia/DF e Fernando de Noronha): a margem esquerda sai cortada, layout diferente -- reler
+52|175|5213|SAO JOAO DA BARRA|01:São João da Barra,03:Barra Seca,05:Itabapoana,07:Maniva,09:Pipeiras,11:Barcelos
+52|175|5280|CASIMIRO DE ABREU|01:Casimiro de Abreu,03:Barra de São João
+52|175|5281|SILVA JARDIM|01:Silva Jardim,03:Correntezas,05:Gaviões,07:Quartéis
+52|175|5290|ARARUAMA|01:Araruama,03:Morro Grande,05:São Vicente de Paula
+52|175|5291|CABO FRIO|01:Cabo Frio,03:Armação dos Búzios,05:Arraial do Cabo,07:Tamoios
+52|175|5293|SAO PEDRO DA ALDEIA|01:São Pedro da Aldeia,03:Iguaba Grande
+40|161|4214|JANAUBA|01:Janaúba
+40|161|4215|JEQUITAI|01:Jequitaí
+40|161|4216|JURAMENTO|01:Juramento
+40|161|4217|MONTES CLAROS|01:Montes Claros,03:Mirabela,05:Miralta,07:Patis,09:Santa Rosa de Lima,11:São João da Vereda,13:São Pedro da Garça
+40|161|4218|SAO JOAO DA PONTE|01:São João da Ponte,03:Bonança,05:Campo Redondo,07:Condado do Norte,09:Ibiracatu,11:Lontra,13:Santo Antônio da Boa Vista,15:Varzelândia
+40|161|4220|BUENOPOLIS|01:Buenópolis,03:Augusto de Lima,05:Curimataí,07:Joaquim Felício
+40|161|4221|CORINTO|01:Corinto,03:Andrequicé,05:Contria,07:Santo Hipólito,09:Senhora da Glória
+14|40|1618|PARAMBU|01:Parambu
+14|40|1619|SABOEIRO|01:Saboeiro,03:Flamengo
+14|40|1620|TAUA|01:Tauá,03:Barra Nova,05:Carrapateiras,07:Inhamuns,09:Marrecas,11:Marruás,13:Trici
+14|40|1560|ALTO SANTO|01:Alto Santo,03:Castanhão
+14|40|1561|ITAICABA|01:Itaiçaba
+14|40|1562|JAGUARUANA|01:Jaguaruana,03:Borges,05:Giqui
+14|40|1563|LIMOEIRO DO NORTE|01:Limoeiro do Norte,03:Bixopá
+14|40|1564|MORADA NOVA|01:Morada Nova,03:Aruaru,05:Boa Água,07:Ibicuitinga,09:Juàzeiro de Baixo,11:Pedras
+#   p.175 Marica 5292: ha uma linha obscura entre Inoa 03 e Itapeteiu 05 -- falta um distrito
+31|115|3363|CORIBE|01:Coribe
+31|115|3364|PALMAS DE MONTE ALTO|01:Palmas de Monte Alto,03:Camatei,05:Mandiroba
+31|115|3365|RIACHO DE SANTANA|01:Riacho de Santana,03:Botuquara,05:Matina
+31|115|3366|SANTANA|01:Santana,03:Ibiagui,05:Penamar,07:Porto Novo
+31|115|3367|SANTA MARIA DA VITORIA|01:Santa Maria da Vitória,03:Açudina,05:Inhaumas
+31|115|3370|ANGICAL|01:Angical,03:Brejo Velho,05:Buritizinho,07:Mariquita
+31|115|3372|CORRENTINA|01:Correntina
+40|136|4027|SAO JOAO DO PARAISO|01:São João do Paraíso,03:Vereda do Paraíso
+40|136|4028|TAIOBEIRAS|01:Taiobeiras
+40|136|4500|ARACUAI|01:Araçuaí,03:Engenheiro Schnoor,05:Itira
+40|136|4501|CAPELINHA|01:Capelinha
+40|136|4502|CORONEL MURTA|01:Coronel Murta
+40|136|4504|GOUVEA|01:Gouvêa
+21|76|2213|ITAPETIM|01:Itapetim
+21|76|2215|SERRA TALHADA|01:Serra Talhada,03:Bernardo Vieira,05:Caiçarinha da Penha,07:Luanda,09:Pajeú,11:Tauapiranga
+21|76|2216|TABIRA|01:Tabira,03:Ingàzeira,05:Solidão,07:Tuparetama
+21|76|2240|ARCOVERDE|01:Arcoverde
+21|76|2241|CUSTODIA|01:Custódia,03:Betânia
+21|76|2242|SERTANIA|01:Sertânia,03:Albuquerque Néri,05:Algodões,07:Henrique Dias,09:Rio da Barra
+21|76|2250|ARARIPINA|01:Araripina,03:Morais,05:Nascente
+#   p.115 Barreiras 3371: linha obscura entre Sao Desiderio 05 e Sitio Grande 07
+#   p.136 Diamantina 4503: linha obscura perto do codigo 27 -- tem 15 distritos, um ilegivel
+#   p.76  Sao Jose do Egito 2214: aparecem 01 e 05 (Tigre), falta o 03
+21|72|2163|CUPIRA|01:Cupira
+21|72|2164|GARANHUNS|01:Garanhuns,03:Brejão,05:Caetés,07:Iratama,09:Itacatu,11:Miracica,13:Paranatama,15:São João
+21|72|2165|GLORIA DO GOITA|01:Glória do Goitá,03:Apoti,05:Chã da Alegria,07:Feira Nova
+21|72|2166|GRAVATA|01:Gravatá,03:Chã Grande,05:Mandacaru,07:Uruçu-Mirim
+21|72|2167|JOAO ALFREDO|01:João Alfredo,03:Salgadinho
+21|72|2168|JUREMA|01:Jurema,03:Santo Antônio das Queimadas
+21|72|2169|LAGOA DOS GATOS|01:Lagoa dos Gatos,03:Lagoa do Sousa
+21|72|2170|LAJEDO|01:Lajedo
+31|104|3394|MACAJUBA|01:Macajuba
+31|104|3395|MAIRI|01:Mairi
+31|104|3396|MIGUEL CALMON|01:Miguel Calmon,03:Itapura,05:Tapiranga,07:Várzea do Poço
+31|104|3397|MUNDO NOVO|01:Mundo Nôvo,03:Alto Bonito,05:Ibiaporã,07:Indai,09:Tapiramutá
+31|104|3398|PIRITIBA|01:Piritiba,03:França,05:Largo
+31|104|3399|RUY BARBOSA|01:Ruy Barbosa,03:Lajedinho,05:Morro das Flôres,07:Tapiraipe
+31|104|3210|AMARGOSA|01:Amargosa,03:Corta Mão,05:Diógenes Sampaio,07:Itachama,09:Nossa Senhora dos Milagres,11:Tartaruga
+31|104|3211|BREJOES|01:Brejões,03:Nova Itarana
+60|232|6642|JULIO MESQUITA|01:Júlio Mesquita
+60|232|6643|JUNQUEIROPOLIS|01:Junqueirópolis
+60|232|6644|LUCELIA|01:Lucélia,03:Pracinha
+60|232|6645|LUPERCIO|01:Lupércio
+60|232|6646|MARIAPOLIS|01:Mariápolis,03:Mourão
+60|232|6647|MARILIA|01:Marília,03:Amadeu Amaral,05:Avencas,07:Dirceu,09:Lácio,11:Padre Nóbrega,13:Rosália
+60|232|6648|OCAUCU|01:Ocauçu
+60|232|6649|ORIENTE|01:Oriente
+60|232|6650|OSVALDO CRUZ|01:Osvaldo Cruz,03:Lagoa Azul
+60|232|6651|PACAEMBU|01:Pacaembu
+60|232|6652|PARAPUA|01:Parapuã
+60|232|6653|POMPEIA|01:Pompéia,03:Nôvo Cravinhos
+81|270|8250|AGUDO|01:Agudo
+81|270|8251|BARRA DO RIBEIRO|01:Barra do Ribeiro
+81|270|8252|BOM RETIRO DO SUL|01:Bom Retiro do Sul
+81|270|8253|CACEQUI|01:Cacequi,03:Saica,05:Umbu
+81|270|8255|CANOAS|01:Canoas,03:Santa Rita
+81|270|8256|ESTEIO|01:Esteio
+81|270|8257|FAXINAL DO SOTURNO|01:Faxinal do Soturno,03:São José do Polesine
+81|270|8258|GENERAL CAMARA|01:General Câmara,03:Melos,05:Santo Amaro do Sul
+81|285|8400|ARROIO DO MEIO|01:Arroio do Meio,03:Nova Bréscia,05:Pouso Novo,07:Travesseiro
+81|285|8401|ARVOREZINHA|01:Arvorezinha,03:Alvorada,05:Maurício Cardoso
+81|285|8402|CAMPO BOM|01:Campo Bom
+81|285|8403|CANDELARIA|01:Candelária,03:Batucaraí
+81|285|8404|CANELA|01:Canela
+81|285|8405|DOIS IRMAOS|01:Dois Irmãos,05:Santa Maria do Erval
+81|285|8406|ENCANTADO|01:Encantado,03:Anta Gorda,05:Ilópolis,07:Putinga,09:Relvado,11:Itapuca
+81|285|8407|ESTANCIA VELHA|01:Estância Velha,03:Ivoti
+40|125|4337|SENHORA DO PORTO|01:Senhora do Pôrto
+40|125|4338|TARUMIRIM|01:Tarumirim,03:Itapiruna,05:Santa Bárbara,07:São José do Acácio,09:São Vicente do Rio Doce,11:Senhora da Penha,13:Sobrália,15:Vai-Volta
+40|125|4339|TUMIRITINGA|01:Tumiritinga,03:São Geraldo de Tumiritinga
+40|125|4340|VIRGINOPOLIS|01:Virginópolis,03:Divino de Virginópolis,05:Gonzaga,07:São Geraldo da Piedade,09:Santa Efigênia,11:Sardoá
+40|125|4341|VIRGOLANDIA|01:Virgolândia,03:Marilac
+40|125|4400|ABRE CAMPO|01:Abre Campo,03:Granada,05:Pedra Bonita,07:Sericita
+40|125|4401|ALEM PARAIBA|01:Além Paraíba,03:Angustura,05:Aventureiro
+#   p.270 Cachoeira do Sul 8254: seis distritos com codigos inconsistentes na leitura -- reler
+31|105|3212|ITAQUARA|01:Itaquara
+31|105|3213|ITIRUCU|01:Itiruçu
+31|105|3214|JAGUAQUARA|01:Jaguaquara,03:Apuarema,05:Ipiúna
+31|105|3215|JEQUIE|01:Jequié,03:Aiquara,05:Baixão,07:Boaçu,09:Itagi,11:Itaibó,13:Itajuru,15:Jitaúna,17:Oriente Novo
+31|105|3216|JIQUIRICA|01:Jiquiriçá
+31|105|3217|LAJE|01:Laje,03:Capão,05:Engenheiro Pontes
+31|105|3218|MARACAS|01:Maracás,03:Ibitiguira,05:Juraci,07:Lajedo do Tabocal,09:Nova Itaípe,11:Tamburi,13:Três Morros
+31|105|3219|MUTUIPE|01:Mutuípe
+40|166|4910|FRUTAL|01:Frutal,03:Aparecida de Minas,05:Planura
+40|166|4911|ITAPAGIPE|01:Itapagipe
+40|166|4912|ITUIUTABA|01:Ituiutaba,03:Gurinhatã,05:Ipiaçu
+40|166|4913|ITURAMA|01:Iturama,03:Alexandrita
+40|166|4914|MONTE ALEGRE DE MINAS|01:Monte Alegre de Minas
+40|166|4915|PIRAJUBA|01:Pirajuba
+40|166|4916|PRATA|01:Prata,03:Jardinésia,05:Patrimônio
+40|166|4917|SANTA VITORIA|01:Santa Vitória
+40|166|4918|TUPACIGUARA|01:Tupaciguara,03:Arapora
+40|166|4919|UBERABA|01:Uberaba,03:Baixa
+40|166|4920|UBERLANDIA|01:Uberlândia,03:Cruzeiro dos Peixotos,05:Martinésia,07:Miraporanga
+81|278|8309|GAURAMA|01:Gaurama,03:Aurea,05:Balisa,07:Centenário
+81|278|8310|GETULIO VARGAS|01:Getúlio Vargas,03:Erebango,05:Floriano Peixoto,07:Ipiranga
+81|278|8311|GIRUA|01:Giruá,03:Ubiretama,05:Salgado Filho
+81|278|8312|HORIZONTINA|01:Horizontina,03:Cascata,05:Doutor Maurício Cardoso,07:Pranchada,09:Pitanga
+81|278|8313|HUMAITA|01:Humaitá,03:Sede Nova
+81|278|8314|IRAI|01:Iraí,03:Alpestre,05:Farinhas,07:Planalto,09:Saltinho,11:São Gabriel,13:Volta Grande
+81|278|8315|MARCELINO RAMOS|01:Marcelino Ramos,03:Coronel Teixeira,05:Maximiliano de Almeida
