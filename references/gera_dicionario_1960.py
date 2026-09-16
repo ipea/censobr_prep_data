@@ -28,6 +28,10 @@ SAIDA = os.path.join(RAIZ, "references", "censo_docs")
 CODIGO = os.path.join(RAIZ, "read_guides", "1960_codigo_do_censo.csv")
 
 VALOR = [("Valor", "")]
+# a convencao de tipos do projeto tem tres tipos -- string, float64 e int32 --, e
+# as colunas logicas saem nela como 1 e 0, nao como TRUE e FALSE
+SIM = ("1", "Sim")
+NAO = ("0", "Não")
 TEXTO = [("Texto", "")]
 FALTA_127 = ("", "Informação faltante - Amostra de 1,27%")
 NA_NO_25 = ("", "Não se aplica - Registro advindo da amostra de 25%")
@@ -326,12 +330,12 @@ DESENHO = [
 
 DIAG_COMUM = [
     ("censobr_favela", "Registro em favela. Só na Guanabara, onde o Código de Municípios e Distritos "
-                       "dá código próprio às favelas", [("TRUE", ""), ("FALSE", "")]),
+                       "dá código próprio às favelas", [SIM, NAO]),
     ("censobr_muni_corrigido", "Código de município corrigido na leitura: Alagoas vinha deslocada em "
                                "+200, Fernando de Noronha como 2701, o Distrito Federal como 9701 e a "
-                               "Guanabara codificada por bairro", [("TRUE", ""), ("FALSE", "")]),
+                               "Guanabara codificada por bairro", [SIM, NAO]),
     ("censobr_uf_corrigida", "Unidade da federação corrigida na leitura: 64 famílias de Porto Velho "
-                             "estavam gravadas como Roraima", [("TRUE", ""), ("FALSE", ""), NA_NO_25]),
+                             "estavam gravadas como Roraima", [SIM, NAO, NA_NO_25]),
     ("censobr_diagnostico", "Diagnóstico do dano de fita no registro. O arquivo da amostra de 25% não "
                             "sofreu dano: 948 MB sem um caractere fora de [0-9 ]",
      [("sem_problema", "Registro íntegro"),
@@ -381,9 +385,9 @@ def secoes_domicilios():
               ("registro_perdido", "A família foi reconstruída a partir dos registros de pessoa"),
               NA_NO_25]),
             ("censobr_convivente_isolada", "Família convivente cujo registro de família principal não "
-                                           "está no arquivo", [("TRUE", ""), ("FALSE", "")]),
+                                           "está no arquivo", [SIM, NAO]),
             ("censobr_dois_chefes", "Domicílio com dois registros na posição de chefe",
-             [("TRUE", ""), ("FALSE", ""), NA_NO_25]),
+             [SIM, NAO, NA_NO_25]),
             ("censobr_linha", "Número da linha do registro no arquivo de origem", VALOR)]),
     ]
 
@@ -442,25 +446,25 @@ def secoes_pessoas():
              [("2", "Chefe"), ("3", "Demais pessoas"), NA_NO_25]),
             ("censobr_duplicata_mantida", "Linha repetida que foi mantida, com marca, por não se "
                                           "encaixar no mecanismo de cópia identificado",
-             [("TRUE", ""), ("FALSE", ""), NA_NO_25]),
+             [SIM, NAO, NA_NO_25]),
             ("censobr_familia_origem", "Como a família foi reconstruída na leitura",
              [("registro", "A família tem o seu registro no arquivo"),
               ("registro_perdido", "A família foi reconstruída a partir dos registros de pessoa"),
               ("anexada_anterior", "Pessoa anexada à família anterior"), NA_NO_25]),
             ("censobr_v208_imputada", "Nacionalidade imputada deterministicamente a partir da "
-                                      "naturalidade", [("TRUE", ""), ("FALSE", ""), NA_NO_25]),
+                                      "naturalidade", [SIM, NAO, NA_NO_25]),
             ("censobr_v217_fora_da_faixa", "Filhos tidos fora da faixa do dicionário",
-             [("TRUE", ""), ("FALSE", ""), NA_NO_25]),
+             [SIM, NAO, NA_NO_25]),
             ("censobr_v218_fora_da_faixa", "Filhos vivos fora da faixa do dicionário",
-             [("TRUE", ""), ("FALSE", ""), NA_NO_25]),
+             [SIM, NAO, NA_NO_25]),
             ("censobr_flag_conjuge_mesmo_sexo", "Cônjuge do mesmo sexo do chefe. Marca de coerência, "
-                                                "sem correção", [("TRUE", ""), ("FALSE", ""), NA_NO_25]),
+                                                "sem correção", [SIM, NAO, NA_NO_25]),
             ("censobr_flag_filho_mais_velho", "Filho mais velho incompatível com a idade do chefe. "
                                               "Marca de coerência, sem correção",
-             [("TRUE", ""), ("FALSE", ""), NA_NO_25]),
+             [SIM, NAO, NA_NO_25]),
             ("censobr_flag_casamento_impossivel", "Ano de casamento incompatível com a idade. Marca "
                                                   "de coerência, sem correção",
-             [("TRUE", ""), ("FALSE", ""), NA_NO_25]),
+             [SIM, NAO, NA_NO_25]),
             ("censobr_linha", "Número da linha do registro no arquivo de origem", VALOR)]),
     ]
 

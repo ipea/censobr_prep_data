@@ -29,5 +29,9 @@ logs/crew_workers/
 _tmp_*.R
 __pycache__/
 *.html
+# os dicionarios de variaveis de 1960 sao artefato deliberado, destinado ao
+# release censo_docs, e os moldes sao a proveniencia deles
+!references/censo_docs/*.html
+!references/censo_docs/molde/*.html
 *_files/
 nul
