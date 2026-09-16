@@ -181,6 +181,20 @@ A diferença de população — 733.602 pessoas, 1,03% — é a distância entre
 
 O conjunto de colunas mudou bastante: 26 colunas novas nos domicílios e 32 nas pessoas, 8 renomeadas em cada. O inventário coluna a coluna está em [`microdata_1960_compilacao_dicionario.csv`](microdata_1960_compilacao_dicionario.csv), com o nome antigo ao lado de cada uma.
 
+### O dicionário publicado
+
+Os dois dicionários HTML que o `censobr` distribui no release `censo_docs` foram refeitos a partir dos publicados, em [`censo_docs/`](censo_docs/), pelo gerador [`gera_dicionario_1960.py`](gera_dicionario_1960.py) — que usa os antigos como molde, guardados em [`censo_docs/molde/`](censo_docs/molde/): o cabeçalho, o CSS, a largura das colunas e o rodapé saem intactos, e só as linhas da tabela são refeitas, com as mesmas classes de estilo.
+
+Agora eles documentam **todas** as colunas das duas tabelas, na ordem do arquivo — 66 e 98, contra 35 e 66 antes. O que mudou:
+
+- **Entraram** 36 variáveis nos domicílios e 41 nas pessoas: a geografia do `censobr`, as duas épocas de cada unidade territorial, o tipo de unidade, as colunas de desenho das duas etapas, os quatro pesos e as marcas de auditoria.
+- **Saíram** `V200` e `V201` — número e dígito verificador da pessoa, redundâncias de perfuração que o estágio da amostra de 25% já usara como teste de leitura e descartara.
+- **Foram renomeadas** oito nas duas tabelas, mais `V204b`→`V204B` e `V223b`→`V223B`. E `V001`–`V004` e `V100` passam a `v001`–`v004` e `v100`, em minúsculas: é como o layout original distingue a chave do questionário das variáveis do formulário, e os dois estágios preservaram a distinção.
+- **As seis listas longas que o arquivo antigo remetia a abas de Excel que a exportação para HTML não levou** — "Ver aba V207", V210, V214, V216, V221, V223B — passam a vir impressas, do *Código do Censo* transcrito em `read_guides/1960_codigo_do_censo.csv`. São 640 códigos que o dicionário publicado prometia e não entregava; a ocupação habitual sozinha tem 248.
+- **Três erros de código corrigidos**, conferidos no *Código do Censo*: em `V215`, os códigos 7 e 8 tinham o mesmo rótulo ("Somente Casamento") e o 6 vinha pela metade — são "Somente casamento civil", "Somente casamento religioso" e "Casamento civil e religioso". Mais os erros de digitação "Peças Servindo Domitório", "Cananalização" e "Total de Comodos".
+- **O zero de `V112` e `V113` ganhou linha própria**: não é ausência, é o código que o questionário manda usar quando não há indicação do número de cômodos ou de dormitórios (*Código do Censo*, p. 25).
+- Em `V101`, o dicionário de domicílios passa a dizer que **os códigos 4 e 5 não ocorrem naquela tabela**: o domicílio leva o código da família principal, e as famílias conviventes só aparecem na tabela de pessoas.
+
 ## 10. O que sai
 
 Duas tabelas, em `./data/microdata_sample/1960/`:
