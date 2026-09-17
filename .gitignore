@@ -33,5 +33,8 @@ __pycache__/
 # release censo_docs, e os moldes sao a proveniencia deles
 !references/censo_docs/*.html
 !references/censo_docs/molde/*.html
+# a transcricao integral do Codigo de Zonas Fisiograficas, Municipios e
+# Distritos de 1960 e fonte primaria, como os PDFs ao lado dela
+!references/fontes_1960/*.html
 *_files/
 nul
