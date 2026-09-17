@@ -15,7 +15,14 @@ S = (r"C:\Users\antro\AppData\Local\Temp\claude"
 
 def texto(x):
     x = re.sub(r"<[^>]+>", "", x)
-    x = x.replace("&nbsp;", " ").replace("&amp;", "&").replace("&#39;", "'")
+    x = re.sub(r"&#x([0-9a-fA-F]+);", lambda m: chr(int(m.group(1), 16)), x)
+    x = re.sub(r"&#(\d+);", lambda m: chr(int(m.group(1))), x)
+    x = x.replace("&nbsp;", " ").replace("&amp;", "&")
+    # o transcritor ancora as notas de rodape na propria celula, como [20.1]
+    x = re.sub(r"\s*\[\d+\.\d+\]", "", x)
+    # e marca com [texto?] o trecho que leu sem certeza: fica o texto lido,
+    # e a linha inteira sai com duvida = True
+    x = re.sub(r"\[([^\[\]]*?)\?\]", lambda m: m.group(1), x)
     return re.sub(r"\s+", " ", x).strip()
 
 
@@ -43,23 +50,27 @@ for sec in secs:
     for tr in re.findall(r"<tr\b[^>]*>.*?</tr>", sec, re.S):
         if "<th" in tr:
             continue
-        tds = [texto(x) for x in re.findall(r"<td\b[^>]*>(.*?)</td>", tr, re.S)]
-        if len(tds) != 4:
+        cru = re.findall(r"<td\b[^>]*>(.*?)</td>", tr, re.S)
+        if len(cru) != 4:
             continue
-        nome, z, m, d = tds
-        # o transcritor marcou com ? o que nao conseguiu ler com certeza
-        duvida = "?" in (z + m + d)
+        # o transcritor marcou com ? o que nao conseguiu ler com certeza, tanto
+        # num codigo quanto num trecho de nome, este entre colchetes
+        duvida = "?" in "".join(cru)
+        nome, z, m, d = (texto(x) for x in cru)
         z, m, d = (re.sub(r"[^0-9]", "", x) for x in (z, m, d))
         # na pagina das unidades especiais uma linha so traz zona, municipio e
         # distrito ao mesmo tempo, entao os tres casos se testam em sequencia e
         # nao em alternativa
+        maiuscula = nome == nome.upper() and any(c.isalpha() for c in nome)
+        if z and len(z) == 4 and not m and not d and maiuscula:
+            m, z = z, ""                        # municipio repetido na virada de pagina
         if z:
             zona_cod, zona_nome = z, nome
         if m:
             mun_cod, mun_nome = m, nome
         if d:
             linhas.append({
-                "uf60": uf_cod, "nome_uf": uf_nome,
+                "nome_uf": uf_nome,
                 "zona_cod": zona_cod, "zona": zona_nome,
                 "code_muni_1960": int(mun_cod) if mun_cod else None,
                 "name_muni_1960": mun_nome,
@@ -75,7 +86,7 @@ print("unidades da federacao:", len(paginas_uf))
 for k, v in paginas_uf.items():
     print("   %-28s uf60=%s" % (k, v))
 
-dest = os.path.join(S, "cadastro_1960.csv")
+dest = os.path.join("references", "fontes_1960", "1960_cadastro_territorial.csv")
 with io.open(dest, "w", encoding="utf-8", newline="") as fh:
     w = csv.DictWriter(fh, fieldnames=list(linhas[0].keys()))
     w.writeheader()

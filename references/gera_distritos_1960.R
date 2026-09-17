@@ -29,10 +29,32 @@ message("transcricao: ", nrow(novo), " distritos em ", uniqueN(novo$code_muni_19
 
 # a unidade da federacao e o nome do municipio vem do crosswalk, que e a
 # autoridade para os dois -- o cabecalho da pagina nao serve, porque so a
-# primeira pagina de cada estado o traz
-novo[muni, `:=`(uf60 = i.uf60, name_muni_1960 = i.nome), on = c(code_muni_1960 = "cod60")]
+# primeira pagina de cada estado o traz e o codigo se arrasta para as seguintes
+# (5,74% de acerto contra a divisao territorial).
+#
+# O codigo 541 esta duas vezes no crosswalk: e Anhanga, no Para, e e tambem o
+# codigo que o nosso estagio da amostra de 1,27% inventou para o municipio do
+# Rio de Janeiro ao reduzir os bairros da Guanabara (5410 a 5591) a um so
+# municipio. No livro 541 e Anhanga e nada mais, entao a linha sintetica sai
+# do join -- sem isso os tres distritos de Anhanga saem rotulados como Rio de
+# Janeiro.
+cw <- muni[!(uf60 == 54 & cod60 == 541)]
+novo[, uf60 := NA_integer_]
+novo[cw, `:=`(uf60 = i.uf60, name_muni_1960 = i.nome), on = c(code_muni_1960 = "cod60")]
 
 gb <- novo$code_muni_1960 >= 5410 & novo$code_muni_1960 <= 5591
+
+# Rafard (6311) esta no livro e nao no crosswalk, que pula de 6310 a 6312: a
+# unidade vem do municipio de codigo mais proximo, que e o vizinho de pagina.
+# Os bairros da Guanabara tambem faltam no crosswalk, e nao entram aqui porque
+# tem tratamento proprio mais abaixo.
+faltantes <- unique(novo[is.na(uf60) & !gb, code_muni_1960])
+if(length(faltantes) > 0){
+  vizinho <- cw[, .(cod60, uf60)][order(cod60)]
+  novo[is.na(uf60) & !gb, uf60 := vizinho[.(code_muni_1960), uf60, on = "cod60", roll = "nearest"]]
+  message("sem crosswalk, unidade pelo municipio vizinho: ",
+          paste(faltantes, collapse = ", "))
+}
 message("Guanabara na transcricao: ", sum(gb), " linhas; no guia anterior: ",
         guia[uf60 == 54, .N])
 
@@ -83,7 +105,7 @@ r <- rbindlist(list(fora, antiga_gb, falta_gb), use.names = TRUE, fill = TRUE)
 
 resto <- guia[uf60 != 54 & !is.na(name_district_1960) & name_district_1960 != ""]
 resto[, uf60 := NULL]
-resto[muni, `:=`(uf60 = i.uf60, name_muni_1960 = i.nome), on = c(code_muni_1960 = "cod60")]
+resto[cw, `:=`(uf60 = i.uf60, name_muni_1960 = i.nome), on = c(code_muni_1960 = "cod60")]
 resto <- resto[!is.na(uf60)]
 resto[r, ja := TRUE, on = c("uf60", "code_muni_1960", "code_district_1960")]
 resto <- unique(resto[is.na(ja)], by = c("uf60", "code_muni_1960", "code_district_1960"))
