@@ -4,7 +4,14 @@ library(crew)
 
 # cores available
 # coress <- floor(.9 * parallelly::freeCores()[1])
-coress <- 1  # limitado temporariamente para evitar rate-limit do FTP IBGE
+# Quatro trabalhadores. O limite de 1 existia para nao levar rate-limit do FTP
+# do IBGE, e continua valendo quando a rodada baixa dado novo -- mas a cadeia de
+# 1960, que e a que corre agora, nao toca o FTP: le do release_legacy e de
+# arquivos locais. O teto de memoria e o ramo de Sao Paulo na amostra de 25%,
+# medido em 3 GB; quatro ramos simultaneos pedem uns 12 GB. Se apertar, baixar
+# para 2. Nao subir sem testar: oito workers de furrr causaram o OOM de
+# 2026-05-03, e furrr dentro das funcoes ja usa quatro.
+coress <- 4
 
 
 # RENV -------------------------------------------------------------------------
