@@ -20,7 +20,7 @@
 
 
 # Baixa os 27 zips por UF do FTP e descompacta em laco (ha zip aninhado).
-download_microdata_2000 <- function(){
+download_microdata_2000 <- function(remote){
 
   dest_dir <- "./data_raw/microdata/2000"
   txt_dir  <- file.path(dest_dir, "txt")
@@ -29,10 +29,11 @@ download_microdata_2000 <- function(){
 
   message("\nDownloading 2000 microdata...\n")
 
-  ftp <- 'https://ftp.ibge.gov.br/Censos/Censo_Demografico_2000/Microdados/'
+  # `remote`: listagem do FTP vinda de ftp_fingerprint_censobr(), e a
+  # dependencia que faz este alvo rodar de novo quando o IBGE republica.
+  ftp <- FTP_CENSOBR$microdata_2000
 
-  listed <- list_folders(ftp)
-  uf_zips <- listed[grepl("^[A-Z]{2}\\.zip$", listed)]
+  uf_zips <- remote$arquivo[grepl("^[A-Z]{2}\\.zip$", remote$arquivo)]
 
   # max_active = 1: o FTP do IBGE recusa rajadas paralelas (ver microdata_2022)
   for(tentativa in 1:3){

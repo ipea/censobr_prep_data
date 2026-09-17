@@ -307,11 +307,13 @@ get_schema <- function(year, dataset){
   # Microdados CD2022 - acesso Publico.xlsx": DEC > 0 vira double(); senao o
   # inteiro e dimensionado por INT (<=2 int8, 3-4 int16, 5-9 int32). O layout
   # publico nao tem INT >= 10, entao nao ha int64() -- ao contrario do
-  # controlado, onde a area de ponderacao estoura 32 bits. F0101 e M0101 sao
-  # string() porque carregam letra no valor ("F001", "M001"); P0101 parece com
-  # elas mas e contagem, fica inteiro. Os tipos conferem com os que o consumidor
-  # verificou contra os dados no acesso controlado, para as 256 variaveis que
-  # as duas modalidades compartilham.
+  # controlado, onde a area de ponderacao estoura 32 bits. F0101, M0101 e
+  # P0115 sao string() porque carregam letra no valor ("F001", "M001"); P0101
+  # parece com elas mas e contagem, fica inteiro. P0115 e o numero de ordem da
+  # familia, que entrou no arquivo de pessoas na republicacao de 14/09/2026.
+  # Os tipos conferem com os que o consumidor verificou contra os dados no
+  # acesso controlado, para as 257 variaveis que as duas modalidades
+  # compartilham.
   # Declarar o schema tambem evita que o arrow tipe como null as colunas em
   # branco no primeiro bloco que le.
 
@@ -330,9 +332,10 @@ get_schema <- function(year, dataset){
     )
   }
 
-  if (year==2022 & dataset=="population") {   # Pessoas -- 168 variaveis
+  if (year==2022 & dataset=="population") {   # Pessoas -- 169 variaveis
     sss <- schema(
-      P0010 = int8(), P0020 = int8(), P0100 = int32(), P0101 = int8(), P0110 = double(), P0120 = int8(),
+      P0010 = int8(), P0020 = int8(), P0100 = int32(), P0101 = int8(),
+      P0110 = double(), P0115 = string(), P0120 = int8(),
       P0130 = int8(), P0140 = int8(), P0150 = int8(), P0170 = int8(), P0180 = int8(), P0200 = int8(),
       P0210 = int8(), P0220 = int8(), P0230 = int8(), P0240 = int8(), P0250 = int8(), P0260 = int8(),
       P0270 = int8(), P0280 = int8(), P0290 = int8(), P0300 = int8(), P0310 = int8(), P0320 = int8(),

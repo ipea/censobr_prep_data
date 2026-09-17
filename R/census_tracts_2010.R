@@ -1,5 +1,5 @@
 # download zipped files of census tracts and return the paths to unzipped files
-download_tract_2010 <- function(year, overwrite = FALSE){ # year = 2010
+download_tract_2010 <- function(year, remote, overwrite = FALSE){ # year = 2010
   
   # create dest_dir
   dest_dir <- paste0('./data_raw/tracts/', year)
@@ -9,7 +9,7 @@ download_tract_2010 <- function(year, overwrite = FALSE){ # year = 2010
   
   # get ftp
   if(year==2010){
-    ftp   <- 'https://ftp.ibge.gov.br/Censos/Censo_Demografico_2010/Resultados_do_Universo/Agregados_por_Setores_Censitarios/'
+    ftp   <- FTP_CENSOBR$tracts_2010
     files <- NULL
   }
   
@@ -20,8 +20,10 @@ download_tract_2010 <- function(year, overwrite = FALSE){ # year = 2010
   #   files <- c("https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios_Rendimento_do_Responsavel/Agregados_por_setores_renda_responsavel_BR_csv.zip")
   # }
   
-  # get file names
-  listed_files <- list_folders(ftp)
+  # get file names -- `remote` e a listagem do FTP vinda de
+  # ftp_fingerprint_censobr(), e a dependencia que faz este alvo rodar de novo
+  # quando o IBGE republica.
+  listed_files <- remote$arquivo
 
   # keep zip files
   listed_files <- listed_files[listed_files %like% ".zip$"]

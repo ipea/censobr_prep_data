@@ -28,19 +28,16 @@
 
 
 # Baixa e descompacta o CSV nacional.
-download_tract_2022_prelim <- function(){
+download_tract_2022_prelim <- function(remote){
 
   dest_dir <- "./data_raw/tracts/2022_preliminares"
   dir.create(dest_dir, recursive = TRUE, showWarnings = FALSE)
 
   message("\nDownloading 2022 census tracts (preliminares) ...\n")
 
-  url <- paste0("https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/",
-                "Agregados_por_Setores_Censitarios_preliminares/",
-                "agregados_por_setores_csv/BR/",
-                "Agregados_preliminares_por_setores_censitarios_BR.zip")
-
-  download_file_censobr(file_url = url, dest_dir = dest_dir, max_active = 1)
+  # `remote` vem de ftp_fingerprint_censobr() com a URL do zip (o endereco
+  # esta em FTP_CENSOBR) e e a dependencia que detecta republicacao.
+  download_file_censobr(file_url = remote$url, dest_dir = dest_dir, max_active = 1)
   unzip_censobr(zip_dir = dest_dir, out_zip = dest_dir)
 
   csv <- list.files(dest_dir, pattern = "\\.csv$", full.names = TRUE, ignore.case = TRUE)

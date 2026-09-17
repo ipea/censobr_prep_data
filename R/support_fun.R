@@ -9,16 +9,90 @@ detect_year_from_string <- function(string){
 }
 
 
-###### list ftp folders -----------------
+###### ftp do IBGE -----------------
 
-# function to list ftp folders from their original sub-dir
-list_folders <- function(ftp){
+# Enderecos do FTP do IBGE, um por fonte. Ficam num lugar so porque duas coisas
+# precisam deles: a funcao de download de cada ano e o alvo que confere o que o
+# servidor esta servindo agora.
+FTP_CENSOBR <- list(
 
-  h <- rvest::read_html(ftp)
-  elements <- rvest::html_elements(h, "a")
-  folders <- rvest::html_attr(elements, "href")
-  return(folders)
+  microdata_2000     = 'https://ftp.ibge.gov.br/Censos/Censo_Demografico_2000/Microdados/',
+  microdata_2010     = 'https://ftp.ibge.gov.br/Censos/Censo_Demografico_2010/Resultados_Gerais_da_Amostra/Microdados/',
+  microdata_2022     = 'https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Microdados_e_Areas_de_Ponderacao/Microdados_de_acesso_Publico/csv/',
 
+  tracts_2000        = 'https://ftp.ibge.gov.br/Censos/Censo_Demografico_2000/Dados_do_Universo/Agregado_por_Setores_Censitarios/',
+  tracts_2010        = 'https://ftp.ibge.gov.br/Censos/Censo_Demografico_2010/Resultados_do_Universo/Agregados_por_Setores_Censitarios/',
+  tracts_2022        = c('https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios/Agregados_por_Setor_csv/',
+                         'https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios_Caracteristicas_urbanisticas_do_entorno_dos_domicilios/Agregados_por_Setor_csv/',
+                         'https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios_Rendimento_do_Responsavel/Agregados_por_setores_renda_responsavel_BR_20260508_csv.zip'),
+  tracts_2022_prelim = 'https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios_preliminares/agregados_por_setores_csv/BR/Agregados_preliminares_por_setores_censitarios_BR.zip'
+)
+
+
+# O que o FTP esta servindo agora: url, arquivo, data e tamanho de tudo que ha
+# na fonte. Um alvo com cue "always" chama isto e o alvo de download depende do
+# resultado -- e a unica forma de o pipeline perceber republicacao, porque o
+# targets compara o hash dos arquivos locais, que nao muda quando o IBGE troca
+# os dele. Em 14/09/2026 o IBGE acrescentou a P0115 aos microdados de 2022 e
+# nada aqui se mexeu.
+#
+# Uma requisicao por pasta: o indice do Apache ja traz nome, data e tamanho de
+# todos os arquivos de uma vez. URL de arquivo solto, que nao tem indice, vai
+# por HEAD. Sem resposta do servidor devolve a ultima impressao gravada em
+# disco -- o FTP do IBGE cai e recusa rajadas, e isso nao pode derrubar um
+# tar_make que nao precisa baixar nada.
+ftp_fingerprint_censobr <- function(fonte){
+
+  cache <- file.path("./data_raw/ftp_fingerprints", paste0(fonte, ".csv"))
+
+  impressao <- tryCatch(
+
+    lapply(FTP_CENSOBR[[fonte]], function(url){
+
+      if(!grepl("/$", url)){
+        resp <- httr2::request(url) |>
+          httr2::req_method("HEAD") |>
+          httr2::req_options(timeout = 120, ssl_verifypeer = 0L) |>
+          httr2::req_perform()
+        return(data.frame(url     = url,
+                          arquivo = basename(url),
+                          data    = httr2::resp_header(resp, "Last-Modified"),
+                          tamanho = httr2::resp_header(resp, "Content-Length")))
+      }
+
+      # indice do Apache: <td> de icone, link, data, tamanho e descricao. O
+      # texto do link vem truncado com "..>", entao o nome sai do href; as
+      # linhas de cabecalho, o pai e os links de ordenacao nao tem os cinco.
+      linhas <- rvest::html_elements(rvest::read_html(url), "table tr")
+
+      campos <- lapply(linhas, function(linha){
+        td   <- rvest::html_text2(rvest::html_elements(linha, "td"))
+        href <- rvest::html_attr(rvest::html_element(linha, "td a"), "href")
+        if(length(td) < 4 || is.na(href) || grepl("^[./?]", href)) return(NULL)
+        data.frame(url     = paste0(url, href),
+                   arquivo = href,
+                   data    = trimws(td[3]),
+                   tamanho = trimws(td[4]))
+      })
+
+      do.call(rbind, campos)
+    }),
+
+    error = function(e) NULL)
+
+  if(is.null(impressao)){
+    message("FTP mudo: ", fonte, " fica com a ultima impressao conhecida")
+    return(data.table::fread(cache, data.table = FALSE))
+  }
+
+  impressao <- do.call(rbind, impressao)
+  impressao <- impressao[order(impressao$arquivo), ]
+  rownames(impressao) <- NULL
+
+  dir.create(dirname(cache), recursive = TRUE, showWarnings = FALSE)
+  data.table::fwrite(impressao, cache)
+
+  impressao
 }
 
 
@@ -200,6 +274,22 @@ unzip_censobr <- function(zip_dir, out_zip = NULL) {
   zip_names <- list.files(zip_dir, pattern = "\\.zip$", full.names = TRUE)
 
   purrr::walk(zip_names, function(z) {
+
+    # extracao anterior intacta nao se refaz: todo item do zip ja esta em disco
+    # com o tamanho que o zip declara. O alvo de download volta a rodar sempre
+    # que a impressao do FTP muda, e reextrair dezenas de GB a toa custa muito
+    # mais que a conferencia.
+    # Os zips dos setores de 2000 gravam o nome dos arquivos em latin-1, que no
+    # R sai como string multibyte invalida: ali nao da para conferir nada, e o
+    # zip segue para extracao.
+    itens <- utils::unzip(z, list = TRUE)
+
+    if(all(validUTF8(itens$Name))){
+      itens    <- itens[!grepl("/$", itens$Name), ]
+      tamanhos <- file.size(file.path(out_zip, itens$Name))
+      if(nrow(itens) && isTRUE(all(tamanhos == itens$Length))) return(invisible(NULL))
+    }
+
     ok <- tryCatch({
       unzip(z, exdir = out_zip)
       TRUE

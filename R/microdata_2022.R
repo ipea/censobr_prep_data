@@ -9,16 +9,22 @@
 #  - a geografia para na UF. Nao ha municipio nem area de ponderacao.
 #  - o peso amostral se chama *0110 (no controlado e *0111).
 #
-# O layout publico e o controlado compartilham 256 variaveis com rotulo,
+# O layout publico e o controlado compartilham 257 variaveis com rotulo,
 # categorias, largura e tipo identicos, mas com POSICOES FWF diferentes em 248
 # delas. Por isso lemos o CSV, que traz header, e nao o TXT.
+#
+# Em 14/09/2026 o IBGE republicou os arquivos: o de pessoas ganhou P0115, o
+# numero de ordem da familia, que fecha o join pessoa-familia. As outras tres
+# tabelas nao mudaram. O pipeline nao percebeu sozinho -- o alvo do raw e
+# format = 'file' e compara o hash local, nunca o remoto --, e foi dai que veio
+# o alvo ftp_microdata_2022, que le a impressao digital do FTP a cada corrida.
 #
 # Public API: download_microdata_2022, clean_microdata_2022, save_microdata_2022.
 
 
 # Baixa os 27 zips por UF do FTP (smart-skip via download_file_censobr) e
 # descompacta os CSVs.
-download_microdata_2022 <- function(){
+download_microdata_2022 <- function(remote){
 
   dest_dir <- "./data_raw/microdata/2022"
   csv_dir  <- file.path(dest_dir, "csv")
@@ -27,12 +33,12 @@ download_microdata_2022 <- function(){
 
   message("\nDownloading 2022 microdata (amostra publica)...\n")
 
-  ftp <- 'https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Microdados_e_Areas_de_Ponderacao/Microdados_de_acesso_Publico/csv/'
-
-  listed <- list_folders(ftp)
+  # `remote`: listagem do FTP vinda de ftp_fingerprint_censobr(), e a
+  # dependencia que faz este alvo rodar de novo quando o IBGE republica.
+  ftp <- FTP_CENSOBR$microdata_2022
 
   # so os zips por UF: Todas_as_UFs.zip repete o mesmo conteudo e dobraria tudo
-  uf_zips <- listed[grepl("^[0-9]{2}_[A-Z]{2}\\.zip$", listed)]
+  uf_zips <- remote$arquivo[grepl("^[0-9]{2}_[A-Z]{2}\\.zip$", remote$arquivo)]
 
   # max_active = 1: pedir as 27 UFs em paralelo faz o FTP do IBGE recusar todas
   # (testado em 2026-09-11: 0 de 27 com o default; serial baixa as 27). Mesmo
@@ -64,7 +70,7 @@ download_microdata_2022 <- function(){
 
 
 # Abre os 27 CSVs de uma tabela e anexa a geografia. Devolve query arrow ainda
-# preguicosa: Pessoas tem 21,5M linhas x 168 colunas, que nao passam pela RAM
+# preguicosa: Pessoas tem 21,5M linhas x 169 colunas, que nao passam pela RAM
 # nem pelo _targets/objects/ -- por isso clean e save vivem no mesmo target.
 clean_microdata_2022 <- function(raw_paths, dataset_name){
 

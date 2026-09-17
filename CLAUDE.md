@@ -114,6 +114,14 @@ The pipeline uses [`targets`](https://books.ropensci.org/targets/) + `tarchetype
 
 Outputs land in `./data/` (gitignored); raw downloads in `./data_raw/` (gitignored); `crew` worker logs in `./logs/crew_workers/`.
 
+### Detecting republication (IBGE FTP)
+
+Every IBGE FTP source has a sentinel target `ftp_<fonte>` with `cue = tar_cue(mode = "always")` that calls `ftp_fingerprint_censobr("<fonte>")` and returns what the server is serving right now — url, file, date and size of every file in the folder, from a single request to the Apache index (a lone file URL goes by HEAD). The download target takes it as an argument, so it re-runs when, and only when, the remote changes. Without it the pipeline is blind to republication: `raw_*_paths_*` is `format = 'file'` and `targets` compares the hash of the local files, which does not change when IBGE swaps theirs — which is how the 14/09/2026 republication of the 2022 microdata (new variable `P0115`) went unnoticed for two days. The seven sources are `microdata_2000|2010|2022`, `tracts_2000|2010|2022|2022_prelim`; their addresses live in `FTP_CENSOBR` (`R/support_fun.R`), used by both the sentinel and the download function. If the FTP does not answer, the fingerprint falls back to the last one cached in `./data_raw/ftp_fingerprints/`, so an unreachable server never blocks a `tar_make()` that needs no download.
+
+Two consequences to expect: (1) `tar_outdated()` and `tar_visnetwork()` now paint every downstream target as outdated, because they cannot predict the sentinel's value — `tar_make()` still skips what is up to date, which is what counts; (2) a full `tar_make()` makes ~9 HTTP requests even when nothing is to be downloaded.
+
+The sources that do not come from the FTP — 1960/1970/1980/1991 from `release_legacy`, 1960 sample from `antrologos/ConsistenciaCenso1960Br` — have no sentinel.
+
 ## Code layout
 
 All code lives in `R/`, sourced by `targets::tar_source('./R')`. One file per (edition × type) — `microdata_<year>.R`, `census_tracts_<year>.R` — each exposing a `download_*` → `clean_*` → `save_*` trio wired as a numbered block (`# 01.` to `# 11.`) in `_targets.R`. Shared code is in `support_fun.R`, `add_geography_cols.R`, `convert_raw_to_parquet.R`, `schema_col_classes.R`, `release_legacy.R` and `type_convention.R`.
@@ -127,8 +135,8 @@ When adding a new year or table, add the trio in `R/` and a numbered block in `_
 Centralized helpers used throughout the pipeline. Reuse before reinventing:
 
 - `download_file_censobr()` — parallel httr2 downloads with timeout/SSL handling (replaces older `RCurl`/`curl` calls).
-- `unzip_censobr()` — base R `unzip()` with a `system2("unzip", ...)` fallback for files that fail.
-- `list_folders(ftp)` — scrapes IBGE FTP HTML index for filenames.
+- `unzip_censobr()` — base R `unzip()` with a `system2("unzip", ...)` fallback for files that fail. Skips a zip whose extraction is already on disk intact (every entry present with the declared size), so a download target can re-run without re-extracting tens of GB.
+- `FTP_CENSOBR` / `ftp_fingerprint_censobr(fonte)` — the registry of IBGE FTP addresses and the remote fingerprint (file, date, size) that makes the pipeline notice republication. See "Detecting republication" below.
 - `add_state_info()` / `add_region_info()` — robust state/region code+name imputation; tolerates historical spellings (e.g. `Goyaz`, `Districto Federal`, `Guanabara`) — important for pre-1960 data.
 - `dicionario_municipality` / `dicionario_state` + `rename_cols_censobr()` — fuzzy column-name standardization across heterogeneous IBGE exports.
 - `write_censobr_parquet()` — the canonical writer (zstd level 22). Always use this instead of `arrow::write_parquet` directly.
@@ -147,6 +155,7 @@ Centralized helpers used throughout the pipeline. Reuse before reinventing:
 ## Known data quirks (don't "fix" these — they are real)
 
 - **2010 tracts RS**: `RS_20231030.zip` is explicitly deleted in favor of `RS_20241211.zip` (see `census_tracts_2010.R:48`).
+- **2000 tracts zips store filenames in latin-1**: read in R they come out as invalid multibyte strings, and `nchar`/`grepl`/`file.info` all abort on them. `unzip_censobr()` detects this with `validUTF8()` and goes straight to extraction instead of trying to compare what is already on disk.
 - **`ÿ` character corruption** in some 2010 xls files (e.g. `Pessoa07_CE.xls`, `Entorno05_RO.xls`) — currently stripped to empty string.
 - **Goiás 2010 `Pessoa02`** (and SP) has malformed `V01`–`V09` column names (vs. `V001`–`V009` elsewhere); fix is wired in `read_single_file_tract_2010` (issue #68 — covers GO, SP1, SP2).
 - `code_weighting` for 2010 tracts is read from the IBGE source file `Composição das Áreas de Ponderação.txt` inside `Documentacao_microdados_2010.zip` via `get_areas_ponderacao_2010()` in `R/support_fun.R`. (Was previously joined from `geobr::read_census_tract(year = 2010)`, but `geobr ≥1.10` no longer exposes that column.)
@@ -159,7 +168,7 @@ The five `ipea/censobr` issues on 2010 tracts (#68, #70, #71, #73, #75) were fix
 
 Decided 2026-09-13 (memory entry [`project_conventions_v0_6_0.md`](C:/Users/antro/.claude/projects/d--Dropbox-Software-R-Packages-censobr-e-prepData-censobr-prep-data/memory/project_conventions_v0_6_0.md)); supersedes the 2026-05-03 rule "`code_*` always float64".
 
-Every column of every published parquet has its type declared in `schemas/censobr_types.csv` (13.346 rows: dataset, coluna, tipo_atual, tipo_alvo and the measured stats), applied by `cast_censobr_types(x, dataset)` (`R/type_convention.R`) as the last step of every `save_*`, after `code_cols_to_numeric()`. The rule is mechanical, derived from measuring every value: `name_*`/`abbrev_*`/`situacao` → string; any non-numeric value → string; any decimal → float64; integral values that fit ±2.147.483.647 → int32; otherwise float64. No int8/int16 (Arrow aborts with `Invalid: overflow` on element-wise arithmetic), no int64 (dplyr refuses joins of integer64 with double, which breaks the geobr joins), no float32 (corrupts weights). **No bool either**: 1960 is the first edition with logical columns — `censobr_favela`, `censobr_muni_corrigido`, the coherence flags — and they come out as 1 and 0 under the rule, because duckdb's BOOLEAN has no numeric measurement and falls to the default. Decided 2026-09-16; the published dictionary documents them as 1 = Sim, 0 = Não. Leading zeros of text codes are dropped (`V0300` of 2000, `V1102` of 1991 become int32). Columns with the same name in the microdata tables of a year share the type, so joins match. The schema is regenerated by `schemas/derive_censobr_types.R` (run from the project root, ~30 min) whenever a table gains or changes columns, before the `tar_make()` that writes the final parquets; never edit types by hand.
+Every column of every published parquet has its type declared in `schemas/censobr_types.csv` (13.347 rows: dataset, coluna, tipo_atual, tipo_alvo and the measured stats), applied by `cast_censobr_types(x, dataset)` (`R/type_convention.R`) as the last step of every `save_*`, after `code_cols_to_numeric()`. The rule is mechanical, derived from measuring every value: `name_*`/`abbrev_*`/`situacao` → string; any non-numeric value → string; any decimal → float64; integral values that fit ±2.147.483.647 → int32; otherwise float64. No int8/int16 (Arrow aborts with `Invalid: overflow` on element-wise arithmetic), no int64 (dplyr refuses joins of integer64 with double, which breaks the geobr joins), no float32 (corrupts weights). **No bool either**: 1960 is the first edition with logical columns — `censobr_favela`, `censobr_muni_corrigido`, the coherence flags — and they come out as 1 and 0 under the rule. Decided 2026-09-16; the published dictionary documents them as 1 = Sim, 0 = Não. The declared type for these 15 columns moved once, and the reason is worth knowing: while the parquet still held BOOLEAN, duckdb had nothing numeric to measure and the column fell to the default, float64; once they were written as 0 and 1, the same mechanical rule measures integers that fit and declares int32. The regeneration of 2026-09-16 therefore carries int32 for them, while the parquets on disk keep float64 until 1960 is next rebuilt — the values are the same either way. Leading zeros of text codes are dropped (`V0300` of 2000, `V1102` of 1991 become int32). Columns with the same name in the microdata tables of a year share the type, so joins match. The schema is regenerated by `schemas/derive_censobr_types.R` (run from the project root, ~30 min) whenever a table gains or changes columns, before the `tar_make()` that writes the final parquets; never edit types by hand.
 
 `code_*` columns therefore come out as int32 when they fit (`code_muni`, `code_state`, `code_district`…) and float64 when they do not (`code_tract`, `code_weighting`, `code_subdistrict`, `code_neighborhood`). Users comparing `code_state == "11"` (string, as in v0.5.0) need `code_state == 11`.
 
@@ -170,6 +179,16 @@ There is **no `dev` branch** on `ipea/censobr` (verified 2026-05-02 — only `ma
 The pre-release **v0.6.0** (Sep/2025, 8 parquets) is the output of an earlier version of `R/census_tracts_2010.R` (not the current `main` HEAD). Useful as a checkpoint reference but should not be conflated with v0.5.0.
 
 The **canonical column-by-column specification** for 2010/2022 tract parquets is the dictionary CSV from Pedro H. G. F. Souza's private repo, frozen at [`references/phgfsouza_census_tracts/`](references/phgfsouza_census_tracts/) (commit `f895871`, 2026-04-30). Read this in any port that touches setores 2010/2022 to validate output column-by-column. Coverage: 8 parquets for 2010, 9 parquets for 2022. Does NOT cover microdata or pre-2010.
+
+## Row order is not stable between runs (measured 2026-09-16)
+
+The microdata tables are written by streaming from an arrow dataset over the per-UF files (`arrow::write_dataset` in every `save_microdata_*`), and the scanner hands batches to the writer in whatever order they finish. Two runs over the same input therefore give the same records in a different order, and a different byte count: 2022 mortality came out at 5.763.064 and 5.760.102 bytes, 2022 households at 144.134.232 and 144.163.906. The content is identical — same rows, same values, verified by sorting.
+
+What this costs: a rebuild cannot be verified by checksum (compare content, sorted by a key), a re-published asset always looks changed, and row order shifts between releases, so nothing downstream may rely on position. What it does not touch: any analysis that treats the file as a set of records.
+
+Pinning `arrow::set_cpu_count(1)` fixes the order only on small tables (measured: mortality yes, households no — the scanner keeps its own I/O pool). Pinning `set_io_thread_count(1)` as well pushes households from 27 s to over 15 minutes, so it is not a real option. Making the order deterministic would mean writing UF by UF in an explicit loop, appending row groups; not done, and not needed for content reproducibility.
+
+The tract tables go through `write_censobr_parquet()` on a materialized data.table, whose order comes from the code's own `fread`/`rbindlist` sequence; they were not measured.
 
 ## Publishing artifacts
 

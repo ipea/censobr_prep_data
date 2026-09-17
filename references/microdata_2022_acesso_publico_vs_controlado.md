@@ -1,7 +1,7 @@
 # Microdados da amostra do Censo 2022: o acesso público, o acesso controlado e o produto
 
-**Data:** 2026-09-13 (substitui a versão de 2026-09-11)
-**Escopo:** a amostra do Censo Demográfico 2022 publicada pelo IBGE em 31/08/2026 — os três níveis de acesso, os tratamentos de confidencialidade do nível público, as diferenças entre os dois layouts oficiais, e o que o produto `censobr` contém.
+**Data:** 2026-09-16 (substitui as versões de 2026-09-13 e 2026-09-11)
+**Escopo:** a amostra do Censo Demográfico 2022 publicada pelo IBGE em 31/08/2026 e republicada em 14/09/2026 — os três níveis de acesso, os tratamentos de confidencialidade do nível público, as diferenças entre os dois layouts oficiais, e o que o produto `censobr` contém.
 **Fontes:** FTP do IBGE; Notas metodológicas 03/2026 e 05/2026; `Layout Microdados CD2022 - acesso {Público,Controlado}.xlsx`.
 
 ---
@@ -27,6 +27,13 @@ Documentacao/           Leia-me.pdf, layouts, dicionário de variáveis,
 
 Dentro de cada zip: `{Domicilios,Familia,Mortalidade,Pessoas}_<código UF>_publico.csv`,
 separador `;`, com cabeçalho, vazio como NA.
+
+Em 14/09/2026 o IBGE republicou dados e documentação. A mudança de dado é uma
+só: o arquivo de pessoas ganhou `P0115 — Número de ordem da Família`, na sexta
+posição, logo depois do peso, no público e no controlado. Domicílios, Família e
+Mortalidade não mudaram (md5 idêntico em RR). Quem baixou antes de 14/09 tem 168
+colunas no arquivo de pessoas, e não 169. A documentação corrigiu os códigos de
+`Codificação_Ensino Superior CD2022.xlsx`, que o pipeline não lê.
 
 ## Os três níveis de acesso
 
@@ -69,6 +76,11 @@ os domicílios eliminados pela subamostra e pela supressão global. Como é
 única no país, o join domicílio ↔ pessoa (`D0100` ↔ `P0100`) não precisa da
 UF, e `(P0100, P0101)` identifica a pessoa.
 
+Desde 14/09/2026 o registro de pessoa traz também `P0115`, o número de ordem da
+família, no mesmo domínio de `F0101` (`F001`, `F002`…). Com ele
+`(P0100, P0115)` ↔ `(F0100, F0101)` liga pessoa a família — join que o acesso
+público não permitia antes, por parar no domicílio.
+
 ## Os dois layouts, variável a variável
 
 Os dois xlsx foram achatados (`var`, `nome`, posições, `INT`, `DEC`, `TIPO`)
@@ -77,13 +89,14 @@ e comparados nas variáveis comuns.
 | registro | público | controlado |
 |---|---:|---:|
 | DOMI (`households`) | 55 | 64 |
-| PESS (`population`) | 168 | 210 |
+| PESS (`population`) | 169 | 211 |
 | FAMI (`families`) | 23 | 31 |
 | MORT (`mortality`) | 14 | 25 |
 
-- **256 variáveis comuns**, todas com o mesmo rótulo, as mesmas categorias,
+- **257 variáveis comuns**, todas com o mesmo rótulo, as mesmas categorias,
   a mesma largura, os mesmos decimais e o mesmo tipo.
-- **A posição no TXT difere em 248 das 256.** São arquivos físicos
+- **A posição no TXT difere em 248 das 256** comparadas na divulgação de
+  31/08/2026 — a 257ª, `P0115`, entrou nos dois layouts em 14/09. São arquivos físicos
   distintos; as posições de um não leem o outro. O pipeline lê o CSV, que
   tem cabeçalho.
 - **O peso tem código diferente:** `D0110`, `P0110`, `F0110`, `M0110` no
@@ -114,12 +127,12 @@ produzido aqui.
 
 | tabela | bytes (v1.0.0) | MiB | linhas | colunas |
 |---|---:|---:|---:|---:|
-| households | 144.164.237 | 137,49 | 7.689.914 | 60 (55 + 5) |
-| population | 639.164.776 | 609,56 | 21.538.508 | 173 (168 + 5) |
-| families | 99.665.411 | 95,05 | 6.550.107 | 28 (23 + 5) |
-| mortality | 5.762.209 | 5,50 | 430.961 | 19 (14 + 5) |
+| households | 144.303.752 | 137,62 | 7.689.914 | 60 (55 + 5) |
+| population | 641.904.188 | 612,17 | 21.538.508 | 174 (169 + 5) |
+| families | 99.768.019 | 95,15 | 6.550.107 | 28 (23 + 5) |
+| mortality | 5.763.064 | 5,50 | 430.961 | 19 (14 + 5) |
 
-280 colunas ao todo: 260 variáveis do IBGE e 5 de geografia em cada tabela —
+281 colunas ao todo: 261 variáveis do IBGE e 5 de geografia em cada tabela —
 `code_region`, `name_region`, `code_state`, `abbrev_state`, `name_state`,
 derivadas de `*0020`, com `code_*` em `numeric`. Não há `code_muni` nem
 `code_weighting`, porque o público para na UF. `code_weighting` existe nos
@@ -137,8 +150,8 @@ arquivo lido. No parquet publicado vale a convenção de tipos do produto
 quatro pesos (13 decimais), `D0240` (moradores por dormitório, 2 inteiros e 2
 decimais), `D0360` e `F0260` (rendimentos per capita, 9 inteiros e 2
 decimais) —; `int32` em todas as demais, que são inteiras e cabem; `string`
-em `F0101` e `M0101`, que carregam letra no valor (`"F001"`, `"M001"`),
-enquanto `P0101` é contagem e fica inteira. Não há `int8`/`int16` no produto.
+em `F0101`, `M0101` e `P0115`, que carregam letra no valor (`"F001"`,
+`"M001"`), enquanto `P0101` é contagem e fica inteira. Não há `int8`/`int16` no produto.
 
 Verificações:
 
@@ -146,4 +159,17 @@ Verificações:
 - `sum(P0110)` = 203.080.756, a população divulgada do Censo 2022; bate com
   o SIDRA (tabela 4709) nas 27 UFs com diferença 0 (RR, a menor: 636.707);
 - nenhuma coluna 100% NA em nenhuma tabela;
-- 7.689.914 valores distintos de `D0100` para 7.689.914 domicílios.
+- 7.689.914 valores distintos de `D0100` para 7.689.914 domicílios;
+- `P0115` é nulo em 1.583.812 pessoas (7,4%) — exatamente as que moram nos
+  1.522.088 domicílios sem nenhum registro de família. Em domicílio que tem
+  família, ninguém fica de fora;
+- o join `(P0100, P0115)` ↔ `(F0100, F0101)` fecha nos dois sentidos: nenhuma
+  família sem pessoa, nenhuma pessoa com `P0115` sem família, e 6.550.107 pares
+  distintos para as 6.550.107 linhas da tabela Família.
+
+Os bytes de um parquet variam de uma execução para outra, e por isso as três
+tabelas que o IBGE não mexeu mudaram de tamanho entre a gravação de 11/09 e a
+de 16/09. O `arrow` lê os 27 CSVs sem fixar a ordem em que os blocos chegam, e
+a ordem das linhas muda; o conteúdo, não. Verificado gravando a mortalidade
+duas vezes seguidas: 5.763.064 e 5.760.102 bytes, ordem de `M0100` diferente,
+conjunto de valores idêntico.
