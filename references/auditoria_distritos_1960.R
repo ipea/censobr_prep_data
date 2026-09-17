@@ -86,7 +86,9 @@ print(x[, .(municipios = .N, domicilios = sum(dom)), by = veredicto][order(-domi
 # Duas medidas independentes: a populacao de cada distrito e a parcela dele que
 # o censo classificou no quadro urbano ou suburbano (V118 em 1 ou 3). A segunda
 # e mais forte, porque e uma razao interna e nao depende do nivel do peso.
-alvos <- intersect(sin[, unique(code_muni_1960)], x[veredicto == "sequencial", code_muni_1960])
+# Roda nos dois veredictos, e nao so onde eu concluo pela leitura sequencial:
+# uma regra de classificacao que so se testa de um lado nao se testou.
+alvos <- intersect(sin[, unique(code_muni_1960)], x$code_muni_1960)
 saida <- list()
 for(m in alvos){
   s <- sin[code_muni_1960 == m & ordem > 0][order(ordem)]
@@ -105,6 +107,7 @@ for(m in alvos){
 
   saida[[as.character(m)]] <- data.table(
     municipio = s$name_muni_1960[1], distritos = nrow(s),
+    veredicto = x[code_muni_1960 == m, veredicto],
     seq_pop = round(100 * median(abs(seq_$nos / seq_$pub - 1)), 1),
     seq_urb = round(median(abs(seq_$nos_urb - seq_$pub_urb)), 1),
     seq_urb_pior = round(max(abs(seq_$nos_urb - seq_$pub_urb)), 1),
@@ -113,8 +116,12 @@ for(m in alvos){
     liv_urb_pior = round(max(abs(liv_$nos_urb - liv_$pub_urb)), 1),
     liv_nomeia = nrow(liv_))
 }
-message("\nos municipios a corrigir, com censobr_weight_desenho")
+message("
+os municipios em que o livro pula, com censobr_weight_desenho")
 message("seq_* e a leitura sequencial, liv_* a do livro; pop em %, urb em pontos percentuais")
+message("Nas unidades da amostra de 1,27% o erro de populacao nao quer dizer nada: o")
+message("sorteio e por pasta, e Canoinhas, com duas pastas, expande para 183.258 contra")
+message("as 39.232 publicadas. Ali so a parcela urbana, que e razao interna, informa.")
 print(rbindlist(saida)[order(-distritos)])
 
 # Nos municipios de dois distritos a coluna liv_ sai sobre um distrito so -- a
