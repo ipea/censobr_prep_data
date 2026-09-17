@@ -57,7 +57,7 @@ MUNI_1960_ATUAL <- data.table::data.table(
 COLUNAS_1960_DOM <- c(
   "code_region", "name_region", "code_state", "abbrev_state", "name_state",
   "code_muni", "code_muni_1960", "name_muni_1960",
-  "code_district_1960", "name_district_1960", "name_bairro_1960",
+  "code_district_1960", "name_district_1960", "code_bairro_1960", "name_bairro_1960",
   "name_region_1960", "code_state_1960", "abbrev_state_1960", "name_state_1960",
   "censobr_idhousehold", "censobr_amostra", "censobr_tipo_unidade",
   "v001", "v002", "v003", "v004", "v100",
@@ -74,7 +74,7 @@ COLUNAS_1960_DOM <- c(
 COLUNAS_1960_PES <- c(
   "code_region", "name_region", "code_state", "abbrev_state", "name_state",
   "code_muni", "code_muni_1960", "name_muni_1960",
-  "code_district_1960", "name_district_1960", "name_bairro_1960",
+  "code_district_1960", "name_district_1960", "code_bairro_1960", "name_bairro_1960",
   "name_region_1960", "code_state_1960", "abbrev_state_1960", "name_state_1960",
   "censobr_idperson", "censobr_idfamily", "censobr_idhousehold",
   "censobr_amostra", "censobr_tipo_unidade",
@@ -100,6 +100,7 @@ COLUNAS_1960_PES <- c(
 # as 28 como uma tabela so.
 TIPOS_1960_FALTANTES <- c(
   name_muni_1960 = "character", name_bairro_1960 = "character",
+  code_bairro_1960 = "integer",
   v003 = "integer", v004 = "integer", v100 = "integer",
   censobr_weight_nivel = "character", censobr_weight_ibge = "integer",
   censobr_weight_1965 = "numeric", censobr_weight_1965_fator = "numeric",
@@ -517,6 +518,7 @@ ROTULOS_1960_CENSOBR <- c(
   name_muni_1960 = "Nome do municipio em 1960",
   code_district_1960 = "Distrito no codigo do Codigo de Zonas Fisiograficas, Municipios e Distritos de 1960",
   name_district_1960 = "Nome do distrito em 1960",
+  code_bairro_1960 = "Bairro no codigo do Codigo de Zonas Fisiograficas de 1960, de 5410 a 5591: e a circunscricao censitaria em que o tomo XII publica a Guanabara",
   name_bairro_1960 = "Bairro, so na Guanabara, onde o censo codificou a cidade por bairro",
   name_region_1960 = "Regiao em que os volumes de 1960 publicam: Norte, Nordeste, Leste, Sul, Centro-Oeste",
   code_state_1960 = "Unidade da federacao no codigo do IBGE em 1960: Guanabara 34, Fernando de Noronha 20; a Serra dos Aimores nunca teve codigo",

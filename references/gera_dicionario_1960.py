@@ -245,8 +245,12 @@ GEO = [
     ("code_district_1960", "Código do Distrito no Código de Zonas Fisiográficas, Municípios e "
                            "Distritos de 1960", VALOR),
     ("name_district_1960", "Nome do Distrito em 1960", TEXTO +
-     [("", "Nome não transcrito: restam 720 pares município-distrito que o Código traz impressos e "
-           "cuja leitura visual não foi feita")]),
+     [("", "Nome não transcrito: restam 18 pares município-distrito, 5.244 domicílios, cujo código "
+           "o Código de 1960 não traz impresso na relação do município")]),
+    ("code_bairro_1960", "Código do Bairro no Código de Zonas Fisiográficas, Municípios e Distritos "
+                         "de 1960, de 5410 a 5591. É a Circunscrição Censitária em que o Tomo XII do "
+                         "Volume I publica a Guanabara: 9 zonas e 83 circunscrições", VALOR +
+     [("", "Não aplicável - as demais unidades da federação")]),
     ("name_bairro_1960", "Bairro. Só na Guanabara, onde o censo codificou a cidade por bairro em vez "
                          "de por distrito", TEXTO +
      [("", "Não aplicável - as demais unidades da federação")]),

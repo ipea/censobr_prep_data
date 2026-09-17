@@ -71,6 +71,13 @@ antiga_gb <- guia[uf60 == 54, .(uf60, code_muni_1960, name_muni_1960, code_distr
                                 pagina, fonte)]
 nova_gb <- novo[gb]
 nova_gb[antiga_gb, ja_tem := TRUE, on = c("code_muni_1960", "code_district_1960")]
+
+# a mesma unidade pode reaparecer com o codigo danificado, e ai o par nao casa
+# mas o nome casa: a Mare, favela de Bonsucesso, saiu da transcricao integral
+# com o codigo lido como um so algarismo ("4"), e o transcritor anotou que nao
+# se deve completa-lo pela sequencia. A leitura visual das mesmas paginas ja a
+# traz em 49, entre a Baixa do Sapateiro (48) e a Entrada do Galeao (50).
+nova_gb[antiga_gb, ja_tem := TRUE, on = c("code_muni_1960", "name_district_1960")]
 falta_gb <- nova_gb[is.na(ja_tem)]
 message("Guanabara: ", nrow(falta_gb), " pares que a transcricao tem e o guia nao")
 

@@ -814,8 +814,16 @@ finalize_1960_amostra_127 <- function(tabelas, municipios_path, distritos_path){
              on = c(chave_muni = "code_muni_1960", code_district_1960 = "code_district_1960")]
   domicilios[is.na(censobr_favela), censobr_favela := FALSE]
   domicilios[, chave_muni := NULL]
+
+  # o bairro e a unidade em que o censo publica a Guanabara -- a "circunscricao
+  # censitaria" do tomo XII, 83 delas -- e o seu codigo e o proprio V116, que na
+  # Guanabara vai de 5410 a 5591. Dois registros trazem o V116 danificado pela
+  # fita (5 e 18) e ficam sem codigo de bairro, como ja ficam sem o nome.
+  domicilios[, code_bairro_1960 := NA_integer_]
+  domicilios[UF == 54L & V116 >= 5410L & V116 <= 5591L, code_bairro_1960 := V116]
   pessoas[domicilios, `:=`(code_district_1960 = i.code_district_1960, name_district_1960 = i.name_district_1960,
-                           name_bairro_1960 = i.name_bairro_1960, censobr_favela = i.censobr_favela), on = "censobr_idhousehold"]
+                           code_bairro_1960 = i.code_bairro_1960, name_bairro_1960 = i.name_bairro_1960,
+                           censobr_favela = i.censobr_favela), on = "censobr_idhousehold"]
   message("  distritos: ", domicilios[!is.na(name_district_1960), .N], " de ", nrow(domicilios), " domicilios com nome de distrito; favelas: ",
           domicilios[censobr_favela == TRUE, .N], " domicilios")
   message("  desenho: ", data.table::uniqueN(domicilios$censobr_upa), " pastas (",
@@ -823,8 +831,8 @@ finalize_1960_amostra_127 <- function(tabelas, municipios_path, distritos_path){
           data.table::uniqueN(domicilios$censobr_estrato), " estratos; menor estrato com ",
           min(unique(domicilios[, .(censobr_estrato, censobr_upa)])[, .N, by = censobr_estrato]$N), " pastas")
 
-  data.table::setcolorder(pessoas, c("UF", "V116", "V118", "code_muni", "code_muni_1960", "code_district_1960", "name_district_1960", "name_bairro_1960", "censobr_favela", "censobr_muni_corrigido", "censobr_idhousehold", "censobr_idfamily", "linha", "censobr_weight", "censobr_upa", "censobr_estrato"))
-  data.table::setcolorder(domicilios, c("UF", "V116", "V118", "code_muni", "code_muni_1960", "code_district_1960", "name_district_1960", "name_bairro_1960", "censobr_favela", "censobr_muni_corrigido", "censobr_idhousehold", "linha", "censobr_weight", "censobr_upa", "censobr_estrato"))
+  data.table::setcolorder(pessoas, c("UF", "V116", "V118", "code_muni", "code_muni_1960", "code_district_1960", "name_district_1960", "code_bairro_1960", "name_bairro_1960", "censobr_favela", "censobr_muni_corrigido", "censobr_idhousehold", "censobr_idfamily", "linha", "censobr_weight", "censobr_upa", "censobr_estrato"))
+  data.table::setcolorder(domicilios, c("UF", "V116", "V118", "code_muni", "code_muni_1960", "code_district_1960", "name_district_1960", "code_bairro_1960", "name_bairro_1960", "censobr_favela", "censobr_muni_corrigido", "censobr_idhousehold", "linha", "censobr_weight", "censobr_upa", "censobr_estrato"))
 
   message("  pessoas: ", nrow(pessoas), " x ", ncol(pessoas), " | domicilios: ", nrow(domicilios), " x ", ncol(domicilios))
   list(pessoas = pessoas, domicilios = domicilios)
