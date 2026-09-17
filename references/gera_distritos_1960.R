@@ -65,6 +65,43 @@ fora <- novo[!gb, .(uf60, code_muni_1960, name_muni_1960,
                     zona_cod, zona, pagina,
                     fonte = "Transcricao integral do Codigo de Zonas Fisiograficas, Municipios e Distritos de 1960")]
 
+# --- sete municipios em que o livro imprimiu a numeracao errada ---------------
+#
+# O livro numera os distritos 01, 03, 05 ... na ordem em que os lista, que e a
+# sede seguida da ordem alfabetica. Em sete municipios ele pula numeros, e o
+# arquivo do censo nao pula: em Campos o livro traz os dezoito distritos como
+# 01, 05, 07 ... 41, sem 03, 25 e 27, e o arquivo os traz como 01, 03, 05 ...
+# 35. Sao os mesmos dezoito lugares, e o guia vinha pondo cada nome no distrito
+# seguinte.
+#
+# A Sinopse Preliminar de 1960 -- o volume que o IBGE publicou por estado em
+# 1961-62 com a populacao de cada distrito -- confirma que cada um destes sete
+# tinha exatamente tantos distritos quantos o arquivo tem codigos, com os
+# mesmos nomes na mesma ordem. A transcricao do quadro II esta em
+# references/censo_1960_sinopse_preliminar_distritos.csv, e a conferencia em
+# references/auditoria_distritos_1960.R, que roda com o peso de desenho.
+#
+# Nos tres de tres distritos ou mais as duas medidas separam com folga. Em
+# Campos a leitura sequencial erra 7,4% na populacao de cada distrito e 0,6
+# ponto percentual na parcela urbana, contra 44,0% e 4,3 pontos da leitura do
+# livro, que chega a errar 61,8 pontos em Guarus -- poria 5% de urbanos onde a
+# publicacao traz 67%. Nos quatro de dois distritos nao ha o que comparar,
+# porque a leitura do livro deixa o segundo distrito sem nome nenhum: decide a
+# contagem, e o teste de que o nosso codigo 01 sozinho ja e a sede publicada,
+# que passa nos sete.
+RENUMERAR_1960 <- c(5210, 2012, 6341, 1741, 5306, 8553, 1725)
+# A posicao vem do codigo impresso, e nao da ordem das linhas: a transcricao
+# segue a pagina, e numa virada de pagina a ordem das linhas pode nao ser a do
+# codigo -- Sao Joao da Barra, por exemplo, sai com o 11 entre o 01 e o 03.
+fora[code_muni_1960 %in% RENUMERAR_1960,
+     `:=`(code_district_1960 = 2L * rank(code_district_1960) - 1L,
+          fonte = paste("Codigo de Zonas Fisiograficas de 1960 (nomes e ordem);",
+                        "numeracao sequencial do arquivo do censo, conferida contra a populacao e a",
+                        "parcela urbana por distrito da Sinopse Preliminar de 1960")),
+     by = code_muni_1960]
+message("renumerados: ", length(RENUMERAR_1960), " municipios, ",
+        fora[code_muni_1960 %in% RENUMERAR_1960, .N], " distritos")
+
 # --- Guanabara: os nomes ja transcritos a vista ficam; o que faltar entra -----
 antiga_gb <- guia[uf60 == 54, .(uf60, code_muni_1960, name_muni_1960, code_district_1960,
                                 name_district_1960, name_bairro_1960, tipo, zona_cod, zona,
@@ -110,7 +147,11 @@ if(nrow(falta_gb) > 0){
 # e por isso elas nunca casavam com o dado. Vem do crosswalk, como o resto.
 r <- rbindlist(list(fora, antiga_gb, falta_gb), use.names = TRUE, fill = TRUE)
 
-resto <- guia[uf60 != 54 & !is.na(name_district_1960) & name_district_1960 != ""]
+# Nos sete renumerados a transcricao e a lista completa: se o guia antigo
+# entrasse aqui, devolveria justamente os codigos que a renumeracao tirou --
+# o 37, o 39 e o 41 de Campos --, e com os nomes corrompidos do OCR.
+resto <- guia[uf60 != 54 & !is.na(name_district_1960) & name_district_1960 != "" &
+              !(code_muni_1960 %in% RENUMERAR_1960)]
 resto[, uf60 := NULL]
 resto[cw, `:=`(uf60 = i.uf60, name_muni_1960 = i.nome), on = c(code_muni_1960 = "cod60")]
 resto <- resto[!is.na(uf60)]

@@ -1,11 +1,9 @@
-﻿uf60,code_muni_1960,name_muni_1960,code_district_1960,domicilios_na_amostra
-21,2166,Gravatá,X7,1
-31,3143,Itororó,11,1
-40,4318,Inhapim,02,1
-51,5150,Colatina,31,1
-54,5,,18,1
-54,18,,18,1
-54,5411,,02,1
-54,5466,,09,1
-74,7545,Rodeio,15,1
-81,8271,Viamão,13,1
+uf60,code_muni_1960,name_muni_1960,code_district_1960,domicilios,amostra,motivo
+91,9162,Nossa Senhora do Livramento,5,246,25%,"O arquivo traz tres codigos de distrito e tanto o Codigo de Zonas Fisiograficas quanto a Sinopse Preliminar publicam dois: a sede, com 12.486 habitantes, e Pirizal, com 1.700. O nosso codigo 03 e Pirizal, e o 01 mais o 05 reconstituem a sede. O codigo 05 e uma reparticao interna da sede que nenhuma publicacao distingue, e nomea-lo seria invencao."
+81,8405,Dois Irmaos,3,158,25%,"Mesmo caso. A Sinopse publica dois distritos: Dois Irmaos, com 6.621 habitantes, e Santa Maria do Erval, com 5.098. O nosso codigo 05 e Santa Maria do Erval -- 4.952 pelo peso de desenho, razao 0,97 -- e o 01 mais o 03 somam 6.704 contra os 6.621 da sede, razao 1,01. O codigo 03 e uma reparticao interna da sede."
+40,4096,Itutinga,3,151,25%,"A Sinopse traz Itutinga como distrito unico, com os mesmos 4.318 habitantes do municipio, e o arquivo traz dois codigos. Nao ha segundo distrito publicado a que ligar o codigo 03. A aritmetica de nivel nao ajuda aqui: pelo peso de desenho o municipio expande para 7.836, 81% acima do publicado, porque a fracao sorteada em Itutinga correu bem acima de um em quatro -- e justamente por isso que o peso final e calibrado."
+54,541,Rio de Janeiro,2,1,"1,27%","Guanabara. O V116, que na cidade e o codigo do bairro e vai de 5410 a 5591, veio danificado pela fita neste registro -- vale 5 ou 18 --, entao nao ha bairro a que ligar a circunscricao."
+54,541,Rio de Janeiro,9,1,"1,27%","Idem."
+54,541,Rio de Janeiro,18,2,"1,27%","Idem."
+51,5150,Colatina,31,1,"1,27%","Um domicilio com codigo de distrito acima do maior que o Codigo de Zonas Fisiograficas imprime para o municipio, que e 25. Dano de fita."
+74,7545,Rodeio,15,1,"1,27%","Um domicilio com codigo 15 onde o maior impresso e 05. Dano de fita."
