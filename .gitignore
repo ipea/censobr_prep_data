@@ -19,6 +19,9 @@ logs/crew_workers/
 !reports/*.pdf
 # fontes primarias do censo, versionadas de proposito (ver references/fontes_1960/README.md)
 !references/**/*.pdf
+# excecao da excecao: as 26 Sinopses Preliminares de 1960 somam centenas de MB
+# (Minas sozinha tem 67) e nao entram no git -- a procedencia esta no README
+references/fontes_1960/sinopse_preliminar_1960/
 # .claude/ subdirs that should NOT be ignored (versioned for the team):
 #   .claude/settings.json   — shared hooks / permissions
 #   .claude/rules/          — scope rules and policies (incl. scope.md)
