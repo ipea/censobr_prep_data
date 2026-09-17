@@ -89,15 +89,36 @@ fora <- novo[!gb, .(uf60, code_muni_1960, name_muni_1960,
 # porque a leitura do livro deixa o segundo distrito sem nome nenhum: decide a
 # contagem, e o teste de que o nosso codigo 01 sozinho ja e a sede publicada,
 # que passa nos sete.
-RENUMERAR_1960 <- c(5210, 2012, 6341, 1741, 5306, 8553, 1725)
-# A posicao vem do codigo impresso, e nao da ordem das linhas: a transcricao
-# segue a pagina, e numa virada de pagina a ordem das linhas pode nao ser a do
-# codigo -- Sao Joao da Barra, por exemplo, sai com o 11 entre o 01 e o 03.
+# Ha um segundo grupo, achado pela auditoria por amostragem de 17/09: trinta
+# municipios em que o livro imprime as linhas na ordem certa mas os codigos ao
+# lado delas nao sobem junto, porque um distrito criado depois recebeu o proximo
+# codigo livre em vez do seu lugar na sequencia. Em Palmeira das Missoes o livro
+# lista Palmeira, Coronel Finzito, Jaboticaba, Rodeio Bonito e Sao Jose -- em
+# ordem alfabetica -- e da a Coronel Finzito o 09. O censo deu o 03. Aqui a
+# numeracao do livro esta completa, sem pular, de modo que o teste do grupo
+# anterior nao acusa: o que acusa e o codigo nao subir com a linha.
+#
+# Dos trinta, vinte e tres seguem a ordem das linhas e entram na correcao; cinco
+# seguem o codigo impresso e ficam como estao (Acarau, Ico e Juazeiro do Norte,
+# no Ceara, Virginopolis em Minas e Eldorado em Sao Paulo); dois nao se decidem,
+# porque os distritos que trocam tem quase o mesmo tamanho e a mesma parcela
+# urbana (Horizontina e Tenente Portela, no Rio Grande do Sul). O padrao e
+# geografico e faz sentido: a codificacao era estadual, e o Rio Grande do Sul
+# responde por vinte dos vinte e tres.
+RENUMERAR_1960 <- c(
+  # o livro pula numeros e o arquivo nao (fase 3, 16/09)
+  5210, 2012, 6341, 1741, 5306, 8553, 1725,
+  # os codigos do livro nao sobem com as linhas (auditoria de 17/09)
+  8317, 8554, 8204, 8254, 8417, 8414, 8412, 8107, 8260, 5213, 8264, 8319,
+  8328, 8201, 8406, 8421, 8355, 8311, 8302, 8135, 8322, 6657, 1751)
+
+# A posicao e a da linha impressa, que a transcricao preserva. Nao serve o posto
+# do codigo: nestes trinta e justamente o codigo que esta fora de ordem.
 fora[code_muni_1960 %in% RENUMERAR_1960,
-     `:=`(code_district_1960 = 2L * rank(code_district_1960) - 1L,
-          fonte = paste("Codigo de Zonas Fisiograficas de 1960 (nomes e ordem);",
-                        "numeracao sequencial do arquivo do censo, conferida contra a populacao e a",
-                        "parcela urbana por distrito da Sinopse Preliminar de 1960")),
+     `:=`(code_district_1960 = 2L * seq_len(.N) - 1L,
+          fonte = paste("Codigo de Zonas Fisiograficas de 1960 (nomes e ordem das linhas);",
+                        "numeracao do arquivo do censo, conferida contra a populacao e a parcela",
+                        "urbana por distrito da Sinopse Preliminar de 1960")),
      by = code_muni_1960]
 message("renumerados: ", length(RENUMERAR_1960), " municipios, ",
         fora[code_muni_1960 %in% RENUMERAR_1960, .N], " distritos")
