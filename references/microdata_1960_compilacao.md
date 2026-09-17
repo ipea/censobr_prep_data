@@ -60,13 +60,36 @@ Cada unidade territorial aparece **duas vezes**: como era em 1960 e como é hoje
 | `code_state_1960`, `abbrev_state_1960`, `name_state_1960` | `code_state`, `abbrev_state`, `name_state` |
 | `name_region_1960` — Norte, Nordeste, Leste, Sul, Centro-Oeste, as cinco regiões em que os volumes de 1960 publicam | `code_region`, `name_region` |
 | `code_muni_1960`, `name_muni_1960` | `code_muni` |
-| `code_district_1960`, `name_district_1960`, `name_bairro_1960` | — |
+| `code_district_1960`, `name_district_1960`, `code_bairro_1960`, `name_bairro_1960` | — |
 
 Três unidades não existem mais e merecem atenção:
 
-- **Guanabara** era o município do Rio de Janeiro como unidade da federação. Sai com `code_state_1960` = 34 e `code_state` = 33, e `code_muni` = 3304557, que é o município do Rio de Janeiro de hoje. O censo codificou a cidade por **bairro**, e é o bairro que está em `name_bairro_1960`.
+- **Guanabara** era o município do Rio de Janeiro como unidade da federação. Sai com `code_state_1960` = 34 e `code_state` = 33, e `code_muni` = 3304557, que é o município do Rio de Janeiro de hoje. O censo **não codificou a cidade por distrito**: codificou por bairro, e dentro do bairro por circunscrição ou favela. O bairro está em `code_bairro_1960` (5410 a 5591) e `name_bairro_1960`, e é ele a *Circunscrição Censitária* em que o tomo XII do Volume I publica a cidade — 9 zonas e 83 circunscrições. O que está em `code_district_1960` é a circunscrição, com código até 40, ou a favela, com 41 e acima: o livro as numera numa sequência só dentro do bairro, sob o título "Circunscrições e favelas", e `censobr_favela` diz qual é qual. Quem quiser as favelas filtra por `censobr_favela == 1` e lê o código e o nome nas colunas de distrito. Os nomes ficam **como o IBGE os publicou**: o livro escreve o prefixo "Favela do" em quinze das 147 e não escreve nas outras, e a grafia não foi uniformizada.
+
+  A conferência contra o tomo XII fecha: a nossa população presente dá 3.281.908 contra 3.307.163 publicados (−0,76%), e o quadro rural bate ao dígito, 83.317 dos dois lados. A estrutura também: o guia tem as 9 zonas com a Baía de Guanabara repartida em Orla Norte, Central e Sul, e 85 bairros, que são as 83 circunscrições mais a Zona Rural e a População em trânsito.
 - **Fernando de Noronha** era território federal: `code_state_1960` = 20, `code_state` = 26 (Pernambuco), `code_muni` = 2605459.
 - **Serra dos Aimorés** era a região em litígio entre Minas e o Espírito Santo, que o censo recenseou como unidade à parte e que depois se repartiu entre os dois estados. **Nunca teve código**, e fica vazia nas colunas de estado e de município: quem a identifica é `UF` = 50 e `name_state_1960`. Os tomos de Minas e do Espírito Santo a excluem com todas as letras, e a única publicação que a traz é a Série Nacional.
+
+### Os nomes de distrito, e por que a numeração impressa nem sempre serve
+
+O nome de cada distrito vem do *Código de Zonas Fisiográficas, Municípios e Distritos* de 1960, que é o manual que os codificadores do censo usaram. Em setembro de 2026 o guia foi refeito a partir da **transcrição integral** das suas 313 páginas, no lugar do OCR anterior — que corrompia 19% dos nomes e deixava 720 pares sem nome nenhum.
+
+A transcrição revelou um problema que o OCR escondia: **em alguns municípios a numeração impressa no livro não é a que o censo usou**, e o guia vinha pondo cada nome no distrito seguinte. São duas situações, e cada uma tem a sua assinatura:
+
+1. **O livro pula números e o arquivo não.** Campos traz dezoito distritos numerados 01, 05, 07 … 41, sem 03, 25 e 27; o arquivo traz os mesmos dezoito numerados 01, 03, 05 … 35, sem pular. São sete municípios.
+2. **Os códigos não sobem junto com as linhas.** Palmeira das Missões lista os cinco distritos em ordem alfabética mas dá a Coronel Finzito, o segundo, o código 09 — o próximo livre, por ter sido criado depois. Aqui a numeração está completa, sem buraco, de modo que a primeira assinatura não acusa. São trinta municípios.
+
+Cada caso foi decidido pela medida, contra a **Sinopse Preliminar de 1960** — o volume que o IBGE publicou por estado em 1961-62 com a população de cada distrito do país. A transcrição do seu quadro II está em `references/censo_1960_sinopse_preliminar_distritos.csv`, e a conferência em `references/auditoria_distritos_1960.R`. Duas medidas independentes: a população de cada distrito e a parcela dele que o censo classificou no quadro urbano ou suburbano. A segunda é mais forte, porque é razão interna e não depende do nível do peso.
+
+**O peso é o de desenho, e não o final.** O `censobr_weight` da amostra de 25% é calibrado, entre outras margens, a município × situação da própria Sinopse Preliminar: usá-lo para validar contra ela seria circular. O `censobr_weight_desenho` vale 4 para todos, de modo que a população é a contagem crua vezes quatro e a parcela urbana é a proporção crua. Os dois pesos dão o mesmo veredicto — em Campos, 7,4% contra 7,8% de erro de população —, mas só o de desenho se defende.
+
+Resultado: **trinta municípios corrigidos e sete confirmados**, com separações largas. Em Campos a leitura sequencial erra 0,7 ponto percentual na parcela urbana dos dezoito distritos e a do livro erra 4,3, chegando a 61,8 em Guarus — poria 5% de urbanos onde a publicação traz 67%. Em Novo Hamburgo, 0,6 contra 57,5. Do outro lado, em Virginópolis o livro erra 2,6 e a ordem das linhas 25,3.
+
+O padrão é geográfico e faz sentido, porque a codificação do censo era estadual: vinte dos vinte e três municípios do segundo grupo são do Rio Grande do Sul, e os cinco em que a numeração impressa vale são do Ceará, de Minas e de São Paulo.
+
+**Brasília é um caso à parte.** A sua página no livro é emendada à mão: os códigos datilografados — 9701 Cidade de Brasília, 9702 Planaltina, 9703 Taguatinga, 9704 Sobradinho, 9705 Zona Rural — foram riscados e substituídos por 01 a 06 manuscritos, com a linha do Núcleo Bandeirante acrescentada a mão, sem autoria nem data. O arquivo bruto diz qual versão os codificadores usaram: `V116` = 9701 nos 14.818 registros, e os distritos são 01, 03, 05 e 07. **São quatro, e não seis.** Quais quatro, fixou-se pelo quadro 1 da Sinopse Preliminar de **1970** do Distrito Federal, a única publicação encontrada que abre o DF por localidade: 01 Cidade de Brasília, 03 Planaltina, 05 Sobradinho, 07 Taguatinga. O Núcleo Bandeirante não é distrito — é o quadro suburbano da Cidade de Brasília, e os nossos 21.306 suburbanos ficam a 1,3% dos 21.033 que a publicação lhe dá.
+
+**O que sobra sem nome:** 8 pares e 561 domicílios, 0,018% do compilado, listados com o motivo de cada um em `read_guides/1960_distritos_pendentes.csv`. Em três deles o arquivo traz um distrito que nenhuma publicação de 1960 lista, e a aritmética mostra ser uma repartição interna da sede — nomeá-lo seria invenção. Os outros cinco são registros isolados com dano de fita. Dois municípios ficaram sem decisão, Horizontina e Tenente Portela, porque os distritos que trocariam de nome têm quase o mesmo tamanho e quase a mesma parcela urbana.
 
 ## 6. O desenho amostral, e como calcular erro-padrão
 

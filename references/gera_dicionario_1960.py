@@ -243,10 +243,16 @@ GEO = [
     ("code_muni_1960", "Código do Município na Divisão Territorial Brasileira de 1960", VALOR),
     ("name_muni_1960", "Nome do Município em 1960", TEXTO),
     ("code_district_1960", "Código do Distrito no Código de Zonas Fisiográficas, Municípios e "
-                           "Distritos de 1960", VALOR),
-    ("name_district_1960", "Nome do Distrito em 1960", TEXTO +
-     [("", "Nome não transcrito: restam 17 pares município-distrito, 3.843 domicílios, cujo código "
-           "o Código de 1960 não traz impresso na relação do município")]),
+                           "Distritos de 1960. Na Guanabara não é distrito: é a circunscrição "
+                           "(códigos até 40) ou a favela (41 e acima), que o Código numera numa "
+                           "sequência só dentro do bairro, sob o título \"Circunscrições e favelas\"; "
+                           "censobr_favela diz qual é qual", VALOR),
+    ("name_district_1960", "Nome do Distrito em 1960; na Guanabara, o da circunscrição ou o da "
+                           "favela, como o IBGE o publicou", TEXTO +
+     [("", "Nome não transcrito: restam 8 pares município-distrito e 561 domicílios, 0,018% do "
+           "total. Em três deles o arquivo traz um distrito que nenhuma publicação de 1960 lista, e "
+           "a aritmética mostra ser uma repartição interna da sede; os outros cinco são registros "
+           "com dano de fita. A relação está em read_guides/1960_distritos_pendentes.csv")]),
     ("code_bairro_1960", "Código do Bairro no Código de Zonas Fisiográficas, Municípios e Distritos "
                          "de 1960, de 5410 a 5591. É a Circunscrição Censitária em que o Tomo XII do "
                          "Volume I publica a Guanabara: 9 zonas e 83 circunscrições", VALOR +
@@ -345,7 +351,11 @@ def diag_comum(tabela):
                                             "sem o registro de família correspondente"))
   return [
     ("censobr_favela", "Registro em favela. Só na Guanabara, onde o Código de Municípios e Distritos "
-                       "dá código próprio às favelas", [SIM, NAO]),
+                       "numera circunscrições e favelas numa sequência só dentro do bairro: até 40 "
+                       "é circunscrição, 41 e acima é favela. Quando vale 1, o code_district_1960 é "
+                       "o código da favela e o name_district_1960 é o nome dela, tal como o IBGE o "
+                       "publicou - o Código escreve o prefixo \"Favela do\" em alguns e não em "
+                       "outros, e a grafia não foi uniformizada", [SIM, NAO]),
     ("censobr_muni_corrigido", "Código de município corrigido na leitura: Alagoas vinha deslocada em "
                                "+200, Fernando de Noronha como 2701, o Distrito Federal como 9701 e a "
                                "Guanabara codificada por bairro", [SIM, NAO]),
