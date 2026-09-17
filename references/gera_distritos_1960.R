@@ -120,6 +120,60 @@ resto[, ja := NULL]
 message("do guia anterior, que a transcricao nao tem: ", nrow(resto), " pares")
 
 r <- rbindlist(list(r, resto), use.names = TRUE, fill = TRUE)
+
+# --- Brasilia: a numeracao impressa do livro nao foi a que o censo usou -------
+#
+# A pagina 313 e um documento emendado a mao. Os codigos datilografados -- 9701
+# Cidade de Brasilia, 9702 Planaltina, 9703 Taguatinga, 9704 Sobradinho, 9705
+# Zona Rural -- foram riscados e substituidos por 01 a 06 manuscritos, com a
+# linha do Nucleo Bandeirante acrescentada a mao entre as duas primeiras. O
+# transcritor anota que as emendas nao tem autoria, data nem assinatura.
+#
+# O arquivo bruto mostra que os codificadores ignoraram a emenda: V116 = 9701
+# nos 14.818 registros do Distrito Federal, e os distritos sao 01, 03, 05 e 07
+# -- a convencao impar do resto do pais, aplicada aos quatro lugares da relacao
+# datilografada. Sao quatro distritos, e nao seis: o Nucleo Bandeirante esta
+# dentro da Cidade de Brasilia e "Zona Rural" e situacao do domicilio, que vai
+# em V118.
+#
+# Tres medidas fixam qual nome cabe a cada codigo:
+#
+#  1. O distrito 03 tem 54,2% de nascidos em Goias, contra 15% a 23% nos outros
+#     tres. E Planaltina, a cidade goiana antiga incorporada ao Distrito Federal.
+#  2. A Sinopse Preliminar do Censo de 1970 do Distrito Federal publica, no seu
+#     quadro 1, a populacao recenseada em 1960 por regiao administrativa, e a
+#     soma fecha nos 141.742 da Serie Nacional: Brasilia 92.761 (Plano Piloto
+#     71.728 mais Nucleo Bandeirante 21.033), Taguatinga 27.315, Sobradinho
+#     10.217, Planaltina 4.651, Paranoa 3.576, Jardim 1.677, Gama 811 e
+#     Brazlandia 734. A nossa ordem de tamanho e a mesma -- 07 = 25.386,
+#     05 = 8.235, 03 = 2.972 --, com razoes de 0,93, 0,81 e 0,64.
+#  3. A ordem da pagina impressa poria Taguatinga em 05 e Sobradinho em 07, o
+#     que daria 8.235 contra 27.315 e 25.386 contra 10.217: razoes de 0,30 e
+#     2,49. A publicacao desmente.
+#
+# Vale a ordem alfabetica depois da sede, que e a regra do livro em 96,4% dos
+# municipios com tres distritos ou mais.
+#
+# O Nucleo Bandeirante, a linha acrescentada a mao, nao e distrito: e o quadro
+# suburbano da Cidade de Brasilia. A tabela de 1970 da Brasilia em 1960 como
+# Plano Piloto (71.728) mais Nucleo Bandeirante (21.033), e o nosso distrito 01
+# se reparte em urbano 67.160, suburbano 21.306 e rural 14.734 -- o suburbano
+# fica a 1,3% do Nucleo Bandeirante. "Zona Rural", a outra linha manuscrita, e
+# situacao do domicilio e vai em V118: as quatro cidades satelites foram todas
+# recenseadas no quadro rural, e a Sinopse Preliminar do Brasil confirma, dando
+# a populacao urbana do Distrito Federal como 89.698, toda na sede municipal,
+# contra os 88.466 que somamos em urbano mais suburbano.
+brasilia <- data.table(
+  uf60 = 97L, code_muni_1960 = 9700L, name_muni_1960 = "Brasília",
+  code_district_1960 = c(1L, 3L, 5L, 7L),
+  name_district_1960 = c("Cidade de Brasília", "Planaltina", "Sobradinho", "Taguatinga"),
+  name_bairro_1960 = NA_character_, tipo = "distrito",
+  zona_cod = NA_integer_, zona = NA_character_, pagina = 313L,
+  fonte = "Codigo de Zonas Fisiograficas de 1960 p. 313 (relacao datilografada, antes da emenda manuscrita), na convencao impar; ordem conferida contra a populacao de 1960 por regiao administrativa da Sinopse Preliminar do Censo de 1970 do Distrito Federal, quadro 1")
+r <- r[code_muni_1960 != 9700L]
+r <- rbindlist(list(r, brasilia), use.names = TRUE, fill = TRUE)
+message("Brasilia: ", nrow(brasilia), " distritos, no lugar das ", 6, " linhas da emenda manuscrita")
+
 setorder(r, uf60, code_muni_1960, code_district_1960)
 
 # nenhum par pode aparecer duas vezes: o join do pipeline e por (uf60,
