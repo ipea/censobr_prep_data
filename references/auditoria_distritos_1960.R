@@ -58,6 +58,7 @@ message("municipios em que a soma dos distritos fecha o municipio: ",
 # 05 ... sem pular, cada codigo corresponde a uma posicao so e nao ha como o
 # nome escorregar -- desde que todo codigo do arquivo seja impar e caiba na
 # faixa, o que se confere aqui.
+cad[, linha := .I]
 fora_gb <- cad[(code_muni_1960 < 5410 | code_muni_1960 > 5591) & code_muni_1960 != 9700]
 livro <- fora_gb[order(code_muni_1960, code_district_1960),
                  .(n = .N, cods = list(code_district_1960),
@@ -136,4 +137,69 @@ for(m in alvos){
            .(pop = sum(censobr_weight_desenho)), by = .(cod = code_district_1960)][order(cod)]
   message(sprintf("  %-22s sede %8d | codigo 01 %8d | razao %.2f",
           s$name_muni_1960[1], s$pop_total[1], round(a$pop[1]), a$pop[1] / s$pop_total[1]))
+}
+
+
+# --- 4. dois rastreios sobre a base inteira, sem fonte externa ----------------
+#
+# A auditoria por amostragem de 17/09 sorteou vinte municipios e leu dezoito.
+# Isso acha erro sistematico -- e achou: Palmeira das Missoes denunciou a classe
+# dos codigos que nao sobem com as linhas --, mas nao limita erro avulso: zero
+# erro em dezoito da um teto de uns 17%, que nao diz nada. Para o avulso o
+# instrumento certo nao e a amostra, e sim um rastreio que cubra tudo. Dois
+# servem, e nenhum precisa da Sinopse.
+
+message("\n--- rastreio 1: a regra da sede ---")
+# No Codigo o distrito 01 e a sede e leva o nome do municipio. Um deslocamento
+# tira o nome do municipio do codigo 01.
+gui <- fread("read_guides/1960_distritos.csv", encoding = "UTF-8")
+mun <- fread("read_guides/1960_municipios.csv", encoding = "UTF-8")
+norma <- function(x) toupper(gsub("[^A-Za-z]", "", iconv(x, to = "ASCII//TRANSLIT")))
+gsede <- gui[code_muni_1960 < 5410 | code_muni_1960 > 5591]
+gsede[mun[!(uf60 == 54 & cod60 == 541)], nome_mun := i.nome, on = c(code_muni_1960 = "cod60")]
+gsede <- gsede[code_district_1960 == 1 & !is.na(nome_mun)]
+gsede[, igual := norma(name_district_1960) == norma(nome_mun)]
+message("municipios: ", nrow(gsede), " | o distrito 01 leva o nome do municipio: ",
+        gsede[igual == TRUE, .N], sprintf(" (%.2f%%)", 100 * mean(gsede$igual)))
+message("as excecoes sao quase todas grafia de epoca (Lages por Lajes, Joinvile por")
+message("Joinville, Butucatu por Botucatu). As tres de fundo estao explicadas: Recife")
+message("e Sao Paulo listam os bairros em ordem alfabetica estrita, sem sede primeiro,")
+message("e Planaltina de Goias perdeu a sede para o novo Distrito Federal em 1960.")
+
+message("\n--- rastreio 2: o distrito com o nome do municipio e o maior? ---")
+# Sob um deslocamento o nome da sede cai num distrito pequeno ou rural.
+b <- pes[!(V202 %in% 3:4) & (code_muni_1960 < 5410 | code_muni_1960 > 5591),
+         .(pop = sum(censobr_weight_desenho),
+           urb = 100 * sum(censobr_weight_desenho[V118 %in% c(1, 3)]) / sum(censobr_weight_desenho)),
+         by = .(code_muni_1960, cod = code_district_1960)]
+b[gui, nome := i.name_district_1960, on = c("code_muni_1960", cod = "code_district_1960")]
+b[mun[!(uf60 == 54 & cod60 == 541)], nome_mun := i.nome, on = c(code_muni_1960 = "cod60")]
+b <- b[!is.na(nome) & !is.na(nome_mun)]
+b[, n_dist := .N, by = code_muni_1960]
+b <- b[n_dist >= 2]
+b[, e_sede := norma(nome) == norma(nome_mun)]
+b[, `:=`(maior = pop == max(pop), mais_urb = urb == max(urb)), by = code_muni_1960]
+rs <- b[, .(tem = any(e_sede), m = any(e_sede & maior), u = any(e_sede & mais_urb)),
+        by = code_muni_1960][tem == TRUE]
+message("municipios com dois ou mais distritos e a sede identificada: ", nrow(rs))
+message("  a sede e o maior distrito: ", rs[m == TRUE, .N], sprintf(" (%.1f%%)", 100 * mean(rs$m)))
+message("  a sede e o mais urbano: ", rs[u == TRUE, .N], sprintf(" (%.1f%%)", 100 * mean(rs$u)))
+suspeitos <- rs[m == FALSE & u == FALSE, code_muni_1960]
+message("  nem maior nem mais urbana: ", length(suspeitos), " suspeitos")
+
+# O que fecha: cruzar os suspeitos com a classe estrutural. Onde os codigos sobem
+# com as linhas e nao ha buraco, o deslocamento e impossivel, e a anomalia e
+# propriedade do municipio -- capital ou suburbio industrial cuja sede nao e o
+# maior distrito.
+cl <- fora_gb[order(linha), .(sobe = !is.unsorted(code_district_1960),
+                              sem_buraco = identical(sort(code_district_1960),
+                                                     seq(1L, by = 2L, length.out = .N))),
+              by = code_muni_1960]
+z <- cl[code_muni_1960 %in% suspeitos]
+message("  destes, com mapeamento univoco (codigos sobem e sem buraco): ",
+        z[sobe == TRUE & sem_buraco == TRUE, .N], " de ", nrow(z))
+if(z[sobe == FALSE | sem_buraco == FALSE, .N] > 0){
+  message("  em classe de risco, e portanto ja decididos um a um com a Sinopse:")
+  print(merge(z[sobe == FALSE | sem_buraco == FALSE],
+              mun[, .(code_muni_1960 = cod60, nome)], by = "code_muni_1960"))
 }
