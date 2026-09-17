@@ -96,6 +96,42 @@ ftp_fingerprint_censobr <- function(fonte){
 }
 
 
+# Confere as sete fontes e invalida o alvo de download da que o IBGE mexeu.
+# Roda no topo do _targets.R, a cada tar_make: a deteccao fica automatica sem
+# que nenhum alvo precise de cue "always", que deixaria a cadeia inteira
+# permanentemente desatualizada aos olhos do tar_outdated e do tar_visnetwork.
+# A mensagem sai sempre, mesmo quando nada mudou -- se ela sumir, a checagem
+# parou de rodar, e e assim que se percebe.
+checa_ftp_censobr <- function(){
+
+  alvos <- c(microdata_2000     = "raw_microdata_paths_2000",
+             microdata_2010     = "raw_microdata_paths_2010",
+             microdata_2022     = "raw_microdata_paths_2022",
+             tracts_2000        = "raw_tracts_paths_2000",
+             tracts_2010        = "raw_tracts_paths_2010",
+             tracts_2022        = "raw_tracts_paths_2022",
+             tracts_2022_prelim = "raw_tracts_path_2022_prelim")
+
+  assinatura <- function(x) paste(x$arquivo, x$data, x$tamanho, collapse = "|")
+
+  mudaram <- character(0)
+
+  for(fonte in names(alvos)){
+    cache <- file.path("./data_raw/ftp_fingerprints", paste0(fonte, ".csv"))
+    antes <- if(file.exists(cache)) assinatura(data.table::fread(cache, data.table = FALSE)) else ""
+    agora <- assinatura(ftp_fingerprint_censobr(fonte))
+    if(antes != agora){
+      mudaram <- c(mudaram, fonte)
+      targets::tar_invalidate(any_of(alvos[[fonte]]))
+    }
+  }
+
+  if(length(mudaram)) message("FTP: republicacao em ", paste(mudaram, collapse = ", "),
+                              " -- o download vai refazer")
+  else message("FTP: ", length(alvos), " fontes conferidas, nenhuma mudanca")
+}
+
+
 
 ###### Download file to tempdir -----------------
 #

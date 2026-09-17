@@ -203,16 +203,15 @@ make_theme_dataset_2000 <- function(theme_i, raw_xls_paths, dataset_basico, data
 
 
 # baixa 28 zips do FTP IBGE, descompacta, retorna paths dos XLS.
-download_tract_2000 <- function(remote){
+download_tract_2000 <- function(){
 
   dest_dir <- "./data_raw/tracts/2000"
   dir.create(dest_dir, recursive = TRUE, showWarnings = FALSE)
 
   message("\nDownloading 2000 census tracts ...\n")
 
-  # `remote`: listagem do FTP vinda de ftp_fingerprint_censobr(), e a
-  # dependencia que faz este alvo rodar de novo quando o IBGE republica.
-  ftp <- FTP_CENSOBR$tracts_2000
+  ftp    <- FTP_CENSOBR$tracts_2000
+  remote <- ftp_fingerprint_censobr("tracts_2000")
 
   listed <- remote$arquivo[grepl("\\.zip$", remote$arquivo)]
   if(length(listed) == 0) stop("Nenhum zip listado em ", ftp)

@@ -20,7 +20,7 @@
 
 
 # Baixa os 27 zips por UF do FTP e descompacta em laco (ha zip aninhado).
-download_microdata_2000 <- function(remote){
+download_microdata_2000 <- function(){
 
   dest_dir <- "./data_raw/microdata/2000"
   txt_dir  <- file.path(dest_dir, "txt")
@@ -29,9 +29,8 @@ download_microdata_2000 <- function(remote){
 
   message("\nDownloading 2000 microdata...\n")
 
-  # `remote`: listagem do FTP vinda de ftp_fingerprint_censobr(), e a
-  # dependencia que faz este alvo rodar de novo quando o IBGE republica.
-  ftp <- FTP_CENSOBR$microdata_2000
+  ftp    <- FTP_CENSOBR$microdata_2000
+  remote <- ftp_fingerprint_censobr("microdata_2000")
 
   uf_zips <- remote$arquivo[grepl("^[A-Z]{2}\\.zip$", remote$arquivo)]
 

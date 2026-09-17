@@ -24,7 +24,7 @@
 
 # Baixa os 27 zips por UF do FTP (smart-skip via download_file_censobr) e
 # descompacta os CSVs.
-download_microdata_2022 <- function(remote){
+download_microdata_2022 <- function(){
 
   dest_dir <- "./data_raw/microdata/2022"
   csv_dir  <- file.path(dest_dir, "csv")
@@ -33,9 +33,8 @@ download_microdata_2022 <- function(remote){
 
   message("\nDownloading 2022 microdata (amostra publica)...\n")
 
-  # `remote`: listagem do FTP vinda de ftp_fingerprint_censobr(), e a
-  # dependencia que faz este alvo rodar de novo quando o IBGE republica.
-  ftp <- FTP_CENSOBR$microdata_2022
+  ftp    <- FTP_CENSOBR$microdata_2022
+  remote <- ftp_fingerprint_censobr("microdata_2022")
 
   # so os zips por UF: Todas_as_UFs.zip repete o mesmo conteudo e dobraria tudo
   uf_zips <- remote$arquivo[grepl("^[0-9]{2}_[A-Z]{2}\\.zip$", remote$arquivo)]

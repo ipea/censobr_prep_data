@@ -78,6 +78,16 @@ tar_option_set(
 # Run the R scripts in the R/ folder with your custom functions:
 targets::tar_source('./R')
 
+# O IBGE republica arquivo sem trocar de nome nem avisar -- em 14/09/2026 os
+# microdados de 2022 ganharam uma variavel a mais e nada aqui se mexeu, porque o
+# alvo de download e format = 'file' e o targets compara o hash dos arquivos
+# locais, nunca o do servidor. A checagem abaixo roda a cada tar_make, le o que o
+# FTP esta servindo agora e invalida o download da fonte que mudou -- so dela, e
+# so quando mudou. Fica fora do DAG de proposito: um alvo com cue 'always'
+# resolveria o mesmo, mas deixaria a cadeia inteira a jusante permanentemente
+# desatualizada aos olhos do tar_outdated e do tar_visnetwork.
+checa_ftp_censobr()
+
 ############# The Targets List #########----------------------------------------
 
 # In case of error, run:
@@ -456,20 +466,9 @@ list(
 
   # 05. microdata 2000 ---------------------------------------------------------------
 
-  # o IBGE republica arquivo sem trocar de nome nem avisar -- em 14/09/2026 os
-  # microdados de 2022 ganharam uma variavel a mais. O alvo abaixo roda a cada
-  # tar_make (cue "always") e carrega o que o FTP esta servindo agora: nome,
-  # data e tamanho de cada arquivo da fonte. O download depende dele, e e so
-  # assim que o pipeline rebaixa quando a fonte muda -- o hash dos arquivos
-  # locais, que e o que o targets olha por padrao, nunca acusaria.
-  tar_target(name = ftp_microdata_2000,
-             command = ftp_fingerprint_censobr("microdata_2000"),
-             cue = tar_cue(mode = "always")
-             ),
-
   # download (also unzips, inclusive os zips aninhados da Bahia).
   tar_target(name = raw_microdata_paths_2000,
-             command = download_microdata_2000(ftp_microdata_2000),
+             command = download_microdata_2000(),
              format = "file"
              ),
 
@@ -490,14 +489,9 @@ list(
 
   # 06. microdata 2010 ---------------------------------------------------------------
 
-  tar_target(name = ftp_microdata_2010,
-             command = ftp_fingerprint_censobr("microdata_2010"),
-             cue = tar_cue(mode = "always")
-             ),
-
   # download (also unzips). Returns paths to all extracted TXTs.
   tar_target(name = raw_microdata_paths_2010,
-             command = download_microdata_2010(ftp_microdata_2010),
+             command = download_microdata_2010(),
              format = "file"
              ),
 
@@ -522,14 +516,9 @@ list(
   # amostra de ACESSO PUBLICO (nivel 1) -- a unica redistribuivel. O acesso
   # controlado (nivel 2) e importado pelo proprio pesquisador no consumidor.
 
-  tar_target(name = ftp_microdata_2022,
-             command = ftp_fingerprint_censobr("microdata_2022"),
-             cue = tar_cue(mode = "always")
-             ),
-
   # download (also unzips). Returns paths to all extracted CSVs.
   tar_target(name = raw_microdata_paths_2022,
-             command = download_microdata_2022(ftp_microdata_2022),
+             command = download_microdata_2022(),
              format = 'file'
              ),
 
@@ -552,14 +541,9 @@ list(
 
   # 08. census tracts 2000 ---------------------------------------------------------------
 
-  tar_target(name = ftp_tracts_2000,
-             command = ftp_fingerprint_censobr("tracts_2000"),
-             cue = tar_cue(mode = "always")
-             ),
-
   # download (also unzips). Returns paths to all extracted XLSs.
   tar_target(name = raw_tracts_paths_2000,
-             command = download_tract_2000(ftp_tracts_2000),
+             command = download_tract_2000(),
              format = 'file'
              ),
 
@@ -591,14 +575,9 @@ list(
   # tar_target(name = years_tracts,
   #            command = c(2010)),
   
-  tar_target(name = ftp_tracts_2010,
-             command = ftp_fingerprint_censobr("tracts_2010"),
-             cue = tar_cue(mode = "always")
-             ),
-
   # download
   tar_target(name = raw_tracts_paths_2010,
-             command = download_tract_2010(2010, ftp_tracts_2010),
+             command = download_tract_2010(2010),
              format = 'file'
              ),
   
@@ -631,14 +610,9 @@ list(
 
   # 10. census tracts 2022 ---------------------------------------------------------------
 
-  tar_target(name = ftp_tracts_2022,
-             command = ftp_fingerprint_censobr("tracts_2022"),
-             cue = tar_cue(mode = "always")
-             ),
-
   # download (also unzips). Returns paths to all extracted CSVs.
   tar_target(name = raw_tracts_paths_2022,
-             command = download_tract_2022(ftp_tracts_2022),
+             command = download_tract_2022(),
              format = 'file'
              ),
 
@@ -670,13 +644,8 @@ list(
 
   # divulgacao previa do Censo 2022, um CSV nacional unico -- ver
   # R/census_tracts_2022_prelim.R
-  tar_target(name = ftp_tracts_2022_prelim,
-             command = ftp_fingerprint_censobr("tracts_2022_prelim"),
-             cue = tar_cue(mode = "always")
-             ),
-
   tar_target(name = raw_tracts_path_2022_prelim,
-             command = download_tract_2022_prelim(ftp_tracts_2022_prelim),
+             command = download_tract_2022_prelim(),
              format = 'file'
              ),
 

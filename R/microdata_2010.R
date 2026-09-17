@@ -15,7 +15,7 @@
 
 
 # Baixa os 28 zips por UF do FTP e descompacta os .txt.
-download_microdata_2010 <- function(remote){
+download_microdata_2010 <- function(){
 
   dest_dir <- "./data_raw/microdata/2010"
   txt_dir  <- file.path(dest_dir, "txt")
@@ -24,9 +24,8 @@ download_microdata_2010 <- function(remote){
 
   message("\nDownloading 2010 microdata...\n")
 
-  # `remote`: listagem do FTP vinda de ftp_fingerprint_censobr(), e a
-  # dependencia que faz este alvo rodar de novo quando o IBGE republica.
-  ftp <- FTP_CENSOBR$microdata_2010
+  ftp    <- FTP_CENSOBR$microdata_2010
+  remote <- ftp_fingerprint_censobr("microdata_2010")
 
   # 26 UFs + SP1 + SP2_RM; fora a Documentacao.zip
   uf_zips <- remote$arquivo[grepl("^([A-Z]{2}|SP1|SP2_RM)\\.zip$", remote$arquivo)]

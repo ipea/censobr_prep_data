@@ -180,7 +180,7 @@ make_theme_dataset_2022 <- function(theme_i, raw_csv_paths, dataset_basico, data
 
 
 # baixa zips de 3 endpoints IBGE, descompacta, retorna paths dos CSVs.
-download_tract_2022 <- function(remote){
+download_tract_2022 <- function(){
 
   dest_dir <- "./data_raw/tracts/2022"
   csv_dir  <- file.path(dest_dir, "csv")
@@ -189,10 +189,10 @@ download_tract_2022 <- function(remote){
 
   message("\nDownloading 2022 census tracts ...\n")
 
-  # as duas pastas listaveis e o zip de renda do responsavel, que so existe
-  # por URL direta, estao em FTP_CENSOBR$tracts_2022. `remote` vem de
-  # ftp_fingerprint_censobr() ja com a URL completa de cada arquivo das tres, e
-  # e a dependencia que faz este alvo rodar de novo quando o IBGE republica.
+  # as duas pastas listaveis e o zip de renda do responsavel, que so existe por
+  # URL direta, estao em FTP_CENSOBR$tracts_2022; a impressao digital ja devolve
+  # a URL completa de cada arquivo das tres
+  remote   <- ftp_fingerprint_censobr("tracts_2022")
   all_urls <- remote$url[grepl("\\.zip$", remote$arquivo)]
 
   download_file_censobr(file_url = all_urls, dest_dir = dest_dir)
