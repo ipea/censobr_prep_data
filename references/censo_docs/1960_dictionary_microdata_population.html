@@ -844,19 +844,29 @@ tags will be replaced.-->
  </tr>
  <tr class=xl6618549 height=23 style='mso-height-source:userset;height:17.25pt'>
   <td height=23 class=xl6918549 style='height:17.25pt;border-top:none'>code_district_1960</td>
-  <td class=xl7118549 width=413 style='border-top:none;border-left:none;width:310pt'>Código do Distrito no Código de Zonas Fisiográficas, Municípios e Distritos de 1960</td>
+  <td class=xl7118549 width=413 style='border-top:none;border-left:none;width:310pt'>Código do Distrito no Código de Zonas Fisiográficas, Municípios e Distritos de 1960. Na Guanabara não é distrito: é a circunscrição (códigos até 40) ou a favela (41 e acima), que o Código numera numa sequência só dentro do bairro, sob o título "Circunscrições e favelas"; censobr_favela diz qual é qual</td>
   <td class=xl6918549 style='border-top:none;border-left:none'>Valor</td>
   <td class=xl7018549 width=341 style='border-top:none;border-left:none;width:256pt'>&nbsp;</td>
  </tr>
  <tr class=xl6618549 height=23 style='mso-height-source:userset;height:17.25pt'>
   <td rowspan=2 height=46 class=xl7518549 style='border-bottom:.5pt solid black;height:34.5pt;border-top:none'>name_district_1960</td>
-  <td rowspan=2 class=xl7618549 width=413 style='border-bottom:.5pt solid black;border-top:none;width:310pt'>Nome do Distrito em 1960</td>
+  <td rowspan=2 class=xl7618549 width=413 style='border-bottom:.5pt solid black;border-top:none;width:310pt'>Nome do Distrito em 1960; na Guanabara, o da circunscrição ou o da favela, como o IBGE o publicou</td>
   <td class=xl6918549 style='border-top:none;border-left:none'>Texto</td>
   <td class=xl7018549 width=341 style='border-top:none;border-left:none;width:256pt'>&nbsp;</td>
  </tr>
  <tr class=xl6618549 height=23 style='mso-height-source:userset;height:17.25pt'>
   <td height=23 class=xl6918549 style='height:17.25pt;border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl7018549 width=341 style='border-top:none;border-left:none;width:256pt'>Nome não transcrito: restam 720 pares município-distrito que o Código traz impressos e cuja leitura visual não foi feita</td>
+  <td class=xl7018549 width=341 style='border-top:none;border-left:none;width:256pt'>Nome não transcrito: restam 8 pares município-distrito e 561 domicílios, 0,018% do total. Em três deles o arquivo traz um distrito que nenhuma publicação de 1960 lista, e a aritmética mostra ser uma repartição interna da sede; os outros cinco são registros com dano de fita. A relação está em read_guides/1960_distritos_pendentes.csv</td>
+ </tr>
+ <tr class=xl6618549 height=23 style='mso-height-source:userset;height:17.25pt'>
+  <td rowspan=2 height=46 class=xl7518549 style='border-bottom:.5pt solid black;height:34.5pt;border-top:none'>code_bairro_1960</td>
+  <td rowspan=2 class=xl7618549 width=413 style='border-bottom:.5pt solid black;border-top:none;width:310pt'>Código do Bairro no Código de Zonas Fisiográficas, Municípios e Distritos de 1960, de 5410 a 5591. É a Circunscrição Censitária em que o Tomo XII do Volume I publica a Guanabara: 9 zonas e 83 circunscrições</td>
+  <td class=xl6918549 style='border-top:none;border-left:none'>Valor</td>
+  <td class=xl7018549 width=341 style='border-top:none;border-left:none;width:256pt'>&nbsp;</td>
+ </tr>
+ <tr class=xl6618549 height=23 style='mso-height-source:userset;height:17.25pt'>
+  <td height=23 class=xl6918549 style='height:17.25pt;border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl7018549 width=341 style='border-top:none;border-left:none;width:256pt'>Não aplicável - as demais unidades da federação</td>
  </tr>
  <tr class=xl6618549 height=23 style='mso-height-source:userset;height:17.25pt'>
   <td rowspan=2 height=46 class=xl7518549 style='border-bottom:.5pt solid black;height:34.5pt;border-top:none'>name_bairro_1960</td>
@@ -4399,7 +4409,7 @@ tags will be replaced.-->
  </tr>
  <tr class=xl6618549 height=23 style='mso-height-source:userset;height:17.25pt'>
   <td rowspan=2 height=46 class=xl7518549 style='border-bottom:.5pt solid black;height:34.5pt;border-top:none'>censobr_favela</td>
-  <td rowspan=2 class=xl7618549 width=413 style='border-bottom:.5pt solid black;border-top:none;width:310pt'>Registro em favela. Só na Guanabara, onde o Código de Municípios e Distritos dá código próprio às favelas</td>
+  <td rowspan=2 class=xl7618549 width=413 style='border-bottom:.5pt solid black;border-top:none;width:310pt'>Registro em favela. Só na Guanabara, onde o Código de Municípios e Distritos numera circunscrições e favelas numa sequência só dentro do bairro: até 40 é circunscrição, 41 e acima é favela. Quando vale 1, o code_district_1960 é o código da favela e o name_district_1960 é o nome dela, tal como o IBGE o publicou - o Código escreve o prefixo "Favela do" em alguns e não em outros, e a grafia não foi uniformizada</td>
   <td class=xl6918549 style='border-top:none;border-left:none'>1</td>
   <td class=xl7018549 width=341 style='border-top:none;border-left:none;width:256pt'>Sim</td>
  </tr>
