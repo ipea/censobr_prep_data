@@ -365,8 +365,14 @@ code_cols_to_numeric <- function(df){
 
 # As colunas de geografia do censobr sao adicionais: as do IBGE ficam com o nome
 # original, e estas vem sempre no inicio da tabela, nesta ordem -- do maior para
-# o menor recorte, codigo antes do nome; depois os atributos do setor e as
-# variantes historicas.
+# o menor recorte, codigo antes do nome; depois os atributos do setor.
+#
+# So o que vale para todas as edicoes mora aqui. As variantes com sufixo de ano
+# (code_muni_1960, abbrev_state_1970...) existem numa edicao so e ficam no
+# arquivo dela, entrando por `extra` em relocate_geo_cols_censobr(): um objeto
+# global e dependencia de todo alvo que chama a funcao, e enquanto elas moraram
+# aqui, acrescentar o code_bairro_1960 da Guanabara invalidou a camada save_*
+# das doze edicoes de uma vez, 42 parquets para reescrever sem um dado mudar.
 GEO_COLS_CENSOBR <- c(
   "code_region", "name_region",
   "code_state", "abbrev_state", "name_state",
@@ -384,15 +390,12 @@ GEO_COLS_CENSOBR <- c(
   "code_favela", "name_favela",
   "code_aglomerado", "name_aglomerado",
   "code_weighting", "code_tract",
-  "code_situacao", "situacao", "code_type", "area_km2",
-  "code_muni_1960", "code_muni_1970", "code_muni_1980",
-  "name_muni_1960", "code_district_1960", "name_district_1960",
-  "code_bairro_1960", "name_bairro_1960",
-  "name_region_1960", "code_state_1960", "abbrev_state_1960", "name_state_1960",
-  "abbrev_state_1970", "name_state_1970")
+  "code_situacao", "situacao", "code_type", "area_km2")
 
-relocate_geo_cols_censobr <- function(df){
-  first <- intersect(GEO_COLS_CENSOBR, names(df))
+# `extra`: as variantes historicas da edicao, na ordem em que devem sair, logo
+# depois das transversais.
+relocate_geo_cols_censobr <- function(df, extra = NULL){
+  first <- intersect(c(GEO_COLS_CENSOBR, extra), names(df))
   if(data.table::is.data.table(df)){
     data.table::setcolorder(df, first)
     return(df)

@@ -296,13 +296,24 @@ compile_1960 <- function(paths_25, paths_127, estratos, unidade, municipios_path
 # pessoas tem 15,1 milhoes de linhas e nao passa pela memoria. E o idioma de
 # save_microdata_1970(), com zstd-22 entrando uma vez so, aqui.
 # ------------------------------------------------------------------------------
+
+# As colunas de geografia que so 1960 tem: a divisao territorial da epoca e o
+# bairro da Guanabara. Saem logo depois das transversais de GEO_COLS_CENSOBR,
+# na ordem daqui. Moram neste arquivo, e nao na constante compartilhada, para
+# que mexer nelas invalide 1960 e mais nada.
+GEO_COLS_HIST_1960 <- c("code_muni_1960", "name_muni_1960",
+                        "code_district_1960", "name_district_1960",
+                        "code_bairro_1960", "name_bairro_1960",
+                        "name_region_1960",
+                        "code_state_1960", "abbrev_state_1960", "name_state_1960")
+
 save_microdata_1960 <- function(paths, dataset_name, data_version){
 
   message("Saving microdata 1960: ", dataset_name)
 
   arquivo <- switch(dataset_name, households = "domicilios.parquet", population = "pessoas.parquet")
   arrw <- arrow::open_dataset(paths[basename(paths) == arquivo])
-  arrw <- relocate_geo_cols_censobr(arrw)
+  arrw <- relocate_geo_cols_censobr(arrw, GEO_COLS_HIST_1960)
   arrw <- cast_censobr_types(arrw, paste0("1960_", dataset_name))
 
   out_dir <- "./data/microdata_sample/1960"

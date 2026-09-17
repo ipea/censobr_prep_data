@@ -82,7 +82,7 @@ Foram visíveis no diff antigo de `R/census_tracts_2010.R` e na versão AI-style
 
 ## 2. Nomeação `censobr` (canônica)
 
-**As colunas do IBGE ficam com o nome original, em todas as edições e tabelas — nunca renomeadas para o padrão censobr.** As colunas de geografia censobr (`code_*`, `name_*`, `abbrev_state`) são **adicionais**: copiadas ou derivadas das do IBGE via `mutate()`, nunca via `rename()`, e vêm sempre no início da tabela, na ordem de `GEO_COLS_CENSOBR` (`R/support_fun.R`), aplicada por `relocate_geo_cols_censobr()` em todo `save_*`. Decisão do usuário em 2026-09-13. Esquema de nomes visível em `R/census_tracts_2022.R` (bloco de `mutate` do Basico). Aplicar literalmente, sem invenção.
+**As colunas do IBGE ficam com o nome original, em todas as edições e tabelas — nunca renomeadas para o padrão censobr.** As colunas de geografia censobr (`code_*`, `name_*`, `abbrev_state`) são **adicionais**: copiadas ou derivadas das do IBGE via `mutate()`, nunca via `rename()`, e vêm sempre no início da tabela, na ordem de `GEO_COLS_CENSOBR` (`R/support_fun.R`), aplicada por `relocate_geo_cols_censobr()` em todo `save_*`. `GEO_COLS_CENSOBR` só guarda o que toda edição tem: coluna de geografia que existe numa edição só — as de sufixo de ano — mora no arquivo daquela edição e entra pelo argumento `extra`. Pôr um nome com sufixo de ano na constante compartilhada invalida a camada `save_*` do pipeline inteiro (aconteceu em 2026-09-16 com `code_bairro_1960`). Decisão do usuário em 2026-09-13. Esquema de nomes visível em `R/census_tracts_2022.R` (bloco de `mutate` do Basico). Aplicar literalmente, sem invenção.
 
 ### Identificadores hierárquicos (`code_*`)
 

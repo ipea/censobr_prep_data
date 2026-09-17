@@ -238,7 +238,7 @@ clean_microdata_1970 <- function(raw_paths, derived_paths, dataset_name){
                                "numb_residents", "numb_families",
                                "numb_dwellers_hhincome", "hh_income",
                                "hh_income_per_cap")))
-    arrw <- relocate_geo_cols_censobr(arrw)
+    arrw <- relocate_geo_cols_censobr(arrw, GEO_COLS_HIST_1970)
     return(arrw)
   }
 
@@ -268,7 +268,7 @@ clean_microdata_1970 <- function(raw_paths, derived_paths, dataset_name){
   vs <- paste0("V", sprintf("%03d", 1:54))
   arrw <- arrw |>
     dplyr::relocate(all_of(c(GEO_COLS_1970, vs, "id_person", "id_household")))
-  relocate_geo_cols_censobr(arrw)
+  relocate_geo_cols_censobr(arrw, GEO_COLS_HIST_1970)
 }
 
 
@@ -276,6 +276,10 @@ clean_microdata_1970 <- function(raw_paths, derived_paths, dataset_name){
 GEO_COLS_1970 <- c("code_muni", "code_muni_1970", "code_state", "abbrev_state",
                    "abbrev_state_1970", "name_state", "name_state_1970",
                    "code_region", "name_region")
+
+# As de 1970 que nao existem em nenhuma outra edicao, e que por isso nao entram
+# em GEO_COLS_CENSOBR: saem depois das transversais, na ordem daqui.
+GEO_COLS_HIST_1970 <- c("code_muni_1970", "abbrev_state_1970", "name_state_1970")
 
 
 # Geografia de 1970: a UF moderna sai do code_muni e a de 1970 do prefixo do
