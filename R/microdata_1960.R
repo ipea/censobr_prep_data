@@ -241,8 +241,13 @@ compile_1960 <- function(paths_25, paths_127, estratos, unidade, municipios_path
     dom[, `:=`(censobr_upa = censobr_idhousehold, censobr_fpc = 0.25,
                censobr_usa = censobr_idhousehold, censobr_fpc2 = 1)]
   } else {
-    dom[, `:=`(censobr_upa = v001, censobr_fpc = 0.05,
+    # a pasta do desenho, e nao a do cartao: em dois registros o estagio de 1,27% devolveu uma chave
+    # danificada a pasta certa, e e essa que a unidade primaria tem de seguir. v001 continua com o que
+    # o cartao gravou, e censobr_diagnostico marca os dois
+    dom[, pasta_desenho := as.integer(sub("^.*-", "", trimws(censobr_upa)))]
+    dom[, `:=`(censobr_upa = pasta_desenho, censobr_fpc = 0.05,
                censobr_usa = censobr_idhousehold, censobr_fpc2 = 0.25)]
+    dom[, pasta_desenho := NULL]
   }
   # as colunas de desenho descem do domicilio inteiras: as antigas saem antes,
   # senao a pasta em texto da amostra de 1,27% impoe o tipo a coluna nova
@@ -480,6 +485,11 @@ sampling_errors_1960 <- function(paths){
     rm(p); gc(verbose = FALSE)
   }
   e <- data.table::rbindlist(entre)
+  # seis estratos da metade de 1,27% atravessam a fronteira da UF, porque a regra de colapso juntou a unidade
+  # solitaria a uma vizinha; o laco acima os parte num pedaco por UF, e nove desses pedacos ficam com uma pasta
+  # so, sem medir variancia -- exatamente o que o colapso existia para evitar. Somar os pedacos os reconstitui
+  e <- e[, .(n_upa = sum(n_upa), soma = sum(soma), soma2 = sum(soma2), pessoas = sum(pessoas), f1 = f1[1]),
+         by = .(dominio, censobr_estrato)]
   dd <- data.table::rbindlist(dentro)
 
   e[, v := data.table::fifelse(n_upa > 1, (1 - f1) * n_upa / (n_upa - 1) * (soma2 - soma^2 / n_upa), 0)]

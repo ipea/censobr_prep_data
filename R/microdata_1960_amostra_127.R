@@ -772,6 +772,21 @@ finalize_1960_amostra_127 <- function(tabelas, municipios_path, distritos_path){
   # sorteadas caem de 20 em 20 no cadastro, com inicio proprio em cada estrato (77% dos passos exatos, 90% em
   # 19 a 21); qualquer outro recorte ajusta pior.
   domicilios[, censobr_upa := paste0(UF, "-", pasta)]
+
+  # duas chaves de pasta que o desenho nao aceita. A correcao vai so na coluna de desenho: pasta e V116 ficam
+  # como o cartao gravou. Em 54-541 o cartao perdeu os dois ultimos digitos da pasta ("541  ") e guardou o
+  # distrito 18, que entre as tres pastas 541xx da Guanabara so a 54142 tem. Em 71-70382 o cartao esta integro,
+  # mas a 70382 e a 70380 sao as duas urbanas de Ponta Grossa, vizinhas no cadastro e no mesmo estrato -- uma
+  # pasta em vinte nao tira as duas --, ela traz 1 dos 230 boletins que o cadastro lhe da (0,4%, contra 74% da
+  # 70380 e 98,7% de mediana no Parana) e o seu boletim 088 e justamente o que falta na 70380. Como unidades
+  # primarias de um domicilio so, elas dobravam o erro-padrao do urbano menor do Parana e inflavam em 11% o da
+  # cidade grande da Guanabara
+  domicilios[trimws(censobr_upa) %in% c("54-541", "71-70382"),
+             censobr_diagnostico := data.table::fifelse(censobr_diagnostico == "sem_problema",
+                                    "chave_de_pasta_inferida", paste0(censobr_diagnostico, "+chave_de_pasta_inferida"))]
+  domicilios[trimws(censobr_upa) == "54-541",   censobr_upa := "54-54142"]
+  domicilios[trimws(censobr_upa) == "71-70382", censobr_upa := "71-70380"]
+
   pastas <- domicilios[, .(urbanos = sum(V118 %in% c(1, 3)), rurais = sum(V118 %in% 5),
                            grande = any(pop_urbana_muni >= 1e5, na.rm = TRUE)), by = censobr_upa]
   pastas[, grupo := data.table::fifelse(urbanos > 0 & rurais > 0, "mista", data.table::fifelse(urbanos == 0, "rural",

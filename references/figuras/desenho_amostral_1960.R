@@ -114,7 +114,7 @@ tabZ <- cad[!is.na(zona), .(pastas = .N, zonas = uniqueN(zona), mudancas_de_zona
 tabZ[, nome := UF_NOME[as.character(uf)]]
 cat("\nB3 ordem do cadastro: mudancas ao percorrer as pastas pelo numero\n"); print(tabZ[, .(uf, nome, pastas, zonas, mudancas_de_zona, municipios, mudancas_de_municipio, mudancas_de_grupo)])
 
-# fig03: o cadastro da Bahia, com as sorteadas
+# fig04: o cadastro da Bahia, com as sorteadas
 ba <- cad[uf == 31]; ba[, grupo := factor(grupo, levels = rev(names(cores_grupo)))]
 g <- ggplot(ba, aes(rank_uf, grupo)) + geom_point(data = ba[sorteada == FALSE], colour = "grey78", shape = 124, size = 3) +
   geom_point(data = ba[sorteada == TRUE], aes(colour = grupo), shape = 124, size = 7) + scale_colour_manual(values = cores_grupo) +
@@ -122,9 +122,9 @@ g <- ggplot(ba, aes(rank_uf, grupo)) + geom_point(data = ba[sorteada == FALSE], 
        title = "O cadastro reconstruído: todas as pastas da Bahia (cinza) e as sorteadas (cor)",
        subtitle = "As pastas dos quatro grupos estão intercaladas ao longo de todo o cadastro; dentro de cada grupo, as sorteadas caem de 20 em 20.") +
   tema + theme(legend.position = "none")
-salva("fig03_cadastro_bahia.png", g, 11, 4)
+salva("fig04_cadastro_bahia.png", g, 11, 4)
 
-# fig04: as zonas fisiograficas sao blocos contiguos (Sao Paulo)
+# fig03: as zonas fisiograficas sao blocos contiguos (Sao Paulo)
 sp <- cad[uf == 60 & !is.na(zona)][, bloco := rleid(zona)]
 zs <- sp[, .(ini = min(rank_uf), fim = max(rank_uf), pastas = .N), by = .(zona, bloco)]
 zs[zs[, .(primeiro = min(ini)), by = zona][order(primeiro)][, ordem := .I], ordem := i.ordem, on = "zona"]
@@ -132,7 +132,28 @@ g <- ggplot(zs) + geom_segment(aes(x = ini, xend = fim, y = ordem, yend = ordem)
   labs(x = paste0("posição no cadastro de São Paulo (", nrow(sp), " pastas, na ordem do número)"), y = "zona fisiográfica, na ordem em que aparece",
        title = "O cadastro é ordenado por zona fisiográfica: cada zona é um bloco contíguo de pastas",
        subtitle = paste0("Cada segmento é um bloco de pastas consecutivas da mesma zona: ", nrow(zs), " blocos para ", uniqueN(zs$zona), " zonas.")) + tema
-salva("fig04_zonas_sao_paulo.png", g, 9, 6)
+salva("fig03_zonas_sao_paulo.png", g, 9, 6)
+
+# fig05: o salto de 20 so aparece dentro da sublista do estrato -- a Bahia rural, nas duas reguas
+ba_r <- cad[uf == 31 & grupo == "rural"][order(pasta)][, posicao := .I]
+reguas <- rbind(ba_r[, .(regua = "na numeração do cadastro, com os outros grupos intercalados", x = pasta, sorteada)],
+                ba_r[, .(regua = "contando só as pastas rurais, que é onde o sorteio andou", x = posicao, sorteada)])
+reguas[, regua := factor(regua, levels = unique(regua))]
+g <- ggplot(reguas, aes(x, 1)) +
+  geom_point(data = reguas[sorteada == FALSE], colour = "grey78", shape = 124, size = 3) +
+  geom_point(data = reguas[sorteada == TRUE], colour = cores_grupo[["rural"]], shape = 124, size = 7) +
+  facet_wrap(~regua, ncol = 1, scales = "free_x") +
+  labs(x = NULL, y = NULL, title = "O salto de vinte só aparece quando se olha dentro do estrato",
+       subtitle = paste0("As ", nrow(ba_r), " pastas rurais da Bahia, com as ", sum(ba_r$sorteada), " sorteadas em cor.")) +
+  tema + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+salva("fig05_sorteio_no_estrato.png", g, 10, 5)
+cat("
+B4 Bahia rural:", nrow(ba_r), "pastas,", sum(ba_r$sorteada), "sorteadas | espacamentos em posicao:",
+    paste(diff(ba_r[sorteada == TRUE, posicao]), collapse = " "), "
+")
+cat("B4 os mesmos espacamentos em numero de pasta:",
+    paste(diff(ba_r[sorteada == TRUE, pasta]), collapse = " "), "
+")
 
 # a pergunta central: em que estrato o sorteio de 1 em 20 foi feito? Dentro do estrato certo, os ranks das
 # sorteadas formam uma progressao aritmetica de razao 20.
@@ -184,7 +205,7 @@ g <- ggplot(ex, aes(i, r)) + geom_line(aes(y = ref), colour = "firebrick", linet
   labs(x = "ordem da pasta sorteada dentro do estrato (1ª, 2ª, 3ª…)", y = "posição da pasta no cadastro do estrato",
        title = "Dentro de cada estrato UF × situação, as sorteadas andam de vinte em vinte",
        subtitle = "Pontos: as pastas sorteadas. Tracejado: a reta de inclinação 20 que parte da primeira sorteada — o início aleatório da série.") + tema
-salva("fig05_progressao_estratos.png", g, 10, 6)
+salva("fig07_progressao_estratos.png", g, 10, 6)
 
 # a definicao operacional de "cidade grande"
 mista <- cad$urb > 0 & cad$rur > 0; rural <- cad$urb == 0
@@ -224,7 +245,7 @@ g <- ggplot(d[censobr_weight <= 160], aes(censobr_weight)) + geom_histogram(binw
   annotate("text", x = 1 / 0.0127 + 2, y = Inf, label = "peso de desenho 78,74", hjust = 0, vjust = 1.5, colour = "firebrick") +
   labs(x = "peso calibrado do domicílio (censobr_weight)", y = "domicílios", title = "Os pesos calibrados ficam perto do peso de desenho",
        subtitle = paste0("98% dos domicílios entre ", round(quantile(w, .01), 1), " e ", round(quantile(w, .99), 1), "; o eixo está cortado em 160 (máximo ", round(max(w), 1), ").")) + tema
-salva("fig07_pesos.png", g, 9, 4.5)
+salva("fig08_pesos.png", g, 9, 4.5)
 
 # ---------------------------------------------------------------------------------------------------------
 # D. os erros amostrais
@@ -239,8 +260,10 @@ g <- ggplot(cel, aes(cv_aas, cv_pct, colour = regiao, shape = situacao)) + geom_
   annotate("text", x = 0.55, y = c(0.6, 1.2, 2.4), label = c("deff = 1", "deff = 4", "deff = 16"), hjust = 0, size = 3, colour = "grey30") +
   geom_point(size = 2) + scale_x_log10() + scale_y_log10() +
   labs(x = "CV que a célula teria numa amostra aleatória simples de pessoas do mesmo tamanho (%)", y = "CV pelo desenho de pastas (%)",
-       title = "As 176 células do quadro 1: o erro real é 2 a 4 vezes o de uma amostra aleatória simples", colour = NULL, shape = NULL) + tema
-salva("fig08_deff_celulas.png", g, 9, 5.5)
+       title = "As 176 células do quadro 1: o erro real é 2 a 4 vezes o de uma amostra aleatória simples",
+       subtitle = "As retas pontilhadas são referências de efeito de desenho constante, não tendências ajustadas. O eixo horizontal é derivado do vertical (CV dividido pela raiz do deff).",
+       colour = NULL, shape = NULL) + tema
+salva("fig09_deff_celulas.png", g, 9, 5.5)
 
 # os estimadores alternativos, nos cinco totais-exemplo
 p[, idade := fifelse(V204 %in% 1, V204B, fifelse(V204 %in% 0, 0L, 999L))]; p[is.na(idade), idade := 999L]
@@ -311,7 +334,7 @@ g <- ggplot(long, aes(total, razao, fill = estimador)) + geom_col(position = pos
   scale_fill_brewer(palette = "Set2") + scale_x_discrete(labels = label_wrap(16)) +
   labs(x = NULL, y = "erro-padrão relativo ao estimador adotado", fill = NULL, title = "Os estimadores alternativos, em cinco totais: o que cada um muda",
        subtitle = "1 = conglomerado último com correção finita e 75 estratos (o adotado). Barras abaixo de 1 são erros menores.") + tema + theme(legend.position = "bottom")
-salva("fig09_estimadores.png", g, 10, 5.5)
+salva("fig10_estimadores.png", g, 10, 5.5)
 
 # a componente da primeira etapa (1 domicilio em 4), contra a medida pela segunda
 N60 <- 70119071; n25 <- 0.25 * N60

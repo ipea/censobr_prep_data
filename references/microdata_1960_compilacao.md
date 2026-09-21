@@ -104,7 +104,7 @@ O compilado é de **duas etapas** nas duas metades, com frações diferentes:
 | `censobr_fpc2` | 1 (não há segunda etapa) | 0,25 |
 | `censobr_weight_desenho` | 4 | 78,74 |
 
-São **18.421 estratos** e **3.066.511 unidades primárias**. Como nenhum estrato e nenhuma unidade primária mistura as duas metades, **uma chamada só descreve o país inteiro**:
+São **18.421 estratos** e **3.066.510 unidades primárias**. Como nenhum estrato e nenhuma unidade primária mistura as duas metades, **uma chamada só descreve o país inteiro**:
 
 ```r
 library(survey)
@@ -123,25 +123,27 @@ svyby(~um, ~name_state, d, svytotal)  # por unidade da federação
 
 Nas dezessete a segunda etapa tem `fpc2` = 1 e não contribui: sobra o estimador de uma etapa, que é o do estágio da amostra de 25%. Nas onze, a primeira etapa é o estimador de conglomerado último e a segunda acrescenta o termo da etapa dos domicílios.
 
-**Os estratos das onze unidades foram refeitos aqui.** Os 75 estratos do estágio de 1,27% foram construídos sobre as 28 unidades e não sobrevivem ao corte: só 23 têm pasta nas onze que ficam, cinco atravessam a fronteira e dois caíam para uma pasta só, que não mede variância. A regra de colapso foi reexecutada sobre as onze — a unidade solitária num grupo se junta à primeira vizinha da mesma região — com uma extensão que o corte obriga: a unidade cuja região não tem vizinha entre as onze junta o grupo solitário ao maior grupo dela mesma. É o caso da **Guanabara**, cujas vizinhas, Rio de Janeiro e Minas, vêm todas da amostra de 25%. Resultado: **21 estratos em 146 pastas, o menor com duas**.
+**Os estratos das onze unidades foram refeitos aqui.** Os 75 estratos do estágio de 1,27% foram construídos sobre as 28 unidades e não sobrevivem ao corte: só 23 têm pasta nas onze que ficam, cinco atravessam a fronteira e dois caíam para uma pasta só, que não mede variância. A regra de colapso foi reexecutada sobre as onze — a unidade solitária num grupo se junta à primeira vizinha da mesma região — com uma extensão que o corte obriga: a unidade cuja região não tem vizinha entre as onze junta o grupo solitário ao maior grupo dela mesma. É o caso da **Guanabara**, cujas vizinhas, Rio de Janeiro e Minas, vêm todas da amostra de 25%. Resultado: **21 estratos em 145 pastas, o menor com duas**.
 
 ### O que os erros-padrão dizem
 
 | domínio | estimativa | erro-padrão | CV | efeito de desenho | n efetivo |
 |---|---|---|---|---|---|
-| pessoas | 71.020.963 | 289.053 | 0,407% | — | — |
-| presentes | 70.191.146 | 286.168 | 0,408% | — | — |
-| população urbana | 31.674.004 | 262.682 | 0,829% | 838,6 | 18.061 |
-| população rural | 38.517.143 | 315.365 | 0,819% | 1203,2 | 12.588 |
-| analfabetos de 15 anos e mais | 16.076.203 | 102.832 | 0,640% | 181,3 | 83.540 |
-| crianças de 0 a 4 anos | 9.013.658 | 45.513 | 0,505% | 56,1 | 269.979 |
-| pessoas com rendimento | 44.226.803 | 183.334 | 0,415% | 429,6 | 35.256 |
+| pessoas | 71.020.963 | 283.078 | 0,399% | — | — |
+| presentes | 70.191.146 | 280.575 | 0,400% | — | — |
+| população urbana | 31.674.004 | 256.709 | 0,810% | 800,9 | 18.911 |
+| população rural | 38.517.143 | 315.319 | 0,819% | 1202,8 | 12.592 |
+| analfabetos de 15 anos e mais | 16.076.203 | 103.704 | 0,645% | 184,4 | 82.136 |
+| crianças de 0 a 4 anos | 9.013.658 | 45.474 | 0,505% | 56,0 | 270.461 |
+| pessoas com rendimento | 44.226.803 | 182.119 | 0,412% | 423,9 | 35.730 |
 
-Os coeficientes de variação ficam entre **0,4% e 0,83%**. Comparados com os 0,03% a 0,07% da amostra de 25% sozinha, são dez a vinte vezes maiores — e a razão está inteira nas onze unidades. A conferência contra o `survey` mede isso diretamente: num subconjunto com as onze mais Sergipe e Fernando de Noronha, a metade de 25% contribui com um erro-padrão de **1.904** e a de 1,27% com **291.275**. Praticamente todo o erro-padrão nacional vem de 1% dos registros.
+**Estes números mudaram em 21/09/2026**, e vale dizer por quê, porque duas correções se somaram em sentidos opostos. A primeira é um defeito de cálculo: `sampling_errors_1960()` acumulava os agregados por estrato dentro do laço por unidade da federação, o que partia em doze pedaços os seis estratos que a regra de colapso construiu **atravessando** a fronteira da UF; nove desses pedaços ficavam com uma pasta só e não contribuíam variância nenhuma — exatamente o que o colapso existia para evitar. Corrigido, o erro-padrão da população presente subia de 286.168 para 291.693. A segunda é uma correção de dado: duas chaves de pasta danificadas eram tratadas como unidades primárias próprias, com **um domicílio cada**, e uma delas caía num estrato de quarenta pastas da Guanabara. Devolvidas às suas pastas, o erro-padrão desceu para **280.574**. O efeito da segunda é nacional e não local: uma unidade primária com um domicílio só pesa na soma de quadrados muito além do seu tamanho.
+
+Os coeficientes de variação ficam entre **0,4% e 0,82%**. Comparados com os 0,03% a 0,07% da amostra de 25% sozinha, são dez a vinte vezes maiores — e a razão está inteira nas onze unidades. A conferência contra o `survey` mede isso diretamente: num subconjunto com as onze mais Sergipe e Fernando de Noronha, a metade de 25% contribui com um erro-padrão de **1.904** e a de 1,27% com **280.139**. Praticamente todo o erro-padrão nacional vem de 1% dos registros.
 
 O **efeito de desenho** chega a 1.203 na população rural, e não é defeito: ele compara com um sorteio simples de 15,1 milhões de pessoas, que não é o que este arquivo é. A coluna **n efetivo** diz a mesma coisa de forma legível — quantas pessoas sorteadas uma a uma dariam a mesma precisão. Para a população rural do país, cerca de **12.600**.
 
-A **etapa dos domicílios** vale de 0,05% a 0,28% da variância, que é a ordem que o estágio de 1,27% já tinha medido. A conta à mão de `sampling_errors_1960()` e a do `survey` batem no dígito: 291.281 nos dois, para a população presente do subconjunto conferido.
+A **etapa dos domicílios** vale de 0,05% a 0,28% da variância, que é a ordem que o estágio de 1,27% já tinha medido. A conta à mão de `sampling_errors_1960()` e a do `survey` batem no dígito: 280.146 nos dois, para a população presente do subconjunto conferido.
 
 ## 7. O que a validação diz
 

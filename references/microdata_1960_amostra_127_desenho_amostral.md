@@ -36,6 +36,37 @@ Sem estas palavras o resto não se lê.
 - **Chave do questionário** — a identificação que o arquivo guarda para cada boletim: unidade da federação, distrito, número da pasta e número do boletim dentro da pasta. É por ela que a pasta é reconhecível no arquivo, e é ela que torna possível tudo o que a Parte II faz.
 - **Cartão** — o cartão perfurado de 62 colunas em que cada pessoa e cada página de domicílio da subamostra foram gravadas em 1964. O arquivo de hoje é a imagem desse baralho de cartões.
 
+### 2.1 Boletim, família e domicílio são três coisas diferentes
+
+Esta distinção decide o que cada tabela conta, e é a primeira coisa a acertar, porque o vocabulário do censo de 1960 não é o de hoje.
+
+**O boletim é por família, não por domicílio.** O recenseador preenchia um Boletim de Amostra para cada família: a página do domicílio na frente, uma linha por pessoa atrás. Onde duas famílias dividiam a mesma casa, saíam dois boletins — e a página do domicílio era preenchida **só no da família principal**. O boletim da segunda família traz essa página em branco, no papel e no arquivo (é a decisão registrada no `ipea/censobr#87`: ela fica em branco aqui também, porque copiá-la da família principal seria inventar dado).
+
+Quem diz o que cada família é dentro do seu domicílio é o quesito `V101`:
+
+| `V101` | o que é | abre um domicílio? | famílias |
+|---|---|---|---|
+| 1 | família que ocupa o domicílio sozinha | sim | 172.909 |
+| 2 | família principal de um domicílio com mais de uma | sim | 348 |
+| 3 | domicílio coletivo | sim | 835 |
+| 4 | segunda família do domicílio | não — entra no da anterior | 345 |
+| 5 | terceira família | não — entra no da anterior | 28 |
+| — | página de domicílio perdida na fita | sim, por não haver o que a prenda | 151 |
+
+O domicílio se reconstrói lendo o arquivo na ordem em que ele foi gravado: os códigos 1, 2 e 3 abrem um domicílio novo, e os códigos 4 e 5 entram no domicílio da família imediatamente anterior — o que funciona porque uma família convivente vem sempre logo depois da sua principal, 345 de 345 vezes.
+
+Um exemplo torna isto concreto. Três boletins consecutivos com `V101` igual a 1, 2 e 4 não são três domicílios: são dois. O primeiro é uma casa com uma família só; o segundo e o terceiro são **a mesma casa**, com duas famílias, e as perguntas sobre água, fogão e número de cômodos foram respondidas uma vez só, no segundo.
+
+Daí os três números da subamostra, que são diferentes entre si e frequentemente confundidos:
+
+- **897.009 pessoas**;
+- **174.616 famílias** — isto é, boletins;
+- **174.244 domicílios**, dos quais 173.899 têm uma família, 318 têm duas e 27 têm três.
+
+A tabela de domicílios que este estágio entrega tem 174.245 linhas, uma a mais do que os domicílios que as pessoas apontam: o domicílio 127134 (São Paulo, pasta 63936, boletim 230) é um registro de família cujos cartões de pessoa se perderam por inteiro, e fica na tabela com as contagens de moradores em branco. É o único caso.
+
+**O peso é um por domicílio** (seção 10.5), igual para todas as suas pessoas e para todas as suas famílias. Quem quiser a página do domicílio ao lado de cada pessoa junta as duas tabelas por `censobr_idhousehold`; quem quiser contar famílias usa `censobr_idfamily`.
+
 ## 3. O que os documentos da época dizem sobre o sorteio
 
 ### 3.1 O Volume II de 1965: a única descrição do desenho
@@ -102,12 +133,18 @@ O Volume II, o relatório do IPEA e o Volume IV estão em `references/fontes_196
 
 A subamostra foi perfurada em cartões de 62 colunas, um por pessoa e um por página de domicílio. O arquivo de hoje, `HHOLDA.txt`, é a imagem desse baralho depois de décadas de cópias entre cartões, fitas e discos: 1.074.328 linhas de 62 caracteres. O documento de preparação descreve o dano (linhas deslocadas, caracteres corrompidos, blocos de cartões copiados duas vezes em Pernambuco, cartões de família perdidos) e o que se fez com ele. Aqui interessa o que o dano fez ao desenho:
 
-- **As 814 pastas estão todas lá.** O arquivo tem 817 números de pasta distintos; os três a mais são uma pasta de Rondônia gravada em duas unidades da federação e chaves com um dígito trocado. Nenhum conglomerado inteiro se perdeu.
-- **As pastas têm o tamanho esperado.** Mediana de 223 boletins por pasta (quartis 197 e 241, máximo 352), e mediana de 1.124 pessoas. Vinte e três pastas têm menos de 100 boletins: as de Roraima e de Fernando de Noronha, que eram pequenas mesmo, e algumas truncadas. O caso grave é o Distrito Federal: as duas pastas de Brasília têm 77 e 60 boletins no arquivo, quando a amostra de 25% mostra que tinham 520 e 257 (seção 6). O arquivo perdeu 85% e 75% dessas duas pastas, e o trecho perdido era um acampamento de operários da construção de Brasília. É a única perda parcial de conglomerado de que se tem prova.
+- **Os conglomerados estão todos lá, e são 815.** O arquivo traz 817 chaves de pasta distintas, três a mais do que as 814 que o Volume II declara ter sorteado, e a diferença se decompõe assim. Uma é uma pasta de Rondônia gravada sob duas unidades da federação, que o passo 7 reúne. Duas são chaves danificadas, com **um domicílio cada**, que o passo 8 devolve à pasta certa: em `54-541` o cartão perdeu os dois últimos dígitos da pasta e guardou o distrito 18, que entre as três pastas `541xx` da Guanabara só a 54142 tem; em `71-70382` o cartão está íntegro, mas a 70382 e a 70380 são as duas urbanas de Ponta Grossa, vizinhas no cadastro e no mesmo estrato — um sorteio de uma em vinte não tira as duas —, ela traz 1 dos 230 boletins que o cadastro lhe dá e o seu boletim 088 é justamente o que falta na 70380. As duas ficam marcadas em `censobr_diagnostico`, e `pasta` continua com o que o cartão gravou. Sobram **815**, uma a mais do que as 814 declaradas, e a diferença tem explicação. Ela não é uma pasta a mais: das 815, **670 estão nas dezessete unidades da federação que têm cadastro reconstruído, e todas as 670 foram encontradas nele** (seção 6.2), de modo que nenhuma é inventada; das 145 restantes, nas onze unidades sem cadastro, nenhuma se mostra espúria ao teste que pegou a do Paraná. O que sobra é uma questão de contagem, e o seu objeto é **Fernando de Noronha**.
+
+Ali a única pasta *era* o cadastro inteiro, e o arquivo o demonstra: o fator de expansão implícito — a população publicada dividida pelo que o peso de desenho de 78,74 daria — é **0,06** em Noronha, cerca de um dezesseis avos, contra 0,95 em Roraima, 0,70 no Acre e 1,34 em Rondônia. Quer dizer que a pasta de Noronha não representa um vigésimo de um cadastro: representa o cadastro todo, e a fração real ali é 1/4, não 1/80. **Não houve sorteio de pasta em Fernando de Noronha**, e o Volume II diz que foram "selecionadas 814 pastas".
+
+815 − 1 = 814. O que fica sem prova documental é o que o IBGE efetivamente contou — nenhuma fonte diz se Noronha entrou na conta —, mas a ausência de sorteio ali é medida, não suposta, e nenhum candidato alternativo sobrevive.
+- **As pastas têm o tamanho esperado.** Mediana de 223 boletins por pasta (quartis 197 e 241, máximo 352), e mediana de 1.124 pessoas. Vinte e uma pastas têm menos de 100 boletins: as de Roraima e de Fernando de Noronha, que eram pequenas mesmo, e algumas truncadas. O caso grave é o Distrito Federal: as duas pastas de Brasília têm 77 e 60 boletins no arquivo, quando o cadastro reconstruído mostra que tinham 520 e 257 (seção 6) — restaram 15% e 23%. **Não são as únicas.** Confrontando cada pasta sorteada com o que o cadastro lhe dá, nas dezessete unidades da federação em que isso é possível, uma terceira perdeu mais do que elas: a pasta 31144, de Salvador, guarda **18 dos seus 247 boletins**, e os dezoito são os últimos, do 230 ao 247. Aqui o dano se lê com nitidez incomum: perdeu-se um bloco contíguo pela cabeça da pasta, não cartões avulsos. Outras cinco pastas ficam entre 31% e 54% de cobertura; a mediana das demais é de 99%.
+
+**O que se perdeu em Brasília** merece separar o que se sabe do que se infere, porque este texto afirmava mais do que a evidência dá. Sabe-se que as duas pastas perderam quatro quintos dos seus boletins. Sabe-se também que a construção civil é o **único ramo de atividade do quadro 3 de 1965 que não fecha** com a nossa contagem: −36% no Norte e Centro-Oeste, contra −2,7% no Leste e no Sul (documento de preparação, seção 7). E sabe-se, pela amostra de 25% — processada depois e para o mesmo Distrito Federal —, que **8.698 dos seus 14.818 boletins são boletins individuais de morador de domicílio coletivo**, sorteados pessoa a pessoa pela Lista CD 3: os alojamentos da obra. Daí a inferência de que o que falta é desproporcionalmente operário da construção, que é sólida. O que **não** se sabe é quais boletins a fita perdeu: nenhum registro diz isso, e a afirmação de que o trecho perdido "era um acampamento de operários" é leitura, não constatação.
 - **A chave do questionário sobreviveu em quase todas as linhas**, e é ela que permite dizer a que pasta cada pessoa pertence. Onde o cartão de família se perdeu, a chave está nos cartões de pessoa.
 - O resultado é uma tabela de **897.009 pessoas em 174.245 domicílios**, 885.127 delas presentes na noite de referência — 1,26% dos 70.119.071 presentes que o volume de 1965 publicou.
 
-A distribuição das 817 pastas por unidade da federação, com a classificação de situação que a seção 7 justifica, dá a medida do que a amostra cobre e do que não cobre:
+A distribuição das 815 pastas por unidade da federação, com a classificação de situação que a seção 7 justifica, dá a medida do que a amostra cobre e do que não cobre:
 
 | UF | pastas | cidade grande | urbana menor | mista | rural | boletins por pasta (mediana) |
 |---|---|---|---|---|---|---|
@@ -131,9 +168,9 @@ A distribuição das 817 pastas por unidade da federação, com a classificaçã
 | Serra dos Aimorés | 4 | 0 | 1 | 0 | 3 | 234 |
 | Espírito Santo | 9 | 0 | 2 | 5 | 2 | 302 |
 | Rio de Janeiro | 39 | 14 | 6 | 13 | 6 | 224 |
-| Guanabara | 41 | 40 | 0 | 0 | 1 | 226 |
+| Guanabara | 40 | 39 | 0 | 0 | 1 | 230,5 |
 | São Paulo | 156 | 52 | 34 | 38 | 32 | 232 |
-| Paraná | 48 | 4 | 8 | 17 | 19 | 224 |
+| Paraná | 47 | 4 | 7 | 17 | 19 | 225 |
 | Santa Catarina | 23 | 0 | 5 | 12 | 6 | 221 |
 | Rio Grande do Sul | 62 | 8 | 16 | 25 | 13 | 220 |
 | Mato Grosso | 10 | 0 | 2 | 5 | 3 | 210 |
@@ -154,24 +191,30 @@ A primeira pergunta foi se a chave do questionário — em particular o **númer
 
 ### 5.1 Os números das pastas são todos pares
 
-Das 817 pastas, 816 têm número par; a única ímpar é uma chave danificada. Isso diz que as pastas da amostra de 25% foram numeradas de dois em dois, e que o número da pasta sorteada é o número que ela tinha no cadastro inteiro, não uma numeração nova dada às sorteadas. Os números também carregam a unidade da federação como prefixo: as pastas do Ceará vão de 14002 a 15426, as da Bahia de 31002 a 33786, as de São Paulo de 60002 a 66292. Cada unidade da federação tem a sua própria numeração, e ela não atravessa fronteiras.
+As 815 pastas têm **todas** número par — a única ímpar do arquivo era a chave danificada da Guanabara, devolvida à sua pasta (seção 4). Isso diz que as pastas da amostra de 25% foram numeradas de dois em dois, e que o número da pasta sorteada é o número que ela tinha no cadastro inteiro, não uma numeração nova dada às sorteadas. Os números também carregam a unidade da federação como prefixo: as pastas do Ceará vão de 14002 a 15426, as da Bahia de 31002 a 33786, as de São Paulo de 60002 a 66292. Cada unidade da federação tem a sua própria numeração, e ela não atravessa fronteiras.
 
 ### 5.2 A grade de 40 nas cidades grandes
 
-Se o sorteio foi de uma pasta em vinte numa lista numerada de dois em dois, duas pastas sorteadas consecutivas de uma mesma série devem diferir em 40 no número. A figura 1 mostra os números das pastas sorteadas de quatro unidades da federação, com cada pasta classificada num dos quatro grupos de situação do Volume II (pela situação dos seus próprios boletins e pelo tamanho do município — a regra exata está na seção 8):
+Se o sorteio foi de uma pasta em vinte numa lista numerada de dois em dois, duas pastas sorteadas consecutivas de uma mesma série devem diferir em 40 no número.
 
-![Figura 1](figuras/desenho_amostral_1960/fig01_pastas_sorteadas.png)
+**Antes de olhar os números, um aviso sobre a régua**, porque esta seção e a seção 7 medem a mesma coisa com réguas diferentes e o leitor que não perceber isso vai achar que elas se contradizem. Aqui a distância entre duas pastas sorteadas é medida em **números de pasta**, e o valor esperado é 40. Na seção 7, com o cadastro em mãos, ela passa a ser medida em **posições dentro da sublista do estrato** — ordena-se só as pastas daquele estrato, numera-se 1, 2, 3… — e o valor esperado é 20.
 
-Três coisas se veem a olho nu. As pastas das cidades grandes estão no começo da numeração de cada unidade da federação (as capitais foram as primeiras pastas do cadastro, como a seção 6 confirma) e caem numa grade regular. As pastas mistas e rurais têm, cada grupo, uma grade própria, e as duas grades estão intercaladas ao longo do resto da numeração. E as pastas de um grupo nunca se aproximam demais umas das outras: são sequências sistemáticas separadas, exatamente a assinatura de estratos de situação sorteados cada um por si.
+As duas réguas coincidem num caso só: quando as pastas do estrato são contíguas no cadastro, andar 20 posições é andar 40 no número. Isso vale para as cidades grandes, cujas pastas vêm todas juntas no começo da numeração de cada unidade da federação. Não vale para os outros três grupos, cujas pastas estão **intercaladas** com as dos demais ao longo de todo o cadastro: ali, 20 posições adiante podem ser 80, 140 ou qualquer outro número. A consequência é que a medida desta seção **não tem como enxergar** o salto sistemático fora das cidades grandes — não porque ele não exista, mas porque a régua é a errada. O que a seção 5.2 decide, portanto, é só o caso das cidades grandes; os outros três grupos ficam indecididos até a seção 7.
+
+A figura 1 mostra os números das pastas sorteadas de quatro unidades da federação, com cada pasta classificada num dos quatro grupos de situação do Volume II (pela situação dos seus próprios boletins e pelo tamanho do município — a regra exata está na seção 8):
+
+![Os números das pastas sorteadas em quatro unidades da federação, por grupo de situação](figuras/desenho_amostral_1960/fig01_pastas_sorteadas.png)
+
+Três coisas se veem a olho nu. As pastas das cidades grandes estão no começo da numeração de cada unidade da federação (as capitais foram as primeiras pastas do cadastro, como a seção 6 confirma) e caem numa grade regular. As pastas mistas e rurais ocupam o resto da numeração, intercaladas umas com as outras — e ali, pelo que já se disse sobre a régua, nenhuma grade tem como aparecer. E as pastas de um mesmo grupo nunca se aproximam demais umas das outras, o que é a assinatura de séries sistemáticas separadas, uma por grupo de situação.
 
 A figura 2 mede isso: para cada grupo, o histograma da diferença entre os números de duas pastas sorteadas consecutivas da mesma unidade da federação.
 
-![Figura 2](figuras/desenho_amostral_1960/fig02_espacamento_127.png)
+![A diferença entre os números de duas pastas sorteadas consecutivas, por grupo](figuras/desenho_amostral_1960/fig02_espacamento_127.png)
 
 | grupo de situação | pares de pastas consecutivas | diferença exatamente 40 | 40, 42, 44 ou 46 | diferença mediana |
 |---|---|---|---|---|
-| cidade grande | 146 | 71% | 78% | 40 |
-| urbana menor | 112 | 1% | 1% | 140 |
+| cidade grande | 145 | 72% | 79% | 40 |
+| urbana menor | 111 | 1% | 1% | 140 |
 | mista | 271 | 0% | 2% | 80 |
 | rural | 200 | 1% | 2% | 110 |
 
@@ -179,7 +222,7 @@ Nas cidades grandes, cujas pastas são contíguas no cadastro, a grade é quase 
 
 | cidade | pastas | diferenças entre números consecutivos |
 |---|---|---|
-| Rio de Janeiro (Guanabara) | 40 | 37 vezes 40, uma vez 82, e uma pasta com número danificado |
+| Rio de Janeiro (Guanabara) | 39 | 37 vezes 40 e uma vez 82 |
 | São Paulo | 39 | 21 vezes 40; 44 ou 46 seis vezes; onze saltos de 50 a 82 onde a numeração pulou |
 | Recife | 9 | 40 40 40 42 44 40 44 40 |
 | Salvador | 8 | 40 40 40 40 40 40 40 |
@@ -189,7 +232,9 @@ Nas cidades grandes, cujas pastas são contíguas no cadastro, a grade é quase 
 | Fortaleza | 4 | 40 40 42 |
 | Curitiba | 4 | 40 40 40 |
 
-Nos outros três grupos a diferença mediana é de 80 a 140, e quase nunca 40: não porque o sorteio ali fosse outro, mas porque os números das pastas rurais, mistas e urbanas menores estão intercalados no cadastro, de modo que entre duas rurais sorteadas há muitas pastas de outros grupos. Quando se ignora o grupo e se olha só a unidade da federação, apenas 15% das diferenças são 40. O sorteio, portanto, foi feito por grupo de situação — e isso já se sabe com a amostra de 1,27% sozinha.
+Nos outros três grupos a diferença mediana é de 80 a 140, e quase nunca 40: não porque o sorteio ali fosse outro, mas porque os números das pastas rurais, mistas e urbanas menores estão intercalados no cadastro, de modo que entre duas rurais sorteadas há muitas pastas de outros grupos. Quando se ignora o grupo e se olha só a unidade da federação, apenas 16% das diferenças são 40.
+
+O que o passo 1 estabelece, então, é mais modesto do que parece: nas cidades grandes o sorteio andou de vinte em vinte numa série própria, e os quatro grupos de situação são séries separadas, porque as pastas de um grupo nunca se aproximam das do outro. Que o mesmo salto de vinte exista dentro dos outros três grupos é plausível mas **não está demonstrado aqui** — a régua desta seção não alcança. Quem demonstra é a seção 7, com o cadastro.
 
 ### 5.3 O peso realizado bate com o nominal
 
@@ -235,7 +280,7 @@ O cadastro reconstruído tem **13.411 pastas**, com mediana de 235 boletins por 
 | Serra dos Aimorés | 74 | 4 | 18,5 | 50002 a 50148 |
 | Rio de Janeiro | 764 | 39 | 19,6 | 52002 a 53530 |
 | São Paulo | 3.140 | 156 | 20,1 | 60002 a 66292 |
-| Paraná | 945 | 48 | 19,7 | 70002 a 71900 |
+| Paraná | 945 | 47 | 20,1 | 70002 a 71900 |
 | Rio Grande do Sul | 1.265 | 62 | 20,4 | 81002 a 83532 |
 | Mato Grosso | 211 | 10 | 21,1 | 91002 a 91424 |
 | Goiás | 456 | 23 | 19,8 | 94002 a 94914 |
@@ -243,7 +288,7 @@ O cadastro reconstruído tem **13.411 pastas**, com mediana de 235 boletins por 
 
 Quatro fatos saem da tabela:
 
-1. **Todas as 671 pastas** que a subamostra tem nessas 17 unidades da federação estão no cadastro. Nenhuma pasta "inventada", nenhuma chave inconsistente.
+1. **Todas as 670 pastas** que a subamostra tem nessas 17 unidades da federação estão no cadastro. Nenhuma pasta "inventada", nenhuma chave inconsistente.
 2. **A razão entre o cadastro e as sorteadas é 20 em toda parte** — de 18,5 (Serra dos Aimorés, 4 pastas) a 21,1 (Mato Grosso, 10), mediana 19,9. É a confirmação direta e independente do "uma pasta em vinte", e é também a prova de que o sorteio foi feito **separadamente em cada unidade da federação**: se a série sistemática atravessasse fronteiras, a razão por unidade da federação flutuaria muito mais do que isso nas pequenas. Fernando de Noronha, com uma única pasta no cadastro e ela sorteada, é a exceção que confirma: ali não houve sorteio possível.
 3. **As sorteadas não são maiores nem menores que as demais**: mediana de 235 boletins nas duas. O sorteio não foi enviesado por tamanho.
 4. **O Distrito Federal**: as duas pastas sorteadas têm 520 e 257 boletins no cadastro, e 77 e 60 no arquivo da subamostra. É daqui que vem a certeza de que o arquivo as truncou.
@@ -265,13 +310,47 @@ O sorteio sistemático depende da ordem da lista. Percorrendo o cadastro de cada
 | Paraíba | 461 | 12 | 11 | 88 | 87 | 236 |
 | Goiás | 456 | 25 | 25 | 179 | 178 | 235 |
 
-A leitura: **o cadastro é ordenado por zona fisiográfica e, dentro dela, por município**. Cada município é um bloco contíguo de pastas (502 mudanças para 503 municípios em São Paulo é o mínimo possível: uma mudança a cada município novo), e cada zona é um bloco contíguo de municípios — com uma exceção regular: a zona da capital aparece em dois blocos, porque **as pastas da capital vêm primeiro no cadastro** e o resto da sua zona vem na posição natural. Em São Paulo, a zona 623 ocupa as posições 1 a 965 (965 pastas, 833 delas puramente urbanas de cidade grande) e depois as posições 1643 a 1799; em Minas, a zona de Belo Horizonte ocupa as posições 1 a 171 e depois 1610 a 1639. A figura 4 mostra isso para São Paulo:
+A leitura: **o cadastro é ordenado por zona fisiográfica e, dentro dela, por município**. Cada município é um bloco contíguo de pastas (502 mudanças para 503 municípios em São Paulo é o mínimo possível: uma mudança a cada município novo), e cada zona é um bloco contíguo de municípios — com uma exceção regular: a zona da capital aparece em dois blocos, porque **as pastas da capital vêm primeiro no cadastro** e o resto da sua zona vem na posição natural. Em São Paulo, a zona 623 ocupa as posições 1 a 965 (965 pastas, 833 delas puramente urbanas de cidade grande) e depois as posições 1643 a 1799; em Minas, a zona de Belo Horizonte ocupa as posições 1 a 171 e depois 1610 a 1639. A figura 3 mostra isso para São Paulo:
 
-![Figura 4](figuras/desenho_amostral_1960/fig04_zonas_sao_paulo.png)
+![Cada zona fisiográfica é um bloco contíguo do cadastro de São Paulo](figuras/desenho_amostral_1960/fig03_zonas_sao_paulo.png)
 
-A situação, ao contrário, **não** ordena o cadastro: o grupo muda 1.048 vezes em São Paulo, embora só existam quatro grupos. As pastas urbanas, rurais e mistas estão intercaladas ao longo de todo o cadastro, porque a ordem é a dos setores dentro de cada município, e um município tem setores urbanos e rurais. A figura 3 mostra o cadastro inteiro da Bahia, com as sorteadas em cor:
+A situação, ao contrário, **não** ordena o cadastro: o grupo muda 1.048 vezes em São Paulo, embora só existam quatro grupos. As pastas urbanas, rurais e mistas estão intercaladas ao longo de todo o cadastro, porque a ordem é a dos setores dentro de cada município, e um município tem setores urbanos e rurais. A figura 4 mostra o cadastro inteiro da Bahia, com as sorteadas em cor:
 
-![Figura 3](figuras/desenho_amostral_1960/fig03_cadastro_bahia.png)
+![O cadastro inteiro da Bahia, com os quatro grupos intercalados e as sorteadas em cor](figuras/desenho_amostral_1960/fig04_cadastro_bahia.png)
+
+**"A situação não ordena o cadastro" é a frase que mais confunde neste texto**, e vale desdobrá-la, porque dela depende tudo o que vem a seguir. Ordenar uma lista é escolher por qual chave ela é classificada. As chaves do cadastro são zona fisiográfica, depois município, depois setor — e mais nada. A situação **não é chave**: ela é apenas um atributo que cada pasta carrega, e que varia de uma pasta para a seguinte porque um município tem setores urbanos e setores rurais, e as pastas foram formadas na ordem em que os setores chegaram.
+
+O que a estratificação por situação fez, portanto, não foi reordenar coisa alguma. Foi **recortar quatro sublistas** da lista já ordenada — as pastas de cidade grande, as urbanas menores, as rurais e as mistas, cada uma na ordem em que aparecem — e sortear uma em vinte dentro de cada sublista, com um ponto de partida próprio. Em esquema, com U, M e R para os grupos, e as sorteadas entre colchetes:
+
+```
+cadastro da UF (ordem: zona -> municipio -> setor)
+  pasta    02  04  06  08  10  12  14  16  18  20  22  24  26  28  30  32  34  36 ...
+  grupo     U   R   M   U   R   R   M   U   R   M   U   U   R   M   R   U   M   R
+
+a sublista rural, e so ela, numerada de 1 em diante
+  pasta    04  10  12  18  26  30  36  ...          <- as mesmas pastas, na mesma ordem
+  posicao   1   2   3   4   5   6   7   ...
+                                                    <- aqui o sorteio anda de 20 em 20
+```
+
+Veja o que isso faz com a medida da seção 5.2. Duas pastas rurais sorteadas estão a vinte **posições** uma da outra na sublista rural; mas entre elas, no cadastro, passaram dezenas de pastas urbanas e mistas, de modo que a diferença entre os seus **números** pode ser 80, 140 ou qualquer coisa. O salto existe; é a régua que não o alcança.
+
+A figura 5 mostra isso com dados reais, nas duas réguas, para as pastas rurais da Bahia — 427 no cadastro, 21 sorteadas. Os espaçamentos falam por si. **Em posição dentro da sublista rural:**
+
+```
+20  20  20  20  20  20  20  20  20  20  20  20  17  20  20  20  20  20  20  20
+```
+
+**Os mesmos vinte intervalos, medidos em número de pasta:**
+
+```
+96  138  104  118  90  70  62  76  120  86  92  130  172  154  74  192  156  190  104  98
+```
+
+É o mesmo sorteio, visto de duas maneiras. A primeira linha é um relógio; a segunda parece ruído.
+
+![As pastas rurais da Bahia nas duas réguas: irregular na numeração do cadastro, de vinte em vinte dentro do estrato](figuras/desenho_amostral_1960/fig05_sorteio_no_estrato.png)
+
 
 Isto importa por duas razões. Primeiro, é assim que se deve ler "estratificadas de acordo com critérios geográfico e de situação": a estratificação por situação não reordenou o cadastro; ela apenas separou, dentro da lista já ordenada por zona e município, quatro sublistas — e em cada sublista se sorteou uma em vinte. Segundo, a ordem por zona e município é o que torna a amostra sistemática melhor do que uma amostra aleatória de pastas (pastas vizinhas na lista são vizinhas no mapa), e o que justifica o estimador de diferenças sucessivas da seção 13.4.
 
@@ -300,32 +379,32 @@ Cada estratificação foi testada com o mesmo cadastro, a mesma classificação 
 
 | estratificação candidata | estratos | pares medidos | espaçamento exatamente 20 | entre 19 e 21 | espaçamento mediano |
 |---|---|---|---|---|---|
-| zona fisiográfica × situação (4 grupos) | 891 | 185 | 84,9% | 88,6% | 20 |
-| **unidade da federação × situação (4 grupos)** | **60** | **613** | **77,0%** | **90,2%** | **20** |
-| unidade da federação × urbana/rural/mista (3 grupos) | 48 | 625 | 74,4% | 87,4% | 20 |
-| região × situação (4 grupos) | 16 | 655 | 72,4% | 85,0% | 20 |
-| unidade da federação × município | 2.344 | 161 | 44,1% | 47,8% | 20 |
-| zona fisiográfica, sem situação | 312 | 421 | 18,1% | 23,3% | 18 |
-| unidade da federação, sem situação | 17 | 654 | 12,1% | 18,3% | 20 |
-| região, sem situação | 4 | 667 | 11,8% | 18,1% | 20 |
+| zona fisiográfica × situação (4 grupos) | 891 | 184 | 85,3% | 89,1% | 20 |
+| **unidade da federação × situação (4 grupos)** | **60** | **612** | **77,3%** | **90,4%** | **20** |
+| unidade da federação × urbana/rural/mista (3 grupos) | 48 | 624 | 74,7% | 87,5% | 20 |
+| região × situação (4 grupos) | 16 | 654 | 72,6% | 85,2% | 20 |
+| unidade da federação × município | 2.344 | 160 | 44,4% | 48,1% | 20 |
+| zona fisiográfica, sem situação | 312 | 420 | 18,1% | 23,1% | 18 |
+| unidade da federação, sem situação | 17 | 653 | 12,1% | 18,2% | 20 |
+| região, sem situação | 4 | 666 | 11,9% | 18,0% | 20 |
 
-![Figura 6](figuras/desenho_amostral_1960/fig06_espacamentos_candidatos.png)
+![O espaçamento das sorteadas sob cada estratificação candidata](figuras/desenho_amostral_1960/fig06_espacamentos_candidatos.png)
 
 A leitura, de baixo para cima:
 
 - **Sem a situação, o padrão desaparece.** Unidade da federação sozinha dá 12,1% de espaçamentos exatos; região sozinha, 11,8%; zona sozinha, 18,1%. Isso é o que se espera do acaso quando as sorteadas de quatro séries independentes são olhadas numa lista só (a figura 6, painel de cima, mostra a distribuição espalhada). A situação entra na estratificação, como o Volume II diz.
-- **Com a situação, o padrão aparece**, e ele é mais nítido com a unidade da federação (77,0%) do que com a região (72,4%). A diferença entre as duas são exatamente os pares que se quebram quando as unidades da federação de uma mesma região são emendadas numa lista só: em "região × situação" a lista rural do Nordeste é Maranhão, depois Piauí, depois Ceará…, e a cada fronteira o espaçamento deixa de ser 20 porque cada unidade da federação recomeçou a sua série com o seu próprio início aleatório. É o mesmo mecanismo do exemplo de brinquedo, agora entre unidades da federação.
-- **Os quatro grupos são melhores que três.** Separar as cidades grandes das outras pastas urbanas sobe de 74,4% para 77,0%. O quarto grupo existia, como o Volume II diz.
-- **A zona fisiográfica não é o estrato**, embora "zona × situação" tenha a maior fração de exatos. É o caso "fino demais" do exemplo de brinquedo: com 891 estratos, essa candidata só consegue medir 185 pares — os que caem dentro de uma mesma zona —, e esses pares sairiam exatos de qualquer maneira, porque a zona é um bloco contíguo do cadastro da unidade da federação (seção 6.3) e uma progressão de razão 20 continua sendo de razão 20 dentro de qualquer bloco contíguo. O que decide são os pares que **atravessam** a fronteira de uma zona: se cada zona fosse um estrato com início aleatório próprio, esses pares teriam espaçamento arbitrário e só por acaso (cerca de 5% das vezes) cairiam em 20. Medido: dos 599 pares de "UF × situação" em que as duas pastas têm zona conhecida, os 168 que ficam dentro de uma zona são 85,1% exatos, e os **431 que atravessam zonas são 73,1% exatos** — catorze vezes mais do que o acaso daria. As séries continuam através das zonas; a zona ordena o cadastro, mas não o estratifica. O mesmo vale para o município (44,1% com 161 pares), pelo mesmo motivo.
+- **Com a situação, o padrão aparece**, e ele é mais nítido com a unidade da federação (77,3%) do que com a região (72,6%). A diferença entre as duas são exatamente os pares que se quebram quando as unidades da federação de uma mesma região são emendadas numa lista só: em "região × situação" a lista rural do Nordeste é Maranhão, depois Piauí, depois Ceará…, e a cada fronteira o espaçamento deixa de ser 20 porque cada unidade da federação recomeçou a sua série com o seu próprio início aleatório. É o mesmo mecanismo do exemplo de brinquedo, agora entre unidades da federação.
+- **Os quatro grupos são melhores que três.** Separar as cidades grandes das outras pastas urbanas sobe de 74,7% para 77,3%. O quarto grupo existia, como o Volume II diz.
+- **A zona fisiográfica não é o estrato**, embora "zona × situação" tenha a maior fração de exatos. É o caso "fino demais" do exemplo de brinquedo: com 891 estratos, essa candidata só consegue medir 185 pares — os que caem dentro de uma mesma zona —, e esses pares sairiam exatos de qualquer maneira, porque a zona é um bloco contíguo do cadastro da unidade da federação (seção 6.3) e uma progressão de razão 20 continua sendo de razão 20 dentro de qualquer bloco contíguo. O que decide são os pares que **atravessam** a fronteira de uma zona: se cada zona fosse um estrato com início aleatório próprio, esses pares teriam espaçamento arbitrário e só por acaso (cerca de 5% das vezes) cairiam em 20. Medido: dos 598 pares de "UF × situação" em que as duas pastas têm zona conhecida, os 167 que ficam dentro de uma zona são 85,6% exatos, e os **431 que atravessam zonas são 73,3% exatos** — catorze vezes mais do que o acaso daria. As séries continuam através das zonas; a zona ordena o cadastro, mas não o estratifica. O mesmo vale para o município (44,4% com 160 pares), pelo mesmo motivo.
 
 ### 7.3 Unidade da federação × situação, de perto
 
-Dentro da estratificação vencedora, a distribuição dos 613 espaçamentos é concentrada em 20 e simétrica em volta dele: 472 valem 20, 41 valem 21, 40 valem 19, 12 valem 18, 7 valem 17, 5 valem 22. Por grupo de situação:
+Dentro da estratificação vencedora, a distribuição dos 612 espaçamentos é concentrada em 20 e simétrica em volta dele: 473 valem 20, 41 valem 21, 39 valem 19, 12 valem 18, 7 valem 17, 5 valem 22. Por grupo de situação:
 
 | grupo | pares | exatamente 20 | entre 19 e 21 |
 |---|---|---|---|
 | cidade grande | 105 | 92% | 94% |
-| urbana menor | 109 | 79% | 90% |
+| urbana menor | 108 | 81% | 91% |
 | mista | 236 | 74% | 91% |
 | rural | 163 | 70% | 87% |
 
@@ -341,13 +420,13 @@ Minas Gerais, rural    (cadastro de  531, 26 sorteadas):  2  21  41  61  81 101 
 Pernambuco, mista      (cadastro de  315, 15 sorteadas): 24  47  67  82 102 122 142 162 182 202 222 242 262 282 302
 ```
 
-![Figura 5](figuras/desenho_amostral_1960/fig05_progressao_estratos.png)
+![As posições das sorteadas dentro de cada estrato, de vinte em vinte a partir de um início próprio](figuras/desenho_amostral_1960/fig07_progressao_estratos.png)
 
 Os inícios — 12, 19, 12, 6, 19, 2, 24 — são o "início das séries aleatório" que o Volume II menciona numa linha e nunca explica. A razão cadastro/sorteadas por estrato tem mediana 19,9, com quartis 19,1 e 21,3.
 
 **O que a imperfeição significa.** Dos 60 estratos candidatos, 58 têm pastas sorteadas e 48 têm três ou mais; desses 48, 25 têm 80% ou mais de espaçamentos exatos e 14 são perfeitos. Os desvios de uma unidade (19 ou 21, que somam 13% dos pares) são o que se espera quando **uma pasta do cadastro está classificada num grupo diferente do que o IBGE lhe deu**: uma pasta a mais ou a menos na lista desloca em um todas as posições seguintes. A nossa classificação usa a situação dos boletins da amostra de 25% e o tamanho do município; a do IBGE usou os boletins físicos e uma tabela que não temos; discordâncias pontuais são inevitáveis. Os desvios maiores concentram-se em três unidades da federação do Nordeste — Paraíba, Ceará e Rio Grande do Norte, onde os estratos rurais e mistos ficam entre 17% e 42% de exatos, e o urbano menor da Paraíba, com três pastas, em 0% — e no rural do Rio Grande do Sul (42%); em quatro estratos a primeira sorteada está além da posição 20 (Porto Alegre começa em 38), o que indica que ali uma pasta sorteada está classificada em outro grupo ou faltou no cadastro. Não se sabe se a causa é a classificação ou a compilação da amostra de 25% nessas unidades; o efeito sobre a variância é pequeno, porque o estrato errado de uma pasta muda pouco a soma de quadrados, e é conservador, porque a aproximação errada é sempre para um estrato mais grosso.
 
-Uma última confirmação, de outra natureza: as **corridas** de espaçamentos exatamente 20 — sequências de sorteadas consecutivas, todas a 20 uma da outra — nunca misturam grupos de situação (por construção do teste) e **atravessam zonas fisiográficas com toda a naturalidade**: das 105 corridas com duas ou mais pastas, 98 passam por mais de uma zona. Se a zona fosse estrato, uma corrida acabaria em cada fronteira de zona.
+Uma última confirmação, de outra natureza: as **corridas** de espaçamentos exatamente 20 — sequências de sorteadas consecutivas, todas a 20 uma da outra — nunca misturam grupos de situação (por construção do teste) e **atravessam zonas fisiográficas com toda a naturalidade**: das 104 corridas com duas ou mais pastas, 97 passam por mais de uma zona. Se a zona fosse estrato, uma corrida acabaria em cada fronteira de zona.
 
 ## 8. Passo 4: como o IBGE separava a "cidade de 100 000 e mais habitantes"?
 
@@ -357,11 +436,11 @@ O mesmo teste da seção 7 decide entre as definições: fixa-se "UF × situaç�
 
 | definição de "cidade grande" (pasta puramente urbana de município com…) | estratos | pares | exatamente 20 | entre 19 e 21 |
 |---|---|---|---|---|
-| **população urbana ≥ 100 mil** | **60** | **613** | **77,0%** | **90,2%** |
-| população urbana ≥ 200 mil | 56 | 617 | 75,2% | 88,2% |
-| não separar cidades grandes (3 grupos) | 48 | 625 | 74,4% | 87,4% |
-| população total ≥ 100 mil | 60 | 613 | 72,6% | 85,8% |
-| população urbana ≥ 50 mil | 61 | 612 | 69,0% | 81,9% |
+| **população urbana ≥ 100 mil** | **60** | **612** | **77,3%** | **90,4%** |
+| população urbana ≥ 200 mil | 56 | 616 | 75,5% | 88,3% |
+| não separar cidades grandes (3 grupos) | 48 | 624 | 74,7% | 87,5% |
+| população total ≥ 100 mil | 60 | 612 | 72,9% | 85,9% |
+| população urbana ≥ 50 mil | 61 | 611 | 69,1% | 82,0% |
 
 A população **urbana** do município no corte de 100 mil é a definição que melhor reproduz o sorteio, e o grupo "cidade grande" é justamente o de ajuste mais alto (92% de espaçamentos exatos, contra 70% a 79% dos outros três). A população total do município seria pior do que não separar as cidades: ela promove a cidade grande municípios extensos de sede pequena, que o IBGE claramente não tratava assim. São 34 os municípios com população urbana de 100 mil ou mais em 1960 — de São Paulo e Rio de Janeiro (3,3 e 3,2 milhões) a Olinda e Teresina (100 mil) — e todos os 34 têm pasta de cidade grande na amostra.
 
@@ -375,7 +454,7 @@ Juntando os quatro passos, o desenho da amostra de 1,27% é:
 - **Cadastro**: os boletins de amostra de cada unidade da federação, reunidos em pastas de cerca de 250 na ordem dos setores, e as pastas numeradas de dois em dois na ordem zona fisiográfica → município → setor, com as pastas da capital em primeiro lugar.
 - **Estratos**: a unidade da federação cruzada com quatro grupos de situação da pasta — puramente urbana de município com população urbana de 100 mil ou mais; puramente urbana dos demais municípios; puramente rural; mista.
 - **Segunda etapa**: em cada estrato, uma pasta em vinte, sistematicamente, com início aleatório próprio; todos os boletins da pasta sorteada.
-- **Resultado**: 814 pastas, 1,27% da população; 817 chaves de pasta no arquivo.
+- **Resultado**: 1,27% da população, em **815 unidades primárias** no arquivo — as 814 pastas que o Volume II declara ter sorteado, mais a de Fernando de Noronha, que não foi sorteada porque era o cadastro inteiro (seção 4).
 
 O que é fato documentado, o que é demonstrado e o que é escolha:
 
@@ -383,8 +462,8 @@ O que é fato documentado, o que é demonstrado e o que é escolha:
 |---|---|---|
 | duas etapas, 1/4 e 1/20; pastas de ~250 boletins na ordem dos setores; 4 grupos de situação; sistemático com início aleatório; 814 pastas | fato documentado | Volume II, 1965, pp. 10–11 |
 | a fração é 1/20 em cada unidade da federação | demonstrado | seção 6.2: razão cadastro/sorteadas 18,5 a 21,1 |
-| o critério geográfico é a unidade da federação | demonstrado | seção 7.2: 77,0% contra 72,4% (região) e 12,1% (sem situação) |
-| a zona e o município ordenam o cadastro mas não o estratificam | demonstrado | seções 6.3 e 7.2: pares através de zonas 73,1% exatos |
+| o critério geográfico é a unidade da federação | demonstrado | seção 7.2: 77,3% contra 72,6% (região) e 12,1% (sem situação) |
+| a zona e o município ordenam o cadastro mas não o estratificam | demonstrado | seções 6.3 e 7.2: pares através de zonas 73,3% exatos |
 | "cidade de 100 000 e mais" = população urbana do município no Anuário | melhor definição testada | seção 8 |
 | a classificação de cada pasta nos quatro grupos | escolha nossa, pela situação dos boletins da própria pasta | seções 7.3 e 11 |
 | a extensão do critério às 11 unidades da federação sem amostra de 25% | escolha nossa, sem verificação possível | seção 11 |
@@ -406,7 +485,7 @@ $$
 w^{d} = \frac{1}{0{,}0127} = 78{,}74
 $$
 
-Se o arquivo fosse íntegro e a fração exata em toda parte, bastaria multiplicar contagens por esse número para estimar totais do país; a seção 5.3 mostrou que o fator realizado é de fato 79 a 80 nos domínios grandes. Há uma exceção conhecida: em Fernando de Noronha a única pasta sorteada era o cadastro inteiro (a amostra de 25% mostra uma pasta em vez de vinte, seção 6.2), de modo que ali só houve a etapa de um domicílio em quatro e o peso de desenho verdadeiro é 4, não 78,74. A coluna guarda os 78,74 nominais em toda parte; o peso final usa os 4 para Noronha.
+Se o arquivo fosse íntegro e a fração exata em toda parte, bastaria multiplicar contagens por esse número para estimar totais do país; a seção 5.3 mostrou que o fator realizado é de fato 79 a 80 nos domínios grandes. Há uma exceção conhecida: em Fernando de Noronha a única pasta sorteada era o cadastro inteiro (a amostra de 25% mostra uma pasta em vez de vinte, seção 6.2), de modo que ali só houve a etapa de um domicílio em quatro e o peso de desenho verdadeiro é 4, não 78,74. Isso se confere boletim a boletim: **os 62 domicílios da pasta de 1,27% estão todos entre os 75 da amostra de 25%** — a pasta era mesmo o cadastro, e o arquivo de 1,27% perdeu 13 deles. A coluna `censobr_weight_desenho` guarda os 78,74 nominais em toda parte, e por isso `censobr_weight_fator` sai entre 0,05 e 0,09 em Noronha; o peso final parte dos 4, e em relação a eles o fator fica entre 0,94 e 1,79, com mediana 4,52 de peso.
 
 ### 10.2 Por que calibrar, e a quê
 
@@ -421,18 +500,30 @@ Por isso há dois pesos. O final é o segundo; o primeiro fica nas tabelas para 
 
 ### 10.3 `censobr_weight`: calibrado aos resultados definitivos
 
-As restrições, todas sobre pessoas presentes, em quatro blocos:
+As restrições são 543, todas sobre **pessoas presentes**, isto é, `V202` fora de 3 e 4 (moradores ausentes). Elas vêm de três tabelas do volume nacional dos resultados definitivos, e valem descritas uma a uma, com a variável do arquivo de um lado e a página publicada do outro.
 
-| bloco | células | fonte |
-|---|---|---|
-| (a) sexo × onze faixas de idade, por unidade da federação com oito pastas ou mais (21 unidades) | 462 | tab. 33 |
-| (b) total por sexo, nas seis unidades pequenas: Rondônia, Acre, Roraima, Amapá, Fernando de Noronha, Serra dos Aimorés | 12 | tab. 33 |
-| (c) população urbana (quadros urbano e suburbano), nas 21 unidades com oito pastas ou mais | 21 | tab. 34 |
-| (d) quem sabe ler e escrever, de 5 anos e mais, por sexo: nas 21 unidades, nas quatro pequenas do Norte e Centro-Oeste juntas, em Noronha e em Aimorés | 48 | tab. 40 |
+| bloco | variável do arquivo | categorias | recorte | células | fonte |
+|---|---|---|---|---|---|
+| **(a)** sexo × idade | `V202` para o sexo (1, 3, 5 = homens; 2, 4, 6 = mulheres) e `V204`/`V204B` para a idade | 2 sexos × 11 faixas: 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-39, 40-49, 50-59, 60-69, 70 e mais | cada unidade da federação com **oito pastas ou mais** (21 delas), uma a uma | 462 | tabela 33, **pp. 82-84** |
+| **(b)** total por sexo | `V202` | 2 sexos, sem abrir a idade | as seis unidades pequenas — Rondônia, Acre, Roraima, Amapá, Fernando de Noronha, Serra dos Aimorés | 12 | tabela 33, coluna TOTAIS, **p. 82** |
+| **(c)** população urbana | `V118` | quadro urbano (1) e suburbano (3) somados, contra o rural (5) | as mesmas 21 unidades com oito pastas ou mais | 21 | tabela 34, coluna "urbana", **p. 85** |
+| **(d)** sabem ler e escrever | `V211` | só a categoria "sabem" (códigos 0 e 1), entre os presentes de **5 anos e mais**, por sexo | as 21 unidades uma a uma; as quatro pequenas do Norte e Centro-Oeste somadas num grupo; Noronha e Aimorés sozinhas | 48 | tabela 40, linha "sabem", **p. 98** |
 
-São 543 restrições, contra 184 do peso de 1965; as onze faixas são as de 1965, somando "70 e mais" e "idade ignorada" da tab. 33. O que fica fora, e por quê:
+Três detalhes de construção que mudam o resultado e que o código fixa. A **idade** é lida de `V204`, que diz em que unidade ela veio: meses (0) viram zero anos; anos (1) usam `V204B`; acima de 99 anos (5), ignorada (9) e ausente caem na última faixa. A última faixa é **"70 e mais e ignorada"** justamente por isso — ela soma as duas linhas que a tabela 33 publica separadas, porque o arquivo não distingue confiavelmente uma da outra. E só "sabem" entra como restrição em (d), não "não sabem": os dois somam o total da faixa etária, que já está preso por (a), de modo que restringir os dois seria redundante e tornaria o sistema singular.
 
-- **O Distrito Federal** não entra em nenhuma célula e fica no peso de desenho. O arquivo perdeu 80% dos seus boletins — um acampamento de operários —, e forçar os 137 domicílios que restaram a representar 140 mil pessoas seria criar com peso o que o arquivo perdeu. O DF fica em 43 mil pessoas, 31% do publicado, com a composição do que sobreviveu; o total do Norte e Centro-Oeste, e o do país, ficam 97 mil pessoas abaixo do publicado por isso.
+A tabela 33 é a maior das três e dá as margens (a) e (b). É esta página:
+
+![Tabela 33 da Série Nacional, p. 82: população presente por sexo e grupos de idade, por unidade da federação](figuras/desenho_amostral_1960/facsimile_definitivos_tab33.png){ width=72% }
+
+A linha 1 dessa página, "BRASIL ... 70 191 370", é o total contra o qual a compilação inteira fecha; as linhas 2 a 34 são as regiões e as unidades da federação a que os pesos se calibram, uma a uma. A tabela 34 dá o corte urbano/rural da margem (c) e a tabela 40, a alfabetização da margem (d):
+
+![Tabela 34 da Série Nacional, p. 85: população presente por situação do domicílio](figuras/desenho_amostral_1960/facsimile_definitivos_tab34.png){ width=72% }
+
+![Tabela 40 da Série Nacional, p. 98: alfabetização das pessoas de 5 anos e mais, por sexo](figuras/desenho_amostral_1960/facsimile_definitivos_tab40.png){ width=72% }
+
+As três estão transcritas em `references/censo_1960_resultados_definitivos_serie_nacional.csv`, que guarda a página de cada célula na coluna `pagina`, e a transcrição é reproduzível por `references/transcricao_1960_serie_nacional.py`. As margens são 543 contra as 184 do peso de 1965; as onze faixas são as de 1965, somando "70 e mais" e "idade ignorada" da tab. 33. O que fica fora, e por quê:
+
+- **O Distrito Federal** não entra em nenhuma célula e fica no peso de desenho. O arquivo perdeu quatro quintos dos seus boletins, e o que falta é desproporcionalmente operário da construção (seção 4); forçar os 137 domicílios que restaram a representar 140 mil pessoas seria criar com peso o que o arquivo perdeu. O DF fica em 43 mil pessoas, 31% do publicado, com a composição do que sobreviveu; o total do Norte e Centro-Oeste, e o do país, ficam 97 mil pessoas abaixo do publicado por isso.
 - **As faixas de idade das seis unidades pequenas.** Foi testado juntar as quatro do Norte e Centro-Oeste num "resto" com margens de idade, em onze e em cinco faixas: os fatores implícitos das quatro vão de 0,7 (Amapá) a 1,6 (Rondônia), e a estrutura etária conjunta só fechava inflando famílias grandes de Rondônia até 7 vezes. Elas ficam só com o total por sexo.
 - **A cor.** Foi testada como restrição, por sexo e região, e rejeitada: no arquivo, quem ficou sem código de cor é dano — cinco vezes mais que o "sem declaração" publicado —, e essas pessoas fazem falta aos pretos e pardos; a calibração compensava inflando as famílias grandes com código válido. A cor fica como validação (10.7).
 - **Os domicílios** (tab. 7) ficam como validação, pela regra de calibrar ao que é demográfico e medir o resto.
@@ -442,7 +533,15 @@ Dois cuidados a mais. Os fatores são mantidos entre 0,3 e 3,5 pela distância l
 
 ### 10.4 `censobr_weight_1965`: calibrado aos resultados preliminares
 
-As restrições são as 176 células do quadro 1 de 1965 (4 regiões × 2 situações × 2 sexos × 11 faixas de idade, população presente) e as 8 do quadro 2 que contam quem sabe ler e escrever, por sexo e região, entre os presentes de 5 anos e mais: 184 restrições, reproduzidas exatamente, com o raking sem limites. Duas ampliações foram testadas e rejeitadas: o estado conjugal (quadro 5) faz os pesos explodirem, porque força os domicílios que perderam o cartão do chefe a compensar com peso o que falta; o ramo de atividade (quadro 3) conserta o ramo à custa de inflar até 5,8 vezes os domicílios do Norte e Centro-Oeste com operários da construção — isto é, cria com peso os operários de Brasília que o arquivo perdeu.
+As restrições são as **176 células do quadro 1** — 4 regiões × 2 situações (urbana, que soma quadro urbano e suburbano, e rural) × 2 sexos × 11 faixas de idade, sempre população presente — e as **8 do quadro 2** que contam quem sabe ler e escrever, por sexo e região, entre os presentes de 5 anos e mais. São 184 restrições, reproduzidas exatamente, com o raking sem limites.
+
+Os quadros são os **regionais**, não os do Brasil: o volume repete a mesma série de sete quadros para cada uma das quatro regiões que a amostra foi dimensionada para estimar (Nordeste, Leste, Sul e o par Norte e Centro-Oeste). O par que entra na calibração é este, aqui no bloco do Nordeste, às páginas 17 e 18:
+
+![Quadro 1 dos Resultados Preliminares de 1965, Nordeste, p. 17: população urbana e rural por sexo e grupos de idade](figuras/desenho_amostral_1960/facsimile_1965_quadro1.png){ width=72% }
+
+![Quadro 2 dos Resultados Preliminares de 1965, Nordeste, p. 18: alfabetização por sexo e grupos de idade](figuras/desenho_amostral_1960/facsimile_1965_quadro2.png){ width=72% }
+
+As faixas de idade do quadro 1 são as mesmas onze que o peso final usa (seção 10.3) — foi daqui que elas vieram. Do quadro 2 entra só a linha de quem **sabe** ler, pelo mesmo motivo de lá: o total da faixa já está preso pelo quadro 1, e restringir também quem não sabe tornaria o sistema singular. A transcrição dos sete quadros está em `references/censo_1960_resultados_preliminares_1965.csv`; ao contrário da transcrição dos definitivos, ela não guarda a página de cada célula. Duas ampliações foram testadas e rejeitadas: o estado conjugal (quadro 5) faz os pesos explodirem, porque força os domicílios que perderam o cartão do chefe a compensar com peso o que falta; o ramo de atividade (quadro 3) conserta o ramo à custa de inflar até 5,8 vezes os domicílios do Norte e Centro-Oeste com operários da construção — isto é, cria com peso os operários de Brasília que o arquivo perdeu.
 
 ### 10.5 Como se calibra
 
@@ -464,7 +563,7 @@ que vale 1 em $u = 0$ e tende a $L$ e a $U$ nos extremos. Nos dois casos $\bolds
 
 `censobr_weight` vai de 3,8 (Noronha) a 275, com 98% dos domicílios entre 53,8 e 109 e mediana 78,6:
 
-![Figura 7](figuras/desenho_amostral_1960/fig07_pesos.png)
+![A distribuição do peso calibrado dos domicílios em torno do peso de desenho](figuras/desenho_amostral_1960/fig08_pesos.png)
 
 O fator `censobr_weight_fator` tem percentis 1 e 99 em 0,68 e 1,38; a mediana por unidade da federação fica entre 0,86 (Sergipe) e 1,10 (Mato Grosso) nas unidades com oito pastas ou mais, e vai a 0,51 (Amapá), 0,57 (Acre) e 0,72 (Roraima) nas pequenas, que o desenho havia sobre-representado. Nos limites de 0,3 e 3,5 ficam 252 domicílios, quase todos nas pequenas. Para comparação, `censobr_weight_1965` vai de 38,6 a 384,5, com 98% entre 72,8 e 89,6 e fator de 0,49 a 4,88.
 
@@ -482,12 +581,12 @@ Nenhum peso cria o que não foi amostrado. Rondônia só tem Porto Velho urbano;
 
 Duas colunas, presentes nas tabelas de pessoas e de domicílios, dizem como o sorteio foi feito:
 
-- `censobr_upa` — a **unidade primária de amostragem**: a pasta, identificada por unidade da federação e número (817 valores). O número da pasta, sozinho, está em `pasta`.
+- `censobr_upa` — a **unidade primária de amostragem**: a pasta, identificada por unidade da federação e número (815 valores). O número da pasta, sozinho, está em `pasta`.
 - `censobr_estrato` — o **estrato**: a unidade da federação cruzada com o grupo de situação da pasta, como a Parte II demonstrou. São **75 estratos**, dos quais 64 são de uma unidade da federação só (rótulo `UF 60 - cidade grande`, por exemplo) e 11 juntam duas ou três unidades vizinhas (rótulo `UF 10+12 - cidade grande`), pela regra de colapso explicada abaixo. Cada estrato tem de 2 a 54 pastas, mediana 7; o único com uma pasta só é Fernando de Noronha, e é de propósito (adiante).
 
 **Como cada pasta foi classificada.** Pela situação dos seus próprios boletins: mista se tem urbanos e rurais; rural se só tem rurais; e as puramente urbanas se dividem pelo tamanho do município — cidade grande é a pasta puramente urbana de município com população urbana de 100 mil ou mais no Anuário de 1961, casada pelo código de município (`read_guides/1960_municipios.csv`); urbana menor são as demais. É a regra que a seção 8 mostrou reproduzir melhor o sorteio. Nas 11 unidades da federação em que a amostra de 25% não sobreviveu, a regra é a mesma, mas sem a verificação que o cadastro permite.
 
-**A regra de colapso.** Um estrato com uma pasta só não permite medir variância: não há com o que comparar. Onde isso acontece, a unidade da federação solitária naquele grupo de situação se junta à **primeira vizinha da mesma região que tenha pasta no mesmo grupo**, e só a ela; a lista de vizinhas, por adjacência em 1960 e em ordem de preferência, está em `VIZINHAS_1960` (`R/microdata_1960_amostra_127.R`). O processo se repete até nenhum estrato ficar com uma pasta. São onze juntas, que reúnem 54 das 817 pastas:
+**A regra de colapso.** Um estrato com uma pasta só não permite medir variância: não há com o que comparar. Onde isso acontece, a unidade da federação solitária naquele grupo de situação se junta à **primeira vizinha da mesma região que tenha pasta no mesmo grupo**, e só a ela; a lista de vizinhas, por adjacência em 1960 e em ordem de preferência, está em `VIZINHAS_1960` (`R/microdata_1960_amostra_127.R`). O processo se repete até nenhum estrato ficar com uma pasta. São onze juntas, que reúnem 54 das 815 pastas:
 
 | estrato | pastas | quem se juntou |
 |---|---|---|
@@ -503,7 +602,7 @@ Duas colunas, presentes nas tabelas de pessoas e de domicílios, dizem como o so
 | Acre + Amazonas, mista | 5 | o Acre tinha uma |
 | Pará + Amapá, mista | 8 | o Amapá tinha uma |
 
-A regra anterior dissolvia o grupo de situação inteiro da região — oito estratos que reuniam 266 das 817 pastas —, o que era mais grosso que o desenho e **aumentava** o erro-padrão estimado sem necessidade. Juntar só a vizinha corrige isso: o erro-padrão da população presente do Norte e Centro-Oeste cai de 224.277 para 161.705 (−28%), o do Leste de 338.852 para 305.795 (−10%), e o rural do Brasil de 606.536 para 581.246 (−4%); no Sul, onde não houve colapso, nada muda. A seção 13.3 traz a comparação completa.
+A regra anterior dissolvia o grupo de situação inteiro da região — oito estratos que reuniam 266 das 815 pastas —, o que era mais grosso que o desenho e **aumentava** o erro-padrão estimado sem necessidade. Juntar só a vizinha corrige isso: o erro-padrão da população presente do Norte e Centro-Oeste cai de 224.277 para 161.705 (−28%), o do Leste de 338.852 para 305.795 (−10%), e o rural do Brasil de 606.536 para 581.246 (−4%); no Sul, onde não houve colapso, nada muda. A seção 13.3 traz a comparação completa.
 
 **Fernando de Noronha é um estrato de certeza.** A sua única pasta era o cadastro inteiro (seção 6.2): não houve sorteio de pasta ali, e por isso o estrato fica sozinho de propósito e a etapa das pastas não contribui variância nenhuma. No `survey` isso se escreve com `fpc = 1` para a unidade da federação 24; o passo 11 faz o mesmo.
 
@@ -511,9 +610,15 @@ As regiões são as do Volume II: Nordeste (MA, PI, CE, RN, PB, PE, FN, AL), Les
 
 **Por que isso basta para o erro-padrão.** Para estimar variância de uma amostra de conglomerados é preciso saber (a) quais observações foram sorteadas juntas — a pasta — e (b) dentro de que grupos o sorteio foi independente — o estrato. Errar o estrato para mais grosso (juntar estratos que o IBGE separava) superestima a variância, porque atribui ao acaso diferenças que na verdade estavam controladas pela estratificação. Errar para mais fino subestima. As colunas dão o desenho demonstrado, e onde há dúvida o erro é para o lado grosso.
 
-**A pasta é a última unidade sorteada, e não há unidade secundária.** Uma dúvida natural é se o domicílio não seria a unidade secundária de amostragem. Não é, e a razão é que neste desenho a ordem das etapas é invertida em relação ao livro-texto. No desenho comum, sorteiam-se conglomerados e depois unidades dentro deles. Aqui, o domicílio foi sorteado **primeiro**, no campo, um em cada quatro na Folha de Coleta; as pastas foram formadas **depois**, no órgão central, com os boletins que já estavam na amostra; e o sorteio de uma pasta em vinte veio por último. Dentro de uma pasta sorteada **não há subamostragem**: todos os seus boletins entram. Por isso a pasta é a unidade primária para efeito de variância — é a última coisa sorteada e é tomada inteira — e o domicílio não é uma unidade secundária, mas a unidade da etapa anterior. A consequência prática está na seção 13.2: a aleatoriedade da etapa dos domicílios é uma componente de variância à parte, que se mede e se mostra desprezível.
+**A pasta é a unidade primária, e o domicílio é a etapa anterior — que a tabela publicada escreve como segunda etapa.** Vale desfazer aqui uma confusão que a ordem cronológica provoca. No desenho de livro-texto, sorteiam-se conglomerados e depois unidades dentro deles. Aqui a ordem é a inversa: o domicílio foi sorteado **primeiro**, no campo, um em cada quatro na Folha de Coleta; as pastas foram formadas **depois**, no órgão central, com os boletins que já estavam na amostra; e o sorteio de uma pasta em vinte veio por último. Dentro de uma pasta sorteada **não há subamostragem**: todos os seus boletins entram.
 
-(A compilação antiga do `censobr` traz colunas `censobr_upa` e `censobr_usa` com outra convenção: nos registros da amostra de 25% a unidade primária é o próprio domicílio, e nos registros de 1,27% é o município. Nenhuma das duas corresponde ao desenho descrito aqui; as colunas deste estágio substituem essa convenção.)
+Para a variância, o que importa não é a cronologia e sim qual unidade a amostra entrega em bloco, e essa é a pasta. Por isso a pasta é a unidade primária: é o conglomerado último, e é a dispersão entre pastas que carrega a dependência entre os domicílios de uma mesma pasta. Pôr o domicílio como primeira etapa seria tratá-lo como sorteado por si, e o erro-padrão sairia muito menor que o verdadeiro.
+
+O que muda na tabela que o `censobr` publica é a **escrita**, não o desenho. Lá o par de etapas aparece explicitamente, porque é assim que o `survey` o aceita numa chamada só: `censobr_upa` é a pasta com `censobr_fpc` = 1/20 na primeira etapa, e `censobr_usa` é o domicílio com `censobr_fpc2` = 1/4 na segunda. O estimador que sai disso é exatamente o desta seção — o termo entre pastas, mais a parcela da etapa dos domicílios que a seção 13.2 mede e mostra valer de 0,05% a 1,2% da variância. Escrever as duas etapas não acrescenta nada à conta; dispensa o usuário de fazê-la à mão. A seção 14 mostra a chamada.
+
+Neste estágio, que é anterior à compilação, as tabelas trazem só `censobr_upa` e `censobr_estrato`; `censobr_usa` e `censobr_fpc2` nascem na compilação, onde o domicílio passa a ter identificador único no país.
+
+(A compilação de 2019/2024 do `censobr` trazia colunas `censobr_upa` e `censobr_usa` com outra convenção: nos registros da amostra de 25% a unidade primária era o próprio domicílio, e nos de 1,27% era o município. Nenhuma das duas corresponde ao desenho descrito aqui, e as duas foram substituídas.)
 
 ## 12. Como calcular o erro-padrão, e o que ele diz
 
@@ -565,15 +670,15 @@ A tabela traz as duas colunas que o passo 11 calcula: o erro-padrão **de desenh
 
 | domínio | estimativa | erro-padrão | CV | efeito de desenho | pelos resíduos | CV |
 |---|---|---|---|---|---|---|
-| Brasil | 70.094.960 | 550.338 | 0,79% | — | 5.618 | 0,01% |
-| Brasil, urbana | 31.572.374 | 482.716 | 1,53% | 172 | 53.292 | 0,17% |
+| Brasil | 70.094.960 | 537.588 | 0,77% | — | 5.618 | 0,01% |
+| Brasil, urbana | 31.572.374 | 468.127 | 1,48% | 162 | 53.292 | 0,17% |
 | Brasil, rural | 38.522.586 | 581.462 | 1,51% | 249 | 52.995 | 0,14% |
-| Leste | 24.570.761 | 305.989 | 1,25% | 75 | 0 | 0,00% |
-| Sul | 24.605.438 | 337.029 | 1,37% | 91 | 0 | 0,00% |
+| Leste | 24.570.761 | 295.420 | 1,20% | 70 | 0 | 0,00% |
+| Sul | 24.605.438 | 325.690 | 1,32% | 85 | 0 | 0,00% |
 | Nordeste | 15.486.240 | 263.581 | 1,70% | 74 | 0 | 0,00% |
 | Norte e Centro-Oeste | 5.432.521 | 161.800 | 2,98% | 67 | 5.618 | 0,10% |
-| Sul, urbana | 12.455.833 | 274.528 | 2,20% | 94 | 149 | 0,00% |
-| Leste, urbana | 11.901.020 | 317.024 | 2,66% | 130 | 42.295 | 0,36% |
+| Sul, urbana | 12.455.833 | 260.482 | 2,09% | 85 | 149 | 0,00% |
+| Leste, urbana | 11.901.020 | 306.836 | 2,58% | 122 | 42.295 | 0,36% |
 | Leste, rural | 12.669.741 | 323.409 | 2,55% | 129 | 42.295 | 0,33% |
 | Sul, rural | 12.149.605 | 345.607 | 2,84% | 152 | 149 | 0,00% |
 | Nordeste, rural | 10.273.692 | 267.257 | 2,60% | 104 | 0 | 0,00% |
@@ -583,11 +688,13 @@ A tabela traz as duas colunas que o passo 11 calcula: o erro-padrão **de desenh
 
 Três leituras. **Os zeros da última coluna são legítimos**, e dizem o que a calibração garante: a população presente de cada região (fora o Distrito Federal) é a soma de células que foram restrição, e o peso a reproduz por construção. Os que não são zero dizem onde a garantia não chega: o Distrito Federal, que ficou no peso de desenho e responde sozinho pelos 5.618 do total do país e pelos 5.618 do Norte e Centro-Oeste; e o **corte urbano/rural**, que só foi restrição nas unidades da federação com oito pastas ou mais (seção 10.3) — daí os 42 mil do Leste e os 32 mil do Norte e Centro-Oeste. **O efeito de desenho continua alto** nos domínios definidos pela situação e pela região, porque essas são características da pasta inteira: estimar quanta gente mora no urbano do Nordeste é contar quantas pastas urbanas foram sorteadas ali e o tamanho de cada uma, e isso varia de sorteio para sorteio muito mais do que a contagem de pessoas sugere. **E o total do país tem erro-padrão**, ao contrário do que o peso de 1965 permitia: 550 mil pelo estimador de desenho, 5,6 mil pelos resíduos — a diferença entre ler a amostra como se a calibração não existisse e reconhecer que 543 totais externos a prendem.
 
-Nas 176 células do quadro 1 (região × situação × sexo × idade), onde a variável de interesse varia dentro das pastas, o efeito de desenho tem mediana 6,2 (quartis 4,1 e 9,5, máximo 20,2) e o coeficiente de variação mediana 3,5%, máximo 11,8%; pelos resíduos da calibração o coeficiente de variação cai para mediana 1,3% e máximo 5,7%, ou 35% do erro-padrão de desenho na mediana:
+Nas 176 células do quadro 1 (região × situação × sexo × idade), onde a variável de interesse varia dentro das pastas, o efeito de desenho tem mediana 5,9 (quartis 4,1 e 9,3, máximo 23,5) e o coeficiente de variação mediana 3,5%, máximo 11,8%; pelos resíduos da calibração o coeficiente de variação cai para mediana 1,3% e máximo 5,7%, ou 35% do erro-padrão de desenho na mediana:
 
-![Figura 8](figuras/desenho_amostral_1960/fig08_deff_celulas.png)
+![As 176 células do quadro 1: erro do desenho contra erro de uma amostra aleatória simples](figuras/desenho_amostral_1960/fig09_deff_celulas.png)
 
-O efeito de desenho cai com a idade — mediana 11,9 na faixa de 0 a 4 anos, 9,8 de 10 a 14, 6,4 de 20 a 24, 4,2 de 50 a 59, 3,0 de 60 a 69, 2,8 de 70 e mais —, porque famílias grandes e jovens se concentram em pastas (bairros e zonas rurais inteiros são jovens ou velhos), enquanto os idosos se espalham. Um exemplo completo, mulheres do urbano do Nordeste:
+Duas coisas sobre como ler essa figura. As três retas pontilhadas **não são tendências ajustadas aos pontos**: são referências de efeito de desenho constante. Com os dois eixos em escala logarítmica, elas são $y = x$, $y = 2x$ e $y = 4x$, e como o efeito de desenho é o quadrado da razão entre os dois coeficientes de variação, isso são as linhas de deff 1, 4 e 16. Um ponto sobre a segunda reta é uma célula cujo erro real é o dobro do que uma amostra aleatória simples daria. E o eixo horizontal é **derivado** do vertical: ele é o coeficiente de variação observado dividido pela raiz do efeito de desenho, de modo que a figura mostra a distribuição do efeito de desenho num outro sistema de coordenadas, e não o confronto de duas medidas independentes. Ela serve para ver onde estão as células, não para validar o cálculo.
+
+O efeito de desenho cai com a idade — mediana 11,7 na faixa de 0 a 4 anos, 9,5 de 10 a 14, 6,1 de 20 a 24, 4,1 de 50 a 59, 2,9 de 60 a 69, 2,7 de 70 e mais —, porque famílias grandes e jovens se concentram em pastas (bairros e zonas rurais inteiros são jovens ou velhos), enquanto os idosos se espalham. Um exemplo completo, mulheres do urbano do Nordeste:
 
 | faixa de idade | estimativa | erro-padrão | CV | efeito de desenho | pessoas na amostra | pelos resíduos | CV |
 |---|---|---|---|---|---|---|---|
@@ -608,23 +715,25 @@ Esta seção percorre cada forma de calcular o erro-padrão que foi considerada,
 
 | total (pessoas) | estimativa | pastas com o atributo | CV | efeito de desenho |
 |---|---|---|---|---|
-| operários da construção civil (classe 351) | 726.540 | 657 | 3,7% | 13 |
-| pessoas com rendimento acima de Cr\$ 10 mil | 2.511.635 | 748 | 3,1% | 32 |
-| analfabetos de 15 anos e mais | 16.014.475 | 816 | 1,3% | 43 |
-| solteiros de 15 anos e mais | 13.439.199 | 814 | 1,0% | 22 |
+| operários da construção civil (classe 351) | 726.540 | 657 | 3,6% | 12 |
+| pessoas com rendimento acima de Cr\$ 10 mil | 2.511.635 | 748 | 3,1% | 31 |
+| analfabetos de 15 anos e mais | 16.014.475 | 815 | 1,3% | 43 |
+| solteiros de 15 anos e mais | 13.439.199 | 814 | 1,0% | 21 |
 | população urbana do Nordeste | 5.212.548 | 106 | 3,3% | 78 |
 
 E o resumo, em milhares de pessoas, dos erros-padrão que cada alternativa dá; as subseções explicam cada coluna:
 
-| total | **adotado** (75 estratos, com correção finita) | sem correção finita | colapso no grupo da região (47) | estratos região × situação (16) | diferenças sucessivas | resíduos da calibração | jackknife | se fosse aleatória simples |
-|---|---|---|---|---|---|---|---|---|
-| construção civil | **27** | 27 | 27 | 28 | 25 | 24 | 27 | 7 |
-| rendimento > 10 mil | **78** | 80 | 78 | 82 | 69 | 61 | 80 | 14 |
-| analfabetos 15+ | **205** | 210 | 206 | 215 | 201 | 33 | 210 | 31 |
-| solteiros 15+ | **136** | 140 | 136 | 142 | 133 | 47 | 140 | 29 |
-| urbana do Nordeste | **171** | 175 | 186 | 190 | 173 | 0 | 175 | 19 |
+| total | **adotado** (75 estratos, com correção finita) | sem correção finita | colapso no grupo da região (47) | estratos região × situação (16) | diferenças sucessivas | resíduos da calibração | se fosse aleatória simples |
+|---|---|---|---|---|---|---|---|
+| construção civil | **26** | 27 | 27 | 27 | 25 | 24 | 7 |
+| rendimento > 10 mil | **77** | 79 | 77 | 82 | 65 | 61 | 14 |
+| analfabetos 15+ | **204** | 210 | 205 | 215 | 200 | 33 | 31 |
+| solteiros 15+ | **134** | 138 | 134 | 140 | 130 | 47 | 29 |
+| urbana do Nordeste | **171** | 175 | 186 | 190 | 173 | 0 | 19 |
 
-![Figura 9](figuras/desenho_amostral_1960/fig09_estimadores.png)
+O jackknife não tem coluna aqui, e a razão é que ele não teria números próprios: para um **total**, o jackknife de deleção de uma unidade primária é algebricamente idêntico ao estimador de conglomerado último (seção 13.6). Ele reapareceria como cópia da primeira coluna, com a correção finita, ou da segunda, sem ela.
+
+![Os erros-padrão dos cinco totais-exemplo sob cada estimador](figuras/desenho_amostral_1960/fig10_estimadores.png)
 
 A última coluna é o erro-padrão que uma amostra aleatória simples de pessoas do mesmo tamanho teria; a razão entre ela e a primeira, ao quadrado, é o efeito de desenho. É a medida do que a amostragem por pastas custa.
 
@@ -660,7 +769,7 @@ $$
 \widehat{V}_{2i} = \left(1 - \tfrac{1}{4}\right) \frac{n_i}{n_i - 1} \sum_{k \in i} \left(u_k - \bar{u}_i\right)^2, \qquad \widehat{V}_{\text{dom}} = 20^2 \sum_{i \in s} \widehat{V}_{2i}, \qquad \text{parte que falta} = \tfrac{1}{20}\widehat{V}_{\text{dom}} = 20 \sum_{i \in s} \widehat{V}_{2i},
 $$
 
-o que, em termos dos totais ponderados dos domicílios $w_k y_k$, dá a parte que falta igual a $0{,}0375$ vezes a soma, sobre as pastas sorteadas, da soma de quadrados dos totais dos domicílios em torno da média da pasta — três linhas de código sobre a tabela de domicílios. Medida nos cinco totais-exemplo e em duas células:
+o que, em termos dos totais ponderados dos domicílios $w_k y_k$, dá a parte que falta igual a $f_h (1 - 	frac{1}{4}) = 0{,}0375$ vezes a soma, sobre as pastas sorteadas, da soma de quadrados dos totais dos domicílios em torno da média da pasta — três linhas de código sobre a tabela de domicílios. Em Fernando de Noronha, onde $f_h = 1$ porque a pasta era o cadastro inteiro, o fator é $0{,}75$: ali a etapa dos domicílios não é resíduo, é **toda** a variância — o que resta de aleatório em Noronha é o sorteio de um domicílio em quatro, e a seção 10.1 mostra que a pasta de 1,27% contém de fato os 62 dos 75 domicílios da amostra de 25% que sobreviveram. Medida nos cinco totais-exemplo e em duas células:
 
 | total | $V_{\text{dom}}$ como fração da variância | parte que falta ($V_{\text{dom}}/20$) | aumento do erro-padrão se incluída |
 |---|---|---|---|
@@ -691,7 +800,7 @@ A etapa dos domicílios pesa de 2% a 24% da variância — mais nas células peq
 | Brasil, urbana | 494.024 | 494.024 | 482.523 |
 | Brasil, rural | 606.536 | 606.536 | 581.246 |
 
-Nos totais regionais as duas primeiras colunas coincidem, e não é coincidência: a região e a situação são atributos da pasta inteira, de modo que nesses domínios a regra antiga se comportava exatamente como a mais grossa de todas. O ganho do colapso fino é grande justamente ali — 28% no Norte e Centro-Oeste, 10% no Leste — e nulo no Sul, onde nenhuma unidade da federação ficou sozinha. Nos cinco totais-exemplo, onde a variável de interesse varia dentro da pasta, a diferença é menor mas tem o mesmo sinal (figura 9): 186 mil contra 171 mil na população urbana do Nordeste, 215 mil contra 205 mil nos analfabetos.
+Nos totais regionais as duas primeiras colunas coincidem, e não é coincidência: a região e a situação são atributos da pasta inteira, de modo que nesses domínios a regra antiga se comportava exatamente como a mais grossa de todas. O ganho do colapso fino é grande justamente ali — 28% no Norte e Centro-Oeste, 10% no Leste — e nulo no Sul, onde nenhuma unidade da federação ficou sozinha. Nos cinco totais-exemplo, onde a variável de interesse varia dentro da pasta, a diferença é menor mas tem o mesmo sinal (figura 10): 186 mil contra 171 mil na população urbana do Nordeste, 215 mil contra 205 mil nos analfabetos.
 
 O que se ganha é precisão sem custo de viés: cada junta reúne pastas que o IBGE sorteou separadamente, mas de unidades vizinhas e do mesmo grupo de situação, o que é a aproximação mais próxima possível do desenho real quando não há como medir dentro de uma unidade sozinha. Onde o erro-padrão **sobe** com estratos mais finos — acontece em alguns domínios pequenos — não é um erro: o estimador de variância é ele próprio uma variável aleatória, e estratos mais finos têm menos graus de liberdade, o que o torna mais instável. A justificativa da escolha não é o ganho; é a correspondência com o desenho real, demonstrada na Parte II.
 
@@ -741,7 +850,17 @@ svytotal(~I(V223B == 351), subset(sdr, !(V202 %in% c(3, 4))), na.rm = TRUE)
 
 Dois cuidados. `as_sdr_design()` exige que os dados estejam **ordenados na ordem do sorteio** antes de construir o desenho, e ordena por estrato e depois pela variável indicada; é por isso que a ordenação vem antes. E o método pressupõe que essa ordem seja de fato a do cadastro — o que a seção 6.3 demonstra para esta amostra, mas que deixaria de valer se alguém reordenasse as tabelas.
 
-**Quanto custa.** Nada, se for pela fórmula: o estimador de conglomerado último e o de diferenças sucessivas levam **menos de um décimo de segundo cada um** neste arquivo — os dois operam sobre os 817 totais por pasta, não sobre as 897 mil linhas, e a única diferença entre eles é uma ordenação. O que custa é a outra forma de calcular a mesma coisa: construir os **pesos replicados** de diferenças sucessivas (`as_sdr_design` com 96 réplicas) leva cerca de dez segundos e produz 96 colunas de peso. Os pesos replicados só compensam se o usuário for calcular muitas estatísticas não lineares.
+**Quanto custa.** Nada, se for pela fórmula: o estimador de conglomerado último e o de diferenças sucessivas levam **menos de um décimo de segundo cada um** neste arquivo — os dois operam sobre os 815 totais por pasta, não sobre as 897 mil linhas, e a única diferença entre eles é uma ordenação. O que custa é a outra forma de calcular a mesma coisa: construir os **pesos replicados** de diferenças sucessivas (`as_sdr_design` com 96 réplicas) leva cerca de dez segundos e produz 96 colunas de peso. Os pesos replicados só compensam se o usuário for calcular muitas estatísticas não lineares.
+
+**Cuidado: o `svrep` não devolve a fórmula acima.** Medido em 18/09/2026, na Guanabara: a fórmula de Wolter dá um erro-padrão de 149.043 para a população presente e `as_sdr_design()` dá **157.972**, 6% a mais, e o número não se move com 96, 192, 384 ou 768 réplicas — não é ruído de replicação. O que o pacote implementa é o SDR de **Fay e Train**, que trata a lista como circular: ele soma também $(t_1 - t_n)^2$, a diferença entre a primeira pasta do cadastro e a última, e dispensa o fator $n/(n-1)$. Escrita em fórmula fechada,
+
+$$
+\widehat{V}_{\text{SDR}}(\hat{Y}) = \sum_{h=1}^{H} \left(1 - \frac{1}{20}\right) \frac{1}{2} \left[ \sum_{i=2}^{n_h} \left(t_{h,i} - t_{h,i-1}\right)^2 + \left(t_{h,1} - t_{h,n_h}\right)^2 \right],
+$$
+
+ela reproduz o `svrep` no dígito. Na Guanabara o termo circular vale 15,3% da soma das diferenças. As duas variantes são legítimas, mas a de Wolter é a preferível aqui: a primeira e a última pasta do cadastro de uma unidade da federação não são vizinhas em coisa nenhuma, e a diferença entre elas é a de um par qualquer — contá-la infla a variância sem justificativa de desenho. O fechamento circular é artefato da construção de Hadamard, não hipótese sobre o sorteio. As duas estão implementadas, lado a lado, em `references/estimador_diferencas_sucessivas_1960.R`.
+
+Há ainda uma armadilha do outro lado: num domínio que cabe **numa pasta só**, as diferenças sucessivas não ajudam e chegam a atrapalhar. Com o domínio concentrado na pasta $i$, as duas diferenças que a envolvem valem $t_i^2$ cada uma, e o estimador devolve praticamente o mesmo que o de conglomerado último — na Guanabara, 98,7% de coeficiente de variação contra 97,5%. Nenhum estimador de variância conserta um domínio com um conglomerado só (seção 13.8).
 
 **Por que é opção, e não padrão.** O estimador de conglomerado último é o que qualquer usuário do `survey` obtém das colunas de desenho sem saber nada sobre a ordem do cadastro; o de diferenças sucessivas dá erros menores, mas depende de uma hipótese a mais (a ordem) e de o usuário preservá-la. Fica documentado como a alternativa mais bem fundamentada para variáveis com padrão espacial.
 
@@ -779,7 +898,7 @@ O primeiro termo é o erro do dano, e é dele que a variância pós-calibração
 
 **Com `censobr_weight`, a conta muda de natureza, e o passo 11 a calcula.** Os totais do peso final são externos — a contagem completa em onze unidades da federação e a amostra de 25% nas outras dezessete, cuja variância é vinte vezes menor que a desta subamostra e para efeito prático a torna constante. Calibrar a eles reduz a variância de verdade, e aí a fórmula dos resíduos é a correta. Desde 2026-09-15 o passo 11 a calcula com as 543 células do peso final e a grava em `erro_padrao_calibrado` e `cv_calibrado_pct`; para `censobr_weight_1965` as duas colunas ficam vazias, pela razão acima.
 
-O que ela dá (seção 12.4): zero nas células que foram restrição, legitimamente; 5.618 no total do país, que é o Distrito Federal sozinho; 42 mil no urbano e no rural do Leste, que é o corte urbano/rural das unidades da federação que não tinham oito pastas; e, nas 176 células do quadro 1, uma mediana de 1,3% de coeficiente de variação contra 3,5% do estimador de desenho — 35% do erro-padrão. Nos cinco totais-exemplo (figura 9) a redução vai de 11% nos operários da construção civil a 84% nos analfabetos de 15 anos e mais, e é maior exatamente onde se espera: quanto mais a variável se explica por sexo, idade, situação e alfabetização dentro da unidade da federação, mais dela a calibração já prendeu.
+O que ela dá (seção 12.4): zero nas células que foram restrição, legitimamente; 5.618 no total do país, que é o Distrito Federal sozinho; 42 mil no urbano e no rural do Leste, que é o corte urbano/rural das unidades da federação que não tinham oito pastas; e, nas 176 células do quadro 1, uma mediana de 1,3% de coeficiente de variação contra 3,5% do estimador de desenho — 35% do erro-padrão. Nos cinco totais-exemplo (figura 10) a redução vai de 11% nos operários da construção civil a 84% nos analfabetos de 15 anos e mais, e é maior exatamente onde se espera: quanto mais a variável se explica por sexo, idade, situação e alfabetização dentro da unidade da federação, mais dela a calibração já prendeu.
 
 **Qual dos dois publicar.** Os dois, que é o que o CSV faz, porque respondem a perguntas diferentes. O de desenho responde "quanto esta amostra erraria se eu não soubesse nada sobre os pesos"; é o número conservador, o que um usuário do `survey` obtém sem esforço, e o único comparável com `censobr_weight_1965`. O dos resíduos responde "quanto ainda pode errar, dado que 543 totais publicados pelo IBGE estão presos"; é o número certo para quem usa o peso final como ele é, e o único que reconhece a informação externa que entrou. Para as margens da calibração, o segundo é zero — e isso, aqui, não é uma armadilha: é o que significa ter calibrado a um total que o IBGE apurou com a contagem completa ou com uma amostra vinte vezes maior.
 
@@ -787,11 +906,20 @@ O que ela dá (seção 12.4): zero nas células que foram restrição, legitimam
 
 **Decisão.** As tabelas não trazem, nem trarão, colunas de pesos replicados de nenhum tipo. As duas subseções seguintes explicam o que eles são, para que o leitor saiba o que está deixando de lado e como obtê-los por conta própria a partir das colunas de desenho, com uma linha do `survey`.
 
-**A ideia.** Em vez de fórmula, repetição. Constrói-se uma coleção de conjuntos de pesos, cada um simulando "a amostra sem uma pasta": retira-se a pasta $i$ do estrato $h$ e multiplicam-se os pesos das outras $n_h - 1$ pastas do estrato por $n_h/(n_h - 1)$, para que o estrato continue somando o mesmo. Calcula-se a estimativa $\hat{Y}_{(hi)}$ com cada conjunto; a dispersão das 817 estimativas em torno da estimativa completa é a variância:
+**A ideia.** Em vez de fórmula, repetição. Constrói-se uma coleção de conjuntos de pesos, cada um simulando "a amostra sem uma pasta": retira-se a pasta $i$ do estrato $h$ e multiplicam-se os pesos das outras $n_h - 1$ pastas do estrato por $n_h/(n_h - 1)$, para que o estrato continue somando o mesmo. Calcula-se a estimativa $\hat{Y}_{(hi)}$ com cada conjunto; a dispersão das 815 estimativas em torno da estimativa completa é a variância:
 
 $$
 \widehat{V}_{\text{JK}}(\hat{Y}) = \sum_{h=1}^{H} \frac{n_h - 1}{n_h} \sum_{i=1}^{n_h} \left(\hat{Y}_{(hi)} - \hat{Y}\right)^2 .
 $$
+
+**Para um total, isto não é um estimador novo.** Substituindo $\hat{Y}_{(hi)} - \hat{Y} = n_h(\bar{t}_h - t_{hi})/(n_h - 1)$ na soma, os fatores se cancelam e sobra
+
+$$
+\widehat{V}_{\text{JK}}(\hat{Y}) = \sum_{h=1}^{H} \frac{n_h}{n_h - 1} \sum_{i=1}^{n_h} \left(t_{hi} - \bar{t}_h\right)^2 ,
+$$
+
+que é exatamente o estimador de conglomerado último da seção 12.2, sem a correção de população finita — e com ela, se as réplicas a incorporarem. O jackknife só diz algo diferente em estatísticas **não lineares** (razões, quantis, coeficientes de regressão), onde a linearização e a repetição deixam de coincidir. É por isso que ele não tem coluna na tabela comparativa da abertura desta seção.
+
 
 ```
 pasta       peso original   réplica 1 (sem a pasta 1)   réplica 2 (sem a pasta 2) ...
@@ -804,7 +932,7 @@ pasta       peso original   réplica 1 (sem a pasta 1)   réplica 2 (sem a pasta
 
 **O exemplo.** Para totais e médias o jackknife dá **exatamente** o estimador de conglomerado último sem a correção finita (é uma identidade algébrica): 27, 80, 210, 140 e 175 mil, os mesmos números da coluna "sem correção finita". Não é ganho de precisão; é ganho de conveniência: o usuário não precisa saber o que é estrato nem pasta, só multiplicar pelas colunas de peso.
 
-**O que custa.** 817 colunas a mais em 897 mil linhas (uns 6 GB em ponto flutuante), inviável para distribuir. As alternativas de tamanho razoável são o jackknife por grupos aleatórios de pastas (por exemplo, 100 réplicas) ou o bootstrap da subseção seguinte. Com o `survey`, `as.svrepdesign(desenho, type = "JK1")` constrói as réplicas a partir de `censobr_upa` e `censobr_estrato` sem gravar nada.
+**O que custa.** 815 colunas a mais em 897 mil linhas (uns 6 GB em ponto flutuante), inviável para distribuir. As alternativas de tamanho razoável são o jackknife por grupos aleatórios de pastas (por exemplo, 100 réplicas) ou o bootstrap da subseção seguinte. Com o `survey`, `as.svrepdesign(desenho, type = "JK1")` constrói as réplicas a partir de `censobr_upa` e `censobr_estrato` sem gravar nada.
 
 ### 13.7 Pesos replicados: bootstrap de Rao e Wu (não será feito)
 
@@ -842,7 +970,7 @@ A amostra de 25% sobreviveu para 17 unidades da federação, com a mesma chave d
 3. **Variância pelos resíduos da calibração para `censobr_weight`** (12.4, 13.5), nas colunas `erro_padrao_calibrado` e `cv_calibrado_pct`, ao lado da de desenho. É legítima porque os 543 totais do peso final são externos.
 4. **Peso final calibrado aos resultados definitivos por unidade da federação** (10.3), com o peso de 1965 ao lado (10.4) para reproduzir a publicação preliminar e medir a distância entre as duas.
 5. **Sem variância pós-calibração** para `censobr_weight_1965` (13.5), cujos totais saíram desta mesma amostra: as duas colunas ficam vazias.
-6. **Sem unidade secundária de amostragem** (11): a pasta é a última unidade sorteada e o domicílio é a etapa anterior, cuja variância o estimador contém em 95% pela dispersão entre pastas e nos 5% restantes pelo termo acima.
+6. **A pasta como unidade primária e o domicílio como segunda etapa** (11): a variância vem da dispersão entre pastas, que já contém 95% da variância da etapa dos domicílios, mais o termo acima pelos 5% restantes. Na tabela publicada esse par é escrito explicitamente, em `censobr_upa`/`censobr_fpc` e `censobr_usa`/`censobr_fpc2`, para que uma chamada só de `svydesign` devolva a mesma conta.
 
 **Opção documentada**, não padrão:
 
@@ -856,16 +984,62 @@ A amostra de 25% sobreviveu para 17 unidades da federação, com a mesma chave d
 
 **Tarefa:** nenhuma pendente no cálculo do erro amostral desta amostra. O que falta depende da amostra de 25% (13.9): a fração de sorteio exata por estrato, o Distrito Federal inteiro e a decisão sobre as 150 famílias sem registro.
 
+### 13.11 O que deste desenho chega à tabela publicada
+
+Este documento descreve um **estágio**, e o que o `censobr` distribui é a compilação das duas amostras de 1960. Convém dizer, sem repetir o que [`microdata_1960_compilacao.md`](microdata_1960_compilacao.md) já explica, o que sobrevive daqui e o que não.
+
+**Onze das vinte e oito unidades da federação.** Nas dezessete em que a amostra de 25% existe, ela domina: é vinte vezes maior e a de 1,27% é subamostra dela, de modo que empilhar as duas contaria a mesma gente duas vezes. A compilação é uma partição por unidade da federação, e as onze que vêm daqui — Rondônia, Acre, Amazonas, Roraima, Pará, Amapá, Maranhão, Piauí, Espírito Santo, Guanabara e Santa Catarina — são exatamente aquelas cujos tomos do Volume I foram apurados pelo Boletim Geral completo. A coluna `censobr_amostra` diz, registro a registro, de qual metade ele vem.
+
+**Os 75 estratos não sobrevivem ao corte.** Eles foram construídos sobre as 28 unidades; sobre as onze que ficam, a regra de colapso foi reexecutada, e o resultado são **21 estratos em 145 pastas**, o menor com duas. A Guanabara é o caso que obrigou a estender a regra: as suas vizinhas de região vêm todas da amostra de 25%, e o grupo solitário teve de se juntar ao maior grupo dela mesma.
+
+**O desenho vira de duas etapas, escritas.** A pasta continua sendo a unidade primária — `censobr_upa`, com `censobr_fpc` = 1/20 —, e o domicílio entra como segunda etapa em `censobr_usa`, com `censobr_fpc2` = 1/4. Do lado das dezessete a primeira etapa é o próprio domicílio, com fração 1/4, e a segunda é degenerada. Como nenhum estrato e nenhuma unidade primária mistura as duas metades, uma chamada só de `svydesign` descreve o país (seção 14.1).
+
+**Os dois registros de chave danificada descem corrigidos.** `censobr_upa` na tabela publicada é a pasta do desenho, não a do cartão: `v001` continua com o que o cartão gravou e `censobr_diagnostico` marca os dois. A Guanabara passa de 41 para 40 pastas, e o efeito não é local — o erro-padrão da população presente do **país inteiro** cai de 291.693 para **280.574**, quase 4%, porque uma unidade primária com um domicílio só num estrato de quarenta pesa na soma de quadrados muito além do seu tamanho.
+
+**Os pesos foram refeitos nas duas metades**, para ficarem na mesma régua: os dois estágios calibram aos resultados definitivos da Série Nacional por unidade da federação. O `censobr_weight` que este documento descreve é, nas onze unidades, o mesmo que a tabela publicada traz.
+
 ## 14. Como usar em R
+
+Há duas tabelas em jogo e elas pedem chamadas diferentes: a que o `censobr` publica, que é a compilação das duas amostras de 1960, e a deste estágio, que é a subamostra de 1,27% sozinha. Quem vai analisar o censo quer a primeira; quem vai auditar o que está escrito aqui quer a segunda.
+
+### 14.1 Na tabela publicada
+
+O desenho ali é de duas etapas e está inteiro nas colunas — não é preciso construir nada:
 
 ```r
 library(arrow); library(survey)
+options(survey.lonely.psu = "adjust")
+
+pop <- read_parquet("data/microdata_sample/1960/1960_population_v1.0.0.parquet")
+pop <- pop[order(pop$censobr_estrato, pop$censobr_upa), ]
+
+des <- svydesign(ids     = ~censobr_upa + censobr_usa,
+                 strata  = ~censobr_estrato,
+                 weights = ~censobr_weight,
+                 fpc     = ~censobr_fpc + censobr_fpc2,
+                 data    = pop,
+                 check.strata = FALSE)
+```
+
+**O `check.strata = FALSE` não é opcional.** Sem ele o `survey` aborta com `attempt to make a table with >= 2^31 elements`: para conferir que nenhuma unidade primária cai em dois estratos, ele monta uma tabela de contingência densa de 3.066.510 pastas por 18.421 estratos, e `table()` do R para em 2³¹. A checagem é dispensável porque o aninhamento é garantido por construção — nas dezessete unidades da amostra de 25% a unidade primária é o domicílio, que está numa pasta e numa situação só; nas onze é a própria pasta, e o grupo de situação é atributo dela. Medido: nenhuma das 3.066.510 unidades aparece em mais de um estrato. `nest = TRUE` também faz o erro sumir, porque `check.strata` tem `!nest` por padrão, mas pelo motivo errado — ele renomeia as unidades primárias dentro de cada estrato, um `paste()` sobre 15,1 milhões de linhas, e `censobr_upa` já é único no país.
+
+O custo, medido em 2026-09-21 sobre as 15.145.810 linhas: **136 s** para montar o desenho e **166 s** por `svytotal`, com o objeto ocupando **11,3 GB** — porque o `survey` guarda a tabela inteira dentro dele. Lendo só as colunas de que a conta precisa (`col_select` no `read_parquet`, com as cinco de desenho, o peso e as variáveis a estimar), o mesmo desenho cai para **4,8 GB**. Vale montar uma vez e reaproveitar.
+
+Conferido de ponta a ponta: esse bloco devolve 70.191.146 presentes com erro-padrão 280.575, que é o valor de `data_raw/microdata/1960/compilada/erros_amostrais.csv`. Para um recorte que caiba em memória — uma unidade da federação, uma região —, as diferenças sucessivas da seção 13.4 são viáveis e dão erros-padrão menores; no país inteiro não são, porque 96 colunas de peso replicado sobre 15,1 milhões de linhas passam de 11 GB.
+
+### 14.2 Nas tabelas deste estágio
+
+Aqui o desenho é de uma etapa só — a pasta —, e a parcela da etapa dos domicílios entra pela conta do passo 11, não pelo `survey`:
+
+```r
+library(arrow); library(survey)
+options(survey.lonely.psu = "adjust")     # só Noronha tem pasta sozinha, mas subconjuntos podem ter
+
 pessoas <- read_parquet("data_raw/microdata/1960/amostra_127/pessoas_1960_amostra_127.parquet")
 pessoas$fpc <- ifelse(pessoas$UF == 24, 1, 1 / 20)   # uma pasta em vinte; em Noronha a pasta era o cadastro
 
 desenho <- svydesign(ids = ~censobr_upa, strata = ~censobr_estrato,
                      weights = ~censobr_weight, fpc = ~fpc, data = pessoas)
-options(survey.lonely.psu = "adjust")     # só Noronha tem pasta sozinha, mas subconjuntos podem ter
 
 # um total com erro-padrão: pessoas presentes por estrato
 presentes <- subset(desenho, !(V202 %in% c(3, 4)))
@@ -879,12 +1053,20 @@ svymean(~I(V211 %in% c(0, 1)), alf, na.rm = TRUE)
 svymean(~V204B, subset(presentes, V223B == 351 & V204 == 1), deff = TRUE)
 ```
 
-Quatro cuidados. Subconjuntos devem ser feitos com `subset()` sobre o objeto de desenho, não filtrando a tabela antes, para que as pastas sem ninguém do domínio continuem contadas. Domicílios usam as mesmas colunas e os mesmos pesos, uma linha por domicílio. Estimativas para um município são, em geral, estimativas de uma ou duas pastas: não têm erro-padrão calculável e não devem ser publicadas como estimativas municipais — a amostra não foi desenhada para isso. E o que o `survey` devolve assim é o erro-padrão **de desenho**: para o que a calibração já prendeu, use a coluna `erro_padrao_calibrado` do CSV do passo 11, ou refaça a conta com `survey::calibrate()` sobre as mesmas 543 células (o script da conferência mostra como).
+### 14.3 Quatro cuidados, nas duas
+
+**Recorte o desenho, não a tabela.** Subconjuntos devem sair de `subset()` sobre o objeto de desenho, nunca de um filtro aplicado aos dados antes de construí-lo, para que as pastas sem ninguém do domínio continuem contadas com total zero. Filtrar antes subestima a variância.
+
+**Domicílios usam as mesmas colunas e os mesmos pesos**, uma linha por domicílio. Famílias, não: o peso é por domicílio (seção 2.1).
+
+**Não estime abaixo do município.** Uma estimativa municipal é, em geral, a de uma ou duas pastas; não tem erro-padrão calculável e não deve ser publicada como estimativa municipal. Pior ainda por distrito ou bairro: num domínio que cabe numa pasta só, o coeficiente de variação de um total fica perto de 100% por construção, e uma proporção interna àquela pasta sai com erro-padrão **zero**, que é falsa precisão e não precisão (seção 13.8).
+
+**O que o `survey` devolve é o erro-padrão de desenho.** Para o que a calibração já prendeu, use a coluna `erro_padrao_calibrado` do CSV do passo 11, ou refaça a conta com `survey::calibrate()` sobre as mesmas 543 células — o script da conferência mostra como.
 
 ## 15. Limitações e cuidados
 
 - **O desenho é reconstruído.** O critério geográfico, a regra da cidade grande e a classificação de cada pasta são a leitura do Volume II verificada contra o cadastro (Parte II). Onde a verificação não é possível (as 11 unidades da federação sem amostra de 25%) ou onde a classificação de uma pasta pode diferir da do IBGE, o erro do estimador é para o lado conservador.
-- **O Distrito Federal está truncado** e o trecho perdido não é aleatório (um acampamento de construção). Com `censobr_weight` ele fica no peso de desenho, em 31% da população publicada; com `censobr_weight_1965` ele soma ao Norte e Centro-Oeste o que o arquivo perdeu. A compilação com a amostra de 25% resolve, porque lá o DF está inteiro.
+- **O Distrito Federal está truncado** e o que falta não é aleatório: a construção civil é o único ramo que não fecha ali, e a amostra de 25% mostra que 59% dos boletins do DF eram de morador de domicílio coletivo (seção 4). Com `censobr_weight` ele fica no peso de desenho, em 31% da população publicada; com `censobr_weight_1965` ele soma ao Norte e Centro-Oeste o que o arquivo perdeu. A compilação com a amostra de 25% resolve, porque lá o DF está inteiro.
 - **Cobertura parcial** de Rondônia, Amapá, Acre, Roraima, Fernando de Noronha e Distrito Federal: poucas pastas, e em alguns casos uma situação só.
 - **Domínios pequenos.** Com efeitos de desenho de 4 a 10, uma célula precisa de milhares de pessoas na amostra para ter erro relativo abaixo de 5%.
 - **Comparações com 1965.** Os quadros 1 e 2 são reproduzidos exatamente por construção; os demais diferem por poucos por cento, e as diferenças estão explicadas ou documentadas no documento de preparação (seção 7).
