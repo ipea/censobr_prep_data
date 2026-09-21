@@ -41,3 +41,6 @@ __pycache__/
 !references/fontes_1960/*.html
 *_files/
 nul
+# scratch de sessao: nunca entra. Em 21/09/2026 tmp/ chegou a 8.894 arquivos e
+# 2,2 GB (perfis de navegador, QA da cartografia) sem estar ignorado
+tmp/
