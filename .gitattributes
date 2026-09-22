@@ -1,0 +1,13 @@
+# As provas de 1960 verificam os bytes destes arquivos, incluindo fins de linha.
+# Nao normalizar no checkout: os quatro guias preservam seus formatos atuais.
+read_guides/readguide_1960_amostra_127_familias.csv -text
+read_guides/readguide_1960_amostra_127_pessoas.csv -text
+read_guides/readguide_1960_amostra_25_familias.csv -text
+read_guides/readguide_1960_amostra_25_pessoas.csv -text
+read_guides/1960_amostra_127_correcoes.csv -text
+read_guides/1960_amostra_127_duplicatas.csv -text
+read_guides/1960_amostra_127_vinculos.csv -text
+read_guides/1960_amostra_127_cartoes_recuperados.json -text
+read_guides/1960_amostra_127_reparos_fonte25.json -text
+read_guides/1960_amostra_127_geografia_fonte25.json -text
+references/fechamento_registros_1960_evidencias/*.json -text

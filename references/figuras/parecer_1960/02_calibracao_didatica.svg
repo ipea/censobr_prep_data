@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620" role="img" aria-labelledby="t d">
+<title id="t">Como o ajuste e a conferência podem concordar no mesmo erro</title>
+<desc id="d">Exemplo inventado: cinco leitores presentes, quatro com idade conhecida de cinco anos ou mais e um com idade ignorada. A referência inclui todos e vale cem. Ao excluir o quinto, o ajuste aumenta o peso comum de vinte para vinte e cinco. A conferência errada soma quatro vezes vinte e cinco e mostra cem, mas o conjunto correto soma cento e vinte e cinco. Incluindo os cinco desde o ajuste, o peso fica vinte e o total cem.</desc>
+<rect width="1000" height="620" fill="#ffffff"/>
+<g font-family="Segoe UI,Arial,sans-serif" fill="#172f40">
+<text x="30" y="36" font-size="23" font-weight="600">EXEMPLO DIDÁTICO — números inventados para explicar o mecanismo</text>
+<text x="30" y="71" font-size="20">Cinco leitores presentes. Referência publicada: 100, incluindo idade ignorada.</text>
+<g fill="#eaf2f5"><rect x="30" y="98" width="166" height="75" rx="6"/><rect x="208" y="98" width="166" height="75" rx="6"/><rect x="386" y="98" width="166" height="75" rx="6"/><rect x="564" y="98" width="166" height="75" rx="6"/></g>
+<rect x="748" y="98" width="222" height="75" rx="6" fill="#f7ecd8"/>
+<g font-size="19" text-anchor="middle"><text x="113" y="128">Leitor 1</text><text x="113" y="154">Idade ≥ 5</text><text x="291" y="128">Leitor 2</text><text x="291" y="154">Idade ≥ 5</text><text x="469" y="128">Leitor 3</text><text x="469" y="154">Idade ≥ 5</text><text x="647" y="128">Leitor 4</text><text x="647" y="154">Idade ≥ 5</text><text x="859" y="128">Leitor 5</text><text x="859" y="154">Idade ignorada</text></g>
+<text x="30" y="207" font-size="19">Para simplificar, todos recebem o mesmo peso. Inicialmente, cada um representa 20 pessoas.</text>
+<rect x="30" y="237" width="460" height="266" rx="8" fill="#fcf0eb"/>
+<text x="50" y="272" font-size="22" font-weight="600">Ajuste e teste com a mesma exclusão</text>
+<text x="50" y="310" font-size="20">1. Contam só quatro leitores: 4 × 20 = 80.</text>
+<text x="50" y="348" font-size="20">2. Ajustam o peso para 25: 4 × 25 = 100.</text>
+<text x="50" y="386" font-size="20">3. O teste repete o filtro: “100, correto”.</text>
+<line x1="50" y1="411" x2="470" y2="411" stroke="#d8bab0"/>
+<text x="50" y="448" font-size="21" font-weight="600">Mas os cinco leitores somam 125.</text>
+<text x="50" y="478" font-size="18">Todos recebem peso 25; só quatro são contados.</text>
+<rect x="510" y="237" width="460" height="266" rx="8" fill="#e0efeb"/>
+<text x="530" y="272" font-size="21" font-weight="600">Grupo correto desde o início do ajuste</text>
+<text x="530" y="310" font-size="20">1. Contam os cinco: 5 × 20 = 100.</text>
+<text x="530" y="348" font-size="20">2. Não é preciso elevar o peso neste caso.</text>
+<text x="530" y="386" font-size="20">3. O teste usa o mesmo grupo da fonte.</text>
+<line x1="530" y1="411" x2="950" y2="411" stroke="#afcbc1"/>
+<text x="530" y="448" font-size="21" font-weight="600">Os cinco leitores somam 100.</text>
+<text x="530" y="480" font-size="19">A idade ignorada continua ignorada.</text>
+<text x="30" y="545" font-size="19">Na tabela real de SP, só refizemos a soma com os pesos antigos. Uma nova calibração está pendente.</text>
+<text x="30" y="577" font-size="19">O ajuste real envolve outras condições; não se calcula seu resultado com esta miniatura.</text>
+</g></svg>

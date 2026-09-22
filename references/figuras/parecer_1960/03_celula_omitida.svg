@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="405" viewBox="0 0 1000 405" role="img" aria-labelledby="t d">
+<title id="t">Rondônia rural: linha ausente no relatório não significa problema ausente</title>
+<desc id="d">Na referência oficial há 23324 homens e 16282 mulheres rurais presentes de Rondônia. O relatório existente não traz essas linhas porque a amostra não contém casos classificados como rurais. A apresentação proposta conserva as duas linhas, registra zero casos, soma observada zero e ausência de observações da categoria. Não declara que a população rural seja zero.</desc>
+<rect width="1000" height="405" fill="#ffffff"/>
+<g font-family="Segoe UI,Arial,sans-serif" fill="#172f40">
+<text x="30" y="37" font-size="24" font-weight="600">CASO REAL — população presente rural de Rondônia</text>
+<text x="30" y="75" font-size="20">Referência publicada: 23.324 homens + 16.282 mulheres = 39.606 pessoas.</text>
+<rect x="30" y="106" width="430" height="208" rx="8" fill="#fcf0eb"/>
+<text x="50" y="142" font-size="23" font-weight="600">Relatório existente</text>
+<text x="50" y="182" font-size="21">Homens rurais: linha ausente.</text>
+<text x="50" y="220" font-size="21">Mulheres rurais: linha ausente.</text>
+<text x="50" y="273" font-size="19">A comparação não aparece.</text>
+<rect x="490" y="106" width="480" height="208" rx="8" fill="#e0efeb"/>
+<text x="510" y="142" font-size="23" font-weight="600">Relatório proposto</text>
+<text x="510" y="182" font-size="21">Homens: 0 casos; referência 23.324.</text>
+<text x="510" y="220" font-size="21">Mulheres: 0 casos; referência 16.282.</text>
+<text x="510" y="263" font-size="19">Soma observada: 0. Categoria sem observações.</text>
+<text x="510" y="290" font-size="19">Não significa população verdadeira igual a zero.</text>
+<text x="30" y="356" font-size="20">O primeiro passo é tornar a falta visível. Aumentar pesos urbanos não cria moradores rurais.</text>
+</g></svg>

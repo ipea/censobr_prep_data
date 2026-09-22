@@ -521,14 +521,27 @@ build_1960_amostra_25 <- function(paths, uf, municipios_path, distritos_path){
 # refinamento municipal vale e para reproduzir a Série Regional inclusive nos
 # seus artefatos de arredondamento.
 # ------------------------------------------------------------------------------
-weight_1960_amostra_25 <- function(paths, uf, municipios_path, definitivos_path){
+weight_1960_amostra_25 <- function(paths, uf, municipios_path, definitivos_path,
+                                  out_dir = file.path("./data_raw/microdata/1960/amostra_25", uf)){
 
   message("Weighting 1960 amostra de 25%: ", uf)
 
-  in_dir     <- file.path("./data_raw/microdata/1960/amostra_25", uf)
-  domicilios <- data.table::setDT(arrow::read_parquet(file.path(in_dir, "domicilios.parquet")))
-  pessoas    <- data.table::setDT(arrow::read_parquet(file.path(in_dir, "pessoas_geo.parquet")))
+  arquivos <- as.character(unlist(paths, use.names = FALSE))
+  path_dom <- arquivos[basename(arquivos) == "domicilios.parquet"]
+  path_pes <- arquivos[basename(arquivos) == "pessoas_geo.parquet"]
+  if(length(path_dom) != 1L || length(path_pes) != 1L)
+    stop("informar um arquivo de domicilios e um de pessoas_geo da UF para calibrar")
+  domicilios <- data.table::setDT(arrow::read_parquet(path_dom))
+  pessoas    <- data.table::setDT(arrow::read_parquet(path_pes))
   codigo_uf  <- as.integer(UF_1960_AMOSTRA_25[[uf]])
+  if(!nrow(domicilios) || !nrow(pessoas) || any(!domicilios$UF %in% codigo_uf) || any(!pessoas$UF %in% codigo_uf))
+    stop("arquivos vazios ou com UF incompativel na calibracao")
+  if(anyNA(domicilios$censobr_idhousehold) || anyDuplicated(domicilios$censobr_idhousehold))
+    stop("identificadores ausentes ou duplicados nos domicilios da calibracao")
+  if(any(!pessoas$censobr_idhousehold %in% domicilios$censobr_idhousehold)) stop("pessoas sem domicilio na calibracao")
+  if(any(!pessoas$V202 %in% 1:6)) stop("presenca desconhecida em controles da calibracao")
+  if(any(!domicilios$V118 %in% c(1, 3, 5)) || any(pessoas$V202 %in% c(1, 2, 5, 6) & !pessoas$V118 %in% c(1, 3, 5)))
+    stop("situacao desconhecida em controles da calibracao")
 
   # as colunas de desenho: uma etapa so, o domicilio e a unidade, pasta x situacao e o estrato
   domicilios[, situacao := data.table::fifelse(V118 == 5L, "rural", "urbana")]
@@ -559,19 +572,26 @@ weight_1960_amostra_25 <- function(paths, uf, municipios_path, definitivos_path)
   # --------------------------------------------------------------------------
   def <- data.table::fread(definitivos_path, encoding = "UTF-8")
   def <- def[nivel == "uf" & uf60 == codigo_uf]
+  if(anyDuplicated(def[, .(tabela, uf60, item, sexo, medida)])) stop("chave duplicada no gabarito da calibracao")
   alvo_uf <- def[tabela == 32L & item == "presente" & sexo %in% c("homens", "mulheres"), sum(valor)]
   if(length(alvo_uf) != 1 || is.na(alvo_uf) || alvo_uf <= 0)
     stop(uf, ": sem total de presentes na Serie Nacional para a unidade ", codigo_uf)
 
   pessoas[, presente := V202 %in% c(1L, 2L, 5L, 6L)]
-  pessoas[, sexo  := data.table::fifelse(V202 %in% c(1L, 3L, 5L), "homens", "mulheres")]
-  pessoas[, idade := data.table::fifelse(V204 == 1L, V204B,
-                     data.table::fifelse(V204 == 5L, 100L + V204B,
-                     data.table::fifelse(V204 == 0L, 0L, NA_integer_)))]
+  pessoas[, sexo := data.table::fifelse(V202 %in% c(1L, 3L, 5L), "homens",
+                   data.table::fifelse(V202 %in% c(2L, 4L, 6L), "mulheres", NA_character_))]
+  pessoas[, idade := data.table::fifelse(V204 %in% 1 & V204B %in% 0:99, V204B,
+                    data.table::fifelse(V204 %in% 0 & V204B %in% 0:99, 0L,
+                    data.table::fifelse(V204 %in% 5, 100L, NA_integer_)))]
+  dano <- pessoas[presente == TRUE & is.na(idade) & !V204 %in% 9]
+  if(nrow(dano)) stop("idade danificada em controles da calibracao; resolver ou explicitar a politica antes do ajuste: linhas ",
+                     paste(head(dano$linha, 10L), collapse = ", "))
+  if(any(pessoas$presente & ((!is.na(pessoas$idade) & pessoas$idade >= 5) | pessoas$V204 %in% 9) &
+         !pessoas$V211 %in% 0:4)) stop("alfabetizacao desconhecida em controles da calibracao")
   pessoas[, faixa := as.character(cut(idade, c(-1, 4, 9, 14, 19, 24, 29, 39, 49, 59, 69, Inf),
                      labels = c("0 a 4", "5 a 9", "10 a 14", "15 a 19", "20 a 24", "25 a 29",
                                 "30 a 39", "40 a 49", "50 a 59", "60 a 69", "70 e mais")))]
-  pessoas[is.na(faixa), faixa := "ignorada"]
+  pessoas[V204 %in% 9, faixa := "ignorada"]
   pessoas[, sit := data.table::fifelse(V118 == 5L, "rural", "urbana")]
   pres <- pessoas[presente == TRUE]
 
@@ -618,13 +638,15 @@ weight_1960_amostra_25 <- function(paths, uf, municipios_path, definitivos_path)
   # margem 3: sabem ler e escrever, 5 anos e mais, por sexo, da tabela 40
   m3 <- def[tabela == 40L & item == "sabem" & sexo %in% c("homens", "mulheres"),
             .(celula = paste0("lit_", sexo), alvo = as.numeric(valor))]
-  pres[, cel_lit := data.table::fifelse(!is.na(idade) & idade >= 5L & V211 %in% c(0L, 1L),
+  pres[, cel_lit := data.table::fifelse(((!is.na(idade) & idade >= 5L) | V204 %in% 9L) & V211 %in% c(0L, 1L),
                                         paste0("lit_", sexo), NA_character_)]
 
   # as margens 1 e 2 somam quase a mesma populacao e o sistema de Newton fica
   # singular, ou perto disso: sai a menor celula municipal, que e a que menos
   # custa, e a sua populacao fica presa as margens demograficas
   alvos <- data.table::rbindlist(list(m1[-which.min(m1$alvo)], m2, m3))
+  if(anyDuplicated(alvos$celula)) stop("celula duplicada nos controles da calibracao")
+  if(any(!is.finite(alvos$alvo)) || any(alvos$alvo < 0)) stop("alvos da calibracao devem ser finitos e nao negativos")
   alvos <- alvos[alvo > 0]
 
   # X: uma linha por domicilio, uma coluna por celula, o valor e quantas pessoas
@@ -636,20 +658,19 @@ weight_1960_amostra_25 <- function(paths, uf, municipios_path, definitivos_path)
   longo <- longo[, .N, by = .(id, celula)]
   vazias <- alvos[!celula %in% longo$celula]
   if(nrow(vazias) > 0)
-    message("  ", nrow(vazias), " celulas com alvo e sem amostra, fora da calibracao: ",
-            paste(vazias$celula, collapse = ", "))
-  alvos <- alvos[celula %in% longo$celula]
+    stop("controle positivo sem suporte amostral; nao retirar sem decisao explicita: ",
+         paste(vazias$celula, collapse = ", "))
   longo <- longo[celula %in% alvos$celula]
 
   ids <- domicilios$censobr_idhousehold
   X <- Matrix::sparseMatrix(i = match(longo$id, ids), j = match(longo$celula, alvos$celula),
-                            x = longo$N, dims = c(length(ids), nrow(alvos)))
+                            x = longo$N, dims = c(length(ids), nrow(alvos)), dimnames = list(NULL, alvos$celula))
   message("  calibrando ", format(nrow(alvos)), " celulas em ", format(nrow(domicilios)), " domicilios")
   # os limites do fator: a ancora municipal ja vem contida em [2; 8] pelo colapso,
   # isto e, g em [0,5; 2], e as margens demograficas pedem alguma folga em cima disso
   w <- raking_1960_amostra_127(X, alvos$alvo, rep(4, length(ids)), limites = c(0.25, 3))
   desvio <- max(abs(as.numeric(Matrix::crossprod(X, w)) - alvos$alvo) / alvos$alvo)
-  if(desvio > 1e-6) stop(uf, ": o raking nao convergiu, desvio relativo maximo ", signif(desvio, 3))
+  if(!is.finite(desvio) || desvio > 1e-6) stop(uf, ": o raking nao convergiu, desvio relativo maximo ", signif(desvio, 3))
 
   domicilios[celulas, censobr_weight_nivel := i.nivel, on = c("code_muni_1960", "situacao")]
   domicilios[, `:=`(censobr_weight = w, censobr_weight_fator = w / 4)]
@@ -685,7 +706,8 @@ weight_1960_amostra_25 <- function(paths, uf, municipios_path, definitivos_path)
   pessoas[, c("presente", "sexo", "idade", "faixa", "sit") := NULL]
   pessoas[domicilios, (leva) := mget(paste0("i.", leva)), on = "censobr_idhousehold"]
 
-  saida <- c(file.path(in_dir, "domicilios_pesos.parquet"), file.path(in_dir, "pessoas_pesos.parquet"))
+  dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+  saida <- c(file.path(out_dir, "domicilios_pesos.parquet"), file.path(out_dir, "pessoas_pesos.parquet"))
   arrow::write_parquet(domicilios, saida[1], compression = "zstd", compression_level = 1)
   arrow::write_parquet(pessoas,    saida[2], compression = "zstd", compression_level = 1)
 
@@ -722,71 +744,69 @@ weight_1960_amostra_25 <- function(paths, uf, municipios_path, definitivos_path)
 # o quanto a nossa leitura difere da do IBGE, e a comparação com censobr_weight
 # mede quanto o refinamento municipal desloca as margens.
 # ------------------------------------------------------------------------------
-validate_definitivos_1960_amostra_25 <- function(paths, definitivos_path){
+validate_definitivos_1960_amostra_25 <- function(paths, definitivos_path,
+                                              out_dir = "./data_raw/microdata/1960/amostra_25"){
 
   message("Validating 1960 amostra de 25% against the Serie Nacional")
 
   def <- data.table::fread(definitivos_path, encoding = "UTF-8")
-  def <- def[nivel == "uf" & uf60 %in% UF_1960_AMOSTRA_25]
+  pub <- def[nivel == "uf" & uf60 %in% UF_1960_AMOSTRA_25 &
+    ((tabela %in% c(32L, 33L, 34L, 37L, 40L) & sexo %in% c("homens", "mulheres")) | tabela == 7L),
+    .(uf60, tabela, nome, item, sexo, medida, publicado = valor)]
+  pub[is.na(sexo), sexo := ""]; pub[is.na(medida), medida := ""]
+  chaves <- c("uf60", "tabela", "item", "sexo", "medida")
+  if(anyDuplicated(pub[, ..chaves])) stop("chave duplicada no gabarito da validacao")
+  arquivos <- as.character(unlist(paths, use.names = FALSE))
+  arquivos_dom <- arquivos[basename(arquivos) == "domicilios_pesos.parquet"]
+  unidades_dom <- basename(dirname(arquivos_dom))
+  if(anyDuplicated(unidades_dom) || any(!unidades_dom %in% names(UF_1960_AMOSTRA_25)))
+    stop("UF repetida ou desconhecida nos caminhos de domicilios")
+  arquivos <- arquivos[basename(arquivos) == "pessoas_pesos.parquet"]
+  unidades <- basename(dirname(arquivos))
+  if(anyDuplicated(unidades) || any(!unidades %in% names(UF_1960_AMOSTRA_25)))
+    stop("UF repetida ou desconhecida nos caminhos de pessoas")
 
   medido <- list()
-  for(uf in names(UF_1960_AMOSTRA_25)){
-    p <- data.table::setDT(arrow::read_parquet(
-      file.path("./data_raw/microdata/1960/amostra_25", uf, "pessoas_pesos.parquet"),
+  for(i in seq_along(arquivos)){
+    uf <- as.integer(UF_1960_AMOSTRA_25[[unidades[i]]])
+    par_dom <- match(unidades[i], unidades_dom)
+    p <- data.table::setDT(arrow::read_parquet(arquivos[i],
       col_select = c("UF", "V118", "V202", "V204", "V204B", "V206", "V211",
-                     "censobr_upa", "censobr_weight", "censobr_weight_ibge")))
-
-    p[, sexo     := data.table::fifelse(V202 %in% c(1L, 3L, 5L), "homens", "mulheres")]
-    p[, presente := V202 %in% c(1L, 2L, 5L, 6L)]
-    p[, residente:= V202 %in% c(1L, 2L, 3L, 4L)]
-    p[, situacao := data.table::fifelse(V118 == 5L, "rural", "urbana")]
-    p[, idade    := data.table::fifelse(V204 == 1L, V204B,
-                    data.table::fifelse(V204 == 5L, 100L + V204B,
-                    data.table::fifelse(V204 == 0L, 0L, NA_integer_)))]
-    p[, faixa := cut(idade, c(-1, 4, 9, 14, 19, 24, 29, 39, 49, 59, 69, Inf),
-                     labels = c("0 a 4", "5 a 9", "10 a 14", "15 a 19", "20 a 24", "25 a 29",
-                                "30 a 39", "40 a 49", "50 a 59", "60 a 69", "70 e mais"))]
-    p[, faixa := as.character(faixa)][is.na(faixa), faixa := "ignorada"]
-    # a tabela 37 publica cinco categorias, e "sem declaracao" e so o ignorado
-    # (V206 = 9): em Mato Grosso o publicado da 139 e o nosso 9 da 138. O codigo
-    # 8, india, entra em pardos, que e onde o censo de 1960 o classificava
-    p[, cor := c("4" = "brancos", "5" = "pretos", "6" = "amarelos", "7" = "pardos",
-                 "8" = "pardos", "9" = "sem declaracao")[as.character(V206)]]
-    p[, alfab := data.table::fifelse(V211 %in% c(0L, 1L), "sabem",
-                 data.table::fifelse(V211 %in% c(2L, 3L), "nao sabem", NA_character_))]
-
-    for(w in c("censobr_weight", "censobr_weight_ibge")){
-      p[, peso := as.numeric(get(w))]
-      pres <- p[presente == TRUE]
-      medido[[length(medido) + 1]] <- data.table::rbindlist(list(
-        p[presente  == TRUE, .(tabela = 32L, item = "presente",  valor = sum(peso)), by = sexo],
-        p[residente == TRUE, .(tabela = 32L, item = "residente", valor = sum(peso)), by = sexo],
-        pres[, .(tabela = 33L, valor = sum(peso)), by = .(item = faixa, sexo)],
-        pres[, .(tabela = 34L, valor = sum(peso)), by = .(item = situacao, sexo)],
-        pres[!is.na(cor), .(tabela = 37L, valor = sum(peso)), by = .(item = cor, sexo)],
-        pres[idade >= 5, .(tabela = 40L, item = "5 e mais", valor = sum(peso)), by = sexo],
-        pres[idade >= 5 & !is.na(alfab), .(tabela = 40L, valor = sum(peso)), by = .(item = alfab, sexo)]
-      ), fill = TRUE)[, `:=`(uf60 = as.integer(UF_1960_AMOSTRA_25[[uf]]), peso = w)]
+                     "censobr_weight", "censobr_weight_ibge",
+                     if(!is.na(par_dom)) "censobr_idhousehold")))
+    if(!nrow(p) || any(!p$UF %in% uf)) stop("arquivo pessoal vazio ou com UF incompatível com o caminho")
+    if(!is.na(par_dom)){
+      d <- data.table::setDT(arrow::read_parquet(arquivos_dom[par_dom],
+        col_select = c("UF", "censobr_idhousehold", "V101", "V102", "V118",
+                       "censobr_weight", "censobr_weight_ibge")))
+      if(any(!d$UF %in% uf)) stop("arquivo domiciliar com UF incompatível com o caminho")
     }
+    for(w in c("censobr_weight", "censobr_weight_ibge")){
+      medido[[length(medido) + 1L]] <- tabular_pessoas_validacao_1960(
+        p, pub[uf60 == uf & tabela != 7L], w)[, peso := w]
+      if(!is.na(par_dom)) medido[[length(medido) + 1L]] <- tabular_domicilios_validacao_1960(
+        p, d, pub[uf60 == uf & tabela == 7L], w)[, peso := w]
+    }
+    if(!is.na(par_dom)) rm(d)
     rm(p); gc(verbose = FALSE)
   }
   medido <- data.table::rbindlist(medido)
-  medido[, valor := round(valor)]
+  grade <- data.table::rbindlist(lapply(c("censobr_weight", "censobr_weight_ibge"),
+    function(w) data.table::copy(pub)[, peso := w]))
+  cmp <- completar_validacao_pessoas_1960(grade, medido, c(chaves, "peso"))
 
-  # o publicado, na mesma forma
-  pub <- def[tabela %in% c(32L, 33L, 34L, 37L, 40L) & sexo %in% c("homens", "mulheres"),
-             .(uf60, tabela, item, sexo, publicado = valor)]
-  cmp <- merge(medido, pub, by = c("uf60", "tabela", "item", "sexo"), all.x = TRUE)
-  cmp[, `:=`(dif = valor - publicado, dif_pct = round(100 * (valor - publicado) / publicado, 3))]
+  dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+  saida <- file.path(out_dir, "validacao_definitivos.csv")
+  data.table::fwrite(cmp[order(peso, tabela, uf60, item, sexo, medida)], saida)
 
-  dir.create("./data_raw/microdata/1960/amostra_25", recursive = TRUE, showWarnings = FALSE)
-  saida <- "./data_raw/microdata/1960/amostra_25/validacao_definitivos.csv"
-  data.table::fwrite(cmp[order(peso, tabela, uf60, item, sexo)], saida)
-
-  resumo <- cmp[!is.na(publicado), .(celulas = .N,
-                                     erro_mediano_pct = round(median(abs(dif_pct), na.rm = TRUE), 2),
-                                     erro_max_pct = round(max(abs(dif_pct), na.rm = TRUE), 2)),
-                by = .(peso, tabela)]
+  resumo <- cmp[, .(celulas = .N, observadas = sum(status_celula == "observada"),
+    sem_observacoes = sum(status_celula == "sem_observacoes"),
+    nao_reconstruidas = sum(status_celula == "nao_reconstruida"),
+    classificacao_incompleta = sum(status_celula == "classificacao_incompleta"),
+    peso_ausente = sum(status_celula == "peso_ausente"), percentuais_validos = sum(is.finite(dif_pct)),
+    erro_mediano_pct = if(any(is.finite(dif_pct))) median(abs(dif_pct), na.rm = TRUE) else NA_real_,
+    erro_max_pct = if(any(is.finite(dif_pct))) max(abs(dif_pct), na.rm = TRUE) else NA_real_),
+    by = .(peso, tabela)]
   print(resumo)
   saida
 }

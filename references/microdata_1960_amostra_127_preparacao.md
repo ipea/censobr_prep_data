@@ -1,6 +1,14 @@
 # Censo de 1960, amostra de 1,27% — a preparação passo a passo
 
-Este documento acompanha o código de `R/microdata_1960_amostra_127.R` (bloco `# 01a.` de `_targets.R`). Para cada passo ele diz qual é o problema, como o problema aparece no arquivo, por que ele aparece assim, o que o código faz e como o resultado fica. Todos os números vêm da execução do pipeline em 2026-09-14; os exemplos são linhas reais do arquivo.
+> **Rodada de registros mais recente — 22/09/2026:** [correções incorporadas, exemplos e limites](fechamento_registros_1960_20260922.md). Foram integradas decisões sobre 954 conjuntos repetidos, 169 vínculos novos, 33 reparos/40 campos e 30 cartões para 74 pessoas existentes. As pendências sem prova permanecem bloqueadas; base completa e pesos127 não foram reconstruídos. Esse resultado prevalece sobre contagens e estados de execução anteriores, sem homologar desenho ou variâncias.
+
+> **Execução posterior — 22/09/2026:** o usuário autorizou testes e correções. Além dos reparos, duplicatas e 82 vínculos anteriores, a [recuperação documentada](recuperacao_cartoes_1960_20260922.md) acrescenta 29 cartões da fonte25 para 72 pessoas já existentes, sem fabricar texto HHOLDA nem novos moradores. Implementação e microlotes conferidos; base completa e pesos127 ainda não refeitos. Esse estado substitui os avisos históricos de suspensão absoluta de R e de ausência total de implementação abaixo.
+
+> **Parecer vigente — 21/09/2026:** a [revisão integrativa](microdata_1960_amostra_127_revisao_integrativa.md) concilia as três rodadas e prevalece sobre conclusões incompatíveis deste histórico. Distingue reparos demonstrados de hipóteses, código bloqueado de dados corrigidos e explicita o que não foi avaliado integralmente. Dados não homologados; sem nova execução R ou reprocessamento.
+
+Este documento acompanha o código de `R/microdata_1960_amostra_127.R` (bloco `# 01a.` de `_targets.R`). Para cada passo ele diz qual é o problema, como o problema aparece no arquivo, por que ele aparece assim, o que o código faz e como o resultado fica. O corpo histórico descreve execuções de setembro de 2026; os exemplos são linhas reais do arquivo.
+
+**Revisão de integridade — 21/09/2026.** Este documento não certifica a integridade dos parquets atuais. O cruzamento com a amostra de 25% confirmou exclusões indevidas de filhos de idade ignorada e vínculos indevidos ao registro anterior. Ver [auditoria de vínculos e duplicatas](microdata_1960_amostra_127_auditoria_vinculos.md), [revisão da validação](microdata_1960_amostra_127_auditoria_validacao.md) e [revisão do desenho](microdata_1960_amostra_127_revisao_desenho.md). Esses relatórios prevalecem sobre conclusões históricas incompatíveis abaixo. O código agora interrompe antes das exclusões propostas pela regra antiga e antes da anexação de órfãos; os casos precisam de reconciliação, não de um vínculo escolhido por proximidade. Nenhum parquet foi regenerado nesta revisão e nenhum R/Rscript foi executado. Os testes R preparados ainda precisam de execução autorizada.
 
 O estágio cobre a amostra de 1,27%. A amostra de 25% está em [`microdata_1960_amostra_25_preparacao.md`](microdata_1960_amostra_25_preparacao.md) e a compilação das duas — que é o que o `censobr` distribui como microdados de 1960 — em [`microdata_1960_compilacao.md`](microdata_1960_compilacao.md). Na compilação, esta amostra entra nas **onze** unidades da federação em que a de 25% não sobreviveu; nas outras dezessete ela é subamostra daquela, e empilhar as duas contaria a mesma gente duas vezes.
 
@@ -81,7 +89,7 @@ O mapa do dano por posição no arquivo confirma a origem física: o dano não e
 
 (Faixas de 20.000 linhas com dano relevante; as demais têm de zero a cinco ocorrências cada.)
 
-**O método.** O que está implementado segue as regras dos projetos de resgate de microdados históricos: preservar o bruto; detectar por regra mecânica e explícita; decidir caso a caso num registro escrito e reproduzível; nunca alterar em silêncio, sempre com marca; reconstruir só a partir do conteúdo do próprio registro ou de invariantes estruturais, como a chave do questionário; e validar contra uma fonte externa produzida antes do dano. A regra de fidelidade é esta: imputação determinística — a que não tem alternativa — é permitida e sempre marcada; imputação por suposição não é feita.
+**O método exigido.** Preservar o bruto; detectar por regra explícita; decidir caso a caso num registro reproduzível; marcar toda alteração; reconstruir a partir de evidência que identifique o conteúdo, não apenas de plausibilidade; e conferir contra fonte anterior ao dano. Imputação determinística exige ausência de alternativa. A auditoria de 21/09 encontrou violações dessa exigência nos vínculos, nas exclusões e nos reparos abaixo. Uma marca de diagnóstico permite rastrear a decisão, mas não a torna verdadeira.
 
 ## 4. Os quatro tipos de dano e como se veem
 
@@ -130,7 +138,7 @@ antes    02024301021102572117128571"912183110085404048352425156\0001403
 depois   (texto mantido; só o valor apontado vira NA na leitura)
 ```
 
-**Linha 387715 — reparo.** 2026: um caractere perdido entre as posições 38 e 44 puxou V219/V220 uma casa para a esquerda (hífen de salto em 46, não em 47). Inserido um branco na posição 45: V219 fica NA, V220 e o salto voltam ao lugar. A posição 46 (V220 perdido, V219 = 4) seria igualmente compatível; não há como decidir entre as duas.
+**Linhas 387715 e 387853 — reparos contestados.** O reparo histórico inseriu branco na posição 45, embora reconhecesse a posição 46 como alternativa. A comparação de 21/09 com as linhas 1909824 e 1909966 da amostra de 25% da BA encontrou candidatos únicos pelos campos anteriores ao trecho deslocado. Em ambas, a fonte de 25% traz V218=00 e V219=3, enquanto o reparo atual deixa V218=03 e V219 ausente. Assim, o problema não se limita a escolher entre V219 e V220: o dígito de rendimento foi deixado em filhos vivos. A primeira pessoa também diverge em V216 entre as fontes; isso deve permanecer separado do reparo de deslocamento. O registro de correções e os parquets ainda não foram alterados; a evidência e os candidatos estão na [auditoria de vínculos](microdata_1960_amostra_127_auditoria_vinculos.md).
 
 ```
                   1         2         3         4         5         6  
@@ -214,7 +222,7 @@ Aplica os guias de leitura e separa duas tabelas, `familias` (174.467 linhas) e 
 *194627  21211305214380023519101572092000-                     \0029839
 ```
 
-**Por que são cópias e não pessoas.** Duas famílias podem se parecer, mas não é disso que se trata: a comparação é dentro do mesmo questionário. Dentro de uma família, duas linhas idênticas só podem ser gêmeos de mesmo perfil ou uma cópia, e cinco fatos separam os dois casos:
+**Evidências agregadas de cópia — insuficientes para decidir cada exclusão.** A comparação é dentro do mesmo questionário, mas pessoas distintas podem ter os mesmos códigos, sobretudo irmãos com idade ignorada. Os cinco argumentos históricos abaixo descrevem concentração de dano; não demonstram que cada ocorrência repetida seja uma cópia:
 
 1. 497 das repetidas são cônjuges, e uma família não tem duas esposas idênticas.
 2. A taxa de linhas idênticas é 0,95 por mil pessoas no país inteiro, nunca acima de 1,6 por mil em nenhuma UF, e 51 por mil nos três municípios. Gêmeos não são cinquenta vezes mais comuns num município que no vizinho.
@@ -222,15 +230,15 @@ Aplica os guias de leitura e separa duas tabelas, `familias` (174.467 linhas) e 
 4. As famílias atingidas têm 7,9 pessoas e, sem as repetidas, 4,6, igual às vizinhas.
 5. A tabulação oficial de 1965, feita com estes cartões antes do dano, só reproduz o Nordeste sem as cópias: o fator de expansão implícito fica em 79,5, como no Leste (79,2) e no Sul (79,4), e não em 78,4.
 
-**O que o código faz.** Uma linha é repetida quando tem a mesma chave e os mesmos dados de uma linha anterior da mesma família. Ela é removida quando: é chefe ou cônjuge; ou a família tem duas ou mais repetidas (o bloco copiado; dois pares de gêmeos idênticos numa só família não acontecem); ou é uma repetida avulsa na cauda da família, depois de todos os originais, num dos três municípios danificados — ali as avulsas são quatro vezes mais frequentes que no resto do país (4,2 contra 0,95 por mil) e 45 das 49 estão na cauda, onde as cópias ficam. Uma repetida fora dessas condições — uma só, de filho ou parente, em família sem outra repetição, fora dos três municípios — é gêmeo ou irmão de mesmo perfil e fica, marcada em `censobr_duplicata_mantida`.
+**O que a versão anterior fazia.** Excluía uma repetição quando era chefe/cônjuge, quando havia duas ou mais repetidas na família ou quando era uma avulsa na cauda de um dos três municípios danificados. A segunda condição não exigia Pernambuco nem cauda. Ela excluiu indevidamente as linhas 168805–168806 da PB: a amostra de 25% registra sete pessoas no boletim, com ordens individuais distintas para dois filhos e duas filhas de idade ignorada; a deduplicação deixou cinco. A nova salvaguarda grava `duplicatas_a_revisar.csv` e interrompe antes de excluir. Não se substituiu a regra por outra heurística, nem se consideraram automaticamente legítimas todas as repetições.
 
-**Como fica.** 2.850 linhas removidas: 497 cônjuges repetidos, 2.308 em blocos e 45 avulsas na cauda nos três municípios; 2.778 delas em Pernambuco. A lista, com o motivo de cada uma, está em `duplicatas_removidas.csv`. Ficam 846 repetidas marcadas, quase todas filhos pequenos. A população presente de Pernambuco cai para 4,13 milhões, e o total oficial de 1960 é 4,14 milhões.
+**Estado materializado, ainda não corrigido.** 2.850 linhas removidas: 497 cônjuges repetidos, 2.308 em blocos e 45 avulsas na cauda nos três municípios; 2.778 delas em Pernambuco. A lista histórica está em `duplicatas_removidas.csv`. Esses números descrevem a execução antiga, não exclusões certificadas. Aproximar o total publicado não prova a identidade de cada registro removido.
 
 ### Passo 7 — famílias e domicílios
 
 **A família.** Cada pessoa é ligada ao registro de família que tem a mesma UF e a mesma chave de questionário. É assim que o formulário de 1960 funcionava: um boletim por família, com a página do domicílio na frente e as pessoas atrás. Em 99,2% das linhas isso coincide com o número a posteriori; nas demais a chave corrige o número — é por aqui que as linhas realocadas e recuperadas do passo 4 chegam à família certa.
 
-**Pessoas cujo questionário não tem registro de família.** São 2.678 pessoas em 586 grupos (um grupo = uma chave). O número a posteriori não ajuda a decidir o que são: ele foi atribuído contando registros de família na ordem do arquivo, e 585 dos 586 grupos carregam o número da família imediatamente anterior. Sobra o que está nas próprias linhas:
+**Pessoas cujo questionário não tem registro de família.** Depois da deduplicação histórica, são 1.493 pessoas em 586 grupos: 485 com chefe/cônjuge e 1.008 sem eles. O número 2.678 da redação anterior não correspondia a essa etapa. O número a posteriori foi atribuído pela ordem do arquivo e não demonstra pertencimento à família anterior. A distinção histórica foi:
 
 - **O grupo tem chefe ou cônjuge** (150 grupos, 485 pessoas): é uma família cujo registro de família — e quase sempre o chefe, que era a linha seguinte — se perdeu na fita. O grupo vira família nova, sem página de domicílio (V101 a V113 ficam NA), marcada `registro_perdido`, e ocupa linha própria na tabela de domicílios. No exemplo abaixo a família 2586 tem um chefe de 29 anos sozinho no boletim 075; o boletim 076 traz uma mulher de 60 anos codificada como cônjuge e seis filhos de 4 a 26 anos — não é a mesma família:
 
@@ -250,7 +258,7 @@ Aplica os guias de leitura e separa duas tabelas, `familias` (174.467 linhas) e 
 
   A hipótese de anexar à família anterior os 42 cônjuges que aparecem sozinhos foi testada e descartada. Nos casais do arquivo o ano de casamento é o mesmo nos dois em 99,3% das vezes (138.075 de 139.020); nos 24 casos em que a família anterior não tem cônjuge, o ano nunca coincide — em 13 o chefe anterior declara outro casamento, em 7 é solteiro ou viúvo, em 4 é mulher. São famílias diferentes, com os cartões de família e de chefe perdidos.
 
-- **O grupo não tem chefe nem cônjuge** (436 grupos, 1.008 pessoas): são sobretudo hóspedes (V203 = 4 em 698 delas) e pessoas presentes que não moram ali (V202 = 5 ou 6 em 681), listadas num boletim à parte logo depois da família. Ficam na família anterior, marcadas `anexada_anterior`. A família 2326 é um chefe de 50 anos sozinho seguido de 26 hóspedes não moradores em dois boletins:
+- **O grupo não tem chefe nem cônjuge** (436 grupos, 1.008 pessoas): a versão anterior anexava à família precedente, marcada `anexada_anterior`. A auditoria encontrou 70 conflitos de geografia, incluindo 16 pessoas de MG cujos oito boletins coletivos próprios sobrevivem na amostra de 25%. Coincidir geografia também não basta para confirmar vínculo. A regra foi retirada; uma futura execução salvará `vinculos_a_revisar.csv` e interromperá se houver órfãos sem resolução. O exemplo histórico abaixo mostra a ordem das linhas, não prova a família ou o domicílio comum:
 
 ```
                   1         2         3         4         5         6  

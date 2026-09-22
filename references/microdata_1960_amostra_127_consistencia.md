@@ -1,6 +1,15 @@
 # Censo 1960, amostra de 1,27%: o que o repositório `ConsistenciaCenso1960Br` faz, o que reproduz e o que precisa mudar
 
+> **Rodada de registros mais recente — 22/09/2026:** [correções incorporadas, exemplos e limites](fechamento_registros_1960_20260922.md). Foram integradas decisões sobre 954 conjuntos repetidos, 169 vínculos novos, 33 reparos/40 campos e 30 cartões para 74 pessoas existentes. As pendências sem prova permanecem bloqueadas; base completa e pesos127 não foram reconstruídos. Esse resultado prevalece sobre contagens e estados de execução anteriores, sem homologar desenho ou variâncias.
+
+> **Execução posterior — 22/09/2026:** consultar a [nota de execução](execucao_correcao_1960_20260922.md) e a [recuperação de 29 cartões para 72 pessoas](recuperacao_cartoes_1960_20260922.md). Houve autorização, implementação e testes isolados; os parquets completos127 continuam antigos e não homologados. Os avisos de “testes R não executados” abaixo descrevem a etapa histórica, não o estado mais recente.
+
+> **Parecer vigente — 21/09/2026:** a [revisão integrativa](microdata_1960_amostra_127_revisao_integrativa.md) prevalece sobre conclusões incompatíveis deste histórico, inclusive reparos apresentados como determinísticos, exclusões por perfil e significado das flags. Dados não homologados; testes R novos não executados.
+
 **Data:** 2026-09-14 (segundo exame; substitui a versão do mesmo dia)
+
+**Adendo de 21/09/2026.** A revisão do pipeline atual encontrou decisões não demonstradas e erros corroborados pela amostra de 25%, posteriores ao exame histórico abaixo. A [auditoria de vínculos e duplicatas](microdata_1960_amostra_127_auditoria_vinculos.md), a [auditoria da validação](microdata_1960_amostra_127_auditoria_validacao.md) e a [revisão do desenho](microdata_1960_amostra_127_revisao_desenho.md) prevalecem nos pontos conflitantes. A declaração anterior de que a preparação prevalece não deve ser usada para certificar aquelas decisões. Foram preparados bloqueios preventivos e uma nova validação no código, sem executar R nem regenerar os parquets. Vínculos e exclusões ainda exigem reconciliação versionada; variâncias após calibração ficaram expressamente para uma etapa posterior.
+
 **Status:** este documento é o **diagnóstico**. A implementação está em
 `microdata_1960_amostra_127_preparacao.md` e em `R/microdata_1960_amostra_127.R`,
 e em alguns pontos ela foi além do que este exame propunha, porque em seguida

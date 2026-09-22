@@ -141,6 +141,49 @@ list(
              format = "file"
              ),
 
+  tar_target(name = evidencias_reparos_1960_amostra_127,
+             command = "read_guides/1960_amostra_127_reparos_fonte25.json",
+             format = "file"
+             ),
+
+  tar_target(name = fontes_reparos_1960_amostra_127,
+             command = sapply(jsonlite::fromJSON(evidencias_reparos_1960_amostra_127,
+                                                 simplifyVector = FALSE)$fontes, `[[`, "arquivo"),
+             format = "file"
+             ),
+
+  tar_target(name = decisoes_duplicatas_1960_amostra_127,
+             command = "read_guides/1960_amostra_127_duplicatas.csv",
+             format = "file"
+             ),
+
+  tar_target(name = geografia_fonte25_1960_amostra_127,
+             command = "read_guides/1960_amostra_127_geografia_fonte25.json",
+             format = "file"
+             ),
+
+  tar_target(name = fontes_geografia_1960_amostra_127,
+             command = sapply(jsonlite::fromJSON(geografia_fonte25_1960_amostra_127,
+                                                 simplifyVector = FALSE)$fontes, `[[`, "arquivo"),
+             format = "file"
+             ),
+
+  tar_target(name = decisoes_vinculos_1960_amostra_127,
+             command = "read_guides/1960_amostra_127_vinculos.csv",
+             format = "file"
+             ),
+
+  tar_target(name = manifesto_recuperacao_1960_amostra_127,
+             command = "read_guides/1960_amostra_127_cartoes_recuperados.json",
+             format = "file"
+             ),
+
+  tar_target(name = fontes_recuperacao_1960_amostra_127,
+             command = sapply(jsonlite::fromJSON(manifesto_recuperacao_1960_amostra_127,
+                                                 simplifyVector = FALSE)$fontes, `[[`, "arquivo"),
+             format = "file"
+             ),
+
   # as linhas do arquivo, intactas
   tar_target(name = linhas_1960_amostra_127,
              command = read_1960_amostra_127(raw_1960_amostra_127)
@@ -159,7 +202,11 @@ list(
   tar_target(name = linhas_corrigidas_1960_amostra_127,
              command = {
                problemas_1960_amostra_127
-               apply_corrections_1960_amostra_127(linhas_1960_amostra_127, correcoes_1960_amostra_127)
+               fontes_reparos_1960_amostra_127
+               guia_1960_amostra_25_familias
+               guia_1960_amostra_25_pessoas
+               apply_corrections_1960_amostra_127(linhas_1960_amostra_127, correcoes_1960_amostra_127,
+                                                 evidencias_reparos_1960_amostra_127)
              }
              ),
 
@@ -170,14 +217,25 @@ list(
                                               guia_1960_amostra_127_pessoas)
              ),
 
-  # duplicatas de Pernambuco removidas
+  # decisoes por linha; perfis repetidos sem decisao interrompem antes de excluir
   tar_target(name = tabelas_dedup_1960_amostra_127,
-             command = dedup_1960_amostra_127(tabelas_brutas_1960_amostra_127)
+             command = dedup_1960_amostra_127(tabelas_brutas_1960_amostra_127,
+                                              decisoes_path = decisoes_duplicatas_1960_amostra_127)
+             ),
+
+  # cartoes aprovados da fonte25; pessoas da127 e fontes originais preservadas
+  tar_target(name = tabelas_recuperadas_1960_amostra_127,
+             command = {
+               fontes_recuperacao_1960_amostra_127
+               recover_family_cards_1960_amostra_127(tabelas_dedup_1960_amostra_127,
+                                                    manifesto_recuperacao_1960_amostra_127)
+             }
              ),
 
   # familias pela chave do questionario, domicilios por V101, Rondonia devolvida
   tar_target(name = familias_1960_amostra_127,
-             command = build_families_1960_amostra_127(tabelas_dedup_1960_amostra_127)
+             command = build_families_1960_amostra_127(tabelas_recuperadas_1960_amostra_127,
+                                                       decisoes_path = decisoes_vinculos_1960_amostra_127)
              ),
 
   # divisao territorial de 1960 com a populacao do AEB: nome do municipio e o criterio de cidade grande
@@ -194,7 +252,9 @@ list(
 
   # contagens, peso uniforme, codigos, marcas de coerencia, tipos, desenho da amostra
   tar_target(name = tabelas_1960_amostra_127,
-             command = finalize_1960_amostra_127(familias_1960_amostra_127, municipios_1960, distritos_1960)
+             command = finalize_1960_amostra_127(familias_1960_amostra_127, municipios_1960, distritos_1960,
+                                                 geografia_fonte25_1960_amostra_127,
+                                                 fontes_geografia_1960_amostra_127)
              ),
 
   # quadros 1 e 6 dos Resultados Preliminares de 1965, transcritos e conferidos
@@ -687,4 +747,3 @@ list(
   #                                           tag  = data_version)
   # )
 )
-

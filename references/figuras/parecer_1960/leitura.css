@@ -1,0 +1,24 @@
+:root { color-scheme: light; --ink:#243642; --quiet:#536977; --line:#d7e2e7; --accent:#176a65; }
+html { background:#f4f7f8; scroll-behavior:smooth; }
+body { max-width:1000px; margin:0 auto; padding:52px 56px 100px; background:white; color:var(--ink); font-family:Georgia,"Times New Roman",serif; font-size:19px; line-height:1.75; }
+h1,h2,h3,h4,nav,figcaption,table { font-family:"Segoe UI",Arial,sans-serif; }
+h1 { font-size:38px; line-height:1.2; margin:0 0 32px; color:#17384a; }
+h2 { font-size:29px; line-height:1.35; margin:60px 0 22px; padding-top:18px; border-top:1px solid var(--line); }
+h3 { font-size:23px; line-height:1.45; margin:36px 0 18px; }
+h4 { font-size:20px; margin-top:28px; }
+p { margin:0 0 20px; } a { color:var(--accent); text-underline-offset:3px; }
+strong { color:#183b46; } nav { font-size:16px; line-height:1.6; border-bottom:1px solid var(--line); padding:0 0 24px; margin-bottom:32px; }
+nav ul { padding-left:24px; } nav li { margin:4px 0; }
+table { border-collapse:collapse; width:100%; margin:24px 0 30px; font-size:16px; line-height:1.55; }
+th { text-align:left; background:#eaf2f5; color:#163f4e; } td,th { padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+tr:nth-child(even) td { background:#f8fafb; }
+blockquote { margin:24px 0; padding:16px 24px; border-left:4px solid #80ada5; background:#f0f7f4; }
+blockquote p:last-child { margin-bottom:0; }
+code { font-family:Consolas,"Cascadia Code",monospace; font-size:.85em; overflow-wrap:anywhere; }
+pre { padding:18px; background:#eff3f5; overflow:auto; line-height:1.6; font-size:16px; }
+pre code { font-size:inherit; overflow-wrap:normal; }
+img { max-width:100%; height:auto; } figure { margin:32px 0; } figcaption { color:var(--quiet); font-size:15px; line-height:1.5; margin:10px 0; }
+li { margin-bottom:10px; } hr { border:0; border-top:1px solid var(--line); margin:40px 0; }
+.sourceCode { color:var(--ink); }
+@media(max-width:720px) { body {padding:28px 18px 60px;font-size:18px;} h1 {font-size:30px;} h2 {font-size:26px;} table {display:block;overflow:auto;font-size:15px;} }
+@media print {html,body {background:white;} body {padding:0;max-width:none;font-size:11pt;line-height:1.5;} h1 {font-size:24pt;} h2 {font-size:18pt;} h3 {font-size:14pt;} h2,h3 {break-after:avoid;} figure,table,blockquote {break-inside:avoid;} a {color:inherit;} nav {display:none;} }

@@ -92,7 +92,8 @@ mun <- fread("read_guides/1960_municipios.csv", encoding = "UTF-8")
 cad <- d25[, .(boletins = .N, urb = sum(v118 %in% c(1, 3)), rur = sum(v118 %in% 5)), by = .(uf, pasta = v001)]
 mmoda <- d25[, .N, by = .(uf, pasta = v001, v116)][order(-N)][, .SD[1], by = .(uf, pasta)][, .(uf, pasta, muni = v116)]
 cad <- merge(cad, mmoda, by = c("uf", "pasta"))
-cad[uf == 25, muni := muni - 200L]; cad[uf == 24, muni := 2401L]          # as mesmas correcoes de codigo do pipeline
+# O legado ja traz os municipios de Alagoas em 23xx; nao repetir a correcao do bruto.
+cad[uf == 24, muni := 2401L]
 cad[mun, `:=`(zona = i.zona_fisiografica, pop_urb = i.pop_urbana, pop_tot = i.pop_total), on = c(uf = "uf60", muni = "cod60")]
 cad[, grupo := fifelse(urb > 0 & rur > 0, "mista", fifelse(urb == 0, "rural", fifelse(pop_urb >= 1e5 & !is.na(pop_urb), "cidade grande", "urbana menor")))]
 setorder(cad, uf, pasta); cad[, rank_uf := seq_len(.N), by = uf]

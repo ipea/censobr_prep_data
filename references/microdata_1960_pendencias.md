@@ -1,10 +1,30 @@
 # 1960 — o que ficou em aberto
 
+> **Rodada de registros mais recente — 22/09/2026:** ver [correções incorporadas, exemplos e limites](fechamento_registros_1960_20260922.md) e [inventário final auditável](fechamento_registros_1960_evidencias/inventario_final.json). Manifestos atualizados, sem reconstruir a base: 954 conjuntos repetidos decididos, 169 vínculos novos, 33 reparos/40 campos e 30 cartões para 74 pessoas existentes. Permanecem 463 conjuntos repetidos/928 linhas, 1.229 registros pessoais sem família confirmada, 192 pessoas com conflitos geográficos não conciliados, um cartão vazio e uma convivente sem principal comprovado. Listas sobrepostas, não somar. Três fragmentos não identificáveis continuam preservados. As hipóteses residuais não foram transformadas em certeza.
+
+> **Estado posterior — 22/09/2026:** a [nota de execução](execucao_correcao_1960_20260922.md) e a [recuperação de cartões autorizada](recuperacao_cartoes_1960_20260922.md) prevalecem sobre o histórico abaixo. Foram conferidos 29 cartões da fonte25 para 72 pessoas da127; restam 1.339 pessoas/526 grupos da lista anterior sem cartão confirmado. Demais duplicatas, conflitos e pesos127 continuam pendentes; não houve substituição da base completa. R pode executar somente pelo runner isolado diagnosticado, sem targets nem publicação.
+
+> **Lista conciliada vigente — 21/09/2026:** usar a [revisão integrativa](microdata_1960_amostra_127_revisao_integrativa.md), especialmente seções7–8, para estado, prioridades, lacunas e critérios de encerramento. Ela integra as três rodadas sem tratar este histórico como homologação. Variâncias calibradas continuam adiadas; execução R permanece suspensa.
+
 Anotado em 17/09/2026, depois da reconstrução do guia de distritos e da rodada que
 gravou os dois parquets da v1.0.0. Serve para quem voltar a 1960 daqui a algum
 tempo — inclusive eu mesmo — não ter de redescobrir onde as coisas pararam.
 
-**O que está fechado**, e não precisa ser revisitado: a compilação das duas
+**Reabertura em 21/09/2026.** Não é correto considerar integridade, validação e
+desenho encerrados. A [auditoria de vínculos e duplicatas](microdata_1960_amostra_127_auditoria_vinculos.md)
+confirmou filhos legítimos excluídos e boletins anexados à família errada.
+A [validação](microdata_1960_amostra_127_auditoria_validacao.md) precisa expor
+células sem observações e códigos não classificáveis. A
+[revisão do desenho](microdata_1960_amostra_127_revisao_desenho.md) separa
+evidência documental, reconstrução e hipóteses, incluindo controles estimados
+nas 17 UFs. O cálculo das variâncias após calibração foi adiado pelo usuário.
+
+O código recebeu bloqueios preventivos antes das exclusões e anexações
+não demonstradas. Eles interromperão uma futura reconstrução até reconciliar
+os casos; não corrigem os parquets existentes. R/Rscript e targets não foram
+executados nesta revisão. A nova validação também precisa de teste R autorizado.
+
+**Balanço histórico de 17/09, não certificação atual:** a compilação das duas
 amostras, os pesos, o desenho amostral e os erros-padrão, a geografia, os nomes de
 município, a estrutura da Guanabara e a numeração dos distritos em 2.769
 municípios. O guia de distritos foi refeito da transcrição integral das 313
@@ -15,8 +35,8 @@ suspeito por explicar. O passo a passo está em
 [`microdata_1960_compilacao.md`](microdata_1960_compilacao.md) e a auditoria roda
 por [`auditoria_distritos_1960.R`](auditoria_distritos_1960.R).
 
-Sobram três pontas. Nenhuma bloqueia nada, e as três estão listadas em ordem de
-quanto ainda se pode fazer por elas.
+As três pendências geográficas registradas naquela data seguem abaixo.
+Elas não esgotam as pendências de integridade e inferência reabertas acima.
 
 ---
 

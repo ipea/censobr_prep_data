@@ -1,0 +1,28 @@
+{
+  "versao": 1,
+  "decisao": "PR_71038_216_municipio_fonte25",
+  "code_muni_1960": 7240,
+  "local": {"UF": "71", "distrito": "07", "pasta": "71038", "boletim": "216", "chave": "0771038216", "V118": "5"},
+  "criterio": "Cartao unico nas duas fontes; os 14 campos familiares diferentes de V116 concordam; correspondencia completa das tres pessoas, preservando a diferenca V216=00/63 na linha 888718. Os digitos legiveis 724 de V116 concordam com 7240. Municipio derivado; nao substituir V116 nem inferir pelo consenso da pasta.",
+  "fontes": [
+    {"amostra": "127", "arquivo": "data_raw/microdata/1960/amostra_127/HHOLDA.txt", "sha256": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c"},
+    {"amostra": "25", "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz", "sha256": "3c5ad2b3dbb273eef5f86ccf6982076636c2ac86ee82bc93ed9c1bc3c576f9b9"}
+  ],
+  "registros127": [
+    {"linha": 887255, "tipo": "familias", "derivar_municipio": true, "texto": "71724Z0771038216151598279680202001                    \\0145606"},
+    {"linha": 887256, "tipo": "pessoas", "derivar_municipio": true, "texto": "71724Z077103821625171215419920003110096000005332321207\\0145606"},
+    {"linha": 888718, "tipo": "pessoas", "derivar_municipio": false, "texto": "717240077103821635121155419920001420000000003332321200\\0145821"},
+    {"linha": 888719, "tipo": "pessoas", "derivar_municipio": false, "texto": "7172400771038216352811854199200031100960000034-       \\0145821"}
+  ],
+  "registros25": [
+    {"linha": 708706, "texto": "710382160080315982796802020017240075000000000000000000"},
+    {"linha": 708707, "texto": "710382160180181712154199920003110096000005332321207000"},
+    {"linha": 708708, "texto": "7103821602602628118541999200031100960000034        000"},
+    {"linha": 708709, "texto": "710382160340341211554199920001420006300003332321200000"}
+  ],
+  "correspondencias": [
+    {"linha127": 887256, "linha25": 708707, "diferencas_preservadas": {}},
+    {"linha127": 888718, "linha25": 708709, "diferencas_preservadas": {"V216": [0, 63]}},
+    {"linha127": 888719, "linha25": 708708, "diferencas_preservadas": {}}
+  ]
+}

@@ -1,5 +1,7 @@
 # Censo de 1960: a compilação das duas amostras
 
+> **Parecer vigente — 21/09/2026:** a [revisão integrativa](microdata_1960_amostra_127_revisao_integrativa.md) prevalece sobre afirmações incompatíveis abaixo. O validador compilado ainda omite 220 referências pessoais previstas e não cobre a tabela domiciliar7; o universo de alfabetização25 está incorreto. Schemas e contagens conferem, mas isso não homologa o conteúdo. Exportação e dicionário têm pendências; nenhum parquet foi regenerado nesta revisão.
+
 Este documento explica a tabela de 1960 que o `censobr` distribui: de onde vem cada registro, como os pesos foram feitos, o que dá para estimar com ela e o que não dá.
 
 É o terceiro e último estágio de 1960. Os dois anteriores estão em [`microdata_1960_amostra_127_preparacao.md`](microdata_1960_amostra_127_preparacao.md) e [`microdata_1960_amostra_25_preparacao.md`](microdata_1960_amostra_25_preparacao.md), com os respectivos guias de desenho amostral. Quem quiser só usar o dado pode ficar neste; quem quiser auditar precisa dos três.

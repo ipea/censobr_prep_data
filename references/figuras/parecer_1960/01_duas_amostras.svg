@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="510" viewBox="0 0 1000 510" role="img" aria-labelledby="t d">
+<title id="t">Da seleção de 1960 à combinação atual de arquivos</title>
+<desc id="d">Na história: amostra de cerca de 25 por cento, questionários agrupados em pastas, seleção de pastas e subamostra chamada 1,27 por cento. No produto atual: 17 unidades usam os arquivos de 25 por cento e outras 11 usam os de 1,27 por cento. Não se somam as duas amostras na mesma unidade.</desc>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#506374"/></marker></defs>
+<rect width="1000" height="510" fill="#ffffff"/>
+<g font-family="Segoe UI,Arial,sans-serif" fill="#172f40">
+<text x="30" y="38" font-size="23" font-weight="600">1. Como a amostra menor surgiu</text>
+<rect x="30" y="65" width="260" height="132" rx="8" fill="#eaf2f5"/>
+<text x="50" y="99" font-size="22" font-weight="600">Amostra geral</text>
+<text x="50" y="132" font-size="19">Cerca de 25%, na coleta.</text>
+<text x="50" y="162" font-size="19">Domicílios particulares;</text><text x="50" y="187" font-size="19">pessoas nos coletivos.</text>
+<path d="M 298 132 H 338" stroke="#506374" stroke-width="2" marker-end="url(#a)"/>
+<rect x="350" y="65" width="270" height="132" rx="8" fill="#eaf2f5"/>
+<text x="370" y="99" font-size="22" font-weight="600">Questionários em pastas</text>
+<text x="370" y="134" font-size="19">Lotes de trabalho, mantendo</text>
+<text x="370" y="161" font-size="19">a ordem dos setores.</text>
+<path d="M 628 132 H 668" stroke="#506374" stroke-width="2" marker-end="url(#a)"/>
+<rect x="680" y="65" width="290" height="132" rx="8" fill="#e0efeb"/>
+<text x="700" y="99" font-size="22" font-weight="600">Subamostra de pastas</text>
+<text x="700" y="134" font-size="19">Aproximadamente 1 em 20.</text>
+<text x="700" y="166" font-size="19">Arquivo chamado “1,27%”.</text>
+<text x="30" y="236" font-size="18">Esquema histórico simplificado. Não recupera todas as probabilidades nem os limites do sorteio.</text>
+<line x1="30" x2="970" y1="260" y2="260" stroke="#bccbd2"/>
+<text x="30" y="299" font-size="23" font-weight="600">2. Como os arquivos disponíveis são combinados hoje</text>
+<rect x="30" y="323" width="365" height="66" rx="8" fill="#eaf2f5"/>
+<text x="50" y="351" font-size="20">17 unidades da federação</text><text x="50" y="377" font-size="19">Entram os arquivos de 25%.</text>
+<rect x="30" y="405" width="365" height="66" rx="8" fill="#e0efeb"/>
+<text x="50" y="433" font-size="20">Outras 11 unidades da federação</text><text x="50" y="459" font-size="19">Entram os arquivos de 1,27%.</text>
+<path d="M 403 356 H 495 V 397 M 403 438 H 495 V 397 M 495 397 H 557" fill="none" stroke="#506374" stroke-width="2" marker-end="url(#a)"/>
+<text x="585" y="381" font-size="22" font-weight="600">Arquivo combinado nacional</text>
+<text x="585" y="416" font-size="20">Cada unidade usa uma das fontes.</text>
+<text x="585" y="447" font-size="19">As duas fontes não são somadas na mesma UF.</text>
+</g></svg>

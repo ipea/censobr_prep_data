@@ -1,0 +1,1715 @@
+{
+  "data": "2026-09-22",
+  "resultado": "aprovado_nos_testes_sem_homologar_base_completa",
+  "python": {
+    "comando": "python -m unittest discover -s references -p 'test_*1960.py'",
+    "testes": 150,
+    "resultado": "OK",
+    "nota": "Teste do encerramento de arvore usa somente processos Python proprios; permissao Windows concedida para essa verificacao."
+  },
+  "r": {
+    "aprovado": true,
+    "testes": [
+      {
+        "script": "test_guardas_familias_situacao_1960.R",
+        "exit_code": 0,
+        "segundos": 1.982,
+        "log": "tmp/fechamento_registros_1960_20260922/verificacao_integrada_02/test_guardas_familias_situacao_1960.log",
+        "log_sha256": "d90f238b8c1186fd33f91d9fee3787464cdae7f5ecd3442cdeeaffc5c24a3443"
+      },
+      {
+        "script": "test_nacionalidade_registros_1960.R",
+        "exit_code": 0,
+        "segundos": 1.228,
+        "log": "tmp/fechamento_registros_1960_20260922/verificacao_integrada_02/test_nacionalidade_registros_1960.log",
+        "log_sha256": "af540f3e1a652c81a25f5661196b07dca492663cd13fd69bb0fe780deab50dac"
+      },
+      {
+        "script": "test_integridade_amostra_127.R",
+        "exit_code": 0,
+        "segundos": 18.569,
+        "log": "tmp/fechamento_registros_1960_20260922/verificacao_integrada_02/test_integridade_amostra_127.log",
+        "log_sha256": "a02596aabf5705e25dfead9823622aff462fdf423661c1aba3c6481a1a9e8ade"
+      },
+      {
+        "script": "test_novas_duplicatas_1960.R",
+        "exit_code": 0,
+        "segundos": 13.74,
+        "log": "tmp/fechamento_registros_1960_20260922/verificacao_integrada_02/test_novas_duplicatas_1960.log",
+        "log_sha256": "734a3f6407c7489d749dafbe9481f215792206671bd96c4b0bbdf62b99692ad1"
+      },
+      {
+        "script": "test_novos_vinculos_1960.R",
+        "exit_code": 0,
+        "segundos": 5.895,
+        "log": "tmp/fechamento_registros_1960_20260922/verificacao_integrada_02/test_novos_vinculos_1960.log",
+        "log_sha256": "9493223664159a9637a9e0dc4d60e04a5b427b98843457412b38817d85612bc9"
+      },
+      {
+        "script": "test_reparos_fonte25_1960.R",
+        "exit_code": 0,
+        "segundos": 32.428,
+        "log": "tmp/fechamento_registros_1960_20260922/verificacao_integrada_02/test_reparos_fonte25_1960.log",
+        "log_sha256": "a550dc34eb1aeeba5d4bb54c98561449d15392cb0304c3e0c06991a627587a35"
+      },
+      {
+        "script": "test_reparos_fonte25_guardas_1960.R",
+        "exit_code": 0,
+        "segundos": 22,
+        "log": "tmp/fechamento_registros_1960_20260922/verificacao_integrada_02/test_reparos_fonte25_guardas_1960.log",
+        "log_sha256": "a313fd8f420670be4448f9c61f81c325d925b2b7085f828d4fefa5e1a2c9eecc"
+      },
+      {
+        "script": "test_geografia_registros_1960.R",
+        "exit_code": 0,
+        "segundos": 18.033,
+        "log": "tmp/fechamento_registros_1960_20260922/verificacao_integrada_02/test_geografia_registros_1960.log",
+        "log_sha256": "a83e645296cb37b253591ea7ecbb5d2b3a737ffad3451007e1826d1719415ad4"
+      },
+      {
+        "script": "test_recuperacao_cartoes_1960.R",
+        "exit_code": 0,
+        "segundos": 156.833,
+        "log": "tmp/fechamento_registros_1960_20260922/verificacao_integrada_02/test_recuperacao_cartoes_1960.log",
+        "log_sha256": "ad4f64227e516679fdac2943cb0d0a624e9c011c01c1cfb7d5576f73de17f561"
+      },
+      {
+        "script": "test_contagens_registros_1960.R",
+        "exit_code": 0,
+        "segundos": 4.474,
+        "log": "tmp/fechamento_registros_1960_20260922/verificacao_integrada_02/test_contagens_registros_1960.log",
+        "log_sha256": "4b3c9c4eea1690cc67b3a3d2c0535c9ce2aead81d91ad6e52c2eff25b8c8c6d4"
+      },
+      {
+        "script": "test_validacao_1960.R",
+        "exit_code": 0,
+        "segundos": 44.215,
+        "log": "tmp/fechamento_registros_1960_20260922/verificacao_integrada_02/test_validacao_1960.log",
+        "log_sha256": "f8ecd551492017cef125d90828336ee104dc3ce28f978f68bbf4387530d8840d"
+      },
+      {
+        "script": "test_validacao_amostra_127.R",
+        "exit_code": 0,
+        "segundos": 17.258,
+        "log": "tmp/fechamento_registros_1960_20260922/verificacao_integrada_02/test_validacao_amostra_127.log",
+        "log_sha256": "cbf627a93a64dd1eaf7e5a3e17fd399b2bc03d3c7f438b873b5cc6e68baf6124"
+      },
+      {
+        "script": "test_pesos_1960.R",
+        "exit_code": 0,
+        "segundos": 1.465,
+        "log": "tmp/fechamento_registros_1960_20260922/verificacao_integrada_02/test_pesos_1960.log",
+        "log_sha256": "7586df2666b21517c50e6e5cd0de9e0bc786ca1552cbaaa17266e71ece7b0b1a"
+      }
+    ],
+    "fontes_codigo_antes": {
+      "references/test_guardas_familias_situacao_1960.R": "aa6b5c86c69715c94f78e182b31c2fb2244e23a4ac592513436945c8efda31a2",
+      "references/test_nacionalidade_registros_1960.R": "a590f5d5545c6ca50c868083769aa92538ee24a701acf79fa0e6e3c40849ac54",
+      "references/test_integridade_amostra_127.R": "b07048ffc92e8d0c618289188bbdae6ec64ab895ca959244700aa4397b6c30a8",
+      "references/test_novas_duplicatas_1960.R": "8babc3620718ae9a89ee2446c05ca23ad6ca92917dc9e5f86dbabb2829be408b",
+      "references/test_novos_vinculos_1960.R": "54d0241b0d4171deb67ac126d3b7b6fae12ef34e9e76bdc41afe500366fc0462",
+      "references/test_reparos_fonte25_1960.R": "d6104fe136aca270a59d7d21b039c1d6e7760791b570c00de0c487cdb9dcfd7e",
+      "references/test_reparos_fonte25_guardas_1960.R": "afe54cf0e1221965dafc0bea87d41e7110b37777cba1f6fc7689ed4910114dd6",
+      "references/test_geografia_registros_1960.R": "ef0389810503d2d4a81cf874665f2d9c0d1156620ff765053e98442493f579f7",
+      "references/test_recuperacao_cartoes_1960.R": "a8cd37e62164d355e16426b2de64d3ae17a8db18551edcf420528728a89051e1",
+      "references/test_contagens_registros_1960.R": "f43fe798d18859aeed5c70ce9593a45da4611ad1b90ba13831cae65c0f7af807",
+      "references/test_validacao_1960.R": "11aa969bc2fb8a2a4642586e68fd86caaadae630444d5316cc32de6d5a084914",
+      "references/test_validacao_amostra_127.R": "cee6fbf83be46ff5bfd74c38ef52feee86ebd3980d8e976de1ed0e48c3c77732",
+      "references/test_pesos_1960.R": "b5de89b637bd5b6a15486cb4afc336de69ee90b3a4fccdc70cec00812a55e9d3",
+      "R/microdata_1960.R": "f1085c708692a188ecf110d97b8647c2d9f8613c2e580dccca3812cf73225f89",
+      "R/microdata_1960_amostra_127.R": "8990edcfd9265e21eb3762c15aeeb9a45152249911036f717cf0e53cd1919677",
+      "R/microdata_1960_amostra_25.R": "0f8dd44e67624b219c838951892b350e6caba00a2db4d983daec3db6d8a2e80b",
+      "R/microdata_1960_validacao.R": "853be365b576195487dc7773d16ec8997b90dbab799aabc6d078f9af476fb8d7",
+      "read_guides/1960_amostra_127_cartoes_recuperados.json": "ed3ceca8f6956f12a1c88cfb5938fb55a6ab5bfd50ae4c2df3b0be5118b87769",
+      "read_guides/1960_amostra_127_codigos.csv": "57193b5e534cf754ec38ac32f548e78dc577c4c8794a5b8f4f1c726a11d63bec",
+      "read_guides/1960_amostra_127_correcoes.csv": "64aa59c04c2bc3a37c6943a489638633f735fc99bdcc7cd0a299e1f27640303b",
+      "read_guides/1960_amostra_127_duplicatas.csv": "2f20943f51e39cbb156ea002933c76a494d14f5b00a97f36f1e00fb00947fb0e",
+      "read_guides/1960_amostra_127_geografia_fonte25.json": "4f8d332f484f2a7a0be4e32f7eb53cec1ea7ea9959b44069ab36fc698d2815d6",
+      "read_guides/1960_amostra_127_reparos_fonte25.json": "d11fcb2743c6dcc65c2e4c796fe602977128fb51aeaa948eaf51a77565499e0b",
+      "read_guides/1960_amostra_127_vinculos.csv": "a77cafb2ac548d7df624e554c02ee4f11dcded925ac81fe57efc8888eeab8c6e",
+      "_targets.R": "09aa9961a671b6d411607ad90b0cc588924633702ff2c1d1c931a750090c6b37",
+      "references/ler_fixtures_registros_1960.R": "9368d77e2004a4bb03fe24d6bf2aa934c5ce8e77c3066fe37329304183315f1c",
+      "references/fechamento_registros_1960_evidencias/fixtures_decisoes.json": "e7b0ba8ddc5415ed98b80e2c50bac01a827393eeefa4ba2125a7479e557a467f",
+      "data_raw/microdata/1960/amostra_127/HHOLDA.txt": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c",
+      "data_raw/microdata/1960/amostra_127/pessoas_1960_amostra_127.parquet": "f757fddae54edddd6742ad800149a3086acc9f581a8197ec0a123d7f4efca404",
+      "data_raw/microdata/1960/amostra_127/domicilios_1960_amostra_127.parquet": "f526ab6090d0be7dd9325a0f6b5143dab46186734f8760be8f44513924f93938"
+    },
+    "arquivos_alterados": [],
+    "limite": "Somente suites pequenas; nao e reconstrucao da base ou aprovacao dos registros indeterminados."
+  },
+  "recuperacao_parquets": {
+    "escopo": "Somente os cartoes e pessoas aprovados; nao e a amostra completa nem recalculo de pesos.",
+    "cartoes_recuperados": 30,
+    "pessoas_preservadas": 74,
+    "pessoas_acrescentadas": 0,
+    "por_uf_cartoes": {
+      "14": 1,
+      "40": 5,
+      "52": 2,
+      "60": 11,
+      "71": 7,
+      "81": 2,
+      "94": 2
+    },
+    "por_uf_pessoas": {
+      "14": 2,
+      "40": 16,
+      "52": 9,
+      "60": 22,
+      "71": 15,
+      "81": 4,
+      "94": 6
+    },
+    "originais_inalterados": true,
+    "pessoas_ja_no_parquet_atual": 74,
+    "pessoas_brutas_nao_encontradas_no_parquet_atual": [],
+    "origem_vinculo_anterior": {
+      "anexada_anterior": 74
+    },
+    "pessoas_com_pasta_atribuida_diferente": 5,
+    "arquivos": [
+      {
+        "arquivo": "tmp/recuperacao_cartoes_1960_20260922/teste_48d014f47e1a/pessoas_vinculadas.parquet",
+        "sha256": "0f63d4b27aeb49bbff548f8bed1fb5092f2db4b583d930b43465eb86a2f8089e"
+      },
+      {
+        "arquivo": "tmp/recuperacao_cartoes_1960_20260922/teste_48d014f47e1a/cartoes_recuperados.parquet",
+        "sha256": "e1b8d0e5153c9f2d620de4a640e9ddaf9f68012dfbfddd6e18a924ad172c8c7c"
+      },
+      {
+        "arquivo": "tmp/fechamento_registros_1960_20260922/verificacao_integrada_02/test_recuperacao_cartoes_1960.log",
+        "sha256": "ad4f64227e516679fdac2943cb0d0a624e9c011c01c1cfb7d5576f73de17f561"
+      },
+      {
+        "arquivo": "read_guides/1960_amostra_127_cartoes_recuperados.json",
+        "sha256": "ed3ceca8f6956f12a1c88cfb5938fb55a6ab5bfd50ae4c2df3b0be5118b87769"
+      },
+      {
+        "arquivo": "R/microdata_1960_amostra_127.R",
+        "sha256": "8990edcfd9265e21eb3762c15aeeb9a45152249911036f717cf0e53cd1919677"
+      },
+      {
+        "arquivo": "R/microdata_1960.R",
+        "sha256": "f1085c708692a188ecf110d97b8647c2d9f8613c2e580dccca3812cf73225f89"
+      },
+      {
+        "arquivo": "_targets.R",
+        "sha256": "09aa9961a671b6d411607ad90b0cc588924633702ff2c1d1c931a750090c6b37"
+      },
+      {
+        "arquivo": "references/test_recuperacao_cartoes_1960.R",
+        "sha256": "a8cd37e62164d355e16426b2de64d3ae17a8db18551edcf420528728a89051e1"
+      },
+      {
+        "arquivo": "references/auditoria_recuperacao_cartoes_1960.py",
+        "sha256": "b78400fa4de86d191ad0a68c97b7439bac4588cc3ecc23c27220b1cb058fbd56"
+      },
+      {
+        "arquivo": "references/conferir_recuperacao_cartoes_1960.py",
+        "sha256": "0c374c79979726e49ec587a27e96195948c2aebdfbc092b54ee70c1c7c61a185"
+      }
+    ],
+    "entradas_conferidas": [
+      {
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.al.gz",
+        "sha256": "44d660b46f32aef2f795f6e05d43dd796768311a8a64721f6da5191dcd952873"
+      },
+      {
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.ba.gz",
+        "sha256": "15d040af8d050361097a66d78c0b6477da8fe41ee1942a89e3020242ebdc046d"
+      },
+      {
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.ce.gz",
+        "sha256": "40d8ecdc24e7d8c9ba8b4715f6f0bfa1f1385e4b3d8fe1d15eac3595b68f9fa2"
+      },
+      {
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.df.gz",
+        "sha256": "32f13d1877ca570a99a4a5caaf78712022c91afb16821ce75eb68b3cc9ab4421"
+      },
+      {
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.go.gz",
+        "sha256": "d8e1c1bddfea8df8500ccaef7b23b423e4974b17ab3c0916df50e96317821fa6"
+      },
+      {
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+        "sha256": "75e7b4e7fce28507c24a4e21f1a40e5b47f750fd72b090abe6d1b1406644a621"
+      },
+      {
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mt.gz",
+        "sha256": "3668b84265fad5abb8184653670396be5fb9c65f8e0cd419058a1834f4e8ef30"
+      },
+      {
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pe.gz",
+        "sha256": "5b0335249644da87e8ca3f9ab28e80731dd792ef5a40ce4a01b336a8ec71a296"
+      },
+      {
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+        "sha256": "3c5ad2b3dbb273eef5f86ccf6982076636c2ac86ee82bc93ed9c1bc3c576f9b9"
+      },
+      {
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.rj.gz",
+        "sha256": "363289071564a6cb7a93e8b417914df983c81d0ef92af2689224bc4065db4b6e"
+      },
+      {
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.rn.gz",
+        "sha256": "c464a89865256ea906b120e523e324935df05b0d2a9c9ab6853fbbe7819de746"
+      },
+      {
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.rs.gz",
+        "sha256": "b5d0686e2ddf796b4e33338e1b1dee6a0b53155043b76c5895577936b053e6c2"
+      },
+      {
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+        "sha256": "9b647908667d61fb35dfac8e4a4eda61a70b5f259bee3f5975026b54fa6326be"
+      },
+      {
+        "arquivo": "data_raw/microdata/1960/amostra_127/HHOLDA.txt",
+        "sha256": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c"
+      },
+      {
+        "arquivo": "read_guides/1960_amostra_127_correcoes.csv",
+        "sha256": "64aa59c04c2bc3a37c6943a489638633f735fc99bdcc7cd0a299e1f27640303b"
+      },
+      {
+        "arquivo": "read_guides/1960_amostra_127_duplicatas.csv",
+        "sha256": "2f20943f51e39cbb156ea002933c76a494d14f5b00a97f36f1e00fb00947fb0e"
+      },
+      {
+        "arquivo": "read_guides/1960_amostra_127_vinculos.csv",
+        "sha256": "a77cafb2ac548d7df624e554c02ee4f11dcded925ac81fe57efc8888eeab8c6e"
+      },
+      {
+        "arquivo": "read_guides/readguide_1960_amostra_127_familias.csv",
+        "sha256": "51c443ff8a9e86d1584665b7d6296b061af5592e57d61bed4091d68f30507de5"
+      },
+      {
+        "arquivo": "read_guides/readguide_1960_amostra_127_pessoas.csv",
+        "sha256": "18326d21e51a2af88bd9f3d62b39d7debe0dc611d66985e911ae12c571d71655"
+      },
+      {
+        "arquivo": "read_guides/readguide_1960_amostra_25_familias.csv",
+        "sha256": "815f3241d49f8ababaef8ef2b6c0fc6e515a72302346da8133b7349c0f481007"
+      },
+      {
+        "arquivo": "read_guides/readguide_1960_amostra_25_pessoas.csv",
+        "sha256": "e00be8bf2962bbd2c5ed9bc169321d5b156b1424bd22f4c2f46920aa89d106c8"
+      },
+      {
+        "arquivo": "data_raw/microdata/1960/amostra_127/pessoas_1960_amostra_127.parquet",
+        "sha256": "f757fddae54edddd6742ad800149a3086acc9f581a8197ec0a123d7f4efca404"
+      }
+    ],
+    "antes_depois": [
+      {
+        "linha_pessoa127": 119683,
+        "antes_no_parquet_atual": {
+          "linha": 119683,
+          "censobr_idfamily": 18118,
+          "censobr_idhousehold": 18078,
+          "censobr_upa": "14-14652",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "14-14652-156",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.ce.gz",
+          "linha_cartao25": 464201,
+          "pasta": "14652",
+          "boletim": "156",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 119684,
+        "antes_no_parquet_atual": {
+          "linha": 119684,
+          "censobr_idfamily": 18118,
+          "censobr_idhousehold": 18078,
+          "censobr_upa": "14-14652",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "14-14652-156",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.ce.gz",
+          "linha_cartao25": 464201,
+          "pasta": "14652",
+          "boletim": "156",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 390350,
+        "antes_no_parquet_atual": {
+          "linha": 390350,
+          "censobr_idfamily": 61496,
+          "censobr_idhousehold": 61431,
+          "censobr_upa": "40-40358",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "40-40358-042",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao25": 228376,
+          "pasta": "40358",
+          "boletim": "042",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 390351,
+        "antes_no_parquet_atual": {
+          "linha": 390351,
+          "censobr_idfamily": 61496,
+          "censobr_idhousehold": 61431,
+          "censobr_upa": "40-40358",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "40-40358-042",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao25": 228376,
+          "pasta": "40358",
+          "boletim": "042",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 390352,
+        "antes_no_parquet_atual": {
+          "linha": 390352,
+          "censobr_idfamily": 61496,
+          "censobr_idhousehold": 61431,
+          "censobr_upa": "40-40358",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "40-40358-042",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao25": 228376,
+          "pasta": "40358",
+          "boletim": "042",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 400682,
+        "antes_no_parquet_atual": {
+          "linha": 400682,
+          "censobr_idfamily": 63145,
+          "censobr_idhousehold": 63079,
+          "censobr_upa": "40-40654",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "40-40654-177",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao25": 429723,
+          "pasta": "40654",
+          "boletim": "177",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 400683,
+        "antes_no_parquet_atual": {
+          "linha": 400683,
+          "censobr_idfamily": 63145,
+          "censobr_idhousehold": 63079,
+          "censobr_upa": "40-40654",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "40-40654-177",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao25": 429723,
+          "pasta": "40654",
+          "boletim": "177",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 422226,
+        "antes_no_parquet_atual": {
+          "linha": 422226,
+          "censobr_idfamily": 66616,
+          "censobr_idhousehold": 66548,
+          "censobr_upa": "40-41318",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "40-41318-167",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao25": 851320,
+          "pasta": "41318",
+          "boletim": "167",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 422227,
+        "antes_no_parquet_atual": {
+          "linha": 422227,
+          "censobr_idfamily": 66616,
+          "censobr_idhousehold": 66548,
+          "censobr_upa": "40-41318",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "40-41318-167",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao25": 851320,
+          "pasta": "41318",
+          "boletim": "167",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 422228,
+        "antes_no_parquet_atual": {
+          "linha": 422228,
+          "censobr_idfamily": 66616,
+          "censobr_idhousehold": 66548,
+          "censobr_upa": "40-41318",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "40-41318-167",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao25": 851320,
+          "pasta": "41318",
+          "boletim": "167",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 422229,
+        "antes_no_parquet_atual": {
+          "linha": 422229,
+          "censobr_idfamily": 66616,
+          "censobr_idhousehold": 66548,
+          "censobr_upa": "40-41318",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "40-41318-167",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao25": 851320,
+          "pasta": "41318",
+          "boletim": "167",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 429734,
+        "antes_no_parquet_atual": {
+          "linha": 429734,
+          "censobr_idfamily": 67747,
+          "censobr_idhousehold": 67679,
+          "censobr_upa": "40-41514",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "40-41514-157",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao25": 988725,
+          "pasta": "41514",
+          "boletim": "157",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 429735,
+        "antes_no_parquet_atual": {
+          "linha": 429735,
+          "censobr_idfamily": 67747,
+          "censobr_idhousehold": 67679,
+          "censobr_upa": "40-41514",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "40-41514-157",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao25": 988725,
+          "pasta": "41514",
+          "boletim": "157",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 429736,
+        "antes_no_parquet_atual": {
+          "linha": 429736,
+          "censobr_idfamily": 67747,
+          "censobr_idhousehold": 67679,
+          "censobr_upa": "40-41514",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "40-41514-159",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao25": 988730,
+          "pasta": "41514",
+          "boletim": "159",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 429737,
+        "antes_no_parquet_atual": {
+          "linha": 429737,
+          "censobr_idfamily": 67747,
+          "censobr_idhousehold": 67679,
+          "censobr_upa": "40-41514",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "40-41514-159",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao25": 988730,
+          "pasta": "41514",
+          "boletim": "159",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 429738,
+        "antes_no_parquet_atual": {
+          "linha": 429738,
+          "censobr_idfamily": 67747,
+          "censobr_idhousehold": 67679,
+          "censobr_upa": "40-41514",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "40-41514-159",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao25": 988730,
+          "pasta": "41514",
+          "boletim": "159",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 429739,
+        "antes_no_parquet_atual": {
+          "linha": 429739,
+          "censobr_idfamily": 67747,
+          "censobr_idhousehold": 67679,
+          "censobr_upa": "40-41514",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "40-41514-159",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao25": 988730,
+          "pasta": "41514",
+          "boletim": "159",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 429740,
+        "antes_no_parquet_atual": {
+          "linha": 429740,
+          "censobr_idfamily": 67747,
+          "censobr_idhousehold": 67679,
+          "censobr_upa": "40-41514",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "40-41514-159",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao25": 988730,
+          "pasta": "41514",
+          "boletim": "159",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 583297,
+        "antes_no_parquet_atual": {
+          "linha": 583297,
+          "censobr_idfamily": 91459,
+          "censobr_idhousehold": 91372,
+          "censobr_upa": "52-52756",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "52-52756-210",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.rj.gz",
+          "linha_cartao25": 520585,
+          "pasta": "52756",
+          "boletim": "210",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 583298,
+        "antes_no_parquet_atual": {
+          "linha": 583298,
+          "censobr_idfamily": 91459,
+          "censobr_idhousehold": 91372,
+          "censobr_upa": "52-52756",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "52-52756-210",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.rj.gz",
+          "linha_cartao25": 520585,
+          "pasta": "52756",
+          "boletim": "210",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 583299,
+        "antes_no_parquet_atual": {
+          "linha": 583299,
+          "censobr_idfamily": 91459,
+          "censobr_idhousehold": 91372,
+          "censobr_upa": "52-52756",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "52-52756-210",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.rj.gz",
+          "linha_cartao25": 520585,
+          "pasta": "52756",
+          "boletim": "210",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 583300,
+        "antes_no_parquet_atual": {
+          "linha": 583300,
+          "censobr_idfamily": 91459,
+          "censobr_idhousehold": 91372,
+          "censobr_upa": "52-52756",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "52-52756-210",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.rj.gz",
+          "linha_cartao25": 520585,
+          "pasta": "52756",
+          "boletim": "210",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 583301,
+        "antes_no_parquet_atual": {
+          "linha": 583301,
+          "censobr_idfamily": 91459,
+          "censobr_idhousehold": 91372,
+          "censobr_upa": "52-52756",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "52-52756-210",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.rj.gz",
+          "linha_cartao25": 520585,
+          "pasta": "52756",
+          "boletim": "210",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 583302,
+        "antes_no_parquet_atual": {
+          "linha": 583302,
+          "censobr_idfamily": 91459,
+          "censobr_idhousehold": 91372,
+          "censobr_upa": "52-52756",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "52-52756-210",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.rj.gz",
+          "linha_cartao25": 520585,
+          "pasta": "52756",
+          "boletim": "210",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 583336,
+        "antes_no_parquet_atual": {
+          "linha": 583336,
+          "censobr_idfamily": 91464,
+          "censobr_idhousehold": 91377,
+          "censobr_upa": "52-52756",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "52-52762-054",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.rj.gz",
+          "linha_cartao25": 523615,
+          "pasta": "52762",
+          "boletim": "054",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 583337,
+        "antes_no_parquet_atual": {
+          "linha": 583337,
+          "censobr_idfamily": 91464,
+          "censobr_idhousehold": 91377,
+          "censobr_upa": "52-52756",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "52-52762-054",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.rj.gz",
+          "linha_cartao25": 523615,
+          "pasta": "52762",
+          "boletim": "054",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 583338,
+        "antes_no_parquet_atual": {
+          "linha": 583338,
+          "censobr_idfamily": 91464,
+          "censobr_idhousehold": 91377,
+          "censobr_upa": "52-52756",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "52-52762-054",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.rj.gz",
+          "linha_cartao25": 523615,
+          "pasta": "52762",
+          "boletim": "054",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 775036,
+        "antes_no_parquet_atual": {
+          "linha": 775036,
+          "censobr_idfamily": 126453,
+          "censobr_idhousehold": 126262,
+          "censobr_upa": "60-63850",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-63850-060",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 3865759,
+          "pasta": "63850",
+          "boletim": "060",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 775037,
+        "antes_no_parquet_atual": {
+          "linha": 775037,
+          "censobr_idfamily": 126453,
+          "censobr_idhousehold": 126262,
+          "censobr_upa": "60-63850",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-63850-060",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 3865759,
+          "pasta": "63850",
+          "boletim": "060",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 775061,
+        "antes_no_parquet_atual": {
+          "linha": 775061,
+          "censobr_idfamily": 126457,
+          "censobr_idhousehold": 126266,
+          "censobr_upa": "60-63850",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-63850-073",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 3865801,
+          "pasta": "63850",
+          "boletim": "073",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 775062,
+        "antes_no_parquet_atual": {
+          "linha": 775062,
+          "censobr_idfamily": 126457,
+          "censobr_idhousehold": 126266,
+          "censobr_upa": "60-63850",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-63850-073",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 3865801,
+          "pasta": "63850",
+          "boletim": "073",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 775063,
+        "antes_no_parquet_atual": {
+          "linha": 775063,
+          "censobr_idfamily": 126457,
+          "censobr_idhousehold": 126266,
+          "censobr_upa": "60-63850",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-63850-075",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 3865806,
+          "pasta": "63850",
+          "boletim": "075",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 775064,
+        "antes_no_parquet_atual": {
+          "linha": 775064,
+          "censobr_idfamily": 126457,
+          "censobr_idhousehold": 126266,
+          "censobr_upa": "60-63850",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-63850-075",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 3865806,
+          "pasta": "63850",
+          "boletim": "075",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 782614,
+        "antes_no_parquet_atual": {
+          "linha": 782614,
+          "censobr_idfamily": 127691,
+          "censobr_idhousehold": 127509,
+          "censobr_upa": "60-64054",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-64054-143",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 4001156,
+          "pasta": "64054",
+          "boletim": "143",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 782615,
+        "antes_no_parquet_atual": {
+          "linha": 782615,
+          "censobr_idfamily": 127691,
+          "censobr_idhousehold": 127509,
+          "censobr_upa": "60-64054",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-64054-143",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 4001156,
+          "pasta": "64054",
+          "boletim": "143",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 782616,
+        "antes_no_parquet_atual": {
+          "linha": 782616,
+          "censobr_idfamily": 127691,
+          "censobr_idhousehold": 127509,
+          "censobr_upa": "60-64054",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-64054-144",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 4001159,
+          "pasta": "64054",
+          "boletim": "144",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 782617,
+        "antes_no_parquet_atual": {
+          "linha": 782617,
+          "censobr_idfamily": 127691,
+          "censobr_idhousehold": 127509,
+          "censobr_upa": "60-64054",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-64054-144",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 4001159,
+          "pasta": "64054",
+          "boletim": "144",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 795858,
+        "antes_no_parquet_atual": {
+          "linha": 795858,
+          "censobr_idfamily": 129976,
+          "censobr_idhousehold": 129793,
+          "censobr_upa": "60-64490",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-64490-096",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 223792,
+          "pasta": "64490",
+          "boletim": "096",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 795859,
+        "antes_no_parquet_atual": {
+          "linha": 795859,
+          "censobr_idfamily": 129976,
+          "censobr_idhousehold": 129793,
+          "censobr_upa": "60-64490",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-64490-096",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 223792,
+          "pasta": "64490",
+          "boletim": "096",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 811890,
+        "antes_no_parquet_atual": {
+          "linha": 811890,
+          "censobr_idfamily": 132570,
+          "censobr_idhousehold": 132385,
+          "censobr_upa": "60-65004",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-65004-083",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 557149,
+          "pasta": "65004",
+          "boletim": "083",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 811891,
+        "antes_no_parquet_atual": {
+          "linha": 811891,
+          "censobr_idfamily": 132570,
+          "censobr_idhousehold": 132385,
+          "censobr_upa": "60-65004",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-65004-083",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 557149,
+          "pasta": "65004",
+          "boletim": "083",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 811892,
+        "antes_no_parquet_atual": {
+          "linha": 811892,
+          "censobr_idfamily": 132570,
+          "censobr_idhousehold": 132385,
+          "censobr_upa": "60-65004",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-65004-084",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 557152,
+          "pasta": "65004",
+          "boletim": "084",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 811893,
+        "antes_no_parquet_atual": {
+          "linha": 811893,
+          "censobr_idfamily": 132570,
+          "censobr_idhousehold": 132385,
+          "censobr_upa": "60-65004",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-65004-084",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 557152,
+          "pasta": "65004",
+          "boletim": "084",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 811894,
+        "antes_no_parquet_atual": {
+          "linha": 811894,
+          "censobr_idfamily": 132570,
+          "censobr_idhousehold": 132385,
+          "censobr_upa": "60-65004",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-65004-085",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 557155,
+          "pasta": "65004",
+          "boletim": "085",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 811895,
+        "antes_no_parquet_atual": {
+          "linha": 811895,
+          "censobr_idfamily": 132570,
+          "censobr_idhousehold": 132385,
+          "censobr_upa": "60-65004",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-65004-085",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 557155,
+          "pasta": "65004",
+          "boletim": "085",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 841034,
+        "antes_no_parquet_atual": {
+          "linha": 841034,
+          "censobr_idfamily": 137256,
+          "censobr_idhousehold": 137080,
+          "censobr_upa": "60-65858",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-65858-158",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 1139384,
+          "pasta": "65858",
+          "boletim": "158",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 841035,
+        "antes_no_parquet_atual": {
+          "linha": 841035,
+          "censobr_idfamily": 137256,
+          "censobr_idhousehold": 137080,
+          "censobr_upa": "60-65858",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-65858-158",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 1139384,
+          "pasta": "65858",
+          "boletim": "158",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 841036,
+        "antes_no_parquet_atual": {
+          "linha": 841036,
+          "censobr_idfamily": 137256,
+          "censobr_idhousehold": 137080,
+          "censobr_upa": "60-65858",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-65858-160",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 1139389,
+          "pasta": "65858",
+          "boletim": "160",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 841037,
+        "antes_no_parquet_atual": {
+          "linha": 841037,
+          "censobr_idfamily": 137256,
+          "censobr_idhousehold": 137080,
+          "censobr_upa": "60-65858",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "60-65858-160",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao25": 1139389,
+          "pasta": "65858",
+          "boletim": "160",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 856083,
+        "antes_no_parquet_atual": {
+          "linha": 856083,
+          "censobr_idfamily": 139598,
+          "censobr_idhousehold": 139423,
+          "censobr_upa": "71-70196",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "71-70196-055",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+          "linha_cartao25": 1583,
+          "pasta": "70196",
+          "boletim": "055",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 856084,
+        "antes_no_parquet_atual": {
+          "linha": 856084,
+          "censobr_idfamily": 139598,
+          "censobr_idhousehold": 139423,
+          "censobr_upa": "71-70196",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "71-70196-055",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+          "linha_cartao25": 1583,
+          "pasta": "70196",
+          "boletim": "055",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 856085,
+        "antes_no_parquet_atual": {
+          "linha": 856085,
+          "censobr_idfamily": 139598,
+          "censobr_idhousehold": 139423,
+          "censobr_upa": "71-70196",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "71-70196-056",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+          "linha_cartao25": 1586,
+          "pasta": "70196",
+          "boletim": "056",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 856086,
+        "antes_no_parquet_atual": {
+          "linha": 856086,
+          "censobr_idfamily": 139598,
+          "censobr_idhousehold": 139423,
+          "censobr_upa": "71-70196",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "71-70196-056",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+          "linha_cartao25": 1586,
+          "pasta": "70196",
+          "boletim": "056",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 861116,
+        "antes_no_parquet_atual": {
+          "linha": 861116,
+          "censobr_idfamily": 140473,
+          "censobr_idhousehold": 140296,
+          "censobr_upa": "71-70380",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "71-70380-148",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+          "linha_cartao25": 125840,
+          "pasta": "70380",
+          "boletim": "148",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 861117,
+        "antes_no_parquet_atual": {
+          "linha": 861117,
+          "censobr_idfamily": 140473,
+          "censobr_idhousehold": 140296,
+          "censobr_upa": "71-70380",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "71-70380-148",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+          "linha_cartao25": 125840,
+          "pasta": "70380",
+          "boletim": "148",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 868603,
+        "antes_no_parquet_atual": {
+          "linha": 868603,
+          "censobr_idfamily": 141812,
+          "censobr_idhousehold": 141636,
+          "censobr_upa": "71-70158",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "71-70492-004",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+          "linha_cartao25": 313663,
+          "pasta": "70492",
+          "boletim": "004",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 868604,
+        "antes_no_parquet_atual": {
+          "linha": 868604,
+          "censobr_idfamily": 141812,
+          "censobr_idhousehold": 141636,
+          "censobr_upa": "71-70158",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "71-70492-004",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+          "linha_cartao25": 313663,
+          "pasta": "70492",
+          "boletim": "004",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 869484,
+        "antes_no_parquet_atual": {
+          "linha": 869484,
+          "censobr_idfamily": 141961,
+          "censobr_idhousehold": 141785,
+          "censobr_upa": "71-70492",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "71-70492-260",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+          "linha_cartao25": 314754,
+          "pasta": "70492",
+          "boletim": "260",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 869485,
+        "antes_no_parquet_atual": {
+          "linha": 869485,
+          "censobr_idfamily": 141961,
+          "censobr_idhousehold": 141785,
+          "censobr_upa": "71-70492",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "71-70492-260",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+          "linha_cartao25": 314754,
+          "pasta": "70492",
+          "boletim": "260",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 870051,
+        "antes_no_parquet_atual": {
+          "linha": 870051,
+          "censobr_idfamily": 142058,
+          "censobr_idhousehold": 141882,
+          "censobr_upa": "71-70496",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "71-70496-135",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+          "linha_cartao25": 316765,
+          "pasta": "70496",
+          "boletim": "135",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 870052,
+        "antes_no_parquet_atual": {
+          "linha": 870052,
+          "censobr_idfamily": 142058,
+          "censobr_idhousehold": 141882,
+          "censobr_upa": "71-70496",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "71-70496-135",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+          "linha_cartao25": 316765,
+          "pasta": "70496",
+          "boletim": "135",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 870053,
+        "antes_no_parquet_atual": {
+          "linha": 870053,
+          "censobr_idfamily": 142058,
+          "censobr_idhousehold": 141882,
+          "censobr_upa": "71-70496",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "71-70496-135",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+          "linha_cartao25": 316765,
+          "pasta": "70496",
+          "boletim": "135",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 906969,
+        "antes_no_parquet_atual": {
+          "linha": 906969,
+          "censobr_idfamily": 147778,
+          "censobr_idhousehold": 147602,
+          "censobr_upa": "71-71572",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "71-71572-050",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+          "linha_cartao25": 1101609,
+          "pasta": "71572",
+          "boletim": "050",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 906970,
+        "antes_no_parquet_atual": {
+          "linha": 906970,
+          "censobr_idfamily": 147778,
+          "censobr_idhousehold": 147602,
+          "censobr_upa": "71-71572",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "71-71572-050",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+          "linha_cartao25": 1101609,
+          "pasta": "71572",
+          "boletim": "050",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 958041,
+        "antes_no_parquet_atual": {
+          "linha": 958041,
+          "censobr_idfamily": 155724,
+          "censobr_idhousehold": 155551,
+          "censobr_upa": "81-81562",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "81-81562-006",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.rs.gz",
+          "linha_cartao25": 155679,
+          "pasta": "81562",
+          "boletim": "006",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 958042,
+        "antes_no_parquet_atual": {
+          "linha": 958042,
+          "censobr_idfamily": 155724,
+          "censobr_idhousehold": 155551,
+          "censobr_upa": "81-81562",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "81-81562-006",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.rs.gz",
+          "linha_cartao25": 155679,
+          "pasta": "81562",
+          "boletim": "006",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 990653,
+        "antes_no_parquet_atual": {
+          "linha": 990653,
+          "censobr_idfamily": 161302,
+          "censobr_idhousehold": 161114,
+          "censobr_upa": "81-82322",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "81-82322-067",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.rs.gz",
+          "linha_cartao25": 872258,
+          "pasta": "82322",
+          "boletim": "067",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 990654,
+        "antes_no_parquet_atual": {
+          "linha": 990654,
+          "censobr_idfamily": 161302,
+          "censobr_idhousehold": 161114,
+          "censobr_upa": "81-82322",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "81-82322-067",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.rs.gz",
+          "linha_cartao25": 872258,
+          "pasta": "82322",
+          "boletim": "067",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 1048239,
+        "antes_no_parquet_atual": {
+          "linha": 1048239,
+          "censobr_idfamily": 170322,
+          "censobr_idhousehold": 170117,
+          "censobr_upa": "94-94246",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "94-94246-027",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.go.gz",
+          "linha_cartao25": 114664,
+          "pasta": "94246",
+          "boletim": "027",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 1048240,
+        "antes_no_parquet_atual": {
+          "linha": 1048240,
+          "censobr_idfamily": 170322,
+          "censobr_idhousehold": 170117,
+          "censobr_upa": "94-94246",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "94-94246-027",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.go.gz",
+          "linha_cartao25": 114664,
+          "pasta": "94246",
+          "boletim": "027",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 1048241,
+        "antes_no_parquet_atual": {
+          "linha": 1048241,
+          "censobr_idfamily": 170322,
+          "censobr_idhousehold": 170117,
+          "censobr_upa": "94-94246",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "94-94246-027",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.go.gz",
+          "linha_cartao25": 114664,
+          "pasta": "94246",
+          "boletim": "027",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 1048672,
+        "antes_no_parquet_atual": {
+          "linha": 1048672,
+          "censobr_idfamily": 170395,
+          "censobr_idhousehold": 170188,
+          "censobr_upa": "94-94246",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "94-94246-102",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.go.gz",
+          "linha_cartao25": 115101,
+          "pasta": "94246",
+          "boletim": "102",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 1048673,
+        "antes_no_parquet_atual": {
+          "linha": 1048673,
+          "censobr_idfamily": 170395,
+          "censobr_idhousehold": 170188,
+          "censobr_upa": "94-94246",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "94-94246-102",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.go.gz",
+          "linha_cartao25": 115101,
+          "pasta": "94246",
+          "boletim": "102",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      },
+      {
+        "linha_pessoa127": 1048674,
+        "antes_no_parquet_atual": {
+          "linha": 1048674,
+          "censobr_idfamily": 170395,
+          "censobr_idhousehold": 170188,
+          "censobr_upa": "94-94246",
+          "censobr_familia_origem": "anexada_anterior"
+        },
+        "depois": {
+          "cartao_recuperado": "94-94246-102",
+          "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.go.gz",
+          "linha_cartao25": 115101,
+          "pasta": "94246",
+          "boletim": "102",
+          "unidade": "boletim_coletivo",
+          "respostas_pessoais_preservadas": true
+        }
+      }
+    ]
+  },
+  "git_guias": "Os quatro guias mantem conteudo integral. Tres recebem no indice os bytes CRLF/mistos locais para preservar os hashes; .gitattributes impede normalizacao futura. Uma quebra de linha interna de rotulo CSV ja possuia espaco final, deliberadamente preservado. Diff textual dos guias ignorando somente finais de linha e vazio.",
+  "sem_reconstrucao": true,
+  "sem_recalculo_pesos": true,
+  "sem_novos_crashes_nativos_observados": true
+}

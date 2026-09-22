@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Censo de 1960: revisão explicada, ilustrada e auditável</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+  <style type="text/css">:root { color-scheme: light; --ink:#243642; --quiet:#536977; --line:#d7e2e7; --accent:#176a65; }
+html { background:#f4f7f8; scroll-behavior:smooth; }
+body { max-width:1000px; margin:0 auto; padding:52px 56px 100px; background:white; color:var(--ink); font-family:Georgia,"Times New Roman",serif; font-size:19px; line-height:1.75; }
+h1,h2,h3,h4,nav,figcaption,table { font-family:"Segoe UI",Arial,sans-serif; }
+h1 { font-size:38px; line-height:1.2; margin:0 0 32px; color:#17384a; }
+h2 { font-size:29px; line-height:1.35; margin:60px 0 22px; padding-top:18px; border-top:1px solid var(--line); }
+h3 { font-size:23px; line-height:1.45; margin:36px 0 18px; }
+h4 { font-size:20px; margin-top:28px; }
+p { margin:0 0 20px; } a { color:var(--accent); text-underline-offset:3px; }
+strong { color:#183b46; } nav { font-size:16px; line-height:1.6; border-bottom:1px solid var(--line); padding:0 0 24px; margin-bottom:32px; }
+nav ul { padding-left:24px; } nav li { margin:4px 0; }
+table { border-collapse:collapse; width:100%; margin:24px 0 30px; font-size:16px; line-height:1.55; }
+th { text-align:left; background:#eaf2f5; color:#163f4e; } td,th { padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+tr:nth-child(even) td { background:#f8fafb; }
+blockquote { margin:24px 0; padding:16px 24px; border-left:4px solid #80ada5; background:#f0f7f4; }
+blockquote p:last-child { margin-bottom:0; }
+code { font-family:Consolas,"Cascadia Code",monospace; font-size:.85em; overflow-wrap:anywhere; }
+pre { padding:18px; background:#eff3f5; overflow:auto; line-height:1.6; font-size:16px; }
+pre code { font-size:inherit; overflow-wrap:normal; }
+img { max-width:100%; height:auto; } figure { margin:32px 0; } figcaption { color:var(--quiet); font-size:15px; line-height:1.5; margin:10px 0; }
+li { margin-bottom:10px; } hr { border:0; border-top:1px solid var(--line); margin:40px 0; }
+.sourceCode { color:var(--ink); }
+@media(max-width:720px) { body {padding:28px 18px 60px;font-size:18px;} h1 {font-size:30px;} h2 {font-size:26px;} table {display:block;overflow:auto;font-size:15px;} }
+@media print {html,body {background:white;} body {padding:0;max-width:none;font-size:11pt;line-height:1.5;} h1 {font-size:24pt;} h2 {font-size:18pt;} h3 {font-size:14pt;} h2,h3 {break-after:avoid;} figure,table,blockquote {break-inside:avoid;} a {color:inherit;} nav {display:none;} }
+</style>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#o-que-aconteceu-com-os-registros-de-1960-e-como-decidir-o-que-corrigir" id="toc-o-que-aconteceu-com-os-registros-de-1960-e-como-decidir-o-que-corrigir">O
+que aconteceu com os registros de 1960 — e como decidir o que
+corrigir</a>
+<ul>
+<li><a href="#como-usar-este-documento" id="toc-como-usar-este-documento">Como usar este documento</a></li>
+<li><a href="#antes-de-falar-em-erro-que-arquivo-estamos-tentando-reconstruir" id="toc-antes-de-falar-em-erro-que-arquivo-estamos-tentando-reconstruir">1.
+Antes de falar em erro: que arquivo estamos tentando
+reconstruir?</a></li>
+<li><a href="#quando-a-tentativa-de-recuperar-uma-família-cria-um-vínculo-errado" id="toc-quando-a-tentativa-de-recuperar-uma-família-cria-um-vínculo-errado">2.
+Quando a tentativa de recuperar uma família cria um vínculo
+errado</a></li>
+<li><a href="#quando-duas-pessoas-têm-respostas-iguais-por-que-isso-não-basta-para-excluir-uma" id="toc-quando-duas-pessoas-têm-respostas-iguais-por-que-isso-não-basta-para-excluir-uma">3.
+Quando duas pessoas têm respostas iguais: por que isso não basta para
+excluir uma</a></li>
+<li><a href="#um-reparo-que-mudou-a-escolaridade-números-permitidos-também-podem-estar-errados" id="toc-um-reparo-que-mudou-a-escolaridade-números-permitidos-também-podem-estar-errados">4.
+Um reparo que mudou a escolaridade: números permitidos também podem
+estar errados</a></li>
+<li><a href="#conferir-com-a-publicação-por-que-bateu-o-total-pode-enganar" id="toc-conferir-com-a-publicação-por-que-bateu-o-total-pode-enganar">5.
+Conferir com a publicação: por que “bateu o total” pode enganar</a></li>
+<li><a href="#o-desenho-amostral-o-que-sabemos-e-o-que-estamos-reconstruindo" id="toc-o-desenho-amostral-o-que-sabemos-e-o-que-estamos-reconstruindo">6.
+O desenho amostral: o que sabemos e o que estamos reconstruindo</a></li>
+<li><a href="#o-que-já-foi-conferido-o-que-falta-mudar-e-o-que-ainda-não-sabemos" id="toc-o-que-já-foi-conferido-o-que-falta-mudar-e-o-que-ainda-não-sabemos">7.
+O que já foi conferido, o que falta mudar e o que ainda não
+sabemos</a></li>
+<li><a href="#como-auditar-os-exemplos-sem-decifrar-o-parecer-inteiro" id="toc-como-auditar-os-exemplos-sem-decifrar-o-parecer-inteiro">8. Como
+auditar os exemplos sem decifrar o parecer inteiro</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="o-que-aconteceu-com-os-registros-de-1960-e-como-decidir-o-que-corrigir">O
+que aconteceu com os registros de 1960 — e como decidir o que
+corrigir</h1>
+<p><strong>Versão narrativa e ilustrada, de 22 de setembro de
+2026.</strong> Esta é a reescrita do parecer que reuniu as três revisões
+anteriores. As conclusões não foram convertidas em alterações nos dados.
+Não executei R/Rscript, não refiz pesos e não modifiquei os arquivos de
+produção. A <a href="microdata_1960_amostra_127_anexo_tecnico_20260921.md">versão
+técnica de 21/09</a> está preservada integralmente para consulta.</p>
+<p>O parecer anterior apresentou os resultados como uma lista de
+problemas já conhecidos pelo leitor. Faltou explicar a história que liga
+o arquivo original à regra de tratamento e, depois, à descoberta de um
+erro. Este texto começa por essa história.</p>
+<p>A conclusão, em linguagem direta, é esta: <strong>conseguimos ler e
+organizar quase todos os registros, mas algumas regras usadas para
+completar essa organização foram além do que os registros permitiam
+afirmar.</strong> Algumas associaram pessoas à família errada; outras
+eliminaram pessoas cujas respostas eram iguais; um reparo mudou
+respostas que ainda eram legíveis. Além disso, certas comparações com os
+resultados publicados esconderam diferenças ou compararam grupos
+diferentes de pessoas.</p>
+<p>Isso não significa que todos os registros estejam errados. Significa
+que não devemos tratar o arquivo inteiro como conferido enquanto essas
+decisões não forem resolvidas e seus efeitos reavaliados. Ao longo do
+texto, “ainda não aprovado” tem esse sentido, não o de inutilidade
+completa dos dados.</p>
+<h2 id="como-usar-este-documento">Como usar este documento</h2>
+<p>A leitura pode seguir os capítulos em ordem. Cada caso principal
+explica <strong>como estava o registro, por que a regra parecia
+razoável, o que ela fez, qual evidência a contradiz e como deveria
+ficar</strong>. “Deveria” indica uma proposta sustentada pela evidência,
+não uma alteração já realizada.</p>
+<p>Há três tipos de ilustração:</p>
+<ul>
+<li><strong>Casos reais:</strong> os números identificam registros que
+podem ser encontrados nos arquivos. Não atribuímos nomes às
+pessoas.</li>
+<li><strong>Esquemas explicativos:</strong> reorganizam visualmente
+registros ou etapas reais, sem reproduzir a aparência do formulário
+original.</li>
+<li><strong>Exemplo didático:</strong> usa números inventados,
+expressamente identificados, apenas para tornar visível um mecanismo de
+cálculo.</li>
+</ul>
+<p>No fim de cada conjunto de casos, “Como conferir” leva a um caderno
+com trechos literais, posições dos campos, linhas das fontes e
+localização da regra no programa. O texto principal usa palavras; o
+caderno guarda os códigos necessários para repetir a verificação.</p>
+<h2 id="antes-de-falar-em-erro-que-arquivo-estamos-tentando-reconstruir">1.
+Antes de falar em erro: que arquivo estamos tentando reconstruir?</h2>
+<h3 id="uma-linha-não-é-necessariamente-uma-pessoa">Uma linha não é
+necessariamente uma pessoa</h3>
+<p>O arquivo chamado <strong>HHOLDA.txt</strong> tem 1.074.328 linhas,
+cada uma com 62 posições. Ele conserva uma representação textual dos
+antigos registros em cartões. Algumas linhas descrevem a família e o
+domicílio; outras descrevem pessoas.</p>
+<p>Um número isolado só tem sentido quando sabemos a posição em que
+aparece. Uma posição pode indicar sexo e presença; outra, parentesco; um
+conjunto de três posições, idade. <strong>Ler o arquivo</strong>
+significa separar essas posições e traduzir seus códigos para colunas.
+Essa disposição fixa dos campos é o que os documentos técnicos chamam de
+<em>layout</em>.</p>
+<p>Por exemplo, o código de idade 999 significa “idade ignorada”. Ele
+reúne uma posição com o tipo de idade, 9, e duas posições com o número,
+99. Não significa idade de 99 ou de 999 anos. E uma posição vazia nem
+sempre significa que uma resposta se perdeu: em alguns tipos de
+domicílio, a instrução era justamente não codificar certas
+perguntas.</p>
+<h3 id="pessoa-família-e-domicílio-não-são-a-mesma-unidade">Pessoa,
+família e domicílio não são a mesma unidade</h3>
+<p>Uma pessoa é um registro individual. Uma família é o grupo
+identificado pelo boletim, isto é, pelo questionário. O domicílio é a
+unidade de moradia. Duas famílias podem compartilhar um domicílio; por
+isso, contar boletins não equivale a contar casas.</p>
+<p>Imagine uma casa com uma família principal e uma segunda família. O
+arquivo pode ter dois boletins, mas as perguntas sobre água e cômodos
+estarem preenchidas apenas no da família principal. O espaço vazio no
+outro boletim não prova perda dessas respostas.</p>
+<p>Essa distinção importa porque o tratamento reconstrói duas
+relações:</p>
+<blockquote>
+<p>Qual é a família desta pessoa? E a qual domicílio pertence essa
+família?</p>
+</blockquote>
+<p>Um erro na primeira relação pode mudar a composição da família. Um
+erro na segunda pode alterar a contagem de domicílios ou atribuir a uma
+pessoa características da casa errada. Também pode mudar o peso usado
+para essa pessoa, porque o processamento utiliza pesos comuns dentro do
+domicílio.</p>
+<p>Nos exemplos, “filho” e “filha” abreviam a categoria <strong>filho ou
+enteado / filha ou enteada</strong> do censo. “Esposa” descreve uma
+mulher registrada como cônjuge. Essas expressões não comprovam filiação
+biológica nem acrescentam informações às respostas originais.</p>
+<h3 id="como-se-encontra-a-família-de-uma-pessoa">Como se encontra a
+família de uma pessoa</h3>
+<p>O programa procura uma identificação composta por unidade da
+federação, distrito, pasta e número do boletim. Nos textos técnicos,
+essa combinação é chamada de <strong>chave</strong>: funciona como um
+endereço do questionário.</p>
+<p>A <strong>pasta</strong>, aqui, não é uma pasta do computador nem um
+município. Era um lote de trabalho em que foram reunidos questionários.
+O número de uma pasta ajuda a encontrar o registro, mas não substitui a
+identificação geográfica.</p>
+<p>Quando uma dessas partes está errada, a busca pode fracassar mesmo
+que o cartão da família ainda exista. É a diferença decisiva entre:</p>
+<ul>
+<li>“não encontrei o cartão usando esta identificação”;</li>
+<li>“o cartão se perdeu e deixou de existir”.</li>
+</ul>
+<p>Vários problemas da revisão começam quando a primeira frase foi
+tomada como prova da segunda.</p>
+<h3 id="por-que-temos-duas-amostras-para-comparar">Por que temos duas
+amostras para comparar?</h3>
+<p>O IBGE selecionou uma amostra geral de aproximadamente 25% na coleta.
+Dela foi retirada uma amostra menor, por seleção de pastas, usada na
+publicação preliminar e conhecida no projeto como amostra de 1,27%.</p>
+<p>Hoje, os arquivos de 25% estão disponíveis no projeto para 17
+unidades da federação. Para outras 11, o arquivo combinado utiliza a
+amostra menor. <strong>Nas 17 primeiras, as duas fontes podem ser
+comparadas; na compilação nacional, porém, não são somadas.</strong>
+Entra uma fonte por unidade.</p>
+<figure>
+<img role="img" aria-label="Esquema das duas seleções históricas e das duas fontes usadas no arquivo nacional atual." src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjUxMCIgdmlld0JveD0iMCAwIDEwMDAgNTEwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idCBkIj4KPHRpdGxlIGlkPSJ0Ij5EYSBzZWxlw6fDo28gZGUgMTk2MCDDoCBjb21iaW5hw6fDo28gYXR1YWwgZGUgYXJxdWl2b3M8L3RpdGxlPgo8ZGVzYyBpZD0iZCI+TmEgaGlzdMOzcmlhOiBhbW9zdHJhIGRlIGNlcmNhIGRlIDI1IHBvciBjZW50bywgcXVlc3Rpb27DoXJpb3MgYWdydXBhZG9zIGVtIHBhc3Rhcywgc2VsZcOnw6NvIGRlIHBhc3RhcyBlIHN1YmFtb3N0cmEgY2hhbWFkYSAxLDI3IHBvciBjZW50by4gTm8gcHJvZHV0byBhdHVhbDogMTcgdW5pZGFkZXMgdXNhbSBvcyBhcnF1aXZvcyBkZSAyNSBwb3IgY2VudG8gZSBvdXRyYXMgMTEgdXNhbSBvcyBkZSAxLDI3IHBvciBjZW50by4gTsOjbyBzZSBzb21hbSBhcyBkdWFzIGFtb3N0cmFzIG5hIG1lc21hIHVuaWRhZGUuPC9kZXNjPgo8ZGVmcz48bWFya2VyIGlkPSJhIiB2aWV3Qm94PSIwIDAgMTAgMTAiIHJlZlg9IjkiIHJlZlk9IjUiIG1hcmtlcldpZHRoPSI3IiBtYXJrZXJIZWlnaHQ9IjciIG9yaWVudD0iYXV0by1zdGFydC1yZXZlcnNlIj48cGF0aCBkPSJNIDAgMCBMIDEwIDUgTCAwIDEwIHoiIGZpbGw9IiM1MDYzNzQiLz48L21hcmtlcj48L2RlZnM+CjxyZWN0IHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjUxMCIgZmlsbD0iI2ZmZmZmZiIvPgo8ZyBmb250LWZhbWlseT0iU2Vnb2UgVUksQXJpYWwsc2Fucy1zZXJpZiIgZmlsbD0iIzE3MmY0MCI+Cjx0ZXh0IHg9IjMwIiB5PSIzOCIgZm9udC1zaXplPSIyMyIgZm9udC13ZWlnaHQ9IjYwMCI+MS4gQ29tbyBhIGFtb3N0cmEgbWVub3Igc3VyZ2l1PC90ZXh0Pgo8cmVjdCB4PSIzMCIgeT0iNjUiIHdpZHRoPSIyNjAiIGhlaWdodD0iMTMyIiByeD0iOCIgZmlsbD0iI2VhZjJmNSIvPgo8dGV4dCB4PSI1MCIgeT0iOTkiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI2MDAiPkFtb3N0cmEgZ2VyYWw8L3RleHQ+Cjx0ZXh0IHg9IjUwIiB5PSIxMzIiIGZvbnQtc2l6ZT0iMTkiPkNlcmNhIGRlIDI1JSwgbmEgY29sZXRhLjwvdGV4dD4KPHRleHQgeD0iNTAiIHk9IjE2MiIgZm9udC1zaXplPSIxOSI+RG9taWPDrWxpb3MgcGFydGljdWxhcmVzOzwvdGV4dD48dGV4dCB4PSI1MCIgeT0iMTg3IiBmb250LXNpemU9IjE5Ij5wZXNzb2FzIG5vcyBjb2xldGl2b3MuPC90ZXh0Pgo8cGF0aCBkPSJNIDI5OCAxMzIgSCAzMzgiIHN0cm9rZT0iIzUwNjM3NCIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2EpIi8+CjxyZWN0IHg9IjM1MCIgeT0iNjUiIHdpZHRoPSIyNzAiIGhlaWdodD0iMTMyIiByeD0iOCIgZmlsbD0iI2VhZjJmNSIvPgo8dGV4dCB4PSIzNzAiIHk9Ijk5IiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iNjAwIj5RdWVzdGlvbsOhcmlvcyBlbSBwYXN0YXM8L3RleHQ+Cjx0ZXh0IHg9IjM3MCIgeT0iMTM0IiBmb250LXNpemU9IjE5Ij5Mb3RlcyBkZSB0cmFiYWxobywgbWFudGVuZG88L3RleHQ+Cjx0ZXh0IHg9IjM3MCIgeT0iMTYxIiBmb250LXNpemU9IjE5Ij5hIG9yZGVtIGRvcyBzZXRvcmVzLjwvdGV4dD4KPHBhdGggZD0iTSA2MjggMTMyIEggNjY4IiBzdHJva2U9IiM1MDYzNzQiIHN0cm9rZS13aWR0aD0iMiIgbWFya2VyLWVuZD0idXJsKCNhKSIvPgo8cmVjdCB4PSI2ODAiIHk9IjY1IiB3aWR0aD0iMjkwIiBoZWlnaHQ9IjEzMiIgcng9IjgiIGZpbGw9IiNlMGVmZWIiLz4KPHRleHQgeD0iNzAwIiB5PSI5OSIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9IjYwMCI+U3ViYW1vc3RyYSBkZSBwYXN0YXM8L3RleHQ+Cjx0ZXh0IHg9IjcwMCIgeT0iMTM0IiBmb250LXNpemU9IjE5Ij5BcHJveGltYWRhbWVudGUgMSBlbSAyMC48L3RleHQ+Cjx0ZXh0IHg9IjcwMCIgeT0iMTY2IiBmb250LXNpemU9IjE5Ij5BcnF1aXZvIGNoYW1hZG8g4oCcMSwyNyXigJ0uPC90ZXh0Pgo8dGV4dCB4PSIzMCIgeT0iMjM2IiBmb250LXNpemU9IjE4Ij5Fc3F1ZW1hIGhpc3TDs3JpY28gc2ltcGxpZmljYWRvLiBOw6NvIHJlY3VwZXJhIHRvZGFzIGFzIHByb2JhYmlsaWRhZGVzIG5lbSBvcyBsaW1pdGVzIGRvIHNvcnRlaW8uPC90ZXh0Pgo8bGluZSB4MT0iMzAiIHgyPSI5NzAiIHkxPSIyNjAiIHkyPSIyNjAiIHN0cm9rZT0iI2JjY2JkMiIvPgo8dGV4dCB4PSIzMCIgeT0iMjk5IiBmb250LXNpemU9IjIzIiBmb250LXdlaWdodD0iNjAwIj4yLiBDb21vIG9zIGFycXVpdm9zIGRpc3BvbsOtdmVpcyBzw6NvIGNvbWJpbmFkb3MgaG9qZTwvdGV4dD4KPHJlY3QgeD0iMzAiIHk9IjMyMyIgd2lkdGg9IjM2NSIgaGVpZ2h0PSI2NiIgcng9IjgiIGZpbGw9IiNlYWYyZjUiLz4KPHRleHQgeD0iNTAiIHk9IjM1MSIgZm9udC1zaXplPSIyMCI+MTcgdW5pZGFkZXMgZGEgZmVkZXJhw6fDo288L3RleHQ+PHRleHQgeD0iNTAiIHk9IjM3NyIgZm9udC1zaXplPSIxOSI+RW50cmFtIG9zIGFycXVpdm9zIGRlIDI1JS48L3RleHQ+CjxyZWN0IHg9IjMwIiB5PSI0MDUiIHdpZHRoPSIzNjUiIGhlaWdodD0iNjYiIHJ4PSI4IiBmaWxsPSIjZTBlZmViIi8+Cjx0ZXh0IHg9IjUwIiB5PSI0MzMiIGZvbnQtc2l6ZT0iMjAiPk91dHJhcyAxMSB1bmlkYWRlcyBkYSBmZWRlcmHDp8OjbzwvdGV4dD48dGV4dCB4PSI1MCIgeT0iNDU5IiBmb250LXNpemU9IjE5Ij5FbnRyYW0gb3MgYXJxdWl2b3MgZGUgMSwyNyUuPC90ZXh0Pgo8cGF0aCBkPSJNIDQwMyAzNTYgSCA0OTUgViAzOTcgTSA0MDMgNDM4IEggNDk1IFYgMzk3IE0gNDk1IDM5NyBIIDU1NyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTA2Mzc0IiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYSkiLz4KPHRleHQgeD0iNTg1IiB5PSIzODEiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI2MDAiPkFycXVpdm8gY29tYmluYWRvIG5hY2lvbmFsPC90ZXh0Pgo8dGV4dCB4PSI1ODUiIHk9IjQxNiIgZm9udC1zaXplPSIyMCI+Q2FkYSB1bmlkYWRlIHVzYSB1bWEgZGFzIGZvbnRlcy48L3RleHQ+Cjx0ZXh0IHg9IjU4NSIgeT0iNDQ3IiBmb250LXNpemU9IjE5Ij5BcyBkdWFzIGZvbnRlcyBuw6NvIHPDo28gc29tYWRhcyBuYSBtZXNtYSBVRi48L3RleHQ+CjwvZz48L3N2Zz4K" alt="Esquema das duas seleções históricas e das duas fontes usadas no arquivo nacional atual." />
+<figcaption aria-hidden="true">Esquema das duas seleções históricas e
+das duas fontes usadas no arquivo nacional atual.</figcaption>
+</figure>
+<p><em>Figura 1. A parte superior resume o procedimento histórico; a
+inferior mostra a escolha de fonte no produto atual. São relações
+diferentes. “UF” significa unidade da federação, incluindo os estados e
+territórios da organização da época.</em></p>
+<p>A outra cópia é muito útil para conferir pessoas e boletins. Mas não
+é um cadastro civil independente nem uma prova de que todos os campos de
+uma cópia estejam certos. Podemos confirmar um vínculo e, ao mesmo
+tempo, encontrar uma diferença na resposta sobre o domicílio. O primeiro
+caso abaixo mostra exatamente isso.</p>
+<p><strong>Como conferir:</strong> a descrição histórica está nos <a href="fontes_1960/1965_resultados_preliminares_vol2.pdf#page=6">Resultados
+Preliminares de 1965</a>, página impressa II, sexta página do PDF. Os
+campos e suas posições estão no <a href="../read_guides/readguide_1960_amostra_127_pessoas.csv">guia de
+leitura das pessoas</a>. As contagens gerais e os limites dos testes
+anteriores permanecem no <a href="microdata_1960_amostra_127_anexo_tecnico_20260921.md">anexo
+técnico</a>.</p>
+<h2 id="quando-a-tentativa-de-recuperar-uma-família-cria-um-vínculo-errado">2.
+Quando a tentativa de recuperar uma família cria um vínculo errado</h2>
+<p>Os casos da Bahia e da Paraíba que seguem estão nos arquivos
+processados da amostra de <strong>1,27%</strong>. Para essas duas
+unidades, a compilação nacional escolhe a fonte de <strong>25%</strong>.
+Portanto, não se deve concluir que os mesmos defeitos estejam
+automaticamente no arquivo nacional; a explicação investiga o tratamento
+da fonte menor.</p>
+<h3 id="caso-a-uma-menina-de-ipiaú-foi-ligada-a-uma-família-de-ibicaraí">Caso
+A — uma menina de Ipiaú foi ligada a uma família de Ibicaraí</h3>
+<p><strong>Como estava no original.</strong> Na linha 302261 do HHOLDA
+há uma menina de cinco anos, registrada como filha e moradora presente.
+Seu registro aponta para Ipiaú, na Bahia, pasta 31606, boletim 031. O
+distrito, entretanto, está gravado como 01.</p>
+<p>O cartão familiar correspondente existe no mesmo HHOLDA, na linha
+302453. Nele, o distrito é 07. Essa diferença impede o encontro pela
+identificação completa.</p>
+<p><strong>Qual era a lógica da regra.</strong> Depois de tentar a
+identificação completa, a versão que produziu os arquivos existentes
+tratava certos grupos sem chefe ou cônjuge como continuação da família
+anterior. A justificativa registrada no código era que muitos desses
+grupos pareciam hóspedes ou visitantes listados à parte. A proximidade
+no arquivo era usada como pista de pertencimento.</p>
+<p>Essa pista pode ser útil para investigar. Não é suficiente para
+decidir: registros próximos podem pertencer a boletins, pastas e
+municípios diferentes. Além disso, “não há chefe neste grupo” não
+significa “este grupo pertence ao chefe anterior”.</p>
+<p><strong>O que a regra fez neste caso.</strong> A menina foi ligada ao
+cartão da linha 302253, da pasta 31516, em Ibicaraí. Seu registro
+pessoal continuou guardando informações de Ipiaú, mas sua ligação
+familiar apontou para outra família. Não se trata de descobrir uma
+migração: trata-se de uma associação criada pelo processamento.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Elemento que podemos observar</th>
+<th>Registro da menina</th>
+<th>Família à qual ela foi ligada</th>
+<th>Cartão correspondente encontrado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Município identificado no guia</td>
+<td>Ipiaú</td>
+<td>Ibicaraí</td>
+<td>Ipiaú</td>
+</tr>
+<tr>
+<td>Número da pasta</td>
+<td>31606</td>
+<td>31516</td>
+<td>31606</td>
+</tr>
+<tr>
+<td>Número do boletim</td>
+<td>031</td>
+<td>238</td>
+<td>031</td>
+</tr>
+<tr>
+<td>Distrito</td>
+<td>01</td>
+<td>01</td>
+<td>07</td>
+</tr>
+<tr>
+<td>Linha no HHOLDA</td>
+<td>302261</td>
+<td>302253</td>
+<td>302453</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Por que a revisão considera o vínculo errado.</strong> Na
+amostra de 25%, a linha 399500 reproduz os 25 campos pessoais comparados
+da menina e a situa no boletim 031 correspondente ao cartão que já
+existe no HHOLDA. Não estamos escolhendo apenas uma família
+geograficamente próxima: temos correspondência do conteúdo individual e
+do boletim.</p>
+<p><strong>Como deveria ficar.</strong> A proposta é documentar a
+correção da identificação distrital desta pessoa e ligá-la ao cartão
+existente da linha 302453. Não há motivo para criar uma nova família nem
+para eliminar a menina.</p>
+<p>Há um limite importante: o tipo do domicílio difere entre as duas
+cópias desse boletim — rústico no HHOLDA e durável na outra fonte. A
+evidência para corrigir <strong>a ligação da pessoa</strong> não
+autoriza copiar <strong>todas as características do domicílio</strong>.
+São duas decisões, e a segunda permanece separada.</p>
+<p><strong>O que já foi feito e o que não foi.</strong> A regra de
+anexação ao anterior foi bloqueada para futuras reconstruções nos casos
+pendentes. O arquivo gravado ainda contém a ligação antiga. Bloquear a
+repetição de um erro não corrige o dado que já estava salvo.</p>
+<p>Este caso dá materialidade ao problema geral: 1.008 pessoas foram
+anexadas ao anterior; em 70 aparecem conflitos geográficos identificados
+pela auditoria. As 70 não esgotam os vínculos a conferir. E conflitos de
+pasta, distrito e município podem ocorrer na mesma pessoa, por isso suas
+contagens não devem ser somadas.</p>
+<h3 id="caso-b-uma-família-perdida-já-tinha-cartão-e-uma-fusão-simples-também-estaria-errada">Caso
+B — uma família “perdida” já tinha cartão; e uma fusão simples também
+estaria errada</h3>
+<p>O segundo caso é de Conceição do Coité, Bahia, pasta 31962, boletim
+118.</p>
+<p><strong>Como estava no original.</strong> Seis pessoas aparecem
+juntas nas linhas 315134 a 315139: uma esposa de 37 anos e cinco filhos,
+com idades registradas de 8, 14, 12, 4 e 10 anos. Todas trazem distrito
+03.</p>
+<p>Mais adiante, o HHOLDA contém o cartão do boletim 118, linha 315732,
+seguido do chefe, de 44 anos, linha 315733. Neste trecho, o distrito é
+05. O cartão não desapareceu; a diferença de distrito impediu que os
+seis fossem encontrados pela mesma identificação.</p>
+<p><strong>Qual era a lógica da correção aplicada.</strong> Quando um
+grupo sem cartão correspondente continha chefe ou cônjuge, o programa
+criava uma família nova. O raciocínio era: “a presença de um chefe ou
+cônjuge indica uma família própria; se não há cartão ligado a ela, esse
+cartão deve ter se perdido”.</p>
+<p>A primeira parte é uma pista de estrutura familiar. A segunda é uma
+hipótese sobre a história do arquivo. Um código divergente também produz
+a falta de correspondência, sem que tenha havido perda do cartão.</p>
+<p><strong>Como ficou no arquivo processado.</strong> A esposa e os
+cinco filhos viraram uma família criada pelo programa, sem as respostas
+do domicílio. O chefe permaneceu ligado ao cartão verdadeiro. Mas há uma
+complicação: uma menina de 13 anos, linha 315736, que traz boletim 124,
+também foi ligada ao cartão do boletim 118 pela regra do registro
+anterior.</p>
+<figure>
+<img role="img" aria-label="Esquema do caso real de Conceição do Coité: seis pessoas separadas, chefe acompanhado por uma pessoa de outro boletim, e reconciliação proposta." src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjU5MCIgdmlld0JveD0iMCAwIDEwMDAgNTkwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idCBkIj4KPHRpdGxlIGlkPSJ0Ij5GYW3DrWxpYSBwYXJ0aWRhIGVtIENvbmNlacOnw6NvIGRvIENvaXTDqTogdW5pciBkdWFzIGxpc3RhcyBuw6NvIGJhc3RhPC90aXRsZT4KPGRlc2MgaWQ9ImQiPkNhc28gcmVhbCwgcGFzdGEgMzE5NjIuIE8gcmVnaXN0cm8gcHJvY2Vzc2FkbyBzZXBhcmEgZXNwb3NhIGUgY2luY28gZmlsaG9zIG51bWEgZmFtw61saWEgY3JpYWRhLCBlbnF1YW50byBvIGNhcnTDo28gZXhpc3RlbnRlIGRvIGJvbGV0aW0gMTE4IGNvbnTDqW0gbyBjaGVmZSBlIHVtYSBmaWxoYSBkZSBvdXRybyBib2xldGltLCBvIDEyNC4gQSBmb250ZSBkZSAyNSBwb3IgY2VudG8gc3VzdGVudGEgcmV1bmlyIGNoZWZlLCBlc3Bvc2EgZSBjaW5jbyBmaWxob3Mgbm8gMTE4IGUgcmVjb25kdXppciBhIG91dHJhIGZpbGhhIGFvIGNhcnTDo28gZXhpc3RlbnRlIGRvIDEyNC4gRnVuZGlyIGFzIGR1YXMgbGlzdGFzIHNlbSByZXZlciBhIG1lbmluYSBwcm9kdXogb2l0byBwZXNzb2FzLCBuw6NvIGFzIHNldGUgZG8gMTE4LjwvZGVzYz4KPGRlZnM+PG1hcmtlciBpZD0iYSIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI5IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNyIgbWFya2VySGVpZ2h0PSI3IiBvcmllbnQ9ImF1dG8tc3RhcnQtcmV2ZXJzZSI+PHBhdGggZD0iTSAwIDAgTCAxMCA1IEwgMCAxMCB6IiBmaWxsPSIjNTA2Mzc0Ii8+PC9tYXJrZXI+PC9kZWZzPgo8cmVjdCB3aWR0aD0iMTAwMCIgaGVpZ2h0PSI1OTAiIGZpbGw9IiNmZmZmZmYiLz4KPGcgZm9udC1mYW1pbHk9IlNlZ29lIFVJLEFyaWFsLHNhbnMtc2VyaWYiIGZpbGw9IiMxNzJmNDAiPgo8dGV4dCB4PSIzMCIgeT0iMzgiIGZvbnQtc2l6ZT0iMjMiIGZvbnQtd2VpZ2h0PSI2MDAiPkNBU08gUkVBTCDigJQgQ29uY2Vpw6fDo28gZG8gQ29pdMOpLCBCYWhpYSwgcGFzdGEgMzE5NjI8L3RleHQ+Cjx0ZXh0IHg9IjMwIiB5PSI3OCIgZm9udC1zaXplPSIyMSI+Q29tbyBvIGFycXVpdm8gcHJvY2Vzc2FkbyBlc3TDoTwvdGV4dD4KPHJlY3QgeD0iMzAiIHk9Ijk4IiB3aWR0aD0iNDQwIiBoZWlnaHQ9IjEzNSIgcng9IjgiIGZpbGw9IiNmY2YwZWIiLz4KPHRleHQgeD0iNTAiIHk9IjEzMiIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9IjYwMCI+RmFtw61saWEgY3JpYWRhIHBlbG8gcHJvY2Vzc2FtZW50bzwvdGV4dD4KPHRleHQgeD0iNTAiIHk9IjE2NyIgZm9udC1zaXplPSIyMSI+RXNwb3NhICgzNyBhbm9zKSArIGNpbmNvIGZpbGhvczwvdGV4dD4KPHRleHQgeD0iNTAiIHk9IjIwMCIgZm9udC1zaXplPSIxOSI+Qm9sZXRpbSAxMTgsIGRpc3RyaXRvIGdyYXZhZG8gY29tbyAwMy48L3RleHQ+CjxyZWN0IHg9IjQ5MCIgeT0iOTgiIHdpZHRoPSI0ODAiIGhlaWdodD0iMTM1IiByeD0iOCIgZmlsbD0iI2ZjZjBlYiIvPgo8dGV4dCB4PSI1MTAiIHk9IjEzMiIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9IjYwMCI+Q2FydMOjbyB2ZXJkYWRlaXJvIGRvIGJvbGV0aW0gMTE4PC90ZXh0Pgo8dGV4dCB4PSI1MTAiIHk9IjE2NyIgZm9udC1zaXplPSIyMSI+Q2hlZmUgKDQ0IGFub3MpICsgbWVuaW5hICgxMyBhbm9zKTwvdGV4dD4KPHRleHQgeD0iNTEwIiB5PSIyMDAiIGZvbnQtc2l6ZT0iMTkiPkVsYSBwZXJ0ZW5jZSBhbyBib2xldGltIDEyNCwgbsOjbyBhbyAxMTguPC90ZXh0Pgo8dGV4dCB4PSIzMCIgeT0iMjczIiBmb250LXNpemU9IjIxIiBmb250LXdlaWdodD0iNjAwIj5KdW50YXIgYXMgZHVhcyBsaXN0YXMgc2VtIG91dHJhIHJldmlzw6NvIGRhcmlhIDYgKyAyID0gOCBwZXNzb2FzLjwvdGV4dD4KPHRleHQgeD0iMzAiIHk9IjMwNyIgZm9udC1zaXplPSIxOSI+QSBvdXRyYSBmb250ZSBjb25maXJtYSBzZXRlIHBlc3NvYXMgbm8gYm9sZXRpbSAxMTggZSBhIG1lbmluYSBubyBib2xldGltIDEyNC48L3RleHQ+CjxwYXRoIGQ9Ik0gNTAwIDMyMiBWIDM1NiIgc3Ryb2tlPSIjNTA2Mzc0IiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYSkiLz4KPHRleHQgeD0iMzAiIHk9IjM4MyIgZm9udC1zaXplPSIyMSI+UmVjb25jaWxpYcOnw6NvIHN1c3RlbnRhZGEgcGVsb3MgcmVnaXN0cm9zIOKAlCBhaW5kYSBuw6NvIGFwbGljYWRhPC90ZXh0Pgo8cmVjdCB4PSIzMCIgeT0iNDA0IiB3aWR0aD0iNTM1IiBoZWlnaHQ9IjEzMiIgcng9IjgiIGZpbGw9IiNlMGVmZWIiLz4KPHRleHQgeD0iNTAiIHk9IjQ0MCIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9IjYwMCI+Qm9sZXRpbSAxMTg6IHNldGUgcGVzc29hczwvdGV4dD4KPHRleHQgeD0iNTAiIHk9IjQ3NiIgZm9udC1zaXplPSIyMSI+Q2hlZmUgKyBlc3Bvc2EgKyBjaW5jbyBmaWxob3MuPC90ZXh0Pgo8dGV4dCB4PSI1MCIgeT0iNTA5IiBmb250LXNpemU9IjE5Ij5Vc2FyIG8gY2FydMOjbyBleGlzdGVudGU7IHJlZ2lzdHJhciBvIGFjZXJ0byBkZSBkaXN0cml0by48L3RleHQ+CjxyZWN0IHg9IjU4NSIgeT0iNDA0IiB3aWR0aD0iMzg1IiBoZWlnaHQ9IjEzMiIgcng9IjgiIGZpbGw9IiNlMGVmZWIiLz4KPHRleHQgeD0iNjA1IiB5PSI0NDAiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI2MDAiPkJvbGV0aW0gMTI0PC90ZXh0Pgo8dGV4dCB4PSI2MDUiIHk9IjQ3NiIgZm9udC1zaXplPSIyMSI+RGVzdGlubyBjb3Jyb2JvcmFkbyBkYSBtZW5pbmEuPC90ZXh0Pgo8dGV4dCB4PSI2MDUiIHk9IjUwOSIgZm9udC1zaXplPSIxOSI+Q29uZmVyaXIgbyBncnVwbyBhbnRlcyBkZSB0cmFuc2ZlcmktbGEuPC90ZXh0Pgo8dGV4dCB4PSIzMCIgeT0iNTcwIiBmb250LXNpemU9IjE4Ij7igJxGaWxobyhhKeKAnSBpbmNsdWkgZW50ZWFkbyhhKTsg4oCcZXNwb3Nh4oCdIMOpIGPDtG5qdWdlLiBPIGRlc3Rpbm8gMTI0IGFpbmRhIHJlcXVlciBjb25mZXLDqm5jaWEgaW50ZWdyYWwuPC90ZXh0Pgo8L2c+PC9zdmc+Cg==" alt="Esquema do caso real de Conceição do Coité: seis pessoas separadas, chefe acompanhado por uma pessoa de outro boletim, e reconciliação proposta." />
+<figcaption aria-hidden="true">Esquema do caso real de Conceição do
+Coité: seis pessoas separadas, chefe acompanhado por uma pessoa de outro
+boletim, e reconciliação proposta.</figcaption>
+</figure>
+<p><em>Figura 2. São duas decisões erradas que se cruzam. Juntar as
+listas atuais sem conferir quem já está no destino produziria oito
+pessoas, não as sete sustentadas para o boletim 118.</em></p>
+<p><strong>Qual evidência permite reconstruir a situação.</strong> Na
+fonte de 25%, o boletim 118 contém o chefe, a esposa e os cinco filhos:
+sete pessoas, com correspondência nos campos pessoais comparados. A
+menina de 13 anos corresponde à ordem 6 do boletim 124, linha 645897 do
+arquivo de 25%. O cartão desse boletim também existe no HHOLDA, linha
+315168, e coincide nos 15 campos familiares comparados.</p>
+<p>Essa conferência adicional foi feita ao preparar o exemplo narrativo.
+Ela explica por que a recomendação curta de “reconciliar a família
+criada” precisava ser mais precisa.</p>
+<p><strong>Como deveria ficar, neste caso específico.</strong></p>
+<ol type="1">
+<li>O chefe, a esposa e os cinco filhos devem ser reunidos sob o cartão
+existente do boletim 118, registrando a evidência para corrigir o
+distrito dos seis.</li>
+<li>A menina de 13 anos deve ser preservada e ter seu vínculo revisto
+para o cartão do boletim 124, um destino fortemente corroborado.
+<strong>Antes de executar essa transferência, falta conferir toda a
+composição e multiplicidade atuais desse destino.</strong> Esta
+ilustração não aprovou antecipadamente a reorganização completa do
+boletim 124. Ela não deve ser apagada.</li>
+<li>A identificação familiar criada apenas para os seis deixa de
+representar uma família separada; a alteração de identificadores e de
+contagens precisa ser registrada.</li>
+<li>Depois, é necessário rever os domicílios, as contagens e os pesos
+afetados. Não basta trocar um número de família e considerar todo o
+restante automaticamente correto.</li>
+</ol>
+<p>Essa sequência é uma proposta sustentada para <strong>estes
+registros</strong>. Não é uma autorização para fundir todos os grupos
+parecidos. Das 150 famílias criadas pelo programa, 141 têm cartão
+candidato na mesma unidade, pasta e boletim, mas há casos com diferenças
+adicionais. A existência de candidato inicia a conferência; não a
+encerra.</p>
+<p>No arquivo nacional combinado, há 179 pessoas provenientes de 59
+dessas famílias criadas. Como o tipo de domicílio está ausente, o
+compilador as classifica como particulares por uma regra residual:
+aquilo que não foi reconhecido como coletivo recebe o outro rótulo. A
+forma adequada é registrar tipo não determinado enquanto não houver
+evidência suficiente. “Não sei se é coletivo” não equivale a “sei que é
+particular”.</p>
+<h3 id="e-as-famílias-que-realmente-dividem-um-domicílio">E as famílias
+que realmente dividem um domicílio?</h3>
+<p>Há boletins em que o próprio código informa “família principal”,
+“segunda família” ou “terceira família”. Nesses casos, a sequência do
+arquivo e a concordância da identificação oferecem uma base melhor para
+reunir famílias no mesmo domicílio.</p>
+<p>Mesmo assim, a regra deve conferir as partes da identificação. A
+revisão inventariou 373 encadeamentos desse tipo. Encontrou diferenças
+entre cópias em 37 pares comparáveis, mas isso <strong>não prova que os
+37 vínculos estejam errados</strong>. Mostra onde a explicação precisa
+ser conferida.</p>
+<p>O tratamento adequado é distinguir as situações: relação
+explicitamente codificada; vínculo recuperado por correspondência
+demonstrada; e vínculo ainda desconhecido. Não transformar todos em
+“família certa” só porque receberam um número válido.</p>
+<p><strong>Como conferir os casos A e B:</strong> o <a href="parecer_1960_evidencias/vinculos.md">caderno de vínculos e
+duplicatas</a> traz as linhas originais, os grupos atuais, as
+correspondências de 25% e os campos comparados. Os nomes Ipiaú, Ibicaraí
+e Conceição do Coité vêm do <a href="../read_guides/1960_municipios.csv">guia de municípios</a>, linhas
+849, 847 e 878. A regra de reconstrução está na função
+build_families_1960_amostra_127, no <a href="../R/microdata_1960_amostra_127.R">código de preparação</a>, em
+torno das linhas 501–622.</p>
+<h2 id="quando-duas-pessoas-têm-respostas-iguais-por-que-isso-não-basta-para-excluir-uma">3.
+Quando duas pessoas têm respostas iguais: por que isso não basta para
+excluir uma</h2>
+<h3 id="caso-c-dois-pares-de-filhos-com-idade-ignorada">Caso C — dois
+pares de filhos com idade ignorada</h3>
+<p><strong>Como estava no original.</strong> No boletim 166 da pasta
+19124, em Mamanguape, na Paraíba, há sete registros pessoais. Entre
+eles, aparecem dois filhos do sexo masculino com respostas iguais entre
+si e duas filhas com respostas iguais entre si. <strong>Todas as sete
+pessoas, inclusive chefe e cônjuge, têm idade ignorada.</strong> Não
+podemos chamar os filhos de crianças sem conhecer suas idades.</p>
+<p>Não precisamos supor que sejam gêmeos. Basta reconhecer que sexo,
+parentesco, idade ignorada e outras respostas comuns podem ser iguais em
+pessoas diferentes. O arquivo não contém nomes que permitam
+distingui-las civilmente.</p>
+<p><strong>Por que surgiu a regra de exclusão.</strong> Há sequências no
+arquivo que parecem repetições de registros. A regra antiga procurava
+conteúdo idêntico dentro de uma família e, entre outros critérios,
+considerava que duas ou mais repetições indicavam um bloco copiado.</p>
+<p>A lógica é compreensível: se um trecho foi copiado duas vezes,
+contá-lo duas vezes criaria pessoas inexistentes. O salto indevido foi
+tomar uma pista de cópia como prova suficiente de cópia, sem conferir
+quantas ocorrências legítimas havia na família.</p>
+<p><strong>O que foi eliminado.</strong> A regra retirou as linhas
+168805 e 168806, uma ocorrência de cada par. O grupo passou de sete para
+cinco registros pessoais.</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th>Parte da família</th>
+<th style="text-align: right;">HHOLDA antes da exclusão</th>
+<th style="text-align: right;">Arquivo após a regra antiga</th>
+<th style="text-align: right;">Fonte de 25%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filhos com o primeiro perfil, masculino e idade ignorada</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Filhas com o segundo perfil, feminino e idade ignorada</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Chefe, cônjuge e terceiro filho masculino, de perfil diferente</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align: right;"><strong>7</strong></td>
+<td style="text-align: right;"><strong>5</strong></td>
+<td style="text-align: right;"><strong>7</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Por que a evidência favorece a restauração.</strong> O cartão
+familiar de 25%, linha 84593, declara sete pessoas. As linhas
+84596–84597 preservam os dois filhos; as 84598–84599, as duas filhas,
+com números de ordem distintos no boletim. A outra cópia, portanto,
+sustenta as duas ocorrências de cada perfil.</p>
+<p>Isso não permite distinguir nominalmente cada integrante dos pares.
+Permite comparar quantas ocorrências foram preservadas. Essa evidência
+contradiz o fundamento usado para eliminar uma ocorrência de cada par:
+manter duas ocorrências é melhor sustentado do que reduzir cada perfil a
+uma.</p>
+<p><strong>Como deveria ficar.</strong> A proposta é restaurar as duas
+linhas neste boletim, preservar sua origem e registrar o motivo. A regra
+geral não deve dizer “respostas iguais são uma pessoa”; deve perguntar
+“quantas ocorrências deste perfil são sustentadas pelas fontes?”.</p>
+<p>Essa última pergunta é o que o parecer técnico chamava de
+<strong>multiplicidade</strong>. É apenas a quantidade de vezes que um
+perfil aparece, não um conceito de identidade pessoal.</p>
+<p>Há um segundo exemplo que evita outra correção excessiva. Num boletim
+de Pernambuco, um perfil aparece quatro vezes no HHOLDA, duas na fonte
+de 25%, mas apenas uma foi mantida. A evidência sugere restaurar
+<strong>uma ocorrência</strong>, chegando a duas — não devolver
+indiscriminadamente as três excluídas.</p>
+<p>Por isso, o saldo de 31 restaurações sugeridas na revisão não é igual
+às 39 exclusões envolvidas nos perfis problemáticos. Também não
+significa que faltem 31 pessoas no arquivo combinado nacional: esses
+casos pertencem às unidades em que a compilação usa a fonte de 25%, não
+a versão menor que sofreu as exclusões.</p>
+<p><strong>Situação atual.</strong> A regra antiga foi impedida de
+excluir automaticamente esses candidatos em nova execução. As exclusões
+ainda estão nos arquivos já gravados. Das 2.850 linhas retiradas no
+tratamento histórico, algumas têm boa evidência de repetição, outras
+não. A proposta não é restaurar todas nem aprovar todas: é registrar uma
+decisão por perfil, ocorrência e fonte.</p>
+<p><strong>Como conferir:</strong> o <a href="parecer_1960_evidencias/vinculos.md">caderno de vínculos e
+duplicatas</a> contém o boletim completo da Paraíba. A <a href="microdata_1960_amostra_127_auditoria_vinculos.md">auditoria
+anterior</a> detalha os demais grupos. A regra de exclusão e seu
+bloqueio estão na função dedup_1960_amostra_127, no <a href="../R/microdata_1960_amostra_127.R">código de preparação</a>, em
+torno das linhas 461–499.</p>
+<h2 id="um-reparo-que-mudou-a-escolaridade-números-permitidos-também-podem-estar-errados">4.
+Um reparo que mudou a escolaridade: números permitidos também podem
+estar errados</h2>
+<h3 id="caso-d-o-zero-excedente-no-registro-de-uma-menina-do-rio-grande-do-sul">Caso
+D — o zero excedente no registro de uma menina do Rio Grande do Sul</h3>
+<p><strong>O problema original.</strong> A linha 951431 estava
+danificada: havia um fragmento deslocado e espaços no meio. O reparo
+procurou recuperar a parte legível, recolocá-la nas posições esperadas e
+deixar em branco a parte que não conseguia recuperar.</p>
+<p>Esse princípio é razoável: recuperar o que está preservado e não
+inventar o que se perdeu. O problema não é ter tentado reparar. É que o
+texto escolhido como reparo contém um zero excedente na região dos
+campos de escolaridade.</p>
+<p>O caso é de uma menina de 12 anos, registrada como outro parente,
+pasta 81076, boletim 016. A fonte de 25% conserva seu correspondente na
+linha 252042.</p>
+<p><strong>Vamos olhar apenas a região que mudou.</strong> Cada barra
+abaixo separa um campo; as barras e os colchetes foram acrescentados
+para a ilustração e não pertencem ao arquivo.</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th>Origem da leitura</th>
+<th style="text-align: right;">Série frequentada — uma posição</th>
+<th style="text-align: right;">Grau do curso frequentado — uma
+posição</th>
+<th style="text-align: right;">Curso completo — duas posições</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fragmento original legível, retirados os espaços</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">00</td>
+</tr>
+<tr>
+<td>Texto usado pelo reparo e gravado no arquivo atual</td>
+<td style="text-align: right;"><strong>[0]</strong></td>
+<td style="text-align: right;"><strong>6</strong></td>
+<td style="text-align: right;"><strong>20</strong></td>
+</tr>
+<tr>
+<td>Registro correspondente na fonte de 25%</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">00</td>
+</tr>
+<tr>
+<td>Proposta restrita a esses campos</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">00</td>
+</tr>
+</tbody>
+</table>
+<p>O 6 que deveria ocupar o primeiro campo foi parar no segundo. O 2 que
+deveria ocupar o segundo passou a iniciar o campo de duas posições. Os
+zeros consecutivos impedem identificar exatamente onde alguém inseriu o
+caractere ao escrever o reparo; <strong>o deslocamento dos campos é que
+está demonstrado</strong>.</p>
+<p>Traduzindo os códigos, o efeito não é pequeno:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Pergunta</th>
+<th>O fragmento preservado e a outra fonte dizem</th>
+<th>O reparo atual passou a dizer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Série frequentada</td>
+<td>3ª série</td>
+<td>Cursa o 1º ano elementar</td>
+</tr>
+<tr>
+<td>Grau do curso frequentado</td>
+<td>Elementar</td>
+<td>Ignorado</td>
+</tr>
+<tr>
+<td>Curso completo</td>
+<td>Sem curso completo</td>
+<td>Ginasial, médio de 1º ciclo</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Por que a conferência automática não detectou.</strong> Todos
+os números do reparo existem no dicionário: 0 é permitido no primeiro
+campo, 6 no segundo, e 20 no terceiro. O teste respondeu corretamente à
+pergunta “estes são códigos permitidos?”. Ele não respondeu à pergunta
+“estas eram as respostas desta menina?”.</p>
+<p>É por isso que o arquivo pode dizer “registro recuperado” e, ao mesmo
+tempo, conter valores recuperados incorretamente. A marca de recuperação
+informa que houve uma intervenção; não certifica seu acerto.</p>
+<p><strong>Qual seria a correção adequada.</strong> Restaurar somente as
+posições 34 a 37 para a sequência 6200. Isso recupera o trecho
+sustentado pelo próprio fragmento e pela outra fonte. Não se deve
+simplesmente apagar um zero e deslocar todo o restante da linha; a
+posição da barra final e dos demais campos também importa.</p>
+<p>As perguntas posteriores, nas posições 39 a 54, foram deixadas sem
+informação no reparo. Devem continuar assim nesta proposta. Copiar as
+respostas adicionais da fonte de 25% exigiria outra decisão, com
+justificativa própria. Corrigir três campos comprovados não autoriza
+completar o resto por arrastamento.</p>
+<p>Esse erro está na amostra de 1,27%. O arquivo combinado utiliza 25%
+para o Rio Grande do Sul e não reproduz o defeito. Também não se resolve
+a ligação familiar desta menina apenas corrigindo sua escolaridade.</p>
+<p><strong>Como conferir:</strong> o <a href="parecer_1960_evidencias/reparo_e_gravacao.md">caderno do reparo e
+da gravação</a> mostra a linha original inteira, o texto do reparo, a
+linha do arquivo de 25%, as posições de cada fonte e os rótulos do
+manual. A decisão está na linha 99 do <a href="../read_guides/1960_amostra_127_correcoes.csv">arquivo de
+correções</a>. Os rótulos estão nas linhas 166–192 do <a href="../read_guides/1960_codigo_do_censo.csv">código do censo
+transcrito</a>. Nada disso foi alterado nesta reescrita.</p>
+<h2 id="conferir-com-a-publicação-por-que-bateu-o-total-pode-enganar">5.
+Conferir com a publicação: por que “bateu o total” pode enganar</h2>
+<p>Antes dos próximos casos, duas palavras precisam ficar claras.</p>
+<p>Um <strong>peso</strong> indica quanto um registro contribui para uma
+estimativa. Se uma pessoa tem peso 4, sua contribuição à contagem
+estimada é quatro, não uma. O peso pode deixar de ser inteiro.</p>
+<p><strong>Calibrar os pesos</strong> é ajustá-los para que certas somas
+coincidam com referências escolhidas — por exemplo, o total publicado de
+homens e mulheres ou de leitores. Essas somas de referência eram
+chamadas de “margens” ou “controles” no parecer anterior.</p>
+<p>Esse ajuste só faz sentido se a soma do arquivo e a referência
+falarem do <strong>mesmo grupo de pessoas</strong>. A expressão técnica
+“universo da comparação” significa precisamente isso: quem deve entrar
+naquela conta.</p>
+<h3 id="caso-e-a-pessoa-sem-idade-conhecida-ainda-pode-entrar-na-tabela-histórica-de-leitores">Caso
+E — a pessoa sem idade conhecida ainda pode entrar na tabela histórica
+de leitores</h3>
+<p><strong>Uma pessoa real.</strong> No arquivo de 25% de São Paulo, a
+linha original 1434472 é uma mulher moradora presente, que sabe ler e
+não frequenta escola. Sua idade está expressamente codificada como
+ignorada. Seu peso gravado é aproximadamente 3,9826.</p>
+<p>A palavra “presente” se refere à presença na data de referência do
+censo. Não é sinônimo de moradora: visitantes também podem ser
+presentes, e moradores ausentes continuam sendo residentes. Para a
+tabela de alfabetização examinada aqui, o grupo de comparação é o dos
+presentes.</p>
+<p><strong>Por que a regra parecia correta.</strong> O título da tabela
+se refere a pessoas de cinco anos e mais. O programa então selecionou
+quem tinha idade numérica conhecida de pelo menos cinco anos. Isso é uma
+interpretação natural se olharmos apenas o título.</p>
+<p><strong>O detalhe da fonte que muda a decisão.</strong> A publicação
+explica que as idades ignoradas entram nos totais quando a informação é
+apresentada com um limite mínimo de idade. Na página impressa XIII, o
+grupo de idade ignorada:</p>
+<blockquote>
+<p>“é incluído no total sempre que as informações têm por base um limite
+mínimo de idade para os informantes.”</p>
+</blockquote>
+<p>Não é uma instrução para inventar a idade da mulher, nem para dizer
+que toda idade ignorada pertence biologicamente à faixa de cinco anos e
+mais. É a convenção usada para construir <strong>aquele total
+publicado</strong>. Para comparar ou ajustar pesos a ele, precisamos
+reproduzir essa convenção.</p>
+<p>Fonte visual: <a href="fontes_1960/1960_serie_nacional_vol1_brasil.pdf#page=12">Série
+Nacional, página XIII, 12ª página do PDF</a>.</p>
+<p><strong>O erro ocorreu duas vezes.</strong> O programa que ajusta os
+pesos de 25% excluiu os leitores de idade ignorada. O programa que
+confere o resultado repetiu a mesma exclusão. Assim, ambos trabalharam
+com o mesmo grupo incorreto.</p>
+<figure>
+<img role="img" aria-label="Exemplo inventado com cinco leitores: excluir o quinto no ajuste e na conferência faz as duas contas coincidirem, embora o grupo correto deixe de coincidir." src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjYyMCIgdmlld0JveD0iMCAwIDEwMDAgNjIwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idCBkIj4KPHRpdGxlIGlkPSJ0Ij5Db21vIG8gYWp1c3RlIGUgYSBjb25mZXLDqm5jaWEgcG9kZW0gY29uY29yZGFyIG5vIG1lc21vIGVycm88L3RpdGxlPgo8ZGVzYyBpZD0iZCI+RXhlbXBsbyBpbnZlbnRhZG86IGNpbmNvIGxlaXRvcmVzIHByZXNlbnRlcywgcXVhdHJvIGNvbSBpZGFkZSBjb25oZWNpZGEgZGUgY2luY28gYW5vcyBvdSBtYWlzIGUgdW0gY29tIGlkYWRlIGlnbm9yYWRhLiBBIHJlZmVyw6puY2lhIGluY2x1aSB0b2RvcyBlIHZhbGUgY2VtLiBBbyBleGNsdWlyIG8gcXVpbnRvLCBvIGFqdXN0ZSBhdW1lbnRhIG8gcGVzbyBjb211bSBkZSB2aW50ZSBwYXJhIHZpbnRlIGUgY2luY28uIEEgY29uZmVyw6puY2lhIGVycmFkYSBzb21hIHF1YXRybyB2ZXplcyB2aW50ZSBlIGNpbmNvIGUgbW9zdHJhIGNlbSwgbWFzIG8gY29uanVudG8gY29ycmV0byBzb21hIGNlbnRvIGUgdmludGUgZSBjaW5jby4gSW5jbHVpbmRvIG9zIGNpbmNvIGRlc2RlIG8gYWp1c3RlLCBvIHBlc28gZmljYSB2aW50ZSBlIG8gdG90YWwgY2VtLjwvZGVzYz4KPHJlY3Qgd2lkdGg9IjEwMDAiIGhlaWdodD0iNjIwIiBmaWxsPSIjZmZmZmZmIi8+CjxnIGZvbnQtZmFtaWx5PSJTZWdvZSBVSSxBcmlhbCxzYW5zLXNlcmlmIiBmaWxsPSIjMTcyZjQwIj4KPHRleHQgeD0iMzAiIHk9IjM2IiBmb250LXNpemU9IjIzIiBmb250LXdlaWdodD0iNjAwIj5FWEVNUExPIERJRMOBVElDTyDigJQgbsO6bWVyb3MgaW52ZW50YWRvcyBwYXJhIGV4cGxpY2FyIG8gbWVjYW5pc21vPC90ZXh0Pgo8dGV4dCB4PSIzMCIgeT0iNzEiIGZvbnQtc2l6ZT0iMjAiPkNpbmNvIGxlaXRvcmVzIHByZXNlbnRlcy4gUmVmZXLDqm5jaWEgcHVibGljYWRhOiAxMDAsIGluY2x1aW5kbyBpZGFkZSBpZ25vcmFkYS48L3RleHQ+CjxnIGZpbGw9IiNlYWYyZjUiPjxyZWN0IHg9IjMwIiB5PSI5OCIgd2lkdGg9IjE2NiIgaGVpZ2h0PSI3NSIgcng9IjYiLz48cmVjdCB4PSIyMDgiIHk9Ijk4IiB3aWR0aD0iMTY2IiBoZWlnaHQ9Ijc1IiByeD0iNiIvPjxyZWN0IHg9IjM4NiIgeT0iOTgiIHdpZHRoPSIxNjYiIGhlaWdodD0iNzUiIHJ4PSI2Ii8+PHJlY3QgeD0iNTY0IiB5PSI5OCIgd2lkdGg9IjE2NiIgaGVpZ2h0PSI3NSIgcng9IjYiLz48L2c+CjxyZWN0IHg9Ijc0OCIgeT0iOTgiIHdpZHRoPSIyMjIiIGhlaWdodD0iNzUiIHJ4PSI2IiBmaWxsPSIjZjdlY2Q4Ii8+CjxnIGZvbnQtc2l6ZT0iMTkiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjx0ZXh0IHg9IjExMyIgeT0iMTI4Ij5MZWl0b3IgMTwvdGV4dD48dGV4dCB4PSIxMTMiIHk9IjE1NCI+SWRhZGUg4omlIDU8L3RleHQ+PHRleHQgeD0iMjkxIiB5PSIxMjgiPkxlaXRvciAyPC90ZXh0Pjx0ZXh0IHg9IjI5MSIgeT0iMTU0Ij5JZGFkZSDiiaUgNTwvdGV4dD48dGV4dCB4PSI0NjkiIHk9IjEyOCI+TGVpdG9yIDM8L3RleHQ+PHRleHQgeD0iNDY5IiB5PSIxNTQiPklkYWRlIOKJpSA1PC90ZXh0Pjx0ZXh0IHg9IjY0NyIgeT0iMTI4Ij5MZWl0b3IgNDwvdGV4dD48dGV4dCB4PSI2NDciIHk9IjE1NCI+SWRhZGUg4omlIDU8L3RleHQ+PHRleHQgeD0iODU5IiB5PSIxMjgiPkxlaXRvciA1PC90ZXh0Pjx0ZXh0IHg9Ijg1OSIgeT0iMTU0Ij5JZGFkZSBpZ25vcmFkYTwvdGV4dD48L2c+Cjx0ZXh0IHg9IjMwIiB5PSIyMDciIGZvbnQtc2l6ZT0iMTkiPlBhcmEgc2ltcGxpZmljYXIsIHRvZG9zIHJlY2ViZW0gbyBtZXNtbyBwZXNvLiBJbmljaWFsbWVudGUsIGNhZGEgdW0gcmVwcmVzZW50YSAyMCBwZXNzb2FzLjwvdGV4dD4KPHJlY3QgeD0iMzAiIHk9IjIzNyIgd2lkdGg9IjQ2MCIgaGVpZ2h0PSIyNjYiIHJ4PSI4IiBmaWxsPSIjZmNmMGViIi8+Cjx0ZXh0IHg9IjUwIiB5PSIyNzIiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI2MDAiPkFqdXN0ZSBlIHRlc3RlIGNvbSBhIG1lc21hIGV4Y2x1c8OjbzwvdGV4dD4KPHRleHQgeD0iNTAiIHk9IjMxMCIgZm9udC1zaXplPSIyMCI+MS4gQ29udGFtIHPDsyBxdWF0cm8gbGVpdG9yZXM6IDQgw5cgMjAgPSA4MC48L3RleHQ+Cjx0ZXh0IHg9IjUwIiB5PSIzNDgiIGZvbnQtc2l6ZT0iMjAiPjIuIEFqdXN0YW0gbyBwZXNvIHBhcmEgMjU6IDQgw5cgMjUgPSAxMDAuPC90ZXh0Pgo8dGV4dCB4PSI1MCIgeT0iMzg2IiBmb250LXNpemU9IjIwIj4zLiBPIHRlc3RlIHJlcGV0ZSBvIGZpbHRybzog4oCcMTAwLCBjb3JyZXRv4oCdLjwvdGV4dD4KPGxpbmUgeDE9IjUwIiB5MT0iNDExIiB4Mj0iNDcwIiB5Mj0iNDExIiBzdHJva2U9IiNkOGJhYjAiLz4KPHRleHQgeD0iNTAiIHk9IjQ0OCIgZm9udC1zaXplPSIyMSIgZm9udC13ZWlnaHQ9IjYwMCI+TWFzIG9zIGNpbmNvIGxlaXRvcmVzIHNvbWFtIDEyNS48L3RleHQ+Cjx0ZXh0IHg9IjUwIiB5PSI0NzgiIGZvbnQtc2l6ZT0iMTgiPlRvZG9zIHJlY2ViZW0gcGVzbyAyNTsgc8OzIHF1YXRybyBzw6NvIGNvbnRhZG9zLjwvdGV4dD4KPHJlY3QgeD0iNTEwIiB5PSIyMzciIHdpZHRoPSI0NjAiIGhlaWdodD0iMjY2IiByeD0iOCIgZmlsbD0iI2UwZWZlYiIvPgo8dGV4dCB4PSI1MzAiIHk9IjI3MiIgZm9udC1zaXplPSIyMSIgZm9udC13ZWlnaHQ9IjYwMCI+R3J1cG8gY29ycmV0byBkZXNkZSBvIGluw61jaW8gZG8gYWp1c3RlPC90ZXh0Pgo8dGV4dCB4PSI1MzAiIHk9IjMxMCIgZm9udC1zaXplPSIyMCI+MS4gQ29udGFtIG9zIGNpbmNvOiA1IMOXIDIwID0gMTAwLjwvdGV4dD4KPHRleHQgeD0iNTMwIiB5PSIzNDgiIGZvbnQtc2l6ZT0iMjAiPjIuIE7Do28gw6kgcHJlY2lzbyBlbGV2YXIgbyBwZXNvIG5lc3RlIGNhc28uPC90ZXh0Pgo8dGV4dCB4PSI1MzAiIHk9IjM4NiIgZm9udC1zaXplPSIyMCI+My4gTyB0ZXN0ZSB1c2EgbyBtZXNtbyBncnVwbyBkYSBmb250ZS48L3RleHQ+CjxsaW5lIHgxPSI1MzAiIHkxPSI0MTEiIHgyPSI5NTAiIHkyPSI0MTEiIHN0cm9rZT0iI2FmY2JjMSIvPgo8dGV4dCB4PSI1MzAiIHk9IjQ0OCIgZm9udC1zaXplPSIyMSIgZm9udC13ZWlnaHQ9IjYwMCI+T3MgY2luY28gbGVpdG9yZXMgc29tYW0gMTAwLjwvdGV4dD4KPHRleHQgeD0iNTMwIiB5PSI0ODAiIGZvbnQtc2l6ZT0iMTkiPkEgaWRhZGUgaWdub3JhZGEgY29udGludWEgaWdub3JhZGEuPC90ZXh0Pgo8dGV4dCB4PSIzMCIgeT0iNTQ1IiBmb250LXNpemU9IjE5Ij5OYSB0YWJlbGEgcmVhbCBkZSBTUCwgc8OzIHJlZml6ZW1vcyBhIHNvbWEgY29tIG9zIHBlc29zIGFudGlnb3MuIFVtYSBub3ZhIGNhbGlicmHDp8OjbyBlc3TDoSBwZW5kZW50ZS48L3RleHQ+Cjx0ZXh0IHg9IjMwIiB5PSI1NzciIGZvbnQtc2l6ZT0iMTkiPk8gYWp1c3RlIHJlYWwgZW52b2x2ZSBvdXRyYXMgY29uZGnDp8O1ZXM7IG7Do28gc2UgY2FsY3VsYSBzZXUgcmVzdWx0YWRvIGNvbSBlc3RhIG1pbmlhdHVyYS48L3RleHQ+CjwvZz48L3N2Zz4K" alt="Exemplo inventado com cinco leitores: excluir o quinto no ajuste e na conferência faz as duas contas coincidirem, embora o grupo correto deixe de coincidir." />
+<figcaption aria-hidden="true">Exemplo inventado com cinco leitores:
+excluir o quinto no ajuste e na conferência faz as duas contas
+coincidirem, embora o grupo correto deixe de coincidir.</figcaption>
+</figure>
+<p><em>Figura 3. Exemplo didático, não uma reprodução de cinco pessoas
+do censo. O peso comum simplifica a demonstração. O ajuste real envolve
+várias condições simultâneas e não pode ser refeito por essa
+continha.</em></p>
+<p>O exemplo mostra por que uma conferência precisa verificar primeiro
+<strong>quem entrou na soma</strong>. Repetir o mesmo filtro do ajuste
+pode confirmar sua aritmética e não perceber sua interpretação
+errada.</p>
+<p><strong>Qual é o tamanho real do problema?</strong> Nos arquivos de
+25%, ficaram fora dessa conta 9.395 leitores presentes com idade
+declarada ignorada. Seus pesos atuais somam 36.562,0023. Isso é a
+contribuição que foi omitida; não é uma contagem de 36.562 registros
+individuais.</p>
+<p>As 34 comparações estaduais de leitores — dois sexos nas 17 unidades
+— aparecem com diferença arredondada zero. São Paulo permite ver o que
+acontece ao corrigir apenas a seleção, sem mexer nos pesos:</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th>Comparação em São Paulo</th>
+<th style="text-align: right;">Referência publicada</th>
+<th style="text-align: right;">Soma antiga, excluindo idade
+ignorada</th>
+<th style="text-align: right;">Soma incluindo idade ignorada, com os
+mesmos pesos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Homens que sabem ler</td>
+<td style="text-align: right;">4.089.706</td>
+<td style="text-align: right;">4.089.706</td>
+<td style="text-align: right;">4.097.859,19</td>
+</tr>
+<tr>
+<td>Mulheres que sabem ler</td>
+<td style="text-align: right;">3.557.693</td>
+<td style="text-align: right;">3.557.693</td>
+<td style="text-align: right;">3.565.911,11</td>
+</tr>
+</tbody>
+</table>
+<p>O resultado corrigido <strong>deixa de coincidir</strong>. Isso é
+esperado: os pesos antigos foram ajustados a uma seleção diferente. Não
+seria correto voltar a excluir as pessoas para recuperar a diferença
+zero.</p>
+<p><strong>Como deveria ficar.</strong> A regra de ajuste e a de
+conferência precisam incluir os leitores cuja idade foi declarada
+ignorada, conforme a publicação. Primeiro se corrige a definição do
+grupo. Depois, numa execução autorizada, os pesos terão de ser
+recalculados e conferidos com as demais condições. Não há neste parecer
+uma previsão dos novos pesos.</p>
+<p>As diferentes partes do projeto também não estão na mesma situação. O
+ajuste da amostra de 1,27% já inclui os declarados ignorados nesse
+total; sua validação definitiva recém-reformulada os retirou,
+introduzindo uma regressão. Em 25%, ajuste e validação os excluem; o
+validador combinado também os exclui. A comparação com os preliminares
+de 1,27% tem tratamento próprio. A correção precisa respeitar essas
+diferenças, não aplicar a mesma edição mecanicamente em todas as
+funções.</p>
+<p>Finalmente, idade <strong>declarada ignorada</strong> não é idade
+<strong>danificada</strong>. Há quatro presentes da Guanabara no
+compilado com idade em anos, mas número de anos perdido; a validação os
+trata como ignorados declarados. Isso precisa ser separado. A nota da
+publicação não autoriza transformar qualquer campo ilegível em uma
+declaração que não temos.</p>
+<p><strong>Como conferir:</strong> o <a href="parecer_1960_evidencias/validacao.md">caderno de validação</a>
+contém a pessoa real de São Paulo, as linhas 777–778 do relatório de
+25%, as referências publicadas e a recontagem por sexo. A seleção usada
+no ajuste está em torno das linhas 568–574 e 621 do <a href="../R/microdata_1960_amostra_25.R">programa de 25%</a>.</p>
+<h3 id="caso-f-o-rural-de-rondônia-não-aparece-na-conferência">Caso F —
+o rural de Rondônia não aparece na conferência</h3>
+<p>O arquivo de Rondônia tem 675 pessoas; 666 são presentes nos códigos
+conhecidos. Não há registro classificado como rural. Os pesos dos
+presentes somam 70.232, o total estadual publicado, mas toda essa soma
+fica na parte urbana.</p>
+<p>A publicação, por sua vez, divide esse total em 30.626 pessoas
+urbanas e 39.606 rurais. Portanto, coincidir com o total estadual não
+demonstra que o arquivo represente corretamente a divisão
+urbano–rural.</p>
+<p><strong>Como a linha desaparece.</strong> O programa começa contando
+os grupos encontrados nas pessoas: homens urbanos, mulheres urbanas e
+assim por diante. Como não encontra rural, não cria uma linha rural. Na
+etapa seguinte, busca o total publicado apenas para as linhas que já
+criou. O rural continua ausente.</p>
+<p>Essa operação é chamada de <em>junção</em> ou <em>join</em> no
+código. O nome técnico não é o problema; a decisão relevante é
+<strong>qual lista é preservada</strong>. Se preservamos só os grupos
+observados, deixamos de mostrar grupos que deveriam ter sido
+comparados.</p>
+<figure>
+<img role="img" aria-label="Comparação real do rural de Rondônia: as duas linhas ausentes devem aparecer com zero registros e referência positiva, sem confundir ausência de observação com ausência de população." src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjQwNSIgdmlld0JveD0iMCAwIDEwMDAgNDA1IiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idCBkIj4KPHRpdGxlIGlkPSJ0Ij5Sb25kw7RuaWEgcnVyYWw6IGxpbmhhIGF1c2VudGUgbm8gcmVsYXTDs3JpbyBuw6NvIHNpZ25pZmljYSBwcm9ibGVtYSBhdXNlbnRlPC90aXRsZT4KPGRlc2MgaWQ9ImQiPk5hIHJlZmVyw6puY2lhIG9maWNpYWwgaMOhIDIzMzI0IGhvbWVucyBlIDE2MjgyIG11bGhlcmVzIHJ1cmFpcyBwcmVzZW50ZXMgZGUgUm9uZMO0bmlhLiBPIHJlbGF0w7NyaW8gZXhpc3RlbnRlIG7Do28gdHJheiBlc3NhcyBsaW5oYXMgcG9ycXVlIGEgYW1vc3RyYSBuw6NvIGNvbnTDqW0gY2Fzb3MgY2xhc3NpZmljYWRvcyBjb21vIHJ1cmFpcy4gQSBhcHJlc2VudGHDp8OjbyBwcm9wb3N0YSBjb25zZXJ2YSBhcyBkdWFzIGxpbmhhcywgcmVnaXN0cmEgemVybyBjYXNvcywgc29tYSBvYnNlcnZhZGEgemVybyBlIGF1c8OqbmNpYSBkZSBvYnNlcnZhw6fDtWVzIGRhIGNhdGVnb3JpYS4gTsOjbyBkZWNsYXJhIHF1ZSBhIHBvcHVsYcOnw6NvIHJ1cmFsIHNlamEgemVyby48L2Rlc2M+CjxyZWN0IHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjQwNSIgZmlsbD0iI2ZmZmZmZiIvPgo8ZyBmb250LWZhbWlseT0iU2Vnb2UgVUksQXJpYWwsc2Fucy1zZXJpZiIgZmlsbD0iIzE3MmY0MCI+Cjx0ZXh0IHg9IjMwIiB5PSIzNyIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9IjYwMCI+Q0FTTyBSRUFMIOKAlCBwb3B1bGHDp8OjbyBwcmVzZW50ZSBydXJhbCBkZSBSb25kw7RuaWE8L3RleHQ+Cjx0ZXh0IHg9IjMwIiB5PSI3NSIgZm9udC1zaXplPSIyMCI+UmVmZXLDqm5jaWEgcHVibGljYWRhOiAyMy4zMjQgaG9tZW5zICsgMTYuMjgyIG11bGhlcmVzID0gMzkuNjA2IHBlc3NvYXMuPC90ZXh0Pgo8cmVjdCB4PSIzMCIgeT0iMTA2IiB3aWR0aD0iNDMwIiBoZWlnaHQ9IjIwOCIgcng9IjgiIGZpbGw9IiNmY2YwZWIiLz4KPHRleHQgeD0iNTAiIHk9IjE0MiIgZm9udC1zaXplPSIyMyIgZm9udC13ZWlnaHQ9IjYwMCI+UmVsYXTDs3JpbyBleGlzdGVudGU8L3RleHQ+Cjx0ZXh0IHg9IjUwIiB5PSIxODIiIGZvbnQtc2l6ZT0iMjEiPkhvbWVucyBydXJhaXM6IGxpbmhhIGF1c2VudGUuPC90ZXh0Pgo8dGV4dCB4PSI1MCIgeT0iMjIwIiBmb250LXNpemU9IjIxIj5NdWxoZXJlcyBydXJhaXM6IGxpbmhhIGF1c2VudGUuPC90ZXh0Pgo8dGV4dCB4PSI1MCIgeT0iMjczIiBmb250LXNpemU9IjE5Ij5BIGNvbXBhcmHDp8OjbyBuw6NvIGFwYXJlY2UuPC90ZXh0Pgo8cmVjdCB4PSI0OTAiIHk9IjEwNiIgd2lkdGg9IjQ4MCIgaGVpZ2h0PSIyMDgiIHJ4PSI4IiBmaWxsPSIjZTBlZmViIi8+Cjx0ZXh0IHg9IjUxMCIgeT0iMTQyIiBmb250LXNpemU9IjIzIiBmb250LXdlaWdodD0iNjAwIj5SZWxhdMOzcmlvIHByb3Bvc3RvPC90ZXh0Pgo8dGV4dCB4PSI1MTAiIHk9IjE4MiIgZm9udC1zaXplPSIyMSI+SG9tZW5zOiAwIGNhc29zOyByZWZlcsOqbmNpYSAyMy4zMjQuPC90ZXh0Pgo8dGV4dCB4PSI1MTAiIHk9IjIyMCIgZm9udC1zaXplPSIyMSI+TXVsaGVyZXM6IDAgY2Fzb3M7IHJlZmVyw6puY2lhIDE2LjI4Mi48L3RleHQ+Cjx0ZXh0IHg9IjUxMCIgeT0iMjYzIiBmb250LXNpemU9IjE5Ij5Tb21hIG9ic2VydmFkYTogMC4gQ2F0ZWdvcmlhIHNlbSBvYnNlcnZhw6fDtWVzLjwvdGV4dD4KPHRleHQgeD0iNTEwIiB5PSIyOTAiIGZvbnQtc2l6ZT0iMTkiPk7Do28gc2lnbmlmaWNhIHBvcHVsYcOnw6NvIHZlcmRhZGVpcmEgaWd1YWwgYSB6ZXJvLjwvdGV4dD4KPHRleHQgeD0iMzAiIHk9IjM1NiIgZm9udC1zaXplPSIyMCI+TyBwcmltZWlybyBwYXNzbyDDqSB0b3JuYXIgYSBmYWx0YSB2aXPDrXZlbC4gQXVtZW50YXIgcGVzb3MgdXJiYW5vcyBuw6NvIGNyaWEgbW9yYWRvcmVzIHJ1cmFpcy48L3RleHQ+CjwvZz48L3N2Zz4K" alt="Comparação real do rural de Rondônia: as duas linhas ausentes devem aparecer com zero registros e referência positiva, sem confundir ausência de observação com ausência de população." />
+<figcaption aria-hidden="true">Comparação real do rural de Rondônia: as
+duas linhas ausentes devem aparecer com zero registros e referência
+positiva, sem confundir ausência de observação com ausência de
+população.</figcaption>
+</figure>
+<p><em>Figura 4. A proposta muda a apresentação da limitação, não cria
+moradores rurais nem resolve por si só a representatividade da
+amostra.</em></p>
+<p><strong>Como deveria ficar.</strong> Começar pela lista de
+comparações exigidas pela publicação e procurar a contribuição da
+amostra para cada uma. Para os homens rurais, devem aparecer zero
+registros, soma observada zero e referência 23.324. Para as mulheres,
+zero registros, soma zero e referência 16.282. As diferenças são
+negativas e equivalem a −100%.</p>
+<p>Essa diferença não significa que sabemos que a população rural
+verdadeira era zero. Significa que, com os registros e a classificação
+existentes, não há observações dessa categoria para produzir a
+comparação desejada.</p>
+<p><strong>Então o que fazer além de mostrar a falta?</strong> Primeiro
+conferir se há erro de classificação ou perda de informação; no caso de
+Rondônia, a auditoria confirmou a ausência do código rural no arquivo
+examinado. Depois, reconhecer a limitação de uso. Não existe
+multiplicador que transforme uma pessoa classificada como urbana em
+observação rural.</p>
+<p>Se uma condição do ajuste exigir um total rural positivo, mas nenhuma
+pessoa puder contribuir para ela, o programa deve apontar a
+impossibilidade. Uma eventual decisão de trabalhar apenas com totais
+mais amplos, agregar categorias ou deixar de estimar aquele grupo
+precisa ser explícita. Nenhuma dessas opções deve aparecer como simples
+“correção” de uma célula vazia.</p>
+<p><strong>Não é um caso isolado do relatório.</strong> O validador
+combinado deveria apresentar 1.566 comparações pessoais na grade
+examinada, mas apresenta 1.346. Faltam 220, sendo 210 com referência
+positiva. Parte são totais que não foram construídos; parte são
+categorias sem observações. É importante distinguir as duas causas.</p>
+<p>Além disso, a tabela domiciliar não é construída pelos validadores de
+25% e do combinado. Suas 168 referências estaduais estão fora dessa
+conferência. Não são 168 resultados reprovados: são comparações ainda
+não realizadas.</p>
+<p><strong>Como conferir:</strong> o <a href="parecer_1960_evidencias/validacao.md">caderno de validação</a>
+reproduz as linhas urbanas 803–804 do relatório combinado e indica as
+referências rurais nas linhas 1142–1144 do <a href="censo_1960_resultados_definitivos_serie_nacional.csv">arquivo de
+totais definitivos</a>. A ausência das linhas rurais foi conferida por
+identificação completa, não por uma leitura de algumas linhas do
+relatório.</p>
+<h3 id="caso-g-resposta-ignorada-e-pergunta-não-codificada-foram-trocadas">Caso
+G — resposta “ignorada” e pergunta não codificada foram trocadas</h3>
+<p>Uma informação desconhecida pode aparecer de pelo menos três maneiras
+diferentes:</p>
+<ol type="1">
+<li>A resposta foi registrada como <strong>ignorada</strong>, usando um
+código próprio.</li>
+<li>A pergunta <strong>não devia ser codificada</strong> naquele tipo de
+registro.</li>
+<li>A resposta deveria existir, mas está <strong>perdida ou
+ilegível</strong>.</li>
+</ol>
+<p>Não é seguro juntar essas três situações numa mesma categoria.</p>
+<p><strong>Dois domicílios reais tornam a diferença
+visível.</strong></p>
+<p>Neste caso, “regra atual” significa o código de validação
+reformulado, ainda não executado em R. Seu comportamento foi reproduzido
+na auditoria separada em Python; não estamos apresentando uma nova saída
+do programa R como se já tivesse sido gerada.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Domicílio</th>
+<th>O que está no arquivo</th>
+<th>O que isso quer dizer</th>
+<th>O que a regra atual faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bahia, linha 303650</td>
+<td>Tipo durável; abastecimento de água com código 4</td>
+<td>A resposta sobre água foi explicitamente codificada como
+ignorada</td>
+<td>Deixa o domicílio fora da categoria “outra forma/sem
+declaração”</td>
+</tr>
+<tr>
+<td>Sergipe, linha 284026</td>
+<td>Tipo improvisado; campo de água vazio</td>
+<td>O manual manda não codificar os quesitos seguintes nesse tipo</td>
+<td>Inclui o vazio como se fosse resposta “outra forma/sem
+declaração”</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Por que a regra parecia útil.</strong> O programa agrupou
+“outra forma de abastecimento” com “sem declaração” e tratou qualquer
+ausência como sem declaração. A intenção de reunir desconhecidos era
+simples; o problema foi esquecer o código explícito de ignorado e não
+distinguir o vazio produzido pelas instruções do formulário.</p>
+<p><strong>Como deveria ficar.</strong> Na variável criada apenas para
+comparação, incluir os códigos explícitos correspondentes a “outra
+forma” e “ignorado”. Separar as ausências por motivo: pergunta não
+codificada naquele tipo, parte domiciliar não preenchida por ser família
+secundária, ou informação realmente perdida. Os valores originais não
+precisam ser alterados para corrigir essa classificação.</p>
+<p>Na amostra de 1,27%, há 101 domicílios com água explicitamente
+ignorada que ficaram fora da categoria. Em sentido contrário, entraram
+49 improvisados com salto previsto, uma família secundária sem esse
+bloco preenchido e três domicílios duráveis com ausência que ainda
+requer diagnóstico.</p>
+<p>Nos dois exemplos da tabela, a contribuição de 73,27 do domicílio
+baiano deve entrar, e a de 69,72 do sergipano deve sair dessa categoria.
+A comparação de toda a região Leste muda de aproximadamente +1,62% para
++1,64% em relação à publicação, mantendo os pesos e o restante da
+seleção. <strong>A diferença aumenta um pouco, mas a classificação fica
+melhor fundamentada.</strong> Reduzir a diferença a qualquer custo não é
+um critério de correção.</p>
+<p><strong>Como conferir:</strong> o <a href="parecer_1960_evidencias/validacao.md">caderno de validação</a>
+traz os valores sem arredondamento, o total do Leste e os campos de cada
+domicílio. O <a href="../read_guides/1960_codigo_do_censo.csv">código
+transcrito do censo</a>, linhas 681 e 700–701, distingue a instrução de
+salto dos códigos de água.</p>
+<h3 id="outras-comparações-que-precisam-da-mesma-disciplina">Outras
+comparações que precisam da mesma disciplina</h3>
+<p>A lista abaixo mantém questões importantes da revisão anterior,
+explicadas pelo tipo de decisão necessário:</p>
+<ul>
+<li><strong>Cor:</strong> a publicação agrega as declarações referentes
+a indígenas em pardos. Para reproduzir essa tabela histórica, a
+comparação deve somá-las nessa categoria, sem apagar o código original
+do microdado. A reformulação de 1,27% as deixou sem correspondência; os
+validadores de 25% e do combinado já fazem a agregação corretamente. Não
+há razão para alterar essas duas partes que já estão certas.</li>
+<li><strong>Atividade econômica:</strong> uma pessoa pode ter atividade
+registrada, mas perder o detalhe sobre o ramo. Três casos reais têm
+atividade e ocupação, mas foram tratados como inativos porque faltou o
+ramo. Deve-se consultar a resposta sobre atividade e reservar uma
+situação de ramo desconhecido. Ausência de detalhe não prova ausência de
+trabalho.</li>
+<li><strong>Domicílio permanente:</strong> a tabela definitiva examinada
+é de domicílios particulares permanentes, mas a seleção inclui 49
+improvisados. “Particular” e “permanente” não são sinônimos. A correção
+deve selecionar o mesmo tipo de moradia da tabela, mantendo os
+improvisados no arquivo para outras análises, não apagá-los.</li>
+<li><strong>Domicílio sem lista de pessoas:</strong> existe um caso em
+São Paulo, linha 780535, sem pessoa ligada. Eu havia escrito que todos
+os particulares tinham residente conhecido; essa afirmação estava
+errada. Entre os que têm lista, não apareceu um caso sem residente
+conhecido. A ausência de lista, entretanto, não prova que o domicílio
+estivesse vazio nem ocupado apenas por visitantes. Sua situação
+permanece desconhecida.</li>
+<li><strong>Estado conjugal:</strong> uma suspeita anterior sobre a
+classificação de divorciados foi descartada depois da consulta à
+publicação. Não se deve “corrigir” um tratamento que a fonte sustenta.
+Desquitados e divorciados entram no total, mas não na categoria
+“separados” desse quadro: a publicação define separados como aqueles que
+se separaram sem desquite ou divórcio.</li>
+<li><strong>Tabelas ainda não feitas:</strong> faltam cruzamentos de
+estado conjugal com a atividade da qual a pessoa depende e comparações
+de aluguel. “Não reconstruído” significa que a regra não foi
+implementada, não que os resultados sejam zero ou que a reconstrução
+seja impossível.</li>
+</ul>
+<p>A regra geral pode ser expressa sem jargão:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Situação encontrada</th>
+<th>O relatório deve mostrar</th>
+<th>Não deve afirmar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nenhum caso da categoria, mas a comparação é definida</td>
+<td>Zero observado, quantidade de casos zero e aviso da falta</td>
+<td>“Não existe população dessa categoria”</td>
+</tr>
+<tr>
+<td>Cálculo ainda não implementado</td>
+<td>“Não calculado”</td>
+<td>Zero</td>
+</tr>
+<tr>
+<td>Registro existe, mas não pode ser classificado</td>
+<td>Quantos casos e quanto peso ficaram sem classificação</td>
+<td>Que todos pertencem à categoria residual</td>
+</tr>
+<tr>
+<td>Peso inválido ou ausente</td>
+<td>Que a soma não pode ser aceita nessa condição</td>
+<td>Uma soma silenciosa só dos pesos disponíveis</td>
+</tr>
+<tr>
+<td>Referência publicada igual a zero</td>
+<td>Diferença absoluta; percentual não definido quando implica dividir
+por zero</td>
+<td>Um percentual numérico fabricado</td>
+</tr>
+</tbody>
+</table>
+<p>O termo <strong>NA</strong>, que aparece no código, significa valor
+ausente. Ele não explica sozinho por que está ausente. Essa explicação
+precisa vir da fonte, da regra aplicada e do registro da decisão.</p>
+<h2 id="o-desenho-amostral-o-que-sabemos-e-o-que-estamos-reconstruindo">6. O
+desenho amostral: o que sabemos e o que estamos reconstruindo</h2>
+<p><strong>Desenho amostral</strong> é o procedimento pelo qual as
+unidades foram escolhidas: o que entrou no sorteio, em que ordem, em
+quais grupos e com que chances. Não é apenas uma fórmula que o programa
+estatístico aceita.</p>
+<p>A documentação sustenta uma seleção geral de aproximadamente um
+quarto e uma seleção posterior de pastas dentro dessa amostra. Também
+descreve quatro grupos de pastas, segundo a composição urbana, rural e
+mista e o porte urbano. Essa é a base histórica para tratar a pasta como
+um grupo de observações selecionadas em conjunto.</p>
+<h3 id="por-que-a-pasta-importa-mesmo-depois-de-termos-todas-as-pessoas-em-linhas">Por
+que a pasta importa mesmo depois de termos todas as pessoas em
+linhas</h3>
+<p>Imagine, apenas para explicar, dez pessoas espalhadas por dez áreas e
+dez pessoas de uma mesma área. Os dois arquivos têm dez linhas, mas
+podem conter quantidades diferentes de informação independente sobre uma
+característica territorial. Pessoas próximas compartilham condições
+locais.</p>
+<p>Um <strong>conglomerado</strong> é esse conjunto selecionado em
+bloco; aqui, a pasta tem esse papel na subamostra. Um
+<strong>estrato</strong> é um grupo dentro do qual se organiza a seleção
+ou a análise — por exemplo, uma separação de pastas por situação. As
+palavras não acrescentam prova histórica; nomeiam aspectos do
+procedimento.</p>
+<p>A análise do projeto usa uma reconstrução por unidade da federação e
+quatro grupos de situação. Isso tem evidência favorável: ao ordenar as
+pastas reconstruídas, muitas selecionadas aparecem com intervalos
+próximos de vinte. Mas ainda não recuperamos de forma completa a lista
+histórica, os limites de cada série e seus reinícios.</p>
+<p><strong>Como foi feita a inferência.</strong> Partimos de um conjunto
+de pastas recuperado dos arquivos disponíveis, classificamos essas
+pastas e examinamos a distância entre as selecionadas. Na série
+corrigida por unidade e grupo, 472 de 611 intervalos são exatamente
+vinte; 552 ficam entre dezenove e vinte e um.</p>
+<p>Esses resultados tornam a hipótese plausível. Não demonstram que cada
+lista histórica tinha exatamente os limites que reconstruímos. Se o
+cadastro reconstruído perdeu pastas ou classificou alguma de outra
+forma, as posições também mudam.</p>
+<p>A revisão identificou dois problemas nessa própria investigação: uma
+recodificação repetida de Alagoas alterava posições, e a construção de
+certas sequências misturava grupos diferentes dentro da mesma unidade. A
+primeira foi corrigida apenas no script; as figuras antigas não foram
+refeitas. É preciso recomputar e rotular a evidência antes de usá-la
+para uma conclusão histórica mais forte.</p>
+<h3 id="por-que-127-não-é-uma-probabilidade-exata-recuperada">Por que
+1,27% não é uma probabilidade exata recuperada</h3>
+<p>Se as duas frações fossem exatamente um quarto e um vigésimo, o
+produto seria um em oitenta, ou 1,25%. O inverso seria 80: cada unidade
+representaria, em média, oitenta antes de outros ajustes.</p>
+<p>O projeto usa 1 dividido por 0,0127, aproximadamente 78,74, como peso
+inicial associado ao nome do arquivo. Essa convenção pode ser
+explicitada; não deve ser apresentada como a probabilidade histórica
+exata de cada pessoa, porque a revisão não recuperou essa prova.</p>
+<p>Fernando de Noronha ilustra outra distinção. O ajuste utiliza base 4,
+sob a hipótese de que a pasta entrou com certeza na segunda seleção.
+Alguns metadados, porém, continuam informando base 78,74 e calculando o
+fator de ajuste sobre ela.</p>
+<p>Um <strong>fator de ajuste</strong> é a divisão entre peso final e
+peso inicial. Se o denominador informado não é o usado no cálculo, o
+usuário pode interpretar incorretamente a intensidade do ajuste. A
+proposta é alinhar cálculo e descrição, deixando a hipótese de certeza
+identificada como hipótese. Não mudar pesos arbitrariamente para
+harmonizar rótulos.</p>
+<h3 id="os-totais-publicados-continuam-úteis-embora-também-sejam-estimativas">Os
+totais publicados continuam úteis, embora também sejam estimativas</h3>
+<p>Não estou propondo abandonar os resultados definitivos das 17
+unidades por terem sido estimados com a amostra de 25%. São os
+referenciais disponíveis que o projeto escolheu usar.</p>
+<p>O cuidado é mais preciso: <strong>ajustar um arquivo a uma estimativa
+publicada não transforma essa estimativa em uma contagem sem
+incerteza</strong>.</p>
+<p>Um exemplo inventado ajuda. Suponha que uma publicação estime 1.000
+pessoas num grupo. Depois do ajuste, o nosso arquivo também soma 1.000.
+A diferença entre os dois números é zero porque impusemos essa
+igualdade. Isso não prova que a população verdadeira seja exatamente
+1.000; ela pode diferir porque o número de referência veio de uma
+amostra.</p>
+<p>O cálculo futuro da <strong>variância</strong>, isto é, uma medida de
+quanto a estimativa mudaria sob outras seleções possíveis, precisa
+respeitar essa incerteza. Não o fiz nesta revisão, conforme a decisão de
+deixá-lo para depois. Também não concluí que a aproximação atual seja
+necessariamente conservadora, no sentido de nunca subestimar o erro.</p>
+<p>Há ainda uma nuance documental: a origem do total depende da
+pergunta, não só do estado. As perguntas domiciliares eram do boletim de
+amostra; por isso, seus totais têm base amostral também nas outras 11
+unidades. Não se deve carimbar todas as tabelas de uma mesma unidade
+como se tivessem a mesma origem.</p>
+<p><strong>Como deveria ficar a apresentação do desenho.</strong>
+Separar três níveis: o procedimento descrito na publicação; as partes
+reconstruídas a partir dos arquivos; e as escolhas adotadas para
+análise. A descrição dos pesos deve informar a base efetivamente usada e
+a origem de cada referência. O cálculo de incerteza fica explicitamente
+pendente, sem impedir que os erros de vínculo e de classificação sejam
+corrigidos antes.</p>
+<p><strong>Como conferir:</strong> a <a href="fontes_1960/1965_resultados_preliminares_vol2.pdf#page=6">publicação
+preliminar, página II</a> descreve a formação e seleção de pastas. A <a href="microdata_1960_amostra_127_revisao_desenho.md">nota sobre o
+desenho</a> e o <a href="microdata_1960_amostra_127_anexo_tecnico_20260921.md">anexo
+técnico preservado</a> documentam a classificação, os intervalos, as
+hipóteses e os limites. Este capítulo não recalcula variâncias nem
+certifica a especificação de um programa estatístico.</p>
+<h2 id="o-que-já-foi-conferido-o-que-falta-mudar-e-o-que-ainda-não-sabemos">7.
+O que já foi conferido, o que falta mudar e o que ainda não sabemos</h2>
+<h3 id="ler-corretamente-uma-decisão-errada-continua-produzindo-um-erro">Ler
+corretamente uma decisão errada continua produzindo um erro</h3>
+<p>A reprodução independente da leitura dos 25 campos pessoais das
+897.009 pessoas coincidiu com o arquivo processado, descontadas
+exatamente as 19 imputações identificadas de nacionalidade.</p>
+<p><strong>Imputar</strong>, aqui, significa preencher uma informação
+antes ausente ou ilegível mediante uma regra. As 19 têm correspondência
+na fonte de 25% com os outros 24 campos pessoais iguais e o valor
+preenchido confirmado. Isso é evidência favorável para essas imputações;
+não é aprovação genérica de qualquer preenchimento.</p>
+<p>Essa conferência da leitura é importante: mostra que a aplicação das
+posições e das decisões foi reproduzida. O caso do zero excedente
+explica seu limite. Dois leitores podem produzir os mesmos valores se
+ambos recebem o mesmo texto reparado incorretamente.</p>
+<p>Também passaram conferências de quantidades, nomes e tipos de colunas
+dos arquivos finais. Nos 11 estados/territórios que usam 1,27%, os
+campos selecionados de pesos, contagens e marcas de tratamento foram
+preservados na passagem para o combinado. Até o arquivo final, a
+comparação detalhada de valores terminou apenas para Roraima. Não se
+deve ampliar esse resultado para todas as colunas do país.</p>
+<h3 id="uma-marca-sem-problema-não-significa-necessariamente-examinado-e-aprovado">Uma
+marca “sem problema” não significa necessariamente “examinado e
+aprovado”</h3>
+<p>No código, algumas marcas de inconsistência dependem de idade, sexo
+do chefe ou ano de casamento. Quando faltam dados para testar, o
+resultado pode terminar como FALSE, isto é, sem marca.</p>
+<p>A interpretação segura é “esta regra não sinalizou o registro”. Não é
+“a consistência foi comprovada”. Um tratamento mais informativo
+separaria:</p>
+<ul>
+<li>teste realizado sem apontar contradição;</li>
+<li>teste não aplicável àquele registro;</li>
+<li>teste impossível porque faltam informações.</li>
+</ul>
+<p>Essas situações devem ser descritas no arquivo de decisões. Não
+precisam ser convertidas em respostas demográficas novas.</p>
+<h3 id="gravar-o-arquivo-não-depende-hoje-de-aprovar-as-comparações">Gravar
+o arquivo não depende hoje de aprovar as comparações</h3>
+<p>O projeto tem programas que produzem relatórios de comparação. O
+problema é a relação deles com a gravação dos dados.</p>
+<p>O percurso atual, simplificado, é:</p>
+<pre><code>Dados preparados ──┬── relatório de comparação
+                   └── arquivo final</code></pre>
+<p>Os dois resultados podem ser produzidos em caminhos paralelos. Pedir
+a gravação do arquivo não exige necessariamente que o relatório tenha
+sido produzido e aprovado. E um relatório com diferenças grandes
+continua sendo um arquivo gerado com sucesso.</p>
+<p>A relação desejada seria:</p>
+<pre><code>Dados preparados → comparações → decisão explícita → liberação do arquivo
+                                       │
+                                       └── pendência: não liberar como aprovado</code></pre>
+<p>“Decisão explícita” não significa exigir diferença zero em todas as
+tabelas. Algumas comparações não devem fechar exatamente e outras usam
+referências estimadas. Significa definir quais falhas impedem aceitação,
+quais diferenças são esperadas e quais precisam de justificativa.</p>
+<p>As novas interrupções por problemas de integridade já existentes no
+código são outra coisa: bloqueiam certos tratamentos, mas não
+transformam automaticamente todos os relatórios em requisitos de
+aprovação.</p>
+<p><strong>Como conferir:</strong> o <a href="parecer_1960_evidencias/reparo_e_gravacao.md">caderno do reparo e
+da gravação</a> localiza as dependências em _targets.R e mostra onde o
+validador escreve um relatório sem retornar uma aprovação do
+conteúdo.</p>
+<h3 id="a-descrição-do-produto-também-precisa-falar-do-arquivo-realmente-entregue">A
+descrição do produto também precisa falar do arquivo realmente
+entregue</h3>
+<p>O dicionário informa percentuais de preenchimento das duas partes da
+amostra, mas calcula esses números usando somente Sergipe e Guanabara
+como representantes. Um resultado de 100% na Guanabara não significa
+100% nas 11 unidades que usam a amostra menor.</p>
+<p>Por exemplo, o código de bairro aparece como 100% preenchido na
+descrição dessa parte. Quando se considera a parte inteira, o
+preenchimento é 28,3% nos domicílios e 22,9% nas pessoas. Isso não
+demonstra perda de bairros: mostra que o denominador da descrição não é
+nacional.</p>
+<p>A correção adequada é dizer claramente que se trata de estados de
+exemplo, ou calcular os percentuais de todo o conjunto que o rótulo
+pretende descrever. O dicionário também deve registrar os tipos finais
+das colunas — texto, número, indicador — e não apenas os tipos de uma
+etapa intermediária.</p>
+<p>Há ainda dois riscos de programação apontados por leitura do código,
+sem falha reproduzida: alterações isoladas no arquivo de tipos não estão
+declaradas como dependência rastreada; e a gravação não verifica o
+sucesso da renomeação final antes de apagar o temporário. São pendências
+de segurança e repetibilidade, não provas de que os arquivos atuais
+foram corrompidos.</p>
+<h3 id="o-que-continua-fora-de-uma-aprovação-completa">O que continua
+fora de uma aprovação completa</h3>
+<p>Não concluímos a identidade e o pertencimento de todas as famílias.
+Não conferimos cada exclusão e cada reparo contra uma fonte bruta. Não
+fizemos uma segunda transcrição integral de todas as tabelas publicadas,
+nem uma auditoria completa de ocupação, migração, escolaridade, renda,
+fecundidade e todos os cruzamentos demográficos.</p>
+<p>Também faltam: resolver as diferenças entre cópias, conferir todas as
+margens municipais de 25%, completar as tabelas de validação ainda não
+construídas, conferir nacionalmente todas as transferências de valores
+até a saída e executar os testes R em condição segura. As probabilidades
+históricas e as variâncias após ajuste permanecem, em parte, questões
+próprias de investigação.</p>
+<p>Portanto, “última revisão” deve significar que existe um relato
+consolidado das evidências e pendências — não que nenhuma nova
+informação possa mudar uma decisão. A preparação dos exemplos já mostrou
+como o caso de uma família pode envolver mais de uma regra ao mesmo
+tempo.</p>
+<h3 id="a-ordem-prática-das-correções">A ordem prática das
+correções</h3>
+<p>Primeiro, registrar decisões para os casos de pessoas, famílias,
+duplicatas e reparos: o que muda, com qual prova e o que permanece
+desconhecido. Segundo, fixar o significado de cada comparação com a
+publicação. Terceiro, testar essas decisões em exemplos pequenos,
+incluindo casos que devem continuar sem solução automática.</p>
+<p>Só depois virão a execução autorizada, a nova geração dos arquivos e
+a conferência dos efeitos. O desenho reconstruído deve continuar
+descrito com suas hipóteses. A etapa de variância pode permanecer
+adiada, como solicitado.</p>
+<p>O resultado esperado não é um arquivo sem valores ausentes nem um
+relatório com todas as diferenças iguais a zero. É um arquivo em que
+<strong>cada correção tenha justificativa verificável, cada ausência
+tenha significado conhecido quando possível e cada conclusão respeite a
+evidência disponível</strong>.</p>
+<h2 id="como-auditar-os-exemplos-sem-decifrar-o-parecer-inteiro">8. Como
+auditar os exemplos sem decifrar o parecer inteiro</h2>
+<h3 id="primeiro-escolha-a-pergunta-depois-abra-a-fonte">Primeiro
+escolha a pergunta, depois abra a fonte</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Pergunta que você quer conferir</th>
+<th>Documento com a evidência organizada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A menina de cinco anos pertence ao cartão encontrado em Ipiaú?</td>
+<td><a href="parecer_1960_evidencias/vinculos.md">Vínculos e duplicatas
+— caso Bahia 31606/031</a></td>
+</tr>
+<tr>
+<td>Por que juntar os seis de Conceição do Coité ao cartão atual daria
+oito pessoas?</td>
+<td><a href="parecer_1960_evidencias/vinculos.md">Vínculos e duplicatas
+— caso Bahia 31962/118</a></td>
+</tr>
+<tr>
+<td>Por que duas ocorrências iguais foram preservadas na outra
+fonte?</td>
+<td><a href="parecer_1960_evidencias/vinculos.md">Vínculos e duplicatas
+— caso Paraíba 19124/166</a></td>
+</tr>
+<tr>
+<td>Qual zero deslocou os campos de escolaridade?</td>
+<td><a href="parecer_1960_evidencias/reparo_e_gravacao.md">Reparo,
+posições e rótulos do RS</a></td>
+</tr>
+<tr>
+<td>Quais leitores foram omitidos? Por que corrigir a soma desfaz a
+igualdade?</td>
+<td><a href="parecer_1960_evidencias/validacao.md">Validação — caso de
+São Paulo</a></td>
+</tr>
+<tr>
+<td>Onde deveria aparecer o rural de Rondônia?</td>
+<td><a href="parecer_1960_evidencias/validacao.md">Validação —
+referência e linhas ausentes</a></td>
+</tr>
+<tr>
+<td>Por que ignorado e vazio não são a mesma resposta sobre água?</td>
+<td><a href="parecer_1960_evidencias/validacao.md">Validação — dois
+domicílios reais</a></td>
+</tr>
+</tbody>
+</table>
+<p>O <strong>número de linha do HHOLDA ou do arquivo de 25%</strong>
+conta a partir de 1 na fonte original. Num CSV de documentação, os
+números citados contam o cabeçalho como linha 1. Num arquivo processado,
+a coluna chamada “linha” guarda a referência ao original: ela não é a
+posição atual daquela pessoa depois de ordenar ou excluir registros.</p>
+<p>Os arquivos <strong>Parquet</strong> são apenas o formato em que as
+tabelas processadas foram gravadas. Os <strong>CSVs</strong> são tabelas
+textuais. Um arquivo <strong>gzip</strong>, com extensão .gz, é uma
+fonte textual comprimida. Nenhum desses formatos, por si só, diz se o
+conteúdo está correto.</p>
+<p>As notas de evidência foram preservadas em uma pasta de documentação,
+não apenas em arquivos temporários. Elas contêm os trechos e resultados
+consultados e apontam para as fontes completas. A <a href="parecer_1960_evidencias/LEIA_ME.md">orientação de auditoria</a>
+explica os limites e os passos de conferência.</p>
+<h3 id="três-cuidados-para-não-transformar-proposta-em-fato">Três
+cuidados para não transformar proposta em fato</h3>
+<p><strong>“Confirmado no arquivo”</strong> significa que o conteúdo foi
+encontrado nas fontes indicadas. <strong>“Proposta sustentada”</strong>
+significa que a evidência favorece determinada alteração, ainda não
+aplicada. <strong>“Indeterminado”</strong> significa que não temos base
+suficiente para escolher uma resposta ou ligação única.</p>
+<p>A justificativa de uma regra antiga é reconstruída a partir do código
+e de seus comentários. Ela não é uma afirmação sobre a intenção pessoal
+de quem a escreveu. As explicações deste texto procuram mostrar por que
+a regra poderia parecer razoável e em que ponto a evidência não permite
+mantê-la.</p>
+<p>Por fim, concordância entre cópias ou entre programas é uma evidência
+limitada. As cópias podem compartilhar origem; os programas podem
+compartilhar a mesma interpretação errada. Por isso os exemplos
+combinam, quando disponíveis, o texto original, o código de tratamento,
+a outra fonte e a convenção da publicação.</p>
+<p><strong>Estado final desta entrega:</strong> explicação e
+documentação reescritas; exemplos selecionados reconferidos; ilustrações
+e trilhas de evidência acrescentadas. As propostas permanecem propostas.
+Não houve correção de produção, nova calibração, cálculo de variância ou
+execução de R/Rscript.</p>
+</body>
+</html>

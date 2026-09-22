@@ -1,0 +1,70 @@
+{
+  "data": "2026-09-22",
+  "resultado": "aprovado_para_integracao",
+  "escopo": "Conferencia independente, somente leitura, do manifesto atualizado de recuperacao. Nao e execucao R nem reconstrucao dos microdados completos.",
+  "manifesto_candidato": "tmp/fechamento_registros_1960_20260922/recuperacao_atualizada_01/manifesto.json",
+  "manifesto_sha256": "1c4aeb0900a1c77f136c7cd458732615f4e343970039f65038fea4b21559ee1e",
+  "manifesto_integrado": "read_guides/1960_amostra_127_cartoes_recuperados.json",
+  "manifesto_integrado_sha256": "ed3ceca8f6956f12a1c88cfb5938fb55a6ab5bfd50ae4c2df3b0be5118b87769",
+  "integracao": "Objetos JSON integralmente iguais ao candidato; diferenca de hash somente na serializacao textual/finais de linha do arquivo aplicado. Igualdade conferida antes da bateria integrada.",
+  "manifesto_anterior": "read_guides/1960_amostra_127_cartoes_recuperados.json",
+  "cartoes": 30,
+  "pessoas_ja_existentes": 74,
+  "pessoas_acrescentadas": 0,
+  "cartoes_anteriores_preservados": 29,
+  "preservacao_29": "Textos, respostas, pessoas, localizadores e ressalvas identicos. Apenas o caminho evidencia_alternativas foi atualizado nas verificacoes.",
+  "novo_cartao": {
+    "id_recuperacao": "71-70380-148",
+    "arquivo25": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+    "linha25": 125840,
+    "linhas127": [861116, 861117],
+    "linhas25_correspondentes": [125842, 125841],
+    "unidade": "boletim_coletivo",
+    "limite": "As duas pessoas ja existem na127. Recuperar o cartao nao demonstra um novo edificio e nao acrescenta moradores.",
+    "alternativas_decisivas_descartadas": [
+      {
+        "cartao127": 860662,
+        "cartao25": 125318,
+        "pessoas_no_grupo_proprio": 6,
+        "ancoras_exatas25_e_unicas_na127_UF": [
+          {"linha127": 860663, "linha25": 125319},
+          {"linha127": 860668, "linha25": 125320}
+        ]
+      },
+      {
+        "cartao127": 860762,
+        "cartao25": 125434,
+        "pessoas_no_grupo_proprio": 6,
+        "ancoras_exatas25_e_unicas_na127_UF": [
+          {"linha127": 860763, "linha25": 125435},
+          {"linha127": 860764, "linha25": 125436}
+        ]
+      }
+    ]
+  },
+  "checagens": {
+    "hashes_fontes_manifesto_antes_depois": true,
+    "hash_script_gerador": true,
+    "hash_alternativas": true,
+    "decisoes_atuais_correcoes_duplicatas_vinculos": true,
+    "literais_recomparados_com_HHOLDA_e_gzip25": true,
+    "respostas_familiares_preservadas_na_normalizacao_de_largura": true,
+    "pessoas_exatamente_correspondentes_sem_novas_respostas": true,
+    "v100_ordens_contiguidade_redundancias25": true,
+    "ausencia_cartao127_na_chave_sem_distrito": true,
+    "fallback_sem_igualar_V216_00_a_63_nos_dados": true,
+    "pelo_menos_duas_ancoras_exatas_unicas_em_cada_fallback": true
+  },
+  "conferencia_ampliada_executada": {
+    "avaliacoes_de_alternativas_dos_30_grupos": 7774,
+    "alternativas_plausiveis": 0,
+    "grupos_proprios_distintos_reconferidos": 3938,
+    "grupos_com_correspondencia_integral25": 2302,
+    "grupos_com_fallback24_e_V216_preservado": 1636,
+    "pares_fallback_conferidos": 10499,
+    "ancoras_exatas_e_unicas_conferidas": 4472,
+    "registros25_relidos": 24147,
+    "metodo": "Releitura dos literais, decodificacao independente dos campos, confronto com os guias e CSVs vigentes; indice SQLite aberto em mode=ro para composicao e unicidade por UF. Nenhuma resposta ou arquivo de entrada foi alterado."
+  },
+  "limite_geral": "A ausencia de alternativa plausivel na busca documentada nao e prova de inexistencia historica absoluta. A correspondencia de registros nao e identificacao civil."
+}

@@ -1,5 +1,7 @@
 # Censo de 1960, amostra de 25% — a preparação passo a passo
 
+> **Revisão integrativa — 21/09/2026:** o [parecer vigente](microdata_1960_amostra_127_revisao_integrativa.md) confirmou exclusão indevida de leitores com idade declarada ignorada no calibrador e no validador25, além de referências omitidas na validação. Portanto, fechamento das margens e conclusões históricas abaixo não são homologação. Não houve nova calibração ou execução R nesta revisão.
+
 Este documento descreve como os dezessete arquivos brutos da amostra de 25% do Censo Demográfico de 1960 viram duas tabelas utilizáveis. Ele é o irmão de [`microdata_1960_amostra_127_preparacao.md`](microdata_1960_amostra_127_preparacao.md), que faz o mesmo para a outra amostra de 1960, e pressupõe pouco: onde precisar de vocabulário da época, o guia do desenho amostral da amostra de 1,27% tem um glossário.
 
 O código está em [`R/microdata_1960_amostra_25.R`](../R/microdata_1960_amostra_25.R) e no bloco `# 01b.` do [`_targets.R`](../_targets.R).
