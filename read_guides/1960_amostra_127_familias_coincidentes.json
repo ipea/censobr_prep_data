@@ -1,0 +1,1361 @@
+{
+  "versao": 1,
+  "criterio": "MesmoUF/distrito,15camposcartao e multiconjunto25campospessoais. Pasta/boletim/id_arquivo nao identificam a assinatura. Dano nao pode virar igualdade artificial deNA.",
+  "nao_e_identidade_civil": true,
+  "resumo": {
+    "conjuntos": 10,
+    "cartoes": 21,
+    "pessoas": 54,
+    "conjuntos_preservar_distintos_entre_fontes": 5,
+    "conjuntos_pendentes": 5,
+    "cartoes_preservados_com_contraprova": 10,
+    "pessoas_preservadas_com_contraprova": 12,
+    "exclusoes": 0
+  },
+  "fontes": [
+    {
+      "arquivo": "data_raw/microdata/1960/amostra_127/HHOLDA.txt",
+      "sha256": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c"
+    },
+    {
+      "arquivo": "references/investigacao_residual_1960_evidencias/familias_coincidentes.json",
+      "sha256": "079092937d87523ae7e585244172f80188407e1a42a8ede8a1ed3f9228f842a6"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_127_familias.csv",
+      "sha256": "51c443ff8a9e86d1584665b7d6296b061af5592e57d61bed4091d68f30507de5"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_127_pessoas.csv",
+      "sha256": "18326d21e51a2af88bd9f3d62b39d7debe0dc611d66985e911ae12c571d71655"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_25_familias.csv",
+      "sha256": "815f3241d49f8ababaef8ef2b6c0fc6e515a72302346da8133b7349c0f481007"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_25_pessoas.csv",
+      "sha256": "e00be8bf2962bbd2c5ed9bc169321d5b156b1424bd22f4c2f46920aa89d106c8"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+      "sha256": "75e7b4e7fce28507c24a4e21f1a40e5b47f750fd72b090abe6d1b1406644a621"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+      "sha256": "9b647908667d61fb35dfac8e4a4eda61a70b5f259bee3f5975026b54fa6326be"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pe.gz",
+      "sha256": "5b0335249644da87e8ca3f9ab28e80731dd792ef5a40ce4a01b336a8ec71a296"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.ba.gz",
+      "sha256": "15d040af8d050361097a66d78c0b6477da8fe41ee1942a89e3020242ebdc046d"
+    }
+  ],
+  "conjuntos": [
+    {
+      "id": "familias-02-8448",
+      "UF": 2,
+      "distrito": 1,
+      "n_pessoas_por_cartao": 11,
+      "linhas_cartoes": [
+        8448,
+        8465
+      ],
+      "linhas_pessoas": [
+        8449,
+        8450,
+        8451,
+        8452,
+        8453,
+        8454,
+        8455,
+        8456,
+        8457,
+        8458,
+        8459,
+        8466,
+        8467,
+        8468,
+        8469,
+        8470,
+        8471,
+        8472,
+        8473,
+        8474,
+        8475,
+        8476
+      ],
+      "acao": "pendente",
+      "justificativa": "Coincidencia de respostas sob chaves diferentes, sem contraprova integral suficiente. Preservar textos e registros, mas nao homologar nem excluir. Motivos especificos nas conferencias.",
+      "cartoes127": [
+        {
+          "linha": 8448,
+          "texto_original": "0202420102104249151578389680201001                    \\0001231",
+          "texto_corrigido": "0202420102104249151578389680201001                    \\0001231"
+        },
+        {
+          "linha": 8465,
+          "texto_original": "0202420102104251151578389680201001                    \\0001233",
+          "texto_corrigido": "0202420102104251151578389680201001                    \\0001233"
+        }
+      ],
+      "pessoas127": [
+        {
+          "linha": 8449,
+          "texto_original": "020242010210424925171605504920003110084010100332321207\\0001231",
+          "texto_corrigido": "020242010210424925171605504920003110084010100332321207\\0001231",
+          "linha_cartao": 8448
+        },
+        {
+          "linha": 8450,
+          "texto_original": "020242010210424935191145504920001420000000003332321200\\0001231",
+          "texto_corrigido": "020242010210424935191145504920001420000000003332321200\\0001231",
+          "linha_cartao": 8448
+        },
+        {
+          "linha": 8451,
+          "texto_original": "02024201021042493519104550492000-                     \\0001231",
+          "texto_corrigido": "02024201021042493519104550492000-                     \\0001231",
+          "linha_cartao": 8448
+        },
+        {
+          "linha": 8452,
+          "texto_original": "020242010210424935491205504920003110096300005391325176\\0001231",
+          "texto_corrigido": "020242010210424935491205504920003110096300005391325176\\0001231",
+          "linha_cartao": 8448
+        },
+        {
+          "linha": 8453,
+          "texto_original": "020242010210424935191185704920001520000000003332321200\\0001231",
+          "texto_corrigido": "020242010210424935191185704920001520000000003332321200\\0001231",
+          "linha_cartao": 8448
+        },
+        {
+          "linha": 8454,
+          "texto_original": "020242010210424935291115504920003110000000003332321200\\0001231",
+          "texto_corrigido": "020242010210424935291115504920003110000000003332321200\\0001231",
+          "linha_cartao": 8448
+        },
+        {
+          "linha": 8455,
+          "texto_original": "020242010210424935491235504920001520000000006391325176\\0001231",
+          "texto_corrigido": "020242010210424935491235504920001520000000006391325176\\0001231",
+          "linha_cartao": 8448
+        },
+        {
+          "linha": 8456,
+          "texto_original": "02024201021042493529109550492000311-                  \\0001231",
+          "texto_corrigido": "02024201021042493529109550492000311-                  \\0001231",
+          "linha_cartao": 8448
+        },
+        {
+          "linha": 8457,
+          "texto_original": "020242010210424935191135504920003110000000003332321200\\0001231",
+          "texto_corrigido": "020242010210424935191135504920003110000000003332321200\\0001231",
+          "linha_cartao": 8448
+        },
+        {
+          "linha": 8458,
+          "texto_original": "02024201021042493529107550492000311-                  \\0001231",
+          "texto_corrigido": "02024201021042493529107550492000311-                  \\0001231",
+          "linha_cartao": 8448
+        },
+        {
+          "linha": 8459,
+          "texto_original": "0202420102104249352814557049200031100840101034-       \\0001231",
+          "texto_corrigido": "0202420102104249352814557049200031100840101034-       \\0001231",
+          "linha_cartao": 8448
+        },
+        {
+          "linha": 8466,
+          "texto_original": "020242010210425125171605504920003110084010100332321207\\0001233",
+          "texto_corrigido": "020242010210425125171605504920003110084010100332321207\\0001233",
+          "linha_cartao": 8465
+        },
+        {
+          "linha": 8467,
+          "texto_original": "02024201021042513529107550492000311-                  \\0001233",
+          "texto_corrigido": "02024201021042513529107550492000311-                  \\0001233",
+          "linha_cartao": 8465
+        },
+        {
+          "linha": 8468,
+          "texto_original": "0202420102104251352814557049200031100840101034-       \\0001233",
+          "texto_corrigido": "0202420102104251352814557049200031100840101034-       \\0001233",
+          "linha_cartao": 8465
+        },
+        {
+          "linha": 8469,
+          "texto_original": "020242010210425135191145504920001420000000003332321200\\0001233",
+          "texto_corrigido": "020242010210425135191145504920001420000000003332321200\\0001233",
+          "linha_cartao": 8465
+        },
+        {
+          "linha": 8470,
+          "texto_original": "020242010210425135191135504920003110000000003332321200\\0001233",
+          "texto_corrigido": "020242010210425135191135504920003110000000003332321200\\0001233",
+          "linha_cartao": 8465
+        },
+        {
+          "linha": 8471,
+          "texto_original": "020242010210425135191185704920001520000000003332321200\\0001233",
+          "texto_corrigido": "020242010210425135191185704920001520000000003332321200\\0001233",
+          "linha_cartao": 8465
+        },
+        {
+          "linha": 8472,
+          "texto_original": "020242010210425135291115504920003110000000003332321200\\0001233",
+          "texto_corrigido": "020242010210425135291115504920003110000000003332321200\\0001233",
+          "linha_cartao": 8465
+        },
+        {
+          "linha": 8473,
+          "texto_original": "020242010210425135491235504920001520000000006391325176\\0001233",
+          "texto_corrigido": "020242010210425135491235504920001520000000006391325176\\0001233",
+          "linha_cartao": 8465
+        },
+        {
+          "linha": 8474,
+          "texto_original": "020242010210425135491205504920003110096300005391325176\\0001233",
+          "texto_corrigido": "020242010210425135491205504920003110096300005391325176\\0001233",
+          "linha_cartao": 8465
+        },
+        {
+          "linha": 8475,
+          "texto_original": "02024201021042513529109550492000311-                  \\0001233",
+          "texto_corrigido": "02024201021042513529109550492000311-                  \\0001233",
+          "linha_cartao": 8465
+        },
+        {
+          "linha": 8476,
+          "texto_original": "02024201021042513519104550492000-                     \\0001233",
+          "texto_corrigido": "02024201021042513519104550492000-                     \\0001233",
+          "linha_cartao": 8465
+        }
+      ],
+      "fontes25": [],
+      "conferencias": [
+        {
+          "linha_cartao127": 8448,
+          "suficiente_para_preservar": false,
+          "motivos": [
+            "fonte25_nao_disponivel"
+          ]
+        },
+        {
+          "linha_cartao127": 8465,
+          "suficiente_para_preservar": false,
+          "motivos": [
+            "fonte25_nao_disponivel"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "familias-02-8443",
+      "UF": 2,
+      "distrito": 1,
+      "n_pessoas_por_cartao": 4,
+      "linhas_cartoes": [
+        8443,
+        8460
+      ],
+      "linhas_pessoas": [
+        8444,
+        8445,
+        8446,
+        8447,
+        8461,
+        8462,
+        8463,
+        8464
+      ],
+      "acao": "pendente",
+      "justificativa": "Coincidencia de respostas sob chaves diferentes, sem contraprova integral suficiente. Preservar textos e registros, mas nao homologar nem excluir. Motivos especificos nas conferencias.",
+      "cartoes127": [
+        {
+          "linha": 8443,
+          "texto_original": "0202420102104248151578289680202001                    \\0001230",
+          "texto_corrigido": "0202420102104248151578289680202001                    \\0001230"
+        },
+        {
+          "linha": 8460,
+          "texto_original": "0202420102104250151578289680202001                    \\0001232",
+          "texto_corrigido": "0202420102104250151578289680202001                    \\0001232"
+        }
+      ],
+      "pessoas127": [
+        {
+          "linha": 8444,
+          "texto_original": "020242010210424825171305704920003110085604027332321206\\0001230",
+          "texto_corrigido": "020242010210424825171305704920003110085604027332321206\\0001230",
+          "linha_cartao": 8443
+        },
+        {
+          "linha": 8445,
+          "texto_original": "02024201021042483529102570492000-                     \\0001230",
+          "texto_corrigido": "02024201021042483529102570492000-                     \\0001230",
+          "linha_cartao": 8443
+        },
+        {
+          "linha": 8446,
+          "texto_original": "0202420102104248352812057049200015200856040234-       \\0001230",
+          "texto_corrigido": "0202420102104248352812057049200015200856040234-       \\0001230",
+          "linha_cartao": 8443
+        },
+        {
+          "linha": 8447,
+          "texto_original": "02024201021042483519005570492000-                     \\0001230",
+          "texto_corrigido": "02024201021042483519005570492000-                     \\0001230",
+          "linha_cartao": 8443
+        },
+        {
+          "linha": 8461,
+          "texto_original": "020242010210425025171305704920003110085604027332321206\\0001232",
+          "texto_corrigido": "020242010210425025171305704920003110085604027332321206\\0001232",
+          "linha_cartao": 8460
+        },
+        {
+          "linha": 8462,
+          "texto_original": "02024201021042503519005570492000-                     \\0001232",
+          "texto_corrigido": "02024201021042503519005570492000-                     \\0001232",
+          "linha_cartao": 8460
+        },
+        {
+          "linha": 8463,
+          "texto_original": "02024201021042503529102570492000-                     \\0001232",
+          "texto_corrigido": "02024201021042503529102570492000-                     \\0001232",
+          "linha_cartao": 8460
+        },
+        {
+          "linha": 8464,
+          "texto_original": "0202420102104250352812057049200015200856040234-       \\0001232",
+          "texto_corrigido": "0202420102104250352812057049200015200856040234-       \\0001232",
+          "linha_cartao": 8460
+        }
+      ],
+      "fontes25": [],
+      "conferencias": [
+        {
+          "linha_cartao127": 8443,
+          "suficiente_para_preservar": false,
+          "motivos": [
+            "fonte25_nao_disponivel"
+          ]
+        },
+        {
+          "linha_cartao127": 8460,
+          "suficiente_para_preservar": false,
+          "motivos": [
+            "fonte25_nao_disponivel"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "familias-10-69946",
+      "UF": 10,
+      "distrito": 1,
+      "n_pessoas_por_cartao": 2,
+      "linhas_cartoes": [
+        69946,
+        70362
+      ],
+      "linhas_pessoas": [
+        69947,
+        69948,
+        70363,
+        70364
+      ],
+      "acao": "pendente",
+      "justificativa": "Coincidencia de respostas sob chaves diferentes, sem contraprova integral suficiente. Preservar textos e registros, mas nao homologar nem excluir. Motivos especificos nas conferencias.",
+      "cartoes127": [
+        {
+          "linha": 69946,
+          "texto_original": "1011330110820155151578384680201001                    \\0010584",
+          "texto_corrigido": "1011330110820155151578384680201001                    \\0010584"
+        },
+        {
+          "linha": 70362,
+          "texto_original": "1011330110820236151578384680201001                    \\0010665",
+          "texto_corrigido": "1011330110820236151578384680201001                    \\0010665"
+        }
+      ],
+      "pessoas127": [
+        {
+          "linha": 69947,
+          "texto_original": "101133011082015525171235714914143110086000006332321137\\0010584",
+          "texto_corrigido": "101133011082015525171235714914143110086000006332321137\\0010584",
+          "linha_cartao": 69946
+        },
+        {
+          "linha": 69948,
+          "texto_original": "1011330110820155352811957149141431100860000034-       \\0010584",
+          "texto_corrigido": "1011330110820155352811957149141431100860000034-       \\0010584",
+          "linha_cartao": 69946
+        },
+        {
+          "linha": 70363,
+          "texto_original": "101133011082023625171235714914143110086000006332321137\\0010665",
+          "texto_corrigido": "101133011082023625171235714914143110086000006332321137\\0010665",
+          "linha_cartao": 70362
+        },
+        {
+          "linha": 70364,
+          "texto_original": "1011330110820236352811957149141431100860000034-       \\0010665",
+          "texto_corrigido": "1011330110820236352811957149141431100860000034-       \\0010665",
+          "linha_cartao": 70362
+        }
+      ],
+      "fontes25": [],
+      "conferencias": [
+        {
+          "linha_cartao127": 69946,
+          "suficiente_para_preservar": false,
+          "motivos": [
+            "fonte25_nao_disponivel"
+          ]
+        },
+        {
+          "linha_cartao127": 70362,
+          "suficiente_para_preservar": false,
+          "motivos": [
+            "fonte25_nao_disponivel"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "familias-40-440297",
+      "UF": 40,
+      "distrito": 1,
+      "n_pessoas_por_cartao": 2,
+      "linhas_cartoes": [
+        440297,
+        440370
+      ],
+      "linhas_pessoas": [
+        440298,
+        440299,
+        440371,
+        440372
+      ],
+      "acao": "preservar_distintos_entre_fontes",
+      "justificativa": "Preservar boletins separados: a outra copia conserva cartoes distintos com mesma chave, geografia, composicao e quantidades; divergencia00/63 emV216, quando existente, permanece. Isto corrobora a separacao entre arquivos, nao prova identidade civil nem ausencia absoluta de erro na coleta. Nenhum cartao ou pessoa e excluido.",
+      "cartoes127": [
+        {
+          "linha": 440297,
+          "texto_original": "4042630141848115151478389680204002                    \\0070196",
+          "texto_corrigido": "4042630141848115151478389680204002                    \\0070196"
+        },
+        {
+          "linha": 440370,
+          "texto_original": "4042630141848127151478389680204002                    \\0070208",
+          "texto_corrigido": "4042630141848127151478389680204002                    \\0070208"
+        }
+      ],
+      "pessoas127": [
+        {
+          "linha": 440298,
+          "texto_original": "404263014184811525271805416920003110040005055332321207\\0070196",
+          "texto_corrigido": "404263014184811525271805416920003110040005055332321207\\0070196",
+          "linha_cartao": 440297
+        },
+        {
+          "linha": 440299,
+          "texto_original": "404263014184811535101165416920003110000000003332321200\\0070196",
+          "texto_corrigido": "404263014184811535101165416920003110000000003332321200\\0070196",
+          "linha_cartao": 440297
+        },
+        {
+          "linha": 440371,
+          "texto_original": "404263014184812725271805416920003110040005055332321207\\0070208",
+          "texto_corrigido": "404263014184812725271805416920003110040005055332321207\\0070208",
+          "linha_cartao": 440370
+        },
+        {
+          "linha": 440372,
+          "texto_original": "404263014184812735101165416920003110000000003332321200\\0070208",
+          "texto_corrigido": "404263014184812735101165416920003110000000003332321200\\0070208",
+          "linha_cartao": 440370
+        }
+      ],
+      "fontes25": [
+        {
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao": 1226395,
+          "registros": [
+            {
+              "linha": 1226395,
+              "texto": "418481150020214783896802040024263015000000000000000000"
+            },
+            {
+              "linha": 1226396,
+              "texto": "418481150120122718054169920003110040005055332321207000"
+            },
+            {
+              "linha": 1226397,
+              "texto": "418481150200201011654169920003110006300003332321200000"
+            }
+          ]
+        },
+        {
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+          "linha_cartao": 1226468,
+          "registros": [
+            {
+              "linha": 1226468,
+              "texto": "418481270000214783896802040024263015000000000000000000"
+            },
+            {
+              "linha": 1226469,
+              "texto": "418481270100102718054169920003110040005055332321207000"
+            },
+            {
+              "linha": 1226470,
+              "texto": "418481270290291011654169920003110006300003332321200000"
+            }
+          ]
+        }
+      ],
+      "conferencias": [
+        {
+          "linha_cartao127": 440297,
+          "linha_cartao25": 1226395,
+          "chave25": [
+            40,
+            41848,
+            115
+          ],
+          "suficiente_para_preservar": true,
+          "motivos": [],
+          "diferencas_cartao": [],
+          "diferencasV216_preservadas": [
+            {
+              "valor127": 0,
+              "valor25": 63
+            }
+          ],
+          "composicao25_exata": false,
+          "n_pessoas127": 2,
+          "n_pessoas25": 2
+        },
+        {
+          "linha_cartao127": 440370,
+          "linha_cartao25": 1226468,
+          "chave25": [
+            40,
+            41848,
+            127
+          ],
+          "suficiente_para_preservar": true,
+          "motivos": [],
+          "diferencas_cartao": [],
+          "diferencasV216_preservadas": [
+            {
+              "valor127": 0,
+              "valor25": 63
+            }
+          ],
+          "composicao25_exata": false,
+          "n_pessoas127": 2,
+          "n_pessoas25": 2
+        }
+      ]
+    },
+    {
+      "id": "familias-60-660406",
+      "UF": 60,
+      "distrito": 9,
+      "n_pessoas_por_cartao": 2,
+      "linhas_cartoes": [
+        660406,
+        660427,
+        660899
+      ],
+      "linhas_pessoas": [
+        660407,
+        660408,
+        660428,
+        660429,
+        660900,
+        660901
+      ],
+      "acao": "pendente",
+      "justificativa": "Coincidencia de respostas sob chaves diferentes, sem contraprova integral suficiente. Preservar textos e registros, mas nao homologar nem excluir. Motivos especificos nas conferencias.",
+      "cartoes127": [
+        {
+          "linha": 660406,
+          "texto_original": "6062340960118109111409942591303001                    \\0106543",
+          "texto_corrigido": "6062340960118109111409942591303001                    \\0106543"
+        },
+        {
+          "linha": 660427,
+          "texto_original": "6062340960118116111409942591303001                    \\0106550",
+          "texto_corrigido": "6062340960118116111409942591303001                    \\0106550"
+        },
+        {
+          "linha": 660899,
+          "texto_original": "6062340960118220111409942591303001                    \\0106654",
+          "texto_corrigido": "6062340960118220111409942591303001                    \\0106654"
+        }
+      ],
+      "pessoas127": [
+        {
+          "linha": 660407,
+          "texto_original": "606234096011810921379994929931294269966399994299959191\\0106543",
+          "texto_corrigido": "606234096011810921379994929931294269966399994299959191\\0106543",
+          "linha_cartao": 660406
+        },
+        {
+          "linha": 660408,
+          "texto_original": "606234096011810931489994929931294269966399994299959191\\0106543",
+          "texto_corrigido": "606234096011810931489994929931294269966399994299959191\\0106543",
+          "linha_cartao": 660406
+        },
+        {
+          "linha": 660428,
+          "texto_original": "606234096011811621379994929931294269966399994299959191\\0106550",
+          "texto_corrigido": "606234096011811621379994929931294269966399994299959191\\0106550",
+          "linha_cartao": 660427
+        },
+        {
+          "linha": 660429,
+          "texto_original": "606234096011811631489994929931294269966399994299959191\\0106550",
+          "texto_corrigido": "606234096011811631489994929931294269966399994299959191\\0106550",
+          "linha_cartao": 660427
+        },
+        {
+          "linha": 660900,
+          "texto_original": "606234096011822021379994929931294269966399994299959191\\0106654",
+          "texto_corrigido": "606234096011822021379994929931294269966399994299959191\\0106654",
+          "linha_cartao": 660899
+        },
+        {
+          "linha": 660901,
+          "texto_original": "606234096011822031489994929931294269966399994299959191\\0106654",
+          "texto_corrigido": "606234096011822031489994929931294269966399994299959191\\0106654",
+          "linha_cartao": 660899
+        }
+      ],
+      "fontes25": [
+        {
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao": 1504299,
+          "registros": [
+            {
+              "linha": 1504299,
+              "texto": "601181090080214099425913000006234091000000000000000000"
+            },
+            {
+              "linha": 1504300,
+              "texto": "601181090180183799949299931293110066399994299959191000"
+            },
+            {
+              "linha": 1504301,
+              "texto": "601181090260264899949299931293110066399994299959191000"
+            }
+          ]
+        },
+        {
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao": 1504320,
+          "registros": [
+            {
+              "linha": 1504320,
+              "texto": "601181160040214099425913000006234091000000000000000000"
+            },
+            {
+              "linha": 1504321,
+              "texto": "601181160140143799949299931294269966399994299959191000"
+            },
+            {
+              "linha": 1504322,
+              "texto": "601181160220224899949299931293110066399994299959191000"
+            }
+          ]
+        },
+        {
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+          "linha_cartao": 1504791,
+          "registros": [
+            {
+              "linha": 1504791,
+              "texto": "601182200060214099425913000006234091000000000000000000"
+            },
+            {
+              "linha": 1504792,
+              "texto": "601182200160163799949299931294269966399994299959191000"
+            },
+            {
+              "linha": 1504793,
+              "texto": "601182200240244899949299931294269966399994299959191000"
+            }
+          ]
+        }
+      ],
+      "conferencias": [
+        {
+          "linha_cartao127": 660406,
+          "linha_cartao25": 1504299,
+          "chave25": [
+            60,
+            60118,
+            109
+          ],
+          "suficiente_para_preservar": false,
+          "motivos": [
+            "composicao24_diverge",
+            "respostas_cartao_divergem"
+          ],
+          "diferencas_cartao": [
+            {
+              "campo": "V112",
+              "valor127": 3,
+              "valor25": 0
+            },
+            {
+              "campo": "V113",
+              "valor127": 1,
+              "valor25": 0
+            }
+          ],
+          "diferencasV216_preservadas": [],
+          "composicao25_exata": false,
+          "n_pessoas127": 2,
+          "n_pessoas25": 2
+        },
+        {
+          "linha_cartao127": 660427,
+          "linha_cartao25": 1504320,
+          "chave25": [
+            60,
+            60118,
+            116
+          ],
+          "suficiente_para_preservar": false,
+          "motivos": [
+            "composicao24_diverge",
+            "respostas_cartao_divergem"
+          ],
+          "diferencas_cartao": [
+            {
+              "campo": "V112",
+              "valor127": 3,
+              "valor25": 0
+            },
+            {
+              "campo": "V113",
+              "valor127": 1,
+              "valor25": 0
+            }
+          ],
+          "diferencasV216_preservadas": [],
+          "composicao25_exata": false,
+          "n_pessoas127": 2,
+          "n_pessoas25": 2
+        },
+        {
+          "linha_cartao127": 660899,
+          "linha_cartao25": 1504791,
+          "chave25": [
+            60,
+            60118,
+            220
+          ],
+          "suficiente_para_preservar": false,
+          "motivos": [
+            "respostas_cartao_divergem"
+          ],
+          "diferencas_cartao": [
+            {
+              "campo": "V112",
+              "valor127": 3,
+              "valor25": 0
+            },
+            {
+              "campo": "V113",
+              "valor127": 1,
+              "valor25": 0
+            }
+          ],
+          "diferencasV216_preservadas": [],
+          "composicao25_exata": true,
+          "n_pessoas127": 2,
+          "n_pessoas25": 2
+        }
+      ]
+    },
+    {
+      "id": "familias-21-219938",
+      "UF": 21,
+      "distrito": 29,
+      "n_pessoas_por_cartao": 1,
+      "linhas_cartoes": [
+        219938,
+        220057
+      ],
+      "linhas_pessoas": [
+        219939,
+        220058
+      ],
+      "acao": "pendente",
+      "justificativa": "Coincidencia de respostas sob chaves diferentes, sem contraprova integral suficiente. Preservar textos e registros, mas nao homologar nem excluir. Motivos especificos nas conferencias.",
+      "cartoes127": [
+        {
+          "linha": 219938,
+          "texto_original": "2121352921322167131578360680203001                    \\0034316",
+          "texto_corrigido": "2121352921322167131578360680203001                    \\0034316"
+        },
+        {
+          "linha": 220057,
+          "texto_original": "2121352921322179131578360680203001                    \\0034340",
+          "texto_corrigido": "2121352921322179131578360680203001                    \\0034340"
+        }
+      ],
+      "pessoas127": [
+        {
+          "linha": 219939,
+          "texto_original": "212135292132216723279995420920004269956399994299959191\\0034316",
+          "texto_corrigido": "212135292132216723279995420920004269956399994299959191\\0034316",
+          "linha_cartao": 219938
+        },
+        {
+          "linha": 220058,
+          "texto_original": "212135292132217923279995420920004269956399994299959191\\0034340",
+          "texto_corrigido": "212135292132217923279995420920004269956399994299959191\\0034340",
+          "linha_cartao": 220057
+        }
+      ],
+      "fontes25": [
+        {
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pe.gz",
+          "linha_cartao": 364057,
+          "registros": [
+            {
+              "linha": 364057,
+              "texto": "213221670020115783606802010012135293000000000000000000"
+            },
+            {
+              "linha": 364058,
+              "texto": "213221670120122799954209920004269910099994299959191000"
+            }
+          ]
+        },
+        {
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pe.gz",
+          "linha_cartao": 364130,
+          "registros": [
+            {
+              "linha": 364130,
+              "texto": "213221790030115783606802010012135293000000000000000000"
+            },
+            {
+              "linha": 364131,
+              "texto": "213221790130132799954209920004269910099994299959191000"
+            }
+          ]
+        }
+      ],
+      "conferencias": [
+        {
+          "linha_cartao127": 219938,
+          "linha_cartao25": 364057,
+          "chave25": [
+            21,
+            21322,
+            167
+          ],
+          "suficiente_para_preservar": false,
+          "motivos": [
+            "composicao24_diverge",
+            "respostas_cartao_divergem"
+          ],
+          "diferencas_cartao": [
+            {
+              "campo": "V112",
+              "valor127": 3,
+              "valor25": 1
+            }
+          ],
+          "diferencasV216_preservadas": [],
+          "composicao25_exata": false,
+          "n_pessoas127": 1,
+          "n_pessoas25": 1
+        },
+        {
+          "linha_cartao127": 220057,
+          "linha_cartao25": 364130,
+          "chave25": [
+            21,
+            21322,
+            179
+          ],
+          "suficiente_para_preservar": false,
+          "motivos": [
+            "composicao24_diverge",
+            "respostas_cartao_divergem"
+          ],
+          "diferencas_cartao": [
+            {
+              "campo": "V112",
+              "valor127": 3,
+              "valor25": 1
+            }
+          ],
+          "diferencasV216_preservadas": [],
+          "composicao25_exata": false,
+          "n_pessoas127": 1,
+          "n_pessoas25": 1
+        }
+      ]
+    },
+    {
+      "id": "familias-21-229398",
+      "UF": 21,
+      "distrito": 5,
+      "n_pessoas_por_cartao": 1,
+      "linhas_cartoes": [
+        229398,
+        229526
+      ],
+      "linhas_pessoas": [
+        229399,
+        229527
+      ],
+      "acao": "preservar_distintos_entre_fontes",
+      "justificativa": "Preservar boletins separados: a outra copia conserva cartoes distintos com mesma chave, geografia, composicao e quantidades; divergencia00/63 emV216, quando existente, permanece. Isto corrobora a separacao entre arquivos, nao prova identidade civil nem ausencia absoluta de erro na coleta. Nenhum cartao ou pessoa e excluido.",
+      "cartoes127": [
+        {
+          "linha": 229398,
+          "texto_original": "2121530522060020151578384680202001                    \\0036015",
+          "texto_corrigido": "2121530522060020151578384680202001                    \\0036015"
+        },
+        {
+          "linha": 229526,
+          "texto_original": "2121530522060039151578384680202001                    \\0036034",
+          "texto_corrigido": "2121530522060039151578384680202001                    \\0036034"
+        }
+      ],
+      "pessoas127": [
+        {
+          "linha": 229399,
+          "texto_original": "2121530522060020252716057209200031100400000039-       \\0036015",
+          "texto_corrigido": "2121530522060020252716057209200031100400000039-       \\0036015",
+          "linha_cartao": 229398
+        },
+        {
+          "linha": 229527,
+          "texto_original": "2121530522060039252716057209200031100400000039-       \\0036034",
+          "texto_corrigido": "2121530522060039252716057209200031100400000039-       \\0036034",
+          "linha_cartao": 229526
+        }
+      ],
+      "fontes25": [
+        {
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pe.gz",
+          "linha_cartao": 691350,
+          "registros": [
+            {
+              "linha": 691350,
+              "texto": "220600200070115783846802020012153055000000000000000000"
+            },
+            {
+              "linha": 691351,
+              "texto": "2206002001701727160572099200031100400000039        000"
+            }
+          ]
+        },
+        {
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pe.gz",
+          "linha_cartao": 691478,
+          "registros": [
+            {
+              "linha": 691478,
+              "texto": "220600390000115783846802020012153055000000000000000000"
+            },
+            {
+              "linha": 691479,
+              "texto": "2206003901001027160572099200031100400000039        000"
+            }
+          ]
+        }
+      ],
+      "conferencias": [
+        {
+          "linha_cartao127": 229398,
+          "linha_cartao25": 691350,
+          "chave25": [
+            21,
+            22060,
+            20
+          ],
+          "suficiente_para_preservar": true,
+          "motivos": [],
+          "diferencas_cartao": [],
+          "diferencasV216_preservadas": [],
+          "composicao25_exata": true,
+          "n_pessoas127": 1,
+          "n_pessoas25": 1
+        },
+        {
+          "linha_cartao127": 229526,
+          "linha_cartao25": 691478,
+          "chave25": [
+            21,
+            22060,
+            39
+          ],
+          "suficiente_para_preservar": true,
+          "motivos": [],
+          "diferencas_cartao": [],
+          "diferencasV216_preservadas": [],
+          "composicao25_exata": true,
+          "n_pessoas127": 1,
+          "n_pessoas25": 1
+        }
+      ]
+    },
+    {
+      "id": "familias-31-295312",
+      "UF": 31,
+      "distrito": 1,
+      "n_pessoas_por_cartao": 1,
+      "linhas_cartoes": [
+        295312,
+        295557
+      ],
+      "linhas_pessoas": [
+        295313,
+        295558
+      ],
+      "acao": "preservar_distintos_entre_fontes",
+      "justificativa": "Preservar boletins separados: a outra copia conserva cartoes distintos com mesma chave, geografia, composicao e quantidades; divergencia00/63 emV216, quando existente, permanece. Isto corrobora a separacao entre arquivos, nao prova identidade civil nem ausencia absoluta de erro na coleta. Nenhum cartao ou pessoa e excluido.",
+      "cartoes127": [
+        {
+          "linha": 295312,
+          "texto_original": "3131130131374035151578384680203001                    \\0046935",
+          "texto_corrigido": "3131130131374035151578384680203001                    \\0046935"
+        },
+        {
+          "linha": 295557,
+          "texto_original": "3131130131374087151578384680203001                    \\0046987",
+          "texto_corrigido": "3131130131374087151578384680203001                    \\0046987"
+        }
+      ],
+      "pessoas127": [
+        {
+          "linha": 295313,
+          "texto_original": "313113013137403525171405505920003110000000005333122927\\0046935",
+          "texto_corrigido": "313113013137403525171405505920003110000000005333122927\\0046935",
+          "linha_cartao": 295312
+        },
+        {
+          "linha": 295558,
+          "texto_original": "313113013137408725171405505920003110000000005333122927\\0046987",
+          "texto_corrigido": "313113013137408725171405505920003110000000005333122927\\0046987",
+          "linha_cartao": 295557
+        }
+      ],
+      "fontes25": [
+        {
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.ba.gz",
+          "linha_cartao": 35937,
+          "registros": [
+            {
+              "linha": 35937,
+              "texto": "313740350060115783846802030013113015000000000000000000"
+            },
+            {
+              "linha": 35938,
+              "texto": "313740350160161714055059920003110000000005333122927000"
+            }
+          ]
+        },
+        {
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.ba.gz",
+          "linha_cartao": 36184,
+          "registros": [
+            {
+              "linha": 36184,
+              "texto": "313740870060115783846802030013113015000000000000000000"
+            },
+            {
+              "linha": 36185,
+              "texto": "313740870160161714055059920003110000000005333122927000"
+            }
+          ]
+        }
+      ],
+      "conferencias": [
+        {
+          "linha_cartao127": 295312,
+          "linha_cartao25": 35937,
+          "chave25": [
+            31,
+            31374,
+            35
+          ],
+          "suficiente_para_preservar": true,
+          "motivos": [],
+          "diferencas_cartao": [],
+          "diferencasV216_preservadas": [],
+          "composicao25_exata": true,
+          "n_pessoas127": 1,
+          "n_pessoas25": 1
+        },
+        {
+          "linha_cartao127": 295557,
+          "linha_cartao25": 36184,
+          "chave25": [
+            31,
+            31374,
+            87
+          ],
+          "suficiente_para_preservar": true,
+          "motivos": [],
+          "diferencas_cartao": [],
+          "diferencasV216_preservadas": [],
+          "composicao25_exata": true,
+          "n_pessoas127": 1,
+          "n_pessoas25": 1
+        }
+      ]
+    },
+    {
+      "id": "familias-31-304706",
+      "UF": 31,
+      "distrito": 7,
+      "n_pessoas_por_cartao": 1,
+      "linhas_cartoes": [
+        304706,
+        304947
+      ],
+      "linhas_pessoas": [
+        304707,
+        304948
+      ],
+      "acao": "preservar_distintos_entre_fontes",
+      "justificativa": "Preservar boletins separados: a outra copia conserva cartoes distintos com mesma chave, geografia, composicao e quantidades; divergencia00/63 emV216, quando existente, permanece. Isto corrobora a separacao entre arquivos, nao prova identidade civil nem ausencia absoluta de erro na coleta. Nenhum cartao ou pessoa e excluido.",
+      "cartoes127": [
+        {
+          "linha": 304706,
+          "texto_original": "3131380731608143151598384680202001                    \\0048450",
+          "texto_corrigido": "3131380731608143151598384680202001                    \\0048450"
+        },
+        {
+          "linha": 304947,
+          "texto_original": "3131380731608201151598384680202001                    \\0048508",
+          "texto_corrigido": "3131380731608201151598384680202001                    \\0048508"
+        }
+      ],
+      "pessoas127": [
+        {
+          "linha": 304707,
+          "texto_original": "313138073160814325171205505913053110000000006332321156\\0048450",
+          "texto_corrigido": "313138073160814325171205505913053110000000006332321156\\0048450",
+          "linha_cartao": 304706
+        },
+        {
+          "linha": 304948,
+          "texto_original": "313138073160820125171205505913053110000000006332321156\\0048508",
+          "texto_corrigido": "313138073160820125171205505913053110000000006332321156\\0048508",
+          "linha_cartao": 304947
+        }
+      ],
+      "fontes25": [
+        {
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.ba.gz",
+          "linha_cartao": 401754,
+          "registros": [
+            {
+              "linha": 401754,
+              "texto": "316081430040115983846802020013138075000000000000000000"
+            },
+            {
+              "linha": 401755,
+              "texto": "316081430140141712055059913053110006300006332321156000"
+            }
+          ]
+        },
+        {
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.ba.gz",
+          "linha_cartao": 401995,
+          "registros": [
+            {
+              "linha": 401995,
+              "texto": "316082010040115983846802020013138075000000000000000000"
+            },
+            {
+              "linha": 401996,
+              "texto": "316082010140141712055059913053110006300006332321156000"
+            }
+          ]
+        }
+      ],
+      "conferencias": [
+        {
+          "linha_cartao127": 304706,
+          "linha_cartao25": 401754,
+          "chave25": [
+            31,
+            31608,
+            143
+          ],
+          "suficiente_para_preservar": true,
+          "motivos": [],
+          "diferencas_cartao": [],
+          "diferencasV216_preservadas": [
+            {
+              "valor127": 0,
+              "valor25": 63
+            }
+          ],
+          "composicao25_exata": false,
+          "n_pessoas127": 1,
+          "n_pessoas25": 1
+        },
+        {
+          "linha_cartao127": 304947,
+          "linha_cartao25": 401995,
+          "chave25": [
+            31,
+            31608,
+            201
+          ],
+          "suficiente_para_preservar": true,
+          "motivos": [],
+          "diferencas_cartao": [],
+          "diferencasV216_preservadas": [
+            {
+              "valor127": 0,
+              "valor25": 63
+            }
+          ],
+          "composicao25_exata": false,
+          "n_pessoas127": 1,
+          "n_pessoas25": 1
+        }
+      ]
+    },
+    {
+      "id": "familias-31-305107",
+      "UF": 31,
+      "distrito": 7,
+      "n_pessoas_por_cartao": 1,
+      "linhas_cartoes": [
+        305107,
+        305109
+      ],
+      "linhas_pessoas": [
+        305108,
+        305110
+      ],
+      "acao": "preservar_distintos_entre_fontes",
+      "justificativa": "Preservar boletins separados: a outra copia conserva cartoes distintos com mesma chave, geografia, composicao e quantidades; divergencia00/63 emV216, quando existente, permanece. Isto corrobora a separacao entre arquivos, nao prova identidade civil nem ausencia absoluta de erro na coleta. Nenhum cartao ou pessoa e excluido.",
+      "cartoes127": [
+        {
+          "linha": 305107,
+          "texto_original": "3131380731608250151598384680202001                    \\0048557",
+          "texto_corrigido": "3131380731608250151598384680202001                    \\0048557"
+        },
+        {
+          "linha": 305109,
+          "texto_original": "3131380731608251151598384680202001                    \\0048558",
+          "texto_corrigido": "3131380731608251151598384680202001                    \\0048558"
+        }
+      ],
+      "pessoas127": [
+        {
+          "linha": 305108,
+          "texto_original": "313138073160825025171225705912053110000000006332321156\\0048557",
+          "texto_corrigido": "313138073160825025171225705912053110000000006332321156\\0048557",
+          "linha_cartao": 305107
+        },
+        {
+          "linha": 305110,
+          "texto_original": "313138073160825125171225705912053110000000006332321156\\0048558",
+          "texto_corrigido": "313138073160825125171225705912053110000000006332321156\\0048558",
+          "linha_cartao": 305109
+        }
+      ],
+      "fontes25": [
+        {
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.ba.gz",
+          "linha_cartao": 402155,
+          "registros": [
+            {
+              "linha": 402155,
+              "texto": "316082500050115983846802020013138075000000000000000000"
+            },
+            {
+              "linha": 402156,
+              "texto": "316082500150151712257059912053110006300006332321156000"
+            }
+          ]
+        },
+        {
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.ba.gz",
+          "linha_cartao": 402157,
+          "registros": [
+            {
+              "linha": 402157,
+              "texto": "316082510010115983846802020013138075000000000000000000"
+            },
+            {
+              "linha": 402158,
+              "texto": "316082510110111712257059912053110006300006332321156000"
+            }
+          ]
+        }
+      ],
+      "conferencias": [
+        {
+          "linha_cartao127": 305107,
+          "linha_cartao25": 402155,
+          "chave25": [
+            31,
+            31608,
+            250
+          ],
+          "suficiente_para_preservar": true,
+          "motivos": [],
+          "diferencas_cartao": [],
+          "diferencasV216_preservadas": [
+            {
+              "valor127": 0,
+              "valor25": 63
+            }
+          ],
+          "composicao25_exata": false,
+          "n_pessoas127": 1,
+          "n_pessoas25": 1
+        },
+        {
+          "linha_cartao127": 305109,
+          "linha_cartao25": 402157,
+          "chave25": [
+            31,
+            31608,
+            251
+          ],
+          "suficiente_para_preservar": true,
+          "motivos": [],
+          "diferencas_cartao": [],
+          "diferencasV216_preservadas": [
+            {
+              "valor127": 0,
+              "valor25": 63
+            }
+          ],
+          "composicao25_exata": false,
+          "n_pessoas127": 1,
+          "n_pessoas25": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_guardas_familias_situacao_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Warning message:
+package 'digest' was built under R version 4.5.3 
+Reading 1960 amostra de 1,27%
+  14 linhas: 3 registros de familia, 11 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 14
+Parsing 1960 amostra de 1,27%
+  familias: 3 x 26 | pessoas: 11 x 39 | registros com valor anulado: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+  familias: 1; domicilios: 1; pessoas reconciliadas: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+  familias: 1; domicilios: 1; pessoas reconciliadas: 1
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+cartao_vazio: bloqueado corretamente - Reconstrucao suspensa: cartao familiar sem pessoas; conferir cartoes_sem_pessoas_a_revisar.csv.
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+situacao_sem_decisao: bloqueado corretamente - Reconstrucao suspensa: situacao divergente ou ausente no vinculo direto; conferir vinculos_situacao_a_revisar.csv.
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+situacao_ausente_pessoas: bloqueado corretamente - Reconstrucao suspensa: situacao divergente ou ausente no vinculo direto; conferir vinculos_situacao_a_revisar.csv.
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+situacao_ausente_familias: bloqueado corretamente - Reconstrucao suspensa: situacao divergente ou ausente no vinculo direto; conferir vinculos_situacao_a_revisar.csv.
+Finalizing 1960 amostra de 1,27%
+finalizacao_cartao_vazio: bloqueado corretamente - Finalizacao suspensa: cartao familiar sem pessoas; conferir integridade antes da analise.
+Cartao vazio e situacao: guardas e respostas conferidas em tmp/fechamento_registros_1960_20260922\familias_situacao_ea702c2d444e
+
+Exit code: 0 hex: 0x0

@@ -1,0 +1,47 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_novas_duplicatas_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Warning message:
+package 'digest' was built under R version 4.5.3 
+
+Attaching package: 'arrow'
+
+The following object is masked from 'package:utils':
+
+    timestamp
+
+Manifesto temporario: 6461 linhas; 2736 remover; 3725 manter; sobrepostas: 1908
+Reading 1960 amostra de 1,27%
+  2 linhas: 0 registros de familia, 2 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 2
+Parsing 1960 amostra de 1,27%
+  familias: 0 x 26 | pessoas: 2 x 39 | registros com valor anulado: 0
+Reviewing repeated person lines in 1960 amostra de 1,27%
+  linhas repetidas: 1; removidas por decisao: 0
+Piloto aprovado: linhas 164631 e 164633 mantidas; dois filhos de cinco anos.
+Reviewing repeated person lines in 1960 amostra de 1,27%
+Bloqueio aprovado: grupo incompleto.
+Reviewing repeated person lines in 1960 amostra de 1,27%
+Bloqueio aprovado: texto_original adulterado.
+Reviewing repeated person lines in 1960 amostra de 1,27%
+Bloqueio aprovado: texto_corrigido adulterado.
+Reading 1960 amostra de 1,27%
+  6.461 linhas: 0 registros de familia, 6.461 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 6461
+Parsing 1960 amostra de 1,27%
+  familias: 0 x 26 | pessoas: 6.461 x 39 | registros com valor anulado: 0
+Reviewing repeated person lines in 1960 amostra de 1,27%
+  linhas repetidas: 3236; removidas por decisao: 2736
+Restauracao conferida: linha 211049; grupo 21-21072-73-linha211043; duas ocorrencias mantidas, nenhuma resposta alterada.
+Restauracao conferida: linha 392256; grupo 40-40416-108-linha392251; duas ocorrencias mantidas, nenhuma resposta alterada.
+Restauracao conferida: linha 217736; grupo 21-21278-193-linha217734; duas ocorrencias mantidas, nenhuma resposta alterada.
+Reviewing repeated person lines in 1960 amostra de 1,27%
+  linhas repetidas: 3236; removidas por decisao: 2736
+Ordem invertida aprovada: mesmas retencoes, exclusoes, respostas e marcas.
+Conferencia aprovada: 6461 entradas, 3725 retidas, 2736 removidas; todas as acoes verificadas.
+Saidas auxiliares: tmp/fechamento_registros_1960_20260922/duplicatas\teste_r_dd14df01e3c
+
+Exit code: 0 hex: 0x0

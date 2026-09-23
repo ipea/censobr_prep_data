@@ -1,0 +1,37 @@
+test_missing_person_not_ignored (test_aplicar_residuais_duplicatas_1960.ResidualDecisionTest.test_missing_person_not_ignored) ... ok
+test_municipal_disagreement_rejected (test_aplicar_residuais_duplicatas_1960.ResidualDecisionTest.test_municipal_disagreement_rejected) ... ok
+test_other_card_is_not_ignored (test_aplicar_residuais_duplicatas_1960.ResidualDecisionTest.test_other_card_is_not_ignored) ... ok
+test_two_source_occurrences_preserve_both (test_aplicar_residuais_duplicatas_1960.ResidualDecisionTest.test_two_source_occurrences_preserve_both) ... ok
+test_unique_witnesses_required (test_aplicar_residuais_duplicatas_1960.ResidualDecisionTest.test_unique_witnesses_required) ... ok
+test_competitor_cannot_take_target_group (test_preservacao_alternativos_1960.AlternativeHouseholdTest.test_competitor_cannot_take_target_group) ... ok
+test_missing_person_blocks (test_preservacao_alternativos_1960.AlternativeHouseholdTest.test_missing_person_blocks) ... ok
+test_municipal_code_disagreement_blocks (test_preservacao_alternativos_1960.AlternativeHouseholdTest.test_municipal_code_disagreement_blocks) ... ok
+test_nationally_nonunique_witnesses_block (test_preservacao_alternativos_1960.AlternativeHouseholdTest.test_nationally_nonunique_witnesses_block) ... ok
+test_targets_and_competitors_have_separate_matching_groups (test_preservacao_alternativos_1960.AlternativeHouseholdTest.test_targets_and_competitors_have_separate_matching_groups) ... ok
+test_bad_card_or_count_or_response_rejected (test_preservacao_composta_ce_1960.CompositeCETest.test_bad_card_or_count_or_response_rejected) ... ok
+test_competing_mapping_or_group_rejected (test_preservacao_composta_ce_1960.CompositeCETest.test_competing_mapping_or_group_rejected) ... ok
+test_local_positive (test_preservacao_composta_ce_1960.CompositeCETest.test_local_positive) ... ok
+test_nonunique_adult_rejected_in_either_source (test_preservacao_composta_ce_1960.CompositeCETest.test_nonunique_adult_rejected_in_either_source) ... ok
+test_all_ten_have_explicit_disposition (test_disposicoes_familias_1960.HouseholdDispositionTest.test_all_ten_have_explicit_disposition) ... ok
+test_amazonas_equality_cannot_authorize_exclusion (test_disposicoes_familias_1960.HouseholdDispositionTest.test_amazonas_equality_cannot_authorize_exclusion) ... ok
+test_lost_source_person_blocks (test_disposicoes_familias_1960.HouseholdDispositionTest.test_lost_source_person_blocks) ... ok
+test_matching_separate_forms_not_civil_identity (test_disposicoes_familias_1960.HouseholdDispositionTest.test_matching_separate_forms_not_civil_identity) ... ok
+test_not_every_valid_different_code_is_00_63 (test_disposicoes_familias_1960.HouseholdDispositionTest.test_not_every_valid_different_code_is_00_63) ... ok
+test_blank_does_not_authorize_another_missing_answer (test_preparar_reparos_residuais_texto_1960.ResidualRepairTests.test_blank_does_not_authorize_another_missing_answer) ... ok
+test_mask_only_nationality (test_preparar_reparos_residuais_texto_1960.ResidualRepairTests.test_mask_only_nationality) ... ok
+test_only_declared_third_person_difference (test_preparar_reparos_residuais_texto_1960.ResidualRepairTests.test_only_declared_third_person_difference) ... ok
+test_portable_proof_and_applied_manifest_agree (test_preparar_reparos_residuais_texto_1960.ResidualRepairTests.test_portable_proof_and_applied_manifest_agree) ... ok
+test_target_keeps_all_other_answers (test_preparar_reparos_residuais_texto_1960.ResidualRepairTests.test_target_keeps_all_other_answers) ... ok
+test_unresolved_damage_preserves_literal_record (test_preparar_reparos_residuais_texto_1960.ResidualRepairTests.test_unresolved_damage_preserves_literal_record) ... ok
+test_equal_siblings_are_not_unique_witnesses (test_resolver_cartoes_chaves_fonte25_1960.PairingTest.test_equal_siblings_are_not_unique_witnesses) ... ok
+test_missing_person_blocked (test_resolver_cartoes_chaves_fonte25_1960.PairingTest.test_missing_person_blocked) ... ok
+test_other_response_not_accepted (test_resolver_cartoes_chaves_fonte25_1960.PairingTest.test_other_response_not_accepted) ... ok
+test_preserve_only_year_difference (test_resolver_cartoes_chaves_fonte25_1960.PairingTest.test_preserve_only_year_difference) ... ok
+test_year_outside_pair_not_accepted (test_resolver_cartoes_chaves_fonte25_1960.PairingTest.test_year_outside_pair_not_accepted) ... ok
+test_damage_not_general_wildcard (test_resolver_vinculos_chaves_incompletas_1960.PartialKeyTest.test_damage_not_general_wildcard) ... ok
+test_only_missing_character_can_vary (test_resolver_vinculos_chaves_incompletas_1960.PartialKeyTest.test_only_missing_character_can_vary) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 0.020s
+
+OK

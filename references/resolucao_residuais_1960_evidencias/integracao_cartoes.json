@@ -1,0 +1,371 @@
+{
+  "modo": "somente conferencia; nao altera manifesto nem dados",
+  "cartoes": 32,
+  "pessoas": 80,
+  "cartoes_anteriores_preservados": 30,
+  "novos_cartoes": [
+    "14-15004-116",
+    "31-32426-233"
+  ],
+  "cartoes_conferidos": [
+    {
+      "id": "14-14652-156",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "40-40358-042",
+      "pessoas": 3,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "40-40654-177",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "40-41318-167",
+      "pessoas": 4,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "40-41514-157",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "40-41514-159",
+      "pessoas": 5,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "52-52756-210",
+      "pessoas": 6,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "52-52762-054",
+      "pessoas": 3,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "60-63850-060",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "60-63850-073",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "60-63850-075",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "60-64054-143",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "60-64054-144",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "60-64490-096",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "60-65004-083",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "60-65004-084",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "60-65004-085",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "60-65858-158",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "60-65858-160",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "71-70196-055",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "71-70196-056",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "71-70380-148",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "71-70492-004",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "71-70492-260",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "71-70496-135",
+      "pessoas": 3,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "71-71572-050",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "81-81562-006",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "81-82322-067",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "94-94246-027",
+      "pessoas": 3,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "94-94246-102",
+      "pessoas": 3,
+      "diferencas_preservadas": [],
+      "anterior": true
+    },
+    {
+      "id": "14-15004-116",
+      "pessoas": 4,
+      "diferencas_preservadas": [
+        {
+          "linha127": 132194,
+          "campos": [
+            "V216"
+          ]
+        }
+      ],
+      "anterior": false
+    },
+    {
+      "id": "31-32426-233",
+      "pessoas": 2,
+      "diferencas_preservadas": [],
+      "anterior": false
+    }
+  ],
+  "assinaturas_para_revalidar": [
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.al.gz",
+      "antes": "44d660b46f32aef2f795f6e05d43dd796768311a8a64721f6da5191dcd952873",
+      "atual": "44d660b46f32aef2f795f6e05d43dd796768311a8a64721f6da5191dcd952873",
+      "mudou": false
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.ba.gz",
+      "antes": "15d040af8d050361097a66d78c0b6477da8fe41ee1942a89e3020242ebdc046d",
+      "atual": "15d040af8d050361097a66d78c0b6477da8fe41ee1942a89e3020242ebdc046d",
+      "mudou": false
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.ce.gz",
+      "antes": "40d8ecdc24e7d8c9ba8b4715f6f0bfa1f1385e4b3d8fe1d15eac3595b68f9fa2",
+      "atual": "40d8ecdc24e7d8c9ba8b4715f6f0bfa1f1385e4b3d8fe1d15eac3595b68f9fa2",
+      "mudou": false
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.df.gz",
+      "antes": "32f13d1877ca570a99a4a5caaf78712022c91afb16821ce75eb68b3cc9ab4421",
+      "atual": "32f13d1877ca570a99a4a5caaf78712022c91afb16821ce75eb68b3cc9ab4421",
+      "mudou": false
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.go.gz",
+      "antes": "d8e1c1bddfea8df8500ccaef7b23b423e4974b17ab3c0916df50e96317821fa6",
+      "atual": "d8e1c1bddfea8df8500ccaef7b23b423e4974b17ab3c0916df50e96317821fa6",
+      "mudou": false
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+      "antes": "75e7b4e7fce28507c24a4e21f1a40e5b47f750fd72b090abe6d1b1406644a621",
+      "atual": "75e7b4e7fce28507c24a4e21f1a40e5b47f750fd72b090abe6d1b1406644a621",
+      "mudou": false
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mt.gz",
+      "antes": "3668b84265fad5abb8184653670396be5fb9c65f8e0cd419058a1834f4e8ef30",
+      "atual": "3668b84265fad5abb8184653670396be5fb9c65f8e0cd419058a1834f4e8ef30",
+      "mudou": false
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pe.gz",
+      "antes": "5b0335249644da87e8ca3f9ab28e80731dd792ef5a40ce4a01b336a8ec71a296",
+      "atual": "5b0335249644da87e8ca3f9ab28e80731dd792ef5a40ce4a01b336a8ec71a296",
+      "mudou": false
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+      "antes": "3c5ad2b3dbb273eef5f86ccf6982076636c2ac86ee82bc93ed9c1bc3c576f9b9",
+      "atual": "3c5ad2b3dbb273eef5f86ccf6982076636c2ac86ee82bc93ed9c1bc3c576f9b9",
+      "mudou": false
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.rj.gz",
+      "antes": "363289071564a6cb7a93e8b417914df983c81d0ef92af2689224bc4065db4b6e",
+      "atual": "363289071564a6cb7a93e8b417914df983c81d0ef92af2689224bc4065db4b6e",
+      "mudou": false
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.rn.gz",
+      "antes": "c464a89865256ea906b120e523e324935df05b0d2a9c9ab6853fbbe7819de746",
+      "atual": "c464a89865256ea906b120e523e324935df05b0d2a9c9ab6853fbbe7819de746",
+      "mudou": false
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.rs.gz",
+      "antes": "b5d0686e2ddf796b4e33338e1b1dee6a0b53155043b76c5895577936b053e6c2",
+      "atual": "b5d0686e2ddf796b4e33338e1b1dee6a0b53155043b76c5895577936b053e6c2",
+      "mudou": false
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+      "antes": "9b647908667d61fb35dfac8e4a4eda61a70b5f259bee3f5975026b54fa6326be",
+      "atual": "9b647908667d61fb35dfac8e4a4eda61a70b5f259bee3f5975026b54fa6326be",
+      "mudou": false
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pb.gz",
+      "antes": "bf5fcd1c433b72bd930d56be2a7ec3a28944ed067ae3ed7314dba6813a573692",
+      "atual": "bf5fcd1c433b72bd930d56be2a7ec3a28944ed067ae3ed7314dba6813a573692",
+      "mudou": false
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.fn.gz",
+      "antes": "98d5f9efb7c13ff505d129a80c43e6701cc0711dabd2391ba6c81212f9d0b23b",
+      "atual": "98d5f9efb7c13ff505d129a80c43e6701cc0711dabd2391ba6c81212f9d0b23b",
+      "mudou": false
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.se.gz",
+      "antes": "603527a51f15ff52e4584867b11c6aaafdea2e70f885073e10feb40fd57d8bec",
+      "atual": "603527a51f15ff52e4584867b11c6aaafdea2e70f885073e10feb40fd57d8bec",
+      "mudou": false
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.sa.gz",
+      "antes": "58d3b494802e365526d0a053c9aac798ec82f5b654f375eb834700b9a4b0adef",
+      "atual": "58d3b494802e365526d0a053c9aac798ec82f5b654f375eb834700b9a4b0adef",
+      "mudou": false
+    },
+    {
+      "arquivo": "data_raw/microdata/1960/amostra_127/HHOLDA.txt",
+      "antes": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c",
+      "atual": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c",
+      "mudou": false
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_correcoes.csv",
+      "antes": "dc2efc00470d25d156c76f7decf2603597b61adceb85c3b54c094c893716f831",
+      "atual": "dc2efc00470d25d156c76f7decf2603597b61adceb85c3b54c094c893716f831",
+      "mudou": false
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_duplicatas.csv",
+      "antes": "f43ad7ac48cd7bb108196e411748ce15927e407da010fb7afcf62c873cbf5d0a",
+      "atual": "f43ad7ac48cd7bb108196e411748ce15927e407da010fb7afcf62c873cbf5d0a",
+      "mudou": false
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_vinculos.csv",
+      "antes": "5d0fc8e4eb9eb0d2363247426eeb61e0b58ad719130992c219decee231fbe6a8",
+      "atual": "5d0fc8e4eb9eb0d2363247426eeb61e0b58ad719130992c219decee231fbe6a8",
+      "mudou": false
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_127_familias.csv",
+      "antes": "51c443ff8a9e86d1584665b7d6296b061af5592e57d61bed4091d68f30507de5",
+      "atual": "51c443ff8a9e86d1584665b7d6296b061af5592e57d61bed4091d68f30507de5",
+      "mudou": false
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_127_pessoas.csv",
+      "antes": "18326d21e51a2af88bd9f3d62b39d7debe0dc611d66985e911ae12c571d71655",
+      "atual": "18326d21e51a2af88bd9f3d62b39d7debe0dc611d66985e911ae12c571d71655",
+      "mudou": false
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_25_familias.csv",
+      "antes": "815f3241d49f8ababaef8ef2b6c0fc6e515a72302346da8133b7349c0f481007",
+      "atual": "815f3241d49f8ababaef8ef2b6c0fc6e515a72302346da8133b7349c0f481007",
+      "mudou": false
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_25_pessoas.csv",
+      "antes": "e00be8bf2962bbd2c5ed9bc169321d5b156b1424bd22f4c2f46920aa89d106c8",
+      "atual": "e00be8bf2962bbd2c5ed9bc169321d5b156b1424bd22f4c2f46920aa89d106c8",
+      "mudou": false
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/cartoes_fora_chave_fechada.json",
+      "antes": "28eb5d87e47d2a9b34c27155120b4d7260cbc6a40cbd787c94c08d6b9c8a58bf",
+      "atual": "28eb5d87e47d2a9b34c27155120b4d7260cbc6a40cbd787c94c08d6b9c8a58bf",
+      "mudou": false
+    }
+  ],
+  "literal25_conferidos": 112,
+  "limite": "Confere integracao e literais. A prova de alternativas e testemunhos e testada separadamente nos auditores e em R."
+}

@@ -1,0 +1,26 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_pesos_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+  Newton: 6 iteracoes; desvio maximo 0; fator g: min 0.5 mediana 1 max 1.5
+  Newton: 6 iteracoes; desvio maximo 8.68e-14; fator g: min 0.5 mediana 1 max 1.5
+  Newton: 1 iteracoes; desvio maximo 0; fator g: min 1 mediana 1 max 1
+Calibrating household weights to the definitive results (Serie Nacional) and to the 1965 preliminary results
+  1965: 6 celulas (quadro 1: 4; quadro 2: 2)
+  Newton: 1 iteracoes; desvio maximo 5.41e-16; fator g: min 1 mediana 1 max 1
+  definitivos: 4 celulas (b 2, d 2); razao publicado / soma pela base definitiva fora de [0,5; 2]: =
+  Newton: 1 iteracoes; desvio maximo 0; fator g: min 1 mediana 1 max 1
+  fator mediano do peso final por UF: 24=1
+Calibrating household weights to the definitive results (Serie Nacional) and to the 1965 preliminary results
+Calibrating household weights to the definitive results (Serie Nacional) and to the 1965 preliminary results
+Calibrating household weights to the definitive results (Serie Nacional) and to the 1965 preliminary results
+Calibrating household weights to the definitive results (Serie Nacional) and to the 1965 preliminary results
+Calibrating household weights to the definitive results (Serie Nacional) and to the 1965 preliminary results
+  1965: 6 celulas (quadro 1: 4; quadro 2: 2)
+  Newton: 1 iteracoes; desvio maximo 5.41e-16; fator g: min 1 mediana 1 max 1
+  definitivos: 4 celulas (b 2, d 2); razao publicado / soma pela base definitiva fora de [0,5; 2]: =
+  Newton: 1 iteracoes; desvio maximo 5.41e-16; fator g: min 1 mediana 1 max 1
+  fator mediano do peso final por UF: 0=1
+Testes sinteticos de pesos passaram; nenhuma base real foi recalibrada.
+
+Exit code: 0 hex: 0x0

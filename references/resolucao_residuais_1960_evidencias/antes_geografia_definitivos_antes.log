@@ -1,0 +1,507 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_geografia_validacao_residuais_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Comparing the definitive results (Serie Nacional, vol. I) with the calibrated file
+                   peso tabela celulas observadas sem_observacoes peso_ausente
+                 <char>  <int>   <int>      <int>           <int>        <int>
+ 1:      censobr_weight      7     168          4             164            0
+ 2:      censobr_weight     32     168          4             164            0
+ 3:      censobr_weight     33     756          3             753            0
+ 4:      censobr_weight     34     252          4             248            0
+ 5:      censobr_weight     37     336          2             334            0
+ 6:      censobr_weight     40     252          4             248            0
+ 7: censobr_weight_1965      7     168          4             164            0
+ 8: censobr_weight_1965     32     168          4             164            0
+ 9: censobr_weight_1965     33     756          3             753            0
+10: censobr_weight_1965     34     252          4             248            0
+11: censobr_weight_1965     37     336          2             334            0
+12: censobr_weight_1965     40     252          4             248            0
+    classificacao_incompleta nao_reconstruidas percentuais_validos
+                       <int>             <int>               <int>
+ 1:                        0                 0                 166
+ 2:                        0                 0                 168
+ 3:                        0                 0                 753
+ 4:                        0                 0                 249
+ 5:                        0                 0                 331
+ 6:                        0                 0                 252
+ 7:                        0                 0                 166
+ 8:                        0                 0                 168
+ 9:                        0                 0                 753
+10:                        0                 0                 249
+11:                        0                 0                 331
+12:                        0                 0                 252
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+Contraprova geografia definitiva pessoa_UF_ausente censobr_weight: FALHOU
+Contraprova geografia definitiva pessoa_UF_ausente mulheres_sem_dano censobr_weight: PASSOU
+Contraprova geografia definitiva pessoa_UF_ausente censobr_weight_1965: FALHOU
+Contraprova geografia definitiva pessoa_UF_ausente mulheres_sem_dano censobr_weight_1965: PASSOU
+Comparing the definitive results (Serie Nacional, vol. I) with the calibrated file
+                   peso tabela celulas observadas sem_observacoes peso_ausente
+                 <char>  <int>   <int>      <int>           <int>        <int>
+ 1:      censobr_weight      7     168          4             164            0
+ 2:      censobr_weight     32     168          4             164            0
+ 3:      censobr_weight     33     756          3             753            0
+ 4:      censobr_weight     34     252          4             248            0
+ 5:      censobr_weight     37     336          2             334            0
+ 6:      censobr_weight     40     252          4             248            0
+ 7: censobr_weight_1965      7     168          4             164            0
+ 8: censobr_weight_1965     32     168          4             164            0
+ 9: censobr_weight_1965     33     756          3             753            0
+10: censobr_weight_1965     34     252          4             248            0
+11: censobr_weight_1965     37     336          2             334            0
+12: censobr_weight_1965     40     252          4             248            0
+    classificacao_incompleta nao_reconstruidas percentuais_validos
+                       <int>             <int>               <int>
+ 1:                        0                 0                 166
+ 2:                        0                 0                 168
+ 3:                        0                 0                 753
+ 4:                        0                 0                 249
+ 5:                        0                 0                 331
+ 6:                        0                 0                 252
+ 7:                        0                 0                 166
+ 8:                        0                 0                 168
+ 9:                        0                 0                 753
+10:                        0                 0                 249
+11:                        0                 0                 331
+12:                        0                 0                 252
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+Contraprova geografia definitiva pessoa_UF_invalida censobr_weight: FALHOU
+Contraprova geografia definitiva pessoa_UF_invalida mulheres_sem_dano censobr_weight: PASSOU
+Contraprova geografia definitiva pessoa_UF_invalida censobr_weight_1965: FALHOU
+Contraprova geografia definitiva pessoa_UF_invalida mulheres_sem_dano censobr_weight_1965: PASSOU
+Comparing the definitive results (Serie Nacional, vol. I) with the calibrated file
+                   peso tabela celulas observadas sem_observacoes peso_ausente
+                 <char>  <int>   <int>      <int>           <int>        <int>
+ 1:      censobr_weight      7     168          4             164            0
+ 2:      censobr_weight     32     168          4             164            0
+ 3:      censobr_weight     33     756          4             752            0
+ 4:      censobr_weight     34     252          4             248            0
+ 5:      censobr_weight     37     336          2             334            0
+ 6:      censobr_weight     40     252          4             248            0
+ 7: censobr_weight_1965      7     168          4             164            0
+ 8: censobr_weight_1965     32     168          4             164            0
+ 9: censobr_weight_1965     33     756          4             752            0
+10: censobr_weight_1965     34     252          4             248            0
+11: censobr_weight_1965     37     336          2             334            0
+12: censobr_weight_1965     40     252          4             248            0
+    classificacao_incompleta nao_reconstruidas percentuais_validos
+                       <int>             <int>               <int>
+ 1:                        0                 0                 166
+ 2:                        0                 0                 168
+ 3:                        0                 0                 753
+ 4:                        0                 0                 249
+ 5:                        0                 0                 331
+ 6:                        0                 0                 252
+ 7:                        0                 0                 166
+ 8:                        0                 0                 168
+ 9:                        0                 0                 753
+10:                        0                 0                 249
+11:                        0                 0                 331
+12:                        0                 0                 252
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+Contraprova geografia definitiva domicilio_UF_ausente censobr_weight: FALHOU
+Contraprova geografia definitiva domicilio_UF_ausente censobr_weight_1965: FALHOU
+Comparing the definitive results (Serie Nacional, vol. I) with the calibrated file
+                   peso tabela celulas observadas sem_observacoes peso_ausente
+                 <char>  <int>   <int>      <int>           <int>        <int>
+ 1:      censobr_weight      7     168          4             164            0
+ 2:      censobr_weight     32     168          4             164            0
+ 3:      censobr_weight     33     756          4             752            0
+ 4:      censobr_weight     34     252          4             248            0
+ 5:      censobr_weight     37     336          2             334            0
+ 6:      censobr_weight     40     252          4             248            0
+ 7: censobr_weight_1965      7     168          4             164            0
+ 8: censobr_weight_1965     32     168          4             164            0
+ 9: censobr_weight_1965     33     756          4             752            0
+10: censobr_weight_1965     34     252          4             248            0
+11: censobr_weight_1965     37     336          2             334            0
+12: censobr_weight_1965     40     252          4             248            0
+    classificacao_incompleta nao_reconstruidas percentuais_validos
+                       <int>             <int>               <int>
+ 1:                        0                 0                 166
+ 2:                        0                 0                 168
+ 3:                        0                 0                 753
+ 4:                        0                 0                 249
+ 5:                        0                 0                 331
+ 6:                        0                 0                 252
+ 7:                        0                 0                 166
+ 8:                        0                 0                 168
+ 9:                        0                 0                 753
+10:                        0                 0                 249
+11:                        0                 0                 331
+12:                        0                 0                 252
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+Contraprova geografia definitiva domicilio_UF_invalida censobr_weight: FALHOU
+Contraprova geografia definitiva domicilio_UF_invalida censobr_weight_1965: FALHOU
+Comparing the definitive results (Serie Nacional, vol. I) with the calibrated file
+                   peso tabela celulas observadas sem_observacoes peso_ausente
+                 <char>  <int>   <int>      <int>           <int>        <int>
+ 1:      censobr_weight      7     168          4             164            0
+ 2:      censobr_weight     32     168          4             164            0
+ 3:      censobr_weight     33     756          3             753            0
+ 4:      censobr_weight     34     252          4             248            0
+ 5:      censobr_weight     37     336          2             334            0
+ 6:      censobr_weight     40     252          4             248            0
+ 7: censobr_weight_1965      7     168          4             164            0
+ 8: censobr_weight_1965     32     168          4             164            0
+ 9: censobr_weight_1965     33     756          3             753            0
+10: censobr_weight_1965     34     252          4             248            0
+11: censobr_weight_1965     37     336          2             334            0
+12: censobr_weight_1965     40     252          4             248            0
+    classificacao_incompleta nao_reconstruidas percentuais_validos
+                       <int>             <int>               <int>
+ 1:                        0                 0                 166
+ 2:                        0                 0                 168
+ 3:                        0                 0                 753
+ 4:                        0                 0                 249
+ 5:                        0                 0                 331
+ 6:                        0                 0                 252
+ 7:                        0                 0                 166
+ 8:                        0                 0                 168
+ 9:                        0                 0                 753
+10:                        0                 0                 249
+11:                        0                 0                 331
+12:                        0                 0                 252
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+Contraprova geografia definitiva menor5 fora_do_universo censobr_weight: PASSOU
+Contraprova geografia definitiva menor5 fora_do_universo censobr_weight_1965: PASSOU
+Comparing the definitive results (Serie Nacional, vol. I) with the calibrated file
+                   peso tabela celulas observadas sem_observacoes peso_ausente
+                 <char>  <int>   <int>      <int>           <int>        <int>
+ 1:      censobr_weight      7     168          4             164            0
+ 2:      censobr_weight     32     168          4             164            0
+ 3:      censobr_weight     33     756          3             753            0
+ 4:      censobr_weight     34     252          4             248            0
+ 5:      censobr_weight     37     336          2             334            0
+ 6:      censobr_weight     40     252          4             248            0
+ 7: censobr_weight_1965      7     168          4             164            0
+ 8: censobr_weight_1965     32     168          4             164            0
+ 9: censobr_weight_1965     33     756          3             753            0
+10: censobr_weight_1965     34     252          4             248            0
+11: censobr_weight_1965     37     336          2             334            0
+12: censobr_weight_1965     40     252          4             248            0
+    classificacao_incompleta nao_reconstruidas percentuais_validos
+                       <int>             <int>               <int>
+ 1:                        0                 0                 166
+ 2:                        0                 0                 168
+ 3:                        0                 0                 753
+ 4:                        0                 0                 249
+ 5:                        0                 0                 331
+ 6:                        0                 0                 252
+ 7:                        0                 0                 166
+ 8:                        0                 0                 168
+ 9:                        0                 0                 753
+10:                        0                 0                 249
+11:                        0                 0                 331
+12:                        0                 0                 252
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+Contraprova geografia definitiva ausente fora_do_universo censobr_weight: PASSOU
+Contraprova geografia definitiva ausente fora_do_universo censobr_weight_1965: PASSOU
+Comparing the definitive results (Serie Nacional, vol. I) with the calibrated file
+                   peso tabela celulas observadas sem_observacoes peso_ausente
+                 <char>  <int>   <int>      <int>           <int>        <int>
+ 1:      censobr_weight      7     168          4             164            0
+ 2:      censobr_weight     32     168          4             164            0
+ 3:      censobr_weight     33     756          3             753            0
+ 4:      censobr_weight     34     252          4             248            0
+ 5:      censobr_weight     37     336          2             334            0
+ 6:      censobr_weight     40     252          4             248            0
+ 7: censobr_weight_1965      7     168          4             164            0
+ 8: censobr_weight_1965     32     168          4             164            0
+ 9: censobr_weight_1965     33     756          3             753            0
+10: censobr_weight_1965     34     252          4             248            0
+11: censobr_weight_1965     37     336          2             334            0
+12: censobr_weight_1965     40     252          4             248            0
+    classificacao_incompleta nao_reconstruidas percentuais_validos
+                       <int>             <int>               <int>
+ 1:                        0                 0                 166
+ 2:                        0                 0                 168
+ 3:                        0                 0                 753
+ 4:                        0                 0                 249
+ 5:                        0                 0                 331
+ 6:                        0                 0                 252
+ 7:                        0                 0                 166
+ 8:                        0                 0                 168
+ 9:                        0                 0                 753
+10:                        0                 0                 249
+11:                        0                 0                 331
+12:                        0                 0                 252
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+Contraprova geografia definitiva visitante fora_do_universo censobr_weight: PASSOU
+Contraprova geografia definitiva visitante fora_do_universo censobr_weight_1965: PASSOU
+Comparing the definitive results (Serie Nacional, vol. I) with the calibrated file
+                   peso tabela celulas observadas sem_observacoes peso_ausente
+                 <char>  <int>   <int>      <int>           <int>        <int>
+ 1:      censobr_weight      7     168          4             164            0
+ 2:      censobr_weight     32     168          4             164            0
+ 3:      censobr_weight     33     756          4             752            0
+ 4:      censobr_weight     34     252          4             248            0
+ 5:      censobr_weight     37     336          2             334            0
+ 6:      censobr_weight     40     252          4             248            0
+ 7: censobr_weight_1965      7     168          4             164            0
+ 8: censobr_weight_1965     32     168          4             164            0
+ 9: censobr_weight_1965     33     756          4             752            0
+10: censobr_weight_1965     34     252          4             248            0
+11: censobr_weight_1965     37     336          2             334            0
+12: censobr_weight_1965     40     252          4             248            0
+    classificacao_incompleta nao_reconstruidas percentuais_validos
+                       <int>             <int>               <int>
+ 1:                        0                 0                 166
+ 2:                        0                 0                 168
+ 3:                        0                 0                 753
+ 4:                        0                 0                 249
+ 5:                        0                 0                 331
+ 6:                        0                 0                 252
+ 7:                        0                 0                 166
+ 8:                        0                 0                 168
+ 9:                        0                 0                 753
+10:                        0                 0                 249
+11:                        0                 0                 331
+12:                        0                 0                 252
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+Contraprova geografia definitiva coletivo fora_do_universo censobr_weight: PASSOU
+Contraprova geografia definitiva coletivo fora_do_universo censobr_weight_1965: PASSOU
+Comparing the definitive results (Serie Nacional, vol. I) with the calibrated file
+                   peso tabela celulas observadas sem_observacoes peso_ausente
+                 <char>  <int>   <int>      <int>           <int>        <int>
+ 1:      censobr_weight      7     168          4             164            0
+ 2:      censobr_weight     32     168          4             164            0
+ 3:      censobr_weight     33     756          4             752            0
+ 4:      censobr_weight     34     252          4             248            0
+ 5:      censobr_weight     37     336          2             334            0
+ 6:      censobr_weight     40     252          4             248            0
+ 7: censobr_weight_1965      7     168          4             164            0
+ 8: censobr_weight_1965     32     168          4             164            0
+ 9: censobr_weight_1965     33     756          4             752            0
+10: censobr_weight_1965     34     252          4             248            0
+11: censobr_weight_1965     37     336          2             334            0
+12: censobr_weight_1965     40     252          4             248            0
+    classificacao_incompleta nao_reconstruidas percentuais_validos
+                       <int>             <int>               <int>
+ 1:                        0                 0                 166
+ 2:                        0                 0                 168
+ 3:                        0                 0                 753
+ 4:                        0                 0                 249
+ 5:                        0                 0                 331
+ 6:                        0                 0                 252
+ 7:                        0                 0                 166
+ 8:                        0                 0                 168
+ 9:                        0                 0                 753
+10:                        0                 0                 249
+11:                        0                 0                 331
+12:                        0                 0                 252
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+Contraprova geografia definitiva improvisado fora_do_universo censobr_weight: PASSOU
+Contraprova geografia definitiva improvisado fora_do_universo censobr_weight_1965: PASSOU
+Comparing the definitive results (Serie Nacional, vol. I) with the calibrated file
+                   peso tabela celulas observadas sem_observacoes peso_ausente
+                 <char>  <int>   <int>      <int>           <int>        <int>
+ 1:      censobr_weight      7     168          4             164            0
+ 2:      censobr_weight     32     168          4             164            0
+ 3:      censobr_weight     33     756          4             752            0
+ 4:      censobr_weight     34     252          4             248            0
+ 5:      censobr_weight     37     336          2             334            0
+ 6:      censobr_weight     40     252          4             248            0
+ 7: censobr_weight_1965      7     168          4             164            0
+ 8: censobr_weight_1965     32     168          4             164            0
+ 9: censobr_weight_1965     33     756          4             752            0
+10: censobr_weight_1965     34     252          4             248            0
+11: censobr_weight_1965     37     336          2             334            0
+12: censobr_weight_1965     40     252          4             248            0
+    classificacao_incompleta nao_reconstruidas percentuais_validos
+                       <int>             <int>               <int>
+ 1:                        0                 0                 166
+ 2:                        0                 0                 168
+ 3:                        0                 0                 753
+ 4:                        0                 0                 249
+ 5:                        0                 0                 331
+ 6:                        0                 0                 252
+ 7:                        0                 0                 166
+ 8:                        0                 0                 168
+ 9:                        0                 0                 753
+10:                        0                 0                 249
+11:                        0                 0                 331
+12:                        0                 0                 252
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+Contraprova geografia definitiva so_visitante fora_do_universo censobr_weight: PASSOU
+Contraprova geografia definitiva so_visitante fora_do_universo censobr_weight_1965: PASSOU
+Comparing the definitive results (Serie Nacional, vol. I) with the calibrated file
+                   peso tabela celulas observadas sem_observacoes peso_ausente
+                 <char>  <int>   <int>      <int>           <int>        <int>
+ 1:      censobr_weight      7       6          4               2            0
+ 2:      censobr_weight     32       6          4               2            0
+ 3:      censobr_weight     33      27          3              24            0
+ 4:      censobr_weight     34       9          4               5            0
+ 5:      censobr_weight     37      12          2              10            0
+ 6:      censobr_weight     40       9          4               5            0
+ 7: censobr_weight_1965      7       6          4               2            0
+ 8: censobr_weight_1965     32       6          4               2            0
+ 9: censobr_weight_1965     33      27          3              24            0
+10: censobr_weight_1965     34       9          4               5            0
+11: censobr_weight_1965     37      12          2              10            0
+12: censobr_weight_1965     40       9          4               5            0
+    classificacao_incompleta nao_reconstruidas percentuais_validos
+                       <int>             <int>               <int>
+ 1:                        0                 0                   6
+ 2:                        0                 0                   6
+ 3:                        0                 0                  27
+ 4:                        0                 0                   9
+ 5:                        0                 0                  12
+ 6:                        0                 0                   9
+ 7:                        0                 0                   6
+ 8:                        0                 0                   6
+ 9:                        0                 0                  27
+10:                        0                 0                   9
+11:                        0                 0                  12
+12:                        0                 0                   9
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+Contraprova geografia definitiva UF_valida_fora_da_grade censobr_weight: PASSOU
+Contraprova geografia definitiva UF_valida_fora_da_grade censobr_weight_1965: PASSOU
+Error: Contraprovas geograficas definitivas falharam: pessoa_UF_ausente censobr_weight; pessoa_UF_ausente censobr_weight_1965; pessoa_UF_invalida censobr_weight; pessoa_UF_invalida censobr_weight_1965; domicilio_UF_ausente censobr_weight; domicilio_UF_ausente censobr_weight_1965; domicilio_UF_invalida censobr_weight; domicilio_UF_invalida censobr_weight_1965
+Execution halted
+
+Exit code: 1 hex: 0x1

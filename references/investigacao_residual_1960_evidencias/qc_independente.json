@@ -1,0 +1,519 @@
+{
+  "modo": "segunda leitura independente; nenhuma decisao aplicada",
+  "literais127": 423,
+  "literais25": 352,
+  "cobertura_correcoes_texto": 124,
+  "grupos_conferidos": [
+    {
+      "classe": "repeticao",
+      "chave25": [
+        14,
+        14820,
+        48
+      ],
+      "linhas127": [
+        617461,
+        617462,
+        617463,
+        617464
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": false,
+      "n127": 4,
+      "n25": 4
+    },
+    {
+      "classe": "repeticao",
+      "chave25": [
+        14,
+        14990,
+        34
+      ],
+      "linhas127": [
+        131522,
+        131523,
+        131524,
+        131525,
+        131526,
+        131527,
+        131528,
+        131529,
+        131530
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": false,
+      "n127": 9,
+      "n25": 9
+    },
+    {
+      "classe": "repeticao",
+      "chave25": [
+        21,
+        21604,
+        156
+      ],
+      "linhas127": [
+        200310,
+        200311,
+        200312,
+        200313,
+        200314,
+        200315,
+        200316,
+        200317,
+        200318,
+        200319,
+        200320,
+        200321,
+        200322,
+        200323,
+        200324,
+        200325
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": false,
+      "n127": 16,
+      "n25": 16
+    },
+    {
+      "classe": "repeticao",
+      "chave25": [
+        52,
+        52686,
+        143
+      ],
+      "linhas127": [
+        582098,
+        582099,
+        582100,
+        582101,
+        582102,
+        582103,
+        582104
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": true,
+      "n127": 7,
+      "n25": 7
+    },
+    {
+      "classe": "repeticao",
+      "chave25": [
+        60,
+        60864,
+        158
+      ],
+      "linhas127": [
+        617691,
+        617692,
+        617693,
+        617694
+      ],
+      "composicao24_mesmas_quantidades": false,
+      "composicao25_mesmas_quantidades": false,
+      "n127": 4,
+      "n25": 3
+    },
+    {
+      "classe": "repeticao",
+      "chave25": [
+        60,
+        63788,
+        140
+      ],
+      "linhas127": [
+        773910,
+        773911,
+        773912,
+        773913
+      ],
+      "composicao24_mesmas_quantidades": false,
+      "composicao25_mesmas_quantidades": false,
+      "n127": 4,
+      "n25": 3
+    },
+    {
+      "classe": "repeticao",
+      "chave25": [
+        60,
+        63788,
+        163
+      ],
+      "linhas127": [
+        773910,
+        773911,
+        773912,
+        773913
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": true,
+      "n127": 4,
+      "n25": 4
+    },
+    {
+      "classe": "repeticao",
+      "chave25": [
+        60,
+        63788,
+        198
+      ],
+      "linhas127": [
+        774110,
+        774111,
+        774112,
+        774113,
+        774114,
+        774115,
+        774116
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": true,
+      "n127": 7,
+      "n25": 7
+    },
+    {
+      "classe": "repeticao",
+      "chave25": [
+        81,
+        82192,
+        39
+      ],
+      "linhas127": [
+        986862,
+        986863,
+        986864,
+        986865,
+        986866,
+        986867,
+        986868,
+        986869,
+        986870,
+        986871,
+        986872,
+        986873,
+        986874,
+        986875
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": false,
+      "n127": 14,
+      "n25": 14
+    },
+    {
+      "classe": "repeticao",
+      "chave25": [
+        81,
+        82892,
+        190
+      ],
+      "linhas127": [
+        1009569,
+        1009570,
+        1009571,
+        1009572,
+        1009573,
+        1009574,
+        1009575,
+        1009576,
+        1009577,
+        1009578
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": false,
+      "n127": 10,
+      "n25": 10
+    },
+    {
+      "classe": "repeticao",
+      "chave25": [
+        81,
+        82976,
+        100
+      ],
+      "linhas127": [
+        1014152,
+        1014153,
+        1014154,
+        1014155,
+        1014156,
+        1014157
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": false,
+      "n127": 6,
+      "n25": 6
+    },
+    {
+      "classe": "repeticao",
+      "chave25": [
+        81,
+        83080,
+        143
+      ],
+      "linhas127": [
+        1017939,
+        1017940,
+        1017941,
+        1017942,
+        1017943
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": false,
+      "n127": 5,
+      "n25": 5
+    },
+    {
+      "classe": "repeticao",
+      "chave25": [
+        81,
+        83082,
+        167
+      ],
+      "linhas127": [
+        1017503,
+        1017504,
+        1017505,
+        1017506,
+        1017507,
+        1017508,
+        1017509,
+        1017510,
+        1017511,
+        1017512,
+        1017513,
+        1017514
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": true,
+      "n127": 12,
+      "n25": 12
+    },
+    {
+      "classe": "vinculo",
+      "chave25": [
+        14,
+        14990,
+        116
+      ],
+      "linhas127": [
+        132193,
+        132194,
+        132195,
+        132196
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": false,
+      "n127": 4,
+      "n25": 4
+    },
+    {
+      "classe": "vinculo",
+      "chave25": [
+        31,
+        32426,
+        6
+      ],
+      "linhas127": [
+        333756,
+        333757
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": true,
+      "n127": 2,
+      "n25": 2
+    },
+    {
+      "classe": "vinculo",
+      "chave25": [
+        40,
+        40090,
+        4
+      ],
+      "linhas127": [
+        491756,
+        491757
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": true,
+      "n127": 2,
+      "n25": 2
+    },
+    {
+      "classe": "vinculo",
+      "chave25": [
+        60,
+        60596,
+        52
+      ],
+      "linhas127": [
+        673347,
+        673348
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": true,
+      "n127": 2,
+      "n25": 2
+    },
+    {
+      "classe": "vinculo",
+      "chave25": [
+        60,
+        62164,
+        154
+      ],
+      "linhas127": [
+        673347,
+        673348
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": true,
+      "n127": 2,
+      "n25": 2
+    },
+    {
+      "classe": "vinculo",
+      "chave25": [
+        81,
+        82892,
+        201
+      ],
+      "linhas127": [
+        1009631,
+        1009632
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": false,
+      "n127": 2,
+      "n25": 2
+    },
+    {
+      "classe": "vinculo",
+      "chave25": [
+        60,
+        60158,
+        119
+      ],
+      "linhas127": [
+        661580,
+        661581,
+        695176
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": true,
+      "n127": 3,
+      "n25": 3
+    },
+    {
+      "classe": "vinculo",
+      "chave25": [
+        81,
+        82586,
+        40
+      ],
+      "linhas127": [
+        997257,
+        1000795,
+        1000796
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": true,
+      "n127": 3,
+      "n25": 3
+    },
+    {
+      "classe": "vinculo",
+      "chave25": [
+        81,
+        82586,
+        45
+      ],
+      "linhas127": [
+        997258,
+        1000818,
+        1000819,
+        1000820
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": true,
+      "n127": 4,
+      "n25": 4
+    },
+    {
+      "classe": "vinculo",
+      "chave25": [
+        81,
+        82586,
+        140
+      ],
+      "linhas127": [
+        997259,
+        1001504,
+        1001505,
+        1001506,
+        1001507
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": true,
+      "n127": 5,
+      "n25": 5
+    },
+    {
+      "classe": "chave_ilegivel",
+      "chave25": [
+        14,
+        15290,
+        67
+      ],
+      "linhas127": [
+        142818,
+        142819,
+        142820,
+        142821,
+        142822,
+        142823,
+        142824,
+        142402
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": true,
+      "n127": 8,
+      "n25": 8
+    },
+    {
+      "classe": "chave_ilegivel",
+      "chave25": [
+        21,
+        22934,
+        69
+      ],
+      "linhas127": [
+        259658,
+        259659,
+        259660,
+        259661,
+        259662,
+        259663,
+        259248
+      ],
+      "composicao24_mesmas_quantidades": true,
+      "composicao25_mesmas_quantidades": true,
+      "n127": 7,
+      "n25": 7
+    }
+  ],
+  "cobertura_vinculos_inventario": 1421,
+  "fontes25_sha256": {
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.ce.gz": "40d8ecdc24e7d8c9ba8b4715f6f0bfa1f1385e4b3d8fe1d15eac3595b68f9fa2",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.pe.gz": "5b0335249644da87e8ca3f9ab28e80731dd792ef5a40ce4a01b336a8ec71a296",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.rj.gz": "363289071564a6cb7a93e8b417914df983c81d0ef92af2689224bc4065db4b6e",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.sp.gz": "9b647908667d61fb35dfac8e4a4eda61a70b5f259bee3f5975026b54fa6326be",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.rs.gz": "b5d0686e2ddf796b4e33338e1b1dee6a0b53155043b76c5895577936b053e6c2",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.ba.gz": "15d040af8d050361097a66d78c0b6477da8fe41ee1942a89e3020242ebdc046d",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.mg.gz": "75e7b4e7fce28507c24a4e21f1a40e5b47f750fd72b090abe6d1b1406644a621",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.rn.gz": "c464a89865256ea906b120e523e324935df05b0d2a9c9ab6853fbbe7819de746",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz": "58d3b494802e365526d0a053c9aac798ec82f5b654f375eb834700b9a4b0adef",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.pr.gz": "3c5ad2b3dbb273eef5f86ccf6982076636c2ac86ee82bc93ed9c1bc3c576f9b9",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.go.gz": "d8e1c1bddfea8df8500ccaef7b23b423e4974b17ab3c0916df50e96317821fa6"
+  },
+  "limite": "Confere literais, composicoes e cobertura. Nao transforma candidatos em identidade comprovada nem repete todas as buscas globais."
+}

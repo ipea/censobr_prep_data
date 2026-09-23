@@ -1,0 +1,2871 @@
+{
+  "pergunta": "Ha caso unipessoal impedido estruturalmente por exigir duas testemunhas nos199 alvos?",
+  "resposta": "Nao. Os80 grupos completos tem de2 a8 pessoas. Numero de alvos nao e tamanho da familia.",
+  "grupos": 80,
+  "alvos": 199,
+  "grupos_unipessoais": 0,
+  "tamanhos_contexto": [
+    {
+      "pessoas_por_grupo": 2,
+      "grupos": 53
+    },
+    {
+      "pessoas_por_grupo": 3,
+      "grupos": 14
+    },
+    {
+      "pessoas_por_grupo": 4,
+      "grupos": 5
+    },
+    {
+      "pessoas_por_grupo": 5,
+      "grupos": 3
+    },
+    {
+      "pessoas_por_grupo": 6,
+      "grupos": 2
+    },
+    {
+      "pessoas_por_grupo": 8,
+      "grupos": 3
+    }
+  ],
+  "limite": "Verifica este impedimento estrutural especifico, nao aprova os199 nem demonstra que nenhum outro criterio possa ser aprofundado.",
+  "cobertura": [
+    {
+      "grupo": "orfao:25:0125002091",
+      "linhas_alvo": [
+        261157,
+        261158
+      ],
+      "linhas_contexto": [
+        261157,
+        261158
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        25002,
+        91
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            25,
+            25002,
+            91
+          ],
+          "pessoas": [
+            {
+              "linha127": 261157,
+              "linha25": 18776
+            },
+            {
+              "linha127": 261158,
+              "linha25": 18775
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:25:0125002192",
+      "linhas_alvo": [
+        261538,
+        261539
+      ],
+      "linhas_contexto": [
+        261538,
+        261539
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        25002,
+        192
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            25,
+            25002,
+            192
+          ],
+          "pessoas": [
+            {
+              "linha127": 261538,
+              "linha25": 19242
+            },
+            {
+              "linha127": 261539,
+              "linha25": 19243
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:25:0125002194",
+      "linhas_alvo": [
+        261540,
+        261541,
+        261542
+      ],
+      "linhas_contexto": [
+        261540,
+        261541,
+        261542
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        25002,
+        194
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            25,
+            25002,
+            194
+          ],
+          "pessoas": [
+            {
+              "linha127": 261540,
+              "linha25": 19248
+            },
+            {
+              "linha127": 261542,
+              "linha25": 19247
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:31:0132404150",
+      "linhas_alvo": [
+        330784,
+        330785
+      ],
+      "linhas_contexto": [
+        330784,
+        330785
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        32404,
+        150
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            31,
+            32404,
+            150
+          ],
+          "pessoas": [
+            {
+              "linha127": 330784,
+              "linha25": 958556
+            },
+            {
+              "linha127": 330785,
+              "linha25": 958557
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:31:0133074051",
+      "linhas_alvo": [
+        364721,
+        364722,
+        364723
+      ],
+      "linhas_contexto": [
+        364721,
+        364722,
+        364723
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        33074,
+        51
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            31,
+            33074,
+            51
+          ],
+          "pessoas": [
+            {
+              "linha127": 364723,
+              "linha25": 1417221
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:31:0133074053",
+      "linhas_alvo": [
+        364724,
+        364725
+      ],
+      "linhas_contexto": [
+        364724,
+        364725
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        33074,
+        53
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            31,
+            33074,
+            53
+          ],
+          "pessoas": [
+            {
+              "linha127": 364724,
+              "linha25": 1417227
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0140906184",
+      "linhas_alvo": [
+        407681,
+        407682
+      ],
+      "linhas_contexto": [
+        407681,
+        407682
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        40906,
+        184
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            40906,
+            184
+          ],
+          "pessoas": [
+            {
+              "linha127": 407681,
+              "linha25": 583912
+            },
+            {
+              "linha127": 407682,
+              "linha25": 583913
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0141046049",
+      "linhas_alvo": [
+        412327,
+        412328
+      ],
+      "linhas_contexto": [
+        412327,
+        412328
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        41046,
+        49
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            41046,
+            49
+          ],
+          "pessoas": [
+            {
+              "linha127": 412327,
+              "linha25": 671884
+            },
+            {
+              "linha127": 412328,
+              "linha25": 671885
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0141046067",
+      "linhas_alvo": [
+        412410,
+        412411,
+        412412
+      ],
+      "linhas_contexto": [
+        412410,
+        412411,
+        412412
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        41046,
+        67
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            41046,
+            67
+          ],
+          "pessoas": [
+            {
+              "linha127": 412410,
+              "linha25": 671976
+            },
+            {
+              "linha127": 412411,
+              "linha25": 671977
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0141046122",
+      "linhas_alvo": [
+        412732,
+        412733
+      ],
+      "linhas_contexto": [
+        412732,
+        412733
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        41046,
+        122
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            41046,
+            122
+          ],
+          "pessoas": [
+            {
+              "linha127": 412732,
+              "linha25": 672303
+            },
+            {
+              "linha127": 412733,
+              "linha25": 672304
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0142756050",
+      "linhas_alvo": [
+        471691,
+        471692
+      ],
+      "linhas_contexto": [
+        471691,
+        471692
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        42756,
+        50
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            42756,
+            50
+          ],
+          "pessoas": [
+            {
+              "linha127": 471691,
+              "linha25": 1850999
+            },
+            {
+              "linha127": 471692,
+              "linha25": 1850998
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0140090004",
+      "linhas_alvo": [
+        491756,
+        491757
+      ],
+      "linhas_contexto": [
+        491756,
+        491757
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        40090,
+        4
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            40090,
+            4
+          ],
+          "pessoas": [
+            {
+              "linha127": 491757,
+              "linha25": 58693
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0140090006",
+      "linhas_alvo": [
+        491758,
+        491759
+      ],
+      "linhas_contexto": [
+        491758,
+        491759
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        40090,
+        6
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            40090,
+            6
+          ],
+          "pessoas": [
+            {
+              "linha127": 491758,
+              "linha25": 58698
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0140090007",
+      "linhas_alvo": [
+        491760,
+        491761
+      ],
+      "linhas_contexto": [
+        491760,
+        491761
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        40090,
+        7
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            40090,
+            7
+          ],
+          "pessoas": [
+            {
+              "linha127": 491760,
+              "linha25": 58701
+            },
+            {
+              "linha127": 491761,
+              "linha25": 58702
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0140090010",
+      "linhas_alvo": [
+        491764,
+        491765
+      ],
+      "linhas_contexto": [
+        491764,
+        491765
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        40090,
+        10
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            40090,
+            10
+          ],
+          "pessoas": [
+            {
+              "linha127": 491764,
+              "linha25": 58710
+            },
+            {
+              "linha127": 491765,
+              "linha25": 58709
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0140090011",
+      "linhas_alvo": [
+        491766,
+        491767
+      ],
+      "linhas_contexto": [
+        491766,
+        491767
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        40090,
+        11
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            40090,
+            11
+          ],
+          "pessoas": [
+            {
+              "linha127": 491766,
+              "linha25": 58712
+            },
+            {
+              "linha127": 491767,
+              "linha25": 58713
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0140090012",
+      "linhas_alvo": [
+        491768,
+        491769
+      ],
+      "linhas_contexto": [
+        491768,
+        491769
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        40090,
+        12
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            40090,
+            12
+          ],
+          "pessoas": [
+            {
+              "linha127": 491768,
+              "linha25": 58716
+            },
+            {
+              "linha127": 491769,
+              "linha25": 58715
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0140090013",
+      "linhas_alvo": [
+        491770,
+        491771
+      ],
+      "linhas_contexto": [
+        491770,
+        491771
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        40090,
+        13
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            40090,
+            13
+          ],
+          "pessoas": [
+            {
+              "linha127": 491770,
+              "linha25": 58719
+            },
+            {
+              "linha127": 491771,
+              "linha25": 58718
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0140090228",
+      "linhas_alvo": [
+        492721,
+        492722
+      ],
+      "linhas_contexto": [
+        492721,
+        492722
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        40090,
+        228
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            40090,
+            228
+          ],
+          "pessoas": [
+            {
+              "linha127": 492721,
+              "linha25": 59834
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0140130127",
+      "linhas_alvo": [
+        493230,
+        493231
+      ],
+      "linhas_contexto": [
+        493230,
+        493231
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        40130,
+        127
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            40130,
+            127
+          ],
+          "pessoas": [
+            {
+              "linha127": 493230,
+              "linha25": 79439
+            },
+            {
+              "linha127": 493231,
+              "linha25": 79438
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0140130130",
+      "linhas_alvo": [
+        493232,
+        493233
+      ],
+      "linhas_contexto": [
+        493232,
+        493233
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        40130,
+        130
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            40130,
+            130
+          ],
+          "pessoas": [
+            {
+              "linha127": 493233,
+              "linha25": 79445
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0140130131",
+      "linhas_alvo": [
+        493234,
+        493235
+      ],
+      "linhas_contexto": [
+        493234,
+        493235
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        40130,
+        131
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            40130,
+            131
+          ],
+          "pessoas": [
+            {
+              "linha127": 493234,
+              "linha25": 79448
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0140130132",
+      "linhas_alvo": [
+        493236,
+        493237
+      ],
+      "linhas_contexto": [
+        493236,
+        493237
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        40130,
+        132
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            40130,
+            132
+          ],
+          "pessoas": [
+            {
+              "linha127": 493237,
+              "linha25": 79451
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0140130232",
+      "linhas_alvo": [
+        493303,
+        493304
+      ],
+      "linhas_contexto": [
+        493303,
+        493304
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        40130,
+        232
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            40130,
+            232
+          ],
+          "pessoas": [
+            {
+              "linha127": 493303,
+              "linha25": 79697
+            },
+            {
+              "linha127": 493304,
+              "linha25": 79696
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0140130235",
+      "linhas_alvo": [
+        493307,
+        493308
+      ],
+      "linhas_contexto": [
+        493307,
+        493308
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        40130,
+        235
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            40130,
+            235
+          ],
+          "pessoas": [
+            {
+              "linha127": 493307,
+              "linha25": 79705
+            },
+            {
+              "linha127": 493308,
+              "linha25": 79704
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:40:0144314155",
+      "linhas_alvo": [
+        534564,
+        534565
+      ],
+      "linhas_contexto": [
+        534564,
+        534565
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        44314,
+        155
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            40,
+            44314,
+            155
+          ],
+          "pessoas": [
+            {
+              "linha127": 534564,
+              "linha25": 2885916
+            },
+            {
+              "linha127": 534565,
+              "linha25": 2885915
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:3560596049",
+      "linhas_alvo": [
+        673343,
+        673344
+      ],
+      "linhas_contexto": [
+        673343,
+        673344
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        60596,
+        49
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            60596,
+            49
+          ],
+          "pessoas": [
+            {
+              "linha127": 673343,
+              "linha25": 1791089
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:3560596050",
+      "linhas_alvo": [
+        673345,
+        673346
+      ],
+      "linhas_contexto": [
+        673345,
+        673346
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        60596,
+        50
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            60596,
+            50
+          ],
+          "pessoas": [
+            {
+              "linha127": 673346,
+              "linha25": 1791092
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:3960676115",
+      "linhas_alvo": [
+        675435,
+        675436
+      ],
+      "linhas_contexto": [
+        675435,
+        675436
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        60676,
+        115
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            60676,
+            115
+          ],
+          "pessoas": [
+            {
+              "linha127": 675436,
+              "linha25": 1843566
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:3960676120",
+      "linhas_alvo": [
+        675443,
+        675444
+      ],
+      "linhas_contexto": [
+        675443,
+        675444
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        60676,
+        120
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            60676,
+            120
+          ],
+          "pessoas": [
+            {
+              "linha127": 675444,
+              "linha25": 1843580
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:3960676121",
+      "linhas_alvo": [
+        675445,
+        675446
+      ],
+      "linhas_contexto": [
+        675445,
+        675446
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        60676,
+        121
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            60676,
+            121
+          ],
+          "pessoas": [
+            {
+              "linha127": 675446,
+              "linha25": 1843583
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:5761076217",
+      "linhas_alvo": [
+        687633,
+        687634
+      ],
+      "linhas_contexto": [
+        687633,
+        687634
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        61076,
+        217
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            61076,
+            217
+          ],
+          "pessoas": [
+            {
+              "linha127": 687633,
+              "linha25": 2093475
+            },
+            {
+              "linha127": 687634,
+              "linha25": 2093476
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:5761076220",
+      "linhas_alvo": [
+        687635,
+        687636
+      ],
+      "linhas_contexto": [
+        687635,
+        687636
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        61076,
+        220
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            61076,
+            220
+          ],
+          "pessoas": [
+            {
+              "linha127": 687635,
+              "linha25": 2093482
+            },
+            {
+              "linha127": 687636,
+              "linha25": 2093483
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:5761076221",
+      "linhas_alvo": [
+        687637,
+        687638,
+        687639,
+        687640
+      ],
+      "linhas_contexto": [
+        687637,
+        687638,
+        687639,
+        687640
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        61076,
+        221
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            61076,
+            221
+          ],
+          "pessoas": [
+            {
+              "linha127": 687637,
+              "linha25": 2093486
+            },
+            {
+              "linha127": 687638,
+              "linha25": 2093485
+            },
+            {
+              "linha127": 687639,
+              "linha25": 2093487
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:5961116033",
+      "linhas_alvo": [
+        687846,
+        687847
+      ],
+      "linhas_contexto": [
+        687846,
+        687847
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        61116,
+        33
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            61116,
+            33
+          ],
+          "pessoas": [
+            {
+              "linha127": 687846,
+              "linha25": 2110305
+            },
+            {
+              "linha127": 687847,
+              "linha25": 2110304
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:5961116069",
+      "linhas_alvo": [
+        687906,
+        687907
+      ],
+      "linhas_contexto": [
+        687906,
+        687907
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        61116,
+        69
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            61116,
+            69
+          ],
+          "pessoas": [
+            {
+              "linha127": 687906,
+              "linha25": 2110406
+            },
+            {
+              "linha127": 687907,
+              "linha25": 2110407
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:5961116071",
+      "linhas_alvo": [
+        687908,
+        687909
+      ],
+      "linhas_contexto": [
+        687908,
+        687909
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        61116,
+        71
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            61116,
+            71
+          ],
+          "pessoas": [
+            {
+              "linha127": 687908,
+              "linha25": 2110412
+            },
+            {
+              "linha127": 687909,
+              "linha25": 2110411
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:5961116077",
+      "linhas_alvo": [
+        687913,
+        687914
+      ],
+      "linhas_contexto": [
+        687913,
+        687914
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        61116,
+        77
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            61116,
+            77
+          ],
+          "pessoas": [
+            {
+              "linha127": 687913,
+              "linha25": 2110425
+            },
+            {
+              "linha127": 687914,
+              "linha25": 2110426
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:0162062017",
+      "linhas_alvo": [
+        698848,
+        698849,
+        698850
+      ],
+      "linhas_contexto": [
+        698848,
+        698849,
+        698850
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        62062,
+        17
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            62062,
+            17
+          ],
+          "pessoas": [
+            {
+              "linha127": 698849,
+              "linha25": 2722579
+            },
+            {
+              "linha127": 698850,
+              "linha25": 2722580
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:0162062018",
+      "linhas_alvo": [
+        698851,
+        698852
+      ],
+      "linhas_contexto": [
+        698851,
+        698852
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        62062,
+        18
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            62062,
+            18
+          ],
+          "pessoas": [
+            {
+              "linha127": 698851,
+              "linha25": 2722584
+            },
+            {
+              "linha127": 698852,
+              "linha25": 2722583
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:0162130203",
+      "linhas_alvo": [
+        700261,
+        700262
+      ],
+      "linhas_contexto": [
+        700261,
+        700262
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        62130,
+        203
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            62130,
+            203
+          ],
+          "pessoas": [
+            {
+              "linha127": 700261,
+              "linha25": 2768509
+            },
+            {
+              "linha127": 700262,
+              "linha25": 2768510
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:0163936243",
+      "linhas_alvo": [
+        780536,
+        780537,
+        780538
+      ],
+      "linhas_contexto": [
+        780536,
+        780537,
+        780538
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        63936,
+        243
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            63936,
+            243
+          ],
+          "pessoas": [
+            {
+              "linha127": 780536,
+              "linha25": 3923882
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:0164280007",
+      "linhas_alvo": [
+        789803,
+        789804
+      ],
+      "linhas_contexto": [
+        789803,
+        789804
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        64280,
+        7
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            64280,
+            7
+          ],
+          "pessoas": [
+            {
+              "linha127": 789803,
+              "linha25": 89584
+            },
+            {
+              "linha127": 789804,
+              "linha25": 89583
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:0164458099",
+      "linhas_alvo": [
+        794774,
+        794775,
+        794776
+      ],
+      "linhas_contexto": [
+        794774,
+        794775,
+        794776
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        64458,
+        99
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            64458,
+            99
+          ],
+          "pessoas": [
+            {
+              "linha127": 794775,
+              "linha25": 203615
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:0164458106",
+      "linhas_alvo": [
+        794779,
+        794780
+      ],
+      "linhas_contexto": [
+        794779,
+        794780
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        64458,
+        106
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            64458,
+            106
+          ],
+          "pessoas": [
+            {
+              "linha127": 794780,
+              "linha25": 203630
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:0164458107",
+      "linhas_alvo": [
+        794781,
+        794782
+      ],
+      "linhas_contexto": [
+        794781,
+        794782
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        64458,
+        107
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            64458,
+            107
+          ],
+          "pessoas": [
+            {
+              "linha127": 794782,
+              "linha25": 203633
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:0164458113",
+      "linhas_alvo": [
+        794783,
+        794784
+      ],
+      "linhas_contexto": [
+        794783,
+        794784
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        64458,
+        113
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            64458,
+            113
+          ],
+          "pessoas": [
+            {
+              "linha127": 794784,
+              "linha25": 203646
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:0164754141",
+      "linhas_alvo": [
+        803812,
+        803813
+      ],
+      "linhas_contexto": [
+        803812,
+        803813
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        64754,
+        141
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            64754,
+            141
+          ],
+          "pessoas": [
+            {
+              "linha127": 803812,
+              "linha25": 390763
+            },
+            {
+              "linha127": 803813,
+              "linha25": 390762
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:0164754142",
+      "linhas_alvo": [
+        803814,
+        803815
+      ],
+      "linhas_contexto": [
+        803814,
+        803815
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        64754,
+        142
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            64754,
+            142
+          ],
+          "pessoas": [
+            {
+              "linha127": 803814,
+              "linha25": 390766
+            },
+            {
+              "linha127": 803815,
+              "linha25": 390765
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:0164754235",
+      "linhas_alvo": [
+        804255,
+        804256,
+        804257
+      ],
+      "linhas_contexto": [
+        804255,
+        804256,
+        804257
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        64754,
+        235
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            64754,
+            235
+          ],
+          "pessoas": [
+            {
+              "linha127": 804255,
+              "linha25": 391231
+            },
+            {
+              "linha127": 804256,
+              "linha25": 391232
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:60:0164754255",
+      "linhas_alvo": [
+        804258,
+        804259
+      ],
+      "linhas_contexto": [
+        804258,
+        804259
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        64754,
+        255
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            64754,
+            255
+          ],
+          "pessoas": [
+            {
+              "linha127": 804259,
+              "linha25": 391275
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:71:0170078238",
+      "linhas_alvo": [
+        866389,
+        866390,
+        866391
+      ],
+      "linhas_contexto": [
+        866389,
+        866390,
+        866391
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        70078,
+        238
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            71,
+            70078,
+            238
+          ],
+          "pessoas": [
+            {
+              "linha127": 866389,
+              "linha25": 236889
+            },
+            {
+              "linha127": 866390,
+              "linha25": 236888
+            },
+            {
+              "linha127": 866391,
+              "linha25": 236887
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:71:0170078239",
+      "linhas_alvo": [
+        866392,
+        866393,
+        866394,
+        866395
+      ],
+      "linhas_contexto": [
+        866392,
+        866393,
+        866394,
+        866395
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        70078,
+        239
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            71,
+            70078,
+            239
+          ],
+          "pessoas": [
+            {
+              "linha127": 866392,
+              "linha25": 236891
+            },
+            {
+              "linha127": 866393,
+              "linha25": 236892
+            },
+            {
+              "linha127": 866395,
+              "linha25": 236894
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:71:0171250072",
+      "linhas_alvo": [
+        895472,
+        895473
+      ],
+      "linhas_contexto": [
+        895472,
+        895473
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        71250,
+        72
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            71,
+            71250,
+            72
+          ],
+          "pessoas": [
+            {
+              "linha127": 895472,
+              "linha25": 869096
+            },
+            {
+              "linha127": 895473,
+              "linha25": 869095
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:71:0171250078",
+      "linhas_alvo": [
+        895491,
+        895492,
+        895493
+      ],
+      "linhas_contexto": [
+        895491,
+        895492,
+        895493
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        71250,
+        78
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            71,
+            71250,
+            78
+          ],
+          "pessoas": [
+            {
+              "linha127": 895491,
+              "linha25": 869119
+            },
+            {
+              "linha127": 895492,
+              "linha25": 869121
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:81:0181682045",
+      "linhas_alvo": [
+        961815,
+        961816,
+        961817
+      ],
+      "linhas_contexto": [
+        961815,
+        961816,
+        961817
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        81682,
+        45
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            81,
+            81682,
+            45
+          ],
+          "pessoas": [
+            {
+              "linha127": 961816,
+              "linha25": 450225
+            },
+            {
+              "linha127": 961817,
+              "linha25": 450226
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:81:0181682048",
+      "linhas_alvo": [
+        961818,
+        961819
+      ],
+      "linhas_contexto": [
+        961818,
+        961819
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        81682,
+        48
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            81,
+            81682,
+            48
+          ],
+          "pessoas": [
+            {
+              "linha127": 961818,
+              "linha25": 450233
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:81:0181834034",
+      "linhas_alvo": [
+        966624,
+        966625,
+        966626
+      ],
+      "linhas_contexto": [
+        966624,
+        966625,
+        966626
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        81834,
+        34
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            81,
+            81834,
+            34
+          ],
+          "pessoas": [
+            {
+              "linha127": 966624,
+              "linha25": 549650
+            },
+            {
+              "linha127": 966626,
+              "linha25": 549649
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:81:0181834038",
+      "linhas_alvo": [
+        966627,
+        966628
+      ],
+      "linhas_contexto": [
+        966627,
+        966628
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        81834,
+        38
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            81,
+            81834,
+            38
+          ],
+          "pessoas": [
+            {
+              "linha127": 966627,
+              "linha25": 549659
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:81:0181834039",
+      "linhas_alvo": [
+        966629,
+        966630
+      ],
+      "linhas_contexto": [
+        966629,
+        966630
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        81834,
+        39
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            81,
+            81834,
+            39
+          ],
+          "pessoas": [
+            {
+              "linha127": 966629,
+              "linha25": 549663
+            },
+            {
+              "linha127": 966630,
+              "linha25": 549662
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:81:0181834040",
+      "linhas_alvo": [
+        966631,
+        966632
+      ],
+      "linhas_contexto": [
+        966631,
+        966632
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        81834,
+        40
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            81,
+            81834,
+            40
+          ],
+          "pessoas": [
+            {
+              "linha127": 966631,
+              "linha25": 549665
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:81:0182264046",
+      "linhas_alvo": [
+        989528,
+        989529
+      ],
+      "linhas_contexto": [
+        989528,
+        989529
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        82264,
+        46
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            81,
+            82264,
+            46
+          ],
+          "pessoas": [
+            {
+              "linha127": 989529,
+              "linha25": 833743
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:94:0194624003",
+      "linhas_alvo": [
+        1060168,
+        1060169
+      ],
+      "linhas_contexto": [
+        1060168,
+        1060169
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        94624,
+        3
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            94,
+            94624,
+            3
+          ],
+          "pessoas": [
+            {
+              "linha127": 1060168,
+              "linha25": 394545
+            },
+            {
+              "linha127": 1060169,
+              "linha25": 394546
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:94:0194624117",
+      "linhas_alvo": [
+        1060769,
+        1060770,
+        1060771,
+        1060772,
+        1060773
+      ],
+      "linhas_contexto": [
+        1060769,
+        1060770,
+        1060771,
+        1060772,
+        1060773
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        94624,
+        117
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            94,
+            94624,
+            117
+          ],
+          "pessoas": [
+            {
+              "linha127": 1060769,
+              "linha25": 395173
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:94:0194624147",
+      "linhas_alvo": [
+        1060930,
+        1060931
+      ],
+      "linhas_contexto": [
+        1060930,
+        1060931
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        94624,
+        147
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            94,
+            94624,
+            147
+          ],
+          "pessoas": [
+            {
+              "linha127": 1060930,
+              "linha25": 395347
+            },
+            {
+              "linha127": 1060931,
+              "linha25": 395348
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:97:0297050065",
+      "linhas_alvo": [
+        1074051,
+        1074052
+      ],
+      "linhas_contexto": [
+        1074051,
+        1074052
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        97050,
+        65
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            97,
+            97050,
+            65
+          ],
+          "pessoas": [
+            {
+              "linha127": 1074051,
+              "linha25": 31207
+            },
+            {
+              "linha127": 1074052,
+              "linha25": 31206
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:97:0297050105",
+      "linhas_alvo": [
+        1074071,
+        1074072,
+        1074073
+      ],
+      "linhas_contexto": [
+        1074071,
+        1074072,
+        1074073
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        97050,
+        105
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            97,
+            97050,
+            105
+          ],
+          "pessoas": [
+            {
+              "linha127": 1074071,
+              "linha25": 31300
+            },
+            {
+              "linha127": 1074072,
+              "linha25": 31301
+            },
+            {
+              "linha127": 1074073,
+              "linha25": 31302
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:97:0297050127",
+      "linhas_alvo": [
+        1074079,
+        1074080,
+        1074081,
+        1074082,
+        1074083
+      ],
+      "linhas_contexto": [
+        1074079,
+        1074080,
+        1074081,
+        1074082,
+        1074083
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        97050,
+        127
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            97,
+            97050,
+            127
+          ],
+          "pessoas": [
+            {
+              "linha127": 1074079,
+              "linha25": 31349
+            },
+            {
+              "linha127": 1074080,
+              "linha25": 31350
+            },
+            {
+              "linha127": 1074082,
+              "linha25": 31352
+            },
+            {
+              "linha127": 1074083,
+              "linha25": 31351
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "orfao:97:0297050128",
+      "linhas_alvo": [
+        1074084,
+        1074085
+      ],
+      "linhas_contexto": [
+        1074084,
+        1074085
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        97050,
+        128
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            97,
+            97050,
+            128
+          ],
+          "pessoas": [
+            {
+              "linha127": 1074084,
+              "linha25": 31355
+            },
+            {
+              "linha127": 1074085,
+              "linha25": 31356
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "conflito:569742",
+      "linhas_alvo": [
+        570269,
+        570270,
+        570271,
+        570272,
+        570273
+      ],
+      "linhas_contexto": [
+        569743,
+        570269,
+        570270,
+        570271,
+        570272,
+        570273
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        52324,
+        95
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            52,
+            52324,
+            95
+          ],
+          "pessoas": [
+            {
+              "linha127": 569743,
+              "linha25": 153936
+            },
+            {
+              "linha127": 570271,
+              "linha25": 153937
+            },
+            {
+              "linha127": 570272,
+              "linha25": 153941
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "conflito:569750",
+      "linhas_alvo": [
+        570617,
+        570618,
+        570619,
+        570620,
+        570621,
+        570622,
+        570623
+      ],
+      "linhas_contexto": [
+        569751,
+        570617,
+        570618,
+        570619,
+        570620,
+        570621,
+        570622,
+        570623
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        52324,
+        154
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            52,
+            52324,
+            154
+          ],
+          "pessoas": [
+            {
+              "linha127": 569751,
+              "linha25": 154297
+            },
+            {
+              "linha127": 570622,
+              "linha25": 154298
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "conflito:695175",
+      "linhas_alvo": [
+        661580,
+        661581
+      ],
+      "linhas_contexto": [
+        661580,
+        661581,
+        695176
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        60158,
+        119
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            60158,
+            119
+          ],
+          "pessoas": [
+            {
+              "linha127": 661580,
+              "linha25": 1525600
+            },
+            {
+              "linha127": 695176,
+              "linha25": 1525599
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "conflito:143119",
+      "linhas_alvo": [
+        143121,
+        143122,
+        143123,
+        143124,
+        143127
+      ],
+      "linhas_contexto": [
+        143120,
+        143121,
+        143122,
+        143123,
+        143124,
+        143125,
+        143126,
+        143127
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        15290,
+        116
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            14,
+            15290,
+            116
+          ],
+          "pessoas": [
+            {
+              "linha127": 143120,
+              "linha25": 915648
+            },
+            {
+              "linha127": 143127,
+              "linha25": 915649
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "conflito:143128",
+      "linhas_alvo": [
+        143131,
+        143132,
+        143134,
+        143135
+      ],
+      "linhas_contexto": [
+        143129,
+        143130,
+        143131,
+        143132,
+        143133,
+        143134,
+        143135,
+        143136
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        15290,
+        117
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            14,
+            15290,
+            117
+          ],
+          "pessoas": [
+            {
+              "linha127": 143129,
+              "linha25": 915657
+            },
+            {
+              "linha127": 143136,
+              "linha25": 915658
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "conflito:143137",
+      "linhas_alvo": [
+        143139,
+        143140
+      ],
+      "linhas_contexto": [
+        143138,
+        143139,
+        143140,
+        143141
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        15290,
+        118
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            14,
+            15290,
+            118
+          ],
+          "pessoas": [
+            {
+              "linha127": 143138,
+              "linha25": 915666
+            },
+            {
+              "linha127": 143141,
+              "linha25": 915667
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "conflito:566547",
+      "linhas_alvo": [
+        566552
+      ],
+      "linhas_contexto": [
+        566548,
+        566549,
+        566550,
+        566551,
+        566552
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        52230,
+        144
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            52,
+            52230,
+            144
+          ],
+          "pessoas": [
+            {
+              "linha127": 566548,
+              "linha25": 85524
+            },
+            {
+              "linha127": 566551,
+              "linha25": 85525
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "conflito:676491",
+      "linhas_alvo": [
+        676493,
+        676494
+      ],
+      "linhas_contexto": [
+        676492,
+        676493,
+        676494
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        60718,
+        176
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            60,
+            60718,
+            176
+          ],
+          "pessoas": [
+            {
+              "linha127": 676492,
+              "linha25": 1866271
+            },
+            {
+              "linha127": 676494,
+              "linha25": 1866272
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "conflito:894188",
+      "linhas_alvo": [
+        894190,
+        894191,
+        894192
+      ],
+      "linhas_contexto": [
+        894189,
+        894190,
+        894191,
+        894192
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        71230,
+        128
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            71,
+            71230,
+            128
+          ],
+          "pessoas": [
+            {
+              "linha127": 894189,
+              "linha25": 854310
+            },
+            {
+              "linha127": 894192,
+              "linha25": 854311
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "conflito:894317",
+      "linhas_alvo": [
+        894319,
+        894320,
+        894321,
+        894322,
+        894323
+      ],
+      "linhas_contexto": [
+        894318,
+        894319,
+        894320,
+        894321,
+        894322,
+        894323
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        71230,
+        149
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            71,
+            71230,
+            149
+          ],
+          "pessoas": [
+            {
+              "linha127": 894318,
+              "linha25": 854438
+            },
+            {
+              "linha127": 894321,
+              "linha25": 854439
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grupo": "conflito:1070450",
+      "linhas_alvo": [
+        1070452,
+        1070453,
+        1070454
+      ],
+      "linhas_contexto": [
+        1070451,
+        1070452,
+        1070453,
+        1070454
+      ],
+      "composicao25_exata": true,
+      "chave127": [
+        94820,
+        155
+      ],
+      "testemunhas_unicas_por_chave": [
+        {
+          "chave25": [
+            94,
+            94820,
+            155
+          ],
+          "pessoas": [
+            {
+              "linha127": 1070451,
+              "linha25": 531944
+            },
+            {
+              "linha127": 1070452,
+              "linha25": 531945
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fonte": {
+    "arquivo": "tmp/investigacao_residual_1960_20260922/vinculos/detalhes01/detalhes.json",
+    "sha256": "bc7a53a30a72e197541b8f0e23e91657948f1c3b91e4aaf0d91ed30cc1283c2a"
+  },
+  "novas_varreduras_nacionais": 0
+}

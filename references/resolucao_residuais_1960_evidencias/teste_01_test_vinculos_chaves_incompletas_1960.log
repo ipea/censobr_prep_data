@@ -1,0 +1,32 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_vinculos_chaves_incompletas_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Warning message:
+package 'digest' was built under R version 4.5.3 
+Reading 1960 amostra de 1,27%
+  17 linhas: 2 registros de familia, 15 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 15; valor_isolado 2
+Parsing 1960 amostra de 1,27%
+  familias: 2 x 26 | pessoas: 15 x 39 | registros com valor anulado: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 2 em 2 grupos; com chefe ou conjuge: 0
+antes_sem_decisoes: Reconstrucao suspensa: conferir vinculos_a_revisar.csv; o registro anterior nao e um vinculo confirmado.
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+  familias: 2; domicilios: 2; pessoas reconciliadas: 2
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+texto_alterado: conteudo diverge da decisao de vinculo
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+destino_ausente: cartao de destino do vinculo ausente na entrada
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+destino_errado: conteudo diverge da decisao de vinculo
+Dois vinculos de chave incompleta conferidos: tmp/resolucao_residuais_registros_1960_20260922\vinculos_chaves_e870129b676c
+
+Exit code: 0 hex: 0x0

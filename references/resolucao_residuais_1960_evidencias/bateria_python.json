@@ -1,0 +1,16 @@
+{
+  "aprovado": true,
+  "testes": 32,
+  "falhas": 0,
+  "erros": 0,
+  "scripts_sha256": {
+    "test_aplicar_residuais_duplicatas_1960.py": "574615056a7d68ea58327a52590608dc35a8910b0a428a72ca5e54e63d799e77",
+    "test_preservacao_alternativos_1960.py": "894a4493ff4a8cb5ea50cfaa1ebc9c4a7fa1456ed1c5bad7df8c7adb3a702f61",
+    "test_preservacao_composta_ce_1960.py": "e45fc78a472be99ffe0ad864af4fc3bb422162984195569f4aa8b75ddf33bc01",
+    "test_disposicoes_familias_1960.py": "7362c13ce51c9dfc3a9381033b79aa366233663467b758d8958f1df6cf1dd4ab",
+    "test_preparar_reparos_residuais_texto_1960.py": "fa3fe216b70752dcd81d4d5e4eb42e949870dcf367629eb3e715bdf75615c4ee",
+    "test_resolver_cartoes_chaves_fonte25_1960.py": "7ddbf25973faffa3df86181bd57bc876043a78b7dbb6c020a5a0ef563330ca27",
+    "test_resolver_vinculos_chaves_incompletas_1960.py": "2a14db957490cb68c94541f4735767d7fa2811436da0ba68785591bc05e767a6"
+  },
+  "log_sha256": "8b71a0d90272c9018b981863e51ee5eaf1842a6bc293d943b99b3ad6f38c6b73"
+}

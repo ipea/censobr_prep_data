@@ -1,0 +1,112 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_recuperacao_cartoes_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Warning message:
+package 'digest' was built under R version 4.5.3 
+
+Attaching package: 'arrow'
+
+The following object is masked from 'package:utils':
+
+    timestamp
+
+Piloto aprovado selecionado: 40-40654-177; pessoas: 2
+Compiling 1960: ac
+Reading 1960 amostra de 1,27%
+  2 linhas: 0 registros de familia, 2 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 2
+Parsing 1960 amostra de 1,27%
+  familias: 0 x 26 | pessoas: 2 x 39 | registros com valor anulado: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 2 em 1 grupos; com chefe ou conjuge: 0
+MG40090/004 continua pendente: duas pessoas preservadas, nenhum cartao acrescentado.
+Reading 1960 amostra de 1,27%
+  2 linhas: 0 registros de familia, 2 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 2
+Parsing 1960 amostra de 1,27%
+  familias: 0 x 26 | pessoas: 2 x 39 | registros com valor anulado: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+  familias: 1; domicilios: 1; pessoas reconciliadas: 0
+Bloqueio confirmado: pessoa_faltante — composicao pessoal incompleta ou excedente: 40-40654-177
+Bloqueio confirmado: pessoa_excedente — composicao pessoal incompleta ou excedente: 40-40654-177
+Bloqueio confirmado: pessoa_alterada_texto_original — conteudo pessoal diverge da recuperacao: 40-40654-177
+Bloqueio confirmado: pessoa_alterada_texto_corrigido — conteudo pessoal diverge da recuperacao: 40-40654-177
+Bloqueio confirmado: pessoa_alterada_chave — chave pessoal diverge da recuperacao
+Bloqueio confirmado: pessoa_alterada_V116 — geografia pessoal diverge da recuperacao: 40-40654-177
+Bloqueio confirmado: pessoa_alterada_V118 — geografia pessoal diverge da recuperacao: 40-40654-177
+Bloqueio confirmado: pessoa_alterada_distrito — geografia pessoal diverge da recuperacao: 40-40654-177
+Bloqueio confirmado: pessoa_alterada_pasta — composicao pessoal incompleta ou excedente: 40-40654-177
+Bloqueio confirmado: pessoa_alterada_boletim — composicao pessoal incompleta ou excedente: 40-40654-177
+Bloqueio confirmado: pessoa_alterada_V202 — resposta pessoal divergente: V202
+Bloqueio confirmado: pessoa_alterada_tipo — metadados pessoais divergem da recuperacao: 40-40654-177
+Bloqueio confirmado: pessoa_alterada_id_arquivo — metadados pessoais divergem da recuperacao: 40-40654-177
+Bloqueio confirmado: pessoa_alterada_censobr_diagnostico — metadados pessoais divergem da recuperacao: 40-40654-177
+Bloqueio confirmado: pessoa_alterada_censobr_variaveis_anuladas — metadados pessoais divergem da recuperacao: 40-40654-177
+Bloqueio confirmado: cartao_ja_existente — cartao ja existente na entrada: 40-40654-177
+Bloqueio confirmado: replay_sem_duplicar_cartao — cartao ja existente na entrada: 40-40654-177
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+Bloqueio confirmado: manifesto_texto_25 — texto do manifesto diverge da fonte25
+Bloqueio confirmado: manifesto_linha_25 — texto do manifesto diverge da fonte25
+Bloqueio confirmado: manifesto_n_pessoas — composicao pessoal incompleta ou excedente: 40-40654-177
+Bloqueio confirmado: manifesto_UF — UF diverge do arquivo estadual da recuperacao
+Bloqueio confirmado: manifesto_V116 — geografia pessoal diverge da recuperacao: 40-40654-177
+Bloqueio confirmado: manifesto_V118 — geografia pessoal diverge da recuperacao: 40-40654-177
+Bloqueio confirmado: manifesto_distrito — geografia pessoal diverge da recuperacao: 40-40654-177
+Bloqueio confirmado: manifesto_pasta — composicao pessoal incompleta ou excedente: 40-40654-177
+Bloqueio confirmado: manifesto_boletim — composicao pessoal incompleta ou excedente: 40-40654-177
+Bloqueio confirmado: manifesto_pessoa_texto_original — conteudo pessoal diverge da recuperacao: 40-40654-177
+Bloqueio confirmado: manifesto_pessoa_texto_corrigido — conteudo pessoal diverge da recuperacao: 40-40654-177
+Bloqueio confirmado: manifesto_pessoa_texto_25 — texto do manifesto diverge da fonte25
+Bloqueio confirmado: manifesto_pessoa_linha — composicao pessoal incompleta ou excedente: 40-40654-177
+Bloqueio confirmado: manifesto_pessoa_linha_25 — texto do manifesto diverge da fonte25
+Bloqueio confirmado: manifesto_V101_2 — campo familiar diverge da fonte25: V101
+Bloqueio confirmado: manifesto_V101_4 — campo familiar diverge da fonte25: V101
+Bloqueio confirmado: manifesto_V101_5 — campo familiar diverge da fonte25: V101
+Bloqueio confirmado: manifesto_V101_9 — campo familiar diverge da fonte25: V101
+Bloqueio confirmado: hash_fonte_incorreto — fonte alterada ou fora do projeto: data/release_legacy/Censo.1960.amostra.25porcento.al.gz
+Bloqueio confirmado: decisao_duplicada — decisoes de recuperacao repetidas ou sobrepostas
+Bloqueio confirmado: pessoa_repetida_manifesto — decisoes de recuperacao repetidas ou sobrepostas
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 2 em 1 grupos; com chefe ou conjuge: 0
+Reading 1960 amostra de 1,27%
+  80 linhas: 0 registros de familia, 80 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 80
+Parsing 1960 amostra de 1,27%
+  familias: 0 x 26 | pessoas: 80 x 39 | registros com valor anulado: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+  familias: 32; domicilios: 32; pessoas reconciliadas: 0
+Reading 1960 amostra de 1,27%
+  3 linhas: 1 registros de familia, 2 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 3
+Parsing 1960 amostra de 1,27%
+  familias: 1 x 26 | pessoas: 2 x 39 | registros com valor anulado: 0
+Reading 1960 amostra de 1,27%
+  5 linhas: 1 registros de familia, 4 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 5
+Parsing 1960 amostra de 1,27%
+  familias: 1 x 26 | pessoas: 4 x 39 | registros com valor anulado: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+  familias: 2; domicilios: 2; pessoas reconciliadas: 0
+Finalizing 1960 amostra de 1,27%
+  distritos: 2 de 2 domicilios com nome de distrito; favelas: 0 domicilios
+  desenho: 2 pastas (urbana menor 2) em 1 estratos; menor estrato com 2 pastas
+  pessoas: 4 x 90 | domicilios: 2 x 59
+Piloto, manifesto completo e ataques aprovados; evidencia em tmp/recuperacao_cartoes_1960_20260922\teste_caa074b74124
+
+Exit code: 0 hex: 0x0

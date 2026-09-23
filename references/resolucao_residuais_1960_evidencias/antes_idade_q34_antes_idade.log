@@ -1,0 +1,57 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_idade_ignorada_q34_residuais_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432         18             414
+ 2:      censobr_weight      2     432         26             406
+ 3:      censobr_weight      3     120          2              98
+ 4:      censobr_weight      4     360          2             308
+ 5:      censobr_weight      5     324          0             279
+ 6:      censobr_weight      6     264          8             256
+ 7:      censobr_weight      7     288         28             260
+ 8: censobr_weight_1965      1     432         18             414
+ 9: censobr_weight_1965      2     432         26             406
+10: censobr_weight_1965      3     120          2              98
+11: censobr_weight_1965      4     360          2             308
+12: censobr_weight_1965      5     324          0             279
+13: censobr_weight_1965      6     264          8             256
+14: censobr_weight_1965      7     288         28             260
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                        0            0                 432
+ 2:                 0                        0            0                 432
+ 3:                 0                       20            0                 100
+ 4:                 0                       50            0                 308
+ 5:                 0                       45            0                 279
+ 6:                 0                        0            0                 262
+ 7:                 0                        0            0                 288
+ 8:                 0                        0            0                 432
+ 9:                 0                        0            0                 432
+10:                 0                       20            0                 100
+11:                 0                       50            0                 308
+12:                 0                       45            0                 279
+13:                 0                        0            0                 262
+14:                 0                        0            0                 288
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:             100
+14:             100
+Error: z$n_amostra == 2L is not TRUE
+Execution halted
+
+Exit code: 1 hex: 0x1

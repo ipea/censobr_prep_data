@@ -1,0 +1,11 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_idade_ignorada_q34_residuais_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+Error in `[.data.table`(q5, !is.na(grupo_dependencia), somar_validacao_1960_amostra_127(w),  : 
+  The items in the 'by' or 'keyby' list have lengths [0, 0, 1]. Each must be length 0; the same length as there are rows in x (after subsetting if i is provided).
+Calls: validate_1965_1960_amostra_127 ... [ -> [.data.table -> stopf -> raise_condition -> signal
+Execution halted
+
+Exit code: 1 hex: 0x1

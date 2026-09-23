@@ -1,0 +1,21 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_resolucao_duplicatas_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Warning message:
+package 'digest' was built under R version 4.5.3 
+Reading 1960 amostra de 1,27%
+  51 linhas: 5 registros de familia, 46 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 51
+Parsing 1960 amostra de 1,27%
+  familias: 5 x 26 | pessoas: 46 x 39 | registros com valor anulado: 0
+Reviewing repeated person lines in 1960 amostra de 1,27%
+Reviewing repeated person lines in 1960 amostra de 1,27%
+  linhas repetidas: 5; removidas por decisao: 0
+Reviewing repeated person lines in 1960 amostra de 1,27%
+Reviewing repeated person lines in 1960 amostra de 1,27%
+Cinco pares mantidos: 46 pessoas do microlote preservadas, nenhuma exclusao.
+tmp/resolver_residuais_1960_20260922/duplicatas\teste_r_e1ac21282dad
+
+Exit code: 0 hex: 0x0

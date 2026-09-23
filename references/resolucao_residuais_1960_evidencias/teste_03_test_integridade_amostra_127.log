@@ -1,0 +1,108 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_integridade_amostra_127.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Reviewing repeated person lines in 1960 amostra de 1,27%
+Reviewing repeated person lines in 1960 amostra de 1,27%
+  linhas repetidas: 0; removidas por decisao: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+  familias: 1; domicilios: 1; pessoas reconciliadas: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 1 em 1 grupos; com chefe ou conjuge: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 1 em 1 grupos; com chefe ou conjuge: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 1 em 1 grupos; com chefe ou conjuge: 1
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+Reading 1960 amostra de 1,27%
+  8 linhas: 1 registros de familia, 7 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 8
+Parsing 1960 amostra de 1,27%
+  familias: 1 x 26 | pessoas: 7 x 39 | registros com valor anulado: 0
+Reviewing repeated person lines in 1960 amostra de 1,27%
+  linhas repetidas: 2; removidas por decisao: 0
+Reading 1960 amostra de 1,27%
+  18 linhas: 1 registros de familia, 17 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 18
+Parsing 1960 amostra de 1,27%
+  familias: 1 x 26 | pessoas: 17 x 39 | registros com valor anulado: 0
+Reviewing repeated person lines in 1960 amostra de 1,27%
+  linhas repetidas: 9; removidas por decisao: 8
+Reviewing repeated person lines in 1960 amostra de 1,27%
+  linhas repetidas: 9; removidas por decisao: 8
+Reviewing repeated person lines in 1960 amostra de 1,27%
+Reviewing repeated person lines in 1960 amostra de 1,27%
+Reviewing repeated person lines in 1960 amostra de 1,27%
+Reviewing repeated person lines in 1960 amostra de 1,27%
+Reading 1960 amostra de 1,27%
+  16 linhas: 2 registros de familia, 14 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 16
+Parsing 1960 amostra de 1,27%
+  familias: 2 x 26 | pessoas: 14 x 39 | registros com valor anulado: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+  familias: 2; domicilios: 2; pessoas reconciliadas: 1
+Reading 1960 amostra de 1,27%
+  22 linhas: 2 registros de familia, 20 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 22
+Parsing 1960 amostra de 1,27%
+  familias: 2 x 26 | pessoas: 20 x 39 | registros com valor anulado: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+  familias: 2; domicilios: 2; pessoas reconciliadas: 7
+Reading 1960 amostra de 1,27%
+  16 linhas: 2 registros de familia, 14 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 16
+Parsing 1960 amostra de 1,27%
+  familias: 2 x 26 | pessoas: 14 x 39 | registros com valor anulado: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+Finalizing 1960 amostra de 1,27%
+Reading 1960 amostra de 1,27%
+  3 linhas: 0 registros de familia, 3 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  recuperada 1; reparo 2
+Parsing 1960 amostra de 1,27%
+  familias: 0 x 26 | pessoas: 3 x 39 | registros com valor anulado: 0
+Reading 1960 amostra de 1,27%
+  6.461 linhas: 0 registros de familia, 6.461 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 6461
+Parsing 1960 amostra de 1,27%
+  familias: 0 x 26 | pessoas: 6.461 x 39 | registros com valor anulado: 0
+Reviewing repeated person lines in 1960 amostra de 1,27%
+  linhas repetidas: 3236; removidas por decisao: 2736
+Reading 1960 amostra de 1,27%
+  180 linhas: 28 registros de familia, 152 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 180
+Parsing 1960 amostra de 1,27%
+  familias: 28 x 26 | pessoas: 152 x 39 | registros com valor anulado: 0
+Reviewing repeated person lines in 1960 amostra de 1,27%
+  linhas repetidas: 0; removidas por decisao: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+  familias: 28; domicilios: 28; pessoas reconciliadas: 74
+Testes de integridade concluidos; diagnosticos em tmp\integridade_127_c69c415338cd
+
+Exit code: 0 hex: 0x0

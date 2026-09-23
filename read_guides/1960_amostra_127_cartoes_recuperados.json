@@ -54,20 +54,36 @@
       "sha256": "9b647908667d61fb35dfac8e4a4eda61a70b5f259bee3f5975026b54fa6326be"
     },
     {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pb.gz",
+      "sha256": "bf5fcd1c433b72bd930d56be2a7ec3a28944ed067ae3ed7314dba6813a573692"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.fn.gz",
+      "sha256": "98d5f9efb7c13ff505d129a80c43e6701cc0711dabd2391ba6c81212f9d0b23b"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.se.gz",
+      "sha256": "603527a51f15ff52e4584867b11c6aaafdea2e70f885073e10feb40fd57d8bec"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.sa.gz",
+      "sha256": "58d3b494802e365526d0a053c9aac798ec82f5b654f375eb834700b9a4b0adef"
+    },
+    {
       "arquivo": "data_raw/microdata/1960/amostra_127/HHOLDA.txt",
       "sha256": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c"
     },
     {
       "arquivo": "read_guides/1960_amostra_127_correcoes.csv",
-      "sha256": "64aa59c04c2bc3a37c6943a489638633f735fc99bdcc7cd0a299e1f27640303b"
+      "sha256": "dc2efc00470d25d156c76f7decf2603597b61adceb85c3b54c094c893716f831"
     },
     {
       "arquivo": "read_guides/1960_amostra_127_duplicatas.csv",
-      "sha256": "2f20943f51e39cbb156ea002933c76a494d14f5b00a97f36f1e00fb00947fb0e"
+      "sha256": "f43ad7ac48cd7bb108196e411748ce15927e407da010fb7afcf62c873cbf5d0a"
     },
     {
       "arquivo": "read_guides/1960_amostra_127_vinculos.csv",
-      "sha256": "a77cafb2ac548d7df624e554c02ee4f11dcded925ac81fe57efc8888eeab8c6e"
+      "sha256": "5d0fc8e4eb9eb0d2363247426eeb61e0b58ad719130992c219decee231fbe6a8"
     },
     {
       "arquivo": "read_guides/readguide_1960_amostra_127_familias.csv",
@@ -84,6 +100,10 @@
     {
       "arquivo": "read_guides/readguide_1960_amostra_25_pessoas.csv",
       "sha256": "e00be8bf2962bbd2c5ed9bc169321d5b156b1424bd22f4c2f46920aa89d106c8"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/cartoes_fora_chave_fechada.json",
+      "sha256": "28eb5d87e47d2a9b34c27155120b4d7260cbc6a40cbd787c94c08d6b9c8a58bf"
     }
   ],
   "auditoria": {
@@ -2890,6 +2910,173 @@
         "alternativas_plausiveis": 0,
         "busca": "Todos os cartoes da UF por chaves parciais/corpo e todos os perfis pessoais da UF; contexto fisico separado do vinculo.",
         "evidencia_alternativas": "tmp/fechamento_registros_1960_20260922/recuperacao_atualizada_01/alternativas.jsonl"
+      }
+    },
+    {
+      "id_recuperacao": "14-15004-116",
+      "UF": "14",
+      "distrito": "01",
+      "pasta": "15004",
+      "boletim": "116",
+      "V116": "1544",
+      "V118": "5",
+      "linha_25": 701853,
+      "arquivo_25": "data/release_legacy/Censo.1960.amostra.25porcento.ce.gz",
+      "texto_25": "14990116003043               1544015000000000000000000",
+      "n_pessoas": 4,
+      "familias": {
+        "V101": "3",
+        "V102": null,
+        "V103": null,
+        "V104": null,
+        "V105": null,
+        "V106": null,
+        "V107": null,
+        "V108": null,
+        "V109": null,
+        "V110": null,
+        "V111": null,
+        "V112": null,
+        "V113": null,
+        "V116": "1544",
+        "V118": "5"
+      },
+      "pessoas": [
+        {
+          "linha": 132193,
+          "texto_original": "141544011500411635541265407920003110075801016386223515\\0020001",
+          "texto_corrigido": "141544011500411635541265407920003110075801016386223515\\0020001",
+          "linha_25": 701855,
+          "texto_25": "149901160270275412654079920003110075801016386223515000"
+        },
+        {
+          "linha": 132194,
+          "texto_original": "141544011500411635541185407920003110000000007386223515\\0020001",
+          "texto_corrigido": "141544011500411635541185407920003110000000007386223515\\0020001",
+          "linha_25": 701857,
+          "texto_25": "149901160400405411854079920003110006300007386223515000"
+        },
+        {
+          "linha": 132195,
+          "texto_original": "141544011500411635541465407920001420063210057386223515\\0020001",
+          "texto_corrigido": "141544011500411635541465407920001420063210057386223515\\0020001",
+          "linha_25": 701854,
+          "texto_25": "149901160130135414654079920001420063210057386223515000"
+        },
+        {
+          "linha": 132196,
+          "texto_original": "141544011500411635541245407920003110075801017386223515\\0020001",
+          "texto_corrigido": "141544011500411635541245407920003110075801017386223515\\0020001",
+          "linha_25": 701856,
+          "texto_25": "149901160340345412454079920003110075801017386223515000"
+        }
+      ],
+      "unidade": "boletim_coletivo",
+      "ressalvas": [
+        "Numeracao127 e UPA127 preservadas; fonte25 tem chave explicitamente diferente.",
+        "Respostas pessoais divergentes nao sao recodificadas.",
+        "Correspondencia de registros nao e identificacao civil."
+      ],
+      "reconciliacao_chave": {
+        "modalidade": "numeracao127_preservada",
+        "pasta_25": "14990",
+        "boletim_25": "116",
+        "comparacao_pessoal": "24_campos_V216_preservado",
+        "testemunhas_exatas": [
+          132193,
+          132195,
+          132196
+        ],
+        "prova_arquivo": "references/resolucao_residuais_1960_evidencias/cartoes_fora_chave_fechada.json",
+        "alternativas_restantes": 0,
+        "geografia_territorial_alterada": false,
+        "respostas_pessoais_alteradas": false
+      },
+      "verificacoes": {
+        "composicao_integral25": false,
+        "composicao24_V216_preservado": true,
+        "ordens_redundancias_v100": true,
+        "geografia_integral": true,
+        "pessoas_nao_acrescentadas_nem_corrigidas": true,
+        "cartao127_ausente_chaves127_e25": true,
+        "cartoes127_examinados": 19,
+        "alternativas_plausiveis": 0
+      }
+    },
+    {
+      "id_recuperacao": "31-32426-233",
+      "UF": "31",
+      "distrito": "07",
+      "pasta": "32426",
+      "boletim": "233",
+      "V116": "3238",
+      "V118": "5",
+      "linha_25": 973867,
+      "arquivo_25": "data/release_legacy/Censo.1960.amostra.25porcento.ba.gz",
+      "texto_25": "32426006000023               3238075000000000000000000",
+      "n_pessoas": 2,
+      "familias": {
+        "V101": "3",
+        "V102": null,
+        "V103": null,
+        "V104": null,
+        "V105": null,
+        "V106": null,
+        "V107": null,
+        "V108": null,
+        "V109": null,
+        "V110": null,
+        "V111": null,
+        "V112": null,
+        "V113": null,
+        "V116": "3238",
+        "V118": "5"
+      },
+      "pessoas": [
+        {
+          "linha": 333756,
+          "texto_original": "313238073242623335541355705920001420075900000361123516\\0053276",
+          "texto_corrigido": "313238073242623335541355705920001420075900000361123516\\0053276",
+          "linha_25": 973868,
+          "texto_25": "324260060100105413557059920001420075900000361123516000"
+        },
+        {
+          "linha": 333757,
+          "texto_original": "3132380732426233356412154059200014200759000034-       \\0053276",
+          "texto_corrigido": "3132380732426233356412154059200014200759000034-       \\0053276",
+          "linha_25": 973869,
+          "texto_25": "3242600602802864121540599200014200759000034        000"
+        }
+      ],
+      "unidade": "boletim_coletivo",
+      "ressalvas": [
+        "Numeracao127 e UPA127 preservadas; fonte25 tem chave explicitamente diferente.",
+        "Respostas pessoais divergentes nao sao recodificadas.",
+        "Correspondencia de registros nao e identificacao civil."
+      ],
+      "reconciliacao_chave": {
+        "modalidade": "numeracao127_preservada",
+        "pasta_25": "32426",
+        "boletim_25": "006",
+        "comparacao_pessoal": "25_campos",
+        "testemunhas_exatas": [
+          333756,
+          333757
+        ],
+        "prova_arquivo": "references/resolucao_residuais_1960_evidencias/cartoes_fora_chave_fechada.json",
+        "alternativas_restantes": 0,
+        "geografia_territorial_alterada": false,
+        "respostas_pessoais_alteradas": false
+      },
+      "verificacoes": {
+        "composicao_integral25": true,
+        "composicao24_V216_preservado": false,
+        "ordens_redundancias_v100": true,
+        "geografia_integral": true,
+        "pessoas_nao_acrescentadas_nem_corrigidas": true,
+        "cartao127_ausente_chaves127_e25": true,
+        "cartoes127_examinados": 240,
+        "alternativas_plausiveis": 0
       }
     }
   ]

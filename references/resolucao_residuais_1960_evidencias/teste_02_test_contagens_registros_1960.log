@@ -1,0 +1,38 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_contagens_registros_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Warning message:
+package 'digest' was built under R version 4.5.3 
+
+Attaching package: 'arrow'
+
+The following object is masked from 'package:utils':
+
+    timestamp
+
+Reading 1960 amostra de 1,27%
+  5 linhas: 1 registros de familia, 4 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 5
+Parsing 1960 amostra de 1,27%
+  familias: 1 x 26 | pessoas: 4 x 39 | registros com valor anulado: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+  familias: 2; domicilios: 2; pessoas reconciliadas: 0
+Finalizing 1960 amostra de 1,27%
+  distritos: 2 de 2 domicilios com nome de distrito; favelas: 0 domicilios
+  desenho: 2 pastas (urbana menor 2) em 1 estratos; menor estrato com 2 pastas
+  pessoas: 4 x 90 | domicilios: 2 x 59
+Finalizing 1960 amostra de 1,27%
+  distritos: 2 de 2 domicilios com nome de distrito; favelas: 0 domicilios
+  desenho: 2 pastas (urbana menor 2) em 1 estratos; menor estrato com 2 pastas
+  pessoas: 4 x 90 | domicilios: 2 x 59
+Finalizing 1960 amostra de 1,27%
+  distritos: 2 de 2 domicilios com nome de distrito; favelas: 0 domicilios
+  desenho: 2 pastas (urbana menor 2) em 1 estratos; menor estrato com 2 pastas
+  pessoas: 4 x 90 | domicilios: 2 x 59
+Contagens desconhecidas preservadas, demais registros iguais: tmp/fechamento_registros_1960_20260922\contagens_38f81a9a2289
+
+Exit code: 0 hex: 0x0

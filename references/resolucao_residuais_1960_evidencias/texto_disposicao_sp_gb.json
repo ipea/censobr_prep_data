@@ -1,0 +1,966 @@
+{
+  "escopo": "Indice preaplicacao: apenas 661571, 695175 e contexto GB. Fonte25 SP: apenas 60158/118 e 60158/119.",
+  "sp": [
+    {
+      "cartao127": {
+        "linha": 661571,
+        "uf": 60,
+        "pasta": 60158,
+        "boletim": 118,
+        "distrito": 11,
+        "municipio": 6234,
+        "situacao": 1,
+        "chave": "1160158118",
+        "original": "6062341160158118111478942579105002                    \\0106791",
+        "corrigido": "6062341160158118111478942579105002                    \\0106791",
+        "invalidos": ""
+      },
+      "pessoas127_vinculo_vigente": [
+        {
+          "linha": 661572,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 118,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158118",
+          "original": "606234116015811821371395426919261721064402029319127165\\0106791",
+          "corrigido": "606234116015811821371395426919261721064402029319127165\\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 661571,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 661573,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 118,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158118",
+          "original": "606234116015811831291375426920001721064402020319148145\\0106791",
+          "corrigido": "606234116015811831291375426920001721064402020319148145\\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 661571,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 661574,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 118,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158118",
+          "original": "6062341160158118312212754269200017210658010134-       \\0106791",
+          "corrigido": "6062341160158118312212754269200017210658010134-       \\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 661571,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 661575,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 118,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158118",
+          "original": "606234116015811831121275426920001644165801011319124166\\0106791",
+          "corrigido": "606234116015811831121275426920001644165801011319124166\\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 661571,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 661576,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 118,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158118",
+          "original": "6062341160158118312115754269200017210400050434-       \\0106791",
+          "corrigido": "6062341160158118312115754269200017210400050434-       \\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 661571,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 661577,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 118,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158118",
+          "original": "6062341160158118312911554269200004310000000035-       \\0106791",
+          "corrigido": "6062341160158118312911554269200004310000000035-       \\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 661571,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 661578,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 118,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158118",
+          "original": "606234116015811831221355426920001721000000000354723286\\0106791",
+          "corrigido": "606234116015811831221355426920001721000000000354723286\\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 661571,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 661579,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 118,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158118",
+          "original": "60623411601581183112101542692000-                     \\0106791",
+          "corrigido": "60623411601581183112101542692000-                     \\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 661571,
+          "familia_fisica": 661571
+        }
+      ],
+      "pessoas127_posicao_fisica": [
+        {
+          "linha": 661572,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 118,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158118",
+          "original": "606234116015811821371395426919261721064402029319127165\\0106791",
+          "corrigido": "606234116015811821371395426919261721064402029319127165\\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 661571,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 661573,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 118,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158118",
+          "original": "606234116015811831291375426920001721064402020319148145\\0106791",
+          "corrigido": "606234116015811831291375426920001721064402020319148145\\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 661571,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 661574,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 118,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158118",
+          "original": "6062341160158118312212754269200017210658010134-       \\0106791",
+          "corrigido": "6062341160158118312212754269200017210658010134-       \\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 661571,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 661575,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 118,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158118",
+          "original": "606234116015811831121275426920001644165801011319124166\\0106791",
+          "corrigido": "606234116015811831121275426920001644165801011319124166\\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 661571,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 661576,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 118,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158118",
+          "original": "6062341160158118312115754269200017210400050434-       \\0106791",
+          "corrigido": "6062341160158118312115754269200017210400050434-       \\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 661571,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 661577,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 118,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158118",
+          "original": "6062341160158118312911554269200004310000000035-       \\0106791",
+          "corrigido": "6062341160158118312911554269200004310000000035-       \\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 661571,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 661578,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 118,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158118",
+          "original": "606234116015811831221355426920001721000000000354723286\\0106791",
+          "corrigido": "606234116015811831221355426920001721000000000354723286\\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 661571,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 661579,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 118,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158118",
+          "original": "60623411601581183112101542692000-                     \\0106791",
+          "corrigido": "60623411601581183112101542692000-                     \\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 661571,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 661580,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 119,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158119",
+          "original": "6062341160158119312815654269200017322627020234-       \\0106791",
+          "corrigido": "6062341160158119312815654269200017322627020234-       \\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 695175,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 661581,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 119,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158119",
+          "original": "6062341160158119312217354269200017210000000034-       \\0106791",
+          "corrigido": "6062341160158119312217354269200017210000000034-       \\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 695175,
+          "familia_fisica": 661571
+        }
+      ],
+      "cartoes25": [
+        {
+          "linha": 1525589,
+          "texto": "601581180080814789425791050026234111000000000000000000"
+        }
+      ],
+      "pessoas25": [
+        {
+          "linha": 1525590,
+          "texto": "601581180180183713954269919261721064402029319127165000"
+        },
+        {
+          "linha": 1525591,
+          "texto": "601581180260262913754269920001721064402020319148145000"
+        },
+        {
+          "linha": 1525592,
+          "texto": "6015811803403429115542699200004310063000035        000"
+        },
+        {
+          "linha": 1525593,
+          "texto": "6015811804204221157542699200017210400050434        000"
+        },
+        {
+          "linha": 1525594,
+          "texto": "601581180500502213554269920001721006300000354723286000"
+        },
+        {
+          "linha": 1525595,
+          "texto": "601581180690691212754269920001644165801011319124166000"
+        },
+        {
+          "linha": 1525596,
+          "texto": "6015811807707722127542699200017210658010134        000"
+        },
+        {
+          "linha": 1525597,
+          "texto": "60158118085085121015426992000                      000"
+        }
+      ],
+      "comparacao_do_grupo_logico": {
+        "n127": 8,
+        "n25": 8,
+        "composicao25": false,
+        "composicao24": true,
+        "n_ocorrencias_pessoais_exatas": 6,
+        "mais_proximos": [
+          {
+            "linha127": 661572,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 0,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525590,
+                "diferencas": {},
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 661573,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 0,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525591,
+                "diferencas": {},
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 661574,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 0,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525596,
+                "diferencas": {},
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 661575,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 0,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525595,
+                "diferencas": {},
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 661576,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 0,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525593,
+                "diferencas": {},
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 661577,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 1,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525592,
+                "diferencas": {
+                  "V216": [
+                    0,
+                    63
+                  ]
+                },
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 661578,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 1,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525594,
+                "diferencas": {
+                  "V216": [
+                    0,
+                    63
+                  ]
+                },
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 661579,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 0,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525597,
+                "diferencas": {},
+                "invalidos25": []
+              }
+            ]
+          }
+        ]
+      },
+      "comparacao_do_grupo_fisico": {
+        "n127": 10,
+        "n25": 8,
+        "composicao25": false,
+        "composicao24": false,
+        "n_ocorrencias_pessoais_exatas": 6,
+        "mais_proximos": [
+          {
+            "linha127": 661572,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 0,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525590,
+                "diferencas": {},
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 661573,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 0,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525591,
+                "diferencas": {},
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 661574,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 0,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525596,
+                "diferencas": {},
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 661575,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 0,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525595,
+                "diferencas": {},
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 661576,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 0,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525593,
+                "diferencas": {},
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 661577,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 1,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525592,
+                "diferencas": {
+                  "V216": [
+                    0,
+                    63
+                  ]
+                },
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 661578,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 1,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525594,
+                "diferencas": {
+                  "V216": [
+                    0,
+                    63
+                  ]
+                },
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 661579,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 0,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525597,
+                "diferencas": {},
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 661580,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 7,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525596,
+                "diferencas": {
+                  "V203": [
+                    8,
+                    2
+                  ],
+                  "AGE": [
+                    56,
+                    27
+                  ],
+                  "V213": [
+                    3,
+                    2
+                  ],
+                  "V214": [
+                    22,
+                    10
+                  ],
+                  "V216": [
+                    27,
+                    58
+                  ],
+                  "V217": [
+                    2,
+                    1
+                  ],
+                  "V218": [
+                    2,
+                    1
+                  ]
+                },
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 661581,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 5,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525593,
+                "diferencas": {
+                  "V203": [
+                    2,
+                    1
+                  ],
+                  "AGE": [
+                    73,
+                    57
+                  ],
+                  "V215": [
+                    0,
+                    4
+                  ],
+                  "V217": [
+                    0,
+                    5
+                  ],
+                  "V218": [
+                    0,
+                    4
+                  ]
+                },
+                "invalidos25": []
+              },
+              {
+                "linha25": 1525596,
+                "diferencas": {
+                  "AGE": [
+                    73,
+                    27
+                  ],
+                  "V215": [
+                    0,
+                    6
+                  ],
+                  "V216": [
+                    0,
+                    58
+                  ],
+                  "V217": [
+                    0,
+                    1
+                  ],
+                  "V218": [
+                    0,
+                    1
+                  ]
+                },
+                "invalidos25": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cartao127": {
+        "linha": 695175,
+        "uf": 60,
+        "pasta": 60158,
+        "boletim": 119,
+        "distrito": 11,
+        "municipio": 7234,
+        "situacao": 5,
+        "chave": "1160158119",
+        "original": "6072341160158119151478952579104002                    \\0113119",
+        "corrigido": "6072341160158119151478952579104002                    \\0113119",
+        "invalidos": ""
+      },
+      "pessoas127_vinculo_vigente": [
+        {
+          "linha": 661580,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 119,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158119",
+          "original": "6062341160158119312815654269200017322627020234-       \\0106791",
+          "corrigido": "6062341160158119312815654269200017322627020234-       \\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 695175,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 661581,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 119,
+          "distrito": 11,
+          "municipio": 6234,
+          "situacao": 1,
+          "chave": "1160158119",
+          "original": "6062341160158119312217354269200017210000000034-       \\0106791",
+          "corrigido": "6062341160158119312217354269200017210000000034-       \\0106791",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 695175,
+          "familia_fisica": 661571
+        },
+        {
+          "linha": 695176,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 119,
+          "distrito": 11,
+          "municipio": 7234,
+          "situacao": 5,
+          "chave": "1160158119",
+          "original": "607234116015811925171575426919261656262702020323227537\\0113119",
+          "corrigido": "607234116015811925171575426919261656262702020323227537\\0113119",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 695175,
+          "familia_fisica": 695175
+        }
+      ],
+      "pessoas127_posicao_fisica": [
+        {
+          "linha": 695176,
+          "uf": 60,
+          "pasta": 60158,
+          "boletim": 119,
+          "distrito": 11,
+          "municipio": 7234,
+          "situacao": 5,
+          "chave": "1160158119",
+          "original": "607234116015811925171575426919261656262702020323227537\\0113119",
+          "corrigido": "607234116015811925171575426919261656262702020323227537\\0113119",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 695175,
+          "familia_fisica": 695175
+        }
+      ],
+      "cartoes25": [
+        {
+          "linha": 1525598,
+          "texto": "601581190040314789425792080026234111000000000000000000"
+        }
+      ],
+      "pessoas25": [
+        {
+          "linha": 1525599,
+          "texto": "601581190140141715754269919261656262702020323227537000"
+        },
+        {
+          "linha": 1525600,
+          "texto": "6015811902202228156542699200017322627020234        000"
+        },
+        {
+          "linha": 1525601,
+          "texto": "6015811903003022173542699200017210000000034        000"
+        }
+      ],
+      "comparacao_do_grupo_logico": {
+        "n127": 3,
+        "n25": 3,
+        "composicao25": true,
+        "composicao24": true,
+        "n_ocorrencias_pessoais_exatas": 3,
+        "mais_proximos": [
+          {
+            "linha127": 661580,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 0,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525600,
+                "diferencas": {},
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 661581,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 0,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525601,
+                "diferencas": {},
+                "invalidos25": []
+              }
+            ]
+          },
+          {
+            "linha127": 695176,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 0,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525599,
+                "diferencas": {},
+                "invalidos25": []
+              }
+            ]
+          }
+        ]
+      },
+      "comparacao_do_grupo_fisico": {
+        "n127": 1,
+        "n25": 3,
+        "composicao25": false,
+        "composicao24": false,
+        "n_ocorrencias_pessoais_exatas": 1,
+        "mais_proximos": [
+          {
+            "linha127": 695176,
+            "invalidos127": [],
+            "minimo_campos_divergentes": 0,
+            "mais_proximos_sem_pareamento_automatico": [
+              {
+                "linha25": 1525599,
+                "diferencas": {},
+                "invalidos25": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "gb": {
+    "pessoa": {
+      "linha": 611254,
+      "uf": 54,
+      "pasta": 541,
+      "boletim": 101,
+      "distrito": 18,
+      "municipio": 5,
+      "situacao": 1,
+      "chave": "18541  101",
+      "original": "545   18541  10131281315402914093110075502028357125137\\0097158",
+      "corrigido": "545   18541  10131281315402914093110075502028357125137\\0097158",
+      "invalidos": "",
+      "excluida": 0,
+      "familia_atual": null,
+      "familia_fisica": 611250
+    },
+    "cartoes_preservados_compativeis_com_pasta_e_boletim": [
+      {
+        "linha": 614952,
+        "uf": 54,
+        "pasta": 54102,
+        "boletim": 101,
+        "distrito": 41,
+        "municipio": 5413,
+        "situacao": 1,
+        "chave": "4154102101",
+        "original": "5454134154102101111598383570202001                    \\0097936",
+        "corrigido": "5454134154102101111598383570202001                    \\0097936",
+        "invalidos": ""
+      },
+      {
+        "linha": 616230,
+        "uf": 54,
+        "pasta": 54142,
+        "boletim": 101,
+        "distrito": 18,
+        "municipio": 5421,
+        "situacao": 1,
+        "chave": "1854142101",
+        "original": "5454211854142101111485942570206002                    \\0098165",
+        "corrigido": "5454211854142101111485942570206002                    \\0098165",
+        "invalidos": ""
+      },
+      {
+        "linha": 617995,
+        "uf": 54,
+        "pasta": 54182,
+        "boletim": 101,
+        "distrito": 26,
+        "municipio": 5423,
+        "situacao": 1,
+        "chave": "2654182101",
+        "original": "5454232654182101111498942579204001                    \\0098489",
+        "corrigido": "5454232654182101111498942579204001                    \\0098489",
+        "invalidos": ""
+      }
+    ],
+    "pessoas_cartao616230": [
+      {
+        "linha": 616231,
+        "uf": 54,
+        "pasta": 54142,
+        "boletim": 101,
+        "distrito": 18,
+        "municipio": 5421,
+        "situacao": 1,
+        "chave": "1854142101",
+        "original": "545421185414210121171315705914091821075502020357125137\\0098165",
+        "corrigido": "545421185414210121171315705914091821075502020357125137\\0098165",
+        "invalidos": "",
+        "excluida": 0,
+        "familia_atual": 616230,
+        "familia_fisica": 616230
+      },
+      {
+        "linha": 616232,
+        "uf": 54,
+        "pasta": 54142,
+        "boletim": 101,
+        "distrito": 18,
+        "municipio": 5421,
+        "situacao": 1,
+        "chave": "1854142101",
+        "original": "54542118541421013129102540991409-                     \\0098165",
+        "corrigido": "54542118541421013129102540991409-                     \\0098165",
+        "invalidos": "",
+        "excluida": 0,
+        "familia_atual": 616230,
+        "familia_fisica": 616230
+      },
+      {
+        "linha": 616233,
+        "uf": 54,
+        "pasta": 54142,
+        "boletim": 101,
+        "distrito": 18,
+        "municipio": 5421,
+        "situacao": 1,
+        "chave": "1854142101",
+        "original": "54542118541421013119006541292000-                     \\0098165",
+        "corrigido": "54542118541421013119006541292000-                     \\0098165",
+        "invalidos": "",
+        "excluida": 0,
+        "familia_atual": 616230,
+        "familia_fisica": 616230
+      }
+    ],
+    "limite": "Cartao 616230 e unico entre os preservados apos conferir distrito. Nao exclui cartao historico ausente. Fonte25 GB indisponivel."
+  },
+  "fontes_sha256": {
+    "tmp\\fechamento_registros_1960_20260922\\recuperacao_atualizada_01\\indice127.sqlite": "54833acacc7baed83d97e46a53cb9c144740b3e36bcd8922888804027bbf6535",
+    "data_raw\\microdata\\1960\\amostra_127\\HHOLDA.txt": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.sp.gz": "9b647908667d61fb35dfac8e4a4eda61a70b5f259bee3f5975026b54fa6326be"
+  }
+}

@@ -1,0 +1,976 @@
+{
+  "arquivos": [
+    {
+      "arquivo": ".claude/plans/2026-09-22_resolver_residuais_registros.md",
+      "bytes": 11456,
+      "sha256": "b29cd0010e1f3a85a9189a1ffcea9cf7f34a920b196df4d9dc410d58437d8556"
+    },
+    {
+      "arquivo": ".gitattributes",
+      "bytes": 1066,
+      "sha256": "f7fea9752918038d32f3b2f190a121bac1ae40e89a133571e1f79c4b65aa5a90"
+    },
+    {
+      "arquivo": "_targets.R",
+      "bytes": 32193,
+      "sha256": "114fb6b53eb2d851335ab52cc4ca5f5972ea606933e2867c89fd4552ffe73cd0"
+    },
+    {
+      "arquivo": "R/microdata_1960_amostra_127.R",
+      "bytes": 207596,
+      "sha256": "a2949c6c8b84c04da54c7e7f6647d988f7a7315f609f4e66c2f183cdf4e9a28e"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_cartoes_recuperados.json",
+      "bytes": 102043,
+      "sha256": "9c745d59147dae664b080243203d31798fd5df010b9594c25640e9700bdd6710"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_codigos.csv",
+      "bytes": 11873,
+      "sha256": "57193b5e534cf754ec38ac32f548e78dc577c4c8794a5b8f4f1c726a11d63bec"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_correcoes.csv",
+      "bytes": 37318,
+      "sha256": "dc2efc00470d25d156c76f7decf2603597b61adceb85c3b54c094c893716f831"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_duplicatas.csv",
+      "bytes": 2916000,
+      "sha256": "f43ad7ac48cd7bb108196e411748ce15927e407da010fb7afcf62c873cbf5d0a"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_familias_coincidentes.json",
+      "bytes": 45998,
+      "sha256": "23e6ee88a383238e0f1661c5857dee2af8eacd02f3961b5d8d97f8e65d87a7b4"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_geografia_fonte25.json",
+      "bytes": 2140,
+      "sha256": "4f8d332f484f2a7a0be4e32f7eb53cec1ea7ea9959b44069ab36fc698d2815d6"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_reparos_fonte25.json",
+      "bytes": 174964,
+      "sha256": "640c208283b170d444104a736627a2514004104abe4661260de494252da478d0"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_vinculos.csv",
+      "bytes": 168032,
+      "sha256": "5d0fc8e4eb9eb0d2363247426eeb61e0b58ad719130992c219decee231fbe6a8"
+    },
+    {
+      "arquivo": "references/aplicar_residuais_duplicatas_1960.py",
+      "bytes": 9789,
+      "sha256": "340cd5b425c037912e9296785dc263459c8163aa0da737a67695c006460e8c39"
+    },
+    {
+      "arquivo": "references/aprofundar_preservacao_duplicatas_1960.py",
+      "bytes": 7018,
+      "sha256": "a14984538ae223da4f071d6d1a408e4b7302e2b3fbb4d46ff330054f6eefaa3a"
+    },
+    {
+      "arquivo": "references/conferir_coincidencias_operacionais_residuais_1960.py",
+      "bytes": 14110,
+      "sha256": "5080e8302ca5c846618885d2457f7dcc46732f4189772071e99f90099e8afb29"
+    },
+    {
+      "arquivo": "references/conferir_disposicao_sp_gb_texto_1960.py",
+      "bytes": 3520,
+      "sha256": "537044fbc4ff6579de628397aa1d58ec5801420819d7d3c1720204e16cef4642"
+    },
+    {
+      "arquivo": "references/conferir_distrito_pe_residual_1960.py",
+      "bytes": 5645,
+      "sha256": "1b9e6c83eb3d89afd06bc20f664e8e53e56839c52e507dcca43b10447b694e34"
+    },
+    {
+      "arquivo": "references/conferir_fontes_residuais_adicionais_1960.py",
+      "bytes": 2310,
+      "sha256": "5acaaf0cb3638b8c6743d033b16c566ba628092103797659686e2f70a805aaf7"
+    },
+    {
+      "arquivo": "references/conferir_integracao_residuais_1960.py",
+      "bytes": 6256,
+      "sha256": "de5f782886e25b585fafc3e4926daf41bb5c83e2b00c894b0627a558777425ff"
+    },
+    {
+      "arquivo": "references/conferir_limite_unipessoal_residual_1960.py",
+      "bytes": 2030,
+      "sha256": "6a5fbf4866f68ebdb5f257bb6afb8111520e3e5ba81f52e7320431e9b70126cd"
+    },
+    {
+      "arquivo": "references/conferir_preservacao_ce_1960.py",
+      "bytes": 9751,
+      "sha256": "f30ec9a128a845acc356140c21195d00d6662387fa6277eb621d8fa152e05c32"
+    },
+    {
+      "arquivo": "references/conferir_segunda_testemunha_rs_1960.py",
+      "bytes": 3204,
+      "sha256": "26709db7e6ee38b63691335ee10364315c489831ff6e6d26d971d941e4350d2d"
+    },
+    {
+      "arquivo": "references/consolidar_preservacoes_duplicatas_1960.py",
+      "bytes": 6043,
+      "sha256": "6f8743de98a3340e937a01da443a5a79a86fd209397c7374ff1cb7aa2630b9be"
+    },
+    {
+      "arquivo": "references/consolidar_resolucao_residuais_1960.py",
+      "bytes": 11181,
+      "sha256": "91e60bdbb3013becda1439a98c170fe09fd4bf3007eb2c75bdd87042c5f96a8b"
+    },
+    {
+      "arquivo": "references/fechamento_registros_1960_evidencias/fixtures_decisoes.json",
+      "bytes": 570144,
+      "sha256": "e7b0ba8ddc5415ed98b80e2c50bac01a827393eeefa4ba2125a7479e557a467f"
+    },
+    {
+      "arquivo": "references/indexar_resolucao_residuais_1960.py",
+      "bytes": 4333,
+      "sha256": "ce9881f99e24252b3275362f0dc3caa22b04e48e033db8a0759265f60f7c3039"
+    },
+    {
+      "arquivo": "references/inventario_final_registros_1960.py",
+      "bytes": 10435,
+      "sha256": "685a5ad4077d4826698624a8e7d0faf34433294f5e960212b7f361e12b1f7241"
+    },
+    {
+      "arquivo": "references/investigacao_familias_repetidas_1960.py",
+      "bytes": 5671,
+      "sha256": "98077b8f395cc9915048a71f6d73c65ba33120d84f817fab77cea1d34c6ca663"
+    },
+    {
+      "arquivo": "references/ler_fixtures_registros_1960.R",
+      "bytes": 1147,
+      "sha256": "9368d77e2004a4bb03fe24d6bf2aa934c5ce8e77c3066fe37329304183315f1c"
+    },
+    {
+      "arquivo": "references/preparar_disposicoes_familias_1960.py",
+      "bytes": 10067,
+      "sha256": "98b6c2c097e36cc0c8ddf86b87f3ad8d11855bb979e0daadbac706b863072b52"
+    },
+    {
+      "arquivo": "references/preparar_distrito_pe_operacional_1960.py",
+      "bytes": 4260,
+      "sha256": "864576d9c3af4aaf330dc7c89189dd8b276ccaad5aac18e12597d877d99ba088"
+    },
+    {
+      "arquivo": "references/preparar_reparos_residuais_texto_1960.py",
+      "bytes": 10410,
+      "sha256": "f9a5b4f99f5c9d245e5a8f03366af5f853ebb80c003cc2390b750242ee51d91e"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/antes_distrito_pe_diagnostico.log",
+      "bytes": 1408,
+      "sha256": "037455a4c13e75116b986f056bbf7c994ee1b4aa881e3e2b280798385c256950"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/antes_geografia_definitivos_antes.log",
+      "bytes": 29752,
+      "sha256": "e5663d348c97c0a80afdb2550609c97365ab0d6e6f98c5e627bbe01d410f381d"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/antes_geografia_ramo_antes.log",
+      "bytes": 37780,
+      "sha256": "c85fba9826cf0226ff59edf3b455e45ea375870e6daa5ef43a983026b6a9e58c"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/antes_idade_q34_antes.log",
+      "bytes": 664,
+      "sha256": "ad0fd1f70e88f6e07ac9c40fbc9ec4281eefa021a7c02b09f384578052ccb50e"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/antes_idade_q34_antes_idade.log",
+      "bytes": 3046,
+      "sha256": "c818c7cb8784e0ce34b4b67e43fc5560a79b89d216e558a612ff9f3372c293bc"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/antes_test_integridade_amostra_127.log",
+      "bytes": 689,
+      "sha256": "1fa866d9ffe63e859e026ee76944626f2aab1d4a1a50eb19399edc0eb80c2609"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/antes_texto_antes.log",
+      "bytes": 844,
+      "sha256": "49724caf7b414c131fb3b9fa079da169ea78bd80a24e35e156a75371c6f91340"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/bateria_01.json",
+      "bytes": 11745,
+      "sha256": "e2540aca532f88dc67124e03dfc170f0512839d3efcaca0b45ef258be900184f"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/bateria_02.json",
+      "bytes": 8919,
+      "sha256": "4e26ab204cf537c5447d8c169cd10e16193a1106fb9629b4c112e1a49c9264f7"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/bateria_03.json",
+      "bytes": 4822,
+      "sha256": "6ed4b969ab5a682b4d1431ec4fd251373e8671860ad24958c95832415ca48a2c"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/bateria_python.json",
+      "bytes": 1009,
+      "sha256": "1596afc05df1545c8f66752f53bfc71ed6252c6f7f6501df476658418c083e23"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/cartoes_fora_chave.json",
+      "bytes": 426688,
+      "sha256": "8fc4edc3c2d9f4a78d8ee99c450fbc1016c0aa46b9e473a7509526b1f953b21a"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/cartoes_fora_chave_fechada.json",
+      "bytes": 426704,
+      "sha256": "28eb5d87e47d2a9b34c27155120b4d7260cbc6a40cbd787c94c08d6b9c8a58bf"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/cartoes_fora_chave_final.json",
+      "bytes": 426700,
+      "sha256": "c3ef808376df8f61598adc31bf980e64582b10ff37e9b7666bc2a5e5d5e872d9"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/cobertura_antes_depois.json",
+      "bytes": 640658,
+      "sha256": "c7d5c8fb1102015459b81dfa56b0c0a6bd34c1fbc3c52df1fac04d37ea271ad9"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/coincidencias_operacionais.json",
+      "bytes": 189441,
+      "sha256": "984c25f07ab21ae541f1b19a7a85b3f4e01a22d8d24186459cf2bfe3b15dd0b6"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/conferencia199_unipessoais.json",
+      "bytes": 55819,
+      "sha256": "c3df78ed4e468270c215071c96b84f17c6771abf28856f3d770449044d763e88"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/conferencia_entrega.json",
+      "bytes": 11326,
+      "sha256": "6dda6c3dc509ed73276eff1d9574d0d07ecb67bb50bbaa0ff6ddb382c9b9b4f8"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/distrito_pe_operacional.json",
+      "bytes": 8274,
+      "sha256": "ca754eda5b567f29617f58e6665208a672cea4c35286982dfb37e89b24e15807"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/distrito_pe_proposta.json",
+      "bytes": 627119,
+      "sha256": "1d02b414822ebc916297055f2fe00ae8578ed80c585bae1fd42ea642bd4a2743"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/familias_reconferidas.json",
+      "bytes": 33512,
+      "sha256": "ffa55fa84713360d12cb0e08db890be1a1a57771a28e937e45e1973cdcb4941e"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/fontes_adicionais.json",
+      "bytes": 7363,
+      "sha256": "37f779367efd0431c9cbbb2f82fbfcb109c7f6115ac6f9298f1179f4e2b9f9b7"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/integracao_cartoes.json",
+      "bytes": 11888,
+      "sha256": "13a81875b0eda56cf115d2f28911e617776efd797fa68a9e35dd920868c16504"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/inventario_atual.json",
+      "bytes": 312304,
+      "sha256": "0938e196012e1cb11dd087edd06a85cb9d5fa81f4a34fa9cbe6a93f180f0c67c"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "bytes": 9553,
+      "sha256": "37d1584a12968103692bc6fb7ec631d62857812f25e68df83532d6c10445d892"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/segunda_testemunha_rs.json",
+      "bytes": 4290,
+      "sha256": "fb70f2a9086843184eeab3a2edc54f9f68d158abc18aac2778fd468f5794f086"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_01_test_cartoes_chaves_fonte25_1960.log",
+      "bytes": 2114,
+      "sha256": "cb48d329de11f226c180750cc1119bd918d5ed740fe9fbead4811f179103f1ce"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_01_test_dependencias_residuais_1960.log",
+      "bytes": 262,
+      "sha256": "5f661dcf6bcccea6428e358bb012407a83e3bb50c27b72374cc9acb0959a5eda"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_01_test_distrito_pe_operacional_1960.log",
+      "bytes": 2832,
+      "sha256": "2869c60d7c94defb795eb5e356bb9c1d17e9aa0d02198887d5d947186fe527d5"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_01_test_geografia_validacao_residuais_1960.log",
+      "bytes": 29451,
+      "sha256": "18dfe6694977857d35ec8c23c1cd228fc28cef688acaaf69a9891b198a1c30b4"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_01_test_guardas_familias_situacao_1960.log",
+      "bytes": 2436,
+      "sha256": "f3d8ac73ab12acc3fa8b52818d7000b3707b38750bf669bd15b117f62dbf7bc3"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_01_test_idade_ignorada_q34_residuais_1960.log",
+      "bytes": 49541,
+      "sha256": "aa1114f848f8d6709bb96d12baae0fe002c2a25258a9c2668f75edf5b2192bdb"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_01_test_integridade_amostra_127.log",
+      "bytes": 703,
+      "sha256": "9222fd6ab3215bd2a403f5a1e1ac3d7f99fd58feba44f49169308ae3786322bf"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_01_test_nacionalidade_registros_1960.log",
+      "bytes": 1350,
+      "sha256": "a831aca951ff7c5639b2281efaf561fbf518d0cc52d5b4c060e8574380d9c0f5"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_01_test_reparos_residuais_texto_1960.log",
+      "bytes": 1791,
+      "sha256": "77b9e7df2084de30403fe45fceaa2b0a8476d880a5ca87abccc7edf2fd2fdd51"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_01_test_resolucao_duplicatas_1960.log",
+      "bytes": 947,
+      "sha256": "81b290c0de81403d0344a873bfdbd596f92988c03985c7f03f6c145976d8a29b"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_01_test_resolucao_familias_coincidentes_1960.log",
+      "bytes": 3879,
+      "sha256": "21698645320728319e2881984b79a5d86985d7a8c09275519ef2e9b02396ce61"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_01_test_vinculos_chaves_incompletas_1960.log",
+      "bytes": 1706,
+      "sha256": "f1047a66c72a4912ced801521ff73841751f2456610cca1a9f8670e4987d610c"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_02_test_contagens_registros_1960.log",
+      "bytes": 1670,
+      "sha256": "731700f98f23c71a19be0c546f6c112dde4950c177bf139d7e1d5fe4e74c23e3"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_02_test_geografia_registros_1960.log",
+      "bytes": 2526,
+      "sha256": "133206a12179b4d432c8d9be2a98431ee251766c305a0311b6e0e52ef3e3a009"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_02_test_novas_duplicatas_1960.log",
+      "bytes": 2317,
+      "sha256": "61dc42117de0c202f894a160092530bac7d8344941782c8b8f33441895027c21"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_02_test_novos_vinculos_1960.log",
+      "bytes": 1456,
+      "sha256": "a7bfae41e7d953981bbfc4bef4046a7353556a45d4d9af44400d66a337399a85"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_02_test_pesos_1960.log",
+      "bytes": 1831,
+      "sha256": "7586df2666b21517c50e6e5cd0de9e0bc786ca1552cbaaa17266e71ece7b0b1a"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_02_test_recuperacao_cartoes_1960.log",
+      "bytes": 7187,
+      "sha256": "9e1819a44f4399859a27510d41ecb3bd4d38a8f660672ee5644de7cac8c4aa73"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_02_test_reparos_fonte25_1960.log",
+      "bytes": 1865,
+      "sha256": "0c2e6643590815a8d9aec2059f645eab51e82f771e537a6c8285fd9168c96092"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_02_test_reparos_fonte25_guardas_1960.log",
+      "bytes": 1988,
+      "sha256": "c68249303d14bd2af854b7749ef856a1d02231aec5d6c26e633137c532da0ef4"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_02_test_validacao_1960.log",
+      "bytes": 143456,
+      "sha256": "372205394ddcf18c73a6a008624d27537fafbafb6c441f07bd2025c82923ae24"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_02_test_validacao_amostra_127.log",
+      "bytes": 61917,
+      "sha256": "825902aeb451a649df0f538a2926be8394d098dca65031627afb97e4b0cf2976"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/teste_03_test_integridade_amostra_127.log",
+      "bytes": 5401,
+      "sha256": "2307f2078de6ebedff6e018fa0067538fdd956b0878beeccefa306c3788a74a2"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/testes_python.log",
+      "bytes": 4772,
+      "sha256": "8b71a0d90272c9018b981863e51ee5eaf1842a6bc293d943b99b3ad6f38c6b73"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/texto_disposicao_sp_gb.json",
+      "bytes": 30182,
+      "sha256": "c1288c1f77d8d3e8195582d582e87b8170fbe222a2f5235523dc87887e1323be"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/texto_propostas.json",
+      "bytes": 31403,
+      "sha256": "8ba0e82203824d06dda81456550a285d5c3509925943a050997e3a745598384a"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/vinculos_chaves_incompletas.json",
+      "bytes": 15611,
+      "sha256": "5578608808439a336273bdd79eaf428ed106de19a611c0ea3e39efb3dc4deed9"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_duplicatas5_1960_evidencias.json",
+      "bytes": 36036,
+      "sha256": "5b25dfd07e0ccaa669304e60154f9b28313bc88f180820bb1d8acc4cc5400959"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_duplicatas_1960.md",
+      "bytes": 13141,
+      "sha256": "68cd8101f2b27fac81c8894d4a6f1be3272cd0104ecee25547a4ad5ee965ec4e"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_duplicatas_1960_evidencias.json",
+      "bytes": 16865,
+      "sha256": "11c428feded22a4a2111e138d295bcbb2920d187ebd6ba61bfe0da4c8474539f"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_duplicatas_alternativos_1960_evidencias.json",
+      "bytes": 17795,
+      "sha256": "0f220c79af4fce8c0906810a5c5cd0893cdf02589f6adcfc300028330a634fa3"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_duplicatas_ce_1960_evidencias.json",
+      "bytes": 312546,
+      "sha256": "ea260b11419d6bc4df4b30eb047d569ffa344de1c9e875f63548810e73c9704e"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_duplicatas_disposicoes.json",
+      "bytes": 328150,
+      "sha256": "d269f41a159eb0f363889bc612a97838897b5fcefe903aeea77f4000fd334b57"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_registros_1960_20260922.md",
+      "bytes": 16407,
+      "sha256": "729a6c63894a397cd16277231e20abf83b0ca90f195f85c5abd0699d3b97a636"
+    },
+    {
+      "arquivo": "references/resolucao_residual_texto_1960.md",
+      "bytes": 13602,
+      "sha256": "eebeffcd6fbb21ee3302a73b2e8db67142ac20a75044ff23f66a2384cd423504"
+    },
+    {
+      "arquivo": "references/resolucao_residual_vinculos_1960.md",
+      "bytes": 16807,
+      "sha256": "d2a1a28c82d51958dde9c62b8bdcefc4470d292055d7765ea83206c7f1397a68"
+    },
+    {
+      "arquivo": "references/resolver_cartoes_chaves_fonte25_1960.py",
+      "bytes": 10613,
+      "sha256": "4deb50e4b8f8a05631125ac3ddb10e7cc11f5836d413772a464269161747df61"
+    },
+    {
+      "arquivo": "references/resolver_vinculos_chaves_incompletas_1960.py",
+      "bytes": 6922,
+      "sha256": "3b953654d7e7a464e4cc27ba6be89669f21ffe0c977a5548d41fafb70f53c626"
+    },
+    {
+      "arquivo": "references/rodar_r_isolado_1960.py",
+      "bytes": 3373,
+      "sha256": "d5af1cfdbf0f9eede74be3f315763bb2fa1edbf8047a8b66e584c34f2e18b60d"
+    },
+    {
+      "arquivo": "references/test_aplicar_residuais_duplicatas_1960.py",
+      "bytes": 2227,
+      "sha256": "574615056a7d68ea58327a52590608dc35a8910b0a428a72ca5e54e63d799e77"
+    },
+    {
+      "arquivo": "references/test_cartoes_chaves_fonte25_1960.R",
+      "bytes": 9269,
+      "sha256": "37f9b49b09f5657f4a060e015daf0e804aa3d21ae24e7d915c60b2a8bf0b115d"
+    },
+    {
+      "arquivo": "references/test_contagens_registros_1960.R",
+      "bytes": 3344,
+      "sha256": "f43fe798d18859aeed5c70ce9593a45da4611ad1b90ba13831cae65c0f7af807"
+    },
+    {
+      "arquivo": "references/test_dependencias_residuais_1960.R",
+      "bytes": 1408,
+      "sha256": "298cf1130ce1b85d0c208086424de849cf076ea7e7400c738e05e7ef1aaae70d"
+    },
+    {
+      "arquivo": "references/test_disposicoes_familias_1960.py",
+      "bytes": 2335,
+      "sha256": "7362c13ce51c9dfc3a9381033b79aa366233663467b758d8958f1df6cf1dd4ab"
+    },
+    {
+      "arquivo": "references/test_distrito_pe_operacional_1960.R",
+      "bytes": 8152,
+      "sha256": "a46b48901b583878e2d5a104abc79045564546659759d75c5e1a296d72f35c8f"
+    },
+    {
+      "arquivo": "references/test_geografia_registros_1960.R",
+      "bytes": 6329,
+      "sha256": "ef0389810503d2d4a81cf874665f2d9c0d1156620ff765053e98442493f579f7"
+    },
+    {
+      "arquivo": "references/test_geografia_validacao_residuais_1960.R",
+      "bytes": 6014,
+      "sha256": "b0342376c0415b72b15e5c4888f705e4661867dc1ad7c5bf0bc8c2d73f046a82"
+    },
+    {
+      "arquivo": "references/test_guardas_familias_situacao_1960.R",
+      "bytes": 6245,
+      "sha256": "aa6b5c86c69715c94f78e182b31c2fb2244e23a4ac592513436945c8efda31a2"
+    },
+    {
+      "arquivo": "references/test_idade_ignorada_q34_residuais_1960.R",
+      "bytes": 9546,
+      "sha256": "13a5c9d2ca451369268514ba5b633312084ec05e7dbd5ece5194401ec7a7636f"
+    },
+    {
+      "arquivo": "references/test_integridade_amostra_127.R",
+      "bytes": 18844,
+      "sha256": "8bf31a90b20c2deb8c6f1aed05a07c4989037af5deffa6e59d4f1791a75ab7b9"
+    },
+    {
+      "arquivo": "references/test_nacionalidade_registros_1960.R",
+      "bytes": 2056,
+      "sha256": "a590f5d5545c6ca50c868083769aa92538ee24a701acf79fa0e6e3c40849ac54"
+    },
+    {
+      "arquivo": "references/test_novas_duplicatas_1960.R",
+      "bytes": 13032,
+      "sha256": "01673ecf1050c5f5bc841e4ffe7ce29b4462344da14f318c35bcca974025ebba"
+    },
+    {
+      "arquivo": "references/test_novos_vinculos_1960.R",
+      "bytes": 5212,
+      "sha256": "54d0241b0d4171deb67ac126d3b7b6fae12ef34e9e76bdc41afe500366fc0462"
+    },
+    {
+      "arquivo": "references/test_pesos_1960.R",
+      "bytes": 13858,
+      "sha256": "b5de89b637bd5b6a15486cb4afc336de69ee90b3a4fccdc70cec00812a55e9d3"
+    },
+    {
+      "arquivo": "references/test_preparar_reparos_residuais_texto_1960.py",
+      "bytes": 2852,
+      "sha256": "fa3fe216b70752dcd81d4d5e4eb42e949870dcf367629eb3e715bdf75615c4ee"
+    },
+    {
+      "arquivo": "references/test_preservacao_alternativos_1960.py",
+      "bytes": 3671,
+      "sha256": "894a4493ff4a8cb5ea50cfaa1ebc9c4a7fa1456ed1c5bad7df8c7adb3a702f61"
+    },
+    {
+      "arquivo": "references/test_preservacao_composta_ce_1960.py",
+      "bytes": 1614,
+      "sha256": "e45fc78a472be99ffe0ad864af4fc3bb422162984195569f4aa8b75ddf33bc01"
+    },
+    {
+      "arquivo": "references/test_recuperacao_cartoes_1960.R",
+      "bytes": 18774,
+      "sha256": "a8cd37e62164d355e16426b2de64d3ae17a8db18551edcf420528728a89051e1"
+    },
+    {
+      "arquivo": "references/test_reparos_fonte25_1960.R",
+      "bytes": 4436,
+      "sha256": "d6104fe136aca270a59d7d21b039c1d6e7760791b570c00de0c487cdb9dcfd7e"
+    },
+    {
+      "arquivo": "references/test_reparos_fonte25_guardas_1960.R",
+      "bytes": 5700,
+      "sha256": "afe54cf0e1221965dafc0bea87d41e7110b37777cba1f6fc7689ed4910114dd6"
+    },
+    {
+      "arquivo": "references/test_reparos_residuais_texto_1960.R",
+      "bytes": 5398,
+      "sha256": "9a279173561e86746a896c12a941148e308aea0d410258937a2d922fb9154bc8"
+    },
+    {
+      "arquivo": "references/test_resolucao_duplicatas_1960.R",
+      "bytes": 5309,
+      "sha256": "853e6384d8bf0027342095e439f5b256ce58368fb6862fb242382604285a99ac"
+    },
+    {
+      "arquivo": "references/test_resolucao_familias_coincidentes_1960.R",
+      "bytes": 8609,
+      "sha256": "6c7e941b61bbc6a737eadedb44b37a189f90206a4f6ff04fa6f3f4d819cf9ef2"
+    },
+    {
+      "arquivo": "references/test_resolver_cartoes_chaves_fonte25_1960.py",
+      "bytes": 975,
+      "sha256": "7ddbf25973faffa3df86181bd57bc876043a78b7dbb6c020a5a0ef563330ca27"
+    },
+    {
+      "arquivo": "references/test_resolver_vinculos_chaves_incompletas_1960.py",
+      "bytes": 628,
+      "sha256": "2a14db957490cb68c94541f4735767d7fa2811436da0ba68785591bc05e767a6"
+    },
+    {
+      "arquivo": "references/test_validacao_1960.R",
+      "bytes": 29620,
+      "sha256": "11aa969bc2fb8a2a4642586e68fd86caaadae630444d5316cc32de6d5a084914"
+    },
+    {
+      "arquivo": "references/test_validacao_amostra_127.R",
+      "bytes": 17964,
+      "sha256": "cee6fbf83be46ff5bfd74c38ef52feee86ebd3980d8e976de1ed0e48c3c77732"
+    },
+    {
+      "arquivo": "references/test_vinculos_chaves_incompletas_1960.R",
+      "bytes": 5723,
+      "sha256": "b93696ce6be2d04c49e0d83d04641937e03cd9c69cda565b1ee54a897510b726"
+    },
+    {
+      "arquivo": "references/verificar_fechamento_registros_1960.py",
+      "bytes": 3860,
+      "sha256": "6ce8bd966ae441b1b4a4f19d37884c5e71e2d4c1d8c8a845ee90a8fad01425a6"
+    },
+    {
+      "arquivo": "references/verificar_resolucao_residuais_1960.py",
+      "bytes": 3950,
+      "sha256": "1f528cb1d3e911f78814621a1f5db86753323e071f60ccbd6a9123efe4e5e5d4"
+    },
+    {
+      "arquivo": "references/verificar_testes_python_residuais_1960.py",
+      "bytes": 2057,
+      "sha256": "f7ce94b300ef0b328111f057f6350b1e225359a50980eaf97d3f3eb9d8bd2f2c"
+    }
+  ],
+  "links_locais_conferidos": [
+    {
+      "nota": "references/resolucao_residuais_registros_1960_20260922.md",
+      "alvo": "investigacao_residual_registros_1960_20260922.md"
+    },
+    {
+      "nota": "references/resolucao_residuais_registros_1960_20260922.md",
+      "alvo": "resolucao_residuais_duplicatas_1960.md"
+    },
+    {
+      "nota": "references/resolucao_residuais_registros_1960_20260922.md",
+      "alvo": "resolucao_residual_vinculos_1960.md"
+    },
+    {
+      "nota": "references/resolucao_residuais_registros_1960_20260922.md",
+      "alvo": "resolucao_residual_texto_1960.md"
+    },
+    {
+      "nota": "references/resolucao_residuais_registros_1960_20260922.md",
+      "alvo": "resolucao_residuais_1960_evidencias/LEIAME.md"
+    },
+    {
+      "nota": "references/resolucao_residuais_registros_1960_20260922.md",
+      "alvo": "resolucao_residuais_1960_evidencias/conferencia_entrega.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_duplicatas_1960.md",
+      "alvo": "investigacao_residual_duplicatas_1960.md"
+    },
+    {
+      "nota": "references/resolucao_residuais_duplicatas_1960.md",
+      "alvo": "resolucao_residuais_duplicatas_alternativos_1960_evidencias.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_duplicatas_1960.md",
+      "alvo": "resolucao_residuais_duplicatas_ce_1960_evidencias.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_duplicatas_1960.md",
+      "alvo": "../read_guides/1960_amostra_127_familias_coincidentes.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_duplicatas_1960.md",
+      "alvo": "resolucao_residuais_duplicatas_disposicoes.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_duplicatas_1960.md",
+      "alvo": "resolucao_residuais_duplicatas5_1960_evidencias.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_duplicatas_1960.md",
+      "alvo": "test_resolucao_duplicatas_1960.R"
+    },
+    {
+      "nota": "references/resolucao_residuais_duplicatas_1960.md",
+      "alvo": "test_resolucao_familias_coincidentes_1960.R"
+    },
+    {
+      "nota": "references/resolucao_residuais_duplicatas_1960.md",
+      "alvo": "resolucao_residuais_1960_evidencias/LEIAME.md"
+    },
+    {
+      "nota": "references/resolucao_residuais_duplicatas_1960.md",
+      "alvo": "resolucao_residuais_1960_evidencias/cartoes_fora_chave_fechada.json"
+    },
+    {
+      "nota": "references/resolucao_residual_texto_1960.md",
+      "alvo": "../read_guides/1960_amostra_127_codigos.csv"
+    },
+    {
+      "nota": "references/resolucao_residual_texto_1960.md",
+      "alvo": "resolucao_residual_vinculos_1960.md"
+    },
+    {
+      "nota": "references/resolucao_residual_texto_1960.md",
+      "alvo": "../read_guides/1960_amostra_127_reparos_fonte25.json"
+    },
+    {
+      "nota": "references/resolucao_residual_texto_1960.md",
+      "alvo": "investigacao_residual_texto_1960_complementos.json"
+    },
+    {
+      "nota": "references/resolucao_residual_texto_1960.md",
+      "alvo": "resolucao_residuais_1960_evidencias/texto_disposicao_sp_gb.json"
+    },
+    {
+      "nota": "references/resolucao_residual_texto_1960.md",
+      "alvo": "investigacao_residual_1960_evidencias/vinculos_recuperacao.json"
+    },
+    {
+      "nota": "references/resolucao_residual_texto_1960.md",
+      "alvo": "resolucao_residuais_1960_evidencias/texto_propostas.json"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "resolucao_residuais_1960_evidencias/vinculos_chaves_incompletas.json"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "../read_guides/1960_amostra_127_vinculos.csv"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "../read_guides/1960_amostra_127_cartoes_recuperados.json"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "resolucao_residuais_1960_evidencias/cartoes_fora_chave.json"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "resolucao_residuais_1960_evidencias/distrito_pe_operacional.json"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "resolucao_residuais_1960_evidencias/distrito_pe_proposta.json"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "../read_guides/1960_amostra_127_familias_coincidentes.json"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "resolucao_residuais_1960_evidencias/segunda_testemunha_rs.json"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "resolucao_residuais_1960_evidencias/conferencia199_unipessoais.json"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "resolver_vinculos_chaves_incompletas_1960.py"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "resolver_cartoes_chaves_fonte25_1960.py"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "conferir_distrito_pe_residual_1960.py"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "preparar_distrito_pe_operacional_1960.py"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "conferir_segunda_testemunha_rs_1960.py"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "conferir_limite_unipessoal_residual_1960.py"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "test_vinculos_chaves_incompletas_1960.R"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "test_cartoes_chaves_fonte25_1960.R"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "test_distrito_pe_operacional_1960.R"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "test_resolucao_familias_coincidentes_1960.R"
+    },
+    {
+      "nota": "references/resolucao_residual_vinculos_1960.md",
+      "alvo": "resolucao_residuais_1960_evidencias/LEIAME.md"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "../resolucao_residuais_registros_1960_20260922.md"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "../investigacao_residual_1960_evidencias/LEIAME.md"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "../resolucao_residuais_duplicatas5_1960_evidencias.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "../resolucao_residuais_duplicatas_alternativos_1960_evidencias.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "../resolucao_residuais_duplicatas_ce_1960_evidencias.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "../resolucao_residuais_duplicatas_disposicoes.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "../../read_guides/1960_amostra_127_familias_coincidentes.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "vinculos_chaves_incompletas.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "cartoes_fora_chave_fechada.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "cartoes_fora_chave.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "cartoes_fora_chave_final.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "distrito_pe_proposta.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "distrito_pe_operacional.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "texto_propostas.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "texto_disposicao_sp_gb.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "segunda_testemunha_rs.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "conferencia199_unipessoais.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "../resolucao_residuais_duplicatas_1960.md"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "../resolucao_residual_vinculos_1960.md"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "../resolucao_residual_texto_1960.md"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "inventario_atual.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "cobertura_antes_depois.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "integracao_cartoes.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "familias_reconferidas.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "coincidencias_operacionais.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "fontes_adicionais.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "../rodar_r_isolado_1960.py"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "conferencia_entrega.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "bateria_01.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "bateria_02.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "bateria_03.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "bateria_python.json"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "testes_python.log"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "antes_distrito_pe_diagnostico.log"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "antes_test_integridade_amostra_127.log"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "antes_geografia_ramo_antes.log"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "antes_geografia_definitivos_antes.log"
+    },
+    {
+      "nota": "references/resolucao_residuais_1960_evidencias/LEIAME.md",
+      "alvo": "indice.json"
+    }
+  ],
+  "nota": "Assinaturas da entrega; nao sao prova autonoma da verdade historica dos registros."
+}

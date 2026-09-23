@@ -1,0 +1,95 @@
+{
+  "dez_linhas": [
+    760807,
+    760919,
+    760923,
+    760925,
+    761056,
+    761057,
+    761058,
+    806791,
+    806800,
+    806801
+  ],
+  "cinco_chaves": [
+    "61852154",
+    "61852172",
+    "61852192",
+    "64810118",
+    "64810119"
+  ],
+  "dependencias_nos_manifestos_vigentes": {
+    "duplicatas.csv": [],
+    "vinculos.csv": [],
+    "reparos_fonte25.json": [],
+    "cartoes_recuperados.json": [],
+    "geografia_fonte25.json": []
+  },
+  "conclusao_impacto": "Nenhum dos cinco boletins ou dez registros participa das decisoes manifestadas pesquisadas; falso rótulo nao revoga aqueles reparos/vinculos/cartoes/duplicatas.",
+  "fragmento855822": {
+    "pistas34_de35": [
+      {
+        "linha": 219679,
+        "texto": "644840900770771315654269920003110000000003332321160000",
+        "cartao": {
+          "linha": 219672,
+          "texto": "644840900080814781596702120056422015000000000000000000"
+        },
+        "pasta": "64484",
+        "municipio_cartao": "6422",
+        "distrito_cartao": "01"
+      },
+      {
+        "linha": 645158,
+        "texto": "651340570280282215654269920003110000000003332321160000",
+        "cartao": {
+          "linha": 645156,
+          "texto": "651340570000314781596802060036549015000000000000000000"
+        },
+        "pasta": "65134",
+        "municipio_cartao": "6549",
+        "distrito_cartao": "01"
+      },
+      {
+        "linha": 3864497,
+        "texto": "638480060790791215654269920003110000000003332321160000",
+        "cartao": {
+          "linha": 3864490,
+          "texto": "638480060000714783895702050046302015000000000000000000"
+        },
+        "pasta": "63848",
+        "municipio_cartao": "6302",
+        "distrito_cartao": "01"
+      }
+    ],
+    "cartoes25_compativeis_ao_segundo_prefixo_SP6433d01pasta644": [],
+    "numero_cartoes_SP6433d01": 3379,
+    "pastas_SP6433d01": [
+      "64560",
+      "64562",
+      "64564",
+      "64566",
+      "64568",
+      "64570",
+      "64572",
+      "64574",
+      "64576",
+      "64578",
+      "64580",
+      "64582",
+      "64584",
+      "64586"
+    ],
+    "limite": "Dois trechos da linha podem pertencer a registros distintos. Ausencia de cartao compativel ao prefixo nao autoriza corrigir seus digitos."
+  },
+  "fontes_sha256": {
+    "references\\investigacao_residual_texto_1960_evidencias.json": "d66153c5b663ca5dd79b565ad4af5f35211367cb9a0ab7bde11eb4d359651d6c",
+    "read_guides\\1960_amostra_127_duplicatas.csv": "2f20943f51e39cbb156ea002933c76a494d14f5b00a97f36f1e00fb00947fb0e",
+    "read_guides\\1960_amostra_127_vinculos.csv": "a77cafb2ac548d7df624e554c02ee4f11dcded925ac81fe57efc8888eeab8c6e",
+    "read_guides\\1960_amostra_127_reparos_fonte25.json": "d11fcb2743c6dcc65c2e4c796fe602977128fb51aeaa948eaf51a77565499e0b",
+    "read_guides\\1960_amostra_127_cartoes_recuperados.json": "ed3ceca8f6956f12a1c88cfb5938fb55a6ab5bfd50ae4c2df3b0be5118b87769",
+    "read_guides\\1960_amostra_127_geografia_fonte25.json": "4f8d332f484f2a7a0be4e32f7eb53cec1ea7ea9959b44069ab36fc698d2815d6",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.sp.gz": "9b647908667d61fb35dfac8e4a4eda61a70b5f259bee3f5975026b54fa6326be"
+  },
+  "auditor_sha256": "7da4f8a78c549872056f42d1edfb8690b35d6886ccc99bc737faac7f8157b400"
+}

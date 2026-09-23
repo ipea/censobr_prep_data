@@ -1,0 +1,32 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_nacionalidade_registros_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+
+Attaching package: 'arrow'
+
+The following object is masked from 'package:utils':
+
+    timestamp
+
+Reading 1960 amostra de 1,27%
+  6 linhas: 2 registros de familia, 4 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 6
+Parsing 1960 amostra de 1,27%
+  familias: 2 x 26 | pessoas: 4 x 39 | registros com valor anulado: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+  familias: 2; domicilios: 2; pessoas reconciliadas: 0
+Finalizing 1960 amostra de 1,27%
+  distritos: 2 de 2 domicilios com nome de distrito; favelas: 0 domicilios
+  desenho: 2 pastas (urbana menor 2) em 1 estratos; menor estrato com 2 pastas
+  pessoas: 4 x 80 | domicilios: 2 x 49
+Finalizing 1960 amostra de 1,27%
+  distritos: 2 de 2 domicilios com nome de distrito; favelas: 0 domicilios
+  desenho: 2 pastas (urbana menor 2) em 1 estratos; menor estrato com 2 pastas
+  pessoas: 4 x 80 | domicilios: 2 x 49
+Nacionalidade ausente preservada: tmp/fechamento_registros_1960_20260922\nacionalidade_4fdc4a2484f
+
+Exit code: 0 hex: 0x0

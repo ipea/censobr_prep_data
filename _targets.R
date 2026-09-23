@@ -173,6 +173,28 @@ list(
              format = "file"
              ),
 
+  tar_target(name = coincidencias_familias_1960_amostra_127,
+             command = "read_guides/1960_amostra_127_familias_coincidentes.json",
+             format = "file"
+             ),
+
+  tar_target(name = distrito_pe_1960_amostra_127,
+             command = "references/resolucao_residuais_1960_evidencias/distrito_pe_operacional.json",
+             format = "file"
+             ),
+
+  tar_target(name = fontes_distrito_pe_1960_amostra_127,
+             command = sapply(jsonlite::fromJSON(distrito_pe_1960_amostra_127,
+                                                 simplifyVector = FALSE)$fontes, `[[`, "arquivo"),
+             format = "file"
+             ),
+
+  tar_target(name = fontes_coincidencias_1960_amostra_127,
+             command = sapply(jsonlite::fromJSON(coincidencias_familias_1960_amostra_127,
+                                                 simplifyVector = FALSE)$fontes, `[[`, "arquivo"),
+             format = "file"
+             ),
+
   tar_target(name = manifesto_recuperacao_1960_amostra_127,
              command = "read_guides/1960_amostra_127_cartoes_recuperados.json",
              format = "file"
@@ -234,8 +256,14 @@ list(
 
   # familias pela chave do questionario, domicilios por V101, Rondonia devolvida
   tar_target(name = familias_1960_amostra_127,
-             command = build_families_1960_amostra_127(tabelas_recuperadas_1960_amostra_127,
-                                                       decisoes_path = decisoes_vinculos_1960_amostra_127)
+             command = {
+               fontes_coincidencias_1960_amostra_127
+               fontes_distrito_pe_1960_amostra_127
+               build_families_1960_amostra_127(tabelas_recuperadas_1960_amostra_127,
+                                                       decisoes_path = decisoes_vinculos_1960_amostra_127,
+                                                       coincidencias_path = coincidencias_familias_1960_amostra_127,
+                                                       distrito_prova_path = distrito_pe_1960_amostra_127)
+             }
              ),
 
   # divisao territorial de 1960 com a populacao do AEB: nome do municipio e o criterio de cidade grande

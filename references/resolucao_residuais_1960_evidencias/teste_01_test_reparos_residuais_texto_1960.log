@@ -1,0 +1,38 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_reparos_residuais_texto_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Reading 1960 amostra de 1,27%
+  27 linhas: 3 registros de familia, 24 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  reparo_fonte25 4; sem_problema 22; valor_isolado 1
+Applying manual corrections to 1960 amostra de 1,27%
+Reading 1960 amostra de 1,27%
+  10 linhas: 0 registros de familia, 10 de pessoas
+  dano_salto_nao_resolvido 10
+Reading 1960 amostra de 1,27%
+  1 linhas: 0 registros de familia, 1 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+Contraprova: composicao integral do grupo de reparo diverge
+Reading 1960 amostra de 1,27%
+  1 linhas: 0 registros de familia, 1 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+Contraprova: testemunhos insuficientes para identidade ampliada
+Reading 1960 amostra de 1,27%
+  1 linhas: 0 registros de familia, 1 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+Contraprova: testemunha nao coincide nos campos exigidos
+Reading 1960 amostra de 1,27%
+  1 linhas: 0 registros de familia, 1 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+Contraprova: geografia parcial diverge da evidencia
+Reading 1960 amostra de 1,27%
+  1 linhas: 0 registros de familia, 1 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+Contraprova: testemunhos insuficientes para identidade ampliada
+Applying manual corrections to 1960 amostra de 1,27%
+Reading 1960 amostra de 1,27%
+  1 linhas: 0 registros de familia, 1 de pessoas
+Reparos residuais e danos preservados conferidos: tmp/resolver_residuais_registros_1960_20260922/texto\test_texto_1cf824dade4
+
+Exit code: 0 hex: 0x0

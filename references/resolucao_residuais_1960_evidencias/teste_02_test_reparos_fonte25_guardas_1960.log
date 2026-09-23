@@ -1,0 +1,37 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_reparos_fonte25_guardas_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Warning message:
+package 'digest' was built under R version 4.5.3 
+Reading 1960 amostra de 1,27%
+  1 linhas: 0 registros de familia, 1 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+Guarda de grupo: hash_hholda - HHOLDA alterado ou ausente na evidencia do reparo
+Applying manual corrections to 1960 amostra de 1,27%
+Guarda de grupo: grupo127_omitido - grupo127 ausente na evidencia do reparo
+Applying manual corrections to 1960 amostra de 1,27%
+Guarda de grupo: literal_grupo127 - literal do grupo127 diverge de HHOLDA
+Applying manual corrections to 1960 amostra de 1,27%
+Guarda de grupo: grupo25_incompleto - grupo25 ou grupo127 incompleto ou com chave divergente
+Applying manual corrections to 1960 amostra de 1,27%
+Guarda de grupo: outra_pessoa_mesmo_grupo - correspondencias individuais divergem da composicao do grupo
+Applying manual corrections to 1960 amostra de 1,27%
+Guarda de grupo: outro_boletim - chave da fonte25 diverge do alvo do reparo
+Applying manual corrections to 1960 amostra de 1,27%
+Guarda de grupo: campo_legivel - campo do reparo nao esta danificado
+Applying manual corrections to 1960 amostra de 1,27%
+  reparo_fonte25 1
+Reading 1960 amostra de 1,27%
+  1 linhas: 1 registros de familia, 0 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+Guarda de grupo: digito_legivel_em_campo_parcial - reparo substituiria digitos legiveis do campo danificado
+Reading 1960 amostra de 1,27%
+  9 linhas: 9 registros de familia, 0 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  reparo_fonte25 9
+Parsing 1960 amostra de 1,27%
+  familias: 9 x 26 | pessoas: 0 x 39 | registros com valor anulado: 0
+Guardas adicionais dos reparos conferidas: tmp/fechamento_registros_1960_20260922\guardas_reparo_e4c41e6724ee
+
+Exit code: 0 hex: 0x0

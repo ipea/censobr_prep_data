@@ -1,0 +1,36 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_cartoes_chaves_fonte25_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Warning message:
+package 'digest' was built under R version 4.5.3 
+Reading 1960 amostra de 1,27%
+  6 linhas: 0 registros de familia, 6 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  sem_problema 6
+Parsing 1960 amostra de 1,27%
+  familias: 0 x 26 | pessoas: 6 x 39 | registros com valor anulado: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+  familias: 2; domicilios: 2; pessoas reconciliadas: 0
+nao_substituir_V216: resposta pessoal divergente: V216
+nao_substituir_distrito: geografia pessoal diverge da recuperacao: 14-15004-116
+nao_substituir_pasta: composicao pessoal incompleta ou excedente: 14-15004-116
+membro_faltante: composicao pessoal incompleta ou excedente: 14-15004-116
+membro_excedente: composicao pessoal incompleta ou excedente: 14-15004-116
+cartao_existente_FALSE: cartao ja existente na entrada: 14-15004-116
+cartao_existente_TRUE: cartao ja existente sob a chave da fonte25: 14-15004-116
+repeticao_sem_cartoes_novos: cartao ja existente na entrada: 14-15004-116
+uma_testemunha: decisao de chave diverge da prova localizada
+prova_sem_hash: fontes obrigatorias ausentes ou repetidas no manifesto
+alterar_geografia: reconciliacao de chave sem criterio localizado valido
+fonte_interna_falsa: fonte interna alterada na prova de chave
+testemunha_nao_exclusiva: testemunha sem exclusividade documentada na prova de chave
+alternativa_nao_zerada: alternativa remanescente ou analise incompleta na prova de chave
+exatidao_falsa: exatidao diverge da analise de testemunhas
+fonte_de_outra_uf: UF diverge do arquivo estadual da recuperacao
+analise_ausente: analise localizada de chave ausente ou repetida
+Cartoes BA/CE conferidos sem importar numeracao25: tmp/resolucao_residuais_registros_1960_20260922\cartoes_chaves_dd187d285c3c
+
+Exit code: 0 hex: 0x0

@@ -1,0 +1,233 @@
+{
+  "brutos_e_parquets_preservados": {
+    "data_raw/microdata/1960/amostra_127/HHOLDA.txt": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c",
+    "data_raw/microdata/1960/amostra_127/pessoas_1960_amostra_127.parquet": "f757fddae54edddd6742ad800149a3086acc9f581a8197ec0a123d7f4efca404",
+    "data_raw/microdata/1960/amostra_127/domicilios_1960_amostra_127.parquet": "f526ab6090d0be7dd9325a0f6b5143dab46186734f8760be8f44513924f93938"
+  },
+  "testes": [
+    {
+      "script": "test_dependencias_residuais_1960.R",
+      "exit_code": 0,
+      "segundos": 0.303,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_final_03/test_dependencias_residuais_1960.log",
+      "log_sha256": "5f661dcf6bcccea6428e358bb012407a83e3bb50c27b72374cc9acb0959a5eda",
+      "log_portatil": "teste_01_test_dependencias_residuais_1960.log"
+    },
+    {
+      "script": "test_resolucao_duplicatas_1960.R",
+      "exit_code": 0,
+      "segundos": 7.79,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_final_03/test_resolucao_duplicatas_1960.log",
+      "log_sha256": "81b290c0de81403d0344a873bfdbd596f92988c03985c7f03f6c145976d8a29b",
+      "log_portatil": "teste_01_test_resolucao_duplicatas_1960.log"
+    },
+    {
+      "script": "test_vinculos_chaves_incompletas_1960.R",
+      "exit_code": 0,
+      "segundos": 2.564,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_final_03/test_vinculos_chaves_incompletas_1960.log",
+      "log_sha256": "f1047a66c72a4912ced801521ff73841751f2456610cca1a9f8670e4987d610c",
+      "log_portatil": "teste_01_test_vinculos_chaves_incompletas_1960.log"
+    },
+    {
+      "script": "test_distrito_pe_operacional_1960.R",
+      "exit_code": 0,
+      "segundos": 45.175,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_final_03/test_distrito_pe_operacional_1960.log",
+      "log_sha256": "2869c60d7c94defb795eb5e356bb9c1d17e9aa0d02198887d5d947186fe527d5",
+      "log_portatil": "teste_01_test_distrito_pe_operacional_1960.log"
+    },
+    {
+      "script": "test_cartoes_chaves_fonte25_1960.R",
+      "exit_code": 0,
+      "segundos": 144.631,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_final_03/test_cartoes_chaves_fonte25_1960.log",
+      "log_sha256": "cb48d329de11f226c180750cc1119bd918d5ed740fe9fbead4811f179103f1ce",
+      "log_portatil": "teste_01_test_cartoes_chaves_fonte25_1960.log"
+    },
+    {
+      "script": "test_resolucao_familias_coincidentes_1960.R",
+      "exit_code": 0,
+      "segundos": 66.517,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_final_03/test_resolucao_familias_coincidentes_1960.log",
+      "log_sha256": "21698645320728319e2881984b79a5d86985d7a8c09275519ef2e9b02396ce61",
+      "log_portatil": "teste_01_test_resolucao_familias_coincidentes_1960.log"
+    },
+    {
+      "script": "test_reparos_residuais_texto_1960.R",
+      "exit_code": 0,
+      "segundos": 76.526,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_final_03/test_reparos_residuais_texto_1960.log",
+      "log_sha256": "77b9e7df2084de30403fe45fceaa2b0a8476d880a5ca87abccc7edf2fd2fdd51",
+      "log_portatil": "teste_01_test_reparos_residuais_texto_1960.log"
+    },
+    {
+      "script": "test_idade_ignorada_q34_residuais_1960.R",
+      "exit_code": 0,
+      "segundos": 28.416,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_final_03/test_idade_ignorada_q34_residuais_1960.log",
+      "log_sha256": "aa1114f848f8d6709bb96d12baae0fe002c2a25258a9c2668f75edf5b2192bdb",
+      "log_portatil": "teste_01_test_idade_ignorada_q34_residuais_1960.log"
+    },
+    {
+      "script": "test_geografia_validacao_residuais_1960.R",
+      "exit_code": 0,
+      "segundos": 4.767,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_final_03/test_geografia_validacao_residuais_1960.log",
+      "log_sha256": "18dfe6694977857d35ec8c23c1cd228fc28cef688acaaf69a9891b198a1c30b4",
+      "log_portatil": "teste_01_test_geografia_validacao_residuais_1960.log"
+    },
+    {
+      "script": "test_guardas_familias_situacao_1960.R",
+      "exit_code": 0,
+      "segundos": 2.467,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_final_03/test_guardas_familias_situacao_1960.log",
+      "log_sha256": "f3d8ac73ab12acc3fa8b52818d7000b3707b38750bf669bd15b117f62dbf7bc3",
+      "log_portatil": "teste_01_test_guardas_familias_situacao_1960.log"
+    },
+    {
+      "script": "test_nacionalidade_registros_1960.R",
+      "exit_code": 0,
+      "segundos": 2.416,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_final_03/test_nacionalidade_registros_1960.log",
+      "log_sha256": "a831aca951ff7c5639b2281efaf561fbf518d0cc52d5b4c060e8574380d9c0f5",
+      "log_portatil": "teste_01_test_nacionalidade_registros_1960.log"
+    },
+    {
+      "script": "test_integridade_amostra_127.R",
+      "exit_code": 0,
+      "segundos": 25.548,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_integridade_01/test_integridade_amostra_127.log",
+      "log_sha256": "2307f2078de6ebedff6e018fa0067538fdd956b0878beeccefa306c3788a74a2",
+      "log_portatil": "teste_03_test_integridade_amostra_127.log"
+    },
+    {
+      "script": "test_novas_duplicatas_1960.R",
+      "exit_code": 0,
+      "segundos": 29.466,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_novas_duplicatas_1960.log",
+      "log_sha256": "61dc42117de0c202f894a160092530bac7d8344941782c8b8f33441895027c21",
+      "log_portatil": "teste_02_test_novas_duplicatas_1960.log"
+    },
+    {
+      "script": "test_novos_vinculos_1960.R",
+      "exit_code": 0,
+      "segundos": 10.812,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_novos_vinculos_1960.log",
+      "log_sha256": "a7bfae41e7d953981bbfc4bef4046a7353556a45d4d9af44400d66a337399a85",
+      "log_portatil": "teste_02_test_novos_vinculos_1960.log"
+    },
+    {
+      "script": "test_reparos_fonte25_1960.R",
+      "exit_code": 0,
+      "segundos": 104.359,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_reparos_fonte25_1960.log",
+      "log_sha256": "0c2e6643590815a8d9aec2059f645eab51e82f771e537a6c8285fd9168c96092",
+      "log_portatil": "teste_02_test_reparos_fonte25_1960.log"
+    },
+    {
+      "script": "test_reparos_fonte25_guardas_1960.R",
+      "exit_code": 0,
+      "segundos": 26.5,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_reparos_fonte25_guardas_1960.log",
+      "log_sha256": "c68249303d14bd2af854b7749ef856a1d02231aec5d6c26e633137c532da0ef4",
+      "log_portatil": "teste_02_test_reparos_fonte25_guardas_1960.log"
+    },
+    {
+      "script": "test_geografia_registros_1960.R",
+      "exit_code": 0,
+      "segundos": 22.866,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_geografia_registros_1960.log",
+      "log_sha256": "133206a12179b4d432c8d9be2a98431ee251766c305a0311b6e0e52ef3e3a009",
+      "log_portatil": "teste_02_test_geografia_registros_1960.log"
+    },
+    {
+      "script": "test_recuperacao_cartoes_1960.R",
+      "exit_code": 0,
+      "segundos": 245.578,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_recuperacao_cartoes_1960.log",
+      "log_sha256": "9e1819a44f4399859a27510d41ecb3bd4d38a8f660672ee5644de7cac8c4aa73",
+      "log_portatil": "teste_02_test_recuperacao_cartoes_1960.log"
+    },
+    {
+      "script": "test_contagens_registros_1960.R",
+      "exit_code": 0,
+      "segundos": 6.264,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_contagens_registros_1960.log",
+      "log_sha256": "731700f98f23c71a19be0c546f6c112dde4950c177bf139d7e1d5fe4e74c23e3",
+      "log_portatil": "teste_02_test_contagens_registros_1960.log"
+    },
+    {
+      "script": "test_validacao_1960.R",
+      "exit_code": 0,
+      "segundos": 59.187,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_validacao_1960.log",
+      "log_sha256": "372205394ddcf18c73a6a008624d27537fafbafb6c441f07bd2025c82923ae24",
+      "log_portatil": "teste_02_test_validacao_1960.log"
+    },
+    {
+      "script": "test_validacao_amostra_127.R",
+      "exit_code": 0,
+      "segundos": 25.925,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_validacao_amostra_127.log",
+      "log_sha256": "825902aeb451a649df0f538a2926be8394d098dca65031627afb97e4b0cf2976",
+      "log_portatil": "teste_02_test_validacao_amostra_127.log"
+    },
+    {
+      "script": "test_pesos_1960.R",
+      "exit_code": 0,
+      "segundos": 2.596,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_pesos_1960.log",
+      "log_sha256": "7586df2666b21517c50e6e5cd0de9e0bc786ca1552cbaaa17266e71ece7b0b1a",
+      "log_portatil": "teste_02_test_pesos_1960.log"
+    }
+  ],
+  "demonstracoes_antes": [
+    {
+      "origem": "tmp/resolver_residuais_1960_20260922/idade_q34_antes.log",
+      "log_portatil": "antes_idade_q34_antes.log",
+      "sha256": "ad0fd1f70e88f6e07ac9c40fbc9ec4281eefa021a7c02b09f384578052ccb50e",
+      "nota": "Registro da demonstracao anterior; nao e uma suite final aprovada."
+    },
+    {
+      "origem": "tmp/resolver_residuais_1960_20260922/idade_q34_antes_idade.log",
+      "log_portatil": "antes_idade_q34_antes_idade.log",
+      "sha256": "c818c7cb8784e0ce34b4b67e43fc5560a79b89d216e558a612ff9f3372c293bc",
+      "nota": "Registro da demonstracao anterior; nao e uma suite final aprovada."
+    },
+    {
+      "origem": "tmp/resolver_residuais_1960_20260922/texto_antes.log",
+      "log_portatil": "antes_texto_antes.log",
+      "sha256": "49724caf7b414c131fb3b9fa079da169ea78bd80a24e35e156a75371c6f91340",
+      "nota": "Registro da demonstracao anterior; nao e uma suite final aprovada."
+    },
+    {
+      "origem": "tmp/resolver_residuais_1960_20260922/geografia_ramo_antes.log",
+      "log_portatil": "antes_geografia_ramo_antes.log",
+      "sha256": "c85fba9826cf0226ff59edf3b455e45ea375870e6daa5ef43a983026b6a9e58c",
+      "nota": "Registro da demonstracao anterior; nao e uma suite final aprovada."
+    },
+    {
+      "origem": "tmp/resolver_residuais_1960_20260922/geografia_definitivos_antes.log",
+      "log_portatil": "antes_geografia_definitivos_antes.log",
+      "sha256": "e5663d348c97c0a80afdb2550609c97365ab0d6e6f98c5e627bbe01d410f381d",
+      "nota": "Registro da demonstracao anterior; nao e uma suite final aprovada."
+    },
+    {
+      "origem": "tmp/resolver_residuais_1960_20260922/distrito_pe_diagnostico.log",
+      "log_portatil": "antes_distrito_pe_diagnostico.log",
+      "sha256": "037455a4c13e75116b986f056bbf7c994ee1b4aa881e3e2b280798385c256950",
+      "nota": "Registro da demonstracao anterior; nao e uma suite final aprovada."
+    },
+    {
+      "origem": "tmp/resolver_residuais_1960_20260922/bateria_final_02/test_integridade_amostra_127.log",
+      "log_portatil": "antes_test_integridade_amostra_127.log",
+      "sha256": "1fa866d9ffe63e859e026ee76944626f2aab1d4a1a50eb19399edc0eb80c2609",
+      "nota": "Registro da demonstracao anterior; nao e uma suite final aprovada."
+    }
+  ],
+  "scripts_R_distintos_aprovados": 22,
+  "criterio": "Ultima execucao de cada um dos 22 scripts aprovada; codigo, manifestos, provas e dados conferidos. Rodadas interrompidas preservadas, nao reclassificadas como integralmente aprovadas.",
+  "nenhum_peso_recalculado": true,
+  "nenhuma_pessoa_importada": true
+}

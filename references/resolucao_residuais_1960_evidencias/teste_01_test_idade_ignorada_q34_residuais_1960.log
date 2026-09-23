@@ -1,0 +1,864 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_idade_ignorada_q34_residuais_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432         18             414
+ 2:      censobr_weight      2     432         26             406
+ 3:      censobr_weight      3     120          7             113
+ 4:      censobr_weight      4     360          7             353
+ 5:      censobr_weight      5     324          0             279
+ 6:      censobr_weight      6     264          8             256
+ 7:      censobr_weight      7     288         28             260
+ 8: censobr_weight_1965      1     432         18             414
+ 9: censobr_weight_1965      2     432         26             406
+10: censobr_weight_1965      3     120          7             113
+11: censobr_weight_1965      4     360          7             353
+12: censobr_weight_1965      5     324          0             279
+13: censobr_weight_1965      6     264          8             256
+14: censobr_weight_1965      7     288         28             260
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                        0            0                 432
+ 2:                 0                        0            0                 432
+ 3:                 0                        0            0                 120
+ 4:                 0                        0            0                 358
+ 5:                 0                       45            0                 279
+ 6:                 0                        0            0                 262
+ 7:                 0                        0            0                 288
+ 8:                 0                        0            0                 432
+ 9:                 0                        0            0                 432
+10:                 0                        0            0                 120
+11:                 0                        0            0                 358
+12:                 0                       45            0                 279
+13:                 0                        0            0                 262
+14:                 0                        0            0                 288
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:             100
+14:             100
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432          8             358
+ 2:      censobr_weight      2     432          6             354
+ 3:      censobr_weight      3     120          2              98
+ 4:      censobr_weight      4     360          2             308
+ 5:      censobr_weight      5     324          0             279
+ 6:      censobr_weight      6     264          8             256
+ 7:      censobr_weight      7     288         28             260
+ 8: censobr_weight_1965      1     432          8             358
+ 9: censobr_weight_1965      2     432          6             354
+10: censobr_weight_1965      3     120          2              98
+11: censobr_weight_1965      4     360          2             308
+12: censobr_weight_1965      5     324          0             279
+13: censobr_weight_1965      6     264          8             256
+14: censobr_weight_1965      7     288         28             260
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                       66            0                 366
+ 2:                 0                       72            0                 360
+ 3:                 0                       20            0                 100
+ 4:                 0                       50            0                 308
+ 5:                 0                       45            0                 279
+ 6:                 0                        0            0                 262
+ 7:                 0                        0            0                 288
+ 8:                 0                       66            0                 366
+ 9:                 0                       72            0                 360
+10:                 0                       20            0                 100
+11:                 0                       50            0                 308
+12:                 0                       45            0                 279
+13:                 0                        0            0                 262
+14:                 0                        0            0                 288
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:             100
+14:             100
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432         18             414
+ 2:      censobr_weight      2     432         26             406
+ 3:      censobr_weight      3     120          4              98
+ 4:      censobr_weight      4     360          5             315
+ 5:      censobr_weight      5     324          0             279
+ 6:      censobr_weight      6     264          8             256
+ 7:      censobr_weight      7     288         28             260
+ 8: censobr_weight_1965      1     432         18             414
+ 9: censobr_weight_1965      2     432         26             406
+10: censobr_weight_1965      3     120          4              98
+11: censobr_weight_1965      4     360          5             315
+12: censobr_weight_1965      5     324          0             279
+13: censobr_weight_1965      6     264          8             256
+14: censobr_weight_1965      7     288         28             260
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                        0            0                 432
+ 2:                 0                        0            0                 432
+ 3:                 0                       18            0                 102
+ 4:                 0                       40            0                 318
+ 5:                 0                       45            0                 279
+ 6:                 0                        0            0                 262
+ 7:                 0                        0            0                 288
+ 8:                 0                        0            0                 432
+ 9:                 0                        0            0                 432
+10:                 0                       18            0                 102
+11:                 0                       40            0                 318
+12:                 0                       45            0                 279
+13:                 0                        0            0                 262
+14:                 0                        0            0                 288
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:             100
+14:             100
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432         18             414
+ 2:      censobr_weight      2     432         26             406
+ 3:      censobr_weight      3     120          7             113
+ 4:      censobr_weight      4     360          4             311
+ 5:      censobr_weight      5     324          0             279
+ 6:      censobr_weight      6     264          8             256
+ 7:      censobr_weight      7     288         28             260
+ 8: censobr_weight_1965      1     432         18             414
+ 9: censobr_weight_1965      2     432         26             406
+10: censobr_weight_1965      3     120          7             113
+11: censobr_weight_1965      4     360          4             311
+12: censobr_weight_1965      5     324          0             279
+13: censobr_weight_1965      6     264          8             256
+14: censobr_weight_1965      7     288         28             260
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                        0            0                 432
+ 2:                 0                        0            0                 432
+ 3:                 0                        0            0                 120
+ 4:                 0                       45            0                 313
+ 5:                 0                       45            0                 279
+ 6:                 0                        0            0                 262
+ 7:                 0                        0            0                 288
+ 8:                 0                        0            0                 432
+ 9:                 0                        0            0                 432
+10:                 0                        0            0                 120
+11:                 0                       45            0                 313
+12:                 0                       45            0                 279
+13:                 0                        0            0                 262
+14:                 0                        0            0                 288
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:             100
+14:             100
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432         10             414
+ 2:      censobr_weight      2     432         10             406
+ 3:      censobr_weight      3     120          3             113
+ 4:      censobr_weight      4     360          3             353
+ 5:      censobr_weight      5     324          0             279
+ 6:      censobr_weight      6     264          4             256
+ 7:      censobr_weight      7     288         14             260
+ 8: censobr_weight_1965      1     432         18             414
+ 9: censobr_weight_1965      2     432         26             406
+10: censobr_weight_1965      3     120          7             113
+11: censobr_weight_1965      4     360          7             353
+12: censobr_weight_1965      5     324          0             279
+13: censobr_weight_1965      6     264          8             256
+14: censobr_weight_1965      7     288         28             260
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                        0            8                 424
+ 2:                 0                        0           16                 416
+ 3:                 0                        0            4                 116
+ 4:                 0                        0            4                 354
+ 5:                 0                       45            0                 279
+ 6:                 0                        0            4                 258
+ 7:                 0                        0           14                 274
+ 8:                 0                        0            0                 432
+ 9:                 0                        0            0                 432
+10:                 0                        0            0                 120
+11:                 0                        0            0                 358
+12:                 0                       45            0                 279
+13:                 0                        0            0                 262
+14:                 0                        0            0                 288
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:             100
+14:             100
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432          0             324
+ 2:      censobr_weight      2     432          0             324
+ 3:      censobr_weight      3     120          0              90
+ 4:      censobr_weight      4     360          0             270
+ 5:      censobr_weight      5     324          0             243
+ 6:      censobr_weight      6     264          0             198
+ 7:      censobr_weight      7     288          0             216
+ 8: censobr_weight_1965      1     432          0             324
+ 9: censobr_weight_1965      2     432          0             324
+10: censobr_weight_1965      3     120          0              90
+11: censobr_weight_1965      4     360          0             270
+12: censobr_weight_1965      5     324          0             243
+13: censobr_weight_1965      6     264          0             198
+14: censobr_weight_1965      7     288          0             216
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                      108            0                 324
+ 2:                 0                      108            0                 324
+ 3:                 0                       30            0                  90
+ 4:                 0                       90            0                 268
+ 5:                 0                       81            0                 243
+ 6:                 0                       66            0                 196
+ 7:                 0                       72            0                 216
+ 8:                 0                      108            0                 324
+ 9:                 0                      108            0                 324
+10:                 0                       30            0                  90
+11:                 0                       90            0                 268
+12:                 0                       81            0                 243
+13:                 0                       66            0                 196
+14:                 0                       72            0                 216
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:             100
+14:             100
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432         12             420
+ 2:      censobr_weight      2     432          0             432
+ 3:      censobr_weight      3     120          0             120
+ 4:      censobr_weight      4     360          0             360
+ 5:      censobr_weight      5     324          0             324
+ 6:      censobr_weight      6     264          8             256
+ 7:      censobr_weight      7     288         28             260
+ 8: censobr_weight_1965      1     432         12             420
+ 9: censobr_weight_1965      2     432          0             432
+10: censobr_weight_1965      3     120          0             120
+11: censobr_weight_1965      4     360          0             360
+12: censobr_weight_1965      5     324          0             324
+13: censobr_weight_1965      6     264          8             256
+14: censobr_weight_1965      7     288         28             260
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                        0            0                 432
+ 2:                 0                        0            0                 432
+ 3:                 0                        0            0                 120
+ 4:                 0                        0            0                 358
+ 5:                 0                        0            0                 324
+ 6:                 0                        0            0                 262
+ 7:                 0                        0            0                 288
+ 8:                 0                        0            0                 432
+ 9:                 0                        0            0                 432
+10:                 0                        0            0                 120
+11:                 0                        0            0                 358
+12:                 0                        0            0                 324
+13:                 0                        0            0                 262
+14:                 0                        0            0                 288
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:             100
+14:             100
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432          0             432
+ 2:      censobr_weight      2     432          0             432
+ 3:      censobr_weight      3     120          0             120
+ 4:      censobr_weight      4     360          0             360
+ 5:      censobr_weight      5     324          0             324
+ 6:      censobr_weight      6     264          0             264
+ 7:      censobr_weight      7     288          0             288
+ 8: censobr_weight_1965      1     432          0             432
+ 9: censobr_weight_1965      2     432          0             432
+10: censobr_weight_1965      3     120          0             120
+11: censobr_weight_1965      4     360          0             360
+12: censobr_weight_1965      5     324          0             324
+13: censobr_weight_1965      6     264          0             264
+14: censobr_weight_1965      7     288          0             288
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                        0            0                 432
+ 2:                 0                        0            0                 432
+ 3:                 0                        0            0                 120
+ 4:                 0                        0            0                 358
+ 5:                 0                        0            0                 324
+ 6:                 0                        0            0                 262
+ 7:                 0                        0            0                 288
+ 8:                 0                        0            0                 432
+ 9:                 0                        0            0                 432
+10:                 0                        0            0                 120
+11:                 0                        0            0                 358
+12:                 0                        0            0                 324
+13:                 0                        0            0                 262
+14:                 0                        0            0                 288
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:             100
+14:             100
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432         14             418
+ 2:      censobr_weight      2     432         24             408
+ 3:      censobr_weight      3     120          4              98
+ 4:      censobr_weight      4     360          7             353
+ 5:      censobr_weight      5     324          0             279
+ 6:      censobr_weight      6     264          8             256
+ 7:      censobr_weight      7     288         28             260
+ 8: censobr_weight_1965      1     432         14             418
+ 9: censobr_weight_1965      2     432         24             408
+10: censobr_weight_1965      3     120          4              98
+11: censobr_weight_1965      4     360          7             353
+12: censobr_weight_1965      5     324          0             279
+13: censobr_weight_1965      6     264          8             256
+14: censobr_weight_1965      7     288         28             260
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                        0            0                 432
+ 2:                 0                        0            0                 432
+ 3:                 0                       18            0                 102
+ 4:                 0                        0            0                 358
+ 5:                 0                       45            0                 279
+ 6:                 0                        0            0                 262
+ 7:                 0                        0            0                 288
+ 8:                 0                        0            0                 432
+ 9:                 0                        0            0                 432
+10:                 0                       18            0                 102
+11:                 0                        0            0                 358
+12:                 0                       45            0                 279
+13:                 0                        0            0                 262
+14:                 0                        0            0                 288
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:             100
+14:             100
+Contraprova adicional V223_ausente_ramos censobr_weight: PASSOU
+Contraprova adicional V223_ausente_totais_preservados censobr_weight: PASSOU
+Contraprova adicional V223_ausente_ramos censobr_weight_1965: PASSOU
+Contraprova adicional V223_ausente_totais_preservados censobr_weight_1965: PASSOU
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432          4             140
+ 2:      censobr_weight      2     432          6             138
+ 3:      censobr_weight      3     120          2              38
+ 4:      censobr_weight      4     360          2             158
+ 5:      censobr_weight      5     324          0             144
+ 6:      censobr_weight      6     264          8             256
+ 7:      censobr_weight      7     288         28             260
+ 8: censobr_weight_1965      1     432          4             140
+ 9: censobr_weight_1965      2     432          6             138
+10: censobr_weight_1965      3     120          2              38
+11: censobr_weight_1965      4     360          2             158
+12: censobr_weight_1965      5     324          0             144
+13: censobr_weight_1965      6     264          8             256
+14: censobr_weight_1965      7     288         28             260
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                      288            0                 144
+ 2:                 0                      288            0                 144
+ 3:                 0                       80            0                  40
+ 4:                 0                      200            0                 158
+ 5:                 0                      180            0                 144
+ 6:                 0                        0            0                 262
+ 7:                 0                        0            0                 288
+ 8:                 0                      288            0                 144
+ 9:                 0                      288            0                 144
+10:                 0                       80            0                  40
+11:                 0                      200            0                 158
+12:                 0                      180            0                 144
+13:                 0                        0            0                 262
+14:                 0                        0            0                 288
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:             100
+14:             100
+Contraprova adicional pessoa_UF_ausente censobr_weight: PASSOU
+Contraprova adicional pessoa_UF_ausente censobr_weight_1965: PASSOU
+Contraprova adicional pessoa_UF_ausente diagnostico_explicito: PASSOU
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432          4             140
+ 2:      censobr_weight      2     432          6             138
+ 3:      censobr_weight      3     120          2              38
+ 4:      censobr_weight      4     360          2             158
+ 5:      censobr_weight      5     324          0             144
+ 6:      censobr_weight      6     264          8             256
+ 7:      censobr_weight      7     288         28             260
+ 8: censobr_weight_1965      1     432          4             140
+ 9: censobr_weight_1965      2     432          6             138
+10: censobr_weight_1965      3     120          2              38
+11: censobr_weight_1965      4     360          2             158
+12: censobr_weight_1965      5     324          0             144
+13: censobr_weight_1965      6     264          8             256
+14: censobr_weight_1965      7     288         28             260
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                      288            0                 144
+ 2:                 0                      288            0                 144
+ 3:                 0                       80            0                  40
+ 4:                 0                      200            0                 158
+ 5:                 0                      180            0                 144
+ 6:                 0                        0            0                 262
+ 7:                 0                        0            0                 288
+ 8:                 0                      288            0                 144
+ 9:                 0                      288            0                 144
+10:                 0                       80            0                  40
+11:                 0                      200            0                 158
+12:                 0                      180            0                 144
+13:                 0                        0            0                 262
+14:                 0                        0            0                 288
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:             100
+14:             100
+Contraprova adicional pessoa_UF_invalida censobr_weight: PASSOU
+Contraprova adicional pessoa_UF_invalida censobr_weight_1965: PASSOU
+Contraprova adicional pessoa_UF_invalida diagnostico_explicito: PASSOU
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432         14             418
+ 2:      censobr_weight      2     432         24             408
+ 3:      censobr_weight      3     120          7             113
+ 4:      censobr_weight      4     360          7             353
+ 5:      censobr_weight      5     324          0             279
+ 6:      censobr_weight      6     264          0               0
+ 7:      censobr_weight      7     288          0               0
+ 8: censobr_weight_1965      1     432         14             418
+ 9: censobr_weight_1965      2     432         24             408
+10: censobr_weight_1965      3     120          7             113
+11: censobr_weight_1965      4     360          7             353
+12: censobr_weight_1965      5     324          0             279
+13: censobr_weight_1965      6     264          0               0
+14: censobr_weight_1965      7     288          0               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                        0            0                 432
+ 2:                 0                        0            0                 432
+ 3:                 0                        0            0                 120
+ 4:                 0                        0            0                 358
+ 5:                 0                       45            0                 279
+ 6:                 0                      264            0                   0
+ 7:                 0                      288            0                   0
+ 8:                 0                        0            0                 432
+ 9:                 0                        0            0                 432
+10:                 0                        0            0                 120
+11:                 0                        0            0                 358
+12:                 0                       45            0                 279
+13:                 0                      264            0                   0
+14:                 0                      288            0                   0
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:              NA
+ 7:              NA
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:              NA
+14:              NA
+Contraprova adicional domicilio_UF_ausente censobr_weight: PASSOU
+Contraprova adicional domicilio_UF_ausente censobr_weight_1965: PASSOU
+Contraprova adicional domicilio_UF_ausente diagnostico_explicito: PASSOU
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432         14             418
+ 2:      censobr_weight      2     432         24             408
+ 3:      censobr_weight      3     120          7             113
+ 4:      censobr_weight      4     360          7             353
+ 5:      censobr_weight      5     324          0             279
+ 6:      censobr_weight      6     264          0               0
+ 7:      censobr_weight      7     288          0               0
+ 8: censobr_weight_1965      1     432         14             418
+ 9: censobr_weight_1965      2     432         24             408
+10: censobr_weight_1965      3     120          7             113
+11: censobr_weight_1965      4     360          7             353
+12: censobr_weight_1965      5     324          0             279
+13: censobr_weight_1965      6     264          0               0
+14: censobr_weight_1965      7     288          0               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                        0            0                 432
+ 2:                 0                        0            0                 432
+ 3:                 0                        0            0                 120
+ 4:                 0                        0            0                 358
+ 5:                 0                       45            0                 279
+ 6:                 0                      264            0                   0
+ 7:                 0                      288            0                   0
+ 8:                 0                        0            0                 432
+ 9:                 0                        0            0                 432
+10:                 0                        0            0                 120
+11:                 0                        0            0                 358
+12:                 0                       45            0                 279
+13:                 0                      264            0                   0
+14:                 0                      288            0                   0
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:              NA
+ 7:              NA
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:              NA
+14:              NA
+Contraprova adicional domicilio_UF_invalida censobr_weight: PASSOU
+Contraprova adicional domicilio_UF_invalida censobr_weight_1965: PASSOU
+Contraprova adicional domicilio_UF_invalida diagnostico_explicito: PASSOU
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432          4             140
+ 2:      censobr_weight      2     432          6             138
+ 3:      censobr_weight      3     120          4             116
+ 4:      censobr_weight      4     360          4             356
+ 5:      censobr_weight      5     324          0             324
+ 6:      censobr_weight      6     264          8             256
+ 7:      censobr_weight      7     288         28             260
+ 8: censobr_weight_1965      1     432          4             140
+ 9: censobr_weight_1965      2     432          6             138
+10: censobr_weight_1965      3     120          4             116
+11: censobr_weight_1965      4     360          4             356
+12: censobr_weight_1965      5     324          0             324
+13: censobr_weight_1965      6     264          8             256
+14: censobr_weight_1965      7     288         28             260
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                      288            0                 144
+ 2:                 0                      288            0                 144
+ 3:                 0                        0            0                 120
+ 4:                 0                        0            0                 358
+ 5:                 0                        0            0                 324
+ 6:                 0                        0            0                 262
+ 7:                 0                        0            0                 288
+ 8:                 0                      288            0                 144
+ 9:                 0                      288            0                 144
+10:                 0                        0            0                 120
+11:                 0                        0            0                 358
+12:                 0                        0            0                 324
+13:                 0                        0            0                 262
+14:                 0                        0            0                 288
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:             100
+14:             100
+Contraprova adicional pessoa_menor10 fora_do_universo censobr_weight: PASSOU
+Contraprova adicional pessoa_menor10 fora_do_universo censobr_weight_1965: PASSOU
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432          8             424
+ 2:      censobr_weight      2     432         12             420
+ 3:      censobr_weight      3     120          4             116
+ 4:      censobr_weight      4     360          4             356
+ 5:      censobr_weight      5     324          0             144
+ 6:      censobr_weight      6     264          8             256
+ 7:      censobr_weight      7     288         28             260
+ 8: censobr_weight_1965      1     432          8             424
+ 9: censobr_weight_1965      2     432         12             420
+10: censobr_weight_1965      3     120          4             116
+11: censobr_weight_1965      4     360          4             356
+12: censobr_weight_1965      5     324          0             144
+13: censobr_weight_1965      6     264          8             256
+14: censobr_weight_1965      7     288         28             260
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                        0            0                 432
+ 2:                 0                        0            0                 432
+ 3:                 0                        0            0                 120
+ 4:                 0                        0            0                 358
+ 5:                 0                      180            0                 144
+ 6:                 0                        0            0                 262
+ 7:                 0                        0            0                 288
+ 8:                 0                        0            0                 432
+ 9:                 0                        0            0                 432
+10:                 0                        0            0                 120
+11:                 0                        0            0                 358
+12:                 0                      180            0                 144
+13:                 0                        0            0                 262
+14:                 0                        0            0                 288
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:             100
+14:             100
+Contraprova adicional pessoa_ausente fora_do_universo censobr_weight: PASSOU
+Contraprova adicional pessoa_ausente fora_do_universo censobr_weight_1965: PASSOU
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432         14             418
+ 2:      censobr_weight      2     432         24             408
+ 3:      censobr_weight      3     120          7             113
+ 4:      censobr_weight      4     360          7             353
+ 5:      censobr_weight      5     324          0             279
+ 6:      censobr_weight      6     264          8             256
+ 7:      censobr_weight      7     288         28             260
+ 8: censobr_weight_1965      1     432         14             418
+ 9: censobr_weight_1965      2     432         24             408
+10: censobr_weight_1965      3     120          7             113
+11: censobr_weight_1965      4     360          7             353
+12: censobr_weight_1965      5     324          0             279
+13: censobr_weight_1965      6     264          8             256
+14: censobr_weight_1965      7     288         28             260
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                        0            0                 432
+ 2:                 0                        0            0                 432
+ 3:                 0                        0            0                 120
+ 4:                 0                        0            0                 358
+ 5:                 0                       45            0                 279
+ 6:                 0                        0            0                 262
+ 7:                 0                        0            0                 288
+ 8:                 0                        0            0                 432
+ 9:                 0                        0            0                 432
+10:                 0                        0            0                 120
+11:                 0                        0            0                 358
+12:                 0                       45            0                 279
+13:                 0                        0            0                 262
+14:                 0                        0            0                 288
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:             100
+14:             100
+Contraprova adicional domicilio_coletivo fora_do_universo censobr_weight: PASSOU
+Contraprova adicional domicilio_coletivo fora_do_universo censobr_weight_1965: PASSOU
+Comparing the seven 1965 tables with the calibrated file, with each of the two weights
+                   peso quadro celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight      1     432         14             418
+ 2:      censobr_weight      2     432         24             408
+ 3:      censobr_weight      3     120          7             113
+ 4:      censobr_weight      4     360          7             353
+ 5:      censobr_weight      5     324          0             324
+ 6:      censobr_weight      6     264          8             256
+ 7:      censobr_weight      7     288         28             260
+ 8: censobr_weight_1965      1     432         14             418
+ 9: censobr_weight_1965      2     432         24             408
+10: censobr_weight_1965      3     120          7             113
+11: censobr_weight_1965      4     360          7             353
+12: censobr_weight_1965      5     324          0             324
+13: censobr_weight_1965      6     264          8             256
+14: censobr_weight_1965      7     288         28             260
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                 0                        0            0                 432
+ 2:                 0                        0            0                 432
+ 3:                 0                        0            0                 120
+ 4:                 0                        0            0                 358
+ 5:                 0                        0            0                 324
+ 6:                 0                        0            0                 262
+ 7:                 0                        0            0                 288
+ 8:                 0                        0            0                 432
+ 9:                 0                        0            0                 432
+10:                 0                        0            0                 120
+11:                 0                        0            0                 358
+12:                 0                        0            0                 324
+13:                 0                        0            0                 262
+14:                 0                        0            0                 288
+    dif_mediana_abs
+              <num>
+ 1:             100
+ 2:             100
+ 3:             100
+ 4:             100
+ 5:             100
+ 6:             100
+ 7:             100
+ 8:             100
+ 9:             100
+10:             100
+11:             100
+12:             100
+13:             100
+14:             100
+Contraprova adicional domicilio_so_visitante fora_do_universo censobr_weight: PASSOU
+Contraprova adicional domicilio_so_visitante fora_do_universo censobr_weight_1965: PASSOU
+Idade ignorada q3/q4 e contraprovas aprovadas: tmp\idade_q34_e20418b8445d
+
+Exit code: 0 hex: 0x0

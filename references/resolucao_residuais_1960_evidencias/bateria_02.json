@@ -1,0 +1,132 @@
+{
+  "aprovado": true,
+  "scripts_solicitados": [
+    "test_novas_duplicatas_1960.R",
+    "test_novos_vinculos_1960.R",
+    "test_reparos_fonte25_1960.R",
+    "test_reparos_fonte25_guardas_1960.R",
+    "test_geografia_registros_1960.R",
+    "test_recuperacao_cartoes_1960.R",
+    "test_contagens_registros_1960.R",
+    "test_validacao_1960.R",
+    "test_validacao_amostra_127.R",
+    "test_pesos_1960.R"
+  ],
+  "testes": [
+    {
+      "script": "test_novas_duplicatas_1960.R",
+      "exit_code": 0,
+      "segundos": 29.466,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_novas_duplicatas_1960.log",
+      "log_sha256": "61dc42117de0c202f894a160092530bac7d8344941782c8b8f33441895027c21"
+    },
+    {
+      "script": "test_novos_vinculos_1960.R",
+      "exit_code": 0,
+      "segundos": 10.812,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_novos_vinculos_1960.log",
+      "log_sha256": "a7bfae41e7d953981bbfc4bef4046a7353556a45d4d9af44400d66a337399a85"
+    },
+    {
+      "script": "test_reparos_fonte25_1960.R",
+      "exit_code": 0,
+      "segundos": 104.359,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_reparos_fonte25_1960.log",
+      "log_sha256": "0c2e6643590815a8d9aec2059f645eab51e82f771e537a6c8285fd9168c96092"
+    },
+    {
+      "script": "test_reparos_fonte25_guardas_1960.R",
+      "exit_code": 0,
+      "segundos": 26.5,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_reparos_fonte25_guardas_1960.log",
+      "log_sha256": "c68249303d14bd2af854b7749ef856a1d02231aec5d6c26e633137c532da0ef4"
+    },
+    {
+      "script": "test_geografia_registros_1960.R",
+      "exit_code": 0,
+      "segundos": 22.866,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_geografia_registros_1960.log",
+      "log_sha256": "133206a12179b4d432c8d9be2a98431ee251766c305a0311b6e0e52ef3e3a009"
+    },
+    {
+      "script": "test_recuperacao_cartoes_1960.R",
+      "exit_code": 0,
+      "segundos": 245.578,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_recuperacao_cartoes_1960.log",
+      "log_sha256": "9e1819a44f4399859a27510d41ecb3bd4d38a8f660672ee5644de7cac8c4aa73"
+    },
+    {
+      "script": "test_contagens_registros_1960.R",
+      "exit_code": 0,
+      "segundos": 6.264,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_contagens_registros_1960.log",
+      "log_sha256": "731700f98f23c71a19be0c546f6c112dde4950c177bf139d7e1d5fe4e74c23e3"
+    },
+    {
+      "script": "test_validacao_1960.R",
+      "exit_code": 0,
+      "segundos": 59.187,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_validacao_1960.log",
+      "log_sha256": "372205394ddcf18c73a6a008624d27537fafbafb6c441f07bd2025c82923ae24"
+    },
+    {
+      "script": "test_validacao_amostra_127.R",
+      "exit_code": 0,
+      "segundos": 25.925,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_validacao_amostra_127.log",
+      "log_sha256": "825902aeb451a649df0f538a2926be8394d098dca65031627afb97e4b0cf2976"
+    },
+    {
+      "script": "test_pesos_1960.R",
+      "exit_code": 0,
+      "segundos": 2.596,
+      "log": "tmp/resolver_residuais_1960_20260922/bateria_legados_01/test_pesos_1960.log",
+      "log_sha256": "7586df2666b21517c50e6e5cd0de9e0bc786ca1552cbaaa17266e71ece7b0b1a"
+    }
+  ],
+  "fontes_codigo_antes": {
+    "references/test_novas_duplicatas_1960.R": "01673ecf1050c5f5bc841e4ffe7ce29b4462344da14f318c35bcca974025ebba",
+    "references/test_novos_vinculos_1960.R": "54d0241b0d4171deb67ac126d3b7b6fae12ef34e9e76bdc41afe500366fc0462",
+    "references/test_reparos_fonte25_1960.R": "d6104fe136aca270a59d7d21b039c1d6e7760791b570c00de0c487cdb9dcfd7e",
+    "references/test_reparos_fonte25_guardas_1960.R": "afe54cf0e1221965dafc0bea87d41e7110b37777cba1f6fc7689ed4910114dd6",
+    "references/test_geografia_registros_1960.R": "ef0389810503d2d4a81cf874665f2d9c0d1156620ff765053e98442493f579f7",
+    "references/test_recuperacao_cartoes_1960.R": "a8cd37e62164d355e16426b2de64d3ae17a8db18551edcf420528728a89051e1",
+    "references/test_contagens_registros_1960.R": "f43fe798d18859aeed5c70ce9593a45da4611ad1b90ba13831cae65c0f7af807",
+    "references/test_validacao_1960.R": "11aa969bc2fb8a2a4642586e68fd86caaadae630444d5316cc32de6d5a084914",
+    "references/test_validacao_amostra_127.R": "cee6fbf83be46ff5bfd74c38ef52feee86ebd3980d8e976de1ed0e48c3c77732",
+    "references/test_pesos_1960.R": "b5de89b637bd5b6a15486cb4afc336de69ee90b3a4fccdc70cec00812a55e9d3",
+    "R/microdata_1960.R": "f1085c708692a188ecf110d97b8647c2d9f8613c2e580dccca3812cf73225f89",
+    "R/microdata_1960_amostra_127.R": "a2949c6c8b84c04da54c7e7f6647d988f7a7315f609f4e66c2f183cdf4e9a28e",
+    "R/microdata_1960_amostra_25.R": "0f8dd44e67624b219c838951892b350e6caba00a2db4d983daec3db6d8a2e80b",
+    "R/microdata_1960_validacao.R": "853be365b576195487dc7773d16ec8997b90dbab799aabc6d078f9af476fb8d7",
+    "read_guides/1960_amostra_127_cartoes_recuperados.json": "9c745d59147dae664b080243203d31798fd5df010b9594c25640e9700bdd6710",
+    "read_guides/1960_amostra_127_codigos.csv": "57193b5e534cf754ec38ac32f548e78dc577c4c8794a5b8f4f1c726a11d63bec",
+    "read_guides/1960_amostra_127_correcoes.csv": "dc2efc00470d25d156c76f7decf2603597b61adceb85c3b54c094c893716f831",
+    "read_guides/1960_amostra_127_duplicatas.csv": "f43ad7ac48cd7bb108196e411748ce15927e407da010fb7afcf62c873cbf5d0a",
+    "read_guides/1960_amostra_127_familias_coincidentes.json": "23e6ee88a383238e0f1661c5857dee2af8eacd02f3961b5d8d97f8e65d87a7b4",
+    "read_guides/1960_amostra_127_geografia_fonte25.json": "4f8d332f484f2a7a0be4e32f7eb53cec1ea7ea9959b44069ab36fc698d2815d6",
+    "read_guides/1960_amostra_127_reparos_fonte25.json": "640c208283b170d444104a736627a2514004104abe4661260de494252da478d0",
+    "read_guides/1960_amostra_127_vinculos.csv": "5d0fc8e4eb9eb0d2363247426eeb61e0b58ad719130992c219decee231fbe6a8",
+    "_targets.R": "114fb6b53eb2d851335ab52cc4ca5f5972ea606933e2867c89fd4552ffe73cd0",
+    "references/rodar_r_isolado_1960.py": "d5af1cfdbf0f9eede74be3f315763bb2fa1edbf8047a8b66e584c34f2e18b60d",
+    "references/resolucao_residuais_1960_evidencias/cartoes_fora_chave.json": "8fc4edc3c2d9f4a78d8ee99c450fbc1016c0aa46b9e473a7509526b1f953b21a",
+    "references/resolucao_residuais_1960_evidencias/cartoes_fora_chave_fechada.json": "28eb5d87e47d2a9b34c27155120b4d7260cbc6a40cbd787c94c08d6b9c8a58bf",
+    "references/resolucao_residuais_1960_evidencias/cartoes_fora_chave_final.json": "c3ef808376df8f61598adc31bf980e64582b10ff37e9b7666bc2a5e5d5e872d9",
+    "references/resolucao_residuais_1960_evidencias/conferencia199_unipessoais.json": "c3df78ed4e468270c215071c96b84f17c6771abf28856f3d770449044d763e88",
+    "references/resolucao_residuais_1960_evidencias/distrito_pe_operacional.json": "ca754eda5b567f29617f58e6665208a672cea4c35286982dfb37e89b24e15807",
+    "references/resolucao_residuais_1960_evidencias/distrito_pe_proposta.json": "1d02b414822ebc916297055f2fe00ae8578ed80c585bae1fd42ea642bd4a2743",
+    "references/resolucao_residuais_1960_evidencias/segunda_testemunha_rs.json": "fb70f2a9086843184eeab3a2edc54f9f68d158abc18aac2778fd468f5794f086",
+    "references/resolucao_residuais_1960_evidencias/texto_disposicao_sp_gb.json": "c1288c1f77d8d3e8195582d582e87b8170fbe222a2f5235523dc87887e1323be",
+    "references/resolucao_residuais_1960_evidencias/texto_propostas.json": "8ba0e82203824d06dda81456550a285d5c3509925943a050997e3a745598384a",
+    "references/resolucao_residuais_1960_evidencias/vinculos_chaves_incompletas.json": "5578608808439a336273bdd79eaf428ed106de19a611c0ea3e39efb3dc4deed9",
+    "references/resolucao_residuais_duplicatas5_1960_evidencias.json": "5b25dfd07e0ccaa669304e60154f9b28313bc88f180820bb1d8acc4cc5400959",
+    "references/resolucao_residuais_duplicatas_1960_evidencias.json": "11c428feded22a4a2111e138d295bcbb2920d187ebd6ba61bfe0da4c8474539f",
+    "references/resolucao_residuais_duplicatas_alternativos_1960_evidencias.json": "0f220c79af4fce8c0906810a5c5cd0893cdf02589f6adcfc300028330a634fa3",
+    "references/resolucao_residuais_duplicatas_ce_1960_evidencias.json": "ea260b11419d6bc4df4b30eb047d569ffa344de1c9e875f63548810e73c9704e",
+    "data_raw/microdata/1960/amostra_127/HHOLDA.txt": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c",
+    "data_raw/microdata/1960/amostra_127/pessoas_1960_amostra_127.parquet": "f757fddae54edddd6742ad800149a3086acc9f581a8197ec0a123d7f4efca404",
+    "data_raw/microdata/1960/amostra_127/domicilios_1960_amostra_127.parquet": "f526ab6090d0be7dd9325a0f6b5143dab46186734f8760be8f44513924f93938"
+  },
+  "arquivos_alterados": [],
+  "limite": "Testes pequenos; nao reconstruiram os parquets nem homologam casos historicos indeterminados."
+}

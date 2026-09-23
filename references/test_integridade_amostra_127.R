@@ -19,53 +19,73 @@ pessoas <- data.table(linha = 2:3, id_arquivo = "1", UF = "19", V116 = "1901",
                      tipo = "3", V203 = "9", AGE = "99", V204 = "9", V202 = c("1", "2"), V118 = "1",
                      censobr_diagnostico = "sem_problema", censobr_variaveis_anuladas = "")
 
+# Este fixture e sintetico, nao uma transcricao de HHOLDA. A conferencia de
+# familias inteiras exige o esquema completo: os quesitos que nao participam
+# deste cenario ficam explicitamente ausentes, sem simular texto corrompido ou
+# desativar a guarda. Os dois perfis originais continuam distintos por V202.
+campos_fixture_pessoas <- c("V202", "V203", "V204", "AGE", "V205", "V206", "V207", "V208",
+  "V209", "V299", "V210", "V211", "V212", "V213", "V214", "V215", "V216", "V217", "V218",
+  "V219", "V220", "V221", "V223", "V223B", "V224")
+for(campo in setdiff(campos_fixture_pessoas, names(pessoas))) pessoas[, (campo) := NA_character_]
+for(campo in setdiff(paste0("V", 101:113), names(familias))) familias[, (campo) := NA_character_]
+familias[, `:=`(censobr_diagnostico = "sem_problema", censobr_variaveis_anuladas = "")]
+stopifnot(length(campos_fixture_pessoas) == 25L,
+  all(campos_fixture_pessoas %in% names(pessoas)), all(paste0("V", 101:113) %in% names(familias)),
+  identical(pessoas$V202, c("1", "2")), all(pessoas$AGE == "99"), all(pessoas$V204 == "9"))
+
 # Dois pares de filhos de idade ignorada: perfis iguais nao autorizam excluir.
+# Cada cenario conserva seus relatorios; nenhuma chamada reabre a saida de
+# outra contraprova. Isso tambem evita disputa pela regravacao de arquivo recente.
+saida_repetidas <- file.path(saida, "dedup_repetidas")
 repetidas <- rbind(pessoas, copy(pessoas)[, linha := 4:5])
 antes <- copy(repetidas)
-erro <- tryCatch(dedup_1960_amostra_127(list(familias = familias, pessoas = repetidas), saida),
+erro <- tryCatch(dedup_1960_amostra_127(list(familias = familias, pessoas = repetidas), saida_repetidas),
                  error = function(e) conditionMessage(e))
 stopifnot(is.character(erro), grepl("Deduplicacao suspensa", erro), identical(antes, repetidas),
-          nrow(fread(file.path(saida, "duplicatas_a_revisar.csv"))) == 2L,
-          !file.exists(file.path(saida, "duplicatas_removidas.csv")))
+          nrow(fread(file.path(saida_repetidas, "duplicatas_a_revisar.csv"))) == 2L,
+          !file.exists(file.path(saida_repetidas, "duplicatas_removidas.csv")))
 
 # Sem repeticoes, a salvaguarda nao bloqueia nem altera a cardinalidade.
-limpas <- dedup_1960_amostra_127(list(familias = familias, pessoas = pessoas), saida)
+limpas <- dedup_1960_amostra_127(list(familias = familias, pessoas = pessoas), file.path(saida, "dedup_limpas"))
 stopifnot(nrow(limpas$pessoas) == 2L)
-ligadas <- build_families_1960_amostra_127(limpas, saida)
+ligadas <- build_families_1960_amostra_127(limpas, file.path(saida, "build_limpas"))
 stopifnot(all(ligadas$pessoas$censobr_idfamily == 1L),
           all(ligadas$pessoas$censobr_familia_origem == "registro"))
 
 # Um boletim sem registro proprio nao pertence automaticamente ao anterior,
 # nem quando a geografia coincide. Tambem cobre orfao antes da primeira familia.
 for(linha_orfa in c(0L, 4L)){
+  saida_orfa <- file.path(saida, paste0("orfa_", linha_orfa))
   orfa <- copy(pessoas[1])[, `:=`(linha = linha_orfa, boletim = "167", chave = "0119124167")]
   entrada <- rbind(pessoas, orfa)
   antes <- copy(entrada)
-  erro <- tryCatch(build_families_1960_amostra_127(list(familias = familias, pessoas = entrada), saida),
+  erro <- tryCatch(build_families_1960_amostra_127(list(familias = familias, pessoas = entrada), saida_orfa),
                    error = function(e) conditionMessage(e))
   stopifnot(is.character(erro), grepl("Reconstrucao suspensa", erro), identical(antes, entrada),
-            fread(file.path(saida, "vinculos_a_revisar.csv"))$linha == linha_orfa)
+            fread(file.path(saida_orfa, "vinculos_a_revisar.csv"))$linha == linha_orfa)
 }
 
 # A presenca de conjuge nao demonstra que um cartao se perdeu.
+saida_orfa_conjuge <- file.path(saida, "orfa_conjuge")
 orfa <- copy(pessoas[1])[, `:=`(linha = 4L, boletim = "167", chave = "0119124167", V203 = "8")]
 entrada <- rbind(pessoas, orfa)
 antes <- copy(entrada)
-erro <- tryCatch(build_families_1960_amostra_127(list(familias = familias, pessoas = entrada), saida),
+erro <- tryCatch(build_families_1960_amostra_127(list(familias = familias, pessoas = entrada), saida_orfa_conjuge),
                  error = function(e) conditionMessage(e))
 stopifnot(is.character(erro), length(erro) == 1L, grepl("Reconstrucao suspensa", erro),
-          identical(antes, entrada), nrow(fread(file.path(saida, "vinculos_a_revisar.csv"))) == 1L)
+          identical(antes, entrada), nrow(fread(file.path(saida_orfa_conjuge, "vinculos_a_revisar.csv"))) == 1L)
 
 # Familia secundaria nao atravessa pasta so porque a linha anterior e principal.
+saida_convivente_pasta <- file.path(saida, "convivente_pasta")
 principal <- copy(familias)[, V101 := "2"]
 secundaria <- copy(familias)[, `:=`(linha = 4L, id_arquivo = "2", pasta = "19125",
                                     chave = "0119125166", V101 = "4")]
 filha <- copy(pessoas[1])[, `:=`(linha = 5L, id_arquivo = "2", pasta = "19125", chave = "0119125166")]
 erro <- tryCatch(build_families_1960_amostra_127(list(familias = rbind(principal, secundaria),
-                                                    pessoas = rbind(pessoas, filha)), saida),
+                                                    pessoas = rbind(pessoas, filha)), saida_convivente_pasta),
                  error = function(e) conditionMessage(e))
 stopifnot(is.character(erro), grepl("familia convivente", erro),
-          nrow(fread(file.path(saida, "conviventes_a_revisar.csv"))) == 1L)
+          nrow(fread(file.path(saida_convivente_pasta, "conviventes_a_revisar.csv"))) == 1L)
 
 # Chave de questionario igual nao autoriza atribuir outro municipio a pessoa.
 familia_outro_muni <- copy(familias)[, V116 := "1902"]
@@ -231,8 +251,8 @@ linhas_vinculos <- c(
   1032423:1032425, 1032746:1032748, 1032794:1032804)
 vinculos <- lote_integridade_127(as.integer(linhas_vinculos))
 vinculos_antes <- list(familias = copy(vinculos$familias), pessoas = copy(vinculos$pessoas))
-vinculos <- dedup_1960_amostra_127(vinculos, file.path(saida, "vinculos_ampliados"))
-vinculos <- build_families_1960_amostra_127(vinculos, file.path(saida, "vinculos_ampliados"))
+vinculos <- dedup_1960_amostra_127(vinculos, file.path(saida, "vinculos_ampliados_dedup"))
+vinculos <- build_families_1960_amostra_127(vinculos, file.path(saida, "vinculos_ampliados_build"))
 dec_vinculos <- read.csv("read_guides/1960_amostra_127_vinculos.csv", colClasses = "character")
 dec_vinculos <- dec_vinculos[as.integer(dec_vinculos$linha) %in% vinculos$pessoas$linha, ]
 stopifnot(length(linhas_vinculos) == 180L, nrow(vinculos$pessoas) == 152L,

@@ -1,0 +1,12 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_integridade_amostra_127.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Reviewing repeated person lines in 1960 amostra de 1,27%
+Reviewing repeated person lines in 1960 amostra de 1,27%
+Error in data.table::fwrite(dec, file.path(out_dir, "duplicatas_decisoes_conferidas.csv"),  : 
+  Invalid argument: 'tmp\integridade_127_59705e8a7946/duplicatas_decisoes_conferidas.csv'. Failed to open existing file for writing. Do you have write permission to it? Is this Windows and does another process such as Excel have it open?
+Calls: dedup_1960_amostra_127 -> <Anonymous>
+Execution halted
+
+Exit code: 1 hex: 0x1

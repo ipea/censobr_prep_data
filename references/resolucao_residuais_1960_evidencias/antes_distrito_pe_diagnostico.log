@@ -1,0 +1,26 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_distrito_pe_operacional_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Warning message:
+package 'digest' was built under R version 4.5.3 
+Reading 1960 amostra de 1,27%
+  7 linhas: 1 registros de familia, 6 de pessoas
+Applying manual corrections to 1960 amostra de 1,27%
+  reparo_fonte25 1; sem_problema 5; valor_isolado 1
+Parsing 1960 amostra de 1,27%
+  familias: 1 x 26 | pessoas: 6 x 39 | registros com valor anulado: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+  familias: 1; domicilios: 1; pessoas reconciliadas: 5
+Warning messages:
+1: In data.table::rbindlist(list(prova_distrito$cartao127)) :
+  Column 5 ['distrito'] of item 1 is length 0. This (and 0 others like it) has been filled with NA (NULL for list columns) to make each item uniform.
+2: In data.table::rbindlist(prova_distrito$pessoas127) :
+  Column 5 ['distrito'] of item 1 is length 0. This (and 5 others like it) has been filled with NA (NULL for list columns) to make each item uniform.
+[1] "Component \"pessoas\": Datasets have different indices. 'target': [linha]. 'current': has no index."
+Error: identical(entrada_pe, antes_pe) is not TRUE
+Execution halted
+
+Exit code: 1 hex: 0x1

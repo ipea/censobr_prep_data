@@ -1,6 +1,6 @@
 {
   "versao": 1,
-  "criterio": "Identidade geografica e cartao mantidos; grupo completo, multiplicidades e ordens. Campos legiveis do alvo exatos. Conflitos V21600/63 e atributos domiciliares nao identificadores documentados somente no contexto. Dano127 convertido emNA nao conta como igualdade a ausencia25. Dependencias de reparo conjuntas aprovadas.",
+  "criterio": "Grupo completo, multiplicidades e ordens conferidos; campos legiveis do alvo exatos. Os 33 reparos iniciais mantem o criterio anterior. Quatro reparos de V208 usam identidade localizada: duas testemunhas pessoais completas e unicas, ou alvo unico nos outros 24 campos com grupo completo. Divergencias pessoais de terceiros sao enumeradas e preservadas, nunca recodificadas. O distrito danificado X7 de PE e mantido no texto; 07 serve apenas a prova geografica localizada. Conflitos V216 00/63 e atributos domiciliares nao identificadores sao documentados no contexto. Dano da fonte de 1,27% convertido em NA nao conta como igualdade a ausencia na fonte de 25%. Dependencias de reparo conjuntas aprovadas.",
   "fontes": [
     {
       "arquivo": "data_raw/microdata/1960/amostra_127/HHOLDA.txt",
@@ -4870,6 +4870,1021 @@
         }
       ],
       "divergencias_cartao_preservadas": {}
+    },
+    {
+      "linha127": 238423,
+      "tipo": "pessoas",
+      "chave": [
+        21,
+        22366,
+        154
+      ],
+      "motivos": [],
+      "aprovavel_no_criterio": true,
+      "propostas": [
+        {
+          "campo": "V208",
+          "inicio": 28,
+          "fim": 28,
+          "antes": " ",
+          "depois": "9",
+          "linhas25": [
+            902375
+          ]
+        }
+      ],
+      "pessoas127": 6,
+      "pessoas25": 6,
+      "texto_original": "212166X72236615425171505520 20003110040010055332321207\\0037520",
+      "texto_antes": "212166X72236615425171505520 20003110040010055332321207\\0037520",
+      "texto_corrigido_proposto": "212166X72236615425171505520920003110040010055332321207\\0037520",
+      "fontes25_possiveis": [
+        {
+          "linha": 902375,
+          "texto": "223661540100101715055209920003110040010055332321207000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.pe.gz"
+        }
+      ],
+      "grupo127": [
+        {
+          "linha": 238422,
+          "texto": "212166X722366154151478384680205003                    \\0037520",
+          "decisao": "valor_isolado"
+        },
+        {
+          "linha": 238423,
+          "texto": "212166X72236615425171505520 20003110040010055332321207\\0037520",
+          "decisao": "valor_isolado"
+        },
+        {
+          "linha": 239457,
+          "texto": "2121660722366154352911755209200031100000000034-       \\0037673",
+          "decisao": null
+        },
+        {
+          "linha": 239458,
+          "texto": "2121660722366154352911055209200031100000000031-       \\0037673",
+          "decisao": null
+        },
+        {
+          "linha": 239459,
+          "texto": "2121660722366154351911455209200031100000000031-       \\0037673",
+          "decisao": null
+        },
+        {
+          "linha": 239460,
+          "texto": "21216607223661543529107552092000311-                  \\0037673",
+          "decisao": null
+        },
+        {
+          "linha": 239461,
+          "texto": "2121660722366154352911355209200031100000000034-       \\0037673",
+          "decisao": null
+        }
+      ],
+      "grupo25": [
+        {
+          "linha": 902374,
+          "texto": "223661540000614783846802050032166075000000000000000000",
+          "tipo": "familias",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.pe.gz"
+        },
+        {
+          "linha": 902375,
+          "texto": "223661540100101715055209920003110040010055332321207000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.pe.gz"
+        },
+        {
+          "linha": 902376,
+          "texto": "2236615402902929110552099200031100000000031        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.pe.gz"
+        },
+        {
+          "linha": 902377,
+          "texto": "2236615403703719114552099200031100000000031        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.pe.gz"
+        },
+        {
+          "linha": 902378,
+          "texto": "2236615404504529113552099200031100000000034        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.pe.gz"
+        },
+        {
+          "linha": 902379,
+          "texto": "2236615405305329117552099200031100063000034        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.pe.gz"
+        },
+        {
+          "linha": 902380,
+          "texto": "22366154061061291075520992000311                   000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.pe.gz"
+        }
+      ],
+      "correspondencias_contexto": [
+        {
+          "linha127": 238423,
+          "linha25": 902375,
+          "diferencas_preservadas": {
+            "V208": [
+              null,
+              9
+            ]
+          }
+        },
+        {
+          "linha127": 239457,
+          "linha25": 902379,
+          "diferencas_preservadas": {
+            "V216": [
+              0,
+              63
+            ]
+          }
+        },
+        {
+          "linha127": 239458,
+          "linha25": 902376,
+          "diferencas_preservadas": {}
+        },
+        {
+          "linha127": 239459,
+          "linha25": 902377,
+          "diferencas_preservadas": {}
+        },
+        {
+          "linha127": 239460,
+          "linha25": 902380,
+          "diferencas_preservadas": {}
+        },
+        {
+          "linha127": 239461,
+          "linha25": 902378,
+          "diferencas_preservadas": {}
+        }
+      ],
+      "divergencias_cartao_preservadas": {},
+      "criterio_identidade_contexto": "grupo_completo_com_divergencias_preservadas_v1",
+      "divergencias_pessoais_preservadas": [
+        {
+          "linha127": 239457,
+          "linha25": 902379,
+          "diferencas_preservadas": {
+            "V216": [
+              0,
+              63
+            ]
+          }
+        }
+      ],
+      "testemunhas_identidade": [
+        {
+          "linha127": 238423,
+          "linha25": 902375,
+          "campos_ignorados": [
+            "V208"
+          ]
+        }
+      ],
+      "geografia_parcial_preservada": [
+        {
+          "linha127": 238422,
+          "campo": "distrito",
+          "antes": "X7",
+          "depois": "07"
+        },
+        {
+          "linha127": 238423,
+          "campo": "distrito",
+          "antes": "X7",
+          "depois": "07"
+        }
+      ]
+    },
+    {
+      "linha127": 540394,
+      "tipo": "pessoas",
+      "chave": [
+        50,
+        50048,
+        43
+      ],
+      "motivos": [],
+      "aprovavel_no_criterio": true,
+      "propostas": [
+        {
+          "campo": "V208",
+          "inicio": 28,
+          "fim": 28,
+          "antes": " ",
+          "depois": "9",
+          "linhas25": [
+            34601
+          ]
+        }
+      ],
+      "pessoas127": 10,
+      "pessoas25": 10,
+      "texto_original": "505001015004804335191076416 1816200-                  \\0085642",
+      "texto_antes": "505001015004804335191076416 1816200-                  \\0085642",
+      "texto_corrigido_proposto": "50500101500480433519107641691816200-                  \\0085642",
+      "fontes25_possiveis": [
+        {
+          "linha": 34601,
+          "texto": "50048043083083191076416991816200                   000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        }
+      ],
+      "grupo127": [
+        {
+          "linha": 540389,
+          "texto": "5050010150048043151478389680202001                    \\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540390,
+          "texto": "505001015004804325171486416918161520073508086332321167\\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540391,
+          "texto": "50500101500480433529108641691816042-                  \\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540392,
+          "texto": "5050010150048043352911564169181608210000000035-       \\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540393,
+          "texto": "505001015004804335191196416918161420000000003332321160\\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540394,
+          "texto": "505001015004804335191076416 1816200-                  \\0085642",
+          "decisao": "valor_isolado"
+        },
+        {
+          "linha": 540395,
+          "texto": "5050010150048043351911064169181604200000000035-       \\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540396,
+          "texto": "5050010150048043352814864169181615200735080834-       \\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540397,
+          "texto": "5050010150048043354415064169181631100400020039-       \\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540398,
+          "texto": "5050010150048043354215064169181631100400000031-       \\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540399,
+          "texto": "505001015004804335291126416 181607210000000035-       \\0085642",
+          "decisao": "valor_isolado"
+        }
+      ],
+      "grupo25": [
+        {
+          "linha": 34593,
+          "texto": "500480430061014783896802020015001015000000000000000000",
+          "tipo": "familias",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34594,
+          "texto": "500480430160161714864169918161520073508086332321167000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34595,
+          "texto": "5004804302402428148641699181615200735080834        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34596,
+          "texto": "500480430320321911964169918161420006300003332321160000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34597,
+          "texto": "5004804304004029115641699181608210063000035        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34598,
+          "texto": "5004804305905929112641699181607210000000035        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34599,
+          "texto": "5004804306706719110641699181604200000000035        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34600,
+          "texto": "50048043075075291086416991816042                   000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34601,
+          "texto": "50048043083083191076416991816200                   000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34602,
+          "texto": "5004804309109142150641699181631100400000031        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34603,
+          "texto": "5004804310510544150641699181634200400020039        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        }
+      ],
+      "correspondencias_contexto": [
+        {
+          "linha127": 540390,
+          "linha25": 34594,
+          "diferencas_preservadas": {}
+        },
+        {
+          "linha127": 540391,
+          "linha25": 34600,
+          "diferencas_preservadas": {}
+        },
+        {
+          "linha127": 540392,
+          "linha25": 34597,
+          "diferencas_preservadas": {
+            "V216": [
+              0,
+              63
+            ]
+          }
+        },
+        {
+          "linha127": 540393,
+          "linha25": 34596,
+          "diferencas_preservadas": {
+            "V216": [
+              0,
+              63
+            ]
+          }
+        },
+        {
+          "linha127": 540394,
+          "linha25": 34601,
+          "diferencas_preservadas": {
+            "V208": [
+              null,
+              9
+            ]
+          }
+        },
+        {
+          "linha127": 540395,
+          "linha25": 34599,
+          "diferencas_preservadas": {}
+        },
+        {
+          "linha127": 540396,
+          "linha25": 34595,
+          "diferencas_preservadas": {}
+        },
+        {
+          "linha127": 540397,
+          "linha25": 34603,
+          "diferencas_preservadas": {
+            "V212": [
+              1,
+              4
+            ],
+            "V213": [
+              1,
+              2
+            ]
+          }
+        },
+        {
+          "linha127": 540398,
+          "linha25": 34602,
+          "diferencas_preservadas": {}
+        },
+        {
+          "linha127": 540399,
+          "linha25": 34598,
+          "diferencas_preservadas": {
+            "V208": [
+              null,
+              9
+            ]
+          }
+        }
+      ],
+      "divergencias_cartao_preservadas": {},
+      "criterio_identidade_contexto": "grupo_completo_com_divergencias_preservadas_v1",
+      "divergencias_pessoais_preservadas": [
+        {
+          "linha127": 540392,
+          "linha25": 34597,
+          "diferencas_preservadas": {
+            "V216": [
+              0,
+              63
+            ]
+          }
+        },
+        {
+          "linha127": 540393,
+          "linha25": 34596,
+          "diferencas_preservadas": {
+            "V216": [
+              0,
+              63
+            ]
+          }
+        },
+        {
+          "linha127": 540397,
+          "linha25": 34603,
+          "diferencas_preservadas": {
+            "V212": [
+              1,
+              4
+            ],
+            "V213": [
+              1,
+              2
+            ]
+          }
+        }
+      ],
+      "testemunhas_identidade": [
+        {
+          "linha127": 540390,
+          "linha25": 34594,
+          "campos_ignorados": []
+        },
+        {
+          "linha127": 540396,
+          "linha25": 34595,
+          "campos_ignorados": []
+        }
+      ],
+      "geografia_parcial_preservada": []
+    },
+    {
+      "linha127": 540399,
+      "tipo": "pessoas",
+      "chave": [
+        50,
+        50048,
+        43
+      ],
+      "motivos": [],
+      "aprovavel_no_criterio": true,
+      "propostas": [
+        {
+          "campo": "V208",
+          "inicio": 28,
+          "fim": 28,
+          "antes": " ",
+          "depois": "9",
+          "linhas25": [
+            34598
+          ]
+        }
+      ],
+      "pessoas127": 10,
+      "pessoas25": 10,
+      "texto_original": "505001015004804335291126416 181607210000000035-       \\0085642",
+      "texto_antes": "505001015004804335291126416 181607210000000035-       \\0085642",
+      "texto_corrigido_proposto": "5050010150048043352911264169181607210000000035-       \\0085642",
+      "fontes25_possiveis": [
+        {
+          "linha": 34598,
+          "texto": "5004804305905929112641699181607210000000035        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        }
+      ],
+      "grupo127": [
+        {
+          "linha": 540389,
+          "texto": "5050010150048043151478389680202001                    \\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540390,
+          "texto": "505001015004804325171486416918161520073508086332321167\\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540391,
+          "texto": "50500101500480433529108641691816042-                  \\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540392,
+          "texto": "5050010150048043352911564169181608210000000035-       \\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540393,
+          "texto": "505001015004804335191196416918161420000000003332321160\\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540394,
+          "texto": "505001015004804335191076416 1816200-                  \\0085642",
+          "decisao": "valor_isolado"
+        },
+        {
+          "linha": 540395,
+          "texto": "5050010150048043351911064169181604200000000035-       \\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540396,
+          "texto": "5050010150048043352814864169181615200735080834-       \\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540397,
+          "texto": "5050010150048043354415064169181631100400020039-       \\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540398,
+          "texto": "5050010150048043354215064169181631100400000031-       \\0085642",
+          "decisao": null
+        },
+        {
+          "linha": 540399,
+          "texto": "505001015004804335291126416 181607210000000035-       \\0085642",
+          "decisao": "valor_isolado"
+        }
+      ],
+      "grupo25": [
+        {
+          "linha": 34593,
+          "texto": "500480430061014783896802020015001015000000000000000000",
+          "tipo": "familias",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34594,
+          "texto": "500480430160161714864169918161520073508086332321167000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34595,
+          "texto": "5004804302402428148641699181615200735080834        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34596,
+          "texto": "500480430320321911964169918161420006300003332321160000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34597,
+          "texto": "5004804304004029115641699181608210063000035        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34598,
+          "texto": "5004804305905929112641699181607210000000035        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34599,
+          "texto": "5004804306706719110641699181604200000000035        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34600,
+          "texto": "50048043075075291086416991816042                   000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34601,
+          "texto": "50048043083083191076416991816200                   000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34602,
+          "texto": "5004804309109142150641699181631100400000031        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34603,
+          "texto": "5004804310510544150641699181634200400020039        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        }
+      ],
+      "correspondencias_contexto": [
+        {
+          "linha127": 540390,
+          "linha25": 34594,
+          "diferencas_preservadas": {}
+        },
+        {
+          "linha127": 540391,
+          "linha25": 34600,
+          "diferencas_preservadas": {}
+        },
+        {
+          "linha127": 540392,
+          "linha25": 34597,
+          "diferencas_preservadas": {
+            "V216": [
+              0,
+              63
+            ]
+          }
+        },
+        {
+          "linha127": 540393,
+          "linha25": 34596,
+          "diferencas_preservadas": {
+            "V216": [
+              0,
+              63
+            ]
+          }
+        },
+        {
+          "linha127": 540394,
+          "linha25": 34601,
+          "diferencas_preservadas": {
+            "V208": [
+              null,
+              9
+            ]
+          }
+        },
+        {
+          "linha127": 540395,
+          "linha25": 34599,
+          "diferencas_preservadas": {}
+        },
+        {
+          "linha127": 540396,
+          "linha25": 34595,
+          "diferencas_preservadas": {}
+        },
+        {
+          "linha127": 540397,
+          "linha25": 34603,
+          "diferencas_preservadas": {
+            "V212": [
+              1,
+              4
+            ],
+            "V213": [
+              1,
+              2
+            ]
+          }
+        },
+        {
+          "linha127": 540398,
+          "linha25": 34602,
+          "diferencas_preservadas": {}
+        },
+        {
+          "linha127": 540399,
+          "linha25": 34598,
+          "diferencas_preservadas": {
+            "V208": [
+              null,
+              9
+            ]
+          }
+        }
+      ],
+      "divergencias_cartao_preservadas": {},
+      "criterio_identidade_contexto": "grupo_completo_com_divergencias_preservadas_v1",
+      "divergencias_pessoais_preservadas": [
+        {
+          "linha127": 540392,
+          "linha25": 34597,
+          "diferencas_preservadas": {
+            "V216": [
+              0,
+              63
+            ]
+          }
+        },
+        {
+          "linha127": 540393,
+          "linha25": 34596,
+          "diferencas_preservadas": {
+            "V216": [
+              0,
+              63
+            ]
+          }
+        },
+        {
+          "linha127": 540397,
+          "linha25": 34603,
+          "diferencas_preservadas": {
+            "V212": [
+              1,
+              4
+            ],
+            "V213": [
+              1,
+              2
+            ]
+          }
+        }
+      ],
+      "testemunhas_identidade": [
+        {
+          "linha127": 540390,
+          "linha25": 34594,
+          "campos_ignorados": []
+        },
+        {
+          "linha127": 540396,
+          "linha25": 34595,
+          "campos_ignorados": []
+        }
+      ],
+      "geografia_parcial_preservada": []
+    },
+    {
+      "linha127": 540461,
+      "tipo": "pessoas",
+      "chave": [
+        50,
+        50048,
+        51
+      ],
+      "motivos": [],
+      "aprovavel_no_criterio": true,
+      "propostas": [
+        {
+          "campo": "V208",
+          "inicio": 28,
+          "fim": 28,
+          "antes": " ",
+          "depois": "9",
+          "linhas25": [
+            34663
+          ]
+        }
+      ],
+      "pessoas127": 8,
+      "pessoas25": 8,
+      "texto_original": "505001015004805135281365516 191631100740060634-       \\0085650",
+      "texto_antes": "505001015004805135281365516 191631100740060634-       \\0085650",
+      "texto_corrigido_proposto": "5050010150048051352813655169191631100740060634-       \\0085650",
+      "fontes25_possiveis": [
+        {
+          "linha": 34663,
+          "texto": "5004805102702728136551699191631100740060634        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        }
+      ],
+      "grupo127": [
+        {
+          "linha": 540455,
+          "texto": "5050010150048051151478389680202001                    \\0085650",
+          "decisao": null
+        },
+        {
+          "linha": 540456,
+          "texto": "505001015004805125371485516919163110074006066332321167\\0085650",
+          "decisao": null
+        },
+        {
+          "linha": 540457,
+          "texto": "50500101500480513549109552892000200-                  \\0085650",
+          "decisao": null
+        },
+        {
+          "linha": 540458,
+          "texto": "5050010150048051354911355289200020000000000031-       \\0085650",
+          "decisao": null
+        },
+        {
+          "linha": 540459,
+          "texto": "505001015004805135291155528920002000000000003332321160\\0085650",
+          "decisao": null
+        },
+        {
+          "linha": 540460,
+          "texto": "50500101500480513519101552892000-                     \\0085650",
+          "decisao": null
+        },
+        {
+          "linha": 540461,
+          "texto": "505001015004805135281365516 191631100740060634-       \\0085650",
+          "decisao": "valor_isolado"
+        },
+        {
+          "linha": 540462,
+          "texto": "50500101500480513549108552892000311-                  \\0085650",
+          "decisao": null
+        },
+        {
+          "linha": 540463,
+          "texto": "50500101500480513519105552892000311-                  \\0085650",
+          "decisao": null
+        }
+      ],
+      "grupo25": [
+        {
+          "linha": 34661,
+          "texto": "500480510090814783896802020015001015000000000000000000",
+          "tipo": "familias",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34662,
+          "texto": "500480510190193714855169919163110074006066332321167000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34663,
+          "texto": "5004805102702728136551699191631100740060634        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34664,
+          "texto": "500480510350352911555289920002000006300003332321160000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34665,
+          "texto": "50048051043043191055528992000311                   000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34666,
+          "texto": "50048051051051191015528992000                      000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34667,
+          "texto": "5004805106006049113552899200020000000000035        000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34668,
+          "texto": "50048051078078491095528992000200                   000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        },
+        {
+          "linha": 34669,
+          "texto": "50048051086086491085528992000311                   000",
+          "tipo": "pessoas",
+          "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz"
+        }
+      ],
+      "correspondencias_contexto": [
+        {
+          "linha127": 540456,
+          "linha25": 34662,
+          "diferencas_preservadas": {}
+        },
+        {
+          "linha127": 540457,
+          "linha25": 34668,
+          "diferencas_preservadas": {}
+        },
+        {
+          "linha127": 540458,
+          "linha25": 34667,
+          "diferencas_preservadas": {
+            "V220": [
+              1,
+              5
+            ]
+          }
+        },
+        {
+          "linha127": 540459,
+          "linha25": 34664,
+          "diferencas_preservadas": {
+            "V216": [
+              0,
+              63
+            ]
+          }
+        },
+        {
+          "linha127": 540460,
+          "linha25": 34666,
+          "diferencas_preservadas": {}
+        },
+        {
+          "linha127": 540461,
+          "linha25": 34663,
+          "diferencas_preservadas": {
+            "V208": [
+              null,
+              9
+            ]
+          }
+        },
+        {
+          "linha127": 540462,
+          "linha25": 34669,
+          "diferencas_preservadas": {}
+        },
+        {
+          "linha127": 540463,
+          "linha25": 34665,
+          "diferencas_preservadas": {}
+        }
+      ],
+      "divergencias_cartao_preservadas": {},
+      "criterio_identidade_contexto": "grupo_completo_com_divergencias_preservadas_v1",
+      "divergencias_pessoais_preservadas": [
+        {
+          "linha127": 540458,
+          "linha25": 34667,
+          "diferencas_preservadas": {
+            "V220": [
+              1,
+              5
+            ]
+          }
+        },
+        {
+          "linha127": 540459,
+          "linha25": 34664,
+          "diferencas_preservadas": {
+            "V216": [
+              0,
+              63
+            ]
+          }
+        }
+      ],
+      "testemunhas_identidade": [
+        {
+          "linha127": 540456,
+          "linha25": 34662,
+          "campos_ignorados": []
+        },
+        {
+          "linha127": 540457,
+          "linha25": 34668,
+          "campos_ignorados": []
+        }
+      ],
+      "geografia_parcial_preservada": []
     }
   ]
 }

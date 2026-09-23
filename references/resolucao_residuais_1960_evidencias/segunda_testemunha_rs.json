@@ -1,0 +1,116 @@
+{
+  "casos": [
+    {
+      "linha127": 1009631,
+      "texto127_original": "8183630382894021316415254249200017210632121234-       \\0165082",
+      "texto127_corrigido": "8183630382894021316415254249200017210632121234-       \\0165082",
+      "copias25campos_na127_UF": [
+        {
+          "linha": 1009631,
+          "original": "8183630382894021316415254249200017210632121234-       \\0165082",
+          "corrigido": "8183630382894021316415254249200017210632121234-       \\0165082"
+        }
+      ],
+      "n_copias25campos_na127_UF": 1,
+      "n_copias24campos_na25_UF": 1,
+      "n_copias25campos_na25_UF": 1,
+      "candidatos25": [
+        {
+          "uf": 81,
+          "linha": 1277348,
+          "pasta": 82892,
+          "boletim": 201,
+          "texto": "8289220101501564152542499200017210632121234        000"
+        }
+      ]
+    },
+    {
+      "linha127": 1009632,
+      "texto127_original": "8183630382894021316412054249200017210000000034-       \\0165082",
+      "texto127_corrigido": "8183630382894021316412054249200017210000000034-       \\0165082",
+      "copias25campos_na127_UF": [
+        {
+          "linha": 954466,
+          "original": "8181060181452142316412054249200017210000000034-       \\0156065",
+          "corrigido": "8181060181452142316412054249200017210000000034-       \\0156065"
+        },
+        {
+          "linha": 1009632,
+          "original": "8183630382894021316412054249200017210000000034-       \\0165082",
+          "corrigido": "8183630382894021316412054249200017210000000034-       \\0165082"
+        }
+      ],
+      "n_copias25campos_na127_UF": 2,
+      "n_copias24campos_na25_UF": 8,
+      "n_copias25campos_na25_UF": 0,
+      "candidatos25": [
+        {
+          "uf": 81,
+          "linha": 75232,
+          "pasta": 81452,
+          "boletim": 142,
+          "texto": "8145214211011064120542499200017210063000034        000"
+        },
+        {
+          "uf": 81,
+          "linha": 546638,
+          "pasta": 81828,
+          "boletim": 130,
+          "texto": "8182813004004064120542499200017210063000034        000"
+        },
+        {
+          "uf": 81,
+          "linha": 1103146,
+          "pasta": 82646,
+          "boletim": 212,
+          "texto": "8264621203003064120542499200017210063000034        000"
+        },
+        {
+          "uf": 81,
+          "linha": 1171849,
+          "pasta": 82744,
+          "boletim": 71,
+          "texto": "8274407106706764120542499200017210063000034        000"
+        },
+        {
+          "uf": 81,
+          "linha": 1231904,
+          "pasta": 82830,
+          "boletim": 137,
+          "texto": "8283013709709764120542499200017210063000034        000"
+        },
+        {
+          "uf": 81,
+          "linha": 1277349,
+          "pasta": 82892,
+          "boletim": 201,
+          "texto": "8289220102302364120542499200017210063000034        000"
+        },
+        {
+          "uf": 81,
+          "linha": 1318160,
+          "pasta": 82956,
+          "boletim": 186,
+          "texto": "8295618603803864120542499200017210063000034        000"
+        },
+        {
+          "uf": 81,
+          "linha": 1462865,
+          "pasta": 83172,
+          "boletim": 216,
+          "texto": "8317221603903964120542499200017210063000034        000"
+        }
+      ]
+    }
+  ],
+  "criterio_alternativo_testado": "Uma testemunha25unica mais segunda24unica, conservandoV216.",
+  "resultado": "Falha: a segunda pessoa nao e unica nem na127(ao menos2) nem na25(8).",
+  "acao": "Nao recuperar cartao sob criterio da segunda testemunha rara; manter registros.",
+  "limite": "Isto refuta essa via especifica; nao prova que o candidato82892/201 seja falso.",
+  "fontes_sha256": {
+    "tmp/resolucao_residuais_registros_1960_20260922/cartoes_chave01/indice127.sqlite": "a2a603216e9f8aaaa1da0eaef18a79953b25b7cf4fe319aed6e78221026833b9",
+    "tmp/investigacao_residual_1960_20260922/vinculos/integral02/ocorrencias25.sqlite": "4a1db284224095620e27cdbe922c2a00a8ed40e98279f77af87370bebed85b56",
+    "data/release_legacy/Censo.1960.amostra.25porcento.rs.gz": "b5d0686e2ddf796b4e33338e1b1dee6a0b53155043b76c5895577936b053e6c2"
+  },
+  "nova_varredura_nacional": false
+}

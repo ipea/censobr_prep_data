@@ -1,0 +1,7 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_dependencias_residuais_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Dependencias residuais conferidas por parse, sem avaliar o pipeline.
+
+Exit code: 0 hex: 0x0

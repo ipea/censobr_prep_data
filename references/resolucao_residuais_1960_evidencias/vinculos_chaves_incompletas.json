@@ -1,0 +1,433 @@
+{
+  "casos": [
+    {
+      "linha": 142402,
+      "linha_familia": 142817,
+      "cartoes127_compativeis": [
+        142817
+      ],
+      "pessoas127": [
+        {
+          "linha": 142402,
+          "uf": 14,
+          "pasta": null,
+          "boletim": 67,
+          "distrito": 1,
+          "municipio": 1641,
+          "situacao": 5,
+          "chave": "01152 0067",
+          "original": "14164101152 00673519104570792000-                     \\0021501",
+          "corrigido": "14164101152 00673519104570792000-                     \\0021501",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": null,
+          "familia_fisica": 142395
+        },
+        {
+          "linha": 142818,
+          "uf": 14,
+          "pasta": 15290,
+          "boletim": 67,
+          "distrito": 1,
+          "municipio": 1641,
+          "situacao": 5,
+          "chave": "0115290067",
+          "original": "141641011529006725171385707920003110065006065332321176\\0021568",
+          "corrigido": "141641011529006725171385707920003110065006065332321176\\0021568",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 142817,
+          "familia_fisica": 142817
+        },
+        {
+          "linha": 142819,
+          "uf": 14,
+          "pasta": 15290,
+          "boletim": 67,
+          "distrito": 1,
+          "municipio": 1641,
+          "situacao": 5,
+          "chave": "0115290067",
+          "original": "14164101152900673529105570792000111-                  \\0021568",
+          "corrigido": "14164101152900673529105570792000111-                  \\0021568",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 142817,
+          "familia_fisica": 142817
+        },
+        {
+          "linha": 142820,
+          "uf": 14,
+          "pasta": 15290,
+          "boletim": 67,
+          "distrito": 1,
+          "municipio": 1641,
+          "situacao": 5,
+          "chave": "0115290067",
+          "original": "14164101152900673529109570792000311-                  \\0021568",
+          "corrigido": "14164101152900673529109570792000311-                  \\0021568",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 142817,
+          "familia_fisica": 142817
+        },
+        {
+          "linha": 142821,
+          "uf": 14,
+          "pasta": 15290,
+          "boletim": 67,
+          "distrito": 1,
+          "municipio": 1641,
+          "situacao": 5,
+          "chave": "0115290067",
+          "original": "14164101152900673519107570792000311-                  \\0021568",
+          "corrigido": "14164101152900673519107570792000311-                  \\0021568",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 142817,
+          "familia_fisica": 142817
+        },
+        {
+          "linha": 142822,
+          "uf": 14,
+          "pasta": 15290,
+          "boletim": 67,
+          "distrito": 1,
+          "municipio": 1641,
+          "situacao": 5,
+          "chave": "0115290067",
+          "original": "14164101152900673529102570792000-                     \\0021568",
+          "corrigido": "14164101152900673529102570792000-                     \\0021568",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 142817,
+          "familia_fisica": 142817
+        },
+        {
+          "linha": 142823,
+          "uf": 14,
+          "pasta": 15290,
+          "boletim": 67,
+          "distrito": 1,
+          "municipio": 1641,
+          "situacao": 5,
+          "chave": "0115290067",
+          "original": "14164101152900673519010570792000-                     \\0021568",
+          "corrigido": "14164101152900673519010570792000-                     \\0021568",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 142817,
+          "familia_fisica": 142817
+        },
+        {
+          "linha": 142824,
+          "uf": 14,
+          "pasta": 15290,
+          "boletim": 67,
+          "distrito": 1,
+          "municipio": 1641,
+          "situacao": 5,
+          "chave": "0115290067",
+          "original": "1416410115290067352813457079200031100650060634-       \\0021568",
+          "corrigido": "1416410115290067352813457079200031100650060634-       \\0021568",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 142817,
+          "familia_fisica": 142817
+        }
+      ],
+      "cartao127": {
+        "linha": 142817,
+        "uf": 14,
+        "pasta": 15290,
+        "boletim": 67,
+        "distrito": 1,
+        "municipio": 1641,
+        "situacao": 5,
+        "chave": "0115290067",
+        "original": "1416410115290067151478384680204003                    \\0021568",
+        "corrigido": "1416410115290067151478384680204003                    \\0021568",
+        "invalidos": ""
+      },
+      "cartao25": {
+        "linha": 915344,
+        "texto": "152900670000814783846802040031641015000000000000000000"
+      },
+      "pessoas25": [
+        {
+          "linha": 915345,
+          "texto": "152900670100101713857079920003110065006065332321176000"
+        },
+        {
+          "linha": 915346,
+          "texto": "1529006702702728134570799200031100650060634        000"
+        },
+        {
+          "linha": 915347,
+          "texto": "15290067037037291095707992000311                   000"
+        },
+        {
+          "linha": 915348,
+          "texto": "15290067047047191075707992000311                   000"
+        },
+        {
+          "linha": 915349,
+          "texto": "15290067054054291055707992000111                   000"
+        },
+        {
+          "linha": 915350,
+          "texto": "15290067062062191045707992000                      000"
+        },
+        {
+          "linha": 915351,
+          "texto": "15290067074074291025707992000                      000"
+        },
+        {
+          "linha": 915352,
+          "texto": "15290067089089190105707992000                      000"
+        }
+      ],
+      "linha_pessoa25": 915350,
+      "n_pessoas": 8,
+      "composicao25_exata": true,
+      "pasta_original_preservada": true,
+      "fonte25": "data/release_legacy/Censo.1960.amostra.25porcento.ce.gz",
+      "fonte25_sha256": "40d8ecdc24e7d8c9ba8b4715f6f0bfa1f1385e4b3d8fe1d15eac3595b68f9fa2"
+    },
+    {
+      "linha": 259248,
+      "linha_familia": 259657,
+      "cartoes127_compativeis": [
+        259657
+      ],
+      "pessoas127": [
+        {
+          "linha": 259248,
+          "uf": 21,
+          "pasta": null,
+          "boletim": 69,
+          "distrito": 7,
+          "municipio": 2262,
+          "situacao": 5,
+          "chave": "0722 34069",
+          "original": "2122620722 34069352911354209200015200000000034-       \\0040955",
+          "corrigido": "2122620722 34069352911354209200015200000000034-       \\0040955",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": null,
+          "familia_fisica": 259241
+        },
+        {
+          "linha": 259658,
+          "uf": 21,
+          "pasta": 22934,
+          "boletim": 69,
+          "distrito": 7,
+          "municipio": 2262,
+          "situacao": 5,
+          "chave": "0722934069",
+          "original": "212262072293406925171475420920001520084505056332321207\\0041021",
+          "corrigido": "212262072293406925171475420920001520084505056332321207\\0041021",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 259657,
+          "familia_fisica": 259657
+        },
+        {
+          "linha": 259659,
+          "uf": 21,
+          "pasta": 22934,
+          "boletim": 69,
+          "distrito": 7,
+          "municipio": 2262,
+          "situacao": 5,
+          "chave": "0722934069",
+          "original": "2122620722934069351911054209200031100000000031-       \\0041021",
+          "corrigido": "2122620722934069351911054209200031100000000031-       \\0041021",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 259657,
+          "familia_fisica": 259657
+        },
+        {
+          "linha": 259660,
+          "uf": 21,
+          "pasta": 22934,
+          "boletim": 69,
+          "distrito": 7,
+          "municipio": 2262,
+          "situacao": 5,
+          "chave": "0722934069",
+          "original": "2122620722934069352814754209200031100845050534-       \\0041021",
+          "corrigido": "2122620722934069352814754209200031100845050534-       \\0041021",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 259657,
+          "familia_fisica": 259657
+        },
+        {
+          "linha": 259661,
+          "uf": 21,
+          "pasta": 22934,
+          "boletim": 69,
+          "distrito": 7,
+          "municipio": 2262,
+          "situacao": 5,
+          "chave": "0722934069",
+          "original": "21226207229340693519103542092000-                     \\0041021",
+          "corrigido": "21226207229340693519103542092000-                     \\0041021",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 259657,
+          "familia_fisica": 259657
+        },
+        {
+          "linha": 259662,
+          "uf": 21,
+          "pasta": 22934,
+          "boletim": 69,
+          "distrito": 7,
+          "municipio": 2262,
+          "situacao": 5,
+          "chave": "0722934069",
+          "original": "21226207229340693529108542092000311-                  \\0041021",
+          "corrigido": "21226207229340693529108542092000311-                  \\0041021",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 259657,
+          "familia_fisica": 259657
+        },
+        {
+          "linha": 259663,
+          "uf": 21,
+          "pasta": 22934,
+          "boletim": 69,
+          "distrito": 7,
+          "municipio": 2262,
+          "situacao": 5,
+          "chave": "0722934069",
+          "original": "21226207229340693519105542092000311-                  \\0041021",
+          "corrigido": "21226207229340693519105542092000311-                  \\0041021",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 259657,
+          "familia_fisica": 259657
+        }
+      ],
+      "cartao127": {
+        "linha": 259657,
+        "uf": 21,
+        "pasta": 22934,
+        "boletim": 69,
+        "distrito": 7,
+        "municipio": 2262,
+        "situacao": 5,
+        "chave": "0722934069",
+        "original": "2122620722934069151498384680204002                    \\0041021",
+        "corrigido": "2122620722934069151498384680204002                    \\0041021",
+        "invalidos": ""
+      },
+      "cartao25": {
+        "linha": 1300542,
+        "texto": "229340690090714983846802040022262075000000000000000000"
+      },
+      "pessoas25": [
+        {
+          "linha": 1300543,
+          "texto": "229340690190191714754209920001520084505056332321207000"
+        },
+        {
+          "linha": 1300544,
+          "texto": "2293406902702728147542099200031100845050534        000"
+        },
+        {
+          "linha": 1300545,
+          "texto": "2293406903503529113542099200015200000000034        000"
+        },
+        {
+          "linha": 1300546,
+          "texto": "2293406904304319110542099200031100000000031        000"
+        },
+        {
+          "linha": 1300547,
+          "texto": "22934069051051291085420992000311                   000"
+        },
+        {
+          "linha": 1300548,
+          "texto": "22934069060060191055420992000311                   000"
+        },
+        {
+          "linha": 1300549,
+          "texto": "22934069078078191035420992000                      000"
+        }
+      ],
+      "linha_pessoa25": 1300545,
+      "n_pessoas": 7,
+      "composicao25_exata": true,
+      "pasta_original_preservada": true,
+      "fonte25": "data/release_legacy/Censo.1960.amostra.25porcento.pe.gz",
+      "fonte25_sha256": "5b0335249644da87e8ca3f9ab28e80731dd792ef5a40ce4a01b336a8ec71a296"
+    }
+  ],
+  "propostas_manifesto": [
+    {
+      "linha": "142402",
+      "linha_familia": "142817",
+      "texto_original": "14164101152 00673519104570792000-                     \\0021501",
+      "texto_corrigido": "14164101152 00673519104570792000-                     \\0021501",
+      "texto_familia_original": "1416410115290067151478384680204003                    \\0021568",
+      "texto_familia_corrigido": "1416410115290067151478384680204003                    \\0021568",
+      "fonte_25": "data/release_legacy/Censo.1960.amostra.25porcento.ce.gz",
+      "linha_pessoa_25": "915350",
+      "linha_familia_25": "915344",
+      "justificativa": "Chave pessoal com um digito perdido na pasta; unico cartao127 compativel com todos os caracteres legiveis, geografia concordante, cartao integral e grupo completo de 8 pessoas exatos na fonte25. Original preservado; prova em references/resolucao_residuais_1960_evidencias/vinculos_chaves_incompletas.json."
+    },
+    {
+      "linha": "259248",
+      "linha_familia": "259657",
+      "texto_original": "2122620722 34069352911354209200015200000000034-       \\0040955",
+      "texto_corrigido": "2122620722 34069352911354209200015200000000034-       \\0040955",
+      "texto_familia_original": "2122620722934069151498384680204002                    \\0041021",
+      "texto_familia_corrigido": "2122620722934069151498384680204002                    \\0041021",
+      "fonte_25": "data/release_legacy/Censo.1960.amostra.25porcento.pe.gz",
+      "linha_pessoa_25": "1300545",
+      "linha_familia_25": "1300542",
+      "justificativa": "Chave pessoal com um digito perdido na pasta; unico cartao127 compativel com todos os caracteres legiveis, geografia concordante, cartao integral e grupo completo de 7 pessoas exatos na fonte25. Original preservado; prova em references/resolucao_residuais_1960_evidencias/vinculos_chaves_incompletas.json."
+    }
+  ],
+  "alteracao_respostas": false,
+  "fontes": [
+    {
+      "arquivo": "data_raw/microdata/1960/amostra_127/HHOLDA.txt",
+      "sha256": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_correcoes.csv",
+      "sha256": "64aa59c04c2bc3a37c6943a489638633f735fc99bdcc7cd0a299e1f27640303b"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_duplicatas.csv",
+      "sha256": "3867d9ddfd6449f1605af59e49b437414c10eb6cfc7ac63f8a4e7bdf32916198"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_vinculos.csv",
+      "sha256": "a77cafb2ac548d7df624e554c02ee4f11dcded925ac81fe57efc8888eeab8c6e"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_127_familias.csv",
+      "sha256": "51c443ff8a9e86d1584665b7d6296b061af5592e57d61bed4091d68f30507de5"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_127_pessoas.csv",
+      "sha256": "18326d21e51a2af88bd9f3d62b39d7debe0dc611d66985e911ae12c571d71655"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_25_familias.csv",
+      "sha256": "815f3241d49f8ababaef8ef2b6c0fc6e515a72302346da8133b7349c0f481007"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_25_pessoas.csv",
+      "sha256": "e00be8bf2962bbd2c5ed9bc169321d5b156b1424bd22f4c2f46920aa89d106c8"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_integridade_amostra_127.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Reviewing repeated person lines in 1960 amostra de 1,27%
+Reviewing repeated person lines in 1960 amostra de 1,27%
+  linhas repetidas: 0; removidas por decisao: 0
+Building families and households in 1960 amostra de 1,27%
+  Rondonia: 0 familias e 0 pessoas devolvidas
+  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0
+Error in build_families_1960_amostra_127(limpas, saida) : 
+  conferencia de conteudos familiares exige campos e diagnosticos completos
+Execution halted
+
+Exit code: 1 hex: 0x1

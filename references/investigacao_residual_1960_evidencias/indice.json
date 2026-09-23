@@ -1,0 +1,210 @@
+{
+  "arquivos": [
+    {
+      "arquivo": ".claude/plans/2026-09-22_investigacao_residual_registros.md",
+      "bytes": 3690,
+      "sha256": "ff2c61d10e0d1297b304da02dc1be67227f3e75e6911e712a66d58ced64cbc5c"
+    },
+    {
+      "arquivo": "references/conferir_complementos_residuais_texto_1960.py",
+      "bytes": 4558,
+      "sha256": "7da4f8a78c549872056f42d1edfb8690b35d6886ccc99bc737faac7f8157b400"
+    },
+    {
+      "arquivo": "references/conferir_investigacao_residual_1960.py",
+      "bytes": 11638,
+      "sha256": "15f21d58360af2cc0bfb675a90f7baf6199430bb43a048bdce2aa4eff40197eb"
+    },
+    {
+      "arquivo": "references/consolidar_investigacao_residual_1960.py",
+      "bytes": 4309,
+      "sha256": "82483413d52499d9953892f1a5902e03ae4b8e30374e3f4f59e5082ea2baf078"
+    },
+    {
+      "arquivo": "references/consolidar_investigacao_residual_texto_1960.py",
+      "bytes": 7229,
+      "sha256": "d02ee3c75f474cfbb859d9e310a588226a058ddd6381fefb97a19e2049162ee6"
+    },
+    {
+      "arquivo": "references/investigacao_familias_repetidas_1960.py",
+      "bytes": 5671,
+      "sha256": "98077b8f395cc9915048a71f6d73c65ba33120d84f817fab77cea1d34c6ca663"
+    },
+    {
+      "arquivo": "references/investigacao_residual_1960_evidencias/cobertura_integrada.json",
+      "bytes": 275977,
+      "sha256": "28e3619dd5c59ac85631019aef0e42f16223fcf9900ad679b418f6161ac8a8b6"
+    },
+    {
+      "arquivo": "references/investigacao_residual_1960_evidencias/duplicatas_cobertura463.json",
+      "bytes": 464917,
+      "sha256": "8e8fc0f72f7a4b4ca90a5520257dd0896ecdaa2ad717101740cde25728ca068c"
+    },
+    {
+      "arquivo": "references/investigacao_residual_1960_evidencias/duplicatas_colisoes_familias.json",
+      "bytes": 2046,
+      "sha256": "a282a96aa0492454d20f6004a84ab04c91d845f765ba5146c0eaa55008646443"
+    },
+    {
+      "arquivo": "references/investigacao_residual_1960_evidencias/duplicatas_fora_chave.json",
+      "bytes": 64993,
+      "sha256": "62f4757636455270eb3640d7bbc9a026282a4bb23c3bc6d9412b2fbfeee8adfa"
+    },
+    {
+      "arquivo": "references/investigacao_residual_1960_evidencias/duplicatas_hipotese_um_campo.json",
+      "bytes": 129673,
+      "sha256": "02297b2c99af181166dc989c7f8bf367c3313c8708b3fd9da97c9f8d861c9114"
+    },
+    {
+      "arquivo": "references/investigacao_residual_1960_evidencias/duplicatas_qc_blocos_am_ma.json",
+      "bytes": 14343,
+      "sha256": "31a2cc116f42e88096ca91e5c49ed96302e24af9247bbd02dd964ff67504cb46"
+    },
+    {
+      "arquivo": "references/investigacao_residual_1960_evidencias/duplicatas_vizinhancas1702.json",
+      "bytes": 434217,
+      "sha256": "2a828272c8ec000a23006cc35879ded90fc19f4f47ddbc53a7bfa0b0ee6f1d31"
+    },
+    {
+      "arquivo": "references/investigacao_residual_1960_evidencias/familias_coincidentes.json",
+      "bytes": 33512,
+      "sha256": "079092937d87523ae7e585244172f80188407e1a42a8ede8a1ed3f9228f842a6"
+    },
+    {
+      "arquivo": "references/investigacao_residual_1960_evidencias/fontes_documentais.json",
+      "bytes": 17668,
+      "sha256": "c2f455b37ff1b84358cd0cf19880a15f6f78f8266ce471c1c232d1b0ef12834c"
+    },
+    {
+      "arquivo": "references/investigacao_residual_1960_evidencias/LEIAME.md",
+      "bytes": 9658,
+      "sha256": "682b9e5bb34c426efd2a6e804e49bf943f9b0b6aebe69ea0994cdf7cbba86bdc"
+    },
+    {
+      "arquivo": "references/investigacao_residual_1960_evidencias/qc_independente.json",
+      "bytes": 11351,
+      "sha256": "11c2b573186fa5f085154fdc1d53ef895ae68f08619604a2f554ae557a381724"
+    },
+    {
+      "arquivo": "references/investigacao_residual_1960_evidencias/vinculos_casos.json",
+      "bytes": 1414095,
+      "sha256": "390f85f18cbb908ecab76157a8360c1a3735b8c1802b8d805c948d2bbd075522"
+    },
+    {
+      "arquivo": "references/investigacao_residual_1960_evidencias/vinculos_extensoes.json",
+      "bytes": 633341,
+      "sha256": "4a4551af575cade7a3407376168c9854a98d550fb47fa175527e555da100d0f2"
+    },
+    {
+      "arquivo": "references/investigacao_residual_1960_evidencias/vinculos_recuperacao.json",
+      "bytes": 17332,
+      "sha256": "6f70f3fe7f1ad97f22a317fb674655770738cf14d41d1cd7b9884d23c3c484a2"
+    },
+    {
+      "arquivo": "references/investigacao_residual_duplicatas_1960.md",
+      "bytes": 19179,
+      "sha256": "ed50716294d185ecad6bdc578d9afb28ead4b79e8c4c3b8bbd51b17c1a72c029"
+    },
+    {
+      "arquivo": "references/investigacao_residual_duplicatas_1960.py",
+      "bytes": 42183,
+      "sha256": "98cdb0a8bd332013cfdd5f04252c7cd4b2c50595b11461d59b5feebea8416950"
+    },
+    {
+      "arquivo": "references/investigacao_residual_fontes_1960.md",
+      "bytes": 8912,
+      "sha256": "a472a604c76784162c0df324df69662accd464158c89ce759452e70e15e6f3e1"
+    },
+    {
+      "arquivo": "references/investigacao_residual_fontes_1960.py",
+      "bytes": 6922,
+      "sha256": "c2de2d573e77d46c114df842d191d3be1390c1e5e47118617eb04eddfec2a725"
+    },
+    {
+      "arquivo": "references/investigacao_residual_registros_1960_20260922.md",
+      "bytes": 19175,
+      "sha256": "7d76c868b06559b3a9e4045843442797842e973ec1cff036ea46de568988ca19"
+    },
+    {
+      "arquivo": "references/investigacao_residual_texto_1960.md",
+      "bytes": 20945,
+      "sha256": "7d106da2e81e9943d7a149e1105a94047a635f59cb383dc79d6c3af68c6e6fef"
+    },
+    {
+      "arquivo": "references/investigacao_residual_texto_1960.py",
+      "bytes": 15926,
+      "sha256": "c31ba9d69fa20a6490227e48d09d32cae176c13512f906d65df00806db18813e"
+    },
+    {
+      "arquivo": "references/investigacao_residual_texto_1960_complementos.json",
+      "bytes": 3332,
+      "sha256": "905697353660ab258bf0680c66906945b85d78652e1373e316dc6a0af3673fb8"
+    },
+    {
+      "arquivo": "references/investigacao_residual_texto_1960_evidencias.json",
+      "bytes": 1413627,
+      "sha256": "d66153c5b663ca5dd79b565ad4af5f35211367cb9a0ab7bde11eb4d359651d6c"
+    },
+    {
+      "arquivo": "references/investigacao_residual_vinculos_1960.md",
+      "bytes": 15591,
+      "sha256": "810151ade1a458354d0e41295af10c315095493e9d347a480ea0c486b2d99ccd"
+    },
+    {
+      "arquivo": "references/investigacao_residual_vinculos_1960.py",
+      "bytes": 10987,
+      "sha256": "6a08dc6a4521e99de851f71edfe4db98ad63679a761e97e54f996a3163016025"
+    },
+    {
+      "arquivo": "references/investigacao_residual_vinculos_caderno_1960.py",
+      "bytes": 2938,
+      "sha256": "51fc9a36f432aa5c0a1f6c245744bea6d3b69aec707a1e57a1309d8a8aa93481"
+    },
+    {
+      "arquivo": "references/investigacao_residual_vinculos_detalhes_1960.py",
+      "bytes": 8986,
+      "sha256": "61433215df4cf6a3ccdee1fdbf94c6f0a717c24b9c65e4e1950e06a078047bc8"
+    },
+    {
+      "arquivo": "references/investigacao_residual_vinculos_extensoes_1960.py",
+      "bytes": 4519,
+      "sha256": "5923faba1b36be23554fa1042c447b9cad7b9b10cefb74b106fde61f4ca9d0fd"
+    },
+    {
+      "arquivo": "references/investigacao_residual_vinculos_recuperacao_1960.py",
+      "bytes": 5736,
+      "sha256": "94acfcc906e0ae36b2e61eee1dda82732c27ad3a51c7afa334f1808e8beb1823"
+    },
+    {
+      "arquivo": "references/test_conferir_investigacao_residual_1960.py",
+      "bytes": 877,
+      "sha256": "2f5cca9123a2989847ccf6ad01427d314b93956f200c710bd754b8ef420da1ad"
+    },
+    {
+      "arquivo": "references/test_investigacao_familias_repetidas_1960.py",
+      "bytes": 750,
+      "sha256": "f4ff5d1feb3174478f28c4a35b2a9c861f2916e43830650b56bda44cf00017ea"
+    },
+    {
+      "arquivo": "references/test_investigacao_residual_duplicatas_1960.py",
+      "bytes": 3297,
+      "sha256": "68d124226d85daf04c9dc7eac3637922dbfbdbfe8200cef7f1f5b5b13c3e748b"
+    },
+    {
+      "arquivo": "references/test_investigacao_residual_fontes_1960.py",
+      "bytes": 850,
+      "sha256": "4808536f0443c3bbefe70f0b2da8c932966adf757bd7ee414ebb4bdc1f7591d0"
+    },
+    {
+      "arquivo": "references/test_investigacao_residual_texto_1960.py",
+      "bytes": 3155,
+      "sha256": "4f1ff1ee50e14f677e4958ee72944240c991b69e848e3e8a66349bad96d19f35"
+    },
+    {
+      "arquivo": "references/test_investigacao_residual_vinculos_1960.py",
+      "bytes": 1603,
+      "sha256": "0d5c6eb8efa07cfbc124c9aef6f24a074e62ab41c45524eb8f6b01c71fc3eb8d"
+    }
+  ],
+  "nota": "Assinaturas dos arquivos desta investigacao; nao certificado de verdade historica das correspondencias."
+}

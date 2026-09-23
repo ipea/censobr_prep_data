@@ -1,0 +1,644 @@
+{
+  "modo": "somente leitura das fontes; nao aplica correcoes",
+  "copias": [
+    {
+      "uf": "al",
+      "gzip_local_descomprimido": {
+        "sha256": "40d9dd6e027fa7e883a22ee871193013acf6d7510063377752cb7625340d8fee",
+        "bytes": 21868880,
+        "linhas": 397616
+      },
+      "copia_preservada_descomprimida": {
+        "sha256": "40d9dd6e027fa7e883a22ee871193013acf6d7510063377752cb7625340d8fee",
+        "bytes": 21868880,
+        "linhas": 397616
+      },
+      "iguais": true
+    },
+    {
+      "uf": "ba",
+      "gzip_local_descomprimido": {
+        "sha256": "2a9c63c4b47ca37f5d18df86744d782b37ad49a8da4a06c7382096523b1bc027",
+        "bytes": 105107310,
+        "linhas": 1911042
+      },
+      "copia_preservada_descomprimida": {
+        "sha256": "2a9c63c4b47ca37f5d18df86744d782b37ad49a8da4a06c7382096523b1bc027",
+        "bytes": 105107310,
+        "linhas": 1911042
+      },
+      "iguais": true
+    },
+    {
+      "uf": "ce",
+      "gzip_local_descomprimido": {
+        "sha256": "c378778450f9c7ee762b125829e398279b38cc3a83802e5a96b53847010074f3",
+        "bytes": 55469700,
+        "linhas": 1008540
+      },
+      "copia_preservada_descomprimida": {
+        "sha256": "c378778450f9c7ee762b125829e398279b38cc3a83802e5a96b53847010074f3",
+        "bytes": 55469700,
+        "linhas": 1008540
+      },
+      "iguais": true
+    },
+    {
+      "uf": "df",
+      "gzip_local_descomprimido": {
+        "sha256": "670d2f1a4caf6997e4215da9ad6d8207e53c14945b34b92d794c4b6ced6473ea",
+        "bytes": 2733060,
+        "linhas": 49692
+      },
+      "copia_preservada_descomprimida": {
+        "sha256": "670d2f1a4caf6997e4215da9ad6d8207e53c14945b34b92d794c4b6ced6473ea",
+        "bytes": 2733060,
+        "linhas": 49692
+      },
+      "iguais": true
+    },
+    {
+      "uf": "fn",
+      "gzip_local_descomprimido": {
+        "sha256": "026d51d4ed4b02772d6724f0cd5660b38a755f73b6f989299cc7b79f56a87aa9",
+        "bytes": 21065,
+        "linhas": 383
+      },
+      "copia_preservada_descomprimida": {
+        "sha256": "026d51d4ed4b02772d6724f0cd5660b38a755f73b6f989299cc7b79f56a87aa9",
+        "bytes": 21065,
+        "linhas": 383
+      },
+      "iguais": true
+    },
+    {
+      "uf": "go",
+      "gzip_local_descomprimido": {
+        "sha256": "97485556977b3415a7376e91638a79103855fc785c356fc7748ada969bbbc42d",
+        "bytes": 32778240,
+        "linhas": 595968
+      },
+      "copia_preservada_descomprimida": {
+        "sha256": "97485556977b3415a7376e91638a79103855fc785c356fc7748ada969bbbc42d",
+        "bytes": 32778240,
+        "linhas": 595968
+      },
+      "iguais": true
+    },
+    {
+      "uf": "mg",
+      "gzip_local_descomprimido": {
+        "sha256": "3834c88fcbee773fb5616b4ac2e2297f0f8796030af24f7e383b75583b00b8ee",
+        "bytes": 164151295,
+        "linhas": 2984569
+      },
+      "copia_preservada_descomprimida": {
+        "sha256": "3834c88fcbee773fb5616b4ac2e2297f0f8796030af24f7e383b75583b00b8ee",
+        "bytes": 164151295,
+        "linhas": 2984569
+      },
+      "iguais": true
+    },
+    {
+      "uf": "mt",
+      "gzip_local_descomprimido": {
+        "sha256": "a6ebe7f5a178dbfe14d848da52b8065082f1d3933fce1ae14def7d1183059fa8",
+        "bytes": 15026935,
+        "linhas": 273217
+      },
+      "copia_preservada_descomprimida": {
+        "sha256": "a6ebe7f5a178dbfe14d848da52b8065082f1d3933fce1ae14def7d1183059fa8",
+        "bytes": 15026935,
+        "linhas": 273217
+      },
+      "iguais": true
+    },
+    {
+      "uf": "pb",
+      "gzip_local_descomprimido": {
+        "sha256": "99302d952a48485243a443a5c9eaf060d50626bf155e3ff23c2b73d22e6916a9",
+        "bytes": 35068660,
+        "linhas": 637612
+      },
+      "copia_preservada_descomprimida": {
+        "sha256": "99302d952a48485243a443a5c9eaf060d50626bf155e3ff23c2b73d22e6916a9",
+        "bytes": 35068660,
+        "linhas": 637612
+      },
+      "iguais": true
+    },
+    {
+      "uf": "pe",
+      "gzip_local_descomprimido": {
+        "sha256": "26aad2ee698b4b49c9f3f6eb9d701eafc54e8120fa80df0ffa1c226d874babff",
+        "bytes": 71630240,
+        "linhas": 1302368
+      },
+      "copia_preservada_descomprimida": {
+        "sha256": "26aad2ee698b4b49c9f3f6eb9d701eafc54e8120fa80df0ffa1c226d874babff",
+        "bytes": 71630240,
+        "linhas": 1302368
+      },
+      "iguais": true
+    },
+    {
+      "uf": "pr",
+      "gzip_local_descomprimido": {
+        "sha256": "07a8061fd704f3cf70f4afd2df4488072e8556c00412b06d066f99582590b47f",
+        "bytes": 73460860,
+        "linhas": 1335652
+      },
+      "copia_preservada_descomprimida": {
+        "sha256": "07a8061fd704f3cf70f4afd2df4488072e8556c00412b06d066f99582590b47f",
+        "bytes": 73460860,
+        "linhas": 1335652
+      },
+      "iguais": true
+    },
+    {
+      "uf": "rj",
+      "gzip_local_descomprimido": {
+        "sha256": "11af723890bba2386434a160eebc3911274e2e22e49573e33b36ac8c2edb86e8",
+        "bytes": 58146770,
+        "linhas": 1057214
+      },
+      "copia_preservada_descomprimida": {
+        "sha256": "11af723890bba2386434a160eebc3911274e2e22e49573e33b36ac8c2edb86e8",
+        "bytes": 58146770,
+        "linhas": 1057214
+      },
+      "iguais": true
+    },
+    {
+      "uf": "rn",
+      "gzip_local_descomprimido": {
+        "sha256": "f4bca7991eb698011a554886fdb368d0f73b14e26c6fdb269f8dc95a88ecb583",
+        "bytes": 20097715,
+        "linhas": 365413
+      },
+      "copia_preservada_descomprimida": {
+        "sha256": "f4bca7991eb698011a554886fdb368d0f73b14e26c6fdb269f8dc95a88ecb583",
+        "bytes": 20097715,
+        "linhas": 365413
+      },
+      "iguais": true
+    },
+    {
+      "uf": "rs",
+      "gzip_local_descomprimido": {
+        "sha256": "ede6217c7a9686fb98b8fa281580271a15e57ad5a31529ed8ab090a323d34572",
+        "bytes": 93655540,
+        "linhas": 1702828
+      },
+      "copia_preservada_descomprimida": {
+        "sha256": "ede6217c7a9686fb98b8fa281580271a15e57ad5a31529ed8ab090a323d34572",
+        "bytes": 93655540,
+        "linhas": 1702828
+      },
+      "iguais": true
+    },
+    {
+      "uf": "sa",
+      "gzip_local_descomprimido": {
+        "sha256": "d6b66ae2caa97182f8054a5326af21da3be593e89ecd85b0b537815b317eb29d",
+        "bytes": 6414210,
+        "linhas": 116622
+      },
+      "copia_preservada_descomprimida": {
+        "sha256": "d6b66ae2caa97182f8054a5326af21da3be593e89ecd85b0b537815b317eb29d",
+        "bytes": 6414210,
+        "linhas": 116622
+      },
+      "iguais": true
+    },
+    {
+      "uf": "se",
+      "gzip_local_descomprimido": {
+        "sha256": "0de264e28086eddb852c2388765e33f4342f5af534bc1f27a616d1a73033911e",
+        "bytes": 13949045,
+        "linhas": 253619
+      },
+      "copia_preservada_descomprimida": {
+        "sha256": "0de264e28086eddb852c2388765e33f4342f5af534bc1f27a616d1a73033911e",
+        "bytes": 13949045,
+        "linhas": 253619
+      },
+      "iguais": true
+    },
+    {
+      "uf": "sp",
+      "gzip_local_descomprimido": {
+        "sha256": "fd15d82fc7eceff0cb99f8392d34e1831e43ce95a87f56f477fe9be3e9ec0e15",
+        "bytes": 223448390,
+        "linhas": 4062698
+      },
+      "copia_preservada_descomprimida": {
+        "sha256": "fd15d82fc7eceff0cb99f8392d34e1831e43ce95a87f56f477fe9be3e9ec0e15",
+        "bytes": 223448390,
+        "linhas": 4062698
+      },
+      "iguais": true
+    }
+  ],
+  "hholda_local": {
+    "sha256": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c",
+    "bytes": 68756992,
+    "linhas": 1074328
+  },
+  "hholda_git_blob_lf": "c8742b846e3e0466dd71cb56075896c64ebd8938",
+  "hholda_bytes_lf": 67682664,
+  "idade_ignorada_presentes_retidos_por_uf": {
+    "1": 1,
+    "2": 17,
+    "4": 4,
+    "6": 3,
+    "10": 5,
+    "12": 7,
+    "14": 43,
+    "17": 24,
+    "19": 82,
+    "21": 92,
+    "25": 12,
+    "30": 5,
+    "31": 213,
+    "40": 83,
+    "50": 6,
+    "51": 2,
+    "52": 28,
+    "54": 59,
+    "60": 425,
+    "71": 58,
+    "74": 7,
+    "81": 29,
+    "91": 4,
+    "94": 14
+  },
+  "idade_ignorada_presentes_retidos_total": 1223,
+  "limite_contagem_idade": "Contagem de registros apos decisoes atuais, nao estimativa populacional; repeticoes pendentes preservadas.",
+  "archive_name": "Censo1960.zip",
+  "hholda_pacote_recebido": {
+    "sha256": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c",
+    "bytes": 68756992,
+    "linhas": 1074328
+  },
+  "hholda_copias_iguais": true,
+  "membros25_no_pacote": [
+    "25%/se.Z",
+    "25%/mt.Z",
+    "25%/rj.Z",
+    "25%/rs.Z",
+    "25%/df.Z",
+    "25%/al.Z",
+    "25%/sp.Z",
+    "25%/fn.Z",
+    "25%/mg.Z",
+    "25%/pr.Z",
+    "25%/pb.Z",
+    "25%/pe.Z",
+    "25%/sa.Z",
+    "25%/ba.Z",
+    "25%/go.Z",
+    "25%/ce.Z",
+    "25%/rn.Z"
+  ],
+  "scripts_sas": [
+    {
+      "nome": "TESTE_peso25%.sas",
+      "sha256": "5c6625ce2846e50fcf6f1eb37b28864a9e24c651c2e40e5c1855c90eabe8362a",
+      "trechos": [
+        {
+          "linha": 125,
+          "texto": "PROC DATASETS NOLIST; DELETE TESTE; QUIT;"
+        },
+        {
+          "linha": 195,
+          "texto": "PROC DELETE DATA = DOM PES; RUN;"
+        },
+        {
+          "linha": 246,
+          "texto": "PROC DELETE DATA = AMOSTRA25; RUN;"
+        }
+      ]
+    },
+    {
+      "nome": "GeraBookSAS CD60_1%.txt",
+      "sha256": "881a2a4b88b48f9c1a8c71c9fb89e4761ccdcebe139e02eda15203ac86783711",
+      "trechos": []
+    },
+    {
+      "nome": "TESTE_peso.sas",
+      "sha256": "8289c0177e48599ffefd48fa5e4ac3c98d4e719eae1633ef2dce6393e78389b6",
+      "trechos": [
+        {
+          "linha": 151,
+          "texto": "PROC DATASETS NOLIST; DELETE TESTE; QUIT;"
+        },
+        {
+          "linha": 375,
+          "texto": "PROC DATASETS DETAILS; DELETE PES DOM; QUIT;"
+        }
+      ]
+    },
+    {
+      "nome": "GeraBookSAS CD60_1% (1).txt",
+      "sha256": "a801d9ad18e261ff143b150b9cd2aeb9f048639af0af361b21c9b6e35da8a9cd",
+      "trechos": []
+    },
+    {
+      "nome": "TESTE_peso1%.sas",
+      "sha256": "f5e4fc5a2d117fad1a17f27fc95eed894c08876ffc23b494b5e3e9eac07e64a4",
+      "trechos": [
+        {
+          "linha": 22,
+          "texto": "INFILE \"\\\\DENPE43\\CDEMO60\\SUBAMOSTRA 1%\\HHOLDA.txt\" LRECL = 62 PAD;"
+        },
+        {
+          "linha": 126,
+          "texto": "PROC DELETE DATA = CD60AMOSTRA1; RUN;"
+        },
+        {
+          "linha": 243,
+          "texto": "PROC DATASETS NOLIST; DELETE ARQ1; QUIT;"
+        },
+        {
+          "linha": 281,
+          "texto": "PROC DELETE DATA = AMOSTRA25; RUN;"
+        }
+      ]
+    }
+  ],
+  "identidades_publicadas": [
+    {
+      "regiao": "Brasil",
+      "sexo": "total",
+      "dominio_publicado": true,
+      "q1_total": 70119071,
+      "q1_0a4": 11196313,
+      "q1_5a9": 10161291,
+      "q1_menos_0a9": 48761467,
+      "q2_10mais": 48761467,
+      "q3_total": 48761467,
+      "q4_total_ou_soma_sexo": 48761467,
+      "iguais": true
+    },
+    {
+      "regiao": "Brasil",
+      "sexo": "homens",
+      "dominio_publicado": true,
+      "q1_total": 35010717,
+      "q1_0a4": 5712395,
+      "q1_5a9": 5158864,
+      "q1_menos_0a9": 24139458,
+      "q2_10mais": 24139458,
+      "q3_total": 24139458,
+      "q4_total_ou_soma_sexo": 24139458,
+      "iguais": true
+    },
+    {
+      "regiao": "Brasil",
+      "sexo": "mulheres",
+      "dominio_publicado": true,
+      "q1_total": 35108354,
+      "q1_0a4": 5483918,
+      "q1_5a9": 5002427,
+      "q1_menos_0a9": 24622009,
+      "q2_10mais": 24622009,
+      "q3_total": 24622009,
+      "q4_total_ou_soma_sexo": 24622009,
+      "iguais": true
+    },
+    {
+      "regiao": "Nordeste",
+      "sexo": "total",
+      "dominio_publicado": true,
+      "q1_total": 15524609,
+      "q1_0a4": 2564359,
+      "q1_5a9": 2331671,
+      "q1_menos_0a9": 10628579,
+      "q2_10mais": 10628579,
+      "q3_total": 10628579,
+      "q4_total_ou_soma_sexo": 10628579,
+      "iguais": true
+    },
+    {
+      "regiao": "Nordeste",
+      "sexo": "homens",
+      "dominio_publicado": true,
+      "q1_total": 7613641,
+      "q1_0a4": 1319349,
+      "q1_5a9": 1181924,
+      "q1_menos_0a9": 5112368,
+      "q2_10mais": 5112368,
+      "q3_total": 5112368,
+      "q4_total_ou_soma_sexo": 5112368,
+      "iguais": true
+    },
+    {
+      "regiao": "Nordeste",
+      "sexo": "mulheres",
+      "dominio_publicado": true,
+      "q1_total": 7910968,
+      "q1_0a4": 1245010,
+      "q1_5a9": 1149747,
+      "q1_menos_0a9": 5516211,
+      "q2_10mais": 5516211,
+      "q3_total": 5516211,
+      "q4_total_ou_soma_sexo": 5516211,
+      "iguais": true
+    },
+    {
+      "regiao": "Leste",
+      "sexo": "total",
+      "dominio_publicado": true,
+      "q1_total": 24659232,
+      "q1_0a4": 3915834,
+      "q1_5a9": 3571074,
+      "q1_menos_0a9": 17172324,
+      "q2_10mais": 17172324,
+      "q3_total": 17172324,
+      "q4_total_ou_soma_sexo": 17172324,
+      "iguais": true
+    },
+    {
+      "regiao": "Leste",
+      "sexo": "homens",
+      "dominio_publicado": true,
+      "q1_total": 12187188,
+      "q1_0a4": 1982760,
+      "q1_5a9": 1803360,
+      "q1_menos_0a9": 8401068,
+      "q2_10mais": 8401068,
+      "q3_total": 8401068,
+      "q4_total_ou_soma_sexo": 8401068,
+      "iguais": true
+    },
+    {
+      "regiao": "Leste",
+      "sexo": "mulheres",
+      "dominio_publicado": true,
+      "q1_total": 12472044,
+      "q1_0a4": 1933074,
+      "q1_5a9": 1767714,
+      "q1_menos_0a9": 8771256,
+      "q2_10mais": 8771256,
+      "q3_total": 8771256,
+      "q4_total_ou_soma_sexo": 8771256,
+      "iguais": true
+    },
+    {
+      "regiao": "Sul",
+      "sexo": "total",
+      "dominio_publicado": true,
+      "q1_total": 24445902,
+      "q1_0a4": 3761940,
+      "q1_5a9": 3401190,
+      "q1_menos_0a9": 17282772,
+      "q2_10mais": 17282772,
+      "q3_total": 17282772,
+      "q4_total_ou_soma_sexo": 17282772,
+      "iguais": true
+    },
+    {
+      "regiao": "Sul",
+      "sexo": "homens",
+      "dominio_publicado": true,
+      "q1_total": 12401688,
+      "q1_0a4": 1930422,
+      "q1_5a9": 1736124,
+      "q1_menos_0a9": 8735142,
+      "q2_10mais": 8735142,
+      "q3_total": 8735142,
+      "q4_total_ou_soma_sexo": 8735142,
+      "iguais": true
+    },
+    {
+      "regiao": "Sul",
+      "sexo": "mulheres",
+      "dominio_publicado": true,
+      "q1_total": 12044214,
+      "q1_0a4": 1831518,
+      "q1_5a9": 1665066,
+      "q1_menos_0a9": 8547630,
+      "q2_10mais": 8547630,
+      "q3_total": 8547630,
+      "q4_total_ou_soma_sexo": 8547630,
+      "iguais": true
+    },
+    {
+      "regiao": "Norte e Centro-Oeste",
+      "sexo": "total",
+      "dominio_publicado": false,
+      "q1_total": 5489328,
+      "q1_0a4": 954180,
+      "q1_5a9": 857356,
+      "q1_menos_0a9": 3677792,
+      "q2_10mais": 3677792,
+      "q3_total": 3677792,
+      "q4_total_ou_soma_sexo": 3677792,
+      "iguais": true
+    },
+    {
+      "regiao": "Norte e Centro-Oeste",
+      "sexo": "homens",
+      "dominio_publicado": false,
+      "q1_total": 2808200,
+      "q1_0a4": 479864,
+      "q1_5a9": 437456,
+      "q1_menos_0a9": 1890880,
+      "q2_10mais": 1890880,
+      "q3_total": 1890880,
+      "q4_total_ou_soma_sexo": 1890880,
+      "iguais": true
+    },
+    {
+      "regiao": "Norte e Centro-Oeste",
+      "sexo": "mulheres",
+      "dominio_publicado": false,
+      "q1_total": 2681128,
+      "q1_0a4": 474316,
+      "q1_5a9": 419900,
+      "q1_menos_0a9": 1786912,
+      "q2_10mais": 1786912,
+      "q3_total": 1786912,
+      "q4_total_ou_soma_sexo": 1786912,
+      "iguais": true
+    }
+  ],
+  "transcricao": {
+    "sha256": "88d1e6f7db86cde421261c0edc46408c6b56c40dfc7cd514e4f2143db34c0af4",
+    "bytes": 148695,
+    "linhas": 2776
+  },
+  "pdf": {
+    "sha256": "45bf139cb9960458a4e2b15cbfa78538f6bf39e7c1cc15aebeaf2adee94435b0",
+    "bytes": 1641563,
+    "linhas": 6838
+  },
+  "paginas_pdf": 50,
+  "recortes": [
+    {
+      "pagina_pdf": 20,
+      "arquivo": "preliminar_p20_cabecalho.png"
+    },
+    {
+      "pagina_pdf": 21,
+      "arquivo": "preliminar_p21_cabecalho.png"
+    },
+    {
+      "pagina_pdf": 22,
+      "arquivo": "preliminar_p22_cabecalho.png"
+    },
+    {
+      "pagina_pdf": 23,
+      "arquivo": "preliminar_p23_cabecalho.png"
+    },
+    {
+      "pagina_pdf": 28,
+      "arquivo": "preliminar_p28_cabecalho.png"
+    },
+    {
+      "pagina_pdf": 29,
+      "arquivo": "preliminar_p29_cabecalho.png"
+    },
+    {
+      "pagina_pdf": 30,
+      "arquivo": "preliminar_p30_cabecalho.png"
+    },
+    {
+      "pagina_pdf": 31,
+      "arquivo": "preliminar_p31_cabecalho.png"
+    },
+    {
+      "pagina_pdf": 36,
+      "arquivo": "preliminar_p36_cabecalho.png"
+    },
+    {
+      "pagina_pdf": 37,
+      "arquivo": "preliminar_p37_cabecalho.png"
+    },
+    {
+      "pagina_pdf": 38,
+      "arquivo": "preliminar_p38_cabecalho.png"
+    },
+    {
+      "pagina_pdf": 39,
+      "arquivo": "preliminar_p39_cabecalho.png"
+    },
+    {
+      "pagina_pdf": 44,
+      "arquivo": "preliminar_p44_cabecalho.png"
+    },
+    {
+      "pagina_pdf": 45,
+      "arquivo": "preliminar_p45_cabecalho.png"
+    },
+    {
+      "pagina_pdf": 46,
+      "arquivo": "preliminar_p46_cabecalho.png"
+    },
+    {
+      "pagina_pdf": 47,
+      "arquivo": "preliminar_p47_cabecalho.png"
+    }
+  ]
+}

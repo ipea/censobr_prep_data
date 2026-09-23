@@ -10,4 +10,9 @@ read_guides/1960_amostra_127_vinculos.csv -text
 read_guides/1960_amostra_127_cartoes_recuperados.json -text
 read_guides/1960_amostra_127_reparos_fonte25.json -text
 read_guides/1960_amostra_127_geografia_fonte25.json -text
+read_guides/1960_amostra_127_familias_coincidentes.json -text
 references/fechamento_registros_1960_evidencias/*.json -text
+references/investigacao_residual_1960_evidencias/*.json -text
+references/resolucao_residuais_1960_evidencias/*.json -text
+references/resolucao_residuais_1960_evidencias/*.log -text
+references/resolucao_residuais_duplicatas*.json -text

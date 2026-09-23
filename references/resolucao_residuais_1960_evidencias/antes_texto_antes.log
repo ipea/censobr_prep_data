@@ -1,0 +1,18 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_reparos_residuais_texto_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Applying manual corrections to 1960 amostra de 1,27%
+Reading 1960 amostra de 1,27%
+  1 linhas: 0 registros de familia, 1 de pessoas
+Antes: reparo bloqueado em 238423 - geografia do grupo127 diverge do grupo25
+Applying manual corrections to 1960 amostra de 1,27%
+Reading 1960 amostra de 1,27%
+  1 linhas: 0 registros de familia, 1 de pessoas
+Antes: reparo bloqueado em 540394 - composicao integral do grupo de reparo diverge
+Applying manual corrections to 1960 amostra de 1,27%
+Reading 1960 amostra de 1,27%
+  1 linhas: 0 registros de familia, 1 de pessoas
+Antes: reparo bloqueado em 540461 - composicao integral do grupo de reparo diverge
+
+Exit code: 0 hex: 0x0

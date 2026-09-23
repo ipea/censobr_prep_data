@@ -1,0 +1,2444 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_validacao_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          4               0
+ 2:      censobr_weight     33     442          5              21
+ 3:      censobr_weight     34     102          5               1
+ 4:      censobr_weight     37     204          5               7
+ 5:      censobr_weight     40     102          4               2
+ 6:      censobr_weight      7     102          0               0
+ 7: censobr_weight_ibge     32      68          4               0
+ 8: censobr_weight_ibge     33     442          5              21
+ 9: censobr_weight_ibge     34     102          5               1
+10: censobr_weight_ibge     37     204          5               7
+11: censobr_weight_ibge     40     102          4               2
+12: censobr_weight_ibge      7     102          0               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                64                        0            0                   4
+ 2:               416                        0            0                  26
+ 3:                96                        0            0                   6
+ 4:               192                        0            0                  12
+ 5:                96                        0            0                   6
+ 6:               102                        0            0                   0
+ 7:                64                        0            0                   4
+ 8:               416                        0            0                  26
+ 9:                96                        0            0                   6
+10:               192                        0            0                  12
+11:                96                        0            0                   6
+12:               102                        0            0                   0
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:         99.99991     99.99994
+ 2:        100.00000    100.00000
+ 3:         99.99991    100.00000
+ 4:        100.00000    100.00000
+ 5:         99.99995    100.00000
+ 6:               NA           NA
+ 7:         99.99989     99.99993
+ 8:        100.00000    100.00000
+ 9:         99.99988    100.00000
+10:        100.00000    100.00000
+11:         99.99993    100.00000
+12:               NA           NA
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          4               0                40
+ 3:     1,27%     33     286          4              22               260
+ 4:     1,27%     34      66          4               2                60
+ 5:     1,27%     37     132          4               8               120
+ 6:     1,27%     40      66          4               2                60
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68          4               0                64
+ 9:       25%     33     442          5              21               416
+10:       25%     34     102          5               1                96
+11:       25%     37     204          5               7               192
+12:       25%     40     102          4               2                96
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   4         99.97803
+ 3:                        0            0                  26        100.00000
+ 4:                        0            0                   6         99.97806
+ 5:                        0            0                  12        100.00000
+ 6:                        0            0                   6         99.97298
+ 7:                        0            0                   0               NA
+ 8:                        0            0                   4         99.99991
+ 9:                        0            0                  26        100.00000
+10:                        0            0                   6         99.99991
+11:                        0            0                  12        100.00000
+12:                        0            0                   6         99.99995
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:     99.98237
+ 3:    100.00000
+ 4:    100.00000
+ 5:    100.00000
+ 6:    100.00000
+ 7:           NA
+ 8:     99.99994
+ 9:    100.00000
+10:    100.00000
+11:    100.00000
+12:    100.00000
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          0               0
+ 2:      censobr_weight     33     442          0               0
+ 3:      censobr_weight     34     102          0               0
+ 4:      censobr_weight     37     204          0               0
+ 5:      censobr_weight     40     102          0               0
+ 6:      censobr_weight      7     102          0               0
+ 7: censobr_weight_ibge     32      68          0               0
+ 8: censobr_weight_ibge     33     442          0               0
+ 9: censobr_weight_ibge     34     102          0               0
+10: censobr_weight_ibge     37     204          0               0
+11: censobr_weight_ibge     40     102          0               0
+12: censobr_weight_ibge      7     102          0               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                68                        0            0                   0
+ 2:               442                        0            0                   0
+ 3:               102                        0            0                   0
+ 4:               204                        0            0                   0
+ 5:               102                        0            0                   0
+ 6:               102                        0            0                   0
+ 7:                68                        0            0                   0
+ 8:               442                        0            0                   0
+ 9:               102                        0            0                   0
+10:               204                        0            0                   0
+11:               102                        0            0                   0
+12:               102                        0            0                   0
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:               NA           NA
+ 2:               NA           NA
+ 3:               NA           NA
+ 4:               NA           NA
+ 5:               NA           NA
+ 6:               NA           NA
+ 7:               NA           NA
+ 8:               NA           NA
+ 9:               NA           NA
+10:               NA           NA
+11:               NA           NA
+12:               NA           NA
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          0               0                44
+ 3:     1,27%     33     286          0               0               286
+ 4:     1,27%     34      66          0               0                66
+ 5:     1,27%     37     132          0               0               132
+ 6:     1,27%     40      66          0               0                66
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68          0               0                68
+ 9:       25%     33     442          0               0               442
+10:       25%     34     102          0               0               102
+11:       25%     37     204          0               0               204
+12:       25%     40     102          0               0               102
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   0               NA
+ 3:                        0            0                   0               NA
+ 4:                        0            0                   0               NA
+ 5:                        0            0                   0               NA
+ 6:                        0            0                   0               NA
+ 7:                        0            0                   0               NA
+ 8:                        0            0                   0               NA
+ 9:                        0            0                   0               NA
+10:                        0            0                   0               NA
+11:                        0            0                   0               NA
+12:                        0            0                   0               NA
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:           NA
+ 3:           NA
+ 4:           NA
+ 5:           NA
+ 6:           NA
+ 7:           NA
+ 8:           NA
+ 9:           NA
+10:           NA
+11:           NA
+12:           NA
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          4               0
+ 2:      censobr_weight     33     442          5              21
+ 3:      censobr_weight     34     102          5               1
+ 4:      censobr_weight     37     204          5               7
+ 5:      censobr_weight     40     102          4               2
+ 6:      censobr_weight      7     102          0               0
+ 7: censobr_weight_ibge     32      68          4               0
+ 8: censobr_weight_ibge     33     442          5              21
+ 9: censobr_weight_ibge     34     102          5               1
+10: censobr_weight_ibge     37     204          5               7
+11: censobr_weight_ibge     40     102          4               2
+12: censobr_weight_ibge      7     102          0               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                64                        0            0                   4
+ 2:               416                        0            0                  25
+ 3:                96                        0            0                   5
+ 4:               192                        0            0                  12
+ 5:                96                        0            0                   6
+ 6:               102                        0            0                   0
+ 7:                64                        0            0                   4
+ 8:               416                        0            0                  25
+ 9:                96                        0            0                   5
+10:               192                        0            0                  12
+11:                96                        0            0                   6
+12:               102                        0            0                   0
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:         99.99991     99.99994
+ 2:        100.00000    100.00000
+ 3:         99.99991     99.99994
+ 4:        100.00000    100.00000
+ 5:         99.99995    100.00000
+ 6:               NA           NA
+ 7:         99.99989     99.99993
+ 8:        100.00000    100.00000
+ 9:         99.99987     99.99993
+10:        100.00000    100.00000
+11:         99.99993    100.00000
+12:               NA           NA
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          0               0                44
+ 3:     1,27%     33     286          0               0               286
+ 4:     1,27%     34      66          0               0                66
+ 5:     1,27%     37     132          0               0               132
+ 6:     1,27%     40      66          0               0                66
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68          4               0                64
+ 9:       25%     33     442          5              21               416
+10:       25%     34     102          5               1                96
+11:       25%     37     204          5               7               192
+12:       25%     40     102          4               2                96
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   0               NA
+ 3:                        0            0                   0               NA
+ 4:                        0            0                   0               NA
+ 5:                        0            0                   0               NA
+ 6:                        0            0                   0               NA
+ 7:                        0            0                   0               NA
+ 8:                        0            0                   4         99.99991
+ 9:                        0            0                  25        100.00000
+10:                        0            0                   5         99.99991
+11:                        0            0                  12        100.00000
+12:                        0            0                   6         99.99995
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:           NA
+ 3:           NA
+ 4:           NA
+ 5:           NA
+ 6:           NA
+ 7:           NA
+ 8:     99.99994
+ 9:    100.00000
+10:     99.99994
+11:    100.00000
+12:    100.00000
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          2               0
+ 2:      censobr_weight     33     442          3              21
+ 3:      censobr_weight     34     102          3               1
+ 4:      censobr_weight     37     204          3               7
+ 5:      censobr_weight     40     102          2               2
+ 6:      censobr_weight      7     102          0               0
+ 7: censobr_weight_ibge     32      68          4               0
+ 8: censobr_weight_ibge     33     442          5              21
+ 9: censobr_weight_ibge     34     102          5               1
+10: censobr_weight_ibge     37     204          5               7
+11: censobr_weight_ibge     40     102          4               2
+12: censobr_weight_ibge      7     102          0               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                64                        0            2                   2
+ 2:               416                        0            2                  24
+ 3:                96                        0            2                   4
+ 4:               192                        0            2                  10
+ 5:                96                        0            2                   4
+ 6:               102                        0            0                   0
+ 7:                64                        0            0                   4
+ 8:               416                        0            0                  26
+ 9:                96                        0            0                   6
+10:               192                        0            0                  12
+11:                96                        0            0                   6
+12:               102                        0            0                   0
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:         99.99994     99.99994
+ 2:        100.00000    100.00000
+ 3:         99.99993    100.00000
+ 4:        100.00000    100.00000
+ 5:         99.99997    100.00000
+ 6:               NA           NA
+ 7:         99.99989     99.99993
+ 8:        100.00000    100.00000
+ 9:         99.99988    100.00000
+10:        100.00000    100.00000
+11:         99.99993    100.00000
+12:               NA           NA
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          0               0                44
+ 3:     1,27%     33     286          0               0               286
+ 4:     1,27%     34      66          0               0                66
+ 5:     1,27%     37     132          0               0               132
+ 6:     1,27%     40      66          0               0                66
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68          2               0                64
+ 9:       25%     33     442          3              21               416
+10:       25%     34     102          3               1                96
+11:       25%     37     204          3               7               192
+12:       25%     40     102          2               2                96
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   0               NA
+ 3:                        0            0                   0               NA
+ 4:                        0            0                   0               NA
+ 5:                        0            0                   0               NA
+ 6:                        0            0                   0               NA
+ 7:                        0            0                   0               NA
+ 8:                        0            2                   2         99.99994
+ 9:                        0            2                  24        100.00000
+10:                        0            2                   4         99.99993
+11:                        0            2                  10        100.00000
+12:                        0            2                   4         99.99997
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:           NA
+ 3:           NA
+ 4:           NA
+ 5:           NA
+ 6:           NA
+ 7:           NA
+ 8:     99.99994
+ 9:    100.00000
+10:    100.00000
+11:    100.00000
+12:    100.00000
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          2               0
+ 2:      censobr_weight     33     442          3              21
+ 3:      censobr_weight     34     102          3               1
+ 4:      censobr_weight     37     204          3               7
+ 5:      censobr_weight     40     102          2               2
+ 6:      censobr_weight      7     102          0               0
+ 7: censobr_weight_ibge     32      68          4               0
+ 8: censobr_weight_ibge     33     442          5              21
+ 9: censobr_weight_ibge     34     102          5               1
+10: censobr_weight_ibge     37     204          5               7
+11: censobr_weight_ibge     40     102          4               2
+12: censobr_weight_ibge      7     102          0               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                64                        0            2                   2
+ 2:               416                        0            2                  24
+ 3:                96                        0            2                   4
+ 4:               192                        0            2                  10
+ 5:                96                        0            2                   4
+ 6:               102                        0            0                   0
+ 7:                64                        0            0                   4
+ 8:               416                        0            0                  26
+ 9:                96                        0            0                   6
+10:               192                        0            0                  12
+11:                96                        0            0                   6
+12:               102                        0            0                   0
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:         99.99994     99.99994
+ 2:        100.00000    100.00000
+ 3:         99.99993    100.00000
+ 4:        100.00000    100.00000
+ 5:         99.99997    100.00000
+ 6:               NA           NA
+ 7:         99.99989     99.99993
+ 8:        100.00000    100.00000
+ 9:         99.99988    100.00000
+10:        100.00000    100.00000
+11:         99.99993    100.00000
+12:               NA           NA
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          0               0                44
+ 3:     1,27%     33     286          0               0               286
+ 4:     1,27%     34      66          0               0                66
+ 5:     1,27%     37     132          0               0               132
+ 6:     1,27%     40      66          0               0                66
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68          2               0                64
+ 9:       25%     33     442          3              21               416
+10:       25%     34     102          3               1                96
+11:       25%     37     204          3               7               192
+12:       25%     40     102          2               2                96
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   0               NA
+ 3:                        0            0                   0               NA
+ 4:                        0            0                   0               NA
+ 5:                        0            0                   0               NA
+ 6:                        0            0                   0               NA
+ 7:                        0            0                   0               NA
+ 8:                        0            2                   2         99.99994
+ 9:                        0            2                  24        100.00000
+10:                        0            2                   4         99.99993
+11:                        0            2                  10        100.00000
+12:                        0            2                   4         99.99997
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:           NA
+ 3:           NA
+ 4:           NA
+ 5:           NA
+ 6:           NA
+ 7:           NA
+ 8:     99.99994
+ 9:    100.00000
+10:    100.00000
+11:    100.00000
+12:    100.00000
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          4               0
+ 2:      censobr_weight     33     442          4              11
+ 3:      censobr_weight     34     102          5               1
+ 4:      censobr_weight     37     204          6               6
+ 5:      censobr_weight     40     102          2               2
+ 6:      censobr_weight      7     102          0               0
+ 7: censobr_weight_ibge     32      68          4               0
+ 8: censobr_weight_ibge     33     442          4              11
+ 9: censobr_weight_ibge     34     102          5               1
+10: censobr_weight_ibge     37     204          6               6
+11: censobr_weight_ibge     40     102          2               2
+12: censobr_weight_ibge      7     102          0               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                64                        0            0                   4
+ 2:               416                       11            0                  15
+ 3:                96                        0            0                   6
+ 4:               192                        0            0                  12
+ 5:                96                        2            0                   4
+ 6:               102                        0            0                   0
+ 7:                64                        0            0                   4
+ 8:               416                       11            0                  15
+ 9:                96                        0            0                   6
+10:               192                        0            0                  12
+11:                96                        2            0                   4
+12:               102                        0            0                   0
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:         99.99983     99.99994
+ 2:        100.00000    100.00000
+ 3:         99.99991    100.00000
+ 4:         99.99997    100.00000
+ 5:         99.99997    100.00000
+ 6:               NA           NA
+ 7:         99.99979     99.99993
+ 8:        100.00000    100.00000
+ 9:         99.99988    100.00000
+10:         99.99996    100.00000
+11:         99.99996    100.00000
+12:               NA           NA
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          0               0                44
+ 3:     1,27%     33     286          0               0               286
+ 4:     1,27%     34      66          0               0                66
+ 5:     1,27%     37     132          0               0               132
+ 6:     1,27%     40      66          0               0                66
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68          4               0                64
+ 9:       25%     33     442          4              11               416
+10:       25%     34     102          5               1                96
+11:       25%     37     204          6               6               192
+12:       25%     40     102          2               2                96
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   0               NA
+ 3:                        0            0                   0               NA
+ 4:                        0            0                   0               NA
+ 5:                        0            0                   0               NA
+ 6:                        0            0                   0               NA
+ 7:                        0            0                   0               NA
+ 8:                        0            0                   4         99.99983
+ 9:                       11            0                  15        100.00000
+10:                        0            0                   6         99.99991
+11:                        0            0                  12         99.99997
+12:                        2            0                   4         99.99997
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:           NA
+ 3:           NA
+ 4:           NA
+ 5:           NA
+ 6:           NA
+ 7:           NA
+ 8:     99.99994
+ 9:    100.00000
+10:    100.00000
+11:    100.00000
+12:    100.00000
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          4               0
+ 2:      censobr_weight     33     442          3              11
+ 3:      censobr_weight     34     102          5               1
+ 4:      censobr_weight     37     204          6               6
+ 5:      censobr_weight     40     102          2               2
+ 6:      censobr_weight      7     102          0               0
+ 7: censobr_weight_ibge     32      68          4               0
+ 8: censobr_weight_ibge     33     442          3              11
+ 9: censobr_weight_ibge     34     102          5               1
+10: censobr_weight_ibge     37     204          6               6
+11: censobr_weight_ibge     40     102          2               2
+12: censobr_weight_ibge      7     102          0               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                64                        0            0                   4
+ 2:               416                       12            0                  14
+ 3:                96                        0            0                   6
+ 4:               192                        0            0                  12
+ 5:                96                        2            0                   4
+ 6:               102                        0            0                   0
+ 7:                64                        0            0                   4
+ 8:               416                       12            0                  14
+ 9:                96                        0            0                   6
+10:               192                        0            0                  12
+11:                96                        2            0                   4
+12:               102                        0            0                   0
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:         99.99983     99.99994
+ 2:        100.00000    100.00000
+ 3:         99.99991    100.00000
+ 4:         99.99997    100.00000
+ 5:         99.99997    100.00000
+ 6:               NA           NA
+ 7:         99.99979     99.99993
+ 8:        100.00000    100.00000
+ 9:         99.99988    100.00000
+10:         99.99996    100.00000
+11:         99.99996    100.00000
+12:               NA           NA
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          0               0                44
+ 3:     1,27%     33     286          0               0               286
+ 4:     1,27%     34      66          0               0                66
+ 5:     1,27%     37     132          0               0               132
+ 6:     1,27%     40      66          0               0                66
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68          4               0                64
+ 9:       25%     33     442          3              11               416
+10:       25%     34     102          5               1                96
+11:       25%     37     204          6               6               192
+12:       25%     40     102          2               2                96
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   0               NA
+ 3:                        0            0                   0               NA
+ 4:                        0            0                   0               NA
+ 5:                        0            0                   0               NA
+ 6:                        0            0                   0               NA
+ 7:                        0            0                   0               NA
+ 8:                        0            0                   4         99.99983
+ 9:                       12            0                  14        100.00000
+10:                        0            0                   6         99.99991
+11:                        0            0                  12         99.99997
+12:                        2            0                   4         99.99997
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:           NA
+ 3:           NA
+ 4:           NA
+ 5:           NA
+ 6:           NA
+ 7:           NA
+ 8:     99.99994
+ 9:    100.00000
+10:    100.00000
+11:    100.00000
+12:    100.00000
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          0               0
+ 2:      censobr_weight     33     442          3              19
+ 3:      censobr_weight     34     102          1               1
+ 4:      censobr_weight     37     204          2               6
+ 5:      censobr_weight     40     102          1               1
+ 6:      censobr_weight      7     102          0               0
+ 7: censobr_weight_ibge     32      68          0               0
+ 8: censobr_weight_ibge     33     442          3              19
+ 9: censobr_weight_ibge     34     102          1               1
+10: censobr_weight_ibge     37     204          2               6
+11: censobr_weight_ibge     40     102          1               1
+12: censobr_weight_ibge      7     102          0               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                64                        4            0                   0
+ 2:               416                        4            0                  22
+ 3:                96                        4            0                   2
+ 4:               192                        4            0                   8
+ 5:                96                        4            0                   2
+ 6:               102                        0            0                   0
+ 7:                64                        4            0                   0
+ 8:               416                        4            0                  22
+ 9:                96                        4            0                   2
+10:               192                        4            0                   8
+11:                96                        4            0                   2
+12:               102                        0            0                   0
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:               NA           NA
+ 2:        100.00000          100
+ 3:         99.99996          100
+ 4:        100.00000          100
+ 5:         99.99991          100
+ 6:               NA           NA
+ 7:               NA           NA
+ 8:        100.00000          100
+ 9:         99.99994          100
+10:        100.00000          100
+11:         99.99988          100
+12:               NA           NA
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          0               0                44
+ 3:     1,27%     33     286          0               0               286
+ 4:     1,27%     34      66          0               0                66
+ 5:     1,27%     37     132          0               0               132
+ 6:     1,27%     40      66          0               0                66
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68          0               0                64
+ 9:       25%     33     442          3              19               416
+10:       25%     34     102          1               1                96
+11:       25%     37     204          2               6               192
+12:       25%     40     102          1               1                96
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   0               NA
+ 3:                        0            0                   0               NA
+ 4:                        0            0                   0               NA
+ 5:                        0            0                   0               NA
+ 6:                        0            0                   0               NA
+ 7:                        0            0                   0               NA
+ 8:                        4            0                   0               NA
+ 9:                        4            0                  22        100.00000
+10:                        4            0                   2         99.99996
+11:                        4            0                   8        100.00000
+12:                        4            0                   2         99.99991
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:           NA
+ 3:           NA
+ 4:           NA
+ 5:           NA
+ 6:           NA
+ 7:           NA
+ 8:           NA
+ 9:          100
+10:          100
+11:          100
+12:          100
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          4               0
+ 2:      censobr_weight     33     442          6              20
+ 3:      censobr_weight     34     102          3               1
+ 4:      censobr_weight     37     204          6               6
+ 5:      censobr_weight     40     102          4               2
+ 6:      censobr_weight      7     102          0               0
+ 7: censobr_weight_ibge     32      68          4               0
+ 8: censobr_weight_ibge     33     442          6              20
+ 9: censobr_weight_ibge     34     102          3               1
+10: censobr_weight_ibge     37     204          6               6
+11: censobr_weight_ibge     40     102          4               2
+12: censobr_weight_ibge      7     102          0               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                64                        0            0                   4
+ 2:               416                        0            0                  26
+ 3:                96                        2            0                   4
+ 4:               192                        0            0                  12
+ 5:                96                        0            0                   6
+ 6:               102                        0            0                   0
+ 7:                64                        0            0                   4
+ 8:               416                        0            0                  26
+ 9:                96                        2            0                   4
+10:               192                        0            0                  12
+11:                96                        0            0                   6
+12:               102                        0            0                   0
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:         99.99983     99.99994
+ 2:        100.00000    100.00000
+ 3:         99.99993    100.00000
+ 4:         99.99997    100.00000
+ 5:         99.99987    100.00000
+ 6:               NA           NA
+ 7:         99.99979     99.99993
+ 8:        100.00000    100.00000
+ 9:         99.99991    100.00000
+10:         99.99996    100.00000
+11:         99.99984    100.00000
+12:               NA           NA
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          0               0                44
+ 3:     1,27%     33     286          0               0               286
+ 4:     1,27%     34      66          0               0                66
+ 5:     1,27%     37     132          0               0               132
+ 6:     1,27%     40      66          0               0                66
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68          4               0                64
+ 9:       25%     33     442          6              20               416
+10:       25%     34     102          3               1                96
+11:       25%     37     204          6               6               192
+12:       25%     40     102          4               2                96
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   0               NA
+ 3:                        0            0                   0               NA
+ 4:                        0            0                   0               NA
+ 5:                        0            0                   0               NA
+ 6:                        0            0                   0               NA
+ 7:                        0            0                   0               NA
+ 8:                        0            0                   4         99.99983
+ 9:                        0            0                  26        100.00000
+10:                        2            0                   4         99.99993
+11:                        0            0                  12         99.99997
+12:                        0            0                   6         99.99987
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:           NA
+ 3:           NA
+ 4:           NA
+ 5:           NA
+ 6:           NA
+ 7:           NA
+ 8:     99.99994
+ 9:    100.00000
+10:    100.00000
+11:    100.00000
+12:    100.00000
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          4               0
+ 2:      censobr_weight     33     442          5              21
+ 3:      censobr_weight     34     102          5               1
+ 4:      censobr_weight     37     204          3               4
+ 5:      censobr_weight     40     102          4               2
+ 6:      censobr_weight      7     102          0               0
+ 7: censobr_weight_ibge     32      68          4               0
+ 8: censobr_weight_ibge     33     442          5              21
+ 9: censobr_weight_ibge     34     102          5               1
+10: censobr_weight_ibge     37     204          3               4
+11: censobr_weight_ibge     40     102          4               2
+12: censobr_weight_ibge      7     102          0               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                64                        0            0                   4
+ 2:               416                        0            0                  26
+ 3:                96                        0            0                   6
+ 4:               192                        5            0                   7
+ 5:                96                        0            0                   6
+ 6:               102                        0            0                   0
+ 7:                64                        0            0                   4
+ 8:               416                        0            0                  26
+ 9:                96                        0            0                   6
+10:               192                        5            0                   7
+11:                96                        0            0                   6
+12:               102                        0            0                   0
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:         99.99991     99.99994
+ 2:        100.00000    100.00000
+ 3:         99.99991    100.00000
+ 4:        100.00000    100.00000
+ 5:         99.99995    100.00000
+ 6:               NA           NA
+ 7:         99.99989     99.99993
+ 8:        100.00000    100.00000
+ 9:         99.99988    100.00000
+10:        100.00000    100.00000
+11:         99.99993    100.00000
+12:               NA           NA
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          0               0                44
+ 3:     1,27%     33     286          0               0               286
+ 4:     1,27%     34      66          0               0                66
+ 5:     1,27%     37     132          0               0               132
+ 6:     1,27%     40      66          0               0                66
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68          4               0                64
+ 9:       25%     33     442          5              21               416
+10:       25%     34     102          5               1                96
+11:       25%     37     204          3               4               192
+12:       25%     40     102          4               2                96
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   0               NA
+ 3:                        0            0                   0               NA
+ 4:                        0            0                   0               NA
+ 5:                        0            0                   0               NA
+ 6:                        0            0                   0               NA
+ 7:                        0            0                   0               NA
+ 8:                        0            0                   4         99.99991
+ 9:                        0            0                  26        100.00000
+10:                        0            0                   6         99.99991
+11:                        5            0                   7        100.00000
+12:                        0            0                   6         99.99995
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:           NA
+ 3:           NA
+ 4:           NA
+ 5:           NA
+ 6:           NA
+ 7:           NA
+ 8:     99.99994
+ 9:    100.00000
+10:    100.00000
+11:    100.00000
+12:    100.00000
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          4               0
+ 2:      censobr_weight     33     442          5              21
+ 3:      censobr_weight     34     102          5               1
+ 4:      censobr_weight     37     204          5               7
+ 5:      censobr_weight     40     102          3               1
+ 6:      censobr_weight      7     102          0               0
+ 7: censobr_weight_ibge     32      68          4               0
+ 8: censobr_weight_ibge     33     442          5              21
+ 9: censobr_weight_ibge     34     102          5               1
+10: censobr_weight_ibge     37     204          5               7
+11: censobr_weight_ibge     40     102          3               1
+12: censobr_weight_ibge      7     102          0               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                64                        0            0                   4
+ 2:               416                        0            0                  26
+ 3:                96                        0            0                   6
+ 4:               192                        0            0                  12
+ 5:                96                        2            0                   4
+ 6:               102                        0            0                   0
+ 7:                64                        0            0                   4
+ 8:               416                        0            0                  26
+ 9:                96                        0            0                   6
+10:               192                        0            0                  12
+11:                96                        2            0                   4
+12:               102                        0            0                   0
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:         99.99991     99.99994
+ 2:        100.00000    100.00000
+ 3:         99.99991    100.00000
+ 4:        100.00000    100.00000
+ 5:         99.99995    100.00000
+ 6:               NA           NA
+ 7:         99.99989     99.99993
+ 8:        100.00000    100.00000
+ 9:         99.99988    100.00000
+10:        100.00000    100.00000
+11:         99.99993    100.00000
+12:               NA           NA
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          0               0                44
+ 3:     1,27%     33     286          0               0               286
+ 4:     1,27%     34      66          0               0                66
+ 5:     1,27%     37     132          0               0               132
+ 6:     1,27%     40      66          0               0                66
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68          4               0                64
+ 9:       25%     33     442          5              21               416
+10:       25%     34     102          5               1                96
+11:       25%     37     204          5               7               192
+12:       25%     40     102          3               1                96
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   0               NA
+ 3:                        0            0                   0               NA
+ 4:                        0            0                   0               NA
+ 5:                        0            0                   0               NA
+ 6:                        0            0                   0               NA
+ 7:                        0            0                   0               NA
+ 8:                        0            0                   4         99.99991
+ 9:                        0            0                  26        100.00000
+10:                        0            0                   6         99.99991
+11:                        0            0                  12        100.00000
+12:                        2            0                   4         99.99995
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:           NA
+ 3:           NA
+ 4:           NA
+ 5:           NA
+ 6:           NA
+ 7:           NA
+ 8:     99.99994
+ 9:    100.00000
+10:    100.00000
+11:    100.00000
+12:    100.00000
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating 1960 amostra de 25% against the Serie Nacional
+Validating 1960 amostra de 25% against the Serie Nacional
+Validating 1960 amostra de 25% against the Serie Nacional
+Validating 1960 amostra de 25% against the Serie Nacional
+Validating 1960 amostra de 25% against the Serie Nacional
+Validating 1960 amostra de 25% against the Serie Nacional
+Validating the 1960 compilation against the Serie Nacional
+Validating the 1960 compilation against the Serie Nacional
+Validating the 1960 compilation against the Serie Nacional
+Validating the 1960 compilation against the Serie Nacional
+Validating the 1960 compilation against the Serie Nacional
+Validating the 1960 compilation against the Serie Nacional
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44         22              22                 0
+ 3:     1,27%     33     286         22             264                 0
+ 4:     1,27%     34      66         22              44                 0
+ 5:     1,27%     37     132         22             110                 0
+ 6:     1,27%     40      66         22              44                 0
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68         34              34                 0
+ 9:       25%     33     442         34             408                 0
+10:       25%     34     102         34              68                 0
+11:       25%     37     204         34             170                 0
+12:       25%     40     102         34              68                 0
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          2               2                 0
+15: compilado     33      26          2              24                 0
+16: compilado     34       6          2               4                 0
+17: compilado     37      12          2              10                 0
+18: compilado     40       6          2               4                 0
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                  44         99.99996
+ 3:                        0            0                 286        100.00000
+ 4:                        0            0                  66        100.00000
+ 5:                        0            0                 131        100.00000
+ 6:                        0            0                  66        100.00000
+ 7:                        0            0                   0               NA
+ 8:                        0            0                  68         99.99999
+ 9:                        0            0                 439        100.00000
+10:                        0            0                 100        100.00000
+11:                        0            0                 200        100.00000
+12:                        0            0                 102        100.00000
+13:                        0            0                   0               NA
+14:                        0            0                   4         99.99995
+15:                        0            0                  26        100.00000
+16:                        0            0                   6        100.00000
+17:                        0            0                  12        100.00000
+18:                        0            0                   6        100.00000
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:          100
+ 3:          100
+ 4:          100
+ 5:          100
+ 6:          100
+ 7:           NA
+ 8:          100
+ 9:          100
+10:          100
+11:          100
+12:          100
+13:           NA
+14:          100
+15:          100
+16:          100
+17:          100
+18:          100
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44         22              22                 0
+ 3:     1,27%     33     286         22             264                 0
+ 4:     1,27%     34      66         22              44                 0
+ 5:     1,27%     37     132         22             110                 0
+ 6:     1,27%     40      66         22              44                 0
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68         32              34                 0
+ 9:       25%     33     442         32             408                 0
+10:       25%     34     102         32              68                 0
+11:       25%     37     204         32             170                 0
+12:       25%     40     102         32              68                 0
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               2                 0
+15: compilado     33      26          0              24                 0
+16: compilado     34       6          0               4                 0
+17: compilado     37      12          0              10                 0
+18: compilado     40       6          0               4                 0
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                  44         99.99996
+ 3:                        0            0                 286        100.00000
+ 4:                        0            0                  66        100.00000
+ 5:                        0            0                 131        100.00000
+ 6:                        0            0                  66        100.00000
+ 7:                        0            0                   0               NA
+ 8:                        0            2                  66        100.00000
+ 9:                        0            2                 437        100.00000
+10:                        0            2                  98        100.00000
+11:                        0            2                 198        100.00000
+12:                        0            2                 100        100.00000
+13:                        0            0                   0               NA
+14:                        0            2                   2        100.00000
+15:                        0            2                  24        100.00000
+16:                        0            2                   4        100.00000
+17:                        0            2                  10        100.00000
+18:                        0            2                   4        100.00000
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:          100
+ 3:          100
+ 4:          100
+ 5:          100
+ 6:          100
+ 7:           NA
+ 8:          100
+ 9:          100
+10:          100
+11:          100
+12:          100
+13:           NA
+14:          100
+15:          100
+16:          100
+17:          100
+18:          100
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44         22              22                 0
+ 3:     1,27%     33     286         22             264                 0
+ 4:     1,27%     34      66         22              44                 0
+ 5:     1,27%     37     132         22             110                 0
+ 6:     1,27%     40      66         22              44                 0
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68         32              34                 0
+ 9:       25%     33     442         32             408                 0
+10:       25%     34     102         32              68                 0
+11:       25%     37     204         32             170                 0
+12:       25%     40     102         32              68                 0
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               2                 0
+15: compilado     33      26          0              24                 0
+16: compilado     34       6          0               4                 0
+17: compilado     37      12          0              10                 0
+18: compilado     40       6          0               4                 0
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                  44         99.99996
+ 3:                        0            0                 286        100.00000
+ 4:                        0            0                  66        100.00000
+ 5:                        0            0                 131        100.00000
+ 6:                        0            0                  66        100.00000
+ 7:                        0            0                   0               NA
+ 8:                        0            2                  66        100.00000
+ 9:                        0            2                 437        100.00000
+10:                        0            2                  98        100.00000
+11:                        0            2                 198        100.00000
+12:                        0            2                 100        100.00000
+13:                        0            0                   0               NA
+14:                        0            2                   2        100.00000
+15:                        0            2                  24        100.00000
+16:                        0            2                   4        100.00000
+17:                        0            2                  10        100.00000
+18:                        0            2                   4        100.00000
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:          100
+ 3:          100
+ 4:          100
+ 5:          100
+ 6:          100
+ 7:           NA
+ 8:          100
+ 9:          100
+10:          100
+11:          100
+12:          100
+13:           NA
+14:          100
+15:          100
+16:          100
+17:          100
+18:          100
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44         22              22                 0
+ 3:     1,27%     33     286         22             264                 0
+ 4:     1,27%     34      66         22              44                 0
+ 5:     1,27%     37     132         22             110                 0
+ 6:     1,27%     40      66         22              44                 0
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68         34              34                 0
+ 9:       25%     33     442         34             408                 0
+10:       25%     34     102         33              67                 0
+11:       25%     37     204         34             170                 0
+12:       25%     40     102         34              68                 0
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          2               2                 0
+15: compilado     33      26          2              24                 0
+16: compilado     34       6          1               3                 0
+17: compilado     37      12          2              10                 0
+18: compilado     40       6          2               4                 0
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                  44         99.99996
+ 3:                        0            0                 286        100.00000
+ 4:                        0            0                  66        100.00000
+ 5:                        0            0                 131        100.00000
+ 6:                        0            0                  66        100.00000
+ 7:                        0            0                   0               NA
+ 8:                        0            0                  68         99.99999
+ 9:                        0            0                 439        100.00000
+10:                        2            0                  98        100.00000
+11:                        0            0                 200        100.00000
+12:                        0            0                 102        100.00000
+13:                        0            0                   0               NA
+14:                        0            0                   4         99.99995
+15:                        0            0                  26        100.00000
+16:                        2            0                   4        100.00000
+17:                        0            0                  12        100.00000
+18:                        0            0                   6        100.00000
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:          100
+ 3:          100
+ 4:          100
+ 5:          100
+ 6:          100
+ 7:           NA
+ 8:          100
+ 9:          100
+10:          100
+11:          100
+12:          100
+13:           NA
+14:          100
+15:          100
+16:          100
+17:          100
+18:          100
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44         22              22                 0
+ 3:     1,27%     33     286         22             264                 0
+ 4:     1,27%     34      66         22              44                 0
+ 5:     1,27%     37     132         22             110                 0
+ 6:     1,27%     40      66         22              44                 0
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68         32              32                 0
+ 9:       25%     33     442         32             406                 0
+10:       25%     34     102         32              66                 0
+11:       25%     37     204         32             168                 0
+12:       25%     40     102         32              66                 0
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 0
+15: compilado     33      26          0              22                 0
+16: compilado     34       6          0               2                 0
+17: compilado     37      12          0               8                 0
+18: compilado     40       6          0               2                 0
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                  44         99.99996
+ 3:                        0            0                 286        100.00000
+ 4:                        0            0                  66        100.00000
+ 5:                        0            0                 131        100.00000
+ 6:                        0            0                  66        100.00000
+ 7:                        0            0                   0               NA
+ 8:                        4            0                  64         99.99999
+ 9:                        4            0                 435        100.00000
+10:                        4            0                  96        100.00000
+11:                        4            0                 196        100.00000
+12:                        4            0                  98        100.00000
+13:                        0            0                   0               NA
+14:                        4            0                   0               NA
+15:                        4            0                  22        100.00000
+16:                        4            0                   2        100.00000
+17:                        4            0                   8        100.00000
+18:                        4            0                   2        100.00000
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:          100
+ 3:          100
+ 4:          100
+ 5:          100
+ 6:          100
+ 7:           NA
+ 8:          100
+ 9:          100
+10:          100
+11:          100
+12:          100
+13:           NA
+14:           NA
+15:          100
+16:          100
+17:          100
+18:          100
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44         20              20                 0
+ 3:     1,27%     33     286         20             262                 0
+ 4:     1,27%     34      66         20              42                 0
+ 5:     1,27%     37     132         20             108                 0
+ 6:     1,27%     40      66         20              42                 0
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68         32              34                 0
+ 9:       25%     33     442         32             408                 0
+10:       25%     34     102         32              68                 0
+11:       25%     37     204         32             170                 0
+12:       25%     40     102         32              68                 0
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 0
+15: compilado     33      26          0              22                 0
+16: compilado     34       6          0               2                 0
+17: compilado     37      12          0               8                 0
+18: compilado     40       6          0               2                 0
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        4            0                  40         99.99996
+ 3:                        4            0                 282        100.00000
+ 4:                        4            0                  62        100.00000
+ 5:                        4            0                 127        100.00000
+ 6:                        4            0                  62        100.00000
+ 7:                        0            0                   0               NA
+ 8:                        0            2                  66        100.00000
+ 9:                        0            2                 437        100.00000
+10:                        0            2                  98        100.00000
+11:                        0            2                 198        100.00000
+12:                        0            2                 100        100.00000
+13:                        0            0                   0               NA
+14:                        2            2                   0               NA
+15:                        2            2                  22        100.00000
+16:                        2            2                   2        100.00000
+17:                        2            2                   8        100.00000
+18:                        2            2                   2        100.00000
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:          100
+ 3:          100
+ 4:          100
+ 5:          100
+ 6:          100
+ 7:           NA
+ 8:          100
+ 9:          100
+10:          100
+11:          100
+12:          100
+13:           NA
+14:           NA
+15:          100
+16:          100
+17:          100
+18:          100
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44         22              22                 0
+ 3:     1,27%     33     286         22             264                 0
+ 4:     1,27%     34      66         22              44                 0
+ 5:     1,27%     37     132         22             110                 0
+ 6:     1,27%     40      66         22              44                 0
+ 7:       25%      7     102          0               0               102
+ 8:       25%     32      68         34              34                 0
+ 9:       25%     33     442         33             398                 0
+10:       25%     34     102         34              68                 0
+11:       25%     37     204         34             170                 0
+12:       25%     40     102         32              68                 0
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          2               2                 0
+15: compilado     33      26          1              14                 0
+16: compilado     34       6          2               4                 0
+17: compilado     37      12          2              10                 0
+18: compilado     40       6          0               4                 0
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                  44         99.99996
+ 3:                        0            0                 286        100.00000
+ 4:                        0            0                  66        100.00000
+ 5:                        0            0                 131        100.00000
+ 6:                        0            0                  66        100.00000
+ 7:                        0            0                   0               NA
+ 8:                        0            0                  68         99.99999
+ 9:                       11            0                 428        100.00000
+10:                        0            0                 100        100.00000
+11:                        0            0                 200        100.00000
+12:                        2            0                 100        100.00000
+13:                        0            0                   0               NA
+14:                        0            0                   4         99.99995
+15:                       11            0                  15        100.00000
+16:                        0            0                   6        100.00000
+17:                        0            0                  12        100.00000
+18:                        2            0                   4        100.00000
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:          100
+ 3:          100
+ 4:          100
+ 5:          100
+ 6:          100
+ 7:           NA
+ 8:          100
+ 9:          100
+10:          100
+11:          100
+12:          100
+13:           NA
+14:          100
+15:          100
+16:          100
+17:          100
+18:          100
+Validating 1960 amostra de 25% against the Serie Nacional
+Validating the 1960 compilation against the Serie Nacional
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          4               0
+ 2:      censobr_weight     33     442          4              22
+ 3:      censobr_weight     34     102          4               2
+ 4:      censobr_weight     37     204          4               8
+ 5:      censobr_weight     40     102          4               2
+ 6:      censobr_weight      7     102          6               0
+ 7: censobr_weight_ibge     32      68          4               0
+ 8: censobr_weight_ibge     33     442          4              22
+ 9: censobr_weight_ibge     34     102          4               2
+10: censobr_weight_ibge     37     204          4               8
+11: censobr_weight_ibge     40     102          4               2
+12: censobr_weight_ibge      7     102          6               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                64                        0            0                   4
+ 2:               416                        0            0                  26
+ 3:                96                        0            0                   6
+ 4:               192                        0            0                  12
+ 5:                96                        0            0                   6
+ 6:                96                        0            0                   6
+ 7:                64                        0            0                   4
+ 8:               416                        0            0                  26
+ 9:                96                        0            0                   6
+10:               192                        0            0                  12
+11:                96                        0            0                   6
+12:                96                        0            0                   6
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:         99.99960     99.99980
+ 2:        100.00000    100.00000
+ 3:         99.99974    100.00000
+ 4:        100.00000    100.00000
+ 5:         99.99970    100.00000
+ 6:         99.99957     99.99994
+ 7:         99.99958     99.99979
+ 8:        100.00000    100.00000
+ 9:         99.99973    100.00000
+10:        100.00000    100.00000
+11:         99.99969    100.00000
+12:         99.99954     99.99992
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          4               0
+ 2:      censobr_weight     33     442          4              22
+ 3:      censobr_weight     34     102          4               2
+ 4:      censobr_weight     37     204          4               8
+ 5:      censobr_weight     40     102          4               2
+ 6:      censobr_weight      7     102          2               0
+ 7: censobr_weight_ibge     32      68          4               0
+ 8: censobr_weight_ibge     33     442          4              22
+ 9: censobr_weight_ibge     34     102          4               2
+10: censobr_weight_ibge     37     204          4               8
+11: censobr_weight_ibge     40     102          4               2
+12: censobr_weight_ibge      7     102          2               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                64                        0            0                   4
+ 2:               416                        0            0                  26
+ 3:                96                        0            0                   6
+ 4:               192                        0            0                  12
+ 5:                96                        0            0                   6
+ 6:                96                        4            0                   2
+ 7:                64                        0            0                   4
+ 8:               416                        0            0                  26
+ 9:                96                        0            0                   6
+10:               192                        0            0                  12
+11:                96                        0            0                   6
+12:                96                        4            0                   2
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:         99.99960     99.99980
+ 2:        100.00000    100.00000
+ 3:         99.99974    100.00000
+ 4:        100.00000    100.00000
+ 5:         99.99970    100.00000
+ 6:         99.99717     99.99973
+ 7:         99.99958     99.99979
+ 8:        100.00000    100.00000
+ 9:         99.99973    100.00000
+10:        100.00000    100.00000
+11:         99.99969    100.00000
+12:         99.99711     99.99972
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          4               0
+ 2:      censobr_weight     33     442          4              22
+ 3:      censobr_weight     34     102          4               2
+ 4:      censobr_weight     37     204          4               8
+ 5:      censobr_weight     40     102          4               2
+ 6:      censobr_weight      7     102          0               0
+ 7: censobr_weight_ibge     32      68          4               0
+ 8: censobr_weight_ibge     33     442          4              22
+ 9: censobr_weight_ibge     34     102          4               2
+10: censobr_weight_ibge     37     204          4               8
+11: censobr_weight_ibge     40     102          4               2
+12: censobr_weight_ibge      7     102          0               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                64                        0            0                   4
+ 2:               416                        0            0                  26
+ 3:                96                        0            0                   6
+ 4:               192                        0            0                  12
+ 5:                96                        0            0                   6
+ 6:                96                        6            0                   0
+ 7:                64                        0            0                   4
+ 8:               416                        0            0                  26
+ 9:                96                        0            0                   6
+10:               192                        0            0                  12
+11:                96                        0            0                   6
+12:                96                        6            0                   0
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:         99.99946     99.99980
+ 2:        100.00000    100.00000
+ 3:         99.99974    100.00000
+ 4:        100.00000    100.00000
+ 5:         99.99970    100.00000
+ 6:               NA           NA
+ 7:         99.99956     99.99979
+ 8:        100.00000    100.00000
+ 9:         99.99973    100.00000
+10:        100.00000    100.00000
+11:         99.99969    100.00000
+12:               NA           NA
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          0               0
+ 2:      censobr_weight     33     442          0              22
+ 3:      censobr_weight     34     102          0               2
+ 4:      censobr_weight     37     204          0               8
+ 5:      censobr_weight     40     102          0               2
+ 6:      censobr_weight      7     102          2               0
+ 7: censobr_weight_ibge     32      68          0               0
+ 8: censobr_weight_ibge     33     442          0              22
+ 9: censobr_weight_ibge     34     102          0               2
+10: censobr_weight_ibge     37     204          0               8
+11: censobr_weight_ibge     40     102          0               2
+12: censobr_weight_ibge      7     102          2               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                64                        4            0                   0
+ 2:               416                        4            0                  22
+ 3:                96                        4            0                   2
+ 4:               192                        4            0                   8
+ 5:                96                        4            0                   2
+ 6:                96                        4            0                   2
+ 7:                64                        4            0                   0
+ 8:               416                        4            0                  22
+ 9:                96                        4            0                   2
+10:               192                        4            0                   8
+11:                96                        4            0                   2
+12:                96                        4            0                   2
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:               NA           NA
+ 2:        100.00000    100.00000
+ 3:        100.00000    100.00000
+ 4:        100.00000    100.00000
+ 5:        100.00000    100.00000
+ 6:         99.99968     99.99994
+ 7:               NA           NA
+ 8:        100.00000    100.00000
+ 9:        100.00000    100.00000
+10:        100.00000    100.00000
+11:        100.00000    100.00000
+12:         99.99964     99.99992
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          4               0
+ 2:      censobr_weight     33     442          4              22
+ 3:      censobr_weight     34     102          4               2
+ 4:      censobr_weight     37     204          4               8
+ 5:      censobr_weight     40     102          4               2
+ 6:      censobr_weight      7     102          2               0
+ 7: censobr_weight_ibge     32      68          4               0
+ 8: censobr_weight_ibge     33     442          4              22
+ 9: censobr_weight_ibge     34     102          4               2
+10: censobr_weight_ibge     37     204          4               8
+11: censobr_weight_ibge     40     102          4               2
+12: censobr_weight_ibge      7     102          2               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                64                        0            0                   4
+ 2:               416                        0            0                  26
+ 3:                96                        0            0                   6
+ 4:               192                        0            0                  12
+ 5:                96                        0            0                   6
+ 6:                96                        4            0                   2
+ 7:                64                        0            0                   4
+ 8:               416                        0            0                  26
+ 9:                96                        0            0                   6
+10:               192                        0            0                  12
+11:                96                        0            0                   6
+12:                96                        4            0                   2
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:         99.99960     99.99980
+ 2:        100.00000    100.00000
+ 3:         99.99974    100.00000
+ 4:        100.00000    100.00000
+ 5:         99.99970    100.00000
+ 6:         99.99968     99.99994
+ 7:         99.99958     99.99979
+ 8:        100.00000    100.00000
+ 9:         99.99973    100.00000
+10:        100.00000    100.00000
+11:         99.99969    100.00000
+12:         99.99964     99.99992
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          4               0
+ 2:      censobr_weight     33     442          4              22
+ 3:      censobr_weight     34     102          4               2
+ 4:      censobr_weight     37     204          4               8
+ 5:      censobr_weight     40     102          4               2
+ 6:      censobr_weight      7     102          4               0
+ 7: censobr_weight_ibge     32      68          4               0
+ 8: censobr_weight_ibge     33     442          4              22
+ 9: censobr_weight_ibge     34     102          4               2
+10: censobr_weight_ibge     37     204          4               8
+11: censobr_weight_ibge     40     102          4               2
+12: censobr_weight_ibge      7     102          6               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                64                        0            0                   4
+ 2:               416                        0            0                  26
+ 3:                96                        0            0                   6
+ 4:               192                        0            0                  12
+ 5:                96                        0            0                   6
+ 6:                96                        0            2                   4
+ 7:                64                        0            0                   4
+ 8:               416                        0            0                  26
+ 9:                96                        0            0                   6
+10:               192                        0            0                  12
+11:                96                        0            0                   6
+12:                96                        0            0                   6
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:         99.99960     99.99980
+ 2:        100.00000    100.00000
+ 3:         99.99974    100.00000
+ 4:        100.00000    100.00000
+ 5:         99.99970    100.00000
+ 6:         99.99979     99.99994
+ 7:         99.99958     99.99979
+ 8:        100.00000    100.00000
+ 9:         99.99973    100.00000
+10:        100.00000    100.00000
+11:         99.99969    100.00000
+12:         99.99954     99.99992
+Validating 1960 amostra de 25% against the Serie Nacional
+                   peso tabela celulas observadas sem_observacoes
+                 <char>  <int>   <int>      <int>           <int>
+ 1:      censobr_weight     32      68          2               0
+ 2:      censobr_weight     33     442          2              22
+ 3:      censobr_weight     34     102          2               2
+ 4:      censobr_weight     37     204          2               8
+ 5:      censobr_weight     40     102          2               2
+ 6:      censobr_weight      7     102          4               0
+ 7: censobr_weight_ibge     32      68          4               0
+ 8: censobr_weight_ibge     33     442          4              22
+ 9: censobr_weight_ibge     34     102          4               2
+10: censobr_weight_ibge     37     204          4               8
+11: censobr_weight_ibge     40     102          4               2
+12: censobr_weight_ibge      7     102          6               0
+    nao_reconstruidas classificacao_incompleta peso_ausente percentuais_validos
+                <int>                    <int>        <int>               <int>
+ 1:                64                        0            2                   2
+ 2:               416                        0            2                  24
+ 3:                96                        0            2                   4
+ 4:               192                        0            2                  10
+ 5:                96                        0            2                   4
+ 6:                96                        0            2                   4
+ 7:                64                        0            0                   4
+ 8:               416                        0            0                  26
+ 9:                96                        0            0                   6
+10:               192                        0            0                  12
+11:                96                        0            0                   6
+12:                96                        0            0                   6
+    erro_mediano_pct erro_max_pct
+               <num>        <num>
+ 1:         99.99977     99.99980
+ 2:        100.00000    100.00000
+ 3:         99.99990    100.00000
+ 4:        100.00000    100.00000
+ 5:         99.99988    100.00000
+ 6:         99.99858     99.99973
+ 7:         99.99958     99.99979
+ 8:        100.00000    100.00000
+ 9:         99.99973    100.00000
+10:        100.00000    100.00000
+11:         99.99969    100.00000
+12:         99.99954     99.99992
+Validating 1960 amostra de 25% against the Serie Nacional
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          0               0                44
+ 3:     1,27%     33     286          0               0               286
+ 4:     1,27%     34      66          0               0                66
+ 5:     1,27%     37     132          0               0               132
+ 6:     1,27%     40      66          0               0                66
+ 7:       25%      7     102          6               0                96
+ 8:       25%     32      68          4               0                64
+ 9:       25%     33     442          4              22               416
+10:       25%     34     102          4               2                96
+11:       25%     37     204          4               8               192
+12:       25%     40     102          4               2                96
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   0               NA
+ 3:                        0            0                   0               NA
+ 4:                        0            0                   0               NA
+ 5:                        0            0                   0               NA
+ 6:                        0            0                   0               NA
+ 7:                        0            0                   6         99.99957
+ 8:                        0            0                   4         99.99960
+ 9:                        0            0                  26        100.00000
+10:                        0            0                   6         99.99974
+11:                        0            0                  12        100.00000
+12:                        0            0                   6         99.99970
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:           NA
+ 3:           NA
+ 4:           NA
+ 5:           NA
+ 6:           NA
+ 7:     99.99994
+ 8:     99.99980
+ 9:    100.00000
+10:    100.00000
+11:    100.00000
+12:    100.00000
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          0               0                44
+ 3:     1,27%     33     286          0               0               286
+ 4:     1,27%     34      66          0               0                66
+ 5:     1,27%     37     132          0               0               132
+ 6:     1,27%     40      66          0               0                66
+ 7:       25%      7     102          2               0                96
+ 8:       25%     32      68          4               0                64
+ 9:       25%     33     442          4              22               416
+10:       25%     34     102          4               2                96
+11:       25%     37     204          4               8               192
+12:       25%     40     102          4               2                96
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   0               NA
+ 3:                        0            0                   0               NA
+ 4:                        0            0                   0               NA
+ 5:                        0            0                   0               NA
+ 6:                        0            0                   0               NA
+ 7:                        4            0                   2         99.99717
+ 8:                        0            0                   4         99.99960
+ 9:                        0            0                  26        100.00000
+10:                        0            0                   6         99.99974
+11:                        0            0                  12        100.00000
+12:                        0            0                   6         99.99970
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:           NA
+ 3:           NA
+ 4:           NA
+ 5:           NA
+ 6:           NA
+ 7:     99.99973
+ 8:     99.99980
+ 9:    100.00000
+10:    100.00000
+11:    100.00000
+12:    100.00000
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          0               0                44
+ 3:     1,27%     33     286          0               0               286
+ 4:     1,27%     34      66          0               0                66
+ 5:     1,27%     37     132          0               0               132
+ 6:     1,27%     40      66          0               0                66
+ 7:       25%      7     102          0               0                96
+ 8:       25%     32      68          4               0                64
+ 9:       25%     33     442          4              22               416
+10:       25%     34     102          4               2                96
+11:       25%     37     204          4               8               192
+12:       25%     40     102          4               2                96
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   0               NA
+ 3:                        0            0                   0               NA
+ 4:                        0            0                   0               NA
+ 5:                        0            0                   0               NA
+ 6:                        0            0                   0               NA
+ 7:                        6            0                   0               NA
+ 8:                        0            0                   4         99.99946
+ 9:                        0            0                  26        100.00000
+10:                        0            0                   6         99.99974
+11:                        0            0                  12        100.00000
+12:                        0            0                   6         99.99970
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:           NA
+ 3:           NA
+ 4:           NA
+ 5:           NA
+ 6:           NA
+ 7:           NA
+ 8:      99.9998
+ 9:     100.0000
+10:     100.0000
+11:     100.0000
+12:     100.0000
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          0               0                44
+ 3:     1,27%     33     286          0               0               286
+ 4:     1,27%     34      66          0               0                66
+ 5:     1,27%     37     132          0               0               132
+ 6:     1,27%     40      66          0               0                66
+ 7:       25%      7     102          2               0                96
+ 8:       25%     32      68          0               0                64
+ 9:       25%     33     442          0              22               416
+10:       25%     34     102          0               2                96
+11:       25%     37     204          0               8               192
+12:       25%     40     102          0               2                96
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   0               NA
+ 3:                        0            0                   0               NA
+ 4:                        0            0                   0               NA
+ 5:                        0            0                   0               NA
+ 6:                        0            0                   0               NA
+ 7:                        4            0                   2         99.99968
+ 8:                        4            0                   0               NA
+ 9:                        4            0                  22        100.00000
+10:                        4            0                   2        100.00000
+11:                        4            0                   8        100.00000
+12:                        4            0                   2        100.00000
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:           NA
+ 3:           NA
+ 4:           NA
+ 5:           NA
+ 6:           NA
+ 7:     99.99994
+ 8:           NA
+ 9:    100.00000
+10:    100.00000
+11:    100.00000
+12:    100.00000
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          0               0                44
+ 3:     1,27%     33     286          0               0               286
+ 4:     1,27%     34      66          0               0                66
+ 5:     1,27%     37     132          0               0               132
+ 6:     1,27%     40      66          0               0                66
+ 7:       25%      7     102          2               0                96
+ 8:       25%     32      68          4               0                64
+ 9:       25%     33     442          4              22               416
+10:       25%     34     102          4               2                96
+11:       25%     37     204          4               8               192
+12:       25%     40     102          4               2                96
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   0               NA
+ 3:                        0            0                   0               NA
+ 4:                        0            0                   0               NA
+ 5:                        0            0                   0               NA
+ 6:                        0            0                   0               NA
+ 7:                        4            0                   2         99.99968
+ 8:                        0            0                   4         99.99960
+ 9:                        0            0                  26        100.00000
+10:                        0            0                   6         99.99974
+11:                        0            0                  12        100.00000
+12:                        0            0                   6         99.99970
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:           NA
+ 3:           NA
+ 4:           NA
+ 5:           NA
+ 6:           NA
+ 7:     99.99994
+ 8:     99.99980
+ 9:    100.00000
+10:    100.00000
+11:    100.00000
+12:    100.00000
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          0               0                44
+ 3:     1,27%     33     286          0               0               286
+ 4:     1,27%     34      66          0               0                66
+ 5:     1,27%     37     132          0               0               132
+ 6:     1,27%     40      66          0               0                66
+ 7:       25%      7     102          4               0                96
+ 8:       25%     32      68          4               0                64
+ 9:       25%     33     442          4              22               416
+10:       25%     34     102          4               2                96
+11:       25%     37     204          4               8               192
+12:       25%     40     102          4               2                96
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   0               NA
+ 3:                        0            0                   0               NA
+ 4:                        0            0                   0               NA
+ 5:                        0            0                   0               NA
+ 6:                        0            0                   0               NA
+ 7:                        0            2                   4         99.99979
+ 8:                        0            0                   4         99.99960
+ 9:                        0            0                  26        100.00000
+10:                        0            0                   6         99.99974
+11:                        0            0                  12        100.00000
+12:                        0            0                   6         99.99970
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:           NA
+ 3:           NA
+ 4:           NA
+ 5:           NA
+ 6:           NA
+ 7:     99.99994
+ 8:     99.99980
+ 9:    100.00000
+10:    100.00000
+11:    100.00000
+12:    100.00000
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66          0               0                66
+ 2:     1,27%     32      44          0               0                44
+ 3:     1,27%     33     286          0               0               286
+ 4:     1,27%     34      66          0               0                66
+ 5:     1,27%     37     132          0               0               132
+ 6:     1,27%     40      66          0               0                66
+ 7:       25%      7     102          4               0                96
+ 8:       25%     32      68          2               0                64
+ 9:       25%     33     442          2              22               416
+10:       25%     34     102          2               2                96
+11:       25%     37     204          2               8               192
+12:       25%     40     102          2               2                96
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          0               0                 4
+15: compilado     33      26          0               0                26
+16: compilado     34       6          0               0                 6
+17: compilado     37      12          0               0                12
+18: compilado     40       6          0               0                 6
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   0               NA
+ 2:                        0            0                   0               NA
+ 3:                        0            0                   0               NA
+ 4:                        0            0                   0               NA
+ 5:                        0            0                   0               NA
+ 6:                        0            0                   0               NA
+ 7:                        0            2                   4         99.99858
+ 8:                        0            2                   2         99.99977
+ 9:                        0            2                  24        100.00000
+10:                        0            2                   4         99.99990
+11:                        0            2                  10        100.00000
+12:                        0            2                   4         99.99988
+13:                        0            0                   0               NA
+14:                        0            0                   0               NA
+15:                        0            0                   0               NA
+16:                        0            0                   0               NA
+17:                        0            0                   0               NA
+18:                        0            0                   0               NA
+    erro_max_pct
+           <num>
+ 1:           NA
+ 2:           NA
+ 3:           NA
+ 4:           NA
+ 5:           NA
+ 6:           NA
+ 7:     99.99973
+ 8:     99.99980
+ 9:    100.00000
+10:    100.00000
+11:    100.00000
+12:    100.00000
+13:           NA
+14:           NA
+15:           NA
+16:           NA
+17:           NA
+18:           NA
+Validating the 1960 compilation against the Serie Nacional
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66         44              22                 0
+ 2:     1,27%     32      44         22              22                 0
+ 3:     1,27%     33     286         22             264                 0
+ 4:     1,27%     34      66         22              44                 0
+ 5:     1,27%     37     132         22             110                 0
+ 6:     1,27%     40      66         22              44                 0
+ 7:       25%      7     102         68              34                 0
+ 8:       25%     32      68         34              34                 0
+ 9:       25%     33     442         34             408                 0
+10:       25%     34     102         34              68                 0
+11:       25%     37     204         34             170                 0
+12:       25%     40     102         34              68                 0
+13: compilado      7       6          4               2                 0
+14: compilado     32       4          2               2                 0
+15: compilado     33      26          2              24                 0
+16: compilado     34       6          2               4                 0
+17: compilado     37      12          2              10                 0
+18: compilado     40       6          2               4                 0
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                  66         99.99980
+ 2:                        0            0                  44         99.99996
+ 3:                        0            0                 286        100.00000
+ 4:                        0            0                  66        100.00000
+ 5:                        0            0                 131        100.00000
+ 6:                        0            0                  66        100.00000
+ 7:                        0            0                 100         99.99993
+ 8:                        0            0                  68         99.99999
+ 9:                        0            0                 439        100.00000
+10:                        0            0                 100        100.00000
+11:                        0            0                 200        100.00000
+12:                        0            0                 102        100.00000
+13:                        0            0                   6         99.99992
+14:                        0            0                   4         99.99995
+15:                        0            0                  26        100.00000
+16:                        0            0                   6        100.00000
+17:                        0            0                  12        100.00000
+18:                        0            0                   6        100.00000
+    erro_max_pct
+           <num>
+ 1:          100
+ 2:          100
+ 3:          100
+ 4:          100
+ 5:          100
+ 6:          100
+ 7:          100
+ 8:          100
+ 9:          100
+10:          100
+11:          100
+12:          100
+13:          100
+14:          100
+15:          100
+16:          100
+17:          100
+18:          100
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7      66         44              22                 0
+ 2:     1,27%     32      44         22              22                 0
+ 3:     1,27%     33     286         22             264                 0
+ 4:     1,27%     34      66         22              44                 0
+ 5:     1,27%     37     132         22             110                 0
+ 6:     1,27%     40      66         22              44                 0
+ 7:       25%      7     102         64              32                 6
+ 8:       25%     32      68         34              34                 0
+ 9:       25%     33     442         34             408                 0
+10:       25%     34     102         34              68                 0
+11:       25%     37     204         34             170                 0
+12:       25%     40     102         34              68                 0
+13: compilado      7       6          0               0                 6
+14: compilado     32       4          2               2                 0
+15: compilado     33      26          2              24                 0
+16: compilado     34       6          2               4                 0
+17: compilado     37      12          2              10                 0
+18: compilado     40       6          2               4                 0
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                  66         99.99980
+ 2:                        0            0                  44         99.99996
+ 3:                        0            0                 286        100.00000
+ 4:                        0            0                  66        100.00000
+ 5:                        0            0                 131        100.00000
+ 6:                        0            0                  66        100.00000
+ 7:                        0            0                  94         99.99993
+ 8:                        0            0                  68         99.99999
+ 9:                        0            0                 439        100.00000
+10:                        0            0                 100        100.00000
+11:                        0            0                 200        100.00000
+12:                        0            0                 102        100.00000
+13:                        0            0                   0               NA
+14:                        0            0                   4         99.99995
+15:                        0            0                  26        100.00000
+16:                        0            0                   6        100.00000
+17:                        0            0                  12        100.00000
+18:                        0            0                   6        100.00000
+    erro_max_pct
+           <num>
+ 1:          100
+ 2:          100
+ 3:          100
+ 4:          100
+ 5:          100
+ 6:          100
+ 7:          100
+ 8:          100
+ 9:          100
+10:          100
+11:          100
+12:          100
+13:           NA
+14:          100
+15:          100
+16:          100
+17:          100
+18:          100
+Testes sinteticos de validacao 25%/compilado passaram. Artefatos isolados: tmp\validacao_1960_ef9c626734e
+
+Exit code: 0 hex: 0x0
