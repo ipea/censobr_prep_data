@@ -1,0 +1,177 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_publicacao_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+
+Attaching package: 'dplyr'
+
+The following objects are masked from 'package:data.table':
+
+    between, first, last
+
+The following objects are masked from 'package:stats':
+
+    filter, lag
+
+The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union
+
+[1] TRUE
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7       6          4               2                 0
+ 2:     1,27%     32       4          4               0                 0
+ 3:     1,27%     33      26          4              22                 0
+ 4:     1,27%     34       6          4               2                 0
+ 5:     1,27%     37      12          4               8                 0
+ 6:     1,27%     40       6          4               2                 0
+ 7:       25%      7       6          4               2                 0
+ 8:       25%     32       4          4               0                 0
+ 9:       25%     33      26          4              22                 0
+10:       25%     34       6          4               2                 0
+11:       25%     37      12          4               8                 0
+12:       25%     40       6          4               2                 0
+13: compilado      7       6          4               2                 0
+14: compilado     32       4          4               0                 0
+15: compilado     33      26          4              22                 0
+16: compilado     34       6          4               2                 0
+17: compilado     37      12          4               8                 0
+18: compilado     40       6          4               2                 0
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   6         99.99484
+ 2:                        0            0                   4         99.99510
+ 3:                        0            0                  26        100.00000
+ 4:                        0            0                   6         99.99520
+ 5:                        0            0                  12        100.00000
+ 6:                        0            0                   6         99.99447
+ 7:                        0            0                   6         99.99807
+ 8:                        0            0                   4         99.99894
+ 9:                        0            0                  26        100.00000
+10:                        0            0                   6         99.99893
+11:                        0            0                  12        100.00000
+12:                        0            0                   6         99.99872
+13:                        0            0                   6         99.99960
+14:                        0            0                   4         99.99976
+15:                        0            0                  26        100.00000
+16:                        0            0                   6         99.99976
+17:                        0            0                  12        100.00000
+18:                        0            0                   6         99.99972
+    erro_max_pct
+           <num>
+ 1:    100.00000
+ 2:     99.99526
+ 3:    100.00000
+ 4:    100.00000
+ 5:    100.00000
+ 6:    100.00000
+ 7:    100.00000
+ 8:     99.99898
+ 9:    100.00000
+10:    100.00000
+11:    100.00000
+12:    100.00000
+13:    100.00000
+14:     99.99976
+15:    100.00000
+16:    100.00000
+17:    100.00000
+18:    100.00000
+Conferindo integridade da exportacao de 1960
+RECUSOU:  Tipos nao medidos 
+Conferindo integridade da exportacao de 1960
+Warning message:
+Using an external vector in selections was deprecated in tidyselect 1.1.0.
+ℹ Please use `all_of()` or `any_of()` instead.
+  # Was:
+  data %>% select(cols)
+
+  # Now:
+  data %>% select(all_of(cols))
+
+See <https://tidyselect.r-lib.org/reference/faq-external-vector.html>. 
+PASSOU: divergencias e categorias vazias permanecem visiveis, sem veto automatico.
+Saving microdata 1960: households
+  tipos: 22 int32, 0 double, 0 string
+Saving microdata 1960: households
+RECUSOU:  ja existe 
+Saving microdata 1960: population
+  tipos: 31 int32, 0 double, 0 string
+Saving microdata 1960: population
+RECUSOU:  ja existe 
+Conferindo integridade da exportacao de 1960
+RECUSOU:  desatualizada 
+Saving microdata 1960: population
+RECUSOU:  Arquivos alterados 
+Validating the 1960 compilation against the Serie Nacional
+      amostra tabela celulas observadas sem_observacoes nao_reconstruidas
+       <char>  <int>   <int>      <int>           <int>             <int>
+ 1:     1,27%      7       6          4               2                 0
+ 2:     1,27%     32       4          4               0                 0
+ 3:     1,27%     33      26          4              22                 0
+ 4:     1,27%     34       6          4               2                 0
+ 5:     1,27%     37      12          4               8                 0
+ 6:     1,27%     40       6          4               2                 0
+ 7:       25%      7       6          4               2                 0
+ 8:       25%     32       4          4               0                 0
+ 9:       25%     33      26          4              22                 0
+10:       25%     34       6          4               2                 0
+11:       25%     37      12          4               8                 0
+12:       25%     40       6          4               2                 0
+13: compilado      7       6          4               2                 0
+14: compilado     32       4          4               0                 0
+15: compilado     33      26          4              22                 0
+16: compilado     34       6          4               2                 0
+17: compilado     37      12          4               8                 0
+18: compilado     40       6          4               2                 0
+    classificacao_incompleta peso_ausente percentuais_validos erro_mediano_pct
+                       <int>        <int>               <int>            <num>
+ 1:                        0            0                   6         99.99484
+ 2:                        0            0                   4         99.99510
+ 3:                        0            0                  26        100.00000
+ 4:                        0            0                   6         99.99520
+ 5:                        0            0                  12        100.00000
+ 6:                        0            0                   6         99.99447
+ 7:                        0            0                   6         99.99807
+ 8:                        0            0                   4         99.99894
+ 9:                        0            0                  26        100.00000
+10:                        0            0                   6         99.99893
+11:                        0            0                  12        100.00000
+12:                        0            0                   6         99.99872
+13:                        0            0                   6         99.99960
+14:                        0            0                   4         99.99976
+15:                        0            0                  26        100.00000
+16:                        0            0                   6         99.99976
+17:                        0            0                  12        100.00000
+18:                        0            0                   6         99.99972
+    erro_max_pct
+           <num>
+ 1:    100.00000
+ 2:     99.99526
+ 3:    100.00000
+ 4:    100.00000
+ 5:    100.00000
+ 6:    100.00000
+ 7:    100.00000
+ 8:     99.99898
+ 9:    100.00000
+10:    100.00000
+11:    100.00000
+12:    100.00000
+13:    100.00000
+14:     99.99976
+15:    100.00000
+16:    100.00000
+17:    100.00000
+18:    100.00000
+[1] "validacao/validacao_definitivos.csv"
+Conferindo integridade da exportacao de 1960
+RECUSOU:  desatualizada 
+Saving microdata 1960: population
+RECUSOU:  Arquivos alterados 
+Error: IOError: Failed to open local file 'D:/Dropbox/Software/R_Packages/censobr_e_prepData/censobr_prep_data/tmp/correcao_scripts_r_1960_20260923/publicacao_f383c395655/se/domicilios.parquet'. Detail: [Windows error 1224] A operação solicitada não pode ser executada em um arquivo com uma seção mapeada pelo usuário aberta.
+Execution halted
+
+Exit code: 1 hex: 0x1

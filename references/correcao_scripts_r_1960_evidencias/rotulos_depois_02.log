@@ -1,0 +1,164 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_rotulos_erros_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Estimating sampling errors for the 1960 amostra de 1,27%
+Diagnostico provisorio; variancias ainda sem validacao metodologica.
+  12 dominios por peso; com censobr_weight, nas 176 celulas do quadro 1 o coeficiente de variacao tem mediana 99.37% e maximo 99.4%; efeito de desenho mediano 1; pelos residuos da calibracao, mediana 80.88% e maximo 124.5%
+Computing sampling errors in 1960 amostra de 25%
+Diagnostico provisorio; variancias ainda sem validacao metodologica.
+          dominio estimativa pessoas estratos domicilios erro_padrao cv_pct
+           <char>      <num>   <int>    <int>      <int>       <num>  <num>
+1:        pessoas         28       7        2          4    7.745967 27.664
+2:      presentes         28       7        2          4    7.745967 27.664
+3:          rural         16       4        2          4   10.954451 68.465
+4: analfabetos_15         16       4        2          4    6.928203 43.301
+5:         urbana         12       3        2          4    7.745967 64.550
+6:   criancas_0_4          8       2        2          4    4.898979 61.237
+7: com_rendimento          8       2        2          4    4.898979 61.237
+    deff         status_analise variancia_total_validada
+   <num>                 <char>                   <lgcl>
+1:    NA diagnostico_provisorio                    FALSE
+2:    NA diagnostico_provisorio                    FALSE
+3:   5.0 diagnostico_provisorio                    FALSE
+4:   2.0 diagnostico_provisorio                    FALSE
+5:   2.5 diagnostico_provisorio                    FALSE
+6:   1.2 diagnostico_provisorio                    FALSE
+7:   1.2 diagnostico_provisorio                    FALSE
+                 metodo_erro_padrao metodo_erro_padrao_calibrado
+                             <char>                       <char>
+1: aproximacao_desenho_reconstruido                nao_calculado
+2: aproximacao_desenho_reconstruido                nao_calculado
+3: aproximacao_desenho_reconstruido                nao_calculado
+4: aproximacao_desenho_reconstruido                nao_calculado
+5: aproximacao_desenho_reconstruido                nao_calculado
+6: aproximacao_desenho_reconstruido                nao_calculado
+7: aproximacao_desenho_reconstruido                nao_calculado
+   incerteza_controles_incorporada
+                            <lgcl>
+1:                           FALSE
+2:                           FALSE
+3:                           FALSE
+4:                           FALSE
+5:                           FALSE
+6:                           FALSE
+7:                           FALSE
+                                                                                                                                                          aviso_interpretacao
+                                                                                                                                                                       <char>
+1: Aproximacao de desenho com os pesos fornecidos; nao representa variancia total validada. Incerteza dos controles estimados nao incorporada; revisao das variancias adiada.
+2: Aproximacao de desenho com os pesos fornecidos; nao representa variancia total validada. Incerteza dos controles estimados nao incorporada; revisao das variancias adiada.
+3: Aproximacao de desenho com os pesos fornecidos; nao representa variancia total validada. Incerteza dos controles estimados nao incorporada; revisao das variancias adiada.
+4: Aproximacao de desenho com os pesos fornecidos; nao representa variancia total validada. Incerteza dos controles estimados nao incorporada; revisao das variancias adiada.
+5: Aproximacao de desenho com os pesos fornecidos; nao representa variancia total validada. Incerteza dos controles estimados nao incorporada; revisao das variancias adiada.
+6: Aproximacao de desenho com os pesos fornecidos; nao representa variancia total validada. Incerteza dos controles estimados nao incorporada; revisao das variancias adiada.
+7: Aproximacao de desenho com os pesos fornecidos; nao representa variancia total validada. Incerteza dos controles estimados nao incorporada; revisao das variancias adiada.
+Computing sampling errors in the 1960 compilation
+Diagnostico provisorio; variancias ainda sem validacao metodologica.
+          dominio estimativa estratos  upas pessoas erro_padrao cv_pct  deff
+           <char>      <num>    <int> <int>   <int>       <num>  <num> <num>
+1:        pessoas        588        3     6      14    85.67380 14.570    NA
+2:      presentes        588        3     6      14    85.67380 14.570    NA
+3: analfabetos_15        336        3     6       8    31.74902  9.449   0.2
+4:          rural        336        3     6       8   163.82918 48.759   4.1
+5:         urbana        252        3     6       6    85.67380 33.998   1.1
+6: com_rendimento        168        3     6       4    22.44994 13.363   0.1
+7:   criancas_0_4        168        3     6       4    22.44994 13.363   0.1
+   n_efetivo parte_dentro_pct         status_analise variancia_total_validada
+       <num>            <num>                 <char>                   <lgcl>
+1:        NA            16.35 diagnostico_provisorio                    FALSE
+2:        NA            16.35 diagnostico_provisorio                    FALSE
+3:        70            95.24 diagnostico_provisorio                    FALSE
+4:         3             8.94 diagnostico_provisorio                    FALSE
+5:        13            16.35 diagnostico_provisorio                    FALSE
+6:       140            95.24 diagnostico_provisorio                    FALSE
+7:       140            95.24 diagnostico_provisorio                    FALSE
+                 metodo_erro_padrao metodo_erro_padrao_calibrado
+                             <char>                       <char>
+1: aproximacao_desenho_reconstruido                nao_calculado
+2: aproximacao_desenho_reconstruido                nao_calculado
+3: aproximacao_desenho_reconstruido                nao_calculado
+4: aproximacao_desenho_reconstruido                nao_calculado
+5: aproximacao_desenho_reconstruido                nao_calculado
+6: aproximacao_desenho_reconstruido                nao_calculado
+7: aproximacao_desenho_reconstruido                nao_calculado
+   incerteza_controles_incorporada
+                            <lgcl>
+1:                           FALSE
+2:                           FALSE
+3:                           FALSE
+4:                           FALSE
+5:                           FALSE
+6:                           FALSE
+7:                           FALSE
+                                                                                                                                                          aviso_interpretacao
+                                                                                                                                                                       <char>
+1: Aproximacao de desenho com os pesos fornecidos; nao representa variancia total validada. Incerteza dos controles estimados nao incorporada; revisao das variancias adiada.
+2: Aproximacao de desenho com os pesos fornecidos; nao representa variancia total validada. Incerteza dos controles estimados nao incorporada; revisao das variancias adiada.
+3: Aproximacao de desenho com os pesos fornecidos; nao representa variancia total validada. Incerteza dos controles estimados nao incorporada; revisao das variancias adiada.
+4: Aproximacao de desenho com os pesos fornecidos; nao representa variancia total validada. Incerteza dos controles estimados nao incorporada; revisao das variancias adiada.
+5: Aproximacao de desenho com os pesos fornecidos; nao representa variancia total validada. Incerteza dos controles estimados nao incorporada; revisao das variancias adiada.
+6: Aproximacao de desenho com os pesos fornecidos; nao representa variancia total validada. Incerteza dos controles estimados nao incorporada; revisao das variancias adiada.
+7: Aproximacao de desenho com os pesos fornecidos; nao representa variancia total validada. Incerteza dos controles estimados nao incorporada; revisao das variancias adiada.
+Valores identicos; atributos da tabela diferem: amostra_127
+ [1] "Names: 4 string mismatches"                              
+ [2] "Component 1: Modes: numeric, character"                  
+ [3] "Component 1: Lengths: 24, 12"                            
+ [4] "Component 1: target is numeric, current is character"    
+ [5] "Component 2: Modes: character, numeric"                  
+ [6] "Component 2: Lengths: 2, 24"                             
+ [7] "Component 2: target is character, current is numeric"    
+ [8] "Component 3: target is externalptr, current is character"
+ [9] "Component 4: Modes: character, externalptr"              
+[10] "Component 4: Lengths: 12, 1"                             
+[11] "Component 4: target is character, current is externalptr"
+<pointer: 0x0000021ca224cf30>
+<pointer: (nil)>
+Valores anteriores preservados: amostra_127
+Valores identicos; atributos da tabela diferem: csv_127
+ [1] "Names: 4 string mismatches"                              
+ [2] "Component 1: Modes: numeric, character"                  
+ [3] "Component 1: Lengths: 24, 12"                            
+ [4] "Component 1: target is numeric, current is character"    
+ [5] "Component 2: Modes: character, numeric"                  
+ [6] "Component 2: Lengths: 2, 24"                             
+ [7] "Component 2: target is character, current is numeric"    
+ [8] "Component 3: target is externalptr, current is character"
+ [9] "Component 4: Modes: character, externalptr"              
+[10] "Component 4: Lengths: 12, 1"                             
+[11] "Component 4: target is character, current is externalptr"
+<pointer: 0x0000021ca224cf30>
+<pointer: (nil)>
+Valores anteriores preservados: csv_127
+Valores identicos; atributos da tabela diferem: amostra_25
+ [1] "Names: 4 string mismatches"                              
+ [2] "Component 1: Modes: numeric, character"                  
+ [3] "Component 1: Lengths: 7, 8"                              
+ [4] "Component 1: target is numeric, current is character"    
+ [5] "Component 2: Modes: character, numeric"                  
+ [6] "Component 2: Lengths: 2, 7"                              
+ [7] "Component 2: target is character, current is numeric"    
+ [8] "Component 3: target is externalptr, current is character"
+ [9] "Component 4: Modes: character, externalptr"              
+[10] "Component 4: Lengths: 8, 1"                              
+[11] "Component 4: target is character, current is externalptr"
+<pointer: 0x0000021ca224cf30>
+<pointer: (nil)>
+Valores anteriores preservados: amostra_25
+Valores identicos; atributos da tabela diferem: compilada
+ [1] "Names: 4 string mismatches"                              
+ [2] "Component 1: Modes: numeric, character"                  
+ [3] "Component 1: Lengths: 7, 10"                             
+ [4] "Component 1: target is numeric, current is character"    
+ [5] "Component 2: Modes: character, numeric"                  
+ [6] "Component 2: Lengths: 2, 7"                              
+ [7] "Component 2: target is character, current is numeric"    
+ [8] "Component 3: target is externalptr, current is character"
+ [9] "Component 4: Modes: character, externalptr"              
+[10] "Component 4: Lengths: 10, 1"                             
+[11] "Component 4: target is character, current is externalptr"
+<pointer: 0x0000021ca224cf30>
+<pointer: (nil)>
+Valores anteriores preservados: compilada
+Rotulos conferidos nas tres funcoes, no retorno e nos CSVs; residuos zero permanecem diagnosticos.
+
+Exit code: 0 hex: 0x0

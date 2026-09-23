@@ -1,0 +1,280 @@
+{
+  "rodada": "correcao_scripts_r_1960_20260923",
+  "escopo": "Codigo e testes ficticios; nao homologacao da base",
+  "normalizacao_texto": "UTF-8 sem BOM, CRLF convertido a LF",
+  "arquivos": [
+    {
+      "arquivo": "CLAUDE.md",
+      "bytes": 56046,
+      "sha256_bytes": "4ea0d2bf5ff07bfec9e53a825e6a21e3be2e05bf83559aa918e366ba65a4d381",
+      "sha256_texto_lf": "4ea0d2bf5ff07bfec9e53a825e6a21e3be2e05bf83559aa918e366ba65a4d381",
+      "codigo_r": null
+    },
+    {
+      "arquivo": ".claude/plans/2026-09-23_correcao_scripts_r_1960.md",
+      "bytes": 6110,
+      "sha256_bytes": "8e9860e3df0bece784b245a137cb69b6168b12473bb711c33abd46eaf8e06c1e",
+      "sha256_texto_lf": "8e9860e3df0bece784b245a137cb69b6168b12473bb711c33abd46eaf8e06c1e",
+      "codigo_r": null
+    },
+    {
+      "arquivo": "R/microdata_1960.R",
+      "bytes": 47418,
+      "sha256_bytes": "a9ecc96697d731ae7c992db8c7d405d7633620c054730ad42502373add078ecb",
+      "sha256_texto_lf": "a9ecc96697d731ae7c992db8c7d405d7633620c054730ad42502373add078ecb",
+      "codigo_r": null
+    },
+    {
+      "arquivo": "R/microdata_1960_publicacao.R",
+      "bytes": 8753,
+      "sha256_bytes": "68c9f170a6e1f2260e6fd4fe6192864dbc9b8f64c72a8e0b091250b6c716ffd1",
+      "sha256_texto_lf": "68c9f170a6e1f2260e6fd4fe6192864dbc9b8f64c72a8e0b091250b6c716ffd1",
+      "codigo_r": null
+    },
+    {
+      "arquivo": "R/microdata_1960_amostra_127.R",
+      "bytes": 208664,
+      "sha256_bytes": "e2b2305965206491b514e1f6ac40c52cd97c1581420bf3209fa093543d21067d",
+      "sha256_texto_lf": "e2b2305965206491b514e1f6ac40c52cd97c1581420bf3209fa093543d21067d",
+      "codigo_r": null
+    },
+    {
+      "arquivo": "R/microdata_1960_amostra_25.R",
+      "bytes": 55702,
+      "sha256_bytes": "48868506631efa39a8a526a45f51e53cd5357265de567f73b3b24fcf5e30aefd",
+      "sha256_texto_lf": "48868506631efa39a8a526a45f51e53cd5357265de567f73b3b24fcf5e30aefd",
+      "codigo_r": null
+    },
+    {
+      "arquivo": "_targets.R",
+      "bytes": 32938,
+      "sha256_bytes": "1f09262293e5bf2cc6d55365e615279fe2e63d8dc391c03a8b331200a868d446",
+      "sha256_texto_lf": "1f09262293e5bf2cc6d55365e615279fe2e63d8dc391c03a8b331200a868d446",
+      "codigo_r": null
+    },
+    {
+      "arquivo": "references/conferencia_desenho_amostral_1960.R",
+      "bytes": 4339,
+      "sha256_bytes": "6ed9f83c91707c426aa6cb64eb00fe5faf1b4118c088504cbb0bb6c83e2c105d",
+      "sha256_texto_lf": "6ed9f83c91707c426aa6cb64eb00fe5faf1b4118c088504cbb0bb6c83e2c105d",
+      "codigo_r": null
+    },
+    {
+      "arquivo": "references/test_procedencia_compilacao_1960.R",
+      "bytes": 11231,
+      "sha256_bytes": "b53ed9823b4514155247cf299a1ab70177a80e83f84b00215b9d80dfedcf7dc3",
+      "sha256_texto_lf": "b53ed9823b4514155247cf299a1ab70177a80e83f84b00215b9d80dfedcf7dc3",
+      "codigo_r": null
+    },
+    {
+      "arquivo": "references/test_rotulos_erros_1960.R",
+      "bytes": 6014,
+      "sha256_bytes": "be9fcb71760a57a5e920482d34c8e863dd3005f4862e6afae21f970674ac529b",
+      "sha256_texto_lf": "be9fcb71760a57a5e920482d34c8e863dd3005f4862e6afae21f970674ac529b",
+      "codigo_r": null
+    },
+    {
+      "arquivo": "references/test_publicacao_1960.R",
+      "bytes": 12236,
+      "sha256_bytes": "0e8194dd1a419e9ac1c9c32acf1cfdd8487161267deef80ebb75c79f6f6176f3",
+      "sha256_texto_lf": "0e8194dd1a419e9ac1c9c32acf1cfdd8487161267deef80ebb75c79f6f6176f3",
+      "codigo_r": null
+    },
+    {
+      "arquivo": "references/test_exportacao_sem_conferencia_1960.R",
+      "bytes": 1320,
+      "sha256_bytes": "b9443826df33b4147aedc967f9c75db221adb50214f3298b5dbe258c9e1cd58e",
+      "sha256_texto_lf": "b9443826df33b4147aedc967f9c75db221adb50214f3298b5dbe258c9e1cd58e",
+      "codigo_r": null
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_20260923.md",
+      "bytes": 8938,
+      "sha256_bytes": "3fecb2c307154896f00ec0693bfc0f0dfb95c662f8dc795128ce34cd2f27f7c9",
+      "sha256_texto_lf": "3fecb2c307154896f00ec0693bfc0f0dfb95c662f8dc795128ce34cd2f27f7c9",
+      "codigo_r": null
+    },
+    {
+      "arquivo": "schemas/censobr_types.csv",
+      "bytes": 897283,
+      "sha256_bytes": "9bb56074c5d6b00cb8bc435bba4390c99d9543e431d572c1ea65f368f50790c2",
+      "sha256_texto_lf": "2e5653431b3c3311bfe1c62fb843a6d2b87802c3464a770ca07bb00ab20cf917",
+      "codigo_r": null
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/exportacao_antes.log",
+      "bytes": 1325,
+      "sha256_bytes": "efee9d383cdee310969f7d607611a6ede8e63f81050f58ef43a5caba7a677f23",
+      "sha256_texto_lf": "c951c97ef30ae6c73f648f8d869578b7b7f9885927a99e348c35f7bf4e88278a",
+      "codigo_r": 1
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/exportacao_antes_02.log",
+      "bytes": 606,
+      "sha256_bytes": "6615ce70e449db5f406fe5822d0e0e2a635bcb83115f03c06fae245b8f26e944",
+      "sha256_texto_lf": "b74a4625f747e4406df2c3515814adc67ad0d741342cdb1b20cc69b568bbdc4f",
+      "codigo_r": 1
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/exportacao_antes_03.log",
+      "bytes": 653,
+      "sha256_bytes": "312c2f486e1bec8bcd60f2854473e052becd3581bf8650aa477f789d1ca2eca1",
+      "sha256_texto_lf": "b2c4972da9943557f7ff2cd4d7e0454904c1c29e4cba6e7082e5f41ddb01dac7",
+      "codigo_r": 1
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/exportacao_depois.log",
+      "bytes": 676,
+      "sha256_bytes": "b787e2592970074871db4805f1989ef6362eab9571e4d45498fe404711a63cdc",
+      "sha256_texto_lf": "7670bc86bef827c7a1efcda56afa0b6af05df1b605837d6d7fa459d14c6c7e11",
+      "codigo_r": 0
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/LEIAME.md",
+      "bytes": 5532,
+      "sha256_bytes": "02af3c902dabd7b522b973032fec8fdd59cdb6ffa224d63a3cb72d9ae815d721",
+      "sha256_texto_lf": "02af3c902dabd7b522b973032fec8fdd59cdb6ffa224d63a3cb72d9ae815d721",
+      "codigo_r": null
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/pesos_arrow_final.log",
+      "bytes": 2841,
+      "sha256_bytes": "94a8a062724b74a5bcddca430d696228b1b453b52ea6cad88893383fa2311629",
+      "sha256_texto_lf": "8e1d844205b0b4cd5bd3df5b27325236d73bd3457bdee6b5d3d40c414108b993",
+      "codigo_r": 0
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/pesos_arrow_final_02.log",
+      "bytes": 3081,
+      "sha256_bytes": "d3421999b660091912bd1a9a928d63732c6843e62f2969d3fd0a6ab4042543bf",
+      "sha256_texto_lf": "e4e3277826852ffe6bdc713bbf068a82b40166d4beeaa5385337d8f8df439bd2",
+      "codigo_r": 0
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/pesos_avisos_detalhados.log",
+      "bytes": 8029,
+      "sha256_bytes": "432aff6546695b365c48ac0f1df8180281ed905aac1e36a2ade1d465d14a9b86",
+      "sha256_texto_lf": "801169d3928c62c159a395facd24a64e11edc15a8e23bb5f118d5a798b6e5239",
+      "codigo_r": 0
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/pesos_legados.log",
+      "bytes": 1831,
+      "sha256_bytes": "7586df2666b21517c50e6e5cd0de9e0bc786ca1552cbaaa17266e71ece7b0b1a",
+      "sha256_texto_lf": "6515f154531863ac09838e4952dbd46ec5ed4ee89f62ba7812c8c33e056d14e8",
+      "codigo_r": 0
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/procedencia_antes.log",
+      "bytes": 4869,
+      "sha256_bytes": "20d206cbdd63ff23b4f1c41def1b2c8eac894d21cce4100e361c62d6d56685f9",
+      "sha256_texto_lf": "d9d7379731d7e4e698696fa52826f475fbe1e7c73dd5558a015a345dc05fd7a4",
+      "codigo_r": 1
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/procedencia_antes_02.log",
+      "bytes": 2430,
+      "sha256_bytes": "f50723b71f1e71ba3b954744d9f1184a6910905b593a5cbff55d804d0652d6dc",
+      "sha256_texto_lf": "540ecf3af9b8fe608d8d40b36d249e0df43e11608e8b89d56489db1d90632139",
+      "codigo_r": 1
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/procedencia_depois.log",
+      "bytes": 2779,
+      "sha256_bytes": "52e30edc632e39dc989da0207fd7381c5a57a61751da72cfeb2f68e213ff3edb",
+      "sha256_texto_lf": "ccb6b204ed66a647c969b7f944ef6346f9ce48b0c2441cc67fc0a234c238a1f9",
+      "codigo_r": 0
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/procedencia_final.log",
+      "bytes": 3780,
+      "sha256_bytes": "130f2d891dd348a38103d857212e73f4f6ed106c3dd675fa7f89a5e83f060075",
+      "sha256_texto_lf": "6600c517545f699730fd7796ab93efb983666783125e007e2978f13f22b1a21f",
+      "codigo_r": 0
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/procedencia_na_antes.log",
+      "bytes": 3246,
+      "sha256_bytes": "5280812bfd6be32218b0359b3fe612d0ffe5cea4e74f14532fa61b1b75f3d09d",
+      "sha256_texto_lf": "f935c3e8cb343325b1185b0c01ee36abf760908e857355bf5c361170f4bfdf79",
+      "codigo_r": 1
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/publicacao_depois.log",
+      "bytes": 8968,
+      "sha256_bytes": "0c0d1ea1843e3cfeb5d5dcc5a5c5fa132bf8a77c3544dff14c274e82c5f56d1d",
+      "sha256_texto_lf": "f3541f4068ff944a0a1fa7902ee88297a7e28c4d3ee0a9d7ae9bfc404dc7c57f",
+      "codigo_r": 1
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/publicacao_depois_02.log",
+      "bytes": 8969,
+      "sha256_bytes": "544c50e0ec978b3638aca2aa56da8666172845018a02aef8b4e51115d5ebc24f",
+      "sha256_texto_lf": "dcc7db35294873f9eb2936343c7feb87b28fe4cd1093e30e12999ada6ff7b123",
+      "codigo_r": 1
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/publicacao_depois_03.log",
+      "bytes": 94493,
+      "sha256_bytes": "733e36409e221ac1a564d7e9c264dea998bb8de0da5d8779deee216b503486d0",
+      "sha256_texto_lf": "769ca7e0fd5f58223e886db6156f4cbee54b9d036a2eee701ed25dbfe02c458b",
+      "codigo_r": 0
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/publicacao_final.log",
+      "bytes": 102283,
+      "sha256_bytes": "f81ff3f96d1993a68bbacc17025ddd491b6ea4e58952185179f1638674990301",
+      "sha256_texto_lf": "4ec13d5a14772b1dbdaa009097fa1bb87ec14ba7d2cc12018b55df5928c501fd",
+      "codigo_r": 0
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/rotulos_antes.log",
+      "bytes": 525,
+      "sha256_bytes": "4358ca238a4e0beb96bad06b6f1d8510ec1a337a2e3488ca1dbc80bfccb1f12f",
+      "sha256_texto_lf": "23e5f1a5372200d1ec80acaad2c832f5af9cfbe1b637d28b672cdc58e00cf5b6",
+      "codigo_r": 1
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/rotulos_antes_02.log",
+      "bytes": 2576,
+      "sha256_bytes": "2e4df2b0875ab2da10b75aea05333af10f7fcf13b8c2c813cae32a48dd038c8e",
+      "sha256_texto_lf": "14396520b3281738f449bd4806fdcad3d34c7bfe1aad4d486d43795c624a34b9",
+      "codigo_r": 1
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/rotulos_depois.log",
+      "bytes": 8461,
+      "sha256_bytes": "3841a2083cb5f2defb1d43ad28879f4ce37628b7a854f8f30b3e55be32f02563",
+      "sha256_texto_lf": "7a9334653aef3a859d6feb6810ec1e86382f151f83c7fd06f500c4dedac5d6ac",
+      "codigo_r": 1
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/rotulos_depois_02.log",
+      "bytes": 11956,
+      "sha256_bytes": "6e52fc3819fdf127e4cbb6bd9a2b9426bfa02f2b0d9016a9000dbf449da98adf",
+      "sha256_texto_lf": "b3fe90ad2e15a0d76e93c349a54511cb5a081381c408f509aa72fb8ad4dab616",
+      "codigo_r": 0
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/rotulos_erros_antes.rds",
+      "bytes": 1389,
+      "sha256_bytes": "62cf0ead55444b40df317be15f7356a235cc1220ef6ca5dd5be4986422a55c77",
+      "sha256_texto_lf": null,
+      "codigo_r": null
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/rotulos_final.log",
+      "bytes": 8932,
+      "sha256_bytes": "67521c25b85827d593d080c4c3e80dbdf4f4b3c61f8ff62a767397d8271ea76e",
+      "sha256_texto_lf": "77c746c40a6974404fcfa682e488aa15009f05e9a320ebe3588e40e65d9cfa58",
+      "codigo_r": 0
+    },
+    {
+      "arquivo": "references/correcao_scripts_r_1960_evidencias/validacao_legada.log",
+      "bytes": 143457,
+      "sha256_bytes": "a2f3b6d4476d58617f8d51bac3c1cf764473ab6652d28fc9e8a169b900ec4c08",
+      "sha256_texto_lf": "aa38202c24be52f486da57defa0a09e23968d96916d0edbef5cd5be1afea53be",
+      "codigo_r": 0
+    }
+  ]
+}

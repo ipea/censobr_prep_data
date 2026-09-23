@@ -1,4 +1,4 @@
-# Confere o cálculo de erro amostral do passo 11 contra o pacote `survey`, e mede o custo dos estimadores
+# Confere a aritmetica da aproximacao de desenho contra o pacote `survey`, e mede o custo dos estimadores
 # alternativos discutidos em references/microdata_1960_amostra_127_desenho_amostral.md.
 #
 # Não faz parte do pipeline: é um script de conferência, para rodar à mão quando o desenho mudar. É também
@@ -60,8 +60,8 @@ v_entre <- vcov(svytotal(~um, desenho))[1, 1]
 message("população presente: erro-padrão entre pastas ", round(sqrt(v_entre)), " | com a etapa dos domicílios ",
         round(sqrt(v_entre + v_dentro)), " (", round(100 * (sqrt(v_entre + v_dentro) / sqrt(v_entre) - 1), 2), "% maior)")
 
-# 4. a variância pelos resíduos da calibração, que só vale para censobr_weight (totais externos): o survey a
-# calcula com calibrate() sobre as mesmas células; o passo 11 a escreve em erro_padrao_calibrado
+# 4. Leitura dos residuos condicionados a controles fixos, ainda sem validacao metodologica.
+# Este trecho nao executa survey::calibrate() nem confere a incerteza dos controles estimados.
 nosso_cal <- nosso[regiao != "Brasil" & situacao == "ambas" & sexo == "ambos"]
 message("erro-padrão por região, desenho vs resíduos da calibração:")
 for(i in seq_len(nrow(nosso_cal))) message("  ", nosso_cal$regiao[i], ": ", nosso_cal$erro_padrao[i], " vs ", nosso_cal$erro_padrao_calibrado[i])

@@ -882,6 +882,14 @@ sampling_errors_1960_amostra_25 <- function(paths){
   # efeito de desenho perde sentido: fica ausente
   r[, deff := data.table::fifelse(p_chapeu < 0.98, round(variancia / v_srs, 2), NA_real_)]
   r[, c("variancia", "p_chapeu", "v_srs") := NULL]
+  r[, `:=`(status_analise                    = "diagnostico_provisorio",
+           variancia_total_validada          = FALSE,
+           metodo_erro_padrao                = "aproximacao_desenho_reconstruido",
+           metodo_erro_padrao_calibrado      = "nao_calculado",
+           incerteza_controles_incorporada   = FALSE,
+           aviso_interpretacao               = paste("Aproximacao de desenho com os pesos fornecidos; nao representa variancia total validada.",
+                                                    "Incerteza dos controles estimados nao incorporada; revisao das variancias adiada."))]
+  message("Diagnostico provisorio; variancias ainda sem validacao metodologica.")
   print(r[order(-estimativa)])
 
   saida <- "./data_raw/microdata/1960/amostra_25/erros_amostrais.csv"

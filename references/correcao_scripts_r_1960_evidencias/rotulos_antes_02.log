@@ -1,0 +1,48 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_rotulos_erros_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Estimating sampling errors for the 1960 amostra de 1,27%
+  12 dominios por peso; com censobr_weight, nas 176 celulas do quadro 1 o coeficiente de variacao tem mediana 99.37% e maximo 99.4%; efeito de desenho mediano 1; pelos residuos da calibracao, mediana 80.88% e maximo 124.5%
+Computing sampling errors in 1960 amostra de 25%
+          dominio estimativa pessoas estratos domicilios erro_padrao cv_pct
+           <char>      <num>   <int>    <int>      <int>       <num>  <num>
+1:        pessoas         28       7        2          4    7.745967 27.664
+2:      presentes         28       7        2          4    7.745967 27.664
+3:          rural         16       4        2          4   10.954451 68.465
+4: analfabetos_15         16       4        2          4    6.928203 43.301
+5:         urbana         12       3        2          4    7.745967 64.550
+6:   criancas_0_4          8       2        2          4    4.898979 61.237
+7: com_rendimento          8       2        2          4    4.898979 61.237
+    deff
+   <num>
+1:    NA
+2:    NA
+3:   5.0
+4:   2.0
+5:   2.5
+6:   1.2
+7:   1.2
+Computing sampling errors in the 1960 compilation
+          dominio estimativa estratos  upas pessoas erro_padrao cv_pct  deff
+           <char>      <num>    <int> <int>   <int>       <num>  <num> <num>
+1:        pessoas        588        3     6      14    85.67380 14.570    NA
+2:      presentes        588        3     6      14    85.67380 14.570    NA
+3: analfabetos_15        336        3     6       8    31.74902  9.449   0.2
+4:          rural        336        3     6       8   163.82918 48.759   4.1
+5:         urbana        252        3     6       6    85.67380 33.998   1.1
+6: com_rendimento        168        3     6       4    22.44994 13.363   0.1
+7:   criancas_0_4        168        3     6       4    22.44994 13.363   0.1
+   n_efetivo parte_dentro_pct
+       <num>            <num>
+1:        NA            16.35
+2:        NA            16.35
+3:        70            95.24
+4:         3             8.94
+5:        13            16.35
+6:       140            95.24
+7:       140            95.24
+Error: amostra_127 sem identificacao de diagnostico provisorio; csv_127 sem identificacao de diagnostico provisorio; amostra_25 sem identificacao de diagnostico provisorio; compilada sem identificacao de diagnostico provisorio
+Execution halted
+
+Exit code: 1 hex: 0x1

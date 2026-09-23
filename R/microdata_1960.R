@@ -54,6 +54,14 @@ MUNI_1960_ATUAL <- data.table::data.table(
 # A ordem das colunas publicadas: geografia, identificacao, a chave do
 # questionario, o questionario na ordem do formulario, as contagens, o desenho,
 # os pesos e as marcas de auditoria.
+COLUNAS_1960_PROCEDENCIA <- c(
+  "censobr_cartao_recuperado_id", "censobr_cartao_fonte", "censobr_cartao_arquivo",
+  "censobr_cartao_linha", "censobr_cartao_pasta_fonte25", "censobr_cartao_boletim_fonte25",
+  "censobr_cartao_chave_reconciliada", "censobr_cartao_criterio_identificacao",
+  "censobr_cartao_sha256", "censobr_cartao_unidade",
+  "censobr_distrito_original", "censobr_distrito_fonte25", "censobr_distrito_recuperado",
+  "censobr_distrito_prova", "censobr_distrito_prova_sha256")
+
 COLUNAS_1960_DOM <- c(
   "code_region", "name_region", "code_state", "abbrev_state", "name_state",
   "code_muni", "code_muni_1960", "name_muni_1960",
@@ -69,7 +77,7 @@ COLUNAS_1960_DOM <- c(
   "censobr_weight_nivel", "censobr_weight_ibge", "censobr_weight_1965", "censobr_weight_1965_fator",
   "censobr_favela", "censobr_muni_corrigido", "censobr_uf_corrigida",
   "censobr_diagnostico", "censobr_variaveis_anuladas", "censobr_familia_origem",
-  "censobr_convivente_isolada", "censobr_dois_chefes", "censobr_linha")
+  "censobr_convivente_isolada", "censobr_dois_chefes", COLUNAS_1960_PROCEDENCIA, "censobr_linha")
 
 COLUNAS_1960_PES <- c(
   "code_region", "name_region", "code_state", "abbrev_state", "name_state",
@@ -93,11 +101,11 @@ COLUNAS_1960_PES <- c(
   "censobr_duplicata_mantida", "censobr_familia_origem", "censobr_v208_imputada",
   "censobr_v217_fora_da_faixa", "censobr_v218_fora_da_faixa",
   "censobr_flag_conjuge_mesmo_sexo", "censobr_flag_filho_mais_velho",
-  "censobr_flag_casamento_impossivel", "censobr_linha")
+  "censobr_flag_casamento_impossivel", COLUNAS_1960_PROCEDENCIA, "censobr_linha")
 
-# As colunas que so uma das metades tem, e o tipo com que a outra as recebe --
-# um parquet por unidade com esquema diferente impediria o open_dataset de ler
-# as 28 como uma tabela so.
+# As colunas que so uma metade tem recebem NA tipado na outra para permitir
+# a leitura conjunta dos intermediarios. Os tipos publicados dependem da
+# medicao integral registrada em schemas/censobr_types.csv.
 TIPOS_1960_FALTANTES <- c(
   name_muni_1960 = "character", name_bairro_1960 = "character",
   code_bairro_1960 = "integer",
@@ -109,7 +117,23 @@ TIPOS_1960_FALTANTES <- c(
   censobr_tipo_registro = "character", censobr_duplicata_mantida = "logical",
   censobr_v208_imputada = "logical", censobr_v217_fora_da_faixa = "logical",
   censobr_v218_fora_da_faixa = "logical", censobr_flag_conjuge_mesmo_sexo = "logical",
-  censobr_flag_filho_mais_velho = "logical", censobr_flag_casamento_impossivel = "logical")
+  censobr_flag_filho_mais_velho = "logical", censobr_flag_casamento_impossivel = "logical",
+
+  censobr_cartao_recuperado_id          = "character",
+  censobr_cartao_fonte                  = "character",
+  censobr_cartao_arquivo                = "character",
+  censobr_cartao_linha                  = "integer",
+  censobr_cartao_pasta_fonte25          = "character",
+  censobr_cartao_boletim_fonte25        = "character",
+  censobr_cartao_chave_reconciliada     = "integer",
+  censobr_cartao_criterio_identificacao = "character",
+  censobr_cartao_sha256                 = "character",
+  censobr_cartao_unidade                = "character",
+  censobr_distrito_original             = "character",
+  censobr_distrito_fonte25              = "character",
+  censobr_distrito_recuperado           = "integer",
+  censobr_distrito_prova                = "character",
+  censobr_distrito_prova_sha256         = "character")
 
 
 # ------------------------------------------------------------------------------
@@ -288,9 +312,22 @@ compile_1960 <- function(paths_25, paths_127, estratos, unidade, municipios_path
   # esquema uniforme: a metade que nao tem a coluna recebe NA do tipo declarado
   tabelas <- list(dom, pes)
   alvos   <- list(COLUNAS_1960_DOM, COLUNAS_1960_PES)
-  for(i in 1:2)
+  for(i in 1:2){
+    procedencia <- grep("^censobr_(cartao|distrito)_", names(tabelas[[i]]), value = TRUE)
+    if(length(setdiff(procedencia, COLUNAS_1960_PROCEDENCIA)))
+      stop("procedencia sem coluna correspondente no esquema da compilacao")
+    for(col in procedencia){
+      if(all(is.na(tabelas[[i]][[col]])))
+        data.table::set(tabelas[[i]], j = col, value = rep(as(NA, TIPOS_1960_FALTANTES[[col]]), nrow(tabelas[[i]])))
+      if(col %in% c("censobr_cartao_chave_reconciliada", "censobr_distrito_recuperado")){
+        if(any(!is.na(tabelas[[i]][[col]]) & !tabelas[[i]][[col]] %in% c(0L, 1L)))
+          stop("marca de procedencia fora de 0 e 1: ", col)
+        data.table::set(tabelas[[i]], j = col, value = as.integer(tabelas[[i]][[col]]))
+      }
+    }
     for(col in setdiff(alvos[[i]], names(tabelas[[i]])))
       data.table::set(tabelas[[i]], j = col, value = as(NA, TIPOS_1960_FALTANTES[[col]]))
+  }
 
   saida <- out_dir
   dir.create(saida, recursive = TRUE, showWarnings = FALSE)
@@ -326,19 +363,37 @@ GEO_COLS_HIST_1960 <- c("code_muni_1960", "name_muni_1960",
                         "name_region_1960",
                         "code_state_1960", "abbrev_state_1960", "name_state_1960")
 
-save_microdata_1960 <- function(paths, dataset_name, data_version){
+save_microdata_1960 <- function(paths, dataset_name, data_version, conferencia_path = NULL,
+                                out_dir = "./data/microdata_sample/1960"){
 
   message("Saving microdata 1960: ", dataset_name)
+  if(is.null(conferencia_path)) stop("Exportacao exige conferencia tecnica atual.")
+  conferencia <- jsonlite::read_json(conferencia_path, simplifyVector = TRUE)
+  arquivos <- sort(normalizePath(as.character(unlist(paths, use.names = FALSE)), winslash = "/", mustWork = TRUE))
+  codigo <- digest::digest(list(body(conferir_publicacao_1960), body(save_microdata_1960),
+    body(validate_1960), body(tabular_pessoas_validacao_1960),
+    body(tabular_domicilios_validacao_1960), body(completar_validacao_pessoas_1960),
+    body(cast_censobr_types), body(relocate_geo_cols_censobr),
+    UF_1960_AMOSTRA_25, UF_1960_AMOSTRA_127, COLUNAS_1960_DOM, COLUNAS_1960_PES,
+    GEO_COLS_CENSOBR, GEO_COLS_HIST_1960), algo = "sha256")
+  if(!isTRUE(conferencia$integridade_tecnica) ||
+     !identical(arquivos, conferencia$microdados) || !identical(codigo, conferencia$codigo))
+    stop("A conferencia nao corresponde aos microdados ou ao codigo atual.")
+  if(!identical(normalizePath("schemas/censobr_types.csv", winslash = "/", mustWork = TRUE), conferencia$schema))
+    stop("O esquema aplicado difere do esquema da conferencia.")
+  assinaturas <- unname(sapply(conferencia$arquivos, digest::digest, file = TRUE, algo = "sha256"))
+  if(!identical(assinaturas, conferencia$sha256)) stop("Arquivos alterados depois da conferencia.")
 
+  dataset_name <- match.arg(dataset_name, c("households", "population"))
+  dest_file <- file.path(out_dir, paste0("1960_", dataset_name, "_", data_version, ".parquet"))
+  if(file.exists(dest_file)) stop("A versao de saida ja existe; nao sera substituida.")
   arquivo <- switch(dataset_name, households = "domicilios.parquet", population = "pessoas.parquet")
-  arrw <- arrow::open_dataset(paths[basename(paths) == arquivo])
+  arrw <- arrow::open_dataset(arquivos[basename(arquivos) == arquivo])
   arrw <- relocate_geo_cols_censobr(arrw, GEO_COLS_HIST_1960)
   arrw <- cast_censobr_types(arrw, paste0("1960_", dataset_name))
 
-  out_dir <- "./data/microdata_sample/1960"
   dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
-  temp_dir <- file.path(out_dir, paste0("tmp_", dataset_name))
-  unlink(temp_dir, recursive = TRUE)
+  temp_dir <- tempfile(paste0("tmp_", dataset_name, "_"), tmpdir = out_dir)
 
   arrow::write_dataset(arrw,
                        path               = temp_dir,
@@ -348,9 +403,12 @@ save_microdata_1960 <- function(paths, dataset_name, data_version){
                        min_rows_per_group = 1e6L,
                        max_rows_per_group = 1e6L,
                        basename_template  = "part-{i}.parquet")
+  rm(arrw); gc(verbose = FALSE)
 
-  dest_file <- paste0(out_dir, "/1960_", dataset_name, "_", data_version, ".parquet")
-  file.rename(file.path(temp_dir, "part-0.parquet"), dest_file)
+  partes <- list.files(temp_dir, pattern = "[.]parquet$", full.names = TRUE)
+  if(length(partes) != 1L) stop("Exportacao deve produzir um unico parquet; temporarios preservados.")
+  if(file.exists(dest_file) || !file.rename(partes, dest_file))
+    stop("Saida nao instalada; temporarios preservados.")
   unlink(temp_dir, recursive = TRUE)
 
   dest_file
@@ -374,6 +432,10 @@ validate_1960 <- function(paths, definitivos_path,
                           out_dir = "./data_raw/microdata/1960/compilada"){
 
   message("Validating the 1960 compilation against the Serie Nacional")
+
+  fontes <- sort(normalizePath(c(as.character(unlist(paths, use.names = FALSE)), definitivos_path),
+                               winslash = "/", mustWork = TRUE))
+  assinaturas <- unname(sapply(fontes, digest::digest, file = TRUE, algo = "sha256"))
 
   def <- data.table::fread(definitivos_path, encoding = "UTF-8")
   def[nivel == "brasil", uf60 := 999L]
@@ -436,6 +498,15 @@ validate_1960 <- function(paths, definitivos_path,
   dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
   saida <- file.path(out_dir, "validacao_definitivos.csv")
   data.table::fwrite(cmp[order(tabela, uf60, item, sexo, medida)], saida)
+  # O relatorio so serve para estes insumos e esta regra de comparacao.
+  codigo <- digest::digest(list(body(validate_1960), body(tabular_pessoas_validacao_1960),
+    body(tabular_domicilios_validacao_1960), body(completar_validacao_pessoas_1960),
+    UF_1960_AMOSTRA_25, UF_1960_AMOSTRA_127), algo = "sha256")
+  jsonlite::write_json(list(arquivos         = fontes,
+                           sha256           = assinaturas,
+                           codigo           = codigo,
+                           relatorio_sha256 = digest::digest(saida, file = TRUE, algo = "sha256")),
+    paste0(saida, ".fontes.json"), auto_unbox = TRUE, pretty = TRUE)
   resumo <- cmp[, .(celulas = .N, observadas = sum(status_celula == "observada"),
     sem_observacoes = sum(status_celula == "sem_observacoes"),
     nao_reconstruidas = sum(status_celula == "nao_reconstruida"),
@@ -536,6 +607,14 @@ sampling_errors_1960 <- function(paths){
   r[, n_efetivo := round(n_total / deff)]
   r[, parte_dentro_pct := round(100 * v_dentro / (v_entre + v_dentro), 2)]
   r[, c("v_entre", "v_dentro", "p_chapeu", "v_srs") := NULL]
+  r[, `:=`(status_analise                    = "diagnostico_provisorio",
+           variancia_total_validada          = FALSE,
+           metodo_erro_padrao                = "aproximacao_desenho_reconstruido",
+           metodo_erro_padrao_calibrado      = "nao_calculado",
+           incerteza_controles_incorporada   = FALSE,
+           aviso_interpretacao               = paste("Aproximacao de desenho com os pesos fornecidos; nao representa variancia total validada.",
+                                                    "Incerteza dos controles estimados nao incorporada; revisao das variancias adiada."))]
+  message("Diagnostico provisorio; variancias ainda sem validacao metodologica.")
   print(r[order(-estimativa)])
 
   saida <- "./data_raw/microdata/1960/compilada/erros_amostrais.csv"
@@ -607,6 +686,21 @@ ROTULOS_1960_CENSOBR <- c(
   censobr_flag_conjuge_mesmo_sexo = "Conjuge do mesmo sexo do chefe",
   censobr_flag_filho_mais_velho = "Filho mais velho incompativel com a idade do chefe",
   censobr_flag_casamento_impossivel = "Ano de casamento incompativel com a idade",
+  censobr_cartao_recuperado_id          = "Identificador da recuperacao do cartao familiar; vazio quando nao se aplica",
+  censobr_cartao_fonte                  = "Amostra de origem do cartao familiar recuperado, sem mudar a amostra das pessoas",
+  censobr_cartao_arquivo                = "Caminho da fonte usada na recuperacao do cartao familiar",
+  censobr_cartao_linha                  = "Linha do cartao na fonte da recuperacao; nao substitui censobr_linha do arquivo de origem",
+  censobr_cartao_pasta_fonte25          = "Pasta do cartao na fonte de 25%; pode diferir da pasta operacional v001 e nao redefine a unidade amostral",
+  censobr_cartao_boletim_fonte25        = "Boletim do cartao na fonte de 25%; pode diferir do boletim operacional v002",
+  censobr_cartao_chave_reconciliada     = "Chave da fonte de 25% conciliada com a de 1,27%: 1 = Sim, 0 = Nao; vazio quando nao se aplica",
+  censobr_cartao_criterio_identificacao = "Criterio documentado de correspondencia entre o cartao recuperado e as pessoas ja existentes",
+  censobr_cartao_sha256                 = "Assinatura SHA-256 do arquivo-fonte do cartao recuperado; identifica os bytes, nao certifica a decisao historica",
+  censobr_cartao_unidade                = "Tipo do boletim recuperado; boletim coletivo nao demonstra por si so um edificio separado",
+  censobr_distrito_original             = "Distrito literal antes da recuperacao operacional, inclusive caracteres danificados",
+  censobr_distrito_fonte25              = "Distrito recuperado da fonte de 25%; vazio quando nao houve recuperacao",
+  censobr_distrito_recuperado           = "Distrito operacional recuperado com prova: 1 = Sim, 0 = Nao; vazio quando nao se aplica",
+  censobr_distrito_prova                = "Caminho da prova usada para recuperar o distrito operacional sem apagar o texto original",
+  censobr_distrito_prova_sha256         = "Assinatura SHA-256 da prova de recuperacao do distrito",
   censobr_linha = "Linha do registro no arquivo de origem",
   v001 = "Pasta: o lote de trabalho de ~250 questionarios, e a unidade sorteada na amostra de 1,27%",
   v002 = "Boletim dentro da pasta",
@@ -623,7 +717,8 @@ NOMES_1960_ANTIGOS <- c(
   censobr_n_familias = "censobr_nfamilies", censobr_diagnostico = "censobr_diag_households",
   censobr_variaveis_anuladas = "censobr_diag_households_vars", name_muni_1960 = "name_muni")
 
-dicionario_1960 <- function(paths, guia_familias, guia_pessoas){
+dicionario_1960 <- function(paths, guia_familias, guia_pessoas,
+                           out_path = "./references/microdata_1960_compilacao_dicionario.csv"){
 
   message("Writing the 1960 column dictionary")
 
@@ -632,11 +727,13 @@ dicionario_1960 <- function(paths, guia_familias, guia_pessoas){
                                  fill = TRUE)
   guias <- unique(guias[, .(coluna = variavel, rotulo_ibge = rotulo)])
 
+  paths <- as.character(unlist(paths, use.names = FALSE))
   linhas <- list()
   for(tab in c("domicilios", "pessoas")){
     for(u in c("se", "gb")){
-      d <- data.table::setDT(arrow::read_parquet(
-        file.path("./data_raw/microdata/1960/compilada", u, paste0(tab, ".parquet"))))
+      arquivo <- paths[basename(dirname(paths)) == u & basename(paths) == paste0(tab, ".parquet")]
+      if(length(arquivo) != 1L) stop("informar um arquivo por tabela de SE e GB no dicionario")
+      d <- data.table::setDT(arrow::read_parquet(arquivo))
       preenchido <- d[, lapply(.SD, function(x) round(100 * mean(!is.na(x)), 1))]
       linhas[[paste(tab, u)]] <- data.table::data.table(
         tabela = data.table::fifelse(tab == "domicilios", "households", "population"),
@@ -667,7 +764,7 @@ dicionario_1960 <- function(paths, guia_familias, guia_pessoas){
   data.table::setcolorder(x, c("tabela", "ordem", "coluna", "tipo", "rotulo",
                                "preenchido_25_pct", "preenchido_127_pct",
                                "nome_antigo", "situacao_vs_publicado"))
-  saida <- "./references/microdata_1960_compilacao_dicionario.csv"
+  saida <- out_path
   data.table::fwrite(x[order(tabela, ordem)], saida)
 
   print(x[, .N, by = .(tabela, situacao_vs_publicado)][order(tabela, situacao_vs_publicado)])

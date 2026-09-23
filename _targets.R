@@ -445,7 +445,27 @@ list(
 
   # as duas validacoes agregam o pais inteiro e por isso nao sao ramificadas
   tar_target(name = validacao_1960,
-             command = validate_1960(compilada_1960, gabarito_1960_definitivos),
+             command = {
+               arquivo <- validate_1960(compilada_1960, gabarito_1960_definitivos)
+               c(arquivo, paste0(arquivo, ".fontes.json"))
+             },
+             format = "file"
+             ),
+
+  tar_target(name = fontes_validacao_1960,
+             command = validacao_1960[2],
+             format = "file"
+             ),
+
+  tar_target(name = schema_tipos_1960,
+             command = "schemas/censobr_types.csv",
+             format = "file"
+             ),
+
+  tar_target(name = conferencia_publicacao_1960,
+             command = conferir_publicacao_1960(compilada_1960, validacao_1960[1],
+                                                 gabarito_1960_definitivos, schema_tipos_1960,
+                                                 fontes_validacao_1960),
              format = "file"
              ),
 
@@ -469,7 +489,7 @@ list(
   tar_target(name = output_microdata_1960,
              command = save_microdata_1960(compilada_1960,
                                            dataset_names_microdata_1960,
-                                           data_version),
+                                           data_version, conferencia_publicacao_1960),
              pattern = map(dataset_names_microdata_1960),
              format = "file"
              ),

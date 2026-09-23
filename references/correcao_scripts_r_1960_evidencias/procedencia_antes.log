@@ -1,0 +1,85 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_procedencia_compilacao_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+
+Attaching package: 'arrow'
+
+The following object is masked from 'package:utils':
+
+    timestamp
+
+Warning message:
+package 'digest' was built under R version 4.5.3 
+Compiling 1960: se
+  2 domicilios, 2 pessoas, 1 estratos
+Warning messages:
+1: In `[.data.table`(dom, , `:=`(censobr_amostra, amostra)) :
+  Coercing 'character' RHS to 'integer' to match the type of column 36 named 'censobr_amostra'.
+2: In `[.data.table`(dom, , `:=`(censobr_amostra, amostra)) :
+  NAs introduced by coercion
+3: In `[.data.table`(pes, , `:=`(censobr_amostra, amostra)) :
+  Coercing 'character' RHS to 'integer' to match the type of column 37 named 'censobr_amostra'.
+4: In `[.data.table`(pes, , `:=`(censobr_amostra, amostra)) :
+  NAs introduced by coercion
+5: In `[.data.table`(dom, , `:=`(censobr_upa = censobr_idhousehold,  :
+  0.250000 (type 'double') at RHS position 1 out-of-range(NA) or truncated (precision lost) when assigning to type 'integer' (column 59 named 'censobr_fpc')
+6: In prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L,  :
+  'big.mark' and 'decimal.mark' are both '.', which could be confusing
+7: In prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L,  :
+  'big.mark' and 'decimal.mark' are both '.', which could be confusing
+Compiling 1960: gb
+  2 domicilios, 2 pessoas, 1 estratos
+Warning messages:
+1: In `[.data.table`(dom, , `:=`(censobr_amostra, amostra)) :
+  Coercing 'character' RHS to 'integer' to match the type of column 36 named 'censobr_amostra'.
+2: In `[.data.table`(dom, , `:=`(censobr_amostra, amostra)) :
+  NAs introduced by coercion
+3: In `[.data.table`(pes, , `:=`(censobr_amostra, amostra)) :
+  Coercing 'character' RHS to 'integer' to match the type of column 37 named 'censobr_amostra'.
+4: In `[.data.table`(pes, , `:=`(censobr_amostra, amostra)) :
+  NAs introduced by coercion
+5: In `[.data.table`(dom, , `:=`(censobr_upa = pasta_desenho, censobr_fpc = 0.05,  :
+  0.050000 (type 'double') at RHS position 1 out-of-range(NA) or truncated (precision lost) when assigning to type 'integer' (column 59 named 'censobr_fpc')
+6: In `[.data.table`(dom, , `:=`(censobr_upa = pasta_desenho, censobr_fpc = 0.05,  :
+  0.250000 (type 'double') at RHS position 1 out-of-range(NA) or truncated (precision lost) when assigning to type 'integer' (column 61 named 'censobr_fpc2')
+7: In prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L,  :
+  'big.mark' and 'decimal.mark' are both '.', which could be confusing
+8: In prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L,  :
+  'big.mark' and 'decimal.mark' are both '.', which could be confusing
+domicilios 15 colunas preservadas: FALHOU
+domicilios UF e amostra preservadas: FALHOU
+domicilios contagem e pesos preservados: PASSOU
+domicilios chave operacional preservada: PASSOU
+pessoas 15 colunas preservadas: FALHOU
+pessoas UF e amostra preservadas: FALHOU
+pessoas contagem e pesos preservados: PASSOU
+pessoas chave operacional preservada: PASSOU
+respostas pessoais inalteradas: PASSOU
+rotulos das 15 colunas: FALHOU
+dicionario permite saida isolada: FALHOU
+Compiling 1960: se
+  2 domicilios, 2 pessoas, 1 estratos
+Warning messages:
+1: In `[.data.table`(dom, , `:=`(censobr_amostra, amostra)) :
+  Coercing 'character' RHS to 'integer' to match the type of column 36 named 'censobr_amostra'.
+2: In `[.data.table`(dom, , `:=`(censobr_amostra, amostra)) :
+  NAs introduced by coercion
+3: In `[.data.table`(pes, , `:=`(censobr_amostra, amostra)) :
+  Coercing 'character' RHS to 'integer' to match the type of column 37 named 'censobr_amostra'.
+4: In `[.data.table`(pes, , `:=`(censobr_amostra, amostra)) :
+  NAs introduced by coercion
+5: In `[.data.table`(dom, , `:=`(censobr_upa = censobr_idhousehold,  :
+  0.250000 (type 'double') at RHS position 1 out-of-range(NA) or truncated (precision lost) when assigning to type 'integer' (column 59 named 'censobr_fpc')
+6: In prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L,  :
+  'big.mark' and 'decimal.mark' are both '.', which could be confusing
+7: In prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L,  :
+  'big.mark' and 'decimal.mark' are both '.', which could be confusing
+procedencia desconhecida bloqueia antes de gravar: FALHOU
+Compiling 1960: gb
+cartao recuperado continua bloqueado no ramo127: PASSOU
+insumos intocados: PASSOU
+Error: Falhas de procedencia: domicilios 15 colunas preservadas; domicilios UF e amostra preservadas; pessoas 15 colunas preservadas; pessoas UF e amostra preservadas; rotulos das 15 colunas; dicionario permite saida isolada; procedencia desconhecida bloqueia antes de gravar
+Execution halted
+
+Exit code: 1 hex: 0x1

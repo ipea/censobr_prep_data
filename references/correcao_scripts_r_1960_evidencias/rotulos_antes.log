@@ -1,0 +1,10 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_rotulos_erros_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+Estimating sampling errors for the 1960 amostra de 1,27%
+  12 dominios por peso; com censobr_weight, nas 176 celulas do quadro 1 o coeficiente de variacao tem mediana 99.37% e maximo 99.4%; efeito de desenho mediano 1; pelos residuos da calibracao, mediana 80.88% e maximo 124.5%
+Error: identical(d, d_antes) is not TRUE
+Execution halted
+
+Exit code: 1 hex: 0x1

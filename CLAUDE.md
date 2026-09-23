@@ -2,6 +2,14 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Correções técnicas dos scripts de 1960 — 23/09/2026
+
+Estado mais recente: [nota narrativa das correções](references/correcao_scripts_r_1960_20260923.md), plano `.claude/plans/2026-09-23_correcao_scripts_r_1960.md`. Compilação/dicionário preservam 15 campos de procedência, com tipos intermediários consistentes inclusive quando a entrada traz coluna inteira NA_integer_. O bloqueio de cartões recuperados no ramo127 continua. A exportação passa a depender de conferência técnica dos mesmos insumos, relatório, código e esquema, ligada aos targets; não sobrescreve versão existente. As três saídas de erros amostrais são rotuladas provisórias, sem alteração das fórmulas ou valores anteriores.
+
+Seis scripts de testes pertinentes aprovados, incluindo 30 recusas esperadas no teste da exportação e a bateria anterior de pesos com I/O Arrow. Evidências e baseline numérico anterior em `references/correcao_scripts_r_1960_evidencias/`. R sempre isolado e sequencial, sem crash nativo. Os três arquivos protegidos da amostra127 conservam seus SHA-256 anteriores. Nenhuma reconstrução nacional, recálculo de peso real, release, commit ou push nesta rodada; Rproj e renv.lock preexistentes preservados.
+
+**Não há homologação dos dados:** pendências históricas e metodológicas abaixo continuam. `schemas/censobr_types.csv` não foi editado manualmente; a medição integral do produto real ainda é necessária para declarar as novas colunas e liberar a conferência de exportação. A aprovação técnica não resolve exclusões históricas, vínculos sem prova nem validação das variâncias. Não executar targets para contornar esses impedimentos. Os registros abaixo conservam a cronologia; a antiga afirmação de que a compilação descarta as colunas de origem foi superada no código, não nos parquets completos já existentes.
+
 ## Implementação residual — rodada de 22–23/09/2026
 
 Publicação do código autorizada em 23/09/2026, após o fechamento abaixo: commit/push da investigação e implementação residual, sem release de dados. Plano `.claude/plans/2026-09-23_publicar_residuais_registros.md`. As afirmações históricas de ausência de commit descrevem o momento da conclusão dos testes. Preservar fora do commit as alterações anteriores do Rproj e renv.lock; os impedimentos de reconstrução e pesos continuam valendo.

@@ -1,0 +1,26 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_exportacao_sem_conferencia_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+
+Attaching package: 'dplyr'
+
+The following objects are masked from 'package:data.table':
+
+    between, first, last
+
+The following objects are masked from 'package:stats':
+
+    filter, lag
+
+The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union
+
+[1] TRUE
+Saving microdata 1960: population
+Erro capturado:  Exportacao exige conferencia tecnica atual. 
+Parquet exportado:  FALSE 
+PASSOU: sem conferencia nao ha exportacao.
+
+Exit code: 0 hex: 0x0

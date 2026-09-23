@@ -1,0 +1,67 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_procedencia_compilacao_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+[1] "Portuguese_Brazil.utf8"
+
+Attaching package: 'arrow'
+
+The following object is masked from 'package:utils':
+
+    timestamp
+
+Warning message:
+package 'digest' was built under R version 4.5.3 
+Compiling 1960: se
+  2 domicilios, 2 pessoas, 1 estratos
+Warning messages:
+1: In prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L,  :
+  'big.mark' and 'decimal.mark' are both '.', which could be confusing
+2: In prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L,  :
+  'big.mark' and 'decimal.mark' are both '.', which could be confusing
+Compiling 1960: gb
+  2 domicilios, 2 pessoas, 1 estratos
+Warning messages:
+1: In prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L,  :
+  'big.mark' and 'decimal.mark' are both '.', which could be confusing
+2: In prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L,  :
+  'big.mark' and 'decimal.mark' are both '.', which could be confusing
+domicilios 15 colunas preservadas: PASSOU
+domicilios UF e amostra preservadas: PASSOU
+domicilios contagem e pesos preservados: PASSOU
+domicilios fracoes do desenho preservadas: PASSOU
+domicilios chave operacional preservada: PASSOU
+domicilios ausencia tipada na metade25: PASSOU
+domicilios distrito literal e prova preservados: PASSOU
+domicilios uniao Arrow sem perda: PASSOU
+pessoas 15 colunas preservadas: PASSOU
+pessoas UF e amostra preservadas: PASSOU
+pessoas contagem e pesos preservados: PASSOU
+pessoas fracoes do desenho preservadas: PASSOU
+pessoas chave operacional preservada: PASSOU
+pessoas ausencia tipada na metade25: PASSOU
+pessoas distrito literal e prova preservados: PASSOU
+pessoas uniao Arrow sem perda: PASSOU
+respostas pessoais inalteradas: PASSOU
+rotulos das 15 colunas: PASSOU
+dicionario permite saida isolada: PASSOU
+Writing the 1960 column dictionary
+       tabela situacao_vs_publicado     N
+       <char>                <char> <int>
+1: households               mantida    32
+2: households                  nova    42
+3: households             renomeada     8
+4: population               mantida    58
+5: population                  nova    48
+6: population             renomeada     8
+  sem rotulo: V117
+dicionario usa os microlotes recebidos: PASSOU
+Compiling 1960: se
+procedencia desconhecida bloqueia antes de gravar: PASSOU
+Compiling 1960: gb
+marca de recuperacao fora de 0 e 1 bloqueia: PASSOU
+Compiling 1960: gb
+cartao recuperado continua bloqueado no ramo127: PASSOU
+insumos intocados: PASSOU
+Procedencia da compilacao conferida somente em microlotes ficticios: tmp\procedencia_compilacao_1960_e80c1baf3c1d
+
+Exit code: 0 hex: 0x0

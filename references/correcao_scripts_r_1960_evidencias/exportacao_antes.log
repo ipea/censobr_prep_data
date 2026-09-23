@@ -1,0 +1,31 @@
+R: C:/Program Files/R/R-4.5.0/bin/x64/Rscript.exe
+Script: references\test_exportacao_sem_conferencia_1960.R
+PROCESSOR_ARCHITECTURE: AMD64
+
+Attaching package: 'dplyr'
+
+The following objects are masked from 'package:data.table':
+
+    between, first, last
+
+The following objects are masked from 'package:stats':
+
+    filter, lag
+
+The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union
+
+Error in source(file.path(raiz, "R", arquivo), encoding = "UTF-8") : 
+  D:/Dropbox/Software/R_Packages/censobr_e_prepData/censobr_prep_data/R/microdata_1960.R:404:45: unexpected INCOMPLETE_STRING
+403:                      if(!is.na(par_dom)) "censobr_idhousehold")))
+404:     if(!nrow(p) || any(!p$UF %in% uf)) stop("arquivo pessoal vazio ou com UF incompat
+                                                 ^
+In addition: Warning messages:
+1: In source(file.path(raiz, "R", arquivo), encoding = "UTF-8") :
+  invalid input found on input connection 'D:/Dropbox/Software/R_Packages/censobr_e_prepData/censobr_prep_data/R/support_fun.R'
+2: In source(file.path(raiz, "R", arquivo), encoding = "UTF-8") :
+  invalid input found on input connection 'D:/Dropbox/Software/R_Packages/censobr_e_prepData/censobr_prep_data/R/microdata_1960.R'
+Execution halted
+
+Exit code: 1 hex: 0x1

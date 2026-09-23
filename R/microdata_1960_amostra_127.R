@@ -3008,7 +3008,7 @@ sampling_errors_1960_amostra_127 <- function(tabelas, definitivos_path){
   p <- data.table::copy(p0); p[, w := get(peso)]
   w_hh <- dom[[peso]]
   n_amostra <- nrow(p); n_populacao <- sum(p$w)
-  # a projecao da calibracao, so para o peso final: e o unico com totais externos
+  # Os residuos condicionam os controles a valores fixos, mesmo nas UFs com controles estimados.
   XtWX <- if(peso == "censobr_weight") as.matrix(Matrix::crossprod(cal$X, Matrix::Diagonal(x = w_hh) %*% cal$X)) else NULL
 
   # a variancia de um total, dado o valor z_k = w_k y_k (ou w_k e_k) de cada domicilio na ordem de hh
@@ -3056,7 +3056,19 @@ sampling_errors_1960_amostra_127 <- function(tabelas, definitivos_path){
   rbind(totais, celulas, fill = TRUE)[, .(peso = peso, regiao, situacao, sexo, faixa, estimativa = round(estimativa), erro_padrao = round(erro_padrao),
                                           cv_pct, deff, pessoas, erro_padrao_calibrado = round(erro_padrao_calibrado), cv_calibrado_pct)]
   }))
+  res[, `:=`(status_analise                    = "diagnostico_provisorio",
+             variancia_total_validada          = FALSE,
+             metodo_erro_padrao                = "aproximacao_desenho_reconstruido",
+             metodo_erro_padrao_calibrado      = "nao_calculado",
+             incerteza_controles_incorporada   = FALSE,
+             aviso_interpretacao               = paste("Residuos nao calculados; aproximacao de desenho com os pesos fornecidos,",
+                                                      "sem variancia total validada. Revisao das variancias adiada."))]
+  res[peso == "censobr_weight", `:=`(
+    metodo_erro_padrao_calibrado = "residuos_condicionados_a_controles_fixos",
+    aviso_interpretacao          = paste("Residuos condicionados a controles fixos; nao incorporam a incerteza dos controles estimados.",
+                                        "Residuo zero nao significa erro populacional zero; revisao das variancias adiada."))]
   data.table::fwrite(res, "./data_raw/microdata/1960/amostra_127/erros_amostrais.csv", bom = TRUE)
+  message("Diagnostico provisorio; variancias ainda sem validacao metodologica.")
 
   celulas <- res[peso == "censobr_weight" & faixa != "todas"]
   message("  ", nrow(res) / 2, " dominios por peso; com censobr_weight, nas 176 celulas do quadro 1 o coeficiente de variacao tem mediana ",

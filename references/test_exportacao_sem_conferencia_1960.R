@@ -1,0 +1,25 @@
+# O teste grava somente dados ficticios em uma pasta exclusiva sob tmp.
+raiz <- normalizePath(".", winslash = "/")
+.libPaths(c(normalizePath("renv/library/windows/R-4.5/x86_64-w64-mingw32", winslash = "/"), .libPaths()))
+Sys.setlocale("LC_CTYPE", "Portuguese_Brazil.utf8")
+library(data.table)
+library(dplyr)
+setDTthreads(1L)
+for(arquivo in c("support_fun.R", "type_convention.R", "microdata_1960.R"))
+  source(file.path(raiz, "R", arquivo), encoding = "UTF-8")
+dir.create("tmp/correcao_scripts_r_1960_20260923", recursive = TRUE, showWarnings = FALSE)
+ensaio <- tempfile("sem_conferencia_", tmpdir = "tmp/correcao_scripts_r_1960_20260923")
+dir.create(ensaio)
+setwd(ensaio)
+dir.create("schemas")
+file.copy(file.path(raiz, "schemas/censobr_types.csv"), "schemas/censobr_types.csv")
+arrow::write_parquet(data.table(UF = 60L, censobr_idperson = 1L,
+  censobr_idhousehold = 1L, censobr_weight = 4), "pessoas.parquet")
+erro <- tryCatch({
+  save_microdata_1960("pessoas.parquet", "population", "teste")
+  ""
+}, error = function(e) conditionMessage(e))
+cat("Erro capturado: ", erro, "\n")
+cat("Parquet exportado: ", file.exists("data/microdata_sample/1960/1960_population_teste.parquet"), "\n")
+stopifnot(grepl("conferencia", erro), !dir.exists("data/microdata_sample/1960"))
+cat("PASSOU: sem conferencia nao ha exportacao.\n")
