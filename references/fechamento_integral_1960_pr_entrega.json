@@ -1,0 +1,974 @@
+{
+  "data": "2026-09-23",
+  "status": "pendencia_aritmetica_pr_resolvida_e_pesos_tres_ufs_conferidos",
+  "nota": "references/fechamento_integral_1960_pr_20260923.md",
+  "cobertura_visual_pr": 162,
+  "zonas_pr": [
+    {
+      "zona": "Litoral",
+      "n_municipios": 5,
+      "soma_municipal": {
+        "pop_total": 77253,
+        "pop_urbana": 44793,
+        "pop_rural": 32460
+      },
+      "linha_zona": {
+        "pop_total": 77253,
+        "pop_urbana": 44793,
+        "pop_rural": 32460
+      }
+    },
+    {
+      "zona": "Alto Ribeira",
+      "n_municipios": 3,
+      "soma_municipal": {
+        "pop_total": 56079,
+        "pop_urbana": 6196,
+        "pop_rural": 49883
+      },
+      "linha_zona": {
+        "pop_total": 56079,
+        "pop_urbana": 6196,
+        "pop_rural": 49883
+      }
+    },
+    {
+      "zona": "Campos do Oeste",
+      "n_municipios": 3,
+      "soma_municipal": {
+        "pop_total": 124350,
+        "pop_urbana": 23188,
+        "pop_rural": 101162
+      },
+      "linha_zona": {
+        "pop_total": 124350,
+        "pop_urbana": 23188,
+        "pop_rural": 101162
+      }
+    },
+    {
+      "zona": "Castro",
+      "n_municipios": 2,
+      "soma_municipal": {
+        "pop_total": 44198,
+        "pop_urbana": 14440,
+        "pop_rural": 29758
+      },
+      "linha_zona": {
+        "pop_total": 44198,
+        "pop_urbana": 14440,
+        "pop_rural": 29758
+      }
+    },
+    {
+      "zona": "Campos Gerais",
+      "n_municipios": 9,
+      "soma_municipal": {
+        "pop_total": 228801,
+        "pop_urbana": 107485,
+        "pop_rural": 121316
+      },
+      "linha_zona": {
+        "pop_total": 228801,
+        "pop_urbana": 107485,
+        "pop_rural": 121316
+      }
+    },
+    {
+      "zona": "Curitiba",
+      "n_municipios": 10,
+      "soma_municipal": {
+        "pop_total": 520535,
+        "pop_urbana": 391587,
+        "pop_rural": 128948
+      },
+      "linha_zona": {
+        "pop_total": 520535,
+        "pop_urbana": 391587,
+        "pop_rural": 128948
+      }
+    },
+    {
+      "zona": "Tomazina",
+      "n_municipios": 14,
+      "soma_municipal": {
+        "pop_total": 189041,
+        "pop_urbana": 38522,
+        "pop_rural": 150519
+      },
+      "linha_zona": {
+        "pop_total": 189041,
+        "pop_urbana": 38522,
+        "pop_rural": 150519
+      }
+    },
+    {
+      "zona": "Alto Ivai",
+      "n_municipios": 6,
+      "soma_municipal": {
+        "pop_total": 114715,
+        "pop_urbana": 15403,
+        "pop_rural": 99312
+      },
+      "linha_zona": {
+        "pop_total": 114715,
+        "pop_urbana": 15403,
+        "pop_rural": 99312
+      }
+    },
+    {
+      "zona": "Irati",
+      "n_municipios": 10,
+      "soma_municipal": {
+        "pop_total": 152058,
+        "pop_urbana": 47054,
+        "pop_rural": 105004
+      },
+      "linha_zona": {
+        "pop_total": 152058,
+        "pop_urbana": 47054,
+        "pop_rural": 105004
+      }
+    },
+    {
+      "zona": "Oeste",
+      "n_municipios": 49,
+      "soma_municipal": {
+        "pop_total": 1556815,
+        "pop_urbana": 298486,
+        "pop_rural": 1258329
+      },
+      "linha_zona": {
+        "pop_total": 1556815,
+        "pop_urbana": 298486,
+        "pop_rural": 1258329
+      }
+    },
+    {
+      "zona": "Norte",
+      "n_municipios": 51,
+      "soma_municipal": {
+        "pop_total": 1213918,
+        "pop_urbana": 340828,
+        "pop_rural": 873090
+      },
+      "linha_zona": {
+        "pop_total": 1213918,
+        "pop_urbana": 340828,
+        "pop_rural": 873090
+      }
+    }
+  ],
+  "totais_pr_antes": {
+    "pop_total": 4272847,
+    "pop_urbana": 1328355,
+    "pop_rural": 2944492
+  },
+  "totais_pr_depois": {
+    "pop_total": 4277763,
+    "pop_urbana": 1327982,
+    "pop_rural": 2949781
+  },
+  "correcoes_pr": [
+    {
+      "cod60": 7227,
+      "nome": "Cianorte",
+      "pagina_pdf": 16,
+      "pagina_impressa": 12,
+      "fonte_imagem": "quadroII_pdf16.png",
+      "guia": {
+        "pop_total": 49731,
+        "pop_urbana": 8086,
+        "pop_rural": 41645
+      },
+      "sinopse_visual": {
+        "pop_total": 53658,
+        "pop_urbana": 8480,
+        "pop_rural": 45178
+      },
+      "fonte_pop_anterior": "AEB",
+      "diferencas": {
+        "pop_total": 3927,
+        "pop_urbana": 394,
+        "pop_rural": 3533
+      }
+    },
+    {
+      "cod60": 7252,
+      "nome": "Paranavaí",
+      "pagina_pdf": 19,
+      "pagina_impressa": 15,
+      "fonte_imagem": "quadroII_pdf19.png",
+      "guia": {
+        "pop_total": 63189,
+        "pop_urbana": 25058,
+        "pop_rural": 38131
+      },
+      "sinopse_visual": {
+        "pop_total": 63189,
+        "pop_urbana": 25028,
+        "pop_rural": 38161
+      },
+      "fonte_pop_anterior": "AEB",
+      "diferencas": {
+        "pop_urbana": -30,
+        "pop_rural": 30
+      }
+    },
+    {
+      "cod60": 7266,
+      "nome": "Terra Boa",
+      "pagina_pdf": 21,
+      "pagina_impressa": 17,
+      "fonte_imagem": "quadroII_pdf21.png",
+      "guia": {
+        "pop_total": 16697,
+        "pop_urbana": 2485,
+        "pop_rural": 14212
+      },
+      "sinopse_visual": {
+        "pop_total": 17143,
+        "pop_urbana": 2485,
+        "pop_rural": 14658
+      },
+      "fonte_pop_anterior": "AEB",
+      "diferencas": {
+        "pop_total": 446,
+        "pop_rural": 446
+      }
+    },
+    {
+      "cod60": 7336,
+      "nome": "Nova Fátima",
+      "pagina_pdf": 25,
+      "pagina_impressa": 21,
+      "fonte_imagem": "quadroII_pdf25.png",
+      "guia": {
+        "pop_total": 12802,
+        "pop_urbana": 2436,
+        "pop_rural": 10366
+      },
+      "sinopse_visual": {
+        "pop_total": 12829,
+        "pop_urbana": 2463,
+        "pop_rural": 10366
+      },
+      "fonte_pop_anterior": "AEB",
+      "diferencas": {
+        "pop_total": 27,
+        "pop_urbana": 27
+      }
+    },
+    {
+      "cod60": 7348,
+      "nome": "Sertaneja",
+      "pagina_pdf": 26,
+      "pagina_impressa": 22,
+      "fonte_imagem": "quadroII_pdf26.png",
+      "guia": {
+        "pop_total": 17334,
+        "pop_urbana": 4379,
+        "pop_rural": 12955
+      },
+      "sinopse_visual": {
+        "pop_total": 17337,
+        "pop_urbana": 2114,
+        "pop_rural": 15223
+      },
+      "fonte_pop_anterior": "AEB",
+      "diferencas": {
+        "pop_total": 3,
+        "pop_urbana": -2265,
+        "pop_rural": 2268
+      }
+    },
+    {
+      "cod60": 7350,
+      "nome": "Uraí",
+      "pagina_pdf": 27,
+      "pagina_impressa": 23,
+      "fonte_imagem": "quadroII_pdf27.png",
+      "guia": {
+        "pop_total": 24137,
+        "pop_urbana": 5535,
+        "pop_rural": 18602
+      },
+      "sinopse_visual": {
+        "pop_total": 24650,
+        "pop_urbana": 6964,
+        "pop_rural": 17686
+      },
+      "fonte_pop_anterior": "AEB",
+      "diferencas": {
+        "pop_total": 513,
+        "pop_urbana": 1429,
+        "pop_rural": -916
+      }
+    },
+    {
+      "cod60": 7120,
+      "nome": "Bituruna",
+      "pagina_pdf": 27,
+      "pagina_impressa": 23,
+      "fonte_imagem": "quadroII_pdf27.png",
+      "guia": {
+        "pop_total": 7484,
+        "pop_urbana": 634,
+        "pop_rural": 6850
+      },
+      "sinopse_visual": {
+        "pop_total": 7484,
+        "pop_urbana": 706,
+        "pop_rural": 6778
+      },
+      "fonte_pop_anterior": "AEB",
+      "diferencas": {
+        "pop_urbana": 72,
+        "pop_rural": -72
+      }
+    }
+  ],
+  "correcoes_adicionais": [
+    {
+      "uf": "mg",
+      "cod60": 4032,
+      "nome": "Alpinópolis",
+      "pagina_pdf": 41,
+      "pagina_impressa": 37,
+      "url": "https://biblioteca.ibge.gov.br/visualizacao/periodicos/312/cd_1960_sinopse_preliminar_mg.pdf",
+      "antes": {
+        "uf60": "40",
+        "nome_uf60": "Estado de Minas Gerais",
+        "cod60": "4032",
+        "nome": "Alpinópolis",
+        "code_state_2010": "31",
+        "code_muni_2010": "3101904",
+        "zona_fisiografica": "403",
+        "pop_total": "19740",
+        "pop_urbana": "4445",
+        "pop_rural": "6298",
+        "fonte_pop": "AEB"
+      },
+      "depois": {
+        "uf60": "40",
+        "nome_uf60": "Estado de Minas Gerais",
+        "cod60": "4032",
+        "nome": "Alpinópolis",
+        "code_state_2010": "31",
+        "code_muni_2010": "3101904",
+        "zona_fisiografica": "403",
+        "pop_total": "19740",
+        "pop_urbana": "4445",
+        "pop_rural": "15295",
+        "fonte_pop": "Sinopse1960_QuadroII_p37"
+      },
+      "evidencia": "Alpinopolis: distritos 9225/3869/5356 + 10515/576/9939; 6298 e rural de Alterosa",
+      "altera_alvos_urbana_rural": true
+    },
+    {
+      "uf": "mg",
+      "cod60": 4095,
+      "nome": "Itumirim",
+      "pagina_pdf": 47,
+      "pagina_impressa": 43,
+      "url": "https://biblioteca.ibge.gov.br/visualizacao/periodicos/312/cd_1960_sinopse_preliminar_mg.pdf",
+      "antes": {
+        "uf60": "40",
+        "nome_uf60": "Estado de Minas Gerais",
+        "cod60": "4095",
+        "nome": "Itumirim",
+        "code_state_2010": "31",
+        "code_muni_2010": "3134301",
+        "zona_fisiografica": "409",
+        "pop_total": "7395",
+        "pop_urbana": "3043",
+        "pop_rural": "5352",
+        "fonte_pop": "AEB"
+      },
+      "depois": {
+        "uf60": "40",
+        "nome_uf60": "Estado de Minas Gerais",
+        "cod60": "4095",
+        "nome": "Itumirim",
+        "code_state_2010": "31",
+        "code_muni_2010": "3134301",
+        "zona_fisiografica": "409",
+        "pop_total": "7395",
+        "pop_urbana": "2043",
+        "pop_rural": "5352",
+        "fonte_pop": "Sinopse1960_QuadroII_p43"
+      },
+      "evidencia": "Itumirim: sede 4257/1525/2732 + Ingai 3138/518/2620",
+      "altera_alvos_urbana_rural": true
+    },
+    {
+      "uf": "sp",
+      "cod60": 6378,
+      "nome": "Jardinópolis",
+      "pagina_pdf": 30,
+      "pagina_impressa": 26,
+      "url": "https://biblioteca.ibge.gov.br/visualizacao/periodicos/312/cd_1960_sinopse_preliminar_sp.pdf",
+      "antes": {
+        "uf60": "60",
+        "nome_uf60": "Estado de São Paulo",
+        "cod60": "6378",
+        "nome": "Jardinópolis",
+        "code_state_2010": "35",
+        "code_muni_2010": "3525102",
+        "zona_fisiografica": "637",
+        "pop_total": "16652",
+        "pop_urbana": "7533",
+        "pop_rural": "9092",
+        "fonte_pop": "AEB"
+      },
+      "depois": {
+        "uf60": "60",
+        "nome_uf60": "Estado de São Paulo",
+        "cod60": "6378",
+        "nome": "Jardinópolis",
+        "code_state_2010": "35",
+        "code_muni_2010": "3525102",
+        "zona_fisiografica": "637",
+        "pop_total": "16625",
+        "pop_urbana": "7533",
+        "pop_rural": "9092",
+        "fonte_pop": "Sinopse1960_QuadroII_p26"
+      },
+      "evidencia": "Jardinopolis: sede 14380/6965/7415 + Juruce 2245/568/1677; somente pop_total muda",
+      "altera_alvos_urbana_rural": false
+    },
+    {
+      "uf": "sc",
+      "cod60": 7457,
+      "nome": "São Bento do Sul",
+      "pagina_pdf": 16,
+      "pagina_impressa": 11,
+      "url": "https://biblioteca.ibge.gov.br/visualizacao/periodicos/312/cd_1960_sinopse_preliminar_sc.pdf",
+      "antes": {
+        "uf60": "74",
+        "nome_uf60": "Estado de Santa Catarina",
+        "cod60": "7457",
+        "nome": "São Bento do Sul",
+        "code_state_2010": "42",
+        "code_muni_2010": "4215802",
+        "zona_fisiografica": "745",
+        "pop_total": "12814",
+        "pop_urbana": "6047",
+        "pop_rural": "6344",
+        "fonte_pop": "AEB"
+      },
+      "depois": {
+        "uf60": "74",
+        "nome_uf60": "Estado de Santa Catarina",
+        "cod60": "7457",
+        "nome": "São Bento do Sul",
+        "code_state_2010": "42",
+        "code_muni_2010": "4215802",
+        "zona_fisiografica": "745",
+        "pop_total": "12814",
+        "pop_urbana": "6470",
+        "pop_rural": "6344",
+        "fonte_pop": "Sinopse1960_QuadroII_p11"
+      },
+      "evidencia": "Sao Bento do Sul: mesmo total e componentes na linha do unico distrito",
+      "altera_alvos_urbana_rural": true
+    },
+    {
+      "uf": "mt",
+      "cod60": 9204,
+      "nome": "Coxim",
+      "pagina_pdf": 13,
+      "pagina_impressa": 8,
+      "url": "https://biblioteca.ibge.gov.br/visualizacao/periodicos/312/cd_1960_sinopse_preliminar_mt.pdf",
+      "antes": {
+        "uf60": "91",
+        "nome_uf60": "Estado do Mato Grosso",
+        "cod60": "9204",
+        "nome": "Coxim",
+        "code_state_2010": "51",
+        "code_muni_2010": "5103303",
+        "zona_fisiografica": "920",
+        "pop_total": "12997",
+        "pop_urbana": "2748",
+        "pop_rural": "10199",
+        "fonte_pop": "AEB"
+      },
+      "depois": {
+        "uf60": "91",
+        "nome_uf60": "Estado do Mato Grosso",
+        "cod60": "9204",
+        "nome": "Coxim",
+        "code_state_2010": "51",
+        "code_muni_2010": "5103303",
+        "zona_fisiografica": "920",
+        "pop_total": "12997",
+        "pop_urbana": "2798",
+        "pop_rural": "10199",
+        "fonte_pop": "Sinopse1960_QuadroII_p8"
+      },
+      "evidencia": "Coxim: sede 9893/1371/8522 + Pedro Gomes 3104/1427/1677",
+      "altera_alvos_urbana_rural": true
+    }
+  ],
+  "fontes_pdf_adicionais": {
+    "value": [
+      {
+        "uf": "mg",
+        "pagina_pdf": 41,
+        "sha256": "e0337048ca0cec095e0009ec121366a2cd4aa4d8c31fca8d1b742bae14688f0b",
+        "arquivo": "references\\fontes_1960\\sinopse_preliminar_1960\\cd_1960_sinopse_preliminar_mg.pdf"
+      },
+      {
+        "uf": "mg",
+        "pagina_pdf": 47,
+        "sha256": "e0337048ca0cec095e0009ec121366a2cd4aa4d8c31fca8d1b742bae14688f0b",
+        "arquivo": "references\\fontes_1960\\sinopse_preliminar_1960\\cd_1960_sinopse_preliminar_mg.pdf"
+      },
+      {
+        "uf": "sp",
+        "pagina_pdf": 30,
+        "sha256": "8b056c22b720b78224af80e84172b983ad56af57a367de60f6a295d16834ac75",
+        "arquivo": "references\\fontes_1960\\sinopse_preliminar_1960\\cd_1960_sinopse_preliminar_sp.pdf"
+      },
+      {
+        "uf": "sc",
+        "pagina_pdf": 16,
+        "sha256": "c4d0ac4bb687db3b5279f4e6e7fb9771848fb7580755e89e91225ce80679a0e0",
+        "arquivo": "references\\fontes_1960\\sinopse_preliminar_1960\\cd_1960_sinopse_preliminar_sc.pdf"
+      },
+      {
+        "uf": "mt",
+        "pagina_pdf": 13,
+        "sha256": "39496538718f7b34d3591d293ee9ef4c10433e0ba8b0981dce7014f8ea9446e6",
+        "arquivo": "references\\fontes_1960\\sinopse_preliminar_1960\\cd_1960_sinopse_preliminar_mt.pdf"
+      }
+    ],
+    "Count": 5
+  },
+  "guia": {
+    "antes_sha256": "f77a4802a38a1a6246d2d870717c5be88eb843e36e1fd9fd106d673fae86ad11",
+    "depois_sete_pr_sha256": "92401870ff3ad7284c1b3b1ed4208f1a0d23730da8b27e607ea886ed01270b8b",
+    "depois_doze_sha256": "3bc197bdbb6e8746614b108acbdb9cb2de079810172fdea2ffd268e0cf99ed96",
+    "n_municipios": 2770,
+    "mudancas_autorizadas": [
+      4032,
+      4095,
+      6378,
+      7120,
+      7227,
+      7252,
+      7266,
+      7336,
+      7348,
+      7350,
+      7457,
+      9204
+    ],
+    "demais_linhas_preservadas": 2758,
+    "teste_integrativo_aprovado": true,
+    "baseline_portatil": {
+      "caminho": "references/fechamento_integral_1960_evidencias/guia_municipal_anterior.json",
+      "bytes": 967599,
+      "sha256": "5362895fd1fc4f2c721436008308438067fb18b9c2a904624fb9fe0a51afa0cb",
+      "identico_ao_artefato_original": true
+    },
+    "teste_portatil_aprovado": true,
+    "teste_portatil_resultado": "tmp/fechamento_integral_1960/parana/outras_ufs/teste_integrativo_portatil.json"
+  },
+  "execucao_pesos": "tmp/fechamento_integral_1960/pesos_municipais_20260923_021933_338649",
+  "qc": {
+    "mt": {
+      "uf": "mt",
+      "aprovado": true,
+      "domicilios": 45199,
+      "pessoas": 227936,
+      "presentes": 224519,
+      "controles": 147,
+      "peso_min": 1.8701271351264819,
+      "peso_max": 8.058371369580435,
+      "peso_ibge_min": 4,
+      "peso_ibge_max": 5,
+      "residuo_relativo_max_publicado_recomputado": 1.2682929349703324e-14,
+      "residuo_relativo_max_pessoas_direto": 1.0296705727231413e-14,
+      "pior_controle_direto": "mun_9164_rural",
+      "diferenca_relativa_max_direto_diagnostico": 1.0296705727231413e-14,
+      "chaves_contagens_alinhamento_e_pesos_conferidos": true,
+      "comparacao_colunas_extraidas_exata": true,
+      "alvos_reconstruidos": {
+        "guia_sha256": "3bc197bdbb6e8746614b108acbdb9cb2de079810172fdea2ffd268e0cf99ed96",
+        "definitivos_sha256": "6e921c785720d2546c4e432f6ec1f29bc8fa28007b6e913f8335a2e834eebbf7",
+        "municipios_no_guia": 64,
+        "municipios_na_amostra": 63,
+        "populacao_guia_por_situacao": {
+          "urbana": 364004,
+          "rural": 546258
+        },
+        "populacao_guia_soma_situacoes": 910262,
+        "denominador_reescala_ancoras_com_suporte": 905632,
+        "total_presente_definitivo": 892233,
+        "fator_reescala": 0.9852048072506272,
+        "municipios_colapsados": {
+          "9171": [
+            {
+              "situacao": "rural",
+              "motivos": [
+                "universo_menor_100"
+              ]
+            }
+          ],
+          "9208": [
+            {
+              "situacao": "urbana",
+              "motivos": [
+                "fator_fora_2_8"
+              ]
+            },
+            {
+              "situacao": "rural",
+              "motivos": [
+                "fator_fora_2_8"
+              ]
+            }
+          ]
+        },
+        "celulas_sem_ancora": [],
+        "celula_municipal_omitida": "mun_9100_urbana",
+        "alvo_omitido": 175.36645569061164,
+        "margem_sexo_sem_idade": false,
+        "numero_controles_reconstruidos": 147,
+        "max_diferenca_absoluta_alvo": 5.093170329928398e-11
+      },
+      "peso_ibge_por_situacao": {
+        "urbana": {
+          "alvo_atual": 364004,
+          "presentes": 89945,
+          "inteiros": [
+            4,
+            5
+          ],
+          "soma_ponderada": 364004,
+          "residuo": 0,
+          "limite_aberto_residuo": 24,
+          "nao_reproduz_rng_R": true
+        },
+        "rural": {
+          "alvo_atual": 546258,
+          "presentes": 134574,
+          "inteiros": [
+            4,
+            5
+          ],
+          "soma_ponderada": 546258,
+          "residuo": 0,
+          "limite_aberto_residuo": 29,
+          "nao_reproduz_rng_R": true
+        }
+      },
+      "suporte_domiciliar_recontado": true,
+      "hashes_entradas_antes_depois_iguais": {
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\read_guides\\1960_municipios.csv": "3bc197bdbb6e8746614b108acbdb9cb2de079810172fdea2ffd268e0cf99ed96",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\references\\censo_1960_resultados_definitivos_serie_nacional.csv": "6e921c785720d2546c4e432f6ec1f29bc8fa28007b6e913f8335a2e834eebbf7",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\data_raw\\microdata\\1960\\amostra_25\\mt\\domicilios.parquet": "4d848164af6a14247799b0aeba7f8e70b73bf57702afefb74a9739fdbfa03b62",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\data_raw\\microdata\\1960\\amostra_25\\mt\\pessoas_geo.parquet": "7a6d86343135eaa90aa5fb9fd23f242529087567c4a60638ab995cf166b45bb7",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\tmp\\fechamento_integral_1960\\pesos_municipais_20260923_021933_338649\\pesos_com_chaves\\mt\\domicilios_pesos.parquet": "b7a9302fa61d1f0067ca0cfb372b9ad8c9fe43fb1bfc318cec47f3efb9612fc4",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\tmp\\fechamento_integral_1960\\pesos_municipais_20260923_021933_338649\\pesos_com_chaves\\mt\\pessoas_pesos.parquet": "311741660c92c1a7582942de8796051035a430af1670349c8ea1841a8920f540",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\tmp\\fechamento_integral_1960\\pesos_municipais_20260923_021933_338649\\diagnosticos\\mt\\controles.csv": "03f1db6f9ef85a7e87c3048af181fbf0eba00aaec89a9195fe7dff4595a53212"
+      },
+      "rss_maximo_observado_bytes": 206495744
+    },
+    "pr": {
+      "uf": "pr",
+      "aprovado": true,
+      "domicilios": 224179,
+      "pessoas": 1111227,
+      "presentes": 1102425,
+      "controles": 347,
+      "peso_min": 1.3287198702370766,
+      "peso_max": 10.278190441055001,
+      "peso_ibge_min": 3,
+      "peso_ibge_max": 4,
+      "residuo_relativo_max_publicado_recomputado": 3.675208172629664e-13,
+      "residuo_relativo_max_pessoas_direto": 3.7285493652657987e-13,
+      "pior_controle_direto": "mun_7324_urbana",
+      "diferenca_relativa_max_direto_diagnostico": 3.408273902339319e-14,
+      "chaves_contagens_alinhamento_e_pesos_conferidos": true,
+      "comparacao_colunas_extraidas_exata": true,
+      "alvos_reconstruidos": {
+        "guia_sha256": "3bc197bdbb6e8746614b108acbdb9cb2de079810172fdea2ffd268e0cf99ed96",
+        "definitivos_sha256": "6e921c785720d2546c4e432f6ec1f29bc8fa28007b6e913f8335a2e834eebbf7",
+        "municipios_no_guia": 162,
+        "municipios_na_amostra": 162,
+        "populacao_guia_por_situacao": {
+          "urbana": 1327982,
+          "rural": 2949781
+        },
+        "populacao_guia_soma_situacoes": 4277763,
+        "denominador_reescala_ancoras_com_suporte": 4277763,
+        "total_presente_definitivo": 4263721,
+        "fator_reescala": 0.9967174432057129,
+        "municipios_colapsados": {},
+        "celulas_sem_ancora": [],
+        "celula_municipal_omitida": "mun_7152_urbana",
+        "alvo_omitido": 300.01195040491956,
+        "margem_sexo_sem_idade": false,
+        "numero_controles_reconstruidos": 347,
+        "max_diferenca_absoluta_alvo": 4.656612873077393e-10
+      },
+      "peso_ibge_por_situacao": {
+        "urbana": {
+          "alvo_atual": 1327982,
+          "presentes": 346473,
+          "inteiros": [
+            3,
+            4
+          ],
+          "soma_ponderada": 1327982,
+          "residuo": 0,
+          "limite_aberto_residuo": 21,
+          "nao_reproduz_rng_R": true
+        },
+        "rural": {
+          "alvo_atual": 2949781,
+          "presentes": 755952,
+          "inteiros": [
+            3,
+            4
+          ],
+          "soma_ponderada": 2949781,
+          "residuo": 0,
+          "limite_aberto_residuo": 21,
+          "nao_reproduz_rng_R": true
+        }
+      },
+      "suporte_domiciliar_recontado": true,
+      "hashes_entradas_antes_depois_iguais": {
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\read_guides\\1960_municipios.csv": "3bc197bdbb6e8746614b108acbdb9cb2de079810172fdea2ffd268e0cf99ed96",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\references\\censo_1960_resultados_definitivos_serie_nacional.csv": "6e921c785720d2546c4e432f6ec1f29bc8fa28007b6e913f8335a2e834eebbf7",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\data_raw\\microdata\\1960\\amostra_25\\pr\\domicilios.parquet": "853045ecf2456457f5a8e0c6a766ad5632b99c3a3258baafa75fbcba5bfedea6",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\data_raw\\microdata\\1960\\amostra_25\\pr\\pessoas_geo.parquet": "4a7d2d7758d1a0778c112b17a1f2b0b0110a620d97162a4f5292cf41c731c8aa",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\tmp\\fechamento_integral_1960\\pesos_municipais_20260923_021933_338649\\pesos_com_chaves\\pr\\domicilios_pesos.parquet": "eef9d5841d73bf785e371dafc2583014c2f6e7f65c412391b90fde3dfe68b3b6",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\tmp\\fechamento_integral_1960\\pesos_municipais_20260923_021933_338649\\pesos_com_chaves\\pr\\pessoas_pesos.parquet": "31b8449ab0f3fe65d5aa1554ce5052a3f0ede5ebd62b3163ddf6f9230ebeb47a",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\tmp\\fechamento_integral_1960\\pesos_municipais_20260923_021933_338649\\diagnosticos\\pr\\controles.csv": "212a12e74320bd11332153dc3d8bd52927b5d94865a1278deda2de59c7ef8e7a"
+      },
+      "rss_maximo_observado_bytes": 303534080
+    },
+    "mg": {
+      "uf": "mg",
+      "aprovado": true,
+      "domicilios": 489505,
+      "pessoas": 2494671,
+      "presentes": 2465422,
+      "controles": 986,
+      "peso_min": 1.000045697909378,
+      "peso_max": 10.34496755948348,
+      "peso_ibge_min": 3,
+      "peso_ibge_max": 5,
+      "residuo_relativo_max_publicado_recomputado": 1.3849045528598433e-14,
+      "residuo_relativo_max_pessoas_direto": 4.504784942300715e-14,
+      "pior_controle_direto": "mun_4523_urbana",
+      "diferenca_relativa_max_direto_diagnostico": 3.9017822334887845e-14,
+      "chaves_contagens_alinhamento_e_pesos_conferidos": true,
+      "comparacao_colunas_extraidas_exata": true,
+      "alvos_reconstruidos": {
+        "guia_sha256": "3bc197bdbb6e8746614b108acbdb9cb2de079810172fdea2ffd268e0cf99ed96",
+        "definitivos_sha256": "6e921c785720d2546c4e432f6ec1f29bc8fa28007b6e913f8335a2e834eebbf7",
+        "municipios_no_guia": 483,
+        "municipios_na_amostra": 483,
+        "populacao_guia_por_situacao": {
+          "urbana": 3940457,
+          "rural": 5858323
+        },
+        "populacao_guia_soma_situacoes": 9798780,
+        "denominador_reescala_ancoras_com_suporte": 9798780,
+        "total_presente_definitivo": 9698118,
+        "fator_reescala": 0.9897270884742795,
+        "municipios_colapsados": {
+          "4095": [
+            {
+              "situacao": "rural",
+              "motivos": [
+                "fator_fora_2_8"
+              ]
+            }
+          ],
+          "4320": [
+            {
+              "situacao": "rural",
+              "motivos": [
+                "fator_fora_2_8"
+              ]
+            }
+          ],
+          "4800": [
+            {
+              "situacao": "rural",
+              "motivos": [
+                "fator_fora_2_8"
+              ]
+            }
+          ]
+        },
+        "celulas_sem_ancora": [],
+        "celula_municipal_omitida": "mun_4470_urbana",
+        "alvo_omitido": 368.17847691243196,
+        "margem_sexo_sem_idade": false,
+        "numero_controles_reconstruidos": 986,
+        "max_diferenca_absoluta_alvo": 4.0745362639427185e-10
+      },
+      "peso_ibge_por_situacao": {
+        "urbana": {
+          "alvo_atual": 3940457,
+          "presentes": 1008998,
+          "inteiros": [
+            3,
+            4
+          ],
+          "soma_ponderada": 3940457,
+          "residuo": 0,
+          "limite_aberto_residuo": 21,
+          "nao_reproduz_rng_R": true
+        },
+        "rural": {
+          "alvo_atual": 5858323,
+          "presentes": 1456424,
+          "inteiros": [
+            4,
+            5
+          ],
+          "soma_ponderada": 5858323,
+          "residuo": 0,
+          "limite_aberto_residuo": 32,
+          "nao_reproduz_rng_R": true
+        }
+      },
+      "suporte_domiciliar_recontado": true,
+      "hashes_entradas_antes_depois_iguais": {
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\read_guides\\1960_municipios.csv": "3bc197bdbb6e8746614b108acbdb9cb2de079810172fdea2ffd268e0cf99ed96",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\references\\censo_1960_resultados_definitivos_serie_nacional.csv": "6e921c785720d2546c4e432f6ec1f29bc8fa28007b6e913f8335a2e834eebbf7",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\data_raw\\microdata\\1960\\amostra_25\\mg\\domicilios.parquet": "676a3fd4cf2be0f09bea68aa6cda58957225fd23a926dc4f2cab3d65982781da",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\data_raw\\microdata\\1960\\amostra_25\\mg\\pessoas_geo.parquet": "cb753c059b9e62c4c469bedae799f1864968acb36ac4a8f4c5b3134ed475d7c6",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\tmp\\fechamento_integral_1960\\pesos_municipais_20260923_021933_338649\\pesos_com_chaves\\mg\\domicilios_pesos.parquet": "6b55b707bb50ab12284ed39c8b22dc0d254a8e49c580c5ec413214687cde764e",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\tmp\\fechamento_integral_1960\\pesos_municipais_20260923_021933_338649\\pesos_com_chaves\\mg\\pessoas_pesos.parquet": "60ba5da64f1ae8550f5817a1c9780f63b660b7dbad72ccba881be9bb8dd0e1be",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\tmp\\fechamento_integral_1960\\pesos_municipais_20260923_021933_338649\\diagnosticos\\mg\\controles.csv": "71d59e69a963b3ff076178ae770ef343eef7df383cdee78115431fd2a4f83444"
+      },
+      "rss_maximo_observado_bytes": 408768512
+    },
+    "sp": {
+      "uf": "sp",
+      "aprovado": true,
+      "domicilios": 740936,
+      "pessoas": 3319710,
+      "presentes": 3281060,
+      "controles": 1025,
+      "peso_min": 1.5690657323292063,
+      "peso_max": 11.7547170977992,
+      "peso_ibge_min": 3,
+      "peso_ibge_max": 4,
+      "residuo_relativo_max_publicado_recomputado": 4.1559557060415795e-14,
+      "residuo_relativo_max_pessoas_direto": 1.0543602695327403e-13,
+      "pior_controle_direto": "lit_homens",
+      "diferenca_relativa_max_direto_diagnostico": 9.37936047633644e-14,
+      "chaves_contagens_alinhamento_e_pesos_conferidos": true,
+      "comparacao_colunas_extraidas_exata": true,
+      "alvos_reconstruidos": {
+        "guia_sha256": "3bc197bdbb6e8746614b108acbdb9cb2de079810172fdea2ffd268e0cf99ed96",
+        "definitivos_sha256": "6e921c785720d2546c4e432f6ec1f29bc8fa28007b6e913f8335a2e834eebbf7",
+        "municipios_no_guia": 503,
+        "municipios_na_amostra": 503,
+        "populacao_guia_por_situacao": {
+          "urbana": 8148929,
+          "rural": 4825770
+        },
+        "populacao_guia_soma_situacoes": 12974699,
+        "denominador_reescala_ancoras_com_suporte": 12974699,
+        "total_presente_definitivo": 12823806,
+        "fator_reescala": 0.988370211902411,
+        "municipios_colapsados": {
+          "6014": [
+            {
+              "situacao": "urbana",
+              "motivos": [
+                "fator_fora_2_8"
+              ]
+            },
+            {
+              "situacao": "rural",
+              "motivos": [
+                "fator_fora_2_8"
+              ]
+            }
+          ],
+          "6216": [
+            {
+              "situacao": "urbana",
+              "motivos": [
+                "fator_fora_2_8"
+              ]
+            }
+          ],
+          "6305": [
+            {
+              "situacao": "urbana",
+              "motivos": [
+                "fator_fora_2_8"
+              ]
+            }
+          ]
+        },
+        "celulas_sem_ancora": [],
+        "celula_municipal_omitida": "mun_6210_rural",
+        "alvo_omitido": 238.19722106848104,
+        "margem_sexo_sem_idade": false,
+        "numero_controles_reconstruidos": 1025,
+        "max_diferenca_absoluta_alvo": 9.313225746154785e-10
+      },
+      "peso_ibge_por_situacao": {
+        "urbana": {
+          "alvo_atual": 8148929,
+          "presentes": 2052929,
+          "inteiros": [
+            3,
+            4
+          ],
+          "soma_ponderada": 8148929,
+          "residuo": 0,
+          "limite_aberto_residuo": 40,
+          "nao_reproduz_rng_R": true
+        },
+        "rural": {
+          "alvo_atual": 4825770,
+          "presentes": 1228131,
+          "inteiros": [
+            3,
+            4
+          ],
+          "soma_ponderada": 4825770,
+          "residuo": 0,
+          "limite_aberto_residuo": 26,
+          "nao_reproduz_rng_R": true
+        }
+      },
+      "suporte_domiciliar_recontado": true,
+      "hashes_entradas_antes_depois_iguais": {
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\read_guides\\1960_municipios.csv": "3bc197bdbb6e8746614b108acbdb9cb2de079810172fdea2ffd268e0cf99ed96",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\references\\censo_1960_resultados_definitivos_serie_nacional.csv": "6e921c785720d2546c4e432f6ec1f29bc8fa28007b6e913f8335a2e834eebbf7",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\data_raw\\microdata\\1960\\amostra_25\\sp\\domicilios.parquet": "8c87be09f903dd81f6df156faab660ed2a487642b2df86cab11e1ec14a8dc6ea",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\data_raw\\microdata\\1960\\amostra_25\\sp\\pessoas_geo.parquet": "d27e562511a8aebe957fd1c56cddda8f2f4e0ccc0e152628ab096de4894d8b59",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\tmp\\execucao_1960_20260922\\pesos25_reduzido_20260922_095713_201741\\pesos_com_chaves\\sp\\domicilios_pesos.parquet": "c4a98394c65202428758f79ac014ba0f86c726b525d6e8d11fd4d4a7c1acf984",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\tmp\\execucao_1960_20260922\\pesos25_reduzido_20260922_095713_201741\\pesos_com_chaves\\sp\\pessoas_pesos.parquet": "c395ede806a4564f50e80c89a0804e4f89703c5a162240eb63ff89002b443f0b",
+        "D:\\Dropbox\\Software\\R_Packages\\censobr_e_prepData\\censobr_prep_data\\tmp\\execucao_1960_20260922\\pesos25_reduzido_20260922_095713_201741\\diagnosticos\\sp\\controles.csv": "ee12840e369611ff6ae4935fe7a84a81d931a236033635d4bbd13bde634d9e1b"
+      },
+      "rss_maximo_observado_bytes": 501305344
+    }
+  },
+  "limites": [
+    "Nao homologa microdados nacionais nem resolve vinculos/duplicatas historicos.",
+    "Cobertura visual integral somente PR162; cinco casos adicionais de outras UFs. Aritmetica nacional nao prova todas as transcricoes.",
+    "MT tem63/64municipios: Alto Garcas9111,4630habitantes, sem suporte na amostra disponivel; denominador905632.",
+    "Nenhuma execucaoR ou edicao direta do guia nesta frente. Patch e recalculo executados pelo agente principal.",
+    "SorteioR dos pesosIBGE nao reproduzido; inteiros, agregados e limites verificados."
+  ],
+  "script_qc": "references/fechamento_integral_1960_pr_qc.py",
+  "script_teste_integrativo": "references/fechamento_integral_1960_pr_integrativo_test.py",
+  "execucao_pesos_reuso_sp": "tmp/execucao_1960_20260922/pesos25_reduzido_20260922_095713_201741"
+}

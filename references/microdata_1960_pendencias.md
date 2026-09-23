@@ -1,5 +1,35 @@
 # 1960 — o que ficou em aberto
 
+## Estado vigente — 23/09/2026
+
+Usar a [entrega integrada, com exemplos antes/depois](fechamento_integral_1960_entrega.md)
+e o [inventário nominal final](fechamento_integral_1960_evidencias/pendencias_nominais.json).
+Foram integrados 41 cartões para 103 pessoas existentes, 38 reparos comprovados
+pela fonte de 25% e 6.463 decisões sobre respostas repetidas. Permanecem 457
+conjuntos repetidos/916 linhas, 1.193 registros sem cartão confirmado e 192
+conflitos geográficos. As listas se sobrepõem; não somar. Os cartões novos não
+acrescentam pessoas à amostra.
+
+As sete divergências municipais do Paraná e cinco erros adicionais foram
+corrigidos por conferência dos fac-símiles. Pesos de MT, PR e MG foram
+recalculados; os 34 arquivos completos das 17 UFs disponíveis da amostra de 25%
+têm índice e conferência próprios. Isso não certifica o ramo de 1,27% nem uma
+base nacional reunida. Os arquivos antigos não foram substituídos.
+
+As afirmações históricas abaixo de que os códigos desconhecidos são dano de
+fita, repartição interna da sede ou sobreamostragem **não são conclusões
+demonstradas**. Há candidatos territoriais documentados para Livramento e Dois
+Irmãos, sem prova suficiente do código operacional de 1960. O cadastro de 1970
+foi examinado para Horizontina/Tenente Portela, sem resolver a ambiguidade.
+O aluguel ignorado, a classificação domiciliar e a idade ignorada do Quadro 5
+têm tratamento e limites explicados na entrega; as variâncias calibradas
+continuam adiadas. R deve usar o runner isolado, não a configuração antiga.
+
+## Registro histórico — não usar como estado atual
+
+As notas seguintes preservam a cronologia e podem conter hipóteses depois
+rejeitadas. A entrega de 23/09 e suas provas prevalecem.
+
 > **Rodada de registros mais recente — 22/09/2026:** ver [correções incorporadas, exemplos e limites](fechamento_registros_1960_20260922.md) e [inventário final auditável](fechamento_registros_1960_evidencias/inventario_final.json). Manifestos atualizados, sem reconstruir a base: 954 conjuntos repetidos decididos, 169 vínculos novos, 33 reparos/40 campos e 30 cartões para 74 pessoas existentes. Permanecem 463 conjuntos repetidos/928 linhas, 1.229 registros pessoais sem família confirmada, 192 pessoas com conflitos geográficos não conciliados, um cartão vazio e uma convivente sem principal comprovado. Listas sobrepostas, não somar. Três fragmentos não identificáveis continuam preservados. As hipóteses residuais não foram transformadas em certeza.
 
 > **Estado posterior — 22/09/2026:** a [nota de execução](execucao_correcao_1960_20260922.md) e a [recuperação de cartões autorizada](recuperacao_cartoes_1960_20260922.md) prevalecem sobre o histórico abaixo. Foram conferidos 29 cartões da fonte25 para 72 pessoas da127; restam 1.339 pessoas/526 grupos da lista anterior sem cartão confirmado. Demais duplicatas, conflitos e pesos127 continuam pendentes; não houve substituição da base completa. R pode executar somente pelo runner isolado diagnosticado, sem targets nem publicação.

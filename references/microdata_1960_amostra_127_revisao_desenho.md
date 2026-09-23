@@ -1,5 +1,7 @@
 # Revisão do desenho reconstruído da amostra de 1,27% de 1960
 
+> **Atualização delimitada de 23/09/2026 — cinco pastas:** o [confronto nominal dos brutos e estratos exportados](fechamento_integral_1960_duplicatas_pastas_resultado.md) demonstrou que comparar CE15004→15004 apenas pelo número é inadequado:145 famílias com corpo/geografia e composição24 concordantes apontam para CE14990, rural. A UPA127 permanece15004. Nas outras quatro pastas, oito cartões determinam a divergência e27 pessoas já pertencem ao inventário de192 conflitos geográficos. Identidade familiar não decide V118 entre valores legíveis concorrentes. Nenhum estrato, UPA, peso, fração ou regra de sorteio foi alterado; as guardas atuais bloqueiam esses conflitos antes de nova exportação. O diagnóstico desta nota abaixo é histórico; ranks/corridas não foram refeitos por esta investigação. [Evidências e fontes](fechamento_integral_1960_evidencias/pastas_desenho.json).
+
 > **Síntese vigente:** a [revisão integrativa](microdata_1960_amostra_127_revisao_integrativa.md) concilia esta nota com a rechecagem de ranks/corridas e os achados nas duas calibrações. Prevalece em caso de conflito. Reconstrução não equivale a identificação histórica completa; variâncias após calibração continuam adiadas.
 
 Data: 2026-09-21. Documentos relacionados: [desenho amostral](microdata_1960_amostra_127_desenho_amostral.md), [preparação](microdata_1960_amostra_127_preparacao.md) e [consistência](microdata_1960_amostra_127_consistencia.md).

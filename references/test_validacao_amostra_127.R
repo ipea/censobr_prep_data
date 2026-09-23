@@ -250,8 +250,12 @@ for(faixa_q6 in c("ate_500", "501_1000", "1001_2000", "2001_4000", "4001_6000", 
   for(medida_q6 in c("dom_total", "pes_total")){
     z <- celula_pre(rq6, 6L, REGIAO_1960["60"], faixa_q6, medida_q6)
     esperado <- if(faixa_q6 == "6001_mais") 3L else 1L
-    stopifnot(z$n_amostra == esperado, z$nosso == 10 * esperado,
-              z$status_celula == "observada", z$n_sem_classificacao == 0L)
+    stopifnot(z$n_amostra == esperado, z$valor_parcial == 10 * esperado)
+    if(faixa_q6 == "sem_declaracao"){
+      stopifnot(z$nosso == 10 * esperado, z$status_celula == "observada", z$n_sem_classificacao == 0L)
+    } else {
+      stopifnot(is.na(z$nosso), z$status_celula == "classificacao_incompleta", z$n_sem_classificacao == 1L)
+    }
   }
 }
 z <- celula_pre(rq6, 6L, REGIAO_1960["60"], "alugados", "dom_total")

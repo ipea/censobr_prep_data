@@ -150,7 +150,9 @@ if(identical(Sys.getenv("CENSOBR_TEST_PESOS_ARROW"), "1")){
   hash_antes <- tools::md5sum(entradas)
   municipios <- file.path(pasta_teste, "municipios.csv")
   definitivos <- file.path(pasta_teste, "definitivos.csv")
-  fwrite(data.table(uf60 = 24L, cod60 = 2401L, pop_urbana = 16L, pop_rural = 0L), municipios)
+  guia_municipal <- data.table(uf60 = 24L, cod60 = 2401L,
+    pop_total = 16L, pop_urbana = 16L, pop_rural = 0L)
+  fwrite(guia_municipal, municipios)
   def25 <- rbind(copy(def)[, uf60 := 24L],
                  data.table(tabela = 32L, uf60 = 24L, item = "presente",
                             sexo = c("homens", "mulheres"), medida = "", valor = 8))
@@ -166,7 +168,24 @@ if(identical(Sys.getenv("CENSOBR_TEST_PESOS_ARROW"), "1")){
             nrow(np) == 4L, nrow(nd) == 4L, all(abs(np$censobr_weight - 4) < 1e-8),
             np[V204 == 9L & V211 == 1L, sum(censobr_weight)] == 8)
 
-  # Uma idade danificada deve parar, nao ser promovida ao mesmo grupo de V204=9.
+  # Reescalar para a UF nao sana um controle municipal inconsistente.
+  for(caso in c("soma", "negativo", "infinito", "chave_repetida")){
+    guia_ruim <- copy(guia_municipal)
+    if(caso == "soma") guia_ruim[, pop_total := 17L]
+    if(caso == "negativo") guia_ruim[, `:=`(pop_urbana = 17L, pop_rural = -1L)]
+    if(caso == "infinito") guia_ruim[, pop_urbana := Inf]
+    if(caso == "chave_repetida") guia_ruim <- rbind(guia_ruim, guia_ruim)
+    guia_path <- file.path(pasta_teste, paste0("guia_", caso, ".csv"))
+    fwrite(guia_ruim, guia_path)
+    trecho <- if(caso == "soma") "total municipal" else
+      if(caso == "chave_repetida") "municipio repetido" else "populacao municipal invalida"
+    destino_ruim <- file.path(pasta_teste, paste0("saida_guia_", caso))
+    erro_pesos(weight_1960_amostra_25(entradas, "fn", guia_path, definitivos,
+      out_dir = destino_ruim), trecho)
+    stopifnot(!dir.exists(destino_ruim), identical(tools::md5sum(entradas), hash_antes))
+  }
+  gc(verbose = FALSE)
+  # Uma idade danificada nao e promovida ao mesmo grupo de V204=9.
   p25[linha == 1L, V204 := NA_integer_]
   arrow::write_parquet(p25, entradas[1])
   erro_pesos(weight_1960_amostra_25(entradas, "fn", municipios, definitivos,

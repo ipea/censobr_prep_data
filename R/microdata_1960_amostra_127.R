@@ -213,7 +213,8 @@ read_1960_amostra_127 <- function(path){
 # decisão precisa apontar para uma linha suspeita (a exceção é a decisão
 # "realocada", que é sobre uma linha íntegra no lugar errado).
 # ------------------------------------------------------------------------------
-detect_1960_amostra_127 <- function(linhas, guia_familias, guia_pessoas, correcoes){
+detect_1960_amostra_127 <- function(linhas, guia_familias, guia_pessoas, correcoes,
+                                  out_dir = "./data_raw/microdata/1960/amostra_127"){
 
   message("Detecting problems in 1960 amostra de 1,27%")
 
@@ -267,8 +268,8 @@ detect_1960_amostra_127 <- function(linhas, guia_familias, guia_pessoas, correco
   message("  ", nrow(problemas), " linhas suspeitas (",
           sum(problemas$tipo == "1"), " de familia, ", sum(problemas$tipo != "1"), " de pessoa)")
 
-  dir.create("./data_raw/microdata/1960/amostra_127", recursive = TRUE, showWarnings = FALSE)
-  data.table::fwrite(problemas, "./data_raw/microdata/1960/amostra_127/linhas_problematicas.csv", bom = TRUE)
+  dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+  data.table::fwrite(problemas, file.path(out_dir, "linhas_problematicas.csv"), bom = TRUE)
 
   # cobertura das decisoes manuais
   # read.csv, nao fread: so ele devolve as aspas dobradas e os brancos iniciais
@@ -467,7 +468,9 @@ apply_corrections_1960_amostra_127 <- function(linhas, correcoes,
       reparo <- reparos[[i]]; texto <- reparo$texto_antes
       identidade_ampliada <- identical(reparo$criterio_identidade_contexto,
                                         "grupo_completo_com_divergencias_preservadas_v1")
-      if(!is.null(reparo$criterio_identidade_contexto) && !identidade_ampliada)
+      identidade_conjunta <- identical(reparo$criterio_identidade_contexto,
+                                        "duas_testemunhas_intactas_conjuntas_v1")
+      if(!is.null(reparo$criterio_identidade_contexto) && !identidade_ampliada && !identidade_conjunta)
         stop("criterio de identidade desconhecido no reparo")
       if(reparo$texto_original != externos$texto_original[i] || texto != externos$texto_original[i])
         stop("texto anterior diverge na evidencia do reparo")
@@ -541,7 +544,8 @@ apply_corrections_1960_amostra_127 <- function(linhas, correcoes,
       arquivos25 <- gsub("\\", "/", sapply(grupo25, `[[`, "arquivo"), fixed = TRUE)
       f127 <- which(substr(textos127, 17, 17) == "1"); p127 <- which(substr(textos127, 17, 17) %in% c("2", "3"))
       f25 <- which(substr(textos25, 9, 10) == "00"); p25 <- which(substr(textos25, 9, 10) != "00")
-      if(length(f127) != 1L || length(f25) != 1L || length(p127) != length(p25) ||
+      numero_cartoes127 <- if(identidade_conjunta) 0L else 1L
+      if(length(f127) != numero_cartoes127 || length(f25) != 1L || length(p127) != length(p25) ||
          length(p127) != reparo$pessoas127 || length(p25) != reparo$pessoas25 ||
          anyDuplicated(numeros25) || length(unique(arquivos25)) != 1L || any(nchar(textos25) != 54L) ||
          any(substr(textos25, 1, 8) != substr(texto, 9, 16)) ||
@@ -580,25 +584,91 @@ apply_corrections_1960_amostra_127 <- function(linhas, correcoes,
          any(substr(geografia127, 18, 18) != substr(card25, 36, 36)))
         stop("geografia do grupo127 diverge do grupo25")
 
-      fam127 <- campos_evidencia(textos127[f127], guia_f127, nomes_f)
-      fam25 <- campos_evidencia(textos25[f25], guia_f25, nomes_f)
-      idx_reparo_f <- match(numeros127[f127], ids)
-      danos_f <- if(is.na(idx_reparo_f)) character() else sapply(evidencia$reparos[[idx_reparo_f]]$propostas, `[[`, "campo")
-      fam_antes <- campos_evidencia(textos127_antes[f127], guia_f127, nomes_f, danos_f)
-      iguais_antes <- (is.na(fam_antes) & is.na(fam25)) | (!is.na(fam_antes) & !is.na(fam25) & fam_antes == fam25)
-      dif_antes <- nomes_f[!iguais_antes[1, ]]
-      iguais_f <- (is.na(fam127) & is.na(fam25)) | (!is.na(fam127) & !is.na(fam25) & fam127 == fam25)
-      dif_f <- nomes_f[!iguais_f[1, ]]
-      declaradas <- names(reparo$divergencias_cartao_preservadas)
-      if(!setequal(dif_antes, declaradas) || any(!dif_f %in% paste0("V", 102:113)) ||
-         (tipo_alvo == "familias" && length(dif_f))) stop("atributos do cartao divergem sem evidencia explicita")
-      for(nome in dif_antes) if(!identical(as.integer(sapply(reparo$divergencias_cartao_preservadas[[nome]],
-                                                           function(x) if(is.null(x)) NA_integer_ else x)),
-                                           as.integer(c(fam_antes[1, nome], fam25[1, nome]))))
-        stop("divergencia do cartao nao confere com evidencia")
+      if(!identidade_conjunta){
+        fam127 <- campos_evidencia(textos127[f127], guia_f127, nomes_f)
+        fam25 <- campos_evidencia(textos25[f25], guia_f25, nomes_f)
+        idx_reparo_f <- match(numeros127[f127], ids)
+        danos_f <- if(is.na(idx_reparo_f)) character() else sapply(evidencia$reparos[[idx_reparo_f]]$propostas, `[[`, "campo")
+        fam_antes <- campos_evidencia(textos127_antes[f127], guia_f127, nomes_f, danos_f)
+        iguais_antes <- (is.na(fam_antes) & is.na(fam25)) | (!is.na(fam_antes) & !is.na(fam25) & fam_antes == fam25)
+        dif_antes <- nomes_f[!iguais_antes[1, ]]
+        iguais_f <- (is.na(fam127) & is.na(fam25)) | (!is.na(fam127) & !is.na(fam25) & fam127 == fam25)
+        dif_f <- nomes_f[!iguais_f[1, ]]
+        declaradas <- names(reparo$divergencias_cartao_preservadas)
+        if(!setequal(dif_antes, declaradas) || any(!dif_f %in% paste0("V", 102:113)) ||
+           (tipo_alvo == "familias" && length(dif_f))) stop("atributos do cartao divergem sem evidencia explicita")
+        for(nome in dif_antes) if(!identical(as.integer(sapply(reparo$divergencias_cartao_preservadas[[nome]],
+                                                             function(x) if(is.null(x)) NA_integer_ else x)),
+                                             as.integer(c(fam_antes[1, nome], fam25[1, nome]))))
+          stop("divergencia do cartao nao confere com evidencia")
+      }
       valores127 <- campos_evidencia(textos127[p127], guia127, nomes_p)
       valores25 <- campos_evidencia(textos25[p25], guia25, nomes_p)
       divergencias <- reparo$divergencias_pessoais_preservadas
+      if(identidade_conjunta){
+        # MG405458 perde somente parentesco e dezena da idade; seu tipo3 permanece.
+        # As duas testemunhas sao lidas antes do reparo e nunca incluem o alvo.
+        testemunhas <- reparo$testemunhas_identidade
+        linhas_t <- as.integer(vapply(testemunhas, `[[`, integer(1), "linha127"))
+        linhas_t25 <- as.integer(vapply(testemunhas, `[[`, integer(1), "linha25"))
+        if(!identical(reparo$linha127, 405458L) || !identical(chave, c(40L, 40880L, 1L)) ||
+           !setequal(campos_alvo, c("V203", "AGE")) || length(p127) != 3L ||
+           substr(reparo$texto_antes, 17L, 17L) != "3" || substr(texto, 17L, 17L) != "3" ||
+           length(testemunhas) != 2L || anyNA(linhas_t) || anyNA(linhas_t25) ||
+           anyDuplicated(linhas_t) || anyDuplicated(linhas_t25) || reparo$linha127 %in% linhas_t ||
+           any(vapply(testemunhas, function(x) length(x$campos_ignorados) != 0L, logical(1))) ||
+           length(divergencias) || length(reparo$divergencias_cartao_preservadas) || length(geo_parcial) ||
+           arquivos25[f25] != "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz")
+          stop("identidade conjunta: alvo, testemunhas ou escopo nao autorizado")
+        ia <- match(linhas_t, numeros127); ib <- match(linhas_t25, numeros25)
+        if(anyNA(ia) || anyNA(ib) || !all(ia %in% p127) || !all(ib %in% p25) ||
+           any(textos127[ia] != originais127[ia]) || any(textos127_antes[ia] != originais127[ia]))
+          stop("identidade conjunta: testemunha nao e intacta ou nao pertence ao grupo")
+        a_t <- campos_evidencia(originais127[ia], guia127, nomes_p)
+        b_t <- campos_evidencia(textos25[ib], guia25, nomes_p)
+        if(!identical(a_t, b_t)) stop("identidade conjunta: testemunha nao coincide em25 campos")
+        perfis <- gsub("-", " ", substr(originais127[ia], 19L, 54L), fixed = TRUE)
+        if(anyDuplicated(perfis)) stop("identidade conjunta: testemunhas de perfis iguais")
+        chave_127 <- paste0(substr(texto, 1L, 2L), substr(texto, 7L, 16L))
+        chave_25 <- substr(texto, 9L, 16L)
+        conjuncoes <- vector("list", 2L); contagens_chave <- integer(2L)
+        for(amostra in seq_len(2L)){
+          con <- if(amostra == 1L) file(raw_path, "rt", encoding = "latin1") else
+            gzfile(arquivos25[f25], "rt", encoding = "latin1")
+          encontrados <- vector("list", length(perfis)); inicio <- 0L
+          repeat {
+            trecho <- readLines(con, n = 10000L, warn = FALSE)
+            if(!length(trecho)) break
+            if(amostra == 1L){
+              ajustes <- dec[linha > inicio & linha <= inicio + length(trecho) &
+                !is.na(texto_corrigido) & texto_corrigido != ""]
+              if(nrow(ajustes)) trecho[ajustes$linha - inicio] <- ajustes$texto_corrigido
+              chaves <- paste0(substr(trecho, 1L, 2L), substr(trecho, 7L, 16L))
+              contagens_chave[amostra] <- contagens_chave[amostra] + sum(chaves == chave_127)
+              pessoal <- substr(trecho, 17L, 17L) %in% c("2", "3") & substr(trecho, 1L, 2L) == substr(texto, 1L, 2L)
+              corpos <- substr(trecho, 19L, 54L)
+              for(pos in c(2L, 3L, 15L, 18L, 29L)){
+                salto <- substr(corpos, pos, pos) == "-" & trimws(substr(corpos, pos + 1L, 36L)) == ""
+                corpos[salto] <- paste0(substr(corpos[salto], 1L, pos - 1L), strrep(" ", 37L - pos))
+              }
+            } else {
+              chaves <- substr(trecho, 1L, 8L)
+              contagens_chave[amostra] <- contagens_chave[amostra] + sum(chaves == chave_25)
+              pessoal <- substr(trecho, 9L, 10L) != "00"
+              corpos <- paste0(substr(trecho, 15L, 24L), substr(trecho, 26L, 51L))
+            }
+            for(j in seq_along(perfis))
+              encontrados[[j]] <- union(encontrados[[j]], chaves[pessoal & corpos == perfis[j]])
+            inicio <- inicio + length(trecho)
+          }
+          close(con)
+          conjuncoes[[amostra]] <- Reduce(intersect, encontrados)
+        }
+        conjuncao <- list(chaves127 = conjuncoes[[1L]], chaves25 = conjuncoes[[2L]], contagens_chave = contagens_chave)
+        if(!identical(conjuncao$chaves127, chave_127) || !identical(conjuncao$chaves25, chave_25) ||
+           !identical(conjuncao$contagens_chave, c(3L, 4L)))
+          stop("identidade conjunta: outro grupo ou cardinalidade da chave divergente")
+      }
       if(identidade_ampliada){
         testemunhas <- reparo$testemunhas_identidade
         linhas_t <- as.integer(sapply(testemunhas, `[[`, "linha127"))
@@ -888,7 +958,8 @@ dedup_1960_amostra_127 <- function(tabelas, out_dir = "./data_raw/microdata/1960
 # A linha HHOLDA fica ausente: a procedencia do cartao tem campos proprios.
 recover_family_cards_1960_amostra_127 <- function(tabelas,
     manifesto_path = "read_guides/1960_amostra_127_cartoes_recuperados.json",
-    out_dir = "./data_raw/microdata/1960/amostra_127"){
+    out_dir = "./data_raw/microdata/1960/amostra_127",
+    correcoes_path = "read_guides/1960_amostra_127_correcoes.csv"){
 
   manifesto <- jsonlite::fromJSON(manifesto_path, simplifyVector = FALSE)
   if(!identical(manifesto$versao, 1L)) stop("versao do manifesto de recuperacao invalida")
@@ -927,10 +998,12 @@ recover_family_cards_1960_amostra_127 <- function(tabelas,
   obrigatorias <- c("data_raw/microdata/1960/amostra_127/HHOLDA.txt",
     "read_guides/readguide_1960_amostra_127_familias.csv", "read_guides/readguide_1960_amostra_127_pessoas.csv",
     "read_guides/readguide_1960_amostra_25_familias.csv", "read_guides/readguide_1960_amostra_25_pessoas.csv",
-    "read_guides/1960_amostra_127_correcoes.csv", "read_guides/1960_amostra_127_duplicatas.csv",
+    correcoes_path, "read_guides/1960_amostra_127_duplicatas.csv",
     "read_guides/1960_amostra_127_vinculos.csv", sapply(cartoes, `[[`, "arquivo_25"),
     unlist(lapply(cartoes, function(x) if(!is.null(x$reconciliacao_chave))
-      x$reconciliacao_chave$prova_arquivo else character()), use.names = FALSE))
+      x$reconciliacao_chave$prova_arquivo else character()), use.names = FALSE),
+    unlist(lapply(cartoes, function(x) if(!is.null(x$prova_composta))
+      x$prova_composta$prova_arquivo else character()), use.names = FALSE))
   if(anyDuplicated(fontes$arquivo) || !all(obrigatorias %in% fontes$arquivo))
     stop("fontes obrigatorias ausentes ou repetidas no manifesto")
   raiz <- paste0(normalizePath(".", winslash = "/"), "/")
@@ -945,7 +1018,7 @@ recover_family_cards_1960_amostra_127 <- function(tabelas,
   gp25 <- data.table::fread("read_guides/readguide_1960_amostra_25_pessoas.csv", encoding = "UTF-8")
   gf127 <- data.table::fread("read_guides/readguide_1960_amostra_127_familias.csv", encoding = "UTF-8")
   gp127 <- data.table::fread("read_guides/readguide_1960_amostra_127_pessoas.csv", encoding = "UTF-8")
-  correcoes <- utils::read.csv("read_guides/1960_amostra_127_correcoes.csv", strip.white = FALSE,
+  correcoes <- utils::read.csv(correcoes_path, strip.white = FALSE,
     stringsAsFactors = FALSE, fileEncoding = "UTF-8", colClasses = "character")
 
   # O mesmo leitor confere os campos pessoais e familiares, sem apagar dano.
@@ -964,6 +1037,152 @@ recover_family_cards_1960_amostra_127 <- function(tabelas,
     }
     resultado[, registro := NULL]
     resultado
+  }
+
+  # A composição conjunta identifica somente o grupo próprio do concorrente.
+  # Os alvos do cartão recuperado continuam exigindo os 25 quesitos exatos.
+  regras_compostas <- Filter(function(x) !is.null(x$prova_composta), cartoes)
+  arquivos_compostos <- unique(vapply(regras_compostas, function(x)
+    x$prova_composta$prova_arquivo, character(1)))
+  reler_composta <- function(arquivo, alvos){
+    alvos <- sort(unique(as.integer(alvos)))
+    if(!length(alvos) || anyNA(alvos) || any(alvos < 1L)) stop("prova composta: localizador invalido")
+    con <- gzfile(arquivo, "rt", encoding = "latin1")
+    on.exit(close(con))
+    texto <- rep(NA_character_, length(alvos)); inicio <- 0L
+    while(inicio < max(alvos)){
+      trecho <- readLines(con, n = 10000L, warn = FALSE)
+      if(!length(trecho)) break
+      idx <- which(alvos > inicio & alvos <= inicio + length(trecho))
+      texto[idx] <- trecho[alvos[idx] - inicio]
+      inicio <- inicio + length(trecho)
+    }
+    setNames(texto, as.character(alvos))
+  }
+  for(arquivo_composto in arquivos_compostos){
+    prova <- jsonlite::fromJSON(arquivo_composto, simplifyVector = FALSE)
+    if(!identical(prova$versao, 1L) || !identical(prova$pessoas_novas, 0L) ||
+       !identical(prova$respostas_alteradas, 0L)) stop("prova composta: escopo invalido")
+    fontes_prova <- data.table::rbindlist(prova$fontes)
+    obrigatorias_prova <- c(obrigatorias[seq_len(8L)],
+      vapply(prova$cartoes, `[[`, character(1), "arquivo_25"))
+    if(!all(c("arquivo", "sha256") %in% names(fontes_prova)) ||
+       anyNA(fontes_prova$arquivo) || anyNA(fontes_prova$sha256) ||
+       anyDuplicated(fontes_prova$arquivo) || !all(obrigatorias_prova %in% fontes_prova$arquivo))
+      stop("prova composta: fontes internas incompletas")
+    for(jp in seq_len(nrow(fontes_prova))){
+      caminho <- normalizePath(fontes_prova$arquivo[jp], winslash = "/", mustWork = TRUE)
+      if(!startsWith(tolower(caminho), tolower(raiz)) ||
+         !identical(digest::digest(file = caminho, algo = "sha256"), fontes_prova$sha256[jp]))
+        stop("prova composta: fonte interna alterada")
+    }
+    regras_prova <- Filter(function(x) identical(x$prova_composta$prova_arquivo,
+      arquivo_composto), regras_compostas)
+    decisivos_prova <- integer()
+    for(regra in regras_prova){
+      pc <- regra$prova_composta
+      decisivos <- as.integer(unlist(pc$cartoes_decisivos, use.names = FALSE))
+      if(!identical(pc$modalidade, "grupos_proprios24_V216_00_63_preservado") ||
+         !is.null(regra$reconciliacao_chave) || !length(decisivos) || anyNA(decisivos) || anyDuplicated(decisivos))
+        stop("prova composta: modalidade ou concorrentes invalidos")
+      caso <- Filter(function(x) identical(x$id_recuperacao, regra$id_recuperacao), prova$cartoes)
+      analise <- Filter(function(x) identical(x$id_recuperacao, regra$id_recuperacao), prova$analises)
+      if(length(caso) != 1L || !identical(caso[[1L]], regra) || length(analise) != 1L)
+        stop("prova composta: regra ou analise localizada divergente")
+      examinados <- analise[[1L]]$cartoes_examinados
+      linhas_examinadas <- vapply(examinados, `[[`, integer(1), "linha_cartao127")
+      usados <- vapply(examinados, function(x) isTRUE(x$usou_prova_composta), logical(1))
+      if(anyDuplicated(linhas_examinadas) ||
+         !identical(length(examinados), regra$verificacoes$cartoes127_examinados) ||
+         !identical(regra$verificacoes$alternativas_plausiveis, 0L) ||
+         any(vapply(examinados, function(x) length(x$motivos_depois) != 0L, logical(1))) ||
+         !setequal(linhas_examinadas[usados], decisivos) ||
+         any(vapply(examinados[usados], function(x) length(x$motivos_antes) == 0L, logical(1))))
+        stop("prova composta: alternativa remanescente ou analise incompleta")
+      decisivos_prova <- union(decisivos_prova, decisivos)
+    }
+    for(linha_composta in decisivos_prova){
+      cp <- prova$provas_compostas[[as.character(linha_composta)]]
+      if(is.null(cp) || !identical(cp$cartao127$linha, linha_composta) ||
+         !identical(unlist(cp$prova_anterior$motivos_estritos, use.names = FALSE), "composicao_propria_diverge") ||
+         !isTRUE(cp$composicao24_exata) || length(cp$cartoes25) != 1L ||
+         length(cp$ocorrencias_grupo24_na127) != 1L || length(cp$ocorrencias_grupo24_na25) != 1L)
+        stop("prova composta: grupo nao unico ou prova estrutural incompleta")
+      f127 <- cp$cartao127; f25 <- cp$cartoes25[[1L]]
+      a <- data.table::rbindlist(cp$pessoas127); b <- data.table::rbindlist(cp$pessoas25)
+      pares <- cp$pares_nova_busca
+      if(!nrow(a) || nrow(a) != nrow(b) || anyDuplicated(a$linha) || anyDuplicated(b$linha) ||
+         length(pares) != nrow(a) || anyNA(a$linha) || anyNA(b$linha) ||
+         !setequal(vapply(pares, `[[`, integer(1), "linha127"), a$linha) ||
+         !setequal(vapply(pares, `[[`, integer(1), "linha25"), b$linha))
+        stop("prova composta: multiplicidade ou pareamento incompleto")
+      key25 <- substr(f25$texto, 1L, 8L)
+      if(!identical(cp$ocorrencias_grupo24_na127[[1L]]$cartao, linha_composta) ||
+         !setequal(as.integer(unlist(cp$ocorrencias_grupo24_na127[[1L]]$linhas)), a$linha) ||
+         !identical(cp$ocorrencias_grupo24_na25[[1L]]$chave, key25) ||
+         !setequal(as.integer(unlist(cp$ocorrencias_grupo24_na25[[1L]]$linhas)), c(f25$linha, b$linha)) ||
+         !identical(unlist(cp$ocorrencias_grupo24_na25[[1L]]$textos, use.names = FALSE),
+           c(f25$texto, b$texto[order(b$linha)])))
+        stop("prova composta: ocorrencia unica pertence a outro grupo")
+      arquivo25 <- paste0("data/release_legacy/Censo.1960.amostra.25porcento.",
+        unname(siglas_fonte25[as.character(f127$uf)]), ".gz")
+      if(!arquivo25 %in% fontes_prova$arquivo) stop("prova composta: UF sem fonte assinada")
+      raw127 <- reler_composta("data_raw/microdata/1960/amostra_127/HHOLDA.txt", c(f127$linha, a$linha))
+      raw25 <- reler_composta(arquivo25, c(f25$linha, b$linha, f25$linha + nrow(b) + 1L))
+      originais <- c(f127$original, a$original)
+      corrigidos <- c(f127$corrigido, a$corrigido)
+      ids127 <- c(f127$linha, a$linha)
+      esperado <- originais
+      reparos <- correcoes$texto_corrigido[match(ids127, as.integer(correcoes$linha))]
+      aplica <- !is.na(reparos) & reparos != ""
+      esperado[aplica] <- reparos[aplica]
+      if(anyNA(raw127[as.character(ids127)]) ||
+         !identical(unname(raw127[as.character(ids127)]), originais) ||
+         !identical(corrigidos, esperado) || anyNA(raw25[as.character(c(f25$linha, b$linha))]) ||
+         !identical(unname(raw25[as.character(c(f25$linha, b$linha))]), c(f25$texto, b$texto)))
+        stop("prova composta: texto diverge da fonte ou correcao vigente")
+      seguinte <- raw25[as.character(f25$linha + nrow(b) + 1L)]
+      if(substr(f25$texto, 9L, 10L) != "00" || as.integer(substr(f25$texto, 12L, 13L)) != nrow(b) ||
+         !setequal(b$linha, f25$linha + seq_len(nrow(b))) ||
+         !setequal(as.integer(substr(b$texto, 9L, 10L)), seq_len(nrow(b))) ||
+         any(substr(b$texto, 9L, 11L) != substr(b$texto, 12L, 14L)) ||
+         any(substr(b$texto, 24L, 24L) != substr(b$texto, 25L, 25L)) ||
+         any(substr(b$texto, 52L, 54L) != "000") ||
+         any(substr(b$texto, 1L, 8L) != key25) ||
+         (!is.na(seguinte) && substr(seguinte, 1L, 8L) == key25))
+        stop("prova composta: grupo fonte25 incompleto")
+      if(substr(f127$corrigido, 17L, 17L) != "1" ||
+         !all(substr(a$corrigido, 17L, 17L) %in% c("2", "3")) ||
+         any(substr(a$corrigido, 1L, 16L) != substr(f127$corrigido, 1L, 16L)) ||
+         any(substr(a$corrigido, 18L, 18L) != substr(f127$corrigido, 18L, 18L)) ||
+         substr(f127$corrigido, 9L, 16L) != key25 ||
+         substr(f127$corrigido, 7L, 8L) != substr(f25$texto, 34L, 35L) ||
+         as.integer(substr(f127$corrigido, 1L, 2L)) != f127$uf)
+        stop("prova composta: chave ou geografia propria divergente")
+      campos_familia <- c(paste0("V", 101:113), "V116", "V118")
+      ca <- campos_conferidos(f127$corrigido, gf127[variavel %in% campos_familia])
+      cb <- campos_conferidos(f25$texto, gf25[variavel %in% campos_familia])
+      for(v in campos_familia)
+        if(!identical(as.integer(ca[[v]]), as.integer(cb[[v]])))
+          stop("prova composta: corpo familiar proprio divergente")
+      comuns_compostos <- intersect(gp127$variavel, gp25$variavel)
+      pa <- campos_conferidos(a$corrigido, gp127[variavel %in% comuns_compostos])
+      pb <- campos_conferidos(b$texto, gp25[variavel %in% comuns_compostos])
+      perfil24 <- setdiff(comuns_compostos, "V216")
+      sa <- do.call(paste, c(pa[, ..perfil24], sep = "|"))
+      sb <- do.call(paste, c(pb[, ..perfil24], sep = "|"))
+      if(!identical(sort(sa), sort(sb))) stop("prova composta: multiconjunto24 divergente")
+      for(par in pares){
+        ia <- match(par$linha127, a$linha); ib <- match(par$linha25, b$linha)
+        if(sa[ia] != sb[ib] || !all(names(par$diferencas) %in% "V216"))
+          stop("prova composta: pareamento omite outro quesito")
+        iguais <- identical(pa$V216[ia], pb$V216[ib])
+        if(iguais && length(par$diferencas)) stop("prova composta: divergencia declarada incorretamente")
+        if(!iguais && (!pa$V216[ia] %in% c("00", "63") || !pb$V216[ib] %in% c("00", "63") ||
+           !identical(as.integer(unlist(par$diferencas$V216)), as.integer(c(pa$V216[ia], pb$V216[ib])))))
+          stop("prova composta: V216 fora de00/63 ou omitido")
+      }
+    }
   }
 
   # Releitura por arquivo; os textos no manifesto nao substituem a fonte bruta.
@@ -2755,8 +2974,10 @@ validate_1965_1960_amostra_127 <- function(tabelas, gabarito_path,
     fogao_gas = !d$V107 %in% c(0:5, 9), fogao_oleo_querosene = !d$V107 %in% c(0:5, 9),
     instalacao_sanitaria = !d$V106 %in% 4:9, iluminacao_eletrica = !d$V108 %in% 5:7,
     radio = !d$V109 %in% 7:9, geladeira = !d$V110 %in% c(0:1, 9))
+  # A publicacao nao explica a distribuicao do aluguel ignorado nas faixas.
+  # Aluguel conjunto (codigo 8) tambem nao identifica um valor domiciliar.
   for(nm in linhas_aluguel) quesitos[[nm]] <- !d$V103 %in% c(0, 7:9) |
-    (d$V103 %in% 8 & !d$V104 %in% c(0:7, 9))
+    (d$V103 %in% 8 & !d$V104 %in% 0:7)
   for(nm in names(quesitos)) for(pessoas_pendentes in c(FALSE, TRUE)) for(situacao_pendente in c(FALSE, TRUE)){
     incerto <- !d$V101 %in% c(1:5, 9) | (d$V101 %in% c(1, 2, 4, 5) & !d$somente_nao_moradores &
       (d$ocupacao_incerta | is.na(d$regiao) | (pessoas_pendentes & d$n_presenca_incerta > 0L) |
@@ -2776,6 +2997,8 @@ validate_1965_1960_amostra_127 <- function(tabelas, gabarito_path,
   comp[, referencia_estimada := TRUE]
   comp[, politica_dependencia := data.table::fifelse(quadro == 5L,
     "ramo proprio quando codificado; inativos herdam chefe unico residente da mesma familia/domicilio; vinculo nao e certificado por esta comparacao", "nao se aplica")]
+  comp[, politica_aluguel := data.table::fifelse(quadro == 6L & linha %in% linhas_aluguel,
+    "aluguel ignorado ou sem valor domiciliar isolado: faixa pendente; nao redistribuido; total alugado preservado", "nao se aplica")]
   comp[, peso := peso]
   comp
   }))

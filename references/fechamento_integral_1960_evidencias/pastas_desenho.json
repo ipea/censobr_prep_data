@@ -1,0 +1,147 @@
+{
+  "versao": 1,
+  "data": "2026-09-23",
+  "escopo": "Cinco pastas, sem R ou alteracao de dados/estratos/pesos.",
+  "fontes": [
+    {
+      "arquivo": "R/microdata_1960_amostra_127.R",
+      "sha256": "60323a7806eb309ffd50803c5a69c685a7e2cd869c61950ff69a939bd09a5097"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.ce.gz",
+      "sha256": "40d8ecdc24e7d8c9ba8b4715f6f0bfa1f1385e4b3d8fe1d15eac3595b68f9fa2"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+      "sha256": "75e7b4e7fce28507c24a4e21f1a40e5b47f750fd72b090abe6d1b1406644a621"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+      "sha256": "9b647908667d61fb35dfac8e4a4eda61a70b5f259bee3f5975026b54fa6326be"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.brasil.domicilios.amostraCompilada.censobr.parquet",
+      "sha256": "d7514d43d28bc690f3e8a3704fbfcb44d336084bccf0455b4ac08a43d274ed5a"
+    },
+    {
+      "arquivo": "data_raw/microdata/1960/amostra_127/HHOLDA.txt",
+      "sha256": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c"
+    },
+    {
+      "arquivo": "data_raw/microdata/1960/amostra_127/domicilios_1960_amostra_127.parquet",
+      "sha256": "f526ab6090d0be7dd9325a0f6b5143dab46186734f8760be8f44513924f93938"
+    },
+    {
+      "arquivo": "data_raw/microdata/1960/amostra_25/ce/domicilios.parquet",
+      "sha256": "95bf26d6cfe312bbeb45dde9914d2419e681a82a9262ab2ed6d6ef6ec36c18b3"
+    },
+    {
+      "arquivo": "data_raw/microdata/1960/amostra_25/mg/domicilios.parquet",
+      "sha256": "676a3fd4cf2be0f09bea68aa6cda58957225fd23a926dc4f2cab3d65982781da"
+    },
+    {
+      "arquivo": "data_raw/microdata/1960/amostra_25/sp/domicilios.parquet",
+      "sha256": "8c87be09f903dd81f6df156faab660ed2a487642b2df86cab11e1ec14a8dc6ea"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_cartoes_recuperados.json",
+      "sha256": "baaebe8230266f5e5c145f7b4ce5ba40b9eb807cbe98b23043fa3eef9e4792ef"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_codigos.csv",
+      "sha256": "57193b5e534cf754ec38ac32f548e78dc577c4c8794a5b8f4f1c726a11d63bec"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_correcoes.csv",
+      "sha256": "f039a9fe374c26afad6ad84acc142d4da5433892ca9f01978ac4434b13868da9"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_duplicatas.csv",
+      "sha256": "9897d11d62bb4f1640203b091ad56a893d9b42e1fc051d922c04f5ca13b81a0a"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_vinculos.csv",
+      "sha256": "5d0fc8e4eb9eb0d2363247426eeb61e0b58ad719130992c219decee231fbe6a8"
+    },
+    {
+      "arquivo": "read_guides/1960_municipios.csv",
+      "sha256": "3bc197bdbb6e8746614b108acbdb9cb2de079810172fdea2ffd268e0cf99ed96"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_127_familias.csv",
+      "sha256": "51c443ff8a9e86d1584665b7d6296b061af5592e57d61bed4091d68f30507de5"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_127_pessoas.csv",
+      "sha256": "18326d21e51a2af88bd9f3d62b39d7debe0dc611d66985e911ae12c571d71655"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_25_familias.csv",
+      "sha256": "815f3241d49f8ababaef8ef2b6c0fc6e515a72302346da8133b7349c0f481007"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_25_pessoas.csv",
+      "sha256": "e00be8bf2962bbd2c5ed9bc169321d5b156b1424bd22f4c2f46920aa89d106c8"
+    },
+    {
+      "arquivo": "references/fechamento_integral_1960_duplicatas_pastas.py",
+      "sha256": "a81ff5c9ed57a5749f43e0e38243b633069295b10eba2ce440ca1d1573bbd8f3"
+    },
+    {
+      "arquivo": "references/fechamento_integral_1960_evidencias/inventario_final.json",
+      "sha256": "a74cfbf24e318f20bb1f6b607951ccdf7db3b076a62a2bafe7e926d33cdd760c"
+    },
+    {
+      "arquivo": "references/figuras/desenho_amostral_1960.R",
+      "sha256": "3ecf67d922b45e6aaff599f6ab2a454378b2dbf6bb3021b1cb5b604adbd24aa5"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/cartoes_fora_chave_integral20260923.json",
+      "sha256": "e8fa15c74813da1f3a6ea1b7bc4d9122ddbe58383a61ab9583827d0ab80b67fb"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/vinculos/reauditoria01/indice127.sqlite",
+      "sha256": "0df274929772fb14720a0f61b2f8de6a3486791dc31597f9a420022018f59ce7"
+    }
+  ],
+  "pastas": [
+    {
+      "UF": 14,
+      "pasta": 15004,
+      "causa": "Comparacao numerica 15004-15004 inadequada sem crosswalk;145 pares com corpo/geografia exatos correspondem a14990 rural. UPA127 preservada.",
+      "arquivo": "references/fechamento_integral_1960_evidencias/pasta_desenho_14_15004.json",
+      "sha256": "1a13968687f0db482f580aa92114c5e4bd34b5dbb2ad37954c5a7e50b20d7f30"
+    },
+    {
+      "UF": 14,
+      "pasta": 15290,
+      "causa": "Cinco cartoes urbanos127 versus rurais25; geografia pessoal interna divergente. Identidade nao decide V118 verdadeiro.",
+      "arquivo": "references/fechamento_integral_1960_evidencias/pasta_desenho_14_15290.json",
+      "sha256": "a55c034e1e62382cc12325dd509ea37c7aa49616d4260b0c8829e9d698bb3657"
+    },
+    {
+      "UF": 40,
+      "pasta": 43234,
+      "causa": "Um cartao rural127 versus urbano25; chefe e corpo domiciliar diferem e quatro pessoas127 trazem situacao urbana.",
+      "arquivo": "references/fechamento_integral_1960_evidencias/pasta_desenho_40_43234.json",
+      "sha256": "8602080d506d3123c02bb9eec162ba23d588c17a486c13df809851db3d687b92"
+    },
+    {
+      "UF": 60,
+      "pasta": 60158,
+      "causa": "Um cartao rural127, municipio7234 invalido naUF60, versus urbano6234 na25. Identidade pessoal exata nao decide V118 ou tres quesitos domiciliares.",
+      "arquivo": "references/fechamento_integral_1960_evidencias/pasta_desenho_60_60158.json",
+      "sha256": "3e4a34c2e8ff10f956d300e6ec8e44279d6bfbe03501f2bfa4faf500fe428c6c"
+    },
+    {
+      "UF": 60,
+      "pasta": 60718,
+      "causa": "Um cartao rural127 versus urbano25; tres pessoas exatas25, duas com situacao urbana127. Conflito legivel sem direcao demonstrada.",
+      "arquivo": "references/fechamento_integral_1960_evidencias/pasta_desenho_60_60718.json",
+      "sha256": "33466f00345b5bd824414a6eb6cef562b70839edcee34de68887286bf14e7b36"
+    }
+  ],
+  "comando": "python references/fechamento_integral_1960_duplicatas_pastas.py",
+  "limite": "Classificacao recontada; nao identifica desenho nem escolhe geografia verdadeira. Pareamentos24 preservam V216 e nao sao prova isolada de identidade.",
+  "rss_bytes": 180555776
+}

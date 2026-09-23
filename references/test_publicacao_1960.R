@@ -181,11 +181,12 @@ for(caso in c("linha_ausente", "chave_trocada", "status_incompleto")){
 }
 
 # As respostas iguais e as sinalizacoes de parentesco nao autorizam excluir gente.
-for(caso in c("peso_negativo", "peso_diferente", "id_duplicado", "id_outra_uf",
+for(caso in c("peso_negativo", "peso_negativo_fora_t7", "peso_diferente", "id_duplicado", "id_outra_uf",
               "familia_dois_domicilios", "sem_domicilio", "dano", "dano_sufixo", "origem", "coluna_extra")){
   caminho <- paths[basename(dirname(paths)) == "gb" & basename(paths) == "pessoas.parquet"]
   ruim <- copy(bases[["gb/pessoas.parquet"]])
   if(caso == "peso_negativo") ruim[1, censobr_weight := -1]
+  if(caso == "peso_negativo_fora_t7") ruim[1, `:=`(censobr_weight = -1, V202 = 5L)]
   if(caso == "peso_diferente") ruim[1, censobr_weight := 81]
   if(caso == "id_duplicado") ruim[2, censobr_idperson := ruim$censobr_idperson[1]]
   if(caso == "id_outra_uf") ruim[, censobr_idperson := 30 * 1e7 + 1:2]
@@ -197,7 +198,15 @@ for(caso in c("peso_negativo", "peso_diferente", "id_duplicado", "id_outra_uf",
   if(caso == "coluna_extra") ruim[, censobr_cartao_sem_regra := "nao descartar"]
   arrow::write_parquet(ruim, caminho)
   validar()
-  trecho <- switch(caso, peso_negativo = "peso invalido", peso_diferente = "Peso pessoal diverge",
+  # O negativo residente agora e recusado antes, na propria comparacao T7.
+  if(caso == "peso_negativo"){
+    pesos_ruins <- fread(relatorio)[uf60 == 54L & tabela == 7L & n_pesos_ausentes > 0L]
+    stopifnot(nrow(pesos_ruins) == 2L, all(pesos_ruins$medida == "pessoas"),
+      all(pesos_ruins$status_celula == "peso_ausente"),
+      all(is.na(pesos_ruins$valor_minimo)), all(is.na(pesos_ruins$valor_maximo)))
+  }
+  trecho <- switch(caso, peso_negativo = "comparacoes nao calculadas",
+    peso_negativo_fora_t7 = "peso invalido", peso_diferente = "Peso pessoal diverge",
     id_duplicado = "Identificadores ausentes", id_outra_uf = "intervalo nacional",
     familia_dois_domicilios = "familia aparece", sem_domicilio = "comparacoes nao calculadas",
     dano = "dano ou vinculo", dano_sufixo = "dano ou vinculo", origem = "dano ou vinculo", coluna_extra = "Colunas compiladas")

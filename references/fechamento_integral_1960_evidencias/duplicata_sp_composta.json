@@ -1,0 +1,2321 @@
+{
+  "versao": 1,
+  "situacao": "proposta_conferida_sem_manifesto_alterado",
+  "resumo": {
+    "grupos": 1,
+    "linhas": 2,
+    "manter": 2,
+    "remover": 0,
+    "literais127_relidos": 14,
+    "negativos_recusados": 6
+  },
+  "criterio": "Unicidade do multiconjunto familiar completo em ambas as fontes estaduais, 25 campos pessoais/cardinalidades/cartao/geografia exatos no alvo; alternativas independentes identificadas. Nao e identidade civil.",
+  "decisoes": [
+    {
+      "grupo": "60-63788-146-linha773911",
+      "linha": "773911",
+      "acao": "manter",
+      "n_antes": "2",
+      "n_manter": "2",
+      "texto_original": "6062780163788146332999949299312942699000000034-       \\0127106",
+      "texto_corrigido": "6062780163788146332999949299312942699000000034-       \\0127106",
+      "fonte_25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+      "linhas_25": "3827374;3827375",
+      "justificativa": "Preservacao composta em 23/09/2026: grupo integral de quatro pessoas unico nas duas fontes; 25 campos, cartao, geografia e duas ocorrencias conferidos; concorrentes com grupos proprios independentes. Numeracao e respostas preservadas. Prova: references/fechamento_integral_1960_evidencias/duplicata_sp_composta.json; nao identifica civilmente pessoas."
+    },
+    {
+      "grupo": "60-63788-146-linha773911",
+      "linha": "773913",
+      "acao": "manter",
+      "n_antes": "2",
+      "n_manter": "2",
+      "texto_original": "6062780163788146332999949299312942699000000034-       \\0127106",
+      "texto_corrigido": "6062780163788146332999949299312942699000000034-       \\0127106",
+      "fonte_25": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+      "linhas_25": "3827374;3827375",
+      "justificativa": "Preservacao composta em 23/09/2026: grupo integral de quatro pessoas unico nas duas fontes; 25 campos, cartao, geografia e duas ocorrencias conferidos; concorrentes com grupos proprios independentes. Numeracao e respostas preservadas. Prova: references/fechamento_integral_1960_evidencias/duplicata_sp_composta.json; nao identifica civilmente pessoas."
+    }
+  ],
+  "casos": {
+    "773909": {
+      "cartao": {
+        "linha": 773909,
+        "uf": 60,
+        "pasta": 63788,
+        "boletim": 146,
+        "distrito": 1,
+        "municipio": 6278,
+        "situacao": 3,
+        "chave": "0163788146",
+        "original": "6062780163788146131409269570200000                    \\0127106",
+        "corrigido": "6062780163788146131409269570200000                    \\0127106",
+        "invalidos": ""
+      },
+      "pessoas": [
+        {
+          "linha": 773910,
+          "uf": 60,
+          "pasta": 63788,
+          "boletim": 146,
+          "distrito": 1,
+          "municipio": 6278,
+          "situacao": 3,
+          "chave": "0163788146",
+          "original": "606278016378814623179994929931294269966399994399829196\\0127106",
+          "corrigido": "606278016378814623179994929931294269966399994399829196\\0127106",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 773909,
+          "familia_fisica": 773909
+        },
+        {
+          "linha": 773911,
+          "uf": 60,
+          "pasta": 63788,
+          "boletim": 146,
+          "distrito": 1,
+          "municipio": 6278,
+          "situacao": 3,
+          "chave": "0163788146",
+          "original": "6062780163788146332999949299312942699000000034-       \\0127106",
+          "corrigido": "6062780163788146332999949299312942699000000034-       \\0127106",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 773909,
+          "familia_fisica": 773909
+        },
+        {
+          "linha": 773912,
+          "uf": 60,
+          "pasta": 63788,
+          "boletim": 146,
+          "distrito": 1,
+          "municipio": 6278,
+          "situacao": 3,
+          "chave": "0163788146",
+          "original": "6062780163788146332899949299312942699663999934-       \\0127106",
+          "corrigido": "6062780163788146332899949299312942699663999934-       \\0127106",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 773909,
+          "familia_fisica": 773909
+        },
+        {
+          "linha": 773913,
+          "uf": 60,
+          "pasta": 63788,
+          "boletim": 146,
+          "distrito": 1,
+          "municipio": 6278,
+          "situacao": 3,
+          "chave": "0163788146",
+          "original": "6062780163788146332999949299312942699000000034-       \\0127106",
+          "corrigido": "6062780163788146332999949299312942699000000034-       \\0127106",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 773909,
+          "familia_fisica": 773909
+        }
+      ],
+      "alternativas25": [
+        {
+          "chave25": [
+            60,
+            63788,
+            163
+          ],
+          "cartao25": {
+            "linha": 3827371,
+            "texto": "637881630070414092695702000006278013000000000000000000"
+          },
+          "pessoas25": [
+            {
+              "linha": 3827372,
+              "texto": "637881630170171799949299931294269966399994399829196000"
+            },
+            {
+              "linha": 3827373,
+              "texto": "6378816302502528999492999312942699663999934        000"
+            },
+            {
+              "linha": 3827374,
+              "texto": "6378816303303329999492999312942699000000034        000"
+            },
+            {
+              "linha": 3827375,
+              "texto": "6378816304104129999492999312942699000000034        000"
+            }
+          ],
+          "avaliacao": {
+            "motivos": [
+              "menos2testemunhas_exatas_unicas"
+            ],
+            "testemunhas_exatas_unicas_UF127": [],
+            "n127": 4,
+            "n25": 4,
+            "composicao24_exata": true,
+            "composicao25_exata": true,
+            "diferencas_cartao": []
+          }
+        }
+      ],
+      "mesma_chave25": [
+        {
+          "UF25": 60,
+          "cartao25": {
+            "linha": 3827259,
+            "texto": "637881460050814789595802030026278013000000000000000000"
+          },
+          "pessoas25": [
+            {
+              "linha": 3827260,
+              "texto": "637881460150151713954169919261520064309068371324136000"
+            },
+            {
+              "linha": 3827261,
+              "texto": "6378814602302328133542699192617210643090634        000"
+            },
+            {
+              "linha": 3827262,
+              "texto": "637881460310311911654269920001620006300006371324136000"
+            },
+            {
+              "linha": 3827263,
+              "texto": "637881460400402911454269920001721000000005391325176000"
+            },
+            {
+              "linha": 3827264,
+              "texto": "6378814605805829112542699200017210000000034        000"
+            },
+            {
+              "linha": 3827265,
+              "texto": "6378814606606629110542699200005200000000035        000"
+            },
+            {
+              "linha": 3827266,
+              "texto": "63788146074074191085426992000042                   000"
+            },
+            {
+              "linha": 3827267,
+              "texto": "63788146082082291035426992000                      000"
+            }
+          ],
+          "avaliacao": {
+            "motivos": [
+              "cartao_ou_distrito_diverge",
+              "composicao_ou_quantidade_diverge",
+              "menos2testemunhas_exatas_unicas"
+            ],
+            "testemunhas_exatas_unicas_UF127": [],
+            "n127": 4,
+            "n25": 8,
+            "composicao24_exata": false,
+            "composicao25_exata": false
+          },
+          "pessoas127_diferencas_minimas": [
+            {
+              "linha127": 773910,
+              "distancia": 18,
+              "alternativas_minimas": [
+                {
+                  "linha25": 3827260,
+                  "diferencas": [
+                    {
+                      "campo": "V204",
+                      "valor127": 9,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "AGE",
+                      "valor127": 99,
+                      "valor25": 39
+                    },
+                    {
+                      "campo": "V205",
+                      "valor127": 4,
+                      "valor25": 5
+                    },
+                    {
+                      "campo": "V206",
+                      "valor127": 9,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V207",
+                      "valor127": 29,
+                      "valor25": 16
+                    },
+                    {
+                      "campo": "V209",
+                      "valor127": 3,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V299",
+                      "valor127": 1,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V210",
+                      "valor127": 29,
+                      "valor25": 26
+                    },
+                    {
+                      "campo": "V211",
+                      "valor127": 4,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V212",
+                      "valor127": 2,
+                      "valor25": 5
+                    },
+                    {
+                      "campo": "V213",
+                      "valor127": 6,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V214",
+                      "valor127": 99,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V216",
+                      "valor127": 63,
+                      "valor25": 43
+                    },
+                    {
+                      "campo": "V217",
+                      "valor127": 99,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V218",
+                      "valor127": 99,
+                      "valor25": 6
+                    },
+                    {
+                      "campo": "V219",
+                      "valor127": 4,
+                      "valor25": 8
+                    },
+                    {
+                      "campo": "V221",
+                      "valor127": 998,
+                      "valor25": 713
+                    },
+                    {
+                      "campo": "V223B",
+                      "valor127": 919,
+                      "valor25": 413
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "linha127": 773911,
+              "distancia": 12,
+              "alternativas_minimas": [
+                {
+                  "linha25": 3827264,
+                  "diferencas": [
+                    {
+                      "campo": "V204",
+                      "valor127": 9,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "AGE",
+                      "valor127": 99,
+                      "valor25": 12
+                    },
+                    {
+                      "campo": "V205",
+                      "valor127": 4,
+                      "valor25": 5
+                    },
+                    {
+                      "campo": "V206",
+                      "valor127": 9,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V207",
+                      "valor127": 29,
+                      "valor25": 26
+                    },
+                    {
+                      "campo": "V209",
+                      "valor127": 3,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V299",
+                      "valor127": 1,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V210",
+                      "valor127": 29,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V211",
+                      "valor127": 4,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V212",
+                      "valor127": 2,
+                      "valor25": 7
+                    },
+                    {
+                      "campo": "V213",
+                      "valor127": 6,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V214",
+                      "valor127": 99,
+                      "valor25": 10
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "linha127": 773912,
+              "distancia": 15,
+              "alternativas_minimas": [
+                {
+                  "linha25": 3827261,
+                  "diferencas": [
+                    {
+                      "campo": "V204",
+                      "valor127": 9,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "AGE",
+                      "valor127": 99,
+                      "valor25": 33
+                    },
+                    {
+                      "campo": "V205",
+                      "valor127": 4,
+                      "valor25": 5
+                    },
+                    {
+                      "campo": "V206",
+                      "valor127": 9,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V207",
+                      "valor127": 29,
+                      "valor25": 26
+                    },
+                    {
+                      "campo": "V209",
+                      "valor127": 3,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V299",
+                      "valor127": 1,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V210",
+                      "valor127": 29,
+                      "valor25": 26
+                    },
+                    {
+                      "campo": "V211",
+                      "valor127": 4,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V212",
+                      "valor127": 2,
+                      "valor25": 7
+                    },
+                    {
+                      "campo": "V213",
+                      "valor127": 6,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V214",
+                      "valor127": 99,
+                      "valor25": 10
+                    },
+                    {
+                      "campo": "V216",
+                      "valor127": 63,
+                      "valor25": 43
+                    },
+                    {
+                      "campo": "V217",
+                      "valor127": 99,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V218",
+                      "valor127": 99,
+                      "valor25": 6
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "linha127": 773913,
+              "distancia": 12,
+              "alternativas_minimas": [
+                {
+                  "linha25": 3827264,
+                  "diferencas": [
+                    {
+                      "campo": "V204",
+                      "valor127": 9,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "AGE",
+                      "valor127": 99,
+                      "valor25": 12
+                    },
+                    {
+                      "campo": "V205",
+                      "valor127": 4,
+                      "valor25": 5
+                    },
+                    {
+                      "campo": "V206",
+                      "valor127": 9,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V207",
+                      "valor127": 29,
+                      "valor25": 26
+                    },
+                    {
+                      "campo": "V209",
+                      "valor127": 3,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V299",
+                      "valor127": 1,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V210",
+                      "valor127": 29,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V211",
+                      "valor127": 4,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V212",
+                      "valor127": 2,
+                      "valor25": 7
+                    },
+                    {
+                      "campo": "V213",
+                      "valor127": 6,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V214",
+                      "valor127": 99,
+                      "valor25": 10
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "cartoes127_mesmo_cartao_geografia_composicao25": [
+        {
+          "linha_cartao": 773909,
+          "texto_cartao": "6062780163788146131409269570200000                    \\0127106",
+          "pessoas": [
+            {
+              "linha": 773910,
+              "corrigido": "606278016378814623179994929931294269966399994399829196\\0127106"
+            },
+            {
+              "linha": 773911,
+              "corrigido": "6062780163788146332999949299312942699000000034-       \\0127106"
+            },
+            {
+              "linha": 773912,
+              "corrigido": "6062780163788146332899949299312942699663999934-       \\0127106"
+            },
+            {
+              "linha": 773913,
+              "corrigido": "6062780163788146332999949299312942699000000034-       \\0127106"
+            }
+          ]
+        }
+      ],
+      "ocorrencias24_por_perfil_na_UF25": [
+        {
+          "assinatura24": "1799949299312942699699994399829196",
+          "quantidade127_no_alvo": 1,
+          "quantidade25_UF": 5
+        },
+        {
+          "assinatura24": "29999492993129426990000034        ",
+          "quantidade127_no_alvo": 2,
+          "quantidade25_UF": 19
+        },
+        {
+          "assinatura24": "28999492993129426996999934        ",
+          "quantidade127_no_alvo": 1,
+          "quantidade25_UF": 31
+        }
+      ]
+    },
+    "773767": {
+      "cartao": {
+        "linha": 773767,
+        "uf": 60,
+        "pasta": 63788,
+        "boletim": 123,
+        "distrito": 1,
+        "municipio": 6278,
+        "situacao": 3,
+        "chave": "0163788123",
+        "original": "6062780163788123131489269570200000                    \\0127083",
+        "corrigido": "6062780163788123131489269570200000                    \\0127083",
+        "invalidos": ""
+      },
+      "pessoas": [
+        {
+          "linha": 773768,
+          "uf": 60,
+          "pasta": 63788,
+          "boletim": 123,
+          "distrito": 1,
+          "municipio": 6278,
+          "situacao": 3,
+          "chave": "0163788123",
+          "original": "606278016378812323179994929931294269966399994399829196\\0127083",
+          "corrigido": "606278016378812323179994929931294269966399994399829196\\0127083",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 773767,
+          "familia_fisica": 773767
+        },
+        {
+          "linha": 773769,
+          "uf": 60,
+          "pasta": 63788,
+          "boletim": 123,
+          "distrito": 1,
+          "municipio": 6278,
+          "situacao": 3,
+          "chave": "0163788123",
+          "original": "6062780163788123332899949299312942699663999934-       \\0127083",
+          "corrigido": "6062780163788123332899949299312942699663999934-       \\0127083",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 773767,
+          "familia_fisica": 773767
+        },
+        {
+          "linha": 773770,
+          "uf": 60,
+          "pasta": 63788,
+          "boletim": 123,
+          "distrito": 1,
+          "municipio": 6278,
+          "situacao": 3,
+          "chave": "0163788123",
+          "original": "6062780163788123332999949299312942699000000034-       \\0127083",
+          "corrigido": "6062780163788123332999949299312942699000000034-       \\0127083",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 773767,
+          "familia_fisica": 773767
+        }
+      ],
+      "alternativas25": [
+        {
+          "chave25": [
+            60,
+            63788,
+            140
+          ],
+          "cartao25": {
+            "linha": 3827227,
+            "texto": "637881400070314892695702000006278013000000000000000000"
+          },
+          "pessoas25": [
+            {
+              "linha": 3827228,
+              "texto": "637881400170171799949299931294269966399994399829196000"
+            },
+            {
+              "linha": 3827229,
+              "texto": "6378814002502528999492999312942699663999934        000"
+            },
+            {
+              "linha": 3827230,
+              "texto": "6378814003303329999492999312942699000000034        000"
+            }
+          ],
+          "avaliacao": {
+            "motivos": [
+              "menos2testemunhas_exatas_unicas"
+            ],
+            "testemunhas_exatas_unicas_UF127": [],
+            "n127": 3,
+            "n25": 3,
+            "composicao24_exata": true,
+            "composicao25_exata": true,
+            "diferencas_cartao": []
+          }
+        }
+      ],
+      "mesma_chave25": [
+        {
+          "UF25": 60,
+          "cartao25": {
+            "linha": 3827138,
+            "texto": "637881230050614789425792050036278013000000000000000000"
+          },
+          "pessoas25": [
+            {
+              "linha": 3827139,
+              "texto": "6378812301501517157542699192617210628080776        000"
+            },
+            {
+              "linha": 3827140,
+              "texto": "6378812302302328148542699192616200628080734        000"
+            },
+            {
+              "linha": 3827141,
+              "texto": "6378812303103129123542699200017210063000034        000"
+            },
+            {
+              "linha": 3827142,
+              "texto": "637881230400401911854269920001721006300004399849196000"
+            },
+            {
+              "linha": 3827143,
+              "texto": "6378812305805829115542699200005310063000035        000"
+            },
+            {
+              "linha": 3827144,
+              "texto": "63788123066066221075426991326000                   000"
+            }
+          ],
+          "avaliacao": {
+            "motivos": [
+              "cartao_ou_distrito_diverge",
+              "composicao_ou_quantidade_diverge",
+              "menos2testemunhas_exatas_unicas"
+            ],
+            "testemunhas_exatas_unicas_UF127": [],
+            "n127": 3,
+            "n25": 6,
+            "composicao24_exata": false,
+            "composicao25_exata": false
+          },
+          "pessoas127_diferencas_minimas": [
+            {
+              "linha127": 773768,
+              "distancia": 17,
+              "alternativas_minimas": [
+                {
+                  "linha25": 3827142,
+                  "diferencas": [
+                    {
+                      "campo": "V203",
+                      "valor127": 7,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V204",
+                      "valor127": 9,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "AGE",
+                      "valor127": 99,
+                      "valor25": 18
+                    },
+                    {
+                      "campo": "V205",
+                      "valor127": 4,
+                      "valor25": 5
+                    },
+                    {
+                      "campo": "V206",
+                      "valor127": 9,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V207",
+                      "valor127": 29,
+                      "valor25": 26
+                    },
+                    {
+                      "campo": "V209",
+                      "valor127": 3,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V299",
+                      "valor127": 1,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V210",
+                      "valor127": 29,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V211",
+                      "valor127": 4,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V212",
+                      "valor127": 2,
+                      "valor25": 7
+                    },
+                    {
+                      "campo": "V213",
+                      "valor127": 6,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V214",
+                      "valor127": 99,
+                      "valor25": 10
+                    },
+                    {
+                      "campo": "V215",
+                      "valor127": 6,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V217",
+                      "valor127": 99,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V218",
+                      "valor127": 99,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V223",
+                      "valor127": 2,
+                      "valor25": 4
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "linha127": 773769,
+              "distancia": 15,
+              "alternativas_minimas": [
+                {
+                  "linha25": 3827140,
+                  "diferencas": [
+                    {
+                      "campo": "V204",
+                      "valor127": 9,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "AGE",
+                      "valor127": 99,
+                      "valor25": 48
+                    },
+                    {
+                      "campo": "V205",
+                      "valor127": 4,
+                      "valor25": 5
+                    },
+                    {
+                      "campo": "V206",
+                      "valor127": 9,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V207",
+                      "valor127": 29,
+                      "valor25": 26
+                    },
+                    {
+                      "campo": "V209",
+                      "valor127": 3,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V299",
+                      "valor127": 1,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V210",
+                      "valor127": 29,
+                      "valor25": 26
+                    },
+                    {
+                      "campo": "V211",
+                      "valor127": 4,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V212",
+                      "valor127": 2,
+                      "valor25": 6
+                    },
+                    {
+                      "campo": "V213",
+                      "valor127": 6,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V214",
+                      "valor127": 99,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V216",
+                      "valor127": 63,
+                      "valor25": 28
+                    },
+                    {
+                      "campo": "V217",
+                      "valor127": 99,
+                      "valor25": 8
+                    },
+                    {
+                      "campo": "V218",
+                      "valor127": 99,
+                      "valor25": 7
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "linha127": 773770,
+              "distancia": 13,
+              "alternativas_minimas": [
+                {
+                  "linha25": 3827141,
+                  "diferencas": [
+                    {
+                      "campo": "V204",
+                      "valor127": 9,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "AGE",
+                      "valor127": 99,
+                      "valor25": 23
+                    },
+                    {
+                      "campo": "V205",
+                      "valor127": 4,
+                      "valor25": 5
+                    },
+                    {
+                      "campo": "V206",
+                      "valor127": 9,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V207",
+                      "valor127": 29,
+                      "valor25": 26
+                    },
+                    {
+                      "campo": "V209",
+                      "valor127": 3,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V299",
+                      "valor127": 1,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V210",
+                      "valor127": 29,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V211",
+                      "valor127": 4,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V212",
+                      "valor127": 2,
+                      "valor25": 7
+                    },
+                    {
+                      "campo": "V213",
+                      "valor127": 6,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V214",
+                      "valor127": 99,
+                      "valor25": 10
+                    },
+                    {
+                      "campo": "V216",
+                      "valor127": 0,
+                      "valor25": 63
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "cartoes127_mesmo_cartao_geografia_composicao25": [
+        {
+          "linha_cartao": 773767,
+          "texto_cartao": "6062780163788123131489269570200000                    \\0127083",
+          "pessoas": [
+            {
+              "linha": 773768,
+              "corrigido": "606278016378812323179994929931294269966399994399829196\\0127083"
+            },
+            {
+              "linha": 773769,
+              "corrigido": "6062780163788123332899949299312942699663999934-       \\0127083"
+            },
+            {
+              "linha": 773770,
+              "corrigido": "6062780163788123332999949299312942699000000034-       \\0127083"
+            }
+          ]
+        }
+      ],
+      "ocorrencias24_por_perfil_na_UF25": [
+        {
+          "assinatura24": "1799949299312942699699994399829196",
+          "quantidade127_no_alvo": 1,
+          "quantidade25_UF": 5
+        },
+        {
+          "assinatura24": "28999492993129426996999934        ",
+          "quantidade127_no_alvo": 1,
+          "quantidade25_UF": 31
+        },
+        {
+          "assinatura24": "29999492993129426990000034        ",
+          "quantidade127_no_alvo": 1,
+          "quantidade25_UF": 19
+        }
+      ]
+    },
+    "774008": {
+      "cartao": {
+        "linha": 774008,
+        "uf": 60,
+        "pasta": 63788,
+        "boletim": 163,
+        "distrito": 1,
+        "municipio": 6278,
+        "situacao": 3,
+        "chave": "0163788163",
+        "original": "6062780163788163131478369570204002                    \\0127123",
+        "corrigido": "6062780163788163131478369570204002                    \\0127123",
+        "invalidos": ""
+      },
+      "pessoas": [
+        {
+          "linha": 774009,
+          "uf": 60,
+          "pasta": 63788,
+          "boletim": 163,
+          "distrito": 1,
+          "municipio": 6278,
+          "situacao": 3,
+          "chave": "0163788163",
+          "original": "6062780163788163231717854890198931100400060539-       \\0127123",
+          "corrigido": "6062780163788163231717854890198931100400060539-       \\0127123",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 774008,
+          "familia_fisica": 774008
+        },
+        {
+          "linha": 774010,
+          "uf": 60,
+          "pasta": 63788,
+          "boletim": 163,
+          "distrito": 1,
+          "municipio": 6278,
+          "situacao": 3,
+          "chave": "0163788163",
+          "original": "6062780163788163332011354269200014200000000034-       \\0127123",
+          "corrigido": "6062780163788163332011354269200014200000000034-       \\0127123",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 774008,
+          "familia_fisica": 774008
+        },
+        {
+          "linha": 774011,
+          "uf": 60,
+          "pasta": 63788,
+          "boletim": 163,
+          "distrito": 1,
+          "municipio": 6278,
+          "situacao": 3,
+          "chave": "0163788163",
+          "original": "606278016378816333291485426920003110040000008371324136\\0127123",
+          "corrigido": "606278016378816333291485426920003110040000008371324136\\0127123",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 774008,
+          "familia_fisica": 774008
+        },
+        {
+          "linha": 774012,
+          "uf": 60,
+          "pasta": 63788,
+          "boletim": 163,
+          "distrito": 1,
+          "municipio": 6278,
+          "situacao": 3,
+          "chave": "0163788163",
+          "original": "6062780163788163332913854269200031100400030334-       \\0127123",
+          "corrigido": "6062780163788163332913854269200031100400030334-       \\0127123",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 774008,
+          "familia_fisica": 774008
+        }
+      ],
+      "alternativas25": [
+        {
+          "chave25": [
+            60,
+            63788,
+            180
+          ],
+          "cartao25": {
+            "linha": 3827471,
+            "texto": "637881800090414783695702040026278013000000000000000000"
+          },
+          "pessoas25": [
+            {
+              "linha": 3827472,
+              "texto": "6378818001901917178548900198931100400060539        000"
+            },
+            {
+              "linha": 3827473,
+              "texto": "6378818002702720113542699200014200000000034        000"
+            },
+            {
+              "linha": 3827474,
+              "texto": "637881800350352914854269920003110040000008371324136000"
+            },
+            {
+              "linha": 3827475,
+              "texto": "6378818004304329138542699200031100463030334        000"
+            }
+          ],
+          "avaliacao": {
+            "motivos": [],
+            "testemunhas_exatas_unicas_UF127": [
+              774009,
+              774010,
+              774011
+            ],
+            "n127": 4,
+            "n25": 4,
+            "composicao24_exata": true,
+            "composicao25_exata": false,
+            "diferencas_cartao": []
+          }
+        }
+      ],
+      "mesma_chave25": [
+        {
+          "UF25": 60,
+          "cartao25": {
+            "linha": 3827371,
+            "texto": "637881630070414092695702000006278013000000000000000000"
+          },
+          "pessoas25": [
+            {
+              "linha": 3827372,
+              "texto": "637881630170171799949299931294269966399994399829196000"
+            },
+            {
+              "linha": 3827373,
+              "texto": "6378816302502528999492999312942699663999934        000"
+            },
+            {
+              "linha": 3827374,
+              "texto": "6378816303303329999492999312942699000000034        000"
+            },
+            {
+              "linha": 3827375,
+              "texto": "6378816304104129999492999312942699000000034        000"
+            }
+          ],
+          "avaliacao": {
+            "motivos": [
+              "cartao_ou_distrito_diverge",
+              "composicao_ou_quantidade_diverge",
+              "menos2testemunhas_exatas_unicas"
+            ],
+            "testemunhas_exatas_unicas_UF127": [],
+            "n127": 4,
+            "n25": 4,
+            "composicao24_exata": false,
+            "composicao25_exata": false
+          },
+          "pessoas127_diferencas_minimas": [
+            {
+              "linha127": 774009,
+              "distancia": 19,
+              "alternativas_minimas": [
+                {
+                  "linha25": 3827374,
+                  "diferencas": [
+                    {
+                      "campo": "V202",
+                      "valor127": 1,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V203",
+                      "valor127": 7,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V204",
+                      "valor127": 1,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "AGE",
+                      "valor127": 78,
+                      "valor25": 99
+                    },
+                    {
+                      "campo": "V205",
+                      "valor127": 5,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V206",
+                      "valor127": 4,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V207",
+                      "valor127": 89,
+                      "valor25": 29
+                    },
+                    {
+                      "campo": "V208",
+                      "valor127": 0,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V209",
+                      "valor127": 1,
+                      "valor25": 3
+                    },
+                    {
+                      "campo": "V299",
+                      "valor127": 9,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V210",
+                      "valor127": 89,
+                      "valor25": 29
+                    },
+                    {
+                      "campo": "V211",
+                      "valor127": 3,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V212",
+                      "valor127": 1,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V213",
+                      "valor127": 1,
+                      "valor25": 6
+                    },
+                    {
+                      "campo": "V214",
+                      "valor127": 0,
+                      "valor25": 99
+                    },
+                    {
+                      "campo": "V215",
+                      "valor127": 4,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V217",
+                      "valor127": 6,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V218",
+                      "valor127": 5,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V220",
+                      "valor127": 9,
+                      "valor25": 4
+                    }
+                  ]
+                },
+                {
+                  "linha25": 3827375,
+                  "diferencas": [
+                    {
+                      "campo": "V202",
+                      "valor127": 1,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V203",
+                      "valor127": 7,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V204",
+                      "valor127": 1,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "AGE",
+                      "valor127": 78,
+                      "valor25": 99
+                    },
+                    {
+                      "campo": "V205",
+                      "valor127": 5,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V206",
+                      "valor127": 4,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V207",
+                      "valor127": 89,
+                      "valor25": 29
+                    },
+                    {
+                      "campo": "V208",
+                      "valor127": 0,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V209",
+                      "valor127": 1,
+                      "valor25": 3
+                    },
+                    {
+                      "campo": "V299",
+                      "valor127": 9,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V210",
+                      "valor127": 89,
+                      "valor25": 29
+                    },
+                    {
+                      "campo": "V211",
+                      "valor127": 3,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V212",
+                      "valor127": 1,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V213",
+                      "valor127": 1,
+                      "valor25": 6
+                    },
+                    {
+                      "campo": "V214",
+                      "valor127": 0,
+                      "valor25": 99
+                    },
+                    {
+                      "campo": "V215",
+                      "valor127": 4,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V217",
+                      "valor127": 6,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V218",
+                      "valor127": 5,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V220",
+                      "valor127": 9,
+                      "valor25": 4
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "linha127": 774010,
+              "distancia": 13,
+              "alternativas_minimas": [
+                {
+                  "linha25": 3827374,
+                  "diferencas": [
+                    {
+                      "campo": "V203",
+                      "valor127": 0,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V204",
+                      "valor127": 1,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "AGE",
+                      "valor127": 13,
+                      "valor25": 99
+                    },
+                    {
+                      "campo": "V205",
+                      "valor127": 5,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V206",
+                      "valor127": 4,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V207",
+                      "valor127": 26,
+                      "valor25": 29
+                    },
+                    {
+                      "campo": "V209",
+                      "valor127": 2,
+                      "valor25": 3
+                    },
+                    {
+                      "campo": "V299",
+                      "valor127": 0,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V210",
+                      "valor127": 0,
+                      "valor25": 29
+                    },
+                    {
+                      "campo": "V211",
+                      "valor127": 1,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V212",
+                      "valor127": 4,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V213",
+                      "valor127": 2,
+                      "valor25": 6
+                    },
+                    {
+                      "campo": "V214",
+                      "valor127": 0,
+                      "valor25": 99
+                    }
+                  ]
+                },
+                {
+                  "linha25": 3827375,
+                  "diferencas": [
+                    {
+                      "campo": "V203",
+                      "valor127": 0,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V204",
+                      "valor127": 1,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "AGE",
+                      "valor127": 13,
+                      "valor25": 99
+                    },
+                    {
+                      "campo": "V205",
+                      "valor127": 5,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V206",
+                      "valor127": 4,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V207",
+                      "valor127": 26,
+                      "valor25": 29
+                    },
+                    {
+                      "campo": "V209",
+                      "valor127": 2,
+                      "valor25": 3
+                    },
+                    {
+                      "campo": "V299",
+                      "valor127": 0,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V210",
+                      "valor127": 0,
+                      "valor25": 29
+                    },
+                    {
+                      "campo": "V211",
+                      "valor127": 1,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V212",
+                      "valor127": 4,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V213",
+                      "valor127": 2,
+                      "valor25": 6
+                    },
+                    {
+                      "campo": "V214",
+                      "valor127": 0,
+                      "valor25": 99
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "linha127": 774011,
+              "distancia": 19,
+              "alternativas_minimas": [
+                {
+                  "linha25": 3827374,
+                  "diferencas": [
+                    {
+                      "campo": "V204",
+                      "valor127": 1,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "AGE",
+                      "valor127": 48,
+                      "valor25": 99
+                    },
+                    {
+                      "campo": "V205",
+                      "valor127": 5,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V206",
+                      "valor127": 4,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V207",
+                      "valor127": 26,
+                      "valor25": 29
+                    },
+                    {
+                      "campo": "V209",
+                      "valor127": 2,
+                      "valor25": 3
+                    },
+                    {
+                      "campo": "V299",
+                      "valor127": 0,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V210",
+                      "valor127": 0,
+                      "valor25": 29
+                    },
+                    {
+                      "campo": "V211",
+                      "valor127": 3,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V212",
+                      "valor127": 1,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V213",
+                      "valor127": 1,
+                      "valor25": 6
+                    },
+                    {
+                      "campo": "V214",
+                      "valor127": 0,
+                      "valor25": 99
+                    },
+                    {
+                      "campo": "V215",
+                      "valor127": 4,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V219",
+                      "valor127": 8,
+                      "valor25": 3
+                    },
+                    {
+                      "campo": "V220",
+                      "valor127": 3,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V221",
+                      "valor127": 713,
+                      "valor25": null
+                    },
+                    {
+                      "campo": "V223",
+                      "valor127": 2,
+                      "valor25": null
+                    },
+                    {
+                      "campo": "V223B",
+                      "valor127": 413,
+                      "valor25": null
+                    },
+                    {
+                      "campo": "V224",
+                      "valor127": 6,
+                      "valor25": null
+                    }
+                  ]
+                },
+                {
+                  "linha25": 3827375,
+                  "diferencas": [
+                    {
+                      "campo": "V204",
+                      "valor127": 1,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "AGE",
+                      "valor127": 48,
+                      "valor25": 99
+                    },
+                    {
+                      "campo": "V205",
+                      "valor127": 5,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V206",
+                      "valor127": 4,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V207",
+                      "valor127": 26,
+                      "valor25": 29
+                    },
+                    {
+                      "campo": "V209",
+                      "valor127": 2,
+                      "valor25": 3
+                    },
+                    {
+                      "campo": "V299",
+                      "valor127": 0,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V210",
+                      "valor127": 0,
+                      "valor25": 29
+                    },
+                    {
+                      "campo": "V211",
+                      "valor127": 3,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V212",
+                      "valor127": 1,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V213",
+                      "valor127": 1,
+                      "valor25": 6
+                    },
+                    {
+                      "campo": "V214",
+                      "valor127": 0,
+                      "valor25": 99
+                    },
+                    {
+                      "campo": "V215",
+                      "valor127": 4,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V219",
+                      "valor127": 8,
+                      "valor25": 3
+                    },
+                    {
+                      "campo": "V220",
+                      "valor127": 3,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V221",
+                      "valor127": 713,
+                      "valor25": null
+                    },
+                    {
+                      "campo": "V223",
+                      "valor127": 2,
+                      "valor25": null
+                    },
+                    {
+                      "campo": "V223B",
+                      "valor127": 413,
+                      "valor25": null
+                    },
+                    {
+                      "campo": "V224",
+                      "valor127": 6,
+                      "valor25": null
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "linha127": 774012,
+              "distancia": 15,
+              "alternativas_minimas": [
+                {
+                  "linha25": 3827374,
+                  "diferencas": [
+                    {
+                      "campo": "V204",
+                      "valor127": 1,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "AGE",
+                      "valor127": 38,
+                      "valor25": 99
+                    },
+                    {
+                      "campo": "V205",
+                      "valor127": 5,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V206",
+                      "valor127": 4,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V207",
+                      "valor127": 26,
+                      "valor25": 29
+                    },
+                    {
+                      "campo": "V209",
+                      "valor127": 2,
+                      "valor25": 3
+                    },
+                    {
+                      "campo": "V299",
+                      "valor127": 0,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V210",
+                      "valor127": 0,
+                      "valor25": 29
+                    },
+                    {
+                      "campo": "V211",
+                      "valor127": 3,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V212",
+                      "valor127": 1,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V213",
+                      "valor127": 1,
+                      "valor25": 6
+                    },
+                    {
+                      "campo": "V214",
+                      "valor127": 0,
+                      "valor25": 99
+                    },
+                    {
+                      "campo": "V215",
+                      "valor127": 4,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V217",
+                      "valor127": 3,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V218",
+                      "valor127": 3,
+                      "valor25": 0
+                    }
+                  ]
+                },
+                {
+                  "linha25": 3827375,
+                  "diferencas": [
+                    {
+                      "campo": "V204",
+                      "valor127": 1,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "AGE",
+                      "valor127": 38,
+                      "valor25": 99
+                    },
+                    {
+                      "campo": "V205",
+                      "valor127": 5,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V206",
+                      "valor127": 4,
+                      "valor25": 9
+                    },
+                    {
+                      "campo": "V207",
+                      "valor127": 26,
+                      "valor25": 29
+                    },
+                    {
+                      "campo": "V209",
+                      "valor127": 2,
+                      "valor25": 3
+                    },
+                    {
+                      "campo": "V299",
+                      "valor127": 0,
+                      "valor25": 1
+                    },
+                    {
+                      "campo": "V210",
+                      "valor127": 0,
+                      "valor25": 29
+                    },
+                    {
+                      "campo": "V211",
+                      "valor127": 3,
+                      "valor25": 4
+                    },
+                    {
+                      "campo": "V212",
+                      "valor127": 1,
+                      "valor25": 2
+                    },
+                    {
+                      "campo": "V213",
+                      "valor127": 1,
+                      "valor25": 6
+                    },
+                    {
+                      "campo": "V214",
+                      "valor127": 0,
+                      "valor25": 99
+                    },
+                    {
+                      "campo": "V215",
+                      "valor127": 4,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V217",
+                      "valor127": 3,
+                      "valor25": 0
+                    },
+                    {
+                      "campo": "V218",
+                      "valor127": 3,
+                      "valor25": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "cartoes127_mesmo_cartao_geografia_composicao25": [
+        {
+          "linha_cartao": 774008,
+          "texto_cartao": "6062780163788163131478369570204002                    \\0127123",
+          "pessoas": [
+            {
+              "linha": 774009,
+              "corrigido": "6062780163788163231717854890198931100400060539-       \\0127123"
+            },
+            {
+              "linha": 774010,
+              "corrigido": "6062780163788163332011354269200014200000000034-       \\0127123"
+            },
+            {
+              "linha": 774011,
+              "corrigido": "606278016378816333291485426920003110040000008371324136\\0127123"
+            },
+            {
+              "linha": 774012,
+              "corrigido": "6062780163788163332913854269200031100400030334-       \\0127123"
+            }
+          ]
+        }
+      ],
+      "ocorrencias24_por_perfil_na_UF25": [
+        {
+          "assinatura24": "17178548901989311004060539        ",
+          "quantidade127_no_alvo": 1,
+          "quantidade25_UF": 1
+        },
+        {
+          "assinatura24": "20113542692000142000000034        ",
+          "quantidade127_no_alvo": 1,
+          "quantidade25_UF": 6
+        },
+        {
+          "assinatura24": "2914854269200031100400008371324136",
+          "quantidade127_no_alvo": 1,
+          "quantidade25_UF": 1
+        },
+        {
+          "assinatura24": "29138542692000311004030334        ",
+          "quantidade127_no_alvo": 1,
+          "quantidade25_UF": 1
+        }
+      ]
+    }
+  },
+  "unicidade": {
+    "773909": {
+      "cartao127": 773909,
+      "correspondentes127_composicao24_sem_restricao_cartao": [
+        {
+          "agrupamento": "familia_atual",
+          "cartao": 773909,
+          "pessoas": [
+            {
+              "linha": 773910,
+              "corrigido": "606278016378814623179994929931294269966399994399829196\\0127106"
+            },
+            {
+              "linha": 773911,
+              "corrigido": "6062780163788146332999949299312942699000000034-       \\0127106"
+            },
+            {
+              "linha": 773912,
+              "corrigido": "6062780163788146332899949299312942699663999934-       \\0127106"
+            },
+            {
+              "linha": 773913,
+              "corrigido": "6062780163788146332999949299312942699000000034-       \\0127106"
+            }
+          ]
+        },
+        {
+          "agrupamento": "familia_fisica",
+          "cartao": 773909,
+          "pessoas": [
+            {
+              "linha": 773910,
+              "corrigido": "606278016378814623179994929931294269966399994399829196\\0127106"
+            },
+            {
+              "linha": 773911,
+              "corrigido": "6062780163788146332999949299312942699000000034-       \\0127106"
+            },
+            {
+              "linha": 773912,
+              "corrigido": "6062780163788146332899949299312942699663999934-       \\0127106"
+            },
+            {
+              "linha": 773913,
+              "corrigido": "6062780163788146332999949299312942699000000034-       \\0127106"
+            }
+          ]
+        }
+      ],
+      "correspondentes25_composicao24_sem_restricao_cartao": [
+        {
+          "chave25": [
+            60,
+            63788,
+            163
+          ],
+          "cartao25": 3827371,
+          "avaliacao": {
+            "motivos": [
+              "menos2testemunhas_exatas_unicas"
+            ],
+            "testemunhas_exatas_unicas_UF127": [],
+            "n127": 4,
+            "n25": 4,
+            "composicao24_exata": true,
+            "composicao25_exata": true,
+            "diferencas_cartao": []
+          }
+        }
+      ],
+      "nao_autoriza_decisao": true
+    },
+    "773767": {
+      "cartao127": 773767,
+      "correspondentes127_composicao24_sem_restricao_cartao": [
+        {
+          "agrupamento": "familia_atual",
+          "cartao": 773767,
+          "pessoas": [
+            {
+              "linha": 773768,
+              "corrigido": "606278016378812323179994929931294269966399994399829196\\0127083"
+            },
+            {
+              "linha": 773769,
+              "corrigido": "6062780163788123332899949299312942699663999934-       \\0127083"
+            },
+            {
+              "linha": 773770,
+              "corrigido": "6062780163788123332999949299312942699000000034-       \\0127083"
+            }
+          ]
+        },
+        {
+          "agrupamento": "familia_fisica",
+          "cartao": 773767,
+          "pessoas": [
+            {
+              "linha": 773768,
+              "corrigido": "606278016378812323179994929931294269966399994399829196\\0127083"
+            },
+            {
+              "linha": 773769,
+              "corrigido": "6062780163788123332899949299312942699663999934-       \\0127083"
+            },
+            {
+              "linha": 773770,
+              "corrigido": "6062780163788123332999949299312942699000000034-       \\0127083"
+            }
+          ]
+        }
+      ],
+      "correspondentes25_composicao24_sem_restricao_cartao": [
+        {
+          "chave25": [
+            60,
+            63788,
+            140
+          ],
+          "cartao25": 3827227,
+          "avaliacao": {
+            "motivos": [
+              "menos2testemunhas_exatas_unicas"
+            ],
+            "testemunhas_exatas_unicas_UF127": [],
+            "n127": 3,
+            "n25": 3,
+            "composicao24_exata": true,
+            "composicao25_exata": true,
+            "diferencas_cartao": []
+          }
+        }
+      ],
+      "nao_autoriza_decisao": true
+    },
+    "774008": {
+      "cartao127": 774008,
+      "correspondentes127_composicao24_sem_restricao_cartao": [
+        {
+          "agrupamento": "familia_atual",
+          "cartao": 774008,
+          "pessoas": [
+            {
+              "linha": 774009,
+              "corrigido": "6062780163788163231717854890198931100400060539-       \\0127123"
+            },
+            {
+              "linha": 774010,
+              "corrigido": "6062780163788163332011354269200014200000000034-       \\0127123"
+            },
+            {
+              "linha": 774011,
+              "corrigido": "606278016378816333291485426920003110040000008371324136\\0127123"
+            },
+            {
+              "linha": 774012,
+              "corrigido": "6062780163788163332913854269200031100400030334-       \\0127123"
+            }
+          ]
+        },
+        {
+          "agrupamento": "familia_fisica",
+          "cartao": 774008,
+          "pessoas": [
+            {
+              "linha": 774009,
+              "corrigido": "6062780163788163231717854890198931100400060539-       \\0127123"
+            },
+            {
+              "linha": 774010,
+              "corrigido": "6062780163788163332011354269200014200000000034-       \\0127123"
+            },
+            {
+              "linha": 774011,
+              "corrigido": "606278016378816333291485426920003110040000008371324136\\0127123"
+            },
+            {
+              "linha": 774012,
+              "corrigido": "6062780163788163332913854269200031100400030334-       \\0127123"
+            }
+          ]
+        }
+      ],
+      "correspondentes25_composicao24_sem_restricao_cartao": [
+        {
+          "chave25": [
+            60,
+            63788,
+            180
+          ],
+          "cartao25": 3827471,
+          "avaliacao": {
+            "motivos": [],
+            "testemunhas_exatas_unicas_UF127": [
+              774009,
+              774010,
+              774011
+            ],
+            "n127": 4,
+            "n25": 4,
+            "composicao24_exata": true,
+            "composicao25_exata": false,
+            "diferencas_cartao": []
+          }
+        }
+      ],
+      "nao_autoriza_decisao": true
+    }
+  },
+  "controles_negativos": [
+    {
+      "alteracao": "perda_pessoa",
+      "recusada": "Grupo25 diverge"
+    },
+    {
+      "alteracao": "idade",
+      "recusada": "Grupo25 diverge"
+    },
+    {
+      "alteracao": "cartao",
+      "recusada": "Cartao ou distrito diverge"
+    },
+    {
+      "alteracao": "geografia",
+      "recusada": "Geografia pessoal diverge"
+    },
+    {
+      "alteracao": "chave",
+      "recusada": "Chave pessoal diverge"
+    },
+    {
+      "alteracao": "duplicar_concorrente",
+      "recusada": "Grupo25 nao unico"
+    }
+  ],
+  "fontes": [
+    {
+      "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.ce.gz",
+      "sha256": "40d8ecdc24e7d8c9ba8b4715f6f0bfa1f1385e4b3d8fe1d15eac3595b68f9fa2",
+      "linhas": 1008540
+    },
+    {
+      "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.rn.gz",
+      "sha256": "c464a89865256ea906b120e523e324935df05b0d2a9c9ab6853fbbe7819de746",
+      "linhas": 365413
+    },
+    {
+      "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.pb.gz",
+      "sha256": "bf5fcd1c433b72bd930d56be2a7ec3a28944ed067ae3ed7314dba6813a573692",
+      "linhas": 637612
+    },
+    {
+      "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.pe.gz",
+      "sha256": "5b0335249644da87e8ca3f9ab28e80731dd792ef5a40ce4a01b336a8ec71a296",
+      "linhas": 1302368
+    },
+    {
+      "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.fn.gz",
+      "sha256": "98d5f9efb7c13ff505d129a80c43e6701cc0711dabd2391ba6c81212f9d0b23b",
+      "linhas": 383
+    },
+    {
+      "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.al.gz",
+      "sha256": "44d660b46f32aef2f795f6e05d43dd796768311a8a64721f6da5191dcd952873",
+      "linhas": 397616
+    },
+    {
+      "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.se.gz",
+      "sha256": "603527a51f15ff52e4584867b11c6aaafdea2e70f885073e10feb40fd57d8bec",
+      "linhas": 253619
+    },
+    {
+      "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.ba.gz",
+      "sha256": "15d040af8d050361097a66d78c0b6477da8fe41ee1942a89e3020242ebdc046d",
+      "linhas": 1911042
+    },
+    {
+      "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.mg.gz",
+      "sha256": "75e7b4e7fce28507c24a4e21f1a40e5b47f750fd72b090abe6d1b1406644a621",
+      "linhas": 2984569
+    },
+    {
+      "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz",
+      "sha256": "58d3b494802e365526d0a053c9aac798ec82f5b654f375eb834700b9a4b0adef",
+      "linhas": 116622
+    },
+    {
+      "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.rj.gz",
+      "sha256": "363289071564a6cb7a93e8b417914df983c81d0ef92af2689224bc4065db4b6e",
+      "linhas": 1057214
+    },
+    {
+      "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.sp.gz",
+      "sha256": "9b647908667d61fb35dfac8e4a4eda61a70b5f259bee3f5975026b54fa6326be",
+      "linhas": 4062698
+    },
+    {
+      "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.pr.gz",
+      "sha256": "3c5ad2b3dbb273eef5f86ccf6982076636c2ac86ee82bc93ed9c1bc3c576f9b9",
+      "linhas": 1335652
+    },
+    {
+      "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.rs.gz",
+      "sha256": "b5d0686e2ddf796b4e33338e1b1dee6a0b53155043b76c5895577936b053e6c2",
+      "linhas": 1702828
+    },
+    {
+      "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.mt.gz",
+      "sha256": "3668b84265fad5abb8184653670396be5fb9c65f8e0cd419058a1834f4e8ef30",
+      "linhas": 273217
+    },
+    {
+      "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.go.gz",
+      "sha256": "d8e1c1bddfea8df8500ccaef7b23b423e4974b17ab3c0916df50e96317821fa6",
+      "linhas": 595968
+    },
+    {
+      "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.df.gz",
+      "sha256": "32f13d1877ca570a99a4a5caaf78712022c91afb16821ce75eb68b3cc9ab4421",
+      "linhas": 49692
+    },
+    {
+      "arquivo": "data_raw/microdata/1960/amostra_127/HHOLDA.txt",
+      "sha256": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c"
+    },
+    {
+      "arquivo": "references/fechamento_integral_1960_duplicatas_prova_sp.py",
+      "sha256": "8c22e9d0979ece748120c9d8b56f773f6124e7b9f7ca6dc2af698514b393b2d3"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_127_familias.csv",
+      "sha256": "51c443ff8a9e86d1584665b7d6296b061af5592e57d61bed4091d68f30507de5"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_127_pessoas.csv",
+      "sha256": "18326d21e51a2af88bd9f3d62b39d7debe0dc611d66985e911ae12c571d71655"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_25_familias.csv",
+      "sha256": "815f3241d49f8ababaef8ef2b6c0fc6e515a72302346da8133b7349c0f481007"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_25_pessoas.csv",
+      "sha256": "e00be8bf2962bbd2c5ed9bc169321d5b156b1424bd22f4c2f46920aa89d106c8"
+    }
+  ],
+  "manifesto_antes_sha256": "f43ad7ac48cd7bb108196e411748ce15927e407da010fb7afcf62c873cbf5d0a"
+}

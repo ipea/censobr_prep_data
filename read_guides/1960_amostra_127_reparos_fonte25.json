@@ -1,6 +1,6 @@
 {
   "versao": 1,
-  "criterio": "Grupo completo, multiplicidades e ordens conferidos; campos legiveis do alvo exatos. Os 33 reparos iniciais mantem o criterio anterior. Quatro reparos de V208 usam identidade localizada: duas testemunhas pessoais completas e unicas, ou alvo unico nos outros 24 campos com grupo completo. Divergencias pessoais de terceiros sao enumeradas e preservadas, nunca recodificadas. O distrito danificado X7 de PE e mantido no texto; 07 serve apenas a prova geografica localizada. Conflitos V216 00/63 e atributos domiciliares nao identificadores sao documentados no contexto. Dano da fonte de 1,27% convertido em NA nao conta como igualdade a ausencia na fonte de 25%. Dependencias de reparo conjuntas aprovadas.",
+  "criterio": "Grupo completo, multiplicidades e ordens conferidos; campos legiveis do alvo exatos. Os 33 reparos iniciais mantem o criterio anterior. Quatro reparos de V208 usam identidade localizada: duas testemunhas pessoais completas e unicas, ou alvo unico nos outros 24 campos com grupo completo. Divergencias pessoais de terceiros sao enumeradas e preservadas, nunca recodificadas. O distrito danificado X7 de PE e mantido no texto; 07 serve apenas a prova geografica localizada. Conflitos V216 00/63 e atributos domiciliares nao identificadores sao documentados no contexto. Dano da fonte de 1,27% convertido em NA nao conta como igualdade a ausencia na fonte de 25%. Dependencias de reparo conjuntas aprovadas. MG405458 usa a conjuncao unica de duas testemunhas intactas anteriores ao reparo; somente dois caracteres ilegíveis de V203/AGE sao recuperados, preservando unidade9, REC_TYPE3 e geografia.",
   "fontes": [
     {
       "arquivo": "data_raw/microdata/1960/amostra_127/HHOLDA.txt",
@@ -33,6 +33,90 @@
     {
       "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.go.gz",
       "sha256": "d8e1c1bddfea8df8500ccaef7b23b423e4974b17ab3c0916df50e96317821fa6"
+    },
+    {
+      "arquivo": "references/fechamento_integral_1960_evidencias/mg405458_identidade.json",
+      "sha256": "605f0c6b1738e39428ba4a3facb5a69b03fcb50f554335f28e2d8e311a26f5e9"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_correcoes.csv",
+      "sha256": "f039a9fe374c26afad6ad84acc142d4da5433892ca9f01978ac4434b13868da9"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_duplicatas.csv",
+      "sha256": "9897d11d62bb4f1640203b091ad56a893d9b42e1fc051d922c04f5ca13b81a0a"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_vinculos.csv",
+      "sha256": "5d0fc8e4eb9eb0d2363247426eeb61e0b58ad719130992c219decee231fbe6a8"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_127_familias.csv",
+      "sha256": "51c443ff8a9e86d1584665b7d6296b061af5592e57d61bed4091d68f30507de5"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_127_pessoas.csv",
+      "sha256": "18326d21e51a2af88bd9f3d62b39d7debe0dc611d66985e911ae12c571d71655"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_25_familias.csv",
+      "sha256": "815f3241d49f8ababaef8ef2b6c0fc6e515a72302346da8133b7349c0f481007"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_25_pessoas.csv",
+      "sha256": "e00be8bf2962bbd2c5ed9bc169321d5b156b1424bd22f4c2f46920aa89d106c8"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.al.gz",
+      "sha256": "44d660b46f32aef2f795f6e05d43dd796768311a8a64721f6da5191dcd952873"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.ba.gz",
+      "sha256": "15d040af8d050361097a66d78c0b6477da8fe41ee1942a89e3020242ebdc046d"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.ce.gz",
+      "sha256": "40d8ecdc24e7d8c9ba8b4715f6f0bfa1f1385e4b3d8fe1d15eac3595b68f9fa2"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.df.gz",
+      "sha256": "32f13d1877ca570a99a4a5caaf78712022c91afb16821ce75eb68b3cc9ab4421"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.fn.gz",
+      "sha256": "98d5f9efb7c13ff505d129a80c43e6701cc0711dabd2391ba6c81212f9d0b23b"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mt.gz",
+      "sha256": "3668b84265fad5abb8184653670396be5fb9c65f8e0cd419058a1834f4e8ef30"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pb.gz",
+      "sha256": "bf5fcd1c433b72bd930d56be2a7ec3a28944ed067ae3ed7314dba6813a573692"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+      "sha256": "3c5ad2b3dbb273eef5f86ccf6982076636c2ac86ee82bc93ed9c1bc3c576f9b9"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.rn.gz",
+      "sha256": "c464a89865256ea906b120e523e324935df05b0d2a9c9ab6853fbbe7819de746"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.se.gz",
+      "sha256": "603527a51f15ff52e4584867b11c6aaafdea2e70f885073e10feb40fd57d8bec"
+    },
+    {
+      "arquivo": "references/auditoria_recuperacao_cartoes_1960.py",
+      "sha256": "b78400fa4de86d191ad0a68c97b7439bac4588cc3ecc23c27220b1cb058fbd56"
+    },
+    {
+      "arquivo": "references/fechamento_integral_1960_vinculos.py",
+      "sha256": "b25216da760f1c0db6f94c9a5e021528f6440df7582ae0e72b0a5492989f0739"
+    },
+    {
+      "arquivo": "references/fechamento_integral_1960_vinculos_integrar.py",
+      "sha256": "8713559f0a1934ef0c5b54b587fa200f534bc6dea11cb4721050214c8740fe8d"
     }
   ],
   "reparos": [
@@ -5885,6 +5969,113 @@
         }
       ],
       "geografia_parcial_preservada": []
+    },
+    {
+      "linha127": 405458,
+      "tipo": "pessoas",
+      "chave": [
+        40,
+        40880,
+        1
+      ],
+      "motivos": [],
+      "aprovavel_no_criterio": true,
+      "propostas": [
+        {
+          "campo": "V203",
+          "inicio": 20,
+          "fim": 20,
+          "antes": " ",
+          "depois": "7",
+          "linhas25": [
+            567047
+          ]
+        },
+        {
+          "campo": "AGE",
+          "inicio": 22,
+          "fim": 23,
+          "antes": " 9",
+          "depois": "79",
+          "linhas25": [
+            567047
+          ]
+        }
+      ],
+      "pessoas127": 3,
+      "pessoas25": 3,
+      "texto_original": "4040940140880001311 1 954169200017210400130776-       \\0064744",
+      "texto_antes": "4040940140880001311 1 954169200017210400130776-       \\0064744",
+      "texto_corrigido_proposto": "4040940140880001311717954169200017210400130776-       \\0064744",
+      "fontes25_possiveis": [
+        {
+          "linha": 567047,
+          "texto": "4088000101001017179541699200017210400130776        000",
+          "tipo": "pessoas",
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz"
+        }
+      ],
+      "grupo127": [
+        {
+          "linha": 405457,
+          "texto": "404094014088000131291435416920001732200000009325227115\\0064744",
+          "decisao": null
+        },
+        {
+          "linha": 405458,
+          "texto": "4040940140880001311 1 954169200017210400130776-       \\0064744",
+          "decisao": "valor_isolado"
+        },
+        {
+          "linha": 405459,
+          "texto": "40409401408800013164108541692000042-                  \\0064744",
+          "decisao": null
+        }
+      ],
+      "grupo25": [
+        {
+          "linha": 567046,
+          "texto": "408800010000314789425702060024094011000000000000000000",
+          "tipo": "familias",
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz"
+        },
+        {
+          "linha": 567047,
+          "texto": "4088000101001017179541699200017210400130776        000",
+          "tipo": "pessoas",
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz"
+        },
+        {
+          "linha": 567048,
+          "texto": "408800010290292914354169920001732200000009325227115000",
+          "tipo": "pessoas",
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz"
+        },
+        {
+          "linha": 567049,
+          "texto": "40880001037037641085416992000042                   000",
+          "tipo": "pessoas",
+          "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz"
+        }
+      ],
+      "criterio_identidade_contexto": "duas_testemunhas_intactas_conjuntas_v1",
+      "testemunhas_identidade": [
+        {
+          "linha127": 405457,
+          "linha25": 567048,
+          "campos_ignorados": []
+        },
+        {
+          "linha127": 405459,
+          "linha25": 567049,
+          "campos_ignorados": []
+        }
+      ],
+      "divergencias_cartao_preservadas": {},
+      "divergencias_pessoais_preservadas": [],
+      "geografia_parcial_preservada": [],
+      "tipo_registro_preservado": "3",
+      "ressalva": "V203=7 e resposta recuperada; REC_TYPE=3 e conservado literalmente, nao recodificado para2."
     }
   ]
 }

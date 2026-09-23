@@ -224,7 +224,7 @@
     "n25": 1
   },
   "prova_texto": "references/resolucao_residuais_1960_evidencias/texto_propostas.json",
-  "prova_alternativas": "references/resolucao_residuais_1960_evidencias/distrito_pe_proposta.json",
+  "prova_alternativas": "references/fechamento_integral_1960_evidencias/distrito_pe_reauditoria.json",
   "alternativas_sob_toda_chave_legivel": 0,
   "pistas_amplas_examinadas": 326,
   "pistas_amplas_que_exigiriam_trocar_boletim_legivel": [
@@ -247,7 +247,7 @@
     },
     {
       "arquivo": "read_guides/1960_amostra_127_correcoes.csv",
-      "sha256": "dc2efc00470d25d156c76f7decf2603597b61adceb85c3b54c094c893716f831"
+      "sha256": "f039a9fe374c26afad6ad84acc142d4da5433892ca9f01978ac4434b13868da9"
     },
     {
       "arquivo": "read_guides/readguide_1960_amostra_127_familias.csv",
@@ -274,8 +274,8 @@
       "sha256": "5b0335249644da87e8ca3f9ab28e80731dd792ef5a40ce4a01b336a8ec71a296"
     },
     {
-      "arquivo": "references/resolucao_residuais_1960_evidencias/distrito_pe_proposta.json",
-      "sha256": "1d02b414822ebc916297055f2fe00ae8578ed80c585bae1fd42ea642bd4a2743"
+      "arquivo": "references/fechamento_integral_1960_evidencias/distrito_pe_reauditoria.json",
+      "sha256": "87c05e6bee7f4681ffb19095fa10d78c7a4d725985e2f184b31179bc706af08e"
     }
   ]
 }

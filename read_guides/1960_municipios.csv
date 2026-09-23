@@ -1038,7 +1038,7 @@
 40,Estado de Minas Gerais,4028,Taiobeiras,31,3168002,402,12026,2724,9302,AEB
 40,Estado de Minas Gerais,4030,Aiuruoca,31,3101201,403,7624,1591,6033,AEB
 40,Estado de Minas Gerais,4031,Alfenas,31,3101607,403,26188,16874,9314,AEB
-40,Estado de Minas Gerais,4032,Alpinópolis,31,3101904,403,19740,4445,6298,AEB
+40,Estado de Minas Gerais,4032,Alpinópolis,31,3101904,403,19740,4445,15295,Sinopse1960_QuadroII_p37
 40,Estado de Minas Gerais,4033,Alterosa,31,3102001,403,7980,1682,6298,AEB
 40,Estado de Minas Gerais,4034,Andradas,31,3102605,403,19105,5783,13322,AEB
 40,Estado de Minas Gerais,4035,Andrelândia,31,3102803,403,12025,4617,7408,AEB
@@ -1101,7 +1101,7 @@
 40,Estado de Minas Gerais,4092,Itamogi,31,3132909,409,7346,2439,4907,AEB
 40,Estado de Minas Gerais,4093,Itamonte,31,3133006,409,9619,2163,7456,AEB
 40,Estado de Minas Gerais,4094,Itanhandu,31,3133105,409,8364,4736,3628,AEB
-40,Estado de Minas Gerais,4095,Itumirim,31,3134301,409,7395,3043,5352,AEB
+40,Estado de Minas Gerais,4095,Itumirim,31,3134301,409,7395,2043,5352,Sinopse1960_QuadroII_p43
 40,Estado de Minas Gerais,4096,Itutinga,31,3134509,409,4318,1042,3276,AEB
 40,Estado de Minas Gerais,4097,Jacuí,31,3134806,409,11603,2086,9517,AEB
 40,Estado de Minas Gerais,4098,Jacutinga,31,3134905,409,13788,4780,9008,AEB
@@ -1826,7 +1826,7 @@
 60,Estado de São Paulo,6375,Cajuru,35,3509403,637,13737,5267,8470,AEB
 60,Estado de São Paulo,6376,Cravinhos,35,3513108,637,13838,6294,7544,AEB
 60,Estado de São Paulo,6377,Ipuã,35,3521309,637,10675,3049,7626,AEB
-60,Estado de São Paulo,6378,Jardinópolis,35,3525102,637,16652,7533,9092,AEB
+60,Estado de São Paulo,6378,Jardinópolis,35,3525102,637,16625,7533,9092,Sinopse1960_QuadroII_p26
 60,Estado de São Paulo,6379,Luís Antônio,35,3527603,637,3977,484,3493,AEB
 60,Estado de São Paulo,6380,Nuporanga,35,3533601,638,5681,1413,4268,AEB
 60,Estado de São Paulo,6381,Orlândia,35,3534302,638,12244,6898,5346,AEB
@@ -2119,7 +2119,7 @@
 71,Estado do Paraná,7110,Bocaiúva do Sul,41,4103107,711,18346,2101,16245,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 3"
 71,Estado do Paraná,7111,Cerro Azul,41,4105201,711,17304,2058,15246,AEB
 71,Estado do Paraná,7112,Rio Branco do Sul,41,4122206,711,20429,2037,18392,AEB
-71,Estado do Paraná,7120,Bituruna,41,4102901,712,7484,634,6850,AEB
+71,Estado do Paraná,7120,Bituruna,41,4102901,712,7484,706,6778,Sinopse1960_QuadroII_p23
 71,Estado do Paraná,7121,Guarapuava,41,4109401,712,96947,16362,80585,AEB
 71,Estado do Paraná,7122,Palmas,41,4117602,712,19919,6120,13799,AEB
 71,Estado do Paraná,7130,Castro,41,4104907,713,32724,9598,23126,AEB
@@ -2180,7 +2180,7 @@
 71,Estado do Paraná,7224,Capanema,41,4104501,722,29306,4053,25253,AEB
 71,Estado do Paraná,7225,Cascavel,41,4104808,722,39598,5274,34324,AEB
 71,Estado do Paraná,7226,Chopinzinho,41,4105409,722,21797,1303,20494,AEB
-71,Estado do Paraná,7227,Cianorte,41,4105508,722,49731,8086,41645,AEB
+71,Estado do Paraná,7227,Cianorte,41,4105508,722,53658,8480,45178,Sinopse1960_QuadroII_p12
 71,Estado do Paraná,7228,Clevelândia,41,4105706,722,23634,6130,17504,AEB
 71,Estado do Paraná,7229,Coronel Vivida,41,4106506,722,14552,1280,13272,AEB
 71,Estado do Paraná,7230,Cruzeiro do Oeste,41,4106605,723,135816,20289,115527,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 12"
@@ -2205,7 +2205,7 @@
 71,Estado do Paraná,7249,Nova Londrina,41,4117107,724,18366,6068,12298,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 15"
 71,Estado do Paraná,7250,Paraíso do Norte,41,4118006,725,21218,6209,15009,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 15"
 71,Estado do Paraná,7251,Paranacity,41,4118105,725,23729,3816,19913,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 15"
-71,Estado do Paraná,7252,Paranavaí,41,4118402,725,63189,25058,38131,AEB
+71,Estado do Paraná,7252,Paranavaí,41,4118402,725,63189,25028,38161,Sinopse1960_QuadroII_p15
 71,Estado do Paraná,7253,Pato Branco,41,4118501,725,51581,10333,41248,AEB
 71,Estado do Paraná,7254,Peabiru,41,4118808,725,19180,5368,13812,AEB
 71,Estado do Paraná,7255,Pitanga,41,4119608,725,56006,4362,51644,AEB
@@ -2219,7 +2219,7 @@
 71,Estado do Paraná,7263,São Jorge,41,4125308,726,22361,2559,19802,"Sinopse Preliminar do Parana (IBGE, 1962), Quadro II, folha 17"
 71,Estado do Paraná,7264,São Pedro do Ivaí,41,4125803,726,11606,3078,8528,AEB
 71,Estado do Paraná,7265,Tamboara,41,4126702,726,11831,1529,10302,AEB
-71,Estado do Paraná,7266,Terra Boa,41,4127205,726,16697,2485,14212,AEB
+71,Estado do Paraná,7266,Terra Boa,41,4127205,726,17143,2485,14658,Sinopse1960_QuadroII_p17
 71,Estado do Paraná,7267,Terra Rica,41,4127304,726,18619,3129,15490,AEB
 71,Estado do Paraná,7268,Toledo,41,4127700,726,24959,5926,19033,AEB
 71,Estado do Paraná,7300,Alvorada do Sul,41,4100806,730,12803,1260,11543,AEB
@@ -2258,7 +2258,7 @@
 71,Estado do Paraná,7333,Londrina,41,4113700,733,134821,77382,57439,AEB
 71,Estado do Paraná,7334,Lupionópolis,41,4113809,733,8482,2073,6409,AEB
 71,Estado do Paraná,7335,Munhoz de Melo,41,4116307,733,6931,1021,5910,AEB
-71,Estado do Paraná,7336,Nova Fátima,41,4117008,733,12802,2436,10366,AEB
+71,Estado do Paraná,7336,Nova Fátima,41,4117008,733,12829,2463,10366,Sinopse1960_QuadroII_p21
 71,Estado do Paraná,7337,Porecatu,41,4120002,733,20776,5160,15616,AEB
 71,Estado do Paraná,7338,Primeiro de Maio,41,4120507,733,25185,3681,21504,AEB
 71,Estado do Paraná,7339,Ribeirão Claro,41,4121802,733,15511,3532,11979,AEB
@@ -2270,9 +2270,9 @@
 71,Estado do Paraná,7345,Santo Antônio da Platina,41,4124103,734,31460,9777,21683,AEB
 71,Estado do Paraná,7346,Santo Inácio,41,4124509,734,11420,1609,9811,AEB
 71,Estado do Paraná,7347,São Jerônimo da Serra,41,4124707,734,31453,2488,28965,AEB
-71,Estado do Paraná,7348,Sertaneja,41,4126405,734,17334,4379,12955,AEB
+71,Estado do Paraná,7348,Sertaneja,41,4126405,734,17337,2114,15223,Sinopse1960_QuadroII_p22
 71,Estado do Paraná,7349,Sertanópolis,41,4126504,734,23498,6469,17029,AEB
-71,Estado do Paraná,7350,Uraí,41,4128401,735,24137,5535,18602,AEB
+71,Estado do Paraná,7350,Uraí,41,4128401,735,24650,6964,17686,Sinopse1960_QuadroII_p23
 74,Estado de Santa Catarina,7400,Biguaçu,42,4202305,740,22487,5661,16826,AEB
 74,Estado de Santa Catarina,7401,Camboriú,42,4203204,740,12549,3131,9418,AEB
 74,Estado de Santa Catarina,7402,Florianópolis,42,4205407,740,98520,78068,20452,AEB
@@ -2310,7 +2310,7 @@
 74,Estado de Santa Catarina,7454,Papanduva,42,4212205,745,15545,1680,13865,AEB
 74,Estado de Santa Catarina,7455,Porto União,42,4213609,745,32848,12300,20548,AEB
 74,Estado de Santa Catarina,7456,Rio Negrinho,42,4215000,745,8483,5897,2586,AEB
-74,Estado de Santa Catarina,7457,São Bento do Sul,42,4215802,745,12814,6047,6344,AEB
+74,Estado de Santa Catarina,7457,São Bento do Sul,42,4215802,745,12814,6470,6344,Sinopse1960_QuadroII_p11
 74,Estado de Santa Catarina,7460,Bom Retiro,42,4202602,746,15788,3205,12583,AEB
 74,Estado de Santa Catarina,7461,Campos Novos,42,4203600,746,40067,6266,33801,AEB
 74,Estado de Santa Catarina,7462,Curitibanos,42,4204806,746,33677,9954,23723,AEB
@@ -2583,7 +2583,7 @@
 91,Estado do Mato Grosso,9201,Aparecida do Taboado,51,5101008,920,11852,2966,8886,AEB
 91,Estado do Mato Grosso,9202,Camapuã,51,5102602,920,11645,1584,10061,AEB
 91,Estado do Mato Grosso,9203,Cassilândia,51,5102907,920,9221,2489,6732,AEB
-91,Estado do Mato Grosso,9204,Coxim,51,5103303,920,12997,2748,10199,AEB
+91,Estado do Mato Grosso,9204,Coxim,51,5103303,920,12997,2798,10199,Sinopse1960_QuadroII_p8
 91,Estado do Mato Grosso,9205,Inocência,51,5104408,920,3517,379,3138,AEB
 91,Estado do Mato Grosso,9206,Paranaíba,51,5106304,920,18290,4082,14208,AEB
 91,Estado do Mato Grosso,9207,Ribas do Rio Pardo,51,5107100,920,4065,1345,2720,AEB

@@ -1,0 +1,1321 @@
+{
+  "situacao": "identidade_anterior_ao_reparo_reconferida_apos_integracao",
+  "pessoas127": [
+    {
+      "linha": 405457,
+      "uf": 40,
+      "pasta": 40880,
+      "boletim": 1,
+      "distrito": 1,
+      "municipio": 4094,
+      "situacao": 1,
+      "chave": "0140880001",
+      "original": "404094014088000131291435416920001732200000009325227115\\0064744",
+      "corrigido": "404094014088000131291435416920001732200000009325227115\\0064744",
+      "invalidos": "",
+      "excluida": 0,
+      "familia_atual": null,
+      "familia_fisica": 405443
+    },
+    {
+      "linha": 405458,
+      "uf": 40,
+      "pasta": 40880,
+      "boletim": 1,
+      "distrito": 1,
+      "municipio": 4094,
+      "situacao": 1,
+      "chave": "0140880001",
+      "original": "4040940140880001311 1 954169200017210400130776-       \\0064744",
+      "corrigido": "4040940140880001311 1 954169200017210400130776-       \\0064744",
+      "invalidos": "AGE",
+      "excluida": 0,
+      "familia_atual": null,
+      "familia_fisica": 405443
+    },
+    {
+      "linha": 405459,
+      "uf": 40,
+      "pasta": 40880,
+      "boletim": 1,
+      "distrito": 1,
+      "municipio": 4094,
+      "situacao": 1,
+      "chave": "0140880001",
+      "original": "40409401408800013164108541692000042-                  \\0064744",
+      "corrigido": "40409401408800013164108541692000042-                  \\0064744",
+      "invalidos": "",
+      "excluida": 0,
+      "familia_atual": null,
+      "familia_fisica": 405443
+    }
+  ],
+  "cartao25": {
+    "linha": 567046,
+    "texto": "408800010000314789425702060024094011000000000000000000"
+  },
+  "pessoas25": [
+    {
+      "linha": 567047,
+      "texto": "4088000101001017179541699200017210400130776        000"
+    },
+    {
+      "linha": 567048,
+      "texto": "408800010290292914354169920001732200000009325227115000"
+    },
+    {
+      "linha": 567049,
+      "texto": "40880001037037641085416992000042                   000"
+    }
+  ],
+  "identificacao_sem_usar_405458": {
+    "linhas_intactas": [
+      405457,
+      405459
+    ],
+    "ocorrencias_completas25": {
+      "405457": [
+        {
+          "UF": 40,
+          "linha": 77392,
+          "texto": "401261530340342914354169920001732200000009325227115000",
+          "chave": [
+            40,
+            40126,
+            153
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 463891,
+          "texto": "407120470330332914354169920001732200000009325227115000",
+          "chave": [
+            40,
+            40712,
+            47
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 567048,
+          "texto": "408800010290292914354169920001732200000009325227115000",
+          "chave": [
+            40,
+            40880,
+            1
+          ]
+        }
+      ],
+      "405459": [
+        {
+          "UF": 40,
+          "linha": 173514,
+          "texto": "40276039105105641085416992000042                   000",
+          "chave": [
+            40,
+            40276,
+            39
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 202039,
+          "texto": "40320042102102641085416992000042                   000",
+          "chave": [
+            40,
+            40320,
+            42
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 401538,
+          "texto": "40614063042042641085416992000042                   000",
+          "chave": [
+            40,
+            40614,
+            63
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 463971,
+          "texto": "40712058132132641085416992000042                   000",
+          "chave": [
+            40,
+            40712,
+            58
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 545746,
+          "texto": "40844224099099641085416992000042                   000",
+          "chave": [
+            40,
+            40844,
+            224
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 567049,
+          "texto": "40880001037037641085416992000042                   000",
+          "chave": [
+            40,
+            40880,
+            1
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 619922,
+          "texto": "40964033053053641085416992000042                   000",
+          "chave": [
+            40,
+            40964,
+            33
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 686751,
+          "texto": "41066177062062641085416992000042                   000",
+          "chave": [
+            40,
+            41066,
+            177
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 786151,
+          "texto": "41228096054054641085416992000042                   000",
+          "chave": [
+            40,
+            41228,
+            96
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 971914,
+          "texto": "41486021057057641085416992000042                   000",
+          "chave": [
+            40,
+            41486,
+            21
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 1234376,
+          "texto": "41860068134134641085416992000042                   000",
+          "chave": [
+            40,
+            41860,
+            68
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 1325857,
+          "texto": "41986166127127641085416992000042                   000",
+          "chave": [
+            40,
+            41986,
+            166
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 1374925,
+          "texto": "42056124142142641085416992000042                   000",
+          "chave": [
+            40,
+            42056,
+            124
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 1446540,
+          "texto": "42162003060060641085416992000042                   000",
+          "chave": [
+            40,
+            42162,
+            3
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 1474255,
+          "texto": "42200242062062641085416992000042                   000",
+          "chave": [
+            40,
+            42200,
+            242
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 1537930,
+          "texto": "42288048038038641085416992000042                   000",
+          "chave": [
+            40,
+            42288,
+            48
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 1552025,
+          "texto": "42308010081081641085416992000042                   000",
+          "chave": [
+            40,
+            42308,
+            10
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 1654229,
+          "texto": "42456114080080641085416992000042                   000",
+          "chave": [
+            40,
+            42456,
+            114
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 1706911,
+          "texto": "42538096069069641085416992000042                   000",
+          "chave": [
+            40,
+            42538,
+            96
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 1810720,
+          "texto": "42698045055055641085416992000042                   000",
+          "chave": [
+            40,
+            42698,
+            45
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 1954751,
+          "texto": "42910076028028641085416992000042                   000",
+          "chave": [
+            40,
+            42910,
+            76
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2031383,
+          "texto": "43026042049049641085416992000042                   000",
+          "chave": [
+            40,
+            43026,
+            42
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2052668,
+          "texto": "43058052074074641085416992000042                   000",
+          "chave": [
+            40,
+            43058,
+            52
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2066753,
+          "texto": "43078191070070641085416992000042                   000",
+          "chave": [
+            40,
+            43078,
+            191
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2078428,
+          "texto": "43096161063063641085416992000042                   000",
+          "chave": [
+            40,
+            43096,
+            161
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2472908,
+          "texto": "43704013057057641085416992000042                   000",
+          "chave": [
+            40,
+            43704,
+            13
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2473970,
+          "texto": "43704196054054641085416992000042                   000",
+          "chave": [
+            40,
+            43704,
+            196
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2539050,
+          "texto": "43798097055055641085416992000042                   000",
+          "chave": [
+            40,
+            43798,
+            97
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2548754,
+          "texto": "43812221030030641085416992000042                   000",
+          "chave": [
+            40,
+            43812,
+            221
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2622169,
+          "texto": "43928009053053641085416992000042                   000",
+          "chave": [
+            40,
+            43928,
+            9
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2627033,
+          "texto": "43934024069069641085416992000042                   000",
+          "chave": [
+            40,
+            43934,
+            24
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2629987,
+          "texto": "43938073137137641085416992000042                   000",
+          "chave": [
+            40,
+            43938,
+            73
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2635874,
+          "texto": "43946042059059641085416992000042                   000",
+          "chave": [
+            40,
+            43946,
+            42
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2648088,
+          "texto": "43964031055055641085416992000042                   000",
+          "chave": [
+            40,
+            43964,
+            31
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2740342,
+          "texto": "44104021065065641085416992000042                   000",
+          "chave": [
+            40,
+            44104,
+            21
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2820196,
+          "texto": "44216032115115641085416992000042                   000",
+          "chave": [
+            40,
+            44216,
+            32
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2844899,
+          "texto": "44254009150150641085416992000042                   000",
+          "chave": [
+            40,
+            44254,
+            9
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2869265,
+          "texto": "44290210056056641085416992000042                   000",
+          "chave": [
+            40,
+            44290,
+            210
+          ]
+        },
+        {
+          "UF": 40,
+          "linha": 2973820,
+          "texto": "44446189040040641085416992000042                   000",
+          "chave": [
+            40,
+            44446,
+            189
+          ]
+        }
+      ]
+    },
+    "ocorrencias_completas127": {
+      "405457": [
+        {
+          "linha": 405457,
+          "uf": 40,
+          "pasta": 40880,
+          "boletim": 1,
+          "familia_atual": null,
+          "original": "404094014088000131291435416920001732200000009325227115\\0064744",
+          "corrigido": "404094014088000131291435416920001732200000009325227115\\0064744"
+        }
+      ],
+      "405459": [
+        {
+          "linha": 405459,
+          "uf": 40,
+          "pasta": 40880,
+          "boletim": 1,
+          "familia_atual": null,
+          "original": "40409401408800013164108541692000042-                  \\0064744",
+          "corrigido": "40409401408800013164108541692000042-                  \\0064744"
+        },
+        {
+          "linha": 417858,
+          "uf": 40,
+          "pasta": 41228,
+          "boletim": 96,
+          "familia_atual": 417856,
+          "original": "40415001412280963364108541692000042-                  \\0066759",
+          "corrigido": "40415001412280963364108541692000042-                  \\0066759"
+        },
+        {
+          "linha": 480931,
+          "uf": 40,
+          "pasta": 43026,
+          "boletim": 42,
+          "familia_atual": 480929,
+          "original": "40448001430260423164108541692000042-                  \\0076428",
+          "corrigido": "40448001430260423164108541692000042-                  \\0076428"
+        }
+      ]
+    },
+    "chaves_conjuntas25_todas17UF": [
+      [
+        40,
+        40880,
+        1
+      ]
+    ],
+    "chaves_conjuntas127_todasUF": [
+      [
+        40,
+        40880,
+        1
+      ]
+    ]
+  },
+  "consulta_independente_caracteres_legiveis_405458": {
+    "mascara": "1?1?954169200017210400130776        ",
+    "posicoes_ignoradas_na_linha127": [
+      20,
+      22
+    ],
+    "ocorrencias_todas17UF": [
+      {
+        "UF": 40,
+        "linha": 567047,
+        "texto": "4088000101001017179541699200017210400130776        000",
+        "chave": [
+          40,
+          40880,
+          1
+        ]
+      }
+    ]
+  },
+  "proposta_textual_nao_aplicada": {
+    "linha": 405458,
+    "antes": "4040940140880001311 1 954169200017210400130776-       \\0064744",
+    "depois_apenas_em_memoria": "4040940140880001311717954169200017210400130776-       \\0064744",
+    "posicoes_alteradas": [
+      20,
+      22
+    ],
+    "V203": [
+      " ",
+      "7"
+    ],
+    "AGE": [
+      " 9",
+      "79"
+    ],
+    "digito_9_preservado": true
+  },
+  "alternativas_explicadas_sem_usar_texto_alvo": {
+    "405480": {
+      "cartao127": {
+        "linha": 405480,
+        "uf": 40,
+        "pasta": 40880,
+        "boletim": 5,
+        "distrito": 1,
+        "municipio": 4094,
+        "situacao": 1,
+        "chave": "0140880005",
+        "original": "4040940140880005111478949570208004                    \\0064748",
+        "corrigido": "4040940140880005111478949570208004                    \\0064748",
+        "invalidos": ""
+      },
+      "pessoas127": [
+        {
+          "linha": 405481,
+          "uf": 40,
+          "pasta": 40880,
+          "boletim": 5,
+          "distrito": 1,
+          "municipio": 4094,
+          "situacao": 1,
+          "chave": "0140880005",
+          "original": "404094014088000521271375416919161620040005039357125137\\0064748",
+          "corrigido": "404094014088000521271375416919161620040005039357125137\\0064748",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 405480,
+          "familia_fisica": 405480
+        },
+        {
+          "linha": 405482,
+          "uf": 40,
+          "pasta": 40880,
+          "boletim": 5,
+          "distrito": 1,
+          "municipio": 4094,
+          "situacao": 1,
+          "chave": "0140880005",
+          "original": "4040940140880005312911354169191606200000000035-       \\0064748",
+          "corrigido": "4040940140880005312911354169191606200000000035-       \\0064748",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 405480,
+          "familia_fisica": 405480
+        },
+        {
+          "linha": 405483,
+          "uf": 40,
+          "pasta": 40880,
+          "boletim": 5,
+          "distrito": 1,
+          "municipio": 4094,
+          "situacao": 1,
+          "chave": "0140880005",
+          "original": "404094014088000531241375416920003110000000005391325176\\0064748",
+          "corrigido": "404094014088000531241375416920003110000000005391325176\\0064748",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 405480,
+          "familia_fisica": 405480
+        },
+        {
+          "linha": 405484,
+          "uf": 40,
+          "pasta": 40880,
+          "boletim": 5,
+          "distrito": 1,
+          "municipio": 4094,
+          "situacao": 1,
+          "chave": "0140880005",
+          "original": "4040940140880005312911054169200005200000000035-       \\0064748",
+          "corrigido": "4040940140880005312911054169200005200000000035-       \\0064748",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 405480,
+          "familia_fisica": 405480
+        },
+        {
+          "linha": 405485,
+          "uf": 40,
+          "pasta": 40880,
+          "boletim": 5,
+          "distrito": 1,
+          "municipio": 4094,
+          "situacao": 1,
+          "chave": "0140880005",
+          "original": "4040940140880005311911554169191605200000000035-       \\0064748",
+          "corrigido": "4040940140880005311911554169191605200000000035-       \\0064748",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 405480,
+          "familia_fisica": 405480
+        }
+      ],
+      "cartoes25": [
+        {
+          "linha": 567070,
+          "texto": "408800050060514789495702080044094011000000000000000000"
+        }
+      ],
+      "pessoas25": [
+        {
+          "linha": 567071,
+          "texto": "408800050160162713754169919161620046305039357125137000"
+        },
+        {
+          "linha": 567072,
+          "texto": "4088000502402419115541699191605200063000035        000"
+        },
+        {
+          "linha": 567073,
+          "texto": "4088000503203229113541699191606200000000035        000"
+        },
+        {
+          "linha": 567074,
+          "texto": "4088000504004029110541699200005200000000035        000"
+        },
+        {
+          "linha": 567075,
+          "texto": "408800050590592413754169920003110006300005391325176000"
+        }
+      ],
+      "prova_anterior": {
+        "confirmado": false,
+        "criterio": null,
+        "motivos": [
+          "composicao_propria_diverge",
+          "menos_de_duas_testemunhas_unicas_na127_UF"
+        ],
+        "motivos_estritos": [
+          "composicao_propria_diverge"
+        ],
+        "pares": [
+          {
+            "linha127": 405481,
+            "linha25": 567071,
+            "V216": [
+              0,
+              63
+            ],
+            "exato25campos": false,
+            "texto127": "404094014088000521271375416919161620040005039357125137\\0064748",
+            "texto25": "408800050160162713754169919161620046305039357125137000"
+          },
+          {
+            "linha127": 405482,
+            "linha25": 567073,
+            "V216": [
+              0,
+              0
+            ],
+            "exato25campos": true,
+            "texto127": "4040940140880005312911354169191606200000000035-       \\0064748",
+            "texto25": "4088000503203229113541699191606200000000035        000"
+          },
+          {
+            "linha127": 405483,
+            "linha25": 567075,
+            "V216": [
+              0,
+              63
+            ],
+            "exato25campos": false,
+            "texto127": "404094014088000531241375416920003110000000005391325176\\0064748",
+            "texto25": "408800050590592413754169920003110006300005391325176000"
+          },
+          {
+            "linha127": 405484,
+            "linha25": 567074,
+            "V216": [
+              0,
+              0
+            ],
+            "exato25campos": true,
+            "texto127": "4040940140880005312911054169200005200000000035-       \\0064748",
+            "texto25": "4088000504004029110541699200005200000000035        000"
+          },
+          {
+            "linha127": 405485,
+            "linha25": 567072,
+            "V216": [
+              0,
+              63
+            ],
+            "exato25campos": false,
+            "texto127": "4040940140880005311911554169191605200000000035-       \\0064748",
+            "texto25": "4088000502402419115541699191605200063000035        000"
+          }
+        ],
+        "testemunhas_exatas_unicas127": [],
+        "respostas_modificadas": false,
+        "linhas_pessoas127": [
+          405481,
+          405482,
+          405483,
+          405484,
+          405485
+        ],
+        "linhas_cartao25": [
+          567070
+        ],
+        "linhas_pessoas25": [
+          567071,
+          567072,
+          567073,
+          567074,
+          567075
+        ]
+      },
+      "composicao24_exata": true,
+      "assinatura24": "3a3bdca81881328c39b9d4b1fc56df437c87990a4c5fa36acc9deb6aa86932bf",
+      "pareamento_limitado_unico": true,
+      "maximo_diferencas_alem_V216_por_pessoa": 1,
+      "quesitos_omitidos_apenas_na_busca": [
+        "V216"
+      ],
+      "composicao_projetada_exata": true,
+      "assinatura_projetada": "3a3bdca81881328c39b9d4b1fc56df437c87990a4c5fa36acc9deb6aa86932bf",
+      "pares_nova_busca": [
+        {
+          "linha127": 405481,
+          "linha25": 567071,
+          "diferencas": {
+            "V216": [
+              0,
+              63
+            ]
+          }
+        },
+        {
+          "linha127": 405482,
+          "linha25": 567073,
+          "diferencas": {}
+        },
+        {
+          "linha127": 405483,
+          "linha25": 567075,
+          "diferencas": {
+            "V216": [
+              0,
+              63
+            ]
+          }
+        },
+        {
+          "linha127": 405484,
+          "linha25": 567074,
+          "diferencas": {}
+        },
+        {
+          "linha127": 405485,
+          "linha25": 567072,
+          "diferencas": {
+            "V216": [
+              0,
+              63
+            ]
+          }
+        }
+      ],
+      "ocorrencias_grupo24_na127": [
+        {
+          "cartao": 405480,
+          "chave": "",
+          "linhas": [
+            405481,
+            405482,
+            405483,
+            405484,
+            405485
+          ]
+        }
+      ],
+      "ocorrencias_grupo24_na25": [
+        {
+          "chave": "40880005",
+          "linhas": [
+            567070,
+            567071,
+            567072,
+            567073,
+            567074,
+            567075
+          ],
+          "textos": [
+            "408800050060514789495702080044094011000000000000000000",
+            "408800050160162713754169919161620046305039357125137000",
+            "4088000502402419115541699191605200063000035        000",
+            "4088000503203229113541699191606200000000035        000",
+            "4088000504004029110541699200005200000000035        000",
+            "408800050590592413754169920003110006300005391325176000"
+          ]
+        }
+      ],
+      "via_composicao24_unica_nas_duas_fontes": true,
+      "ocorrencias_grupo_projetado_na127": [
+        {
+          "cartao": 405480,
+          "chave": "",
+          "linhas": [
+            405481,
+            405482,
+            405483,
+            405484,
+            405485
+          ]
+        }
+      ],
+      "ocorrencias_grupo_projetado_na25": [
+        {
+          "chave": "40880005",
+          "linhas": [
+            567070,
+            567071,
+            567072,
+            567073,
+            567074,
+            567075
+          ],
+          "textos": [
+            "408800050060514789495702080044094011000000000000000000",
+            "408800050160162713754169919161620046305039357125137000",
+            "4088000502402419115541699191605200063000035        000",
+            "4088000503203229113541699191606200000000035        000",
+            "4088000504004029110541699200005200000000035        000",
+            "408800050590592413754169920003110006300005391325176000"
+          ]
+        }
+      ],
+      "via_composicao_projetada_unica_nas_duas_fontes": true
+    },
+    "405486": {
+      "cartao127": {
+        "linha": 405486,
+        "uf": 40,
+        "pasta": 40880,
+        "boletim": 6,
+        "distrito": 1,
+        "municipio": 4094,
+        "situacao": 1,
+        "chave": "0140880006",
+        "original": "4040940140880006111478942570207001                    \\0064749",
+        "corrigido": "4040940140880006111478942570207001                    \\0064749",
+        "invalidos": ""
+      },
+      "pessoas127": [
+        {
+          "linha": 405487,
+          "uf": 40,
+          "pasta": 40880,
+          "boletim": 6,
+          "distrito": 1,
+          "municipio": 4094,
+          "situacao": 1,
+          "chave": "0140880006",
+          "original": "404094014088000621171235416918161520000000008398327126\\0064749",
+          "corrigido": "404094014088000621171235416918161520000000008398327126\\0064749",
+          "invalidos": "",
+          "excluida": 0,
+          "familia_atual": 405486,
+          "familia_fisica": 405486
+        }
+      ],
+      "cartoes25": [
+        {
+          "linha": 567076,
+          "texto": "408800060020114789425702070014094011000000000000000000"
+        }
+      ],
+      "pessoas25": [
+        {
+          "linha": 567077,
+          "texto": "408800060120121712354169918161520006300008398327126000"
+        }
+      ],
+      "prova_anterior": {
+        "confirmado": false,
+        "criterio": null,
+        "motivos": [
+          "composicao_propria_diverge",
+          "menos_de_duas_testemunhas_unicas_na127_UF"
+        ],
+        "motivos_estritos": [
+          "composicao_propria_diverge"
+        ],
+        "pares": [
+          {
+            "linha127": 405487,
+            "linha25": 567077,
+            "V216": [
+              0,
+              63
+            ],
+            "exato25campos": false,
+            "texto127": "404094014088000621171235416918161520000000008398327126\\0064749",
+            "texto25": "408800060120121712354169918161520006300008398327126000"
+          }
+        ],
+        "testemunhas_exatas_unicas127": [],
+        "respostas_modificadas": false,
+        "linhas_pessoas127": [
+          405487
+        ],
+        "linhas_cartao25": [
+          567076
+        ],
+        "linhas_pessoas25": [
+          567077
+        ]
+      },
+      "composicao24_exata": true,
+      "assinatura24": "def62d46a10a42ce136b798192728ba1e07d93dba6515ad3cef315049978e1ea",
+      "pareamento_limitado_unico": true,
+      "maximo_diferencas_alem_V216_por_pessoa": 1,
+      "quesitos_omitidos_apenas_na_busca": [
+        "V216"
+      ],
+      "composicao_projetada_exata": true,
+      "assinatura_projetada": "def62d46a10a42ce136b798192728ba1e07d93dba6515ad3cef315049978e1ea",
+      "pares_nova_busca": [
+        {
+          "linha127": 405487,
+          "linha25": 567077,
+          "diferencas": {
+            "V216": [
+              0,
+              63
+            ]
+          }
+        }
+      ],
+      "ocorrencias_grupo24_na127": [
+        {
+          "cartao": 405486,
+          "chave": "",
+          "linhas": [
+            405487
+          ]
+        }
+      ],
+      "ocorrencias_grupo24_na25": [
+        {
+          "chave": "40880006",
+          "linhas": [
+            567076,
+            567077
+          ],
+          "textos": [
+            "408800060020114789425702070014094011000000000000000000",
+            "408800060120121712354169918161520006300008398327126000"
+          ]
+        }
+      ],
+      "via_composicao24_unica_nas_duas_fontes": true,
+      "ocorrencias_grupo_projetado_na127": [
+        {
+          "cartao": 405486,
+          "chave": "",
+          "linhas": [
+            405487
+          ]
+        }
+      ],
+      "ocorrencias_grupo_projetado_na25": [
+        {
+          "chave": "40880006",
+          "linhas": [
+            567076,
+            567077
+          ],
+          "textos": [
+            "408800060020114789425702070014094011000000000000000000",
+            "408800060120121712354169918161520006300008398327126000"
+          ]
+        }
+      ],
+      "via_composicao_projetada_unica_nas_duas_fontes": true
+    }
+  },
+  "fontes25_sha256": {
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.ce.gz": "40d8ecdc24e7d8c9ba8b4715f6f0bfa1f1385e4b3d8fe1d15eac3595b68f9fa2",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.rn.gz": "c464a89865256ea906b120e523e324935df05b0d2a9c9ab6853fbbe7819de746",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.pb.gz": "bf5fcd1c433b72bd930d56be2a7ec3a28944ed067ae3ed7314dba6813a573692",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.pe.gz": "5b0335249644da87e8ca3f9ab28e80731dd792ef5a40ce4a01b336a8ec71a296",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.fn.gz": "98d5f9efb7c13ff505d129a80c43e6701cc0711dabd2391ba6c81212f9d0b23b",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.al.gz": "44d660b46f32aef2f795f6e05d43dd796768311a8a64721f6da5191dcd952873",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.se.gz": "603527a51f15ff52e4584867b11c6aaafdea2e70f885073e10feb40fd57d8bec",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.ba.gz": "15d040af8d050361097a66d78c0b6477da8fe41ee1942a89e3020242ebdc046d",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.mg.gz": "75e7b4e7fce28507c24a4e21f1a40e5b47f750fd72b090abe6d1b1406644a621",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.sa.gz": "58d3b494802e365526d0a053c9aac798ec82f5b654f375eb834700b9a4b0adef",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.rj.gz": "363289071564a6cb7a93e8b417914df983c81d0ef92af2689224bc4065db4b6e",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.sp.gz": "9b647908667d61fb35dfac8e4a4eda61a70b5f259bee3f5975026b54fa6326be",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.pr.gz": "3c5ad2b3dbb273eef5f86ccf6982076636c2ac86ee82bc93ed9c1bc3c576f9b9",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.rs.gz": "b5d0686e2ddf796b4e33338e1b1dee6a0b53155043b76c5895577936b053e6c2",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.mt.gz": "3668b84265fad5abb8184653670396be5fb9c65f8e0cd419058a1834f4e8ef30",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.go.gz": "d8e1c1bddfea8df8500ccaef7b23b423e4974b17ab3c0916df50e96317821fa6",
+    "data\\release_legacy\\Censo.1960.amostra.25porcento.df.gz": "32f13d1877ca570a99a4a5caaf78712022c91afb16821ce75eb68b3cc9ab4421"
+  },
+  "limite": "Identificacao precede reparo e nao usa respostas propostas do alvo. MG405458 recupera somente caracteres20/22, conserva unidade9, REC_TYPE3 e toda geografia; V2037 nao autoriza converter REC_TYPE3 em2. Nao identifica civilmente pessoas.",
+  "reparo_aprovado": {
+    "linha127": 405458,
+    "tipo": "pessoas",
+    "chave": [
+      40,
+      40880,
+      1
+    ],
+    "motivos": [],
+    "aprovavel_no_criterio": true,
+    "propostas": [
+      {
+        "campo": "V203",
+        "inicio": 20,
+        "fim": 20,
+        "antes": " ",
+        "depois": "7",
+        "linhas25": [
+          567047
+        ]
+      },
+      {
+        "campo": "AGE",
+        "inicio": 22,
+        "fim": 23,
+        "antes": " 9",
+        "depois": "79",
+        "linhas25": [
+          567047
+        ]
+      }
+    ],
+    "pessoas127": 3,
+    "pessoas25": 3,
+    "texto_original": "4040940140880001311 1 954169200017210400130776-       \\0064744",
+    "texto_antes": "4040940140880001311 1 954169200017210400130776-       \\0064744",
+    "texto_corrigido_proposto": "4040940140880001311717954169200017210400130776-       \\0064744",
+    "fontes25_possiveis": [
+      {
+        "linha": 567047,
+        "texto": "4088000101001017179541699200017210400130776        000",
+        "tipo": "pessoas",
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz"
+      }
+    ],
+    "grupo127": [
+      {
+        "linha": 405457,
+        "texto": "404094014088000131291435416920001732200000009325227115\\0064744",
+        "decisao": null
+      },
+      {
+        "linha": 405458,
+        "texto": "4040940140880001311 1 954169200017210400130776-       \\0064744",
+        "decisao": "valor_isolado"
+      },
+      {
+        "linha": 405459,
+        "texto": "40409401408800013164108541692000042-                  \\0064744",
+        "decisao": null
+      }
+    ],
+    "grupo25": [
+      {
+        "linha": 567046,
+        "texto": "408800010000314789425702060024094011000000000000000000",
+        "tipo": "familias",
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz"
+      },
+      {
+        "linha": 567047,
+        "texto": "4088000101001017179541699200017210400130776        000",
+        "tipo": "pessoas",
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz"
+      },
+      {
+        "linha": 567048,
+        "texto": "408800010290292914354169920001732200000009325227115000",
+        "tipo": "pessoas",
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz"
+      },
+      {
+        "linha": 567049,
+        "texto": "40880001037037641085416992000042                   000",
+        "tipo": "pessoas",
+        "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz"
+      }
+    ],
+    "criterio_identidade_contexto": "duas_testemunhas_intactas_conjuntas_v1",
+    "testemunhas_identidade": [
+      {
+        "linha127": 405457,
+        "linha25": 567048,
+        "campos_ignorados": []
+      },
+      {
+        "linha127": 405459,
+        "linha25": 567049,
+        "campos_ignorados": []
+      }
+    ],
+    "divergencias_cartao_preservadas": {},
+    "divergencias_pessoais_preservadas": [],
+    "geografia_parcial_preservada": [],
+    "tipo_registro_preservado": "3",
+    "ressalva": "V203=7 e resposta recuperada; REC_TYPE=3 e conservado literalmente, nao recodificado para2."
+  },
+  "indice_historico_sha256": "7b26bfed80df824d1fecb68f702aa1eadc1b68621da5cd1553cda501080c5d79",
+  "indice_reauditoria_sha256": "0df274929772fb14720a0f61b2f8de6a3486791dc31597f9a420022018f59ce7",
+  "fontes": [
+    {
+      "arquivo": "data_raw/microdata/1960/amostra_127/HHOLDA.txt",
+      "sha256": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_correcoes.csv",
+      "sha256": "f039a9fe374c26afad6ad84acc142d4da5433892ca9f01978ac4434b13868da9"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_duplicatas.csv",
+      "sha256": "9897d11d62bb4f1640203b091ad56a893d9b42e1fc051d922c04f5ca13b81a0a"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_vinculos.csv",
+      "sha256": "5d0fc8e4eb9eb0d2363247426eeb61e0b58ad719130992c219decee231fbe6a8"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_127_familias.csv",
+      "sha256": "51c443ff8a9e86d1584665b7d6296b061af5592e57d61bed4091d68f30507de5"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_127_pessoas.csv",
+      "sha256": "18326d21e51a2af88bd9f3d62b39d7debe0dc611d66985e911ae12c571d71655"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_25_familias.csv",
+      "sha256": "815f3241d49f8ababaef8ef2b6c0fc6e515a72302346da8133b7349c0f481007"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_25_pessoas.csv",
+      "sha256": "e00be8bf2962bbd2c5ed9bc169321d5b156b1424bd22f4c2f46920aa89d106c8"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.al.gz",
+      "sha256": "44d660b46f32aef2f795f6e05d43dd796768311a8a64721f6da5191dcd952873"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.ba.gz",
+      "sha256": "15d040af8d050361097a66d78c0b6477da8fe41ee1942a89e3020242ebdc046d"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.ce.gz",
+      "sha256": "40d8ecdc24e7d8c9ba8b4715f6f0bfa1f1385e4b3d8fe1d15eac3595b68f9fa2"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.df.gz",
+      "sha256": "32f13d1877ca570a99a4a5caaf78712022c91afb16821ce75eb68b3cc9ab4421"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.fn.gz",
+      "sha256": "98d5f9efb7c13ff505d129a80c43e6701cc0711dabd2391ba6c81212f9d0b23b"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.go.gz",
+      "sha256": "d8e1c1bddfea8df8500ccaef7b23b423e4974b17ab3c0916df50e96317821fa6"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mg.gz",
+      "sha256": "75e7b4e7fce28507c24a4e21f1a40e5b47f750fd72b090abe6d1b1406644a621"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.mt.gz",
+      "sha256": "3668b84265fad5abb8184653670396be5fb9c65f8e0cd419058a1834f4e8ef30"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pb.gz",
+      "sha256": "bf5fcd1c433b72bd930d56be2a7ec3a28944ed067ae3ed7314dba6813a573692"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pe.gz",
+      "sha256": "5b0335249644da87e8ca3f9ab28e80731dd792ef5a40ce4a01b336a8ec71a296"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pr.gz",
+      "sha256": "3c5ad2b3dbb273eef5f86ccf6982076636c2ac86ee82bc93ed9c1bc3c576f9b9"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.rj.gz",
+      "sha256": "363289071564a6cb7a93e8b417914df983c81d0ef92af2689224bc4065db4b6e"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.rn.gz",
+      "sha256": "c464a89865256ea906b120e523e324935df05b0d2a9c9ab6853fbbe7819de746"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.rs.gz",
+      "sha256": "b5d0686e2ddf796b4e33338e1b1dee6a0b53155043b76c5895577936b053e6c2"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.sa.gz",
+      "sha256": "58d3b494802e365526d0a053c9aac798ec82f5b654f375eb834700b9a4b0adef"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.se.gz",
+      "sha256": "603527a51f15ff52e4584867b11c6aaafdea2e70f885073e10feb40fd57d8bec"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.sp.gz",
+      "sha256": "9b647908667d61fb35dfac8e4a4eda61a70b5f259bee3f5975026b54fa6326be"
+    },
+    {
+      "arquivo": "references/auditoria_recuperacao_cartoes_1960.py",
+      "sha256": "b78400fa4de86d191ad0a68c97b7439bac4588cc3ecc23c27220b1cb058fbd56"
+    },
+    {
+      "arquivo": "references/fechamento_integral_1960_vinculos.py",
+      "sha256": "b25216da760f1c0db6f94c9a5e021528f6440df7582ae0e72b0a5492989f0739"
+    },
+    {
+      "arquivo": "references/fechamento_integral_1960_vinculos_integrar.py",
+      "sha256": "8713559f0a1934ef0c5b54b587fa200f534bc6dea11cb4721050214c8740fe8d"
+    }
+  ]
+}

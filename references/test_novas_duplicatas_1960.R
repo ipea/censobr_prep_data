@@ -48,14 +48,14 @@ for(campo in campos_decisao){
 novos <- candidatos[!linha %in% manifesto$linha]
 manifesto <- rbindlist(list(manifesto, novos), use.names = TRUE)
 setorder(manifesto, linha)
-stopifnot(nrow(manifesto) == 6461L, !anyDuplicated(manifesto$linha),
+stopifnot(nrow(manifesto) == 6463L, !anyDuplicated(manifesto$linha),
           sum(manifesto$acao == "remover") == 2736L,
-          sum(manifesto$acao == "manter") == 3725L,
+          sum(manifesto$acao == "manter") == 3727L,
           all(manifesto$acao %in% c("manter", "remover")))
 decisoes_path <- file.path(saida, "manifesto_conciliado.csv")
 write.csv(as.data.frame(manifesto), decisoes_path, row.names = FALSE,
           fileEncoding = "UTF-8", na = "")
-message("Manifesto temporario: 6461 linhas; 2736 remover; 3725 manter; sobrepostas: ", length(comuns))
+message("Manifesto temporario: 6463 linhas; 2736 remover; 3727 manter; sobrepostas: ", length(comuns))
 
 # Ler os literais de HHOLDA em blocos. Os numeros de linha continuam sendo os
 # localizadores originais, mesmo quando o arquivo temporario tem so duas linhas.
@@ -137,8 +137,8 @@ esperadas <- antes_amplo$pessoas[match(manter, linha)]
 retidas_originais <- amplo_ok$pessoas[, .SD, .SDcols = colunas_originais]
 setorder(retidas_originais, linha)
 diagnostico <- fread(file.path(saida, "todos_decididos", "duplicatas_removidas.csv"))
-stopifnot(identical(amplo, antes_amplo), nrow(amplo$pessoas) == 6461L,
-          nrow(amplo_ok$pessoas) == 3725L, identical(sort(amplo_ok$pessoas$linha), manter),
+stopifnot(identical(amplo, antes_amplo), nrow(amplo$pessoas) == 6463L,
+          nrow(amplo_ok$pessoas) == 3727L, identical(sort(amplo_ok$pessoas$linha), manter),
           nrow(diagnostico) == 2736L, identical(sort(diagnostico$linha), remover),
           identical(as.data.frame(retidas_originais), as.data.frame(esperadas)),
           identical(amplo_ok$familias, antes_amplo$familias),
@@ -190,8 +190,8 @@ stopifnot(identical(invertido, antes_invertido),
 message("Ordem invertida aprovada: mesmas retencoes, exclusoes, respostas e marcas.")
 
 # Parquets auxiliares contem apenas linhas decididas; nao sao a base reconstruida.
-arquivos_saida <- file.path(saida, c("entrada_6461.parquet", "retidas_3725.parquet",
-  "removidas_2736.parquet", "acoes_conferidas_6461.parquet"))
+arquivos_saida <- file.path(saida, c("entrada_6463.parquet", "retidas_3727.parquet",
+  "removidas_2736.parquet", "acoes_conferidas_6463.parquet"))
 removidas_integrais <- antes_amplo$pessoas[match(remover, linha)]
 write_parquet(antes_amplo$pessoas, arquivos_saida[1L], compression = "zstd")
 write_parquet(amplo_ok$pessoas, arquivos_saida[2L], compression = "zstd")
@@ -206,7 +206,7 @@ hash_depois <- sapply(fontes_preservadas, function(path) digest(file = path, alg
 stopifnot(identical(hash_antes, hash_depois), identical(amplo, antes_amplo))
 indice <- list(
   escopo = "Somente linhas com decisao; nao reconstrucao integral nem pesos.",
-  entrada = 6461L, retidas = 3725L, removidas = 2736L,
+  entrada = 6463L, retidas = 3727L, removidas = 2736L,
   novas_decisoes = 1908L, novos_grupos = 954L, novas_remocoes = 490L,
   restauracoes_contra_regra_antiga = restauracoes,
   acoes_individuais_conferidas = TRUE, respostas_e_V216_preservados = TRUE,
@@ -217,5 +217,5 @@ indice <- list(
   arquivos = data.frame(arquivo = arquivos_saida,
     sha256 = sapply(arquivos_saida, function(path) digest(file = path, algo = "sha256"))))
 write_json(indice, file.path(saida, "indice_conferencia.json"), auto_unbox = TRUE, pretty = TRUE)
-message("Conferencia aprovada: 6461 entradas, 3725 retidas, 2736 removidas; todas as acoes verificadas.")
+message("Conferencia aprovada: 6463 entradas, 3727 retidas, 2736 removidas; todas as acoes verificadas.")
 message("Saidas auxiliares: ", saida)

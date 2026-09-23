@@ -1,0 +1,18 @@
+{
+  "data": "2026-09-23",
+  "status": "auditoria_integral_concluida_sem_informacao_recuperavel_nova",
+  "pessoas": 899861,
+  "blocos_id": 174467,
+  "blocos_multiconjunto_exato": 174467,
+  "blocos_reordenados": 28194,
+  "v210_perdas_por_leitura_de_uma_coluna": 270090,
+  "coercoes_de_hifen_v221": [199113, 199617],
+  "cobertura": {"orfaos":1216,"conflitos":192,"danos":10,"fragmentos":3,"duplicatas_grupos":458,"duplicatas_linhas":918,"uniao":2332},
+  "domiciliares_iguais_cartao_fisico_anterior": 899861,
+  "casos_resolvidos_pela_fonte_cem": 0,
+  "nota": "references/fechamento_integral_1960_cem_20260923.md",
+  "evidencias": "tmp/fechamento_integral_1960/fonte_cem/auditoria_integral",
+  "pareamento_individual_valido": "residuos_pareados.json",
+  "nao_usar_como_pareamento": "registros_pendentes_cem.json",
+  "recomendacao": "Nao importar campos ou vinculos CEM: conteudo integral reproduzivel dos mesmos originais, com perda V210 e anexacao fisica."
+}

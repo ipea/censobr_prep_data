@@ -16,3 +16,5 @@ references/investigacao_residual_1960_evidencias/*.json -text
 references/resolucao_residuais_1960_evidencias/*.json -text
 references/resolucao_residuais_1960_evidencias/*.log -text
 references/resolucao_residuais_duplicatas*.json -text
+references/fechamento_integral_1960_evidencias/*.json -text
+references/fechamento_integral_1960_*.json -text

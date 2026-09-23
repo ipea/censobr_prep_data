@@ -1,5 +1,7 @@
 > **Arquivo histórico da versão de 21/09/2026.** Texto preservado para rastreabilidade. A exposição vigente é a [versão narrativa e ilustrada](microdata_1960_amostra_127_revisao_integrativa.md), reescrita em 22/09/2026. Este anexo conserva a linguagem técnica e a numeração anteriores; não é uma nova rodada de testes.
 
+> **Atualização documental de 23/09/2026, restrita às cinco pastas da seção de desenho:** a [investigação nominal](fechamento_integral_1960_duplicatas_pastas_resultado.md) identifica uma comparação inadequada CE15004→15004: a correspondência demonstrada em145 famílias aponta para CE14990, também rural. Nas outras quatro pastas, oito cartões com situação pessoal contraditória explicam o rótulo misto antigo;27 pessoas são parte dos192 conflitos já inventariados, não novos casos. Não há prova independente que escolha V118 correto, e nenhum estrato, UPA, ID ou fração foi alterado. O corpo histórico abaixo foi preservado. [Evidência permanente](fechamento_integral_1960_evidencias/pastas_desenho.json).
+
 # Revisão integrativa de 1960: preparação, consistência, validação e desenho
 
 **Data:** 21/09/2026. **Parecer:** revisão documental e diagnóstica concluída; os tratamentos e os produtos **não estão homologados**. Não foram executados R, Rscript ou targets, nem alterados código de produção, guias, pesos, variâncias ou parquets nesta rodada.

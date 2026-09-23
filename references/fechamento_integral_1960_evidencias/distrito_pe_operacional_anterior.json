@@ -1,0 +1,281 @@
+{
+  "versao": 1,
+  "id": "PE-22366-154-distrito",
+  "acao": "derivar_distrito_preservar_textos",
+  "criterio": "Cartao existente unico em toda127 sob toda chave legivel;15campos familiares exatos;6pessoas pareadas preservando apenasV21600/63;chefe unico nas duas fontes antes do reparoV208;0digitolegivel substituido.",
+  "UF": "21",
+  "pasta": "22366",
+  "boletim": "154",
+  "municipio": "2166",
+  "situacao": "5",
+  "distrito_original": "X7",
+  "distrito_operacional": "07",
+  "linhas_reparadas": [
+    238422,
+    238423
+  ],
+  "linhas_vinculadas": [
+    239457,
+    239458,
+    239459,
+    239460,
+    239461
+  ],
+  "cartao127": {
+    "linha": 238422,
+    "uf": 21,
+    "pasta": 22366,
+    "boletim": 154,
+    "distrito": null,
+    "municipio": 2166,
+    "situacao": 5,
+    "chave": "X722366154",
+    "original": "212166X722366154151478384680205003                    \\0037520",
+    "corrigido": "212166X722366154151478384680205003                    \\0037520",
+    "invalidos": ""
+  },
+  "pessoas127": [
+    {
+      "linha": 238423,
+      "uf": 21,
+      "pasta": 22366,
+      "boletim": 154,
+      "distrito": null,
+      "municipio": 2166,
+      "situacao": 5,
+      "chave": "X722366154",
+      "original": "212166X72236615425171505520 20003110040010055332321207\\0037520",
+      "corrigido": "212166X72236615425171505520920003110040010055332321207\\0037520",
+      "invalidos": "",
+      "excluida": 0,
+      "familia_atual": 238422,
+      "familia_fisica": 238422
+    },
+    {
+      "linha": 239457,
+      "uf": 21,
+      "pasta": 22366,
+      "boletim": 154,
+      "distrito": 7,
+      "municipio": 2166,
+      "situacao": 5,
+      "chave": "0722366154",
+      "original": "2121660722366154352911755209200031100000000034-       \\0037673",
+      "corrigido": "2121660722366154352911755209200031100000000034-       \\0037673",
+      "invalidos": "",
+      "excluida": 0,
+      "familia_atual": null,
+      "familia_fisica": 239454
+    },
+    {
+      "linha": 239458,
+      "uf": 21,
+      "pasta": 22366,
+      "boletim": 154,
+      "distrito": 7,
+      "municipio": 2166,
+      "situacao": 5,
+      "chave": "0722366154",
+      "original": "2121660722366154352911055209200031100000000031-       \\0037673",
+      "corrigido": "2121660722366154352911055209200031100000000031-       \\0037673",
+      "invalidos": "",
+      "excluida": 0,
+      "familia_atual": null,
+      "familia_fisica": 239454
+    },
+    {
+      "linha": 239459,
+      "uf": 21,
+      "pasta": 22366,
+      "boletim": 154,
+      "distrito": 7,
+      "municipio": 2166,
+      "situacao": 5,
+      "chave": "0722366154",
+      "original": "2121660722366154351911455209200031100000000031-       \\0037673",
+      "corrigido": "2121660722366154351911455209200031100000000031-       \\0037673",
+      "invalidos": "",
+      "excluida": 0,
+      "familia_atual": null,
+      "familia_fisica": 239454
+    },
+    {
+      "linha": 239460,
+      "uf": 21,
+      "pasta": 22366,
+      "boletim": 154,
+      "distrito": 7,
+      "municipio": 2166,
+      "situacao": 5,
+      "chave": "0722366154",
+      "original": "21216607223661543529107552092000311-                  \\0037673",
+      "corrigido": "21216607223661543529107552092000311-                  \\0037673",
+      "invalidos": "",
+      "excluida": 0,
+      "familia_atual": null,
+      "familia_fisica": 239454
+    },
+    {
+      "linha": 239461,
+      "uf": 21,
+      "pasta": 22366,
+      "boletim": 154,
+      "distrito": 7,
+      "municipio": 2166,
+      "situacao": 5,
+      "chave": "0722366154",
+      "original": "2121660722366154352911355209200031100000000034-       \\0037673",
+      "corrigido": "2121660722366154352911355209200031100000000034-       \\0037673",
+      "invalidos": "",
+      "excluida": 0,
+      "familia_atual": null,
+      "familia_fisica": 239454
+    }
+  ],
+  "cartao25": {
+    "linha": 902374,
+    "texto": "223661540000614783846802050032166075000000000000000000"
+  },
+  "pessoas25": [
+    {
+      "linha": 902375,
+      "texto": "223661540100101715055209920003110040010055332321207000"
+    },
+    {
+      "linha": 902376,
+      "texto": "2236615402902929110552099200031100000000031        000"
+    },
+    {
+      "linha": 902377,
+      "texto": "2236615403703719114552099200031100000000031        000"
+    },
+    {
+      "linha": 902378,
+      "texto": "2236615404504529113552099200031100000000034        000"
+    },
+    {
+      "linha": 902379,
+      "texto": "2236615405305329117552099200031100063000034        000"
+    },
+    {
+      "linha": 902380,
+      "texto": "22366154061061291075520992000311                   000"
+    }
+  ],
+  "pares": [
+    {
+      "linha127": 238423,
+      "linha25": 902375,
+      "diferencas_preservadas": {},
+      "vinculo_atual": 238422,
+      "distrito127": "X7"
+    },
+    {
+      "linha127": 239457,
+      "linha25": 902379,
+      "diferencas_preservadas": {
+        "V216": [
+          0,
+          63
+        ]
+      },
+      "vinculo_atual": null,
+      "distrito127": "07"
+    },
+    {
+      "linha127": 239458,
+      "linha25": 902376,
+      "diferencas_preservadas": {},
+      "vinculo_atual": null,
+      "distrito127": "07"
+    },
+    {
+      "linha127": 239459,
+      "linha25": 902377,
+      "diferencas_preservadas": {},
+      "vinculo_atual": null,
+      "distrito127": "07"
+    },
+    {
+      "linha127": 239460,
+      "linha25": 902380,
+      "diferencas_preservadas": {},
+      "vinculo_atual": null,
+      "distrito127": "07"
+    },
+    {
+      "linha127": 239461,
+      "linha25": 902378,
+      "diferencas_preservadas": {},
+      "vinculo_atual": null,
+      "distrito127": "07"
+    }
+  ],
+  "testemunha_previa_sem_V208": {
+    "linha127": 238423,
+    "linha25": 902375,
+    "campos_ignorados": [
+      "V208"
+    ],
+    "uf": 21,
+    "arquivo": "data\\release_legacy\\Censo.1960.amostra.25porcento.pe.gz",
+    "mascara": "171505520 20003110040010055332321207",
+    "n127": 1,
+    "n25": 1
+  },
+  "prova_texto": "references/resolucao_residuais_1960_evidencias/texto_propostas.json",
+  "prova_alternativas": "references/resolucao_residuais_1960_evidencias/distrito_pe_proposta.json",
+  "alternativas_sob_toda_chave_legivel": 0,
+  "pistas_amplas_examinadas": 326,
+  "pistas_amplas_que_exigiriam_trocar_boletim_legivel": [
+    239272,
+    239410,
+    239434,
+    239454,
+    239466,
+    239471,
+    239631
+  ],
+  "exclusoes": 0,
+  "pessoas_novas": 0,
+  "respostas_pessoais_alteradas": false,
+  "textos_alterados": false,
+  "fontes": [
+    {
+      "arquivo": "data_raw/microdata/1960/amostra_127/HHOLDA.txt",
+      "sha256": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_correcoes.csv",
+      "sha256": "dc2efc00470d25d156c76f7decf2603597b61adceb85c3b54c094c893716f831"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_127_familias.csv",
+      "sha256": "51c443ff8a9e86d1584665b7d6296b061af5592e57d61bed4091d68f30507de5"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_127_pessoas.csv",
+      "sha256": "18326d21e51a2af88bd9f3d62b39d7debe0dc611d66985e911ae12c571d71655"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_25_familias.csv",
+      "sha256": "815f3241d49f8ababaef8ef2b6c0fc6e515a72302346da8133b7349c0f481007"
+    },
+    {
+      "arquivo": "read_guides/readguide_1960_amostra_25_pessoas.csv",
+      "sha256": "e00be8bf2962bbd2c5ed9bc169321d5b156b1424bd22f4c2f46920aa89d106c8"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/texto_propostas.json",
+      "sha256": "8ba0e82203824d06dda81456550a285d5c3509925943a050997e3a745598384a"
+    },
+    {
+      "arquivo": "data/release_legacy/Censo.1960.amostra.25porcento.pe.gz",
+      "sha256": "5b0335249644da87e8ca3f9ab28e80731dd792ef5a40ce4a01b336a8ec71a296"
+    },
+    {
+      "arquivo": "references/resolucao_residuais_1960_evidencias/distrito_pe_proposta.json",
+      "sha256": "1d02b414822ebc916297055f2fe00ae8578ed80c585bae1fd42ea642bd4a2743"
+    }
+  ]
+}

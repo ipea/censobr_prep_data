@@ -1,0 +1,57 @@
+{
+  "data": "2026-09-23",
+  "status": "INVESTIGACAO_IMPLEMENTACAO_E_CONFERENCIA_CONCLUIDAS_SEM_HOMOLOGAR_DADOS",
+  "nota": "references/fechamento_integral_1960_conferencias_20260923.md",
+  "t7": {
+    "celulas_conferidas": 204,
+    "celulas_incompletas_por_peso": 86,
+    "domicilios_distintos": 206,
+    "residentes_distintos": 998,
+    "causa_exclusiva": "V102=7: tipo declarado ignorado",
+    "arquivos_conferidos_por_hash_antes_depois": 34,
+    "resultado": "tmp/fechamento_integral_1960/conferencias/limites_validador_20260923/t7_resultado.json",
+    "limites_por_celula": "tmp/fechamento_integral_1960/conferencias/limites_validador_20260923/t7_celulas_17ufs.csv",
+    "indice_atual_sha256": "f20df9e3dc81b2db6af8682686ba2171c43e1efd58aaf0be8c25f58dd37cfea1",
+    "relatorio_atual_sha256": "5c36de7bc7ca3a1814635fd37f83227cecadb7bf304a3e707633b9eeb5270d35",
+    "comparacao_antes_depois": "tmp/fechamento_integral_1960/conferencias/limites_validador_20260923/comparacao_com_pesos_anteriores.json",
+    "implementacao": "Limites implementados, 13 cenarios aprovados e 204 pares conferidos diretamente contra os34parquets atuais.",
+    "teste_antes": "tmp/fechamento_integral_1960/logs/t7_limites_antes.log",
+    "teste_antes_resultado": "FAIL esperado: colunas valor_minimo/valor_maximo ausentes",
+    "teste_depois": "tmp/fechamento_integral_1960/logs/t7_limites_depois.log",
+    "teste_depois_resultado": "PASS: 13 cenarios sinteticos",
+    "validador_sha256": "c570e82348dd68e2fe0df239cc5e2cd99c57f1ad97b1f5bfe9a481698ca16e9b",
+    "recomendacao": "Manter status incompleto; nao inferir permanente nem misturar limites de classificacao com erro amostral.",
+    "regressao_relatorio": "tmp/fechamento_integral_1960/conferencias/limites_validador_20260923/regressao_2040_celulas.json",
+    "colunas_preexistentes_identicas_em_2040_linhas": true,
+    "celulas_nao_t7_com_limites_ausentes": 1836,
+    "peak_rss_bytes": 387063808,
+    "relatorio_atual": "tmp/fechamento_integral_1960/relatorios/validacao25_c2e0493926db/validacao_definitivos.csv"
+  },
+  "q6": {
+    "identidades_publicadas_independentes": 24,
+    "resultado_aritmetico": "As seis faixas somam exatamente o total alugado nas quatro publicacoes regionais/nacional.",
+    "nota_publicada": "Inclusive os sem declaracao de aluguel.",
+    "pdf_paginas": [
+      25,
+      33,
+      41,
+      49
+    ],
+    "recomendacao": "V104=9 continua no total alugado e passa a pendencia em cada faixa; nenhum valor original deve ser alterado.",
+    "implementacao": "Executor central implementou pendencia das faixas e politica_aluguel; teste_validacao_amostra_127 aprovado na bateria 20260923_022844_296649.",
+    "novo_esclarecimento_manual": "V103=8 e V104=8 pode ser a resposta correta para aluguel conjunto com unidade nao residencial ou estabelecimento agropecuario arrendado; nao e necessariamente contradicao.",
+    "manual_pdf_pagina": 39,
+    "manual_pagina_impressa": 41,
+    "identidades": "tmp/fechamento_integral_1960/conferencias/q6_identidades_publicadas.csv"
+  },
+  "q5": {
+    "status": "NAO_IDENTIFICAVEL_NAS_FONTES_PRELIMINARES_CONSULTADAS",
+    "evidencia_adicional": "Tomo definitivo do Parana inclui expressamente idade ignorada; manual de coleta usa limite de 10 anos para estado conjugal, enquanto Q5 divulgado usa 15 anos.",
+    "limite": "Nenhuma destas fontes identifica o algoritmo historico do quadro preliminar 5 de residentes.",
+    "recomendacao": "Conservar pendencia; nao transpor regra definitiva silenciosamente."
+  },
+  "fontes": "tmp/fechamento_integral_1960/conferencias/fontes_metadados.json",
+  "r_executado": false,
+  "producao_editada": true,
+  "script_producao_editado": "R/microdata_1960_validacao.R"
+}

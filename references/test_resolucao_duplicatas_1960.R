@@ -23,7 +23,7 @@ novas <- manifesto[linha %in% as.character(linhas_alvo)]
 stopifnot(nrow(novas) == 10L, all(novas$acao == "manter"), all(novas$n_manter == "2"),
           all(novas$n_antes == "2"), uniqueN(novas$grupo) == 5L,
           identical(sort(as.integer(novas$linha)), linhas_alvo),
-          nrow(manifesto) == 6461L, sum(manifesto$acao == "manter") == 3725L,
+          nrow(manifesto) == 6463L, sum(manifesto$acao == "manter") == 3727L,
           sum(manifesto$acao == "remover") == 2736L)
 
 dir.create("tmp/resolver_residuais_1960_20260922/duplicatas", recursive = TRUE, showWarnings = FALSE)

@@ -1,0 +1,299 @@
+{
+  "data": "2026-09-23T03:02:21.961645",
+  "status": "ENTREGA_TECNICA_COM_BLOQUEIO_FACTUAL_NA_BASE_NACIONAL",
+  "nacional_corrigida_publicada": false,
+  "novos_pesos127": false,
+  "pesos25_recalculados": [
+    "mt",
+    "pr",
+    "mg"
+  ],
+  "arquivos25_completos": 34,
+  "relatorio_preliminar": {
+    "arquivo": "tmp/fechamento_integral_1960/relatorios/preliminar_base_antiga_c1641f26838",
+    "estado": "RELATORIO_NOVO_SOBRE_BASE_E_PESOS_ANTIGOS_NAO_RECONSTRUIDOS"
+  },
+  "validacao25_comparacoes": 2040,
+  "etapas": {
+    "registros": "correcoes comprovadas integradas; residuos nominalmente nao identificados",
+    "conferencias": "correcoes e limites implementados; convencoes historicas nao presumidas",
+    "reconstrucao": "25 completa e conferida; 127 interrompida antes de excluir repeticoes incertas",
+    "entrega": "provas, testes, relatorios e limites documentados; sem release nacional"
+  },
+  "inventario": {
+    "pessoas_brutas_parseadas": 899859,
+    "cartoes_familia_reais": 174467,
+    "perfis_repetidos_total": 3683,
+    "ocorrencias_apos_primeira_total": 3696,
+    "perfis_repetidos_decididos": 3226,
+    "linhas_manifesto_duplicatas": 6463,
+    "remocoes_autorizadas_se_demais_bloqueios_resolvidos": 2736,
+    "perfis_repetidos_pendentes": 457,
+    "ocorrencias_apos_primeira_pendentes": 459,
+    "todas_linhas_nos_perfis_pendentes": 916,
+    "pessoas_sem_cartao_antes_manifesto": 1493,
+    "grupos_sem_cartao_antes_manifesto": 586,
+    "pessoas_reconciliadas_manifesto": 258,
+    "cartoes_recuperados_manifesto": 41,
+    "pessoas_em_cartoes_recuperados": 103,
+    "conflitos_municipais_sem_reconciliacao": 50,
+    "conflitos_situacao_sem_reconciliacao": 145,
+    "pessoas_distintas_com_conflito_geografico": 192,
+    "cartoes_reais_sem_pessoas": 1,
+    "conviventes_reais_sem_principal_confirmado": 1,
+    "linhas_corrompidas_sem_grupo_identificavel": 3,
+    "pessoas_sem_cartao_apos_manifesto": 1193,
+    "grupos_sem_cartao_apos_manifesto": 472,
+    "grupos_pendentes_com_chefe_ou_conjuge": 110,
+    "pessoas_pendentes_por_uf": {
+      "02": 17,
+      "04": 125,
+      "12": 8,
+      "14": 9,
+      "17": 13,
+      "21": 69,
+      "25": 12,
+      "31": 101,
+      "40": 146,
+      "51": 57,
+      "52": 22,
+      "54": 149,
+      "60": 239,
+      "null": 3,
+      "71": 46,
+      "74": 68,
+      "81": 59,
+      "91": 23,
+      "94": 13,
+      "97": 14
+    },
+    "nota": "Inventario independente, nao reconstrucao R. Listas de bloqueios se sobrepoem. Tres linhas corrompidas agregadas por chave vazia nao demonstram uma familia comum. O perfil repetido resultante da anulacao de campos danificados nao comprova duplicacao. Conviventes enumeradas na ordem dos cartoes reais; a guarda R tambem verifica cartoes recuperados."
+  },
+  "testes_aprovados": 33,
+  "execucoes_testes": 39,
+  "tentativas_anteriores_falhas": [
+    {
+      "script": "test_recuperacao_cartoes_1960.R",
+      "sha256": "a8cd37e62164d355e16426b2de64d3ae17a8db18551edcf420528728a89051e1",
+      "codigo": 124,
+      "log": "tmp\\fechamento_integral_1960\\regressoes\\20260923_022844_296649\\test_recuperacao_cartoes_1960.log",
+      "ultimas_linhas": [
+        "Reading 1960 amostra de 1,27%",
+        "  103 linhas: 0 registros de familia, 103 de pessoas",
+        "Applying manual corrections to 1960 amostra de 1,27%",
+        "  reparo_fonte25 1; sem_problema 102",
+        "Parsing 1960 amostra de 1,27%",
+        "  familias: 0 x 26 | pessoas: 103 x 39 | registros com valor anulado: 0",
+        "Building families and households in 1960 amostra de 1,27%",
+        "  Rondonia: 0 familias e 0 pessoas devolvidas",
+        "  pessoas sem registro de familia: 0 em 0 grupos; com chefe ou conjuge: 0",
+        "  familias: 41; domicilios: 41; pessoas reconciliadas: 0",
+        "",
+        "Runner: prazo excedido; encerrado somente este processo."
+      ]
+    },
+    {
+      "script": "test_publicacao_1960.R",
+      "sha256": "0e8194dd1a419e9ac1c9c32acf1cfdd8487161267deef80ebb75c79f6f6176f3",
+      "codigo": 1,
+      "log": "tmp\\fechamento_integral_1960\\regressoes\\20260923_025127_067028\\test_publicacao_1960.log",
+      "ultimas_linhas": [
+        "13:    100.00000",
+        "14:     99.99999",
+        "15:    100.00000",
+        "16:    100.00000",
+        "17:    100.00000",
+        "18:    100.00000",
+        "Conferindo integridade da exportacao de 1960",
+        "Error in recusar(conferir(), trecho) : ",
+        "  Recusa esperada: peso invalido; recebida: Validacao tem comparacoes nao calculadas ou incompletas.",
+        "Execution halted",
+        "",
+        "Exit code: 1 hex: 0x1"
+      ]
+    }
+  ],
+  "logs_adicionais_aprovados": [
+    "tmp/fechamento_integral_1960/logs/t7_limites_depois.log",
+    "tmp/fechamento_integral_1960/logs/validacao25_limites03.log",
+    "tmp/fechamento_integral_1960/logs/relatorio_preliminar02.log"
+  ],
+  "protegidos_sha256": {
+    "censobr_prep_data.Rproj": "aa1bb6b4e0ed0325d1e781f5b6eacf7549b809566866accf8ca605331d136816",
+    "renv.lock": "cebd5e98542910cc17236a8c9ff3de2e87c66eb4b9a000eabd681a26bc5e3fff",
+    "schemas/censobr_types.csv": "9bb56074c5d6b00cb8bc435bba4390c99d9543e431d572c1ea65f368f50790c2",
+    "data_raw/microdata/1960/amostra_127/HHOLDA.txt": "6449ca06c9086bbb0474481827f0efff98a0d9489838f322b4a69e489a42c44c",
+    "data_raw/microdata/1960/amostra_127/pessoas_1960_amostra_127.parquet": "f757fddae54edddd6742ad800149a3086acc9f581a8197ec0a123d7f4efca404",
+    "data_raw/microdata/1960/amostra_127/domicilios_1960_amostra_127.parquet": "f526ab6090d0be7dd9325a0f6b5143dab46186734f8760be8f44513924f93938"
+  },
+  "artefatos": [
+    {
+      "arquivo": "tmp/fechamento_integral_1960/pesos_municipais_20260923_021933_338649_completo/indice_34_parquets_completos.json",
+      "sha256": "f20df9e3dc81b2db6af8682686ba2171c43e1efd58aaf0be8c25f58dd37cfea1"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/relatorios/validacao25_c2e0493926db/estado.json",
+      "sha256": "89b5a8fac5e7921bf120318955f642649912cb15014615f604cb8072eaf43d09"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/relatorios/validacao25_c2e0493926db/validacao_definitivos.csv",
+      "sha256": "5c36de7bc7ca3a1814635fd37f83227cecadb7bf304a3e707633b9eeb5270d35"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/conferencias/limites_validador_20260923/t7_resultado.json",
+      "sha256": "7f6b54f821fb8bde8de731dfe401cee05d22bffd4e126f2e319b7d6c71d9ced0"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/conferencias/limites_validador_20260923/t7_celulas_17ufs.csv",
+      "sha256": "d8f63edd681e98f1572ca6f58f9e47cd50bb4ba293b9bb61b0188d3560a534e9"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/reconstrucao127/20260923_024533_367c7d02178d/estado.json",
+      "sha256": "b7ae4d2d0d46d0851fff48e25442df6ff0bbaffae03150b36fd01d145e70b4e4"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/reconstrucao127/20260923_024533_367c7d02178d/entradas.csv",
+      "sha256": "431ad7febc8664497f03c157845175ef344c2b02d93071ad997f8b4020bba399"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/reconstrucao127/20260923_024533_367c7d02178d/duplicatas_a_revisar.csv",
+      "sha256": "518186aff73b32259c9dc2044c112d8e9f118ff61fab42b917787d2cab0389f7"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/reconstrucao127/20260923_024533_367c7d02178d/duplicatas_decisoes_conferidas.csv",
+      "sha256": "1468204d4abe1310aabac3f00feb19dd11c861df5139964919346fe903135325"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/logs/reconstrucao127_final02.log",
+      "sha256": "5965b22ee7d0bafe398415df61c40412465fc671c8f0d4b6f34c99a5b6db9880"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/regressoes/20260923_022844_296649/resultados.json",
+      "sha256": "b897001f1a5119ae714685aa6fff41ad8bb2ff24c927e47bc90a1d513fa894dd"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/regressoes/20260923_025127_067028/resultados.json",
+      "sha256": "3e40820605ff4ecb85417d69aad65d106ece8b1dae290c29b6632c0315846fc5"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/regressoes/20260923_030055_828747/resultados.json",
+      "sha256": "00afad8101b09abe587748d4dd4e6a0319a85e5a79c98443e565d4eb9e431b59"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/logs/t7_limites_depois.log",
+      "sha256": "41449bc3d8b7ea8403e6b2057f24903481e17972a815207dc584d7c9ed763f86"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/logs/validacao25_limites03.log",
+      "sha256": "89ef040040615daf1c315b165cff03da571d4a7c070c690d0fe7147f0c0b9d3e"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/logs/relatorio_preliminar02.log",
+      "sha256": "7525f3e287be40bb528e213f8e4b320ee4d8b8fbb263b50a86ddc02755a51f73"
+    },
+    {
+      "arquivo": "references/fechamento_integral_1960_pr_entrega.json",
+      "sha256": "420bae592d1bef3a19a1beac2bb2042d26da25cee4e38ccfb5e6bae2e5555dc8"
+    },
+    {
+      "arquivo": "references/fechamento_integral_1960_conferencias_entrega.json",
+      "sha256": "1e3da0dffacefa5c04764069e98e551763b594f3429a2fa23422d54e84ac709c"
+    },
+    {
+      "arquivo": "references/fechamento_integral_1960_cem_entrega.json",
+      "sha256": "9f89928f5b30ae51ea38b1e2c2d5cedebd2a85a3ec29b090ea88df1e0925c129"
+    },
+    {
+      "arquivo": "references/fechamento_integral_1960_evidencias/inventario_final.json",
+      "sha256": "a74cfbf24e318f20bb1f6b607951ccdf7db3b076a62a2bafe7e926d33cdd760c"
+    },
+    {
+      "arquivo": "references/fechamento_integral_1960_evidencias/pendencias_nominais.json",
+      "sha256": "7c660f306ad4ec2f6a33dcd39f2667a7a4c1f96d0f46f33999f23ea219b05757"
+    },
+    {
+      "arquivo": "references/fechamento_integral_1960_evidencias/pastas_desenho.json",
+      "sha256": "a41578f18e04d2da007799ff6a77fec7d353c0548eb1c574ec0f2e730135cf6c"
+    },
+    {
+      "arquivo": "references/fechamento_integral_1960_evidencias/guia_municipal_anterior.json",
+      "sha256": "5362895fd1fc4f2c721436008308438067fb18b9c2a904624fb9fe0a51afa0cb"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/parana/outras_ufs/teste_integrativo_portatil.json",
+      "sha256": "57f0d854cac752650197135294a1b08d54df794f57d0228aa16c18cc0b0d2881"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_cartoes_recuperados.json",
+      "sha256": "baaebe8230266f5e5c145f7b4ce5ba40b9eb807cbe98b23043fa3eef9e4792ef"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_reparos_fonte25.json",
+      "sha256": "aa208c2189e5bced087d284c7e454f1f54052631f0828765bce638057743c710"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_duplicatas.csv",
+      "sha256": "9897d11d62bb4f1640203b091ad56a893d9b42e1fc051d922c04f5ca13b81a0a"
+    },
+    {
+      "arquivo": "read_guides/1960_amostra_127_correcoes.csv",
+      "sha256": "f039a9fe374c26afad6ad84acc142d4da5433892ca9f01978ac4434b13868da9"
+    },
+    {
+      "arquivo": "read_guides/1960_municipios.csv",
+      "sha256": "3bc197bdbb6e8746614b108acbdb9cb2de079810172fdea2ffd268e0cf99ed96"
+    },
+    {
+      "arquivo": "R/microdata_1960_amostra_127.R",
+      "sha256": "60323a7806eb309ffd50803c5a69c685a7e2cd869c61950ff69a939bd09a5097"
+    },
+    {
+      "arquivo": "R/microdata_1960_amostra_25.R",
+      "sha256": "0f0122b730b2e5d794288313f3ee468959b79afe2f9d59ccaf64a61bc2d2ac25"
+    },
+    {
+      "arquivo": "R/microdata_1960_validacao.R",
+      "sha256": "c570e82348dd68e2fe0df239cc5e2cd99c57f1ad97b1f5bfe9a481698ca16e9b"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/relatorios/preliminar_base_antiga_c1641f26838/estado.json",
+      "sha256": "15550ff022fb5ac8ef3cf34a7fc1db37b7a9aaeb357b8f8452151fe8088a63a9"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/relatorios/preliminar_base_antiga_c1641f26838/entradas.csv",
+      "sha256": "bb6463cd869158a9b11ac5e7349af5eb99e3cd39835e22522bb4d1538576fb42"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/relatorios/preliminar_base_antiga_c1641f26838/calibracao_1965_validacao.csv",
+      "sha256": "5215a8a10f8da98334c3f79011434c9c3fc4f0a1a2cf1894ae1c2a77d20dbe8f"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/relatorios/preliminar_base_antiga_c1641f26838/q5_cenarios_idade_ignorada.csv",
+      "sha256": "e07d73a961f9a3e3ecbdd795a20bc78219f343c7a625c07cb5edc685602b66b4"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/relatorios/preliminar_base_antiga_c1641f26838/q5_conferencia_com_validador.csv",
+      "sha256": "b10e542cc8f5b64f2978d1036e5b8cd0064dfbf6b4fdb08d381c0176b9397464"
+    }
+  ],
+  "rejeitados_ou_superados": [
+    {
+      "arquivo": "tmp/fechamento_integral_1960/logs/validacao25_integral01.log",
+      "motivo": "leitura parou com Arrow I/O=1; filho encerrado; repeticao com I/O=2 aprovada"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/relatorios/preliminar_base_antiga_3fc6c4b4b5e",
+      "motivo": "cenario auxiliar Q5 inicial tinha leitura incorreta de idade; substituido pela segunda execucao"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/fonte_cem/auditoria_integral/registros_pendentes_cem.json",
+      "motivo": "hipotese posicional rejeitada; usar residuos_pareados.json"
+    },
+    {
+      "arquivo": "tmp/fechamento_integral_1960/conferencias/pesos_corrigidos_20260923_01",
+      "motivo": "conferencia parcial rejeitou caso vazio FN por erro no auditor; refeita sem alterar dados"
+    }
+  ],
+  "limite": "Investigar todas as listas conhecidas nao prova inexistencia de outra fonte historica. Variancias calibradas adiadas; esquema nacional exige dados completos.",
+  "git_status": " M R/microdata_1960_amostra_127.R\n M R/microdata_1960_amostra_25.R\n M R/microdata_1960_validacao.R\n M censobr_prep_data.Rproj\n M read_guides/1960_amostra_127_cartoes_recuperados.json\n M read_guides/1960_amostra_127_correcoes.csv\n M read_guides/1960_amostra_127_duplicatas.csv\n M read_guides/1960_amostra_127_reparos_fonte25.json\n M read_guides/1960_amostra_25_distritos_pendentes.csv\n M read_guides/1960_distritos_pendentes.csv\n M read_guides/1960_municipios.csv\n M references/microdata_1960_amostra_127_anexo_tecnico_20260921.md\n M references/microdata_1960_amostra_127_revisao_desenho.md\n M references/microdata_1960_pendencias.md\n M references/resolucao_residuais_1960_evidencias/distrito_pe_operacional.json\n M references/test_novas_duplicatas_1960.R\n M references/test_pesos_1960.R\n M references/test_publicacao_1960.R\n M references/test_resolucao_duplicatas_1960.R\n M references/test_validacao_amostra_127.R\n M renv.lock\n?? .claude/plans/2026-09-23_fechamento_integral_1960.md\n?? references/fechamento_integral_1960_cem.py\n?? references/fechamento_integral_1960_cem_20260923.md\n?? references/fechamento_integral_1960_cem_entrega.json\n?? references/fechamento_integral_1960_cem_pareamento.py\n?? references/fechamento_integral_1960_cem_plano.md\n?? references/fechamento_integral_1960_conferencias.py\n?? references/fechamento_integral_1960_conferencias_20260923.md\n?? references/fechamento_integral_1960_conferencias_comparar.py\n?? references/fechamento_integral_1960_conferencias_entrega.json\n?? references/fechamento_integral_1960_conferencias_fontes.py\n?? references/fechamento_integral_1960_conferencias_plano.md\n?? references/fechamento_integral_1960_conferencias_relatorio.py\n?? references/fechamento_integral_1960_conferencias_test_t7.R\n?? references/fechamento_integral_1960_duplicatas.py\n?? references/fechamento_integral_1960_duplicatas_20260923.md\n?? references/fechamento_integral_1960_duplicatas_alternativas.py\n?? references/fechamento_integral_1960_duplicatas_itutinga.py\n?? references/fechamento_integral_1960_duplicatas_itutinga_plano.md\n?? references/fechamento_integral_1960_duplicatas_itutinga_resultado.md\n?? references/fechamento_integral_1960_duplicatas_pastas.py\n?? references/fechamento_integral_1960_duplicatas_pastas_plano.md\n?? references/fechamento_integral_1960_duplicatas_pastas_resultado.md\n?? references/fechamento_integral_1960_duplicatas_plano.md\n?? references/fechamento_integral_1960_duplicatas_prova_sp.py\n?? references/fechamento_integral_1960_duplicatas_reauditoria_pe.py\n?? references/fechamento_integral_1960_duplicatas_reauditoria_pe_pacote.py\n?? references/fechamento_integral_1960_duplicatas_reauditoria_pe_plano.md\n?? references/fechamento_integral_1960_duplicatas_revisao_final.md\n?? references/fechamento_integral_1960_duplicatas_revisao_final.py\n?? references/fechamento_integral_1960_duplicatas_revisao_independente.md\n?? references/fechamento_integral_1960_duplicatas_revisao_mg.py\n?? references/fechamento_integral_1960_duplicatas_revisao_vinculos.py\n?? references/fechamento_integral_1960_duplicatas_teste_sp.R\n?? references/fechamento_integral_1960_duplicatas_testemunhos.py\n?? references/fechamento_integral_1960_duplicatas_unicidade.py\n?? references/fechamento_integral_1960_entrega.md\n?? references/fechamento_integral_1960_entrega.py\n?? references/fechamento_integral_1960_evidencias/cartao_composto_40-40880-001.json\n?? references/fechamento_integral_1960_evidencias/cartao_composto_60-62130-203.json\n?? references/fechamento_integral_1960_evidencias/cartao_composto_60-64458-099.json\n?? references/fechamento_integral_1960_evidencias/cartao_composto_60-64458-106.json\n?? references/fechamento_integral_1960_evidencias/cartao_composto_60-64458-107.json\n?? references/fechamento_integral_1960_evidencias/cartao_composto_60-64458-113.json\n?? references/fechamento_integral_1960_evidencias/cartao_composto_94-94624-003.json\n?? references/fechamento_integral_1960_evidencias/cartao_composto_94-94624-117.json\n?? references/fechamento_integral_1960_evidencias/cartao_composto_94-94624-147.json\n?? references/fechamento_integral_1960_evidencias/cartoes_compostos.json\n?? references/fechamento_integral_1960_evidencias/coincidencias41.json\n?? references/fechamento_integral_1960_evidencias/distrito_pe_operacional_anterior.json\n?? references/fechamento_integral_1960_evidencias/distrito_pe_reauditoria.json\n?? references/fechamento_integral_1960_evidencias/duplicata_sp_composta.json\n?? references/fechamento_integral_1960_evidencias/guia_municipal_anterior.json\n?? references/fechamento_integral_1960_evidencias/inventario_final.json\n?? references/fechamento_integral_1960_evidencias/mg405458_identidade.json\n?? references/fechamento_integral_1960_evidencias/pasta_desenho_14_15004.json\n?? references/fechamento_integral_1960_evidencias/pasta_desenho_14_15290.json\n?? references/fechamento_integral_1960_evidencias/pasta_desenho_40_43234.json\n?? references/fechamento_integral_1960_evidencias/pasta_desenho_60_60158.json\n?? references/fechamento_integral_1960_evidencias/pasta_desenho_60_60718.json\n?? references/fechamento_integral_1960_evidencias/pastas_desenho.json\n?? references/fechamento_integral_1960_evidencias/pendencias_nominais.json\n?? references/fechamento_integral_1960_geografia_fontes.py\n?? references/fechamento_integral_1960_geografia_mgmt.md\n?? references/fechamento_integral_1960_geografia_mgmt.py\n?? references/fechamento_integral_1960_geografia_rs_contagem.py\n?? references/fechamento_integral_1960_geografia_rs_fontes.py\n?? references/fechamento_integral_1960_geografia_rs_pares.py\n?? references/fechamento_integral_1960_geografia_rs_pares_resultado.md\n?? references/fechamento_integral_1960_geografia_rs_plano.md\n?? references/fechamento_integral_1960_geografia_rs_resultado.md\n?? references/fechamento_integral_1960_pesos_pr.py\n?? references/fechamento_integral_1960_pr_20260923.md\n?? references/fechamento_integral_1960_pr_conferencia.py\n?? references/fechamento_integral_1960_pr_entrega.json\n?? references/fechamento_integral_1960_pr_extrair.py\n?? references/fechamento_integral_1960_pr_integrativo_test.py\n?? references/fechamento_integral_1960_pr_outras_ufs.py\n?? references/fechamento_integral_1960_pr_qc.py\n?? references/fechamento_integral_1960_pr_test.py\n?? references/fechamento_integral_1960_regressoes.py\n?? references/fechamento_integral_1960_relatorio_preliminar.R\n?? references/fechamento_integral_1960_validacao25.R\n?? references/fechamento_integral_1960_vinculos.py\n?? references/fechamento_integral_1960_vinculos_coincidencias.py\n?? references/fechamento_integral_1960_vinculos_integrar.py\n?? references/fechamento_integral_1960_vinculos_inventario.py\n?? references/fechamento_integral_1960_vinculos_limites.md\n?? references/fechamento_integral_1960_vinculos_mg.py\n?? references/fechamento_integral_1960_vinculos_mg_proposta.py\n?? references/fechamento_integral_1960_vinculos_mg_teste.R\n?? references/fechamento_integral_1960_vinculos_pacote.py\n?? references/fechamento_integral_1960_vinculos_plano.md\n?? references/fechamento_integral_1960_vinculos_portar.py\n?? references/fechamento_integral_1960_vinculos_teste.R\n?? references/fechamento_integral_1960_vinculos_testes.md\n?? references/investigar_fonte_cem_1960.py\n?? references/ler_fonte_cem_1960.R\n?? references/reconstruir_integral_127_1960.R\n?? references/resolucao_residuais_1960_evidencias/cartoes_fora_chave_integral20260923.json\n?? references/test_aluguel_ignorado_1960.R\n?? references/test_deteccao_isolada_1960.R\n"
+}

@@ -552,6 +552,15 @@ weight_1960_amostra_25 <- function(paths, uf, municipios_path, definitivos_path,
 
   # o universo: a contagem completa por municipio x situacao
   municipios <- data.table::fread(municipios_path, encoding = "UTF-8")
+  municipios_uf <- municipios[uf60 == codigo_uf]
+  if(anyDuplicated(municipios_uf$cod60)) stop("municipio repetido no guia de calibracao")
+  totais_municipais <- unlist(municipios_uf[, .(pop_total, pop_urbana, pop_rural)], use.names = FALSE)
+  if(any(!is.na(totais_municipais) & (!is.finite(totais_municipais) | totais_municipais < 0)))
+    stop("populacao municipal invalida no guia de calibracao")
+  # A reescala estadual nao corrige uma soma municipal transcrita incorretamente.
+  divergentes <- municipios_uf[!is.na(pop_total) & !is.na(pop_urbana) & !is.na(pop_rural) &
+    pop_total != pop_urbana + pop_rural, cod60]
+  if(length(divergentes)) stop("total municipal difere da soma urbana e rural: ", paste(divergentes, collapse = ", "))
   universo <- data.table::melt(municipios[uf60 == codigo_uf, .(uf60, cod60, urbana = pop_urbana, rural = pop_rural)],
                                id.vars = c("uf60", "cod60"), variable.name = "situacao",
                                value.name = "universo", variable.factor = FALSE)

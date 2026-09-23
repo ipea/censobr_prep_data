@@ -107,7 +107,8 @@ tabular_domicilios_validacao_1960 <- function(p, d, grade, peso){
       pertence <- universo_pes; w <- x$w
     }
     conhecidos <- which(pertence); pendentes <- which(is.na(pertence))
-    faltam <- sum(!is.finite(w[conhecidos])); faltam_pendentes <- sum(!is.finite(w[pendentes]))
+    faltam <- sum(!is.finite(w[conhecidos]) | w[conhecidos] < 0)
+    faltam_pendentes <- sum(!is.finite(w[pendentes]) | w[pendentes] < 0)
     out[i, `:=`(valor_parcial = if(faltam > 0L) NA_real_ else sum(w[conhecidos]),
       n_amostra = length(conhecidos), n_pesos_ausentes = faltam,
       n_sem_classificacao = length(pendentes),
@@ -144,6 +145,15 @@ completar_validacao_pessoas_1960 <- function(grade, medido, chaves){
   comp[status_celula %in% c("observada", "sem_observacoes"), valor := valor_parcial]
   comp[, dif := valor - publicado]
   comp[is.finite(publicado) & publicado != 0, dif_pct := 100 * dif / publicado]
+  # Limites de classificacao a pesos fixos, nao intervalos de confianca.
+  # Cobertura incompleta ou peso invalido nao permite fechar os dois extremos.
+  comp[, `:=`(valor_minimo = NA_real_, valor_maximo = NA_real_)]
+  comp[tabela == 7L & reconstruivel & n_pesos_ausentes == 0L &
+    n_pesos_ausentes_sem_classificacao == 0L & n_domicilios_sem_lista == 0L &
+    n_pessoas_sem_domicilio == 0L & is.finite(valor_parcial) & valor_parcial >= 0 &
+    is.finite(peso_sem_classificacao) & peso_sem_classificacao >= 0 &
+    is.finite(valor_parcial + peso_sem_classificacao),
+    `:=`(valor_minimo = valor_parcial, valor_maximo = valor_parcial + peso_sem_classificacao)]
   comp[, motivo := data.table::fcase(
     !reconstruivel & uf60 == 999L, "faltam UFs para calcular o Brasil completo",
     !reconstruivel & tabela == 7L, "par de arquivos de domicilios e pessoas da UF nao fornecido",
@@ -151,6 +161,7 @@ completar_validacao_pessoas_1960 <- function(grade, medido, chaves){
     status_celula == "classificacao_incompleta" & (n_domicilios_sem_lista > 0L | n_pessoas_sem_domicilio > 0L),
       "vinculos/listas incompletos; contadores de domicilios e pessoas separados, sem imputar moradores",
     status_celula == "classificacao_incompleta", "ha registros que podem pertencer a esta comparacao, mas faltam codigos validos",
+    status_celula == "peso_ausente" & tabela == 7L, "ha pesos ausentes, nao finitos ou negativos",
     status_celula == "peso_ausente", "ha pesos ausentes ou nao finitos",
     status_celula == "sem_observacoes", "nenhum registro observado nesta categoria; nao significa populacao zero",
     default = "comparacao calculada")]
